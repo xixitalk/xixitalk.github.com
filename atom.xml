@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[xixitalk Blog]]></title>
+  <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-06-04T00:31:21+08:00</updated>
+  <updated>2012-06-04T00:41:01+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
-    <name><![CDATA[xixitalk@twitter]]></name>
+    <name><![CDATA[xixitalk]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
