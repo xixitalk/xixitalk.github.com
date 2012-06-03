@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk Blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-06-03T23:52:34+08:00</updated>
+  <updated>2012-06-04T00:31:21+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk@twitter]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[second]]></title>
+    <link href="http://xixitalk.github.com/blog/2012/06/04/second/"/>
+    <updated>2012-06-04T00:09:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2012/06/04/second</id>
+    <content type="html"><![CDATA[<p>中文</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[my-first-post]]></title>
