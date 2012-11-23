@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="flask_twip是@yegle写的一个可以搭建在heroku上的一个twip移植版本。 本教程使用的基于flask_twip-0.0.1的修改版本flask_twip-0.0.1_mod.zip，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件， &hellip;">
+  <meta name="description" content="flask_twip是@yegle写的一个可以搭建在heroku上的一个twip移植版本。 本教程使用的基于flask_twip-0.0.1的修改版本flask_twip-0.0.1_mod.zip，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,7 +106,7 @@
 
 <div class="entry-content"><p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>移植版本。</p>
 
-<p>本教程使用的基于flask_twip-0.0.1的修改版本<a href="https://github.com/xixitalk/flask_twip/blob/master/release/flask_twip-0.0.1_mod.zip">flask_twip-0.0.1_mod.zip</a>，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件，经过不到一天就会丢失，本修改将认证信息通过写代码里第二次上传来规避临时文件丢失，其次增加了gzip支持。</p>
+<p>本教程使用的基于flask_twip-0.0.1的修改版本<a href="https://github.com/xixitalk/flask_twip/blob/master/release/flask_twip-0.0.1_mod.zip">flask_twip-0.0.1_mod.zip</a>，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件（<a href="https://devcenter.heroku.com/articles/python-faq#can-i-read-from-and-write-to-the-file-system">ephemeral文件</a>），经过不到一天就会丢失，本修改将认证信息通过写代码里第二次上传来规避临时文件丢失，其次增加了gzip压缩支持。</p>
 
 <h2>准备工作</h2>
 
@@ -266,6 +266,8 @@ $git push heroku master
         <a class="basic-alignment left" href="/blog/2012/06/04/second/" title="Previous Post: second">&laquo; second</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/11/23/octopress-command-note/" title="Next Post: octopress命令备忘录">octopress命令备忘录 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -283,6 +285,10 @@ $git push heroku master
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/23/octopress-command-note/">octopress命令备忘录</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/23/flask-twip-on-heroku/">flask_twip在heroku上搭建教程</a>
