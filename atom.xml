@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-11-23T23:26:01+08:00</updated>
+  <updated>2012-11-23T23:33:07+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -47,14 +47,15 @@ git commit -m "add source post"
 git push origin source
 </code></pre>
 
-<h2>octopress仓库说明</h2>
+<h2>Octopress仓库说明</h2>
 
-<p>octopress的github分master和source分支，octopress目录下，除<em>deploy目录外的文件上传到source分支。</em>deploy目录内容上传到master分支。</p>
+<p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
 
-<h2>octopress支持中文</h2>
+<h2>Octopress支持中文</h2>
 
-<p>1、rake new_post生成的makedown文件要改成UTF-8无签名格式。
-2、修改ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
+<p>1、rake new_post生成的makedown文件要改成UTF-8无签名格式。</p>
+
+<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
 
 <pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
 </code></pre>
