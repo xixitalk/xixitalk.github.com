@@ -8,7 +8,7 @@ categories:
 
 [flask_twip](https://github.com/yegle/flask_twip)是@[yegle](http://twitter.com/yegle)写的一个可以搭建在[heroku](http://www.heroku.com/)上的一个[twip](http://code.google.com/p/twip/)移植版本。
 
-本教程使用的基于flask_twip-0.0.1的修改版本[flask_twip-0.0.1_mod.zip](https://github.com/xixitalk/flask_twip/blob/master/release/flask_twip-0.0.1_mod.zip)，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件，经过不到一天就会丢失，本修改将认证信息通过写代码里第二次上传来规避临时文件丢失，其次增加了gzip支持。
+本教程使用的基于flask_twip-0.0.1的修改版本[flask_twip-0.0.1_mod.zip](https://github.com/xixitalk/flask_twip/blob/master/release/flask_twip-0.0.1_mod.zip)，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件（[ephemeral文件](https://devcenter.heroku.com/articles/python-faq#can-i-read-from-and-write-to-the-file-system)），经过不到一天就会丢失，本修改将认证信息通过写代码里第二次上传来规避临时文件丢失，其次增加了gzip压缩支持。
 
 准备工作
 -
