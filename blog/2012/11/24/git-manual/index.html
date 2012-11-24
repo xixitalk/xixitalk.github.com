@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>octopress命令备忘录 - xixitalk blog</title>
+  <title>git manual - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="创建新文章 rake new_post["TITLE"] 生成静态HTML文章 rake generate 本地预览 rake preview 通过http://127.0.0.1:4000访问 发布到github空间 rake deploy 将文章的makedown文件上传到github服务器 &hellip;">
+  <meta name="description" content="初始化目录 以下两种方式 空目录初始化 git init 获取一个git仓库代码 git clone https://github.com/xixitalk/flask_twip.git 添加代码 git add .
+git add -u 提交到本地仓库 并未提交远程git仓库 git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2012/11/23/octopress-command-note">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2012/11/24/git-manual">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress命令备忘录</h1>
+      <h1 class="entry-title">Git Manual</h1>
     
     
       <p class="meta">
@@ -95,7 +96,7 @@
   
 
 
-<time datetime="2012-11-23T23:07:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+<time datetime="2012-11-24T21:54:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,52 +105,94 @@
   </header>
 
 
-<div class="entry-content"><h2>创建新文章</h2>
+<div class="entry-content"><h2>初始化目录</h2>
 
-<pre><code>rake new_post["TITLE"]
+<p>以下两种方式</p>
+
+<h3>空目录初始化</h3>
+
+<pre><code>git init  
 </code></pre>
 
-<h2>生成静态HTML文章</h2>
+<h3>获取一个git仓库代码</h3>
 
-<pre><code>rake generate
+<pre><code>git clone https://github.com/xixitalk/flask_twip.git
 </code></pre>
 
-<h2>本地预览</h2>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
-
-<h2>发布到github空间</h2>
-
-<pre><code>rake deploy
-</code></pre>
-
-<h2>将文章的makedown文件上传到github服务器</h2>
+<h3>添加代码</h3>
 
 <pre><code>git add .
-git commit -m "add source post"
-git push origin source
+git add -u
 </code></pre>
 
-<h2>Octopress仓库说明</h2>
+<h3>提交到本地仓库</h3>
 
-<p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
+<p>并未提交远程git仓库</p>
 
-<h2>Octopress支持中文</h2>
-
-<p>1、rake new_post生成的makedown文件要改成UTF-8无签名格式。</p>
-
-<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
-
-<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
+<pre><code>git commit -m "bug fix log"
 </code></pre>
 
-<h2>makedown在线编辑器</h2>
+<h3>提交到仓库</h3>
 
-<pre><code>http://mahua.jser.me/
+<pre><code>git push origin master
 </code></pre>
+
+<h3>删除文件</h3>
+
+<p>并未在git仓库删除,只是标记删除</p>
+
+<pre><code>git rm FILENAME
+</code></pre>
+
+<h3>标记忽略文件</h3>
+
+<p>.gitignore标记忽略文件，详细<a href="http://help.github.com/ignore-files/">http://help.github.com/ignore-files/</a></p>
+
+<h3>撤销修改</h3>
+
+<p>如果还没有commit，可以用下面命令恢复到修改前最后一次commit的状态。</p>
+
+<pre><code>git checkout -- path/filename
+</code></pre>
+
+<h3>git里文件的三种状态</h3>
+
+<ul>
+<li>已提交（committed）  git commit之后</li>
+<li>已修改（modified）   文件修改之后</li>
+<li>已暂存（staged）     git add之后
+git push之后，文件的状态没有改变，依然是已提交(committed)状态。</li>
+</ul>
+
+
+<h3>git里文件流转的三个目录</h3>
+
+<ul>
+<li>工作目录</li>
+<li>暂存区域</li>
+<li>本地仓库
+工作目录是用户编辑的目录，git clone操作后的目录；暂存目录是git add之后加入索引文件；本地仓库是git commit之后将文件快照保持的地方。</li>
+</ul>
+
+
+<h3>git配置</h3>
+
+<pre><code>git config --list 查看配置
+</code></pre>
+
+<h3>git命令帮助</h3>
+
+<pre><code>git help add 查看git add帮助
+</code></pre>
+
+<h3>git手册</h3>
+
+<ul>
+<li><a href="http://git-scm.com/book/zh/">Pro Git</a></li>
+<li><a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/">Git 初學筆記 - 指令操作教學</a></li>
+<li><a href="http://gitbook.liuhui998.com/index.html">Git Community Book 中文版</a></li>
+</ul>
+
 </div>
 
 
@@ -172,7 +215,7 @@ git push origin source
   
 
 
-<time datetime="2012-11-23T23:07:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+<time datetime="2012-11-24T21:54:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2012</time>
       
 
 
@@ -187,10 +230,8 @@ git push origin source
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/11/23/flask-twip-on-heroku/" title="Previous Post: flask_twip在heroku上搭建教程">&laquo; flask_twip在heroku上搭建教程</a>
+        <a class="basic-alignment left" href="/blog/2012/11/23/octopress-command-note/" title="Previous Post: octopress命令备忘录">&laquo; octopress命令备忘录</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/11/24/git-manual/" title="Next Post: git manual">git manual &raquo;</a>
       
     </p>
   </footer>
@@ -257,8 +298,8 @@ git push origin source
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2012/11/24/git-manual/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2012/11/24/git-manual/';
         var disqus_script = 'embed.js';
       
     (function () {
