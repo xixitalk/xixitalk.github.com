@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-11-24T09:14:13+08:00</updated>
+  <updated>2012-11-24T21:19:47+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -60,9 +60,9 @@ git push origin source
 <pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
 </code></pre>
 
-<h2>makedown在线编辑器</h2>
+<h2>makedown在线编辑器:<a href="http://mahua.jser.me/">http://mahua.jser.me/</a></h2>
 
-<pre><code>&lt;http://mahua.jser.me/&gt;
+<pre><code>http://mahua.jser.me/
 </code></pre>
 ]]></content>
   </entry>
