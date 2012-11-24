@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-11-24T09:09:36+08:00</updated>
+  <updated>2012-11-24T09:14:13+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -58,6 +58,11 @@ git push origin source
 <p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
 
 <pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
+</code></pre>
+
+<h2>makedown在线编辑器</h2>
+
+<pre><code>&lt;http://mahua.jser.me/&gt;
 </code></pre>
 ]]></content>
   </entry>
@@ -173,6 +178,11 @@ $git commit - m "init"
 </code></pre>
 
 <p>其中TWITTER为你的twitter用户名，KEY就是该API的key，API地址要保密,任何人通过这个地址都能访问你的twitter帐号。</p>
+
+<p>14、如果https://APPNAME.herokuapp.com/twip/访问不正常，可以通过heroku的logs分析定位。</p>
+
+<pre><code>$heroku logs
+</code></pre>
 
 <p>这样搭建全部完成，可以在支持twip O模式的客户端使用了，注意将API保持https方式，不然会被墙的。</p>
 
