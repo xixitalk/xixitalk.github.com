@@ -29,6 +29,15 @@ categories:
 	git commit -m "add source post"
 	git push origin source
 
+从github服务器更新本地仓库
+-
+
+	cd Octopress
+	cd _deploy
+	git pull origin master
+	cd ..
+	git pull origin source
+
 Octopress仓库说明
 -
 Octopress的github分master和source分支，octopress目录下，除\_deploy目录外的文件上传到source分支。\_deploy目录内容上传到master分支。
