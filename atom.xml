@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-11-24T23:29:17+08:00</updated>
+  <updated>2012-11-25T23:34:11+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -141,6 +141,15 @@ git push之后，文件的状态没有改变，依然是已提交(committed)状�
 <pre><code>git add .
 git commit -m "add source post"
 git push origin source
+</code></pre>
+
+<h2>从github服务器更新本地仓库</h2>
+
+<pre><code>cd Octopress
+cd _deploy
+git pull origin master
+cd ..
+git pull origin source
 </code></pre>
 
 <h2>Octopress仓库说明</h2>
