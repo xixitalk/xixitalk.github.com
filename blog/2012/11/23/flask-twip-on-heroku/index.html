@@ -139,7 +139,7 @@
 <pre><code>$heroku login
 </code></pre>
 
-<p>2、用下面命令创建一个目录，比如mytwip，并进入到mytwip目录里。</p>
+<p>2、用下面命令创建一个目录，比如mytwip，并进入到mytwip目录里。以下命令都是在mytwip目录里进行的。</p>
 
 <pre><code>$mkdir mytwip &amp;&amp; cd mytwip 
 </code></pre>
@@ -154,6 +154,8 @@
 <pre><code>$source venv/bin/activate
 </code></pre>
 
+<p>命令提示符前增加了(venv)前缀，如(venv)xixitalk@ubuntu:~/mytwip$ 。</p>
+
 <p>5、使用pip install安装Flask_Twip,自动会安装所有依赖。用$pip freeze看依赖安装情况。</p>
 
 <pre><code>$pip install Flask_Twip
@@ -167,7 +169,12 @@ $pip freeze
 
 <p>6、从<a href="https://github.com/yegle/flask_twip/tree/master/examples/heroku">https://github.com/yegle/flask_twip/tree/master/examples/heroku</a>下载Procfile、app.py到mytwip目录，从<a href="https://github.com/yegle/flask_twip/tree/master/examples">https://github.com/yegle/flask_twip/tree/master/examples</a>下载settings-example.py文件到mytwip目录，并重命名为settings.py。
 修改settings.py里的TWITTER_CONSUMER_KEY和TWITTER_CONSUMER_SECRET值为准备工作第2步twitter API创建的值。<br/>
-可以在<a href="https://github.com/yegle/flask_twip/tree/master/examples">https://github.com/yegle/flask_twip/tree/master/examples</a>页面点击右边中间的Downloads连接下载，蓝色History上面。</p>
+可以在<a href="https://github.com/yegle/flask_twip/tree/master/examples">https://github.com/yegle/flask_twip/tree/master/examples</a>页面点击右边中间的Downloads连接下载，蓝色History上面。把上面提到的三个文件挑出来放到步骤2创建的mytwip目录里。
+用ls命令查看，现在mytwip有如下几个文件：</p>
+
+<pre><code>(venv)xixitalk@ubuntu:~/mytwip$ ls
+requirements.txt Procfile venv app.py  settings.py
+</code></pre>
 
 <p>7、Procfile设置跳过，上步已经下载。</p>
 
