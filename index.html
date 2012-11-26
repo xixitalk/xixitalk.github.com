@@ -193,10 +193,16 @@ git push之后，文件的状态没有改变，依然是已提交(committed)状�
 <pre><code>git config --global http.proxy example.com:8080
 </code></pre>
 
-<p>在.gitconfi文件可以看到：</p>
+<p>在.gitconfig文件可以看到：</p>
 
 <pre><code>[http]
       proxy = example.com:8080
+</code></pre>
+
+<h3>配置git的默认用户名和邮箱</h3>
+
+<pre><code>$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
 </code></pre>
 
 <h3>git命令帮助</h3>
@@ -419,8 +425,8 @@ $pip freeze
 <p>10、初始化mytwip目录的git环境。</p>
 
 <pre><code>$git init 
-$git add . 
-$git commit - m "init" 
+$git add .
+$git commit -m "init" 
 </code></pre>
 
 <p>11、创建应用,APPNAME为自定义名字。</p>
@@ -435,7 +441,7 @@ $git commit - m "init"
 
 <p>12、将应用上传到heroku的git服务器，应用自动运行。</p>
 
-<pre><code>$ git push heroku master 
+<pre><code>$git push heroku master 
 </code></pre>
 
 <p>13、浏览器访问https://APPNAME.herokuapp.com/twip/进行O模式认证,认证完API格式为：</p>

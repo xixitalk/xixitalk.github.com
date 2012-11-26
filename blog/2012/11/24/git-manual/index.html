@@ -190,10 +190,16 @@ git push之后，文件的状态没有改变，依然是已提交(committed)状�
 <pre><code>git config --global http.proxy example.com:8080
 </code></pre>
 
-<p>在.gitconfi文件可以看到：</p>
+<p>在.gitconfig文件可以看到：</p>
 
 <pre><code>[http]
       proxy = example.com:8080
+</code></pre>
+
+<h3>配置git的默认用户名和邮箱</h3>
+
+<pre><code>$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
 </code></pre>
 
 <h3>git命令帮助</h3>
