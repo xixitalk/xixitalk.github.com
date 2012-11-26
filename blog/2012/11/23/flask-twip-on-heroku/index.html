@@ -121,7 +121,7 @@
 <pre><code>https://APPNAME.herokuapp.com/twip/oauth/callback/
 </code></pre>
 
-<p>APPNAME是你heroku应用的名字。可以提前写好，也可以heroku的应用创建后再回来修改。 在进行O模式认证前要修改好，不然认证后返回不正确，切记。</p>
+<p>APPNAME是你heroku应用的名字。@yegle提醒说callback可以随便填写。</p>
 
 <p>3、找一个linux机器，以下以ubuntu为例，windows没试过，windows很多命令工具没有，比如pip和virtualenv。 ubuntu用下面命令安装heroku工具，也可参见<a href="https://toolbelt.heroku.com/debian">https://toolbelt.heroku.com/debian</a></p>
 
@@ -166,7 +166,8 @@ $pip freeze
 </code></pre>
 
 <p>6、从<a href="https://github.com/yegle/flask_twip/tree/master/examples/heroku">https://github.com/yegle/flask_twip/tree/master/examples/heroku</a>下载Procfile、app.py到mytwip目录，从<a href="https://github.com/yegle/flask_twip/tree/master/examples">https://github.com/yegle/flask_twip/tree/master/examples</a>下载settings-example.py文件到mytwip目录，并重命名为settings.py。
-修改settings.py里的TWITTER_CONSUMER_KEY和TWITTER_CONSUMER_SECRET值为准备工作第2步twitter API创建的值。</p>
+修改settings.py里的TWITTER_CONSUMER_KEY和TWITTER_CONSUMER_SECRET值为准备工作第2步twitter API创建的值。<br/>
+可以在<a href="https://github.com/yegle/flask_twip/tree/master/examples">https://github.com/yegle/flask_twip/tree/master/examples</a>页面点击右边中间的Downloads连接下载，蓝色History上面。</p>
 
 <p>7、Procfile设置跳过，上步已经下载。</p>
 
@@ -180,18 +181,14 @@ $pip freeze
 
 <p>10、初始化mytwip目录的git环境。</p>
 
-<pre><code>$git init $git add . 
+<pre><code>$git init 
+$git add . 
 $git commit - m "init" 
 </code></pre>
 
 <p>11、创建应用,APPNAME为自定义名字。</p>
 
 <pre><code>$heroku create APPNAME 
-</code></pre>
-
-<p>检查准备工作第2步的twitter API key的callback URL是否为：</p>
-
-<pre><code>https://APPNAME.herokuapp.com/twip/oauth/callback/
 </code></pre>
 
 <p>如果创建后想修改应用名字在mytwip目录用下面命令再修改，newname是自定义新应用名称。</p>

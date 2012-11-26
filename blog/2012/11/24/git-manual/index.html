@@ -144,6 +144,11 @@ git add -u
 <pre><code>git rm FILENAME
 </code></pre>
 
+<h3>rm删除的文件重新从服务器更新</h3>
+
+<pre><code>git checkout filename.c
+</code></pre>
+
 <h3>标记忽略文件</h3>
 
 <p>.gitignore标记忽略文件，详细<a href="http://help.github.com/ignore-files/">http://help.github.com/ignore-files/</a></p>
@@ -178,6 +183,17 @@ git push之后，文件的状态没有改变，依然是已提交(committed)状�
 <h3>git配置</h3>
 
 <pre><code>git config --list 查看配置
+</code></pre>
+
+<h3>git配置HTTP代理</h3>
+
+<pre><code>git config --global http.proxy example.com:8080
+</code></pre>
+
+<p>在.gitconfi文件可以看到：</p>
+
+<pre><code>[http]
+      proxy = example.com:8080
 </code></pre>
 
 <h3>git命令帮助</h3>
