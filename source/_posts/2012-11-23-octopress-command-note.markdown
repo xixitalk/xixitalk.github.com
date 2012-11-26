@@ -3,7 +3,8 @@ layout: post
 title: "octopress命令备忘录"
 date: 2012-11-23 23:07
 comments: true
-categories: 
+categories: git github octopress
+tags: [git, github, octopress]
 ---
 
 创建新文章

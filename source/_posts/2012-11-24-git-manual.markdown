@@ -3,7 +3,8 @@ layout: post
 title: "git manual"
 date: 2012-11-24 21:54
 comments: true
-categories: 
+categories: git
+tags: [git]
 ---
 
 ##初始化目录

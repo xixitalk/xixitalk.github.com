@@ -3,7 +3,8 @@ layout: post
 title: "my-first-post"
 date: 2012-06-03 23:44
 comments: true
-categories: 
+categories: test
+tags: [test]
 ---
 ## My First Post
 
