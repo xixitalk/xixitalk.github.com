@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2012-11-26T21:06:08+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[octopress命令备忘录]]></title>
+    <link href="http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/"/>
+    <updated>2012-11-23T23:07:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2012/11/23/octopress-command-note</id>
+    <content type="html"><![CDATA[<h2>创建新文章</h2>
+
+<pre><code>rake new_post["TITLE"]
+</code></pre>
+
+<h2>生成静态HTML文章</h2>
+
+<pre><code>rake generate
+</code></pre>
+
+<h2>本地预览</h2>
+
+<pre><code>rake preview
+</code></pre>
+
+<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
+
+<h2>发布到github空间</h2>
+
+<pre><code>rake deploy
+</code></pre>
+
+<h2>将文章的makedown文件上传到github服务器</h2>
+
+<pre><code>git add .
+git commit -m "add source post"
+git push origin source
+</code></pre>
+
+<h2>从github服务器更新本地仓库</h2>
+
+<pre><code>cd Octopress
+cd _deploy
+git pull origin master
+cd ..
+git pull origin source
+</code></pre>
+
+<h2>Octopress仓库说明</h2>
+
+<p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
+
+<h2>Octopress支持中文</h2>
+
+<p>1、rake new_post生成的makedown文件要改成UTF-8无签名格式。</p>
+
+<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
+
+<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
+</code></pre>
+
+<h2>makedown在线编辑器</h2>
+
+<pre><code>http://mahua.jser.me/
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
