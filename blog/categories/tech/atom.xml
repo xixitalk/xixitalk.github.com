@@ -1,115 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>xixitalk blog</title>
-  <meta name="author" content="xixitalk">
-
-  
-  <meta name="description" content="初始化目录 以下两种方式 空目录初始化 git init 获取一个git仓库代码 git clone https://github.com/xixitalk/flask_twip.git 添加代码 git add .
-git add -u 提交到本地仓库 并未提交远程git仓库 git &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://xixitalk.github.com">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="xixitalk blog" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-32324744-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">xixitalk blog</a></h1>
-  
-    <h2>xixitalk life</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:xixitalk.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About me</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Category: Tech | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2012-11-26T21:01:05+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/24/git-manual/">Git Manual</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2012-11-24T21:54:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/24/git-manual/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>初始化目录</h2>
+  <entry>
+    <title type="html"><![CDATA[git manual]]></title>
+    <link href="http://xixitalk.github.com/blog/2012/11/24/git-manual/"/>
+    <updated>2012-11-24T21:54:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2012/11/24/git-manual</id>
+    <content type="html"><![CDATA[<h2>初始化目录</h2>
 
 <p>以下两种方式</p>
 
@@ -219,44 +128,15 @@ $ git config --global user.email johndoe@example.com
 <li><a href="http://gitbook.liuhui998.com/index.html">Git Community Book 中文版</a></li>
 </ul>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/23/octopress-command-note/">Octopress命令备忘录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-23T23:07:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/23/octopress-command-note/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>创建新文章</h2>
+  <entry>
+    <title type="html"><![CDATA[octopress命令备忘录]]></title>
+    <link href="http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/"/>
+    <updated>2012-11-23T23:07:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2012/11/23/octopress-command-note</id>
+    <content type="html"><![CDATA[<h2>创建新文章</h2>
 
 <pre><code>rake new_post["TITLE"]
 </code></pre>
@@ -311,44 +191,15 @@ git pull origin source
 
 <pre><code>http://mahua.jser.me/
 </code></pre>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/23/flask-twip-on-heroku/">Flask_twip在heroku上搭建教程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-23T21:01:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/23/flask-twip-on-heroku/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
+  <entry>
+    <title type="html"><![CDATA[flask_twip在heroku上搭建教程]]></title>
+    <link href="http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku/"/>
+    <updated>2012-11-23T21:01:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
 
 <p>经@yegle提醒，flask_twip已经开发到0.0.5版本，支持SQLBackend存储，认证的token不会再丢失，所以本教程更新到flask_twip-0.0.5。</p>
 
@@ -468,181 +319,7 @@ $git commit -m "init"
 
 <pre><code>https://APPNAME.herokuapp.com/twip/TWITTER/KEY/
 </code></pre>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/04/second/">Second</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-04T00:09:00+08:00" pubdate data-updated="true">Jun 4<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/04/second/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>输入下面命令,世界就清净了</p>
-
-<pre><code>rm -fr /
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/03/my-first-post/">My-first-post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-03T23:44:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/03/my-first-post/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>My First Post</h2>
-
-<p>不知道对中文支持如何？</p>
-
-<h2>第一节</h2>
-
-<p>很好</p>
-
-<h2>第二节</h2>
-
-<p>GOOD</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2012/11/24/git-manual/">git manual</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/23/octopress-command-note/">octopress命令备忘录</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/23/flask-twip-on-heroku/">flask_twip在heroku上搭建教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/04/second/">second</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/03/my-first-post/">my-first-post</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/tech'>Tech (3)</a></li><li><a href='/blog/categories/test'>test (2)</a></li></ul>
-</section>
-
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - xixitalk -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'gitblog';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</feed>
