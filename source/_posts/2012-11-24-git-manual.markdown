@@ -28,6 +28,9 @@ categories:
 并未在git仓库删除,只是标记删除
 	git rm FILENAME
 
+###rm删除的文件重新从服务器更新
+	git checkout filename.c
+
 ###标记忽略文件
 .gitignore标记忽略文件，详细<http://help.github.com/ignore-files/>
 
@@ -49,6 +52,16 @@ git push之后，文件的状态没有改变，依然是已提交(committed)状�
 
 ###git配置
 	git config --list 查看配置
+
+###git配置HTTP代理
+	git config --global http.proxy example.com:8080
+在.gitconfig文件可以看到：
+	[http]
+	      proxy = example.com:8080
+
+###配置git的默认用户名和邮箱
+	$ git config --global user.name "John Doe"
+	$ git config --global user.email johndoe@example.com
 
 ###git命令帮助
 	git help add 查看git add帮助
