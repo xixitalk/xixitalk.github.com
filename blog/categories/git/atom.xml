@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-11-26T21:06:08+08:00</updated>
+  <updated>2012-11-27T08:29:39+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -158,7 +158,7 @@ $ git config --global user.email johndoe@example.com
 <pre><code>rake deploy
 </code></pre>
 
-<h2>将文章的makedown文件上传到github服务器</h2>
+<h2>将文章的markdown文件上传到github服务器</h2>
 
 <pre><code>git add .
 git commit -m "add source post"
@@ -180,14 +180,14 @@ git pull origin source
 
 <h2>Octopress支持中文</h2>
 
-<p>1、rake new_post生成的makedown文件要改成UTF-8无签名格式。</p>
+<p>1、rake new_post生成的markdown文件要改成UTF-8无签名格式。</p>
 
 <p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
 
 <pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
 </code></pre>
 
-<h2>makedown在线编辑器</h2>
+<h2>markdown在线编辑器</h2>
 
 <pre><code>http://mahua.jser.me/
 </code></pre>
