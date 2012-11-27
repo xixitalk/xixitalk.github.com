@@ -4,7 +4,7 @@
   <title><![CDATA[Category: heroku | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-11-27T09:26:58+08:00</updated>
+  <updated>2012-11-27T16:41:54+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -70,9 +70,10 @@
 
 <p>命令提示符前增加了(venv)前缀，如(venv)xixitalk@ubuntu:~/mytwip$ 。</p>
 
-<p>5、使用pip install安装Flask_Twip,自动会安装所有依赖。用$pip freeze看依赖安装情况。</p>
+<p>5、使用pip install安装Flask_Twip,自动会安装所有依赖。gunicorn需要单独安装。用$pip freeze看依赖安装情况。</p>
 
 <pre><code>$pip install Flask_Twip
+$pip install gunicorn
 $pip freeze
 </code></pre>
 

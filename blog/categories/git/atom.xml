@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2012-11-27T09:26:58+08:00</updated>
+  <updated>2012-11-27T16:41:54+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -29,7 +29,7 @@
 
 <h3>获取一个git仓库代码</h3>
 
-<pre><code>git clone https://github.com/xixitalk/flask_twip.git
+<pre><code>git clone https://github.com/yegle/flask_twip.git
 </code></pre>
 
 <h3>添加代码</h3>
@@ -42,7 +42,8 @@ git add -u
 
 <p>并未提交远程git仓库</p>
 
-<pre><code>git commit -m "bug fix log"
+<pre><code>git commit -m "bugs fixed log"
+git commit -a 自动add修改文件并提交。新建的文件不会add
 </code></pre>
 
 <h3>提交到仓库</h3>
@@ -55,6 +56,13 @@ git add -u
 <p>并未在git仓库删除,只是标记删除</p>
 
 <pre><code>git rm FILENAME
+</code></pre>
+
+<h3>分支(branch)操作</h3>
+
+<pre><code>git branch 显示所有分支，分支加*的是当前分支
+git branck experimental 创建一个名为experimental的分支
+git checkout experimental 切换到experimental分支
 </code></pre>
 
 <h3>rm删除的文件重新从服务器更新</h3>
@@ -251,9 +259,10 @@ git pull origin source
 
 <p>命令提示符前增加了(venv)前缀，如(venv)xixitalk@ubuntu:~/mytwip$ 。</p>
 
-<p>5、使用pip install安装Flask_Twip,自动会安装所有依赖。用$pip freeze看依赖安装情况。</p>
+<p>5、使用pip install安装Flask_Twip,自动会安装所有依赖。gunicorn需要单独安装。用$pip freeze看依赖安装情况。</p>
 
 <pre><code>$pip install Flask_Twip
+$pip install gunicorn
 $pip freeze
 </code></pre>
 

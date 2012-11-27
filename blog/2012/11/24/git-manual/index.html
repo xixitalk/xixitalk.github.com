@@ -9,8 +9,8 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="初始化目录 以下两种方式 空目录初始化 git init 获取一个git仓库代码 git clone https://github.com/xixitalk/flask_twip.git 添加代码 git add .
-git add -u 提交到本地仓库 并未提交远程git仓库 git &hellip;">
+  <meta name="description" content="初始化目录 以下两种方式 空目录初始化 git init 获取一个git仓库代码 git clone https://github.com/yegle/flask_twip.git 添加代码 git add .
+git add -u 提交到本地仓库 并未提交远程git仓库 git commit - &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -118,7 +118,7 @@ git add -u 提交到本地仓库 并未提交远程git仓库 git &hellip;">
 
 <h3>获取一个git仓库代码</h3>
 
-<pre><code>git clone https://github.com/xixitalk/flask_twip.git
+<pre><code>git clone https://github.com/yegle/flask_twip.git
 </code></pre>
 
 <h3>添加代码</h3>
@@ -131,7 +131,8 @@ git add -u
 
 <p>并未提交远程git仓库</p>
 
-<pre><code>git commit -m "bug fix log"
+<pre><code>git commit -m "bugs fixed log"
+git commit -a 自动add修改文件并提交。新建的文件不会add
 </code></pre>
 
 <h3>提交到仓库</h3>
@@ -144,6 +145,13 @@ git add -u
 <p>并未在git仓库删除,只是标记删除</p>
 
 <pre><code>git rm FILENAME
+</code></pre>
+
+<h3>分支(branch)操作</h3>
+
+<pre><code>git branch 显示所有分支，分支加*的是当前分支
+git branck experimental 创建一个名为experimental的分支
+git checkout experimental 切换到experimental分支
 </code></pre>
 
 <h3>rm删除的文件重新从服务器更新</h3>
@@ -263,6 +271,8 @@ $ git config --global user.email johndoe@example.com
         <a class="basic-alignment left" href="/blog/2012/11/23/octopress-command-note/" title="Previous Post: octopress命令备忘录">&laquo; octopress命令备忘录</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/11/27/markdown-manual/" title="Next Post: markdown manual">markdown manual &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -279,7 +289,7 @@ $ git config --global user.email johndoe@example.com
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/flask-twip'>flask_twip (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/octopress'>octopress (1)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/flask-twip'>flask_twip (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/octopress'>octopress (1)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
 </section>
 
   
