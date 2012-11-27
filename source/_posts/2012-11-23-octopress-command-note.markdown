@@ -4,7 +4,6 @@ title: "octopress命令备忘录"
 date: 2012-11-23 23:07
 comments: true
 categories: git github octopress
-tags: [git, github, octopress]
 ---
 
 创建新文章
@@ -24,7 +23,7 @@ tags: [git, github, octopress]
 -
 	rake deploy
 
-将文章的makedown文件上传到github服务器
+将文章的markdown文件上传到github服务器
 -
 	git add .
 	git commit -m "add source post"
@@ -45,11 +44,11 @@ Octopress的github分master和source分支，octopress目录下，除\_deploy目
 
 Octopress支持中文
 -
-1、rake new_post生成的makedown文件要改成UTF-8无签名格式。
+1、rake new_post生成的markdown文件要改成UTF-8无签名格式。
 
 2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：
 	self.content = File.read(File.join(base, name), :encoding => "utf-8")
 
-makedown在线编辑器
+markdown在线编辑器
 -
 	http://mahua.jser.me/

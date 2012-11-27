@@ -4,7 +4,6 @@ title: "flask_twip在heroku上搭建教程"
 date: 2012-11-23 21:01
 comments: true
 categories: heroku git flask_twip twip twitter
-tags: [heroku, git, flask_twip, twip, twitter]
 ---
 
 [flask_twip](https://github.com/yegle/flask_twip)是@[yegle](http://twitter.com/yegle)写的一个可以搭建在[heroku](http://www.heroku.com/)上的一个[twip](http://code.google.com/p/twip/)的port程序。
