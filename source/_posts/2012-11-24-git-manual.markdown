@@ -11,7 +11,7 @@ categories: git
 ###空目录初始化
 	git init  
 ###获取一个git仓库代码
-	git clone https://github.com/xixitalk/flask_twip.git
+	git clone https://github.com/yegle/flask_twip.git
 
 ###添加代码
 	git add .
@@ -19,7 +19,8 @@ categories: git
 
 ###提交到本地仓库
 并未提交远程git仓库
-	git commit -m "bug fix log"
+	git commit -m "bugs fixed log"
+	git commit -a 自动add修改文件并提交。新建的文件不会add
 
 ###提交到仓库
 	git push origin master
@@ -27,6 +28,11 @@ categories: git
 ###删除文件
 并未在git仓库删除,只是标记删除
 	git rm FILENAME
+
+###分支(branch)操作
+	git branch 显示所有分支，分支加*的是当前分支
+	git branck experimental 创建一个名为experimental的分支
+	git checkout experimental 切换到experimental分支
 
 ###rm删除的文件重新从服务器更新
 	git checkout filename.c

@@ -45,8 +45,9 @@ APPNAME是你heroku应用的名字。@yegle提醒说callback可以随便填写�
 	$source venv/bin/activate
 命令提示符前增加了(venv)前缀，如(venv)xixitalk@ubuntu:~/mytwip$ 。
 
-5、使用pip install安装Flask_Twip,自动会安装所有依赖。用$pip freeze看依赖安装情况。
+5、使用pip install安装Flask_Twip,自动会安装所有依赖。gunicorn需要单独安装。用$pip freeze看依赖安装情况。
 	$pip install Flask_Twip
+	$pip install gunicorn
 	$pip freeze
 依赖安装完整后，生成requirements.txt。
 	$pip freeze > requirements.txt

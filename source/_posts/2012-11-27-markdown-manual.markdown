@@ -1,0 +1,46 @@
+---
+layout: post
+title: "markdown manual"
+date: 2012-11-27 14:56
+comments: true
+categories: markdown
+---
+
+##链接
+最简单方式，地址用<>包含  
+
+```
+<http://www.example.com>
+```
+
+效果：
+<http://www.example.com>
+
+第二种方式，这种方式适合短链接
+```
+[xixitalk](http://twittter/xixitalk)
+[xixitalk](http://twittter/xixitalk "xxiitalk")
+```
+效果：
+[xixitalk](http://twittter/xixitalk)
+[xixitalk](http://twittter/xixitalk "xxiitalk")
+
+第三种方式，这种方式适合长链接
+```
+[xixitalk][xixitalk]
+[xixitakj]:http://twittter/xixitalk "xxiitalk"
+```
+效果：
+[xixitalk][xixitalk_id]
+[xixitalk_id]: http://twittter/xixitalk "xxiitalk"
+
+第四种方式，章节式链接
+```
+[第二章 代码块](#codeblock)
+
+<h2 id="codeblock">第二章 代码块<h2>
+```
+效果：  
+[第二章 代码块](#codeblock)
+
+<h2 id="codeblock">第二章 代码块<h2>
