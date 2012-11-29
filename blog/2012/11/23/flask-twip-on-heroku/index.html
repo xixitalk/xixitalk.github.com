@@ -113,7 +113,7 @@
 <h2>提醒</h2>
 
 <p>我原来是用flask_twip-0.0.1搭建的，教程也是基于flask_twip-0.0.1，flask_twip更新到0.0.5后，本教程的更新纯粹想当然，最近有网友提醒有错误，我实际操作一遍发现heroku上使用数据库还比较麻烦，有错误暂时未解决。如果你想搭建一个自己使用的
-API，可以暂时使用我flask_twip-0.0.1的教程，这个是我一步一步实际操作的，可以保证正确。这里有快照：<a href="http://igfw.net/archives/12559">http://igfw.net/archives/12559</a>。如果你想搭建一个很多人使用的API，请等候更新。</p>
+API，可以暂时使用我flask_twip-0.0.1的教程，这个是我一步一步实际操作的，可以保证正确。这里有快照：<a href="http://igfw.net/archives/12559">http://igfw.net/archives/12559</a>。如果你想搭建一个很多人使用的API，请等候更新或者自己解决错误。</p>
 
 <p><del>
 本教程使用的基于flask_twip-0.0.1的修改版本<a href="https://github.com/xixitalk/flask_twip/blob/master/release/flask_twip-0.0.1_mod.zip">flask_twip-0.0.1_mod.zip</a>，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件（<a href="https://devcenter.heroku.com/articles/python-faq#can-i-read-from-and-write-to-the-file-system">ephemeral文件</a>），经过不到一天就会丢失，本修改将认证信息通过写代码里第二次上传来规避临时文件丢失，其次增加了gzip压缩支持。
