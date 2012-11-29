@@ -10,6 +10,10 @@ categories: heroku git flask_twip twip twitter
 
 经@yegle提醒，flask_twip已经开发到0.0.5版本，支持SQLBackend存储，认证的token不会再丢失，所以本教程更新到flask_twip-0.0.5。
 
+##提醒
+我原来是用flask_twip-0.0.1搭建的，教程也是基于flask_twip-0.0.1，flask_twip更新到0.0.5后，本教程的更新纯粹想当然，最近有网友提醒有错误，我实际操作一遍发现heroku上使用数据库还比较麻烦，有错误暂时未解决。如果你想搭建一个自己使用的
+API，可以暂时使用我flask_twip-0.0.1的教程，这个是我一步一步实际操作的，可以保证正确。这里有快照：<http://igfw.net/archives/12559>。如果你想搭建一个很多人使用的API，请等候更新或者自己解决错误。
+
 <del>
 本教程使用的基于flask_twip-0.0.1的修改版本[flask_twip-0.0.1_mod.zip](https://github.com/xixitalk/flask_twip/blob/master/release/flask_twip-0.0.1_mod.zip)，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件（[ephemeral文件](https://devcenter.heroku.com/articles/python-faq#can-i-read-from-and-write-to-the-file-system)），经过不到一天就会丢失，本修改将认证信息通过写代码里第二次上传来规避临时文件丢失，其次增加了gzip压缩支持。
 </del>
@@ -26,6 +30,9 @@ APPNAME是你heroku应用的名字。@yegle提醒说callback可以随便填写�
 3、找一个linux机器，以下以ubuntu为例，windows没试过，windows很多命令工具没有，比如pip和virtualenv。 ubuntu用下面命令安装heroku工具，也可参见<https://toolbelt.heroku.com/debian>
 	wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 有些命令如果系统没有安装单独用apt-get install安装，如git、virtualenv、pip。
+	sudo apt-get install git
+	sudo apt-get install python-pip
+	sudo pip install virtualenv
 
 开始创建heroku应用
 -
@@ -54,7 +61,7 @@ APPNAME是你heroku应用的名字。@yegle提醒说callback可以随便填写�
 
 6、从<https://github.com/yegle/flask_twip/tree/master/examples/heroku>下载Procfile、app.py到mytwip目录，从<https://github.com/yegle/flask_twip/tree/master/examples>下载settings-example.py文件到mytwip目录，并重命名为settings.py。
 修改settings.py里的TWITTER_CONSUMER_KEY和TWITTER_CONSUMER_SECRET值为准备工作第2步twitter API创建的值。  
-可以在<https://github.com/yegle/flask_twip/tree/master/examples>页面点击右边中间的Downloads连接下载，蓝色History上面。把上面提到的三个文件挑出来放到步骤2创建的mytwip目录里。
+如果不知道怎么下载的话，可以在<https://github.com/yegle/flask_twip/tree/master/examples>页面点击右边中间的Downloads连接下载，蓝色History上面。把上面提到的三个文件挑出来放到步骤2创建的mytwip目录里。
 用ls命令查看，现在mytwip有如下几个文件：
 	(venv)xixitalk@ubuntu:~/mytwip$ ls
 	requirements.txt Procfile venv app.py  settings.py
