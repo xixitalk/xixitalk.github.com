@@ -38,11 +38,7 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/about/</loc>
-        <lastmod>2013-01-28T19:58:24+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://xixitalk.github.com/about/</loc>
-        <lastmod>2013-01-28T20:13:06+08:00</lastmod>
+        <lastmod>2013-01-29T19:43:47+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/archives/</loc>
@@ -55,5 +51,9 @@
     <url>
         <loc>http://xixitalk.github.com/</loc>
         <lastmod>2013-01-28T19:58:24+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://xixitalk.github.com/wishlist/</loc>
+        <lastmod>2013-01-29T19:59:32+08:00</lastmod>
     </url>
 </urlset>
