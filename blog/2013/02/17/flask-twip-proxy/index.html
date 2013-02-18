@@ -9,9 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="为flask_twip添加图片代理 为flask_twip添加图片代理,理论上网页也可以。
-代码：https://gist.github.com/xixitalk/4969986
-">
+  <meta name="description" content="为flask_twip添加图片代理 为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。 1、import urllib2 在文件twip.py里增加import urllib2 import urllib2 2、增加/twip/getimg路径映射 在twip. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,8 +109,39 @@
 
 <div class="entry-content"><h2>为flask_twip添加图片代理</h2>
 
-<p>为flask_twip添加图片代理,理论上网页也可以。
-代码：<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a></p>
+<p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。</p>
+
+<h3>1、import urllib2</h3>
+
+<p>在文件twip.py里增加import urllib2</p>
+
+<pre><code>import urllib2
+</code></pre>
+
+<h3>2、增加/twip/getimg路径映射</h3>
+
+<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
+
+<pre><code>('/getimg/',self.getimg),
+</code></pre>
+
+<h3>3、增加getimg函数</h3>
+
+<p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a></p>
+
+<script src="https://gist.github.com/xixitalk/4969986.js"></script>
+
+
+<h3>4、浏览器访问https://YOURAPP.herokuapp.com/twip/getimg</h3>
+
+<p>访问https://YOURAPP.herokuapp.com/twip/getimg，输入图片地址或者网页地址即可。</p>
+
+<h3>客户端使用</h3>
+
+<p>如果客户端获取图片的时候把不能访问的图片地址（以BLOCKIEDIMGURL为例）以参数imgurl形式传给https://YOURAPP.herokuapp.com/twip/getimg就可以直接在客户端查看图片了。</p>
+
+<pre><code>https://YOURAPP.herokuapp.com/twip/getimg?imgurl=BLOCKIEDIMGURL
+</code></pre>
 </div>
 
 
