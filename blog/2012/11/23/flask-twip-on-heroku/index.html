@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="flask_twip是@yegle写的一个可以搭建在heroku上的一个twip的port程序。 经@yegle提醒，flask_twip已经开发到0.0.5版本，支持SQLBackend存储，认证的token不会再丢失，所以本教程更新到flask_twip-0.0.5。 提醒 &hellip;">
+  <meta name="description" content="flask_twip是@yegle写的一个可以搭建在heroku上的一个twip的port程序。 本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@xmchenyj的教程。http:// &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,134 +109,12 @@
 
 <div class="entry-content"><p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
 
-<p>经@yegle提醒，flask_twip已经开发到0.0.5版本，支持SQLBackend存储，认证的token不会再丢失，所以本教程更新到flask_twip-0.0.5。</p>
+<p>本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@<a href="http://twitter.com/xmchenyj">xmchenyj</a>的教程。<a href="http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/">http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/</a></p>
 
-<h2>提醒</h2>
-
-<p>我原来是用flask_twip-0.0.1搭建的，教程也是基于flask_twip-0.0.1，flask_twip更新到0.0.5后，本教程的更新纯粹想当然，最近有网友提醒有错误，我实际操作一遍发现heroku上使用数据库还比较麻烦，有错误暂时未解决。如果你想搭建一个自己使用的
-API，可以暂时使用我flask_twip-0.0.1的教程，这个是我一步一步实际操作的，可以保证正确。这里有快照：<a href="http://igfw.net/archives/12559">http://igfw.net/archives/12559</a>。如果你想搭建一个很多人使用的API，请等候更新或者自己解决错误。</p>
-
-<p><del>
-本教程使用的基于flask_twip-0.0.1的修改版本<a href="https://github.com/xixitalk/flask_twip/blob/master/release/flask_twip-0.0.1_mod.zip">flask_twip-0.0.1_mod.zip</a>，主要是因为原版本O模式认证后的token保存在文件里，而heroku的文件为临时文件（<a href="https://devcenter.heroku.com/articles/python-faq#can-i-read-from-and-write-to-the-file-system">ephemeral文件</a>），经过不到一天就会丢失，本修改将认证信息通过写代码里第二次上传来规避临时文件丢失，其次增加了gzip压缩支持。
-</del></p>
-
-<h2>准备工作</h2>
-
-<p>1、注册heroku帐号,过程略。</p>
-
-<p>2、在<a href="https://dev.twitter.com">https://dev.twitter.com</a>注册一个API的key，记录consumer key和consumer secret，下面会用到。 callback的url是</p>
-
-<pre><code>https://APPNAME.herokuapp.com/twip/oauth/callback/
-</code></pre>
-
-<p>APPNAME是你heroku应用的名字。@yegle提醒说callback可以随便填写。</p>
-
-<p>3、找一个linux机器，以下以ubuntu为例，windows没试过，windows很多命令工具没有，比如pip和virtualenv。 ubuntu用下面命令安装heroku工具，也可参见<a href="https://toolbelt.heroku.com/debian">https://toolbelt.heroku.com/debian</a></p>
-
-<pre><code>wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-</code></pre>
-
-<p>有些命令如果系统没有安装单独用apt-get install安装，如git、virtualenv、pip。</p>
-
-<pre><code>sudo apt-get install git
-sudo apt-get install python-pip
-sudo pip install virtualenv
-</code></pre>
-
-<h2>开始创建heroku应用</h2>
-
-<p>以下步骤可以同步参考<a href="https://devcenter.heroku.com/articles/python">https://devcenter.heroku.com/articles/python</a></p>
-
-<p>1、输入heroku帐号密码登录</p>
-
-<pre><code>$heroku login
-</code></pre>
-
-<p>2、用下面命令创建一个目录，比如mytwip，并进入到mytwip目录里。以下命令都是在mytwip目录里进行的。</p>
-
-<pre><code>$mkdir mytwip &amp;&amp; cd mytwip 
-</code></pre>
-
-<p>3、用下面命令在mytwip目录里创建一个虚拟化环境，mytwip目录里会出现一个venv的目录</p>
-
-<pre><code>$virtualenv venv --distribute
-</code></pre>
-
-<p>4、用下面命令切换到虚拟化环境</p>
-
-<pre><code>$source venv/bin/activate
-</code></pre>
-
-<p>命令提示符前增加了(venv)前缀，如(venv)xixitalk@ubuntu:~/mytwip$ 。</p>
-
-<p>5、使用pip install安装Flask_Twip,自动会安装所有依赖。gunicorn需要单独安装。用$pip freeze看依赖安装情况。</p>
-
-<pre><code>$pip install Flask_Twip
-$pip install gunicorn
-$pip freeze
-</code></pre>
-
-<p>依赖安装完整后，生成requirements.txt。</p>
-
-<pre><code>$pip freeze &gt; requirements.txt
-</code></pre>
-
-<p>6、从<a href="https://github.com/yegle/flask_twip/tree/master/examples/heroku">https://github.com/yegle/flask_twip/tree/master/examples/heroku</a>下载Procfile、app.py到mytwip目录，从<a href="https://github.com/yegle/flask_twip/tree/master/examples">https://github.com/yegle/flask_twip/tree/master/examples</a>下载settings-example.py文件到mytwip目录，并重命名为settings.py。
-修改settings.py里的TWITTER_CONSUMER_KEY和TWITTER_CONSUMER_SECRET值为准备工作第2步twitter API创建的值。<br/>
-如果不知道怎么下载的话，可以在<a href="https://github.com/yegle/flask_twip/tree/master/examples">https://github.com/yegle/flask_twip/tree/master/examples</a>页面点击右边中间的Downloads连接下载，蓝色History上面。把上面提到的三个文件挑出来放到步骤2创建的mytwip目录里。
-用ls命令查看，现在mytwip有如下几个文件：</p>
-
-<pre><code>(venv)xixitalk@ubuntu:~/mytwip$ ls
-requirements.txt Procfile venv app.py  settings.py
-</code></pre>
-
-<p>7、Procfile设置跳过，上步已经下载。</p>
-
-<p>8、$foreman start跳过，这里是本地试运行。</p>
-
-<p>9、在mytwip目录下建一个.gitignore文件，表示venv目录和pyc文件不上传git服务器。</p>
+<p>补充：xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器。这样和他教程结尾的备注才一致。</p>
 
 <pre><code>venv
 *.pyc
-</code></pre>
-
-<p>10、初始化mytwip目录的git环境。</p>
-
-<pre><code>$git init 
-$git add .
-$git commit -m "init" 
-</code></pre>
-
-<p>11、创建应用,APPNAME为自定义名字。</p>
-
-<pre><code>$heroku create APPNAME 
-</code></pre>
-
-<p>如果创建后想修改应用名字在mytwip目录用下面命令再修改，newname是自定义新应用名称。</p>
-
-<pre><code>$heroku apps:rename newname
-</code></pre>
-
-<p>12、将应用上传到heroku的git服务器，应用自动运行。</p>
-
-<pre><code>$git push heroku master 
-</code></pre>
-
-<p>13、浏览器访问https://APPNAME.herokuapp.com/twip/进行O模式认证,认证完API格式为：</p>
-
-<pre><code>https://APPNAME.herokuapp.com/twip/TWITTER/KEY/
-</code></pre>
-
-<p>其中TWITTER为你的twitter用户名，KEY就是该API的key，API地址要保密,任何人通过这个地址都能访问你的twitter帐号。</p>
-
-<p>14、如果https://APPNAME.herokuapp.com/twip/访问不正常，可以通过heroku的logs分析定位。</p>
-
-<pre><code>$heroku logs
-</code></pre>
-
-<p>这样搭建全部完成，可以在支持twip O模式的客户端使用了，注意将API保持https方式，不然会被墙的。</p>
-
-<pre><code>https://APPNAME.herokuapp.com/twip/TWITTER/KEY/
 </code></pre>
 </div>
 
