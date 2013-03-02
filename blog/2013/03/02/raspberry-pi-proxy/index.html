@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>利用Raspberry Pi加Shawdowsocks搭建代理服务 - xixitalk blog</title>
+  <title>利用Raspberry Pi加shadowsocks搭建代理服务 - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密， &hellip;">
+  <meta name="description" content="设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">利用Raspberry Pi加Shawdowsocks搭建代理服务</h1>
+      <h1 class="entry-title">利用Raspberry Pi加shadowsocks搭建代理服务</h1>
     
     
       <p class="meta">
@@ -107,13 +107,13 @@
   </header>
 
 
-<div class="entry-content"><p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
+<div class="entry-content"><p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
 
 <p>原理如图：<br/>
 <img src="/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
 
 <p>说明：<br/>
-1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行Shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br/>
+1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br/>
 2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br/>
 3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br/>
 4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br/>
