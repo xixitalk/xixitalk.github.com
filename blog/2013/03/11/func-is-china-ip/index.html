@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: proxy - xixitalk blog</title>
+  <title>判断是否是中国IP？ - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: proxy">
+  <meta name="description" content="世界上有五个区域互联网注册管理机构，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。点击这里可以获得亚太地址各个国家或地区申请到的IP地址区域。
+中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。
+IPv4地址格式是addr1.addr2. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.comblog/categories/proxy">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,50 +80,103 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Proxy</h1>
+    
+      <h1 class="entry-title">判断是否是中国IP？</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-11T19:11:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>世界上有五个<a href="http://en.wikipedia.org/wiki/Regional_Internet_registry">区域互联网注册管理机构</a>，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">点击这里</a>可以获得亚太地址各个国家或地区申请到的IP地址区域。
+中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br/>
+IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2<sup>32的IP，分布在256x256的区域内，每个区域表述addr1.addr2.<em>.</em>表述的IP（65536个IP）。</sup>
+判断一个IP首先由addr1和addr2直接找到addr1.addr2.<em>.</em>的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
 
-  
-  <h2>2013</h2>
+<p><img src="/static/images/2013/03/ipv4search.png" alt="Raspberry Pi代理原理图" /></p>
 
-<article>
-  
-<h1><a href="/blog/2013/03/11/android-broswer-with-http-proxy/">andrid上支持HTTP proxy代理的浏览器</a></h1>
-<time datetime="2013-03-11T17:07:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>11</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/03/02/raspberry-pi-proxy/">利用Raspberry Pi加shadowsocks搭建代理服务</a></h1>
-<time datetime="2013-03-02T12:31:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>02</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>, <a class='category' href='/blog/categories/shadowsocks/'>shadowsocks</a></span>
-</footer>
-
-
-</article>
-
+<p>每一个区域块有三种情况：<br/>
+1、区域块为空<br/>
+如果区域块为空，则表示此区域块无中国IP分布。<br/>
+2、区域块有一个IP区域，则表示此区域有一个中国IP分布，查询一次是否匹配，如果匹配就是中国IP，如果不匹配就是外国IP。<br/>
+3、区域块有多个IP区域，则表示此区域块有多个中国IP分布，遍历查询，如果匹配就是中国IP，如果不匹配就是外国IP。<br/>
+情况2为理想情况，查询一次。情况3为恶劣情况，经过实际测试，202.14.<em>.</em>区域最恶劣，有40个区域块，202.14.<em>.</em>的IP要查询40次。虽然202.14.<em>.</em>区域的IP给中国分配了40次，但是不同申请的区域是可以连续起来的，所以区域块内还可以优化。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-11T19:11:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/network/'>network</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/11/android-broswer-with-http-proxy/" title="Previous Post: andrid上支持HTTP proxy代理的浏览器">&laquo; andrid上支持HTTP proxy代理的浏览器</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -150,7 +205,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
