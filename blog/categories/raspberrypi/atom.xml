@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-03-04T17:18:29+08:00</updated>
+  <updated>2013-03-11T17:35:48+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -20,7 +20,7 @@
     <id>http://xixitalk.github.com/blog/2013/03/04/raspberry-pi</id>
     <content type="html"><![CDATA[<p>搜索关键词：raspberry pi 树莓派 教程 XBMC shadowsocks</p>
 
-<p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>
+<p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>
 
 <h3>入门教程</h3>
 
@@ -39,13 +39,13 @@ USB的键盘鼠标，如果是PS/2接口的，需要一个转接器转化成USB<
 <p>官方推荐<a href="http://www.raspbian.org/">raspbian</a>系统，这个系统默认启动进入字符终端模式，可以用apt-get安装<a href="http://xbmc.org/">XBMC</a>应用，但是有些不稳定，没有其他三个<a href="http://xbmc.org/">XBMC</a>专门版本稳定，其次首次运行<a href="http://xbmc.org/">XBMC</a>起来要几十秒。<br/>
 <a href="http://www.raspbmc.com/download/">raspbmc</a>、<a href="http://xbian.org/">xbian</a>、<a href="http://openelec.tv/get-openelec/download/viewcategory/10-raspberry-pi-builds">OpenELEC</a>三个都是<a href="http://xbmc.org/">XBMC</a>专用版本。<br/>
 如果你的树莓派用来做服务器的话，推荐使用raspbian系统，raspbian有几乎和debian一样多的软件包，如lighttpd、mysql、php、apache等，正常开机不启动<a href="http://xbmc.org/">XBMC</a>，节省资源。<br/>
-如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为XBMC优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、obfsproxy、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。</p>
+如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、obfsproxy、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。</p>
 
 <h3>代理服务器</h3>
 
 <p>代理服务器的原理<a href="/blog/2013/03/02/raspberry-pi-proxy/">点击这里</a><br/>
 我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs、obfsproxy。<br/>
-polipo用于将socks5转化为HTTP代理<br/>
+polipo用于将socks5转化为HTTP代理，也可以用<a href="www.privoxy.org/">privoxy</a>，privoxy支持URL过滤，可以将一些常用的网站不通过SOCKS代理直接连接。<br/>
 nodejs用于跑nodejs版本的shadowsocks<br/>
 obfsproxy用于网络协议迷惑，将加密数据流伪装成普通数据流</p>
 
@@ -56,7 +56,7 @@ obfsproxy用于网络协议迷惑，将加密数据流伪装成普通数据流</
 
 <h3>挂载3.5寸移动硬盘</h3>
 
-<p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的USB数据端口。<br/>
+<p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的数据端口。<br/>
 测试<a href="http://www.raspbian.org/">raspbian</a>和<a href="http://www.raspbmc.com/download/">raspbmc</a>都可以正常挂接。驱动要安装ntfs-3g，然后通过mount挂载，具体步骤可以参考这里<a href="http://www.ficklelife.com/index.php?id=2">raspbmc Automount an NTFS USB HDD</a>。<br/>
 最新版的<a href="http://www.raspbmc.com/download/">raspbmc</a>连mount都不用，插入移动硬盘后系统自动挂载，挂载在/media/[磁盘名]，磁盘名和移动硬盘挂接windows下的盘符卷标一样的。windows上可以将网络共享映射为本地磁盘，这样下载和使用都像本地磁盘没什么区别。</p>
 

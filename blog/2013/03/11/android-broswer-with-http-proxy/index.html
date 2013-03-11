@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: heroku - xixitalk blog</title>
+  <title>andrid上支持HTTP proxy代理的浏览器 - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: heroku">
+  <meta name="description" content="之前一篇文章讲了在树莓派上搭建HTTP proxy的原理，这样就获得一个HTTP proxy，android上的twidere和twitter都支持HTTP proxy，可以在设置里进行配置。但是从twidere或者twitter打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.comblog/categories/heroku">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,36 +78,111 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Heroku</h1>
+    
+      <h1 class="entry-title">andrid上支持HTTP Proxy代理的浏览器</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-11T17:07:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>之前一篇文章讲了在树莓派上搭建HTTP proxy的<a href="[/blog/2013-03-02-raspberry-pi-proxy/]">原理</a>，这样就获得一个HTTP proxy，android上的<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>和<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twitter</a>都支持HTTP proxy，可以在设置里进行配置。但是从<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>或者<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twitter</a>打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。</p>
 
-  
-  <h2>2012</h2>
+<h3>Firefox</h3>
 
-<article>
-  
-<h1><a href="/blog/2012/11/23/flask-twip-on-heroku/">flask_twip在heroku上搭建教程</a></h1>
-<time datetime="2012-11-23T21:01:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>23</span> <span class='year'>2012</span></time>
+<p>android上的<a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Firefox</a>可以通过安装<a href="https://addons.mozilla.org/zh-CN/android/addon/proxy-mobile/">Proxy Mobile</a>附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。
+优点：支持多tab页面，浏览器功能完整<br/>
+缺点：速度比较慢,最新版本的firefox有可能Proxy Mobile附件组件不兼容</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/flask-twip/'>flask_twip</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/twip/'>twip</a>, <a class='category' href='/blog/categories/twitter/'>twitter</a></span>
-</footer>
+<h3>orweb v2</h3>
 
+<p><a href="https://play.google.com/store/apps/details?id=info.guardianproject.browser">orweb v2浏览器</a>原本是配合tor的android版本<a href="https://play.google.com/store/apps/details?id=org.torproject.android">orbot</a>的代理的，但是可以自定义其他的HTTP proxy。<br/>
+优点：打开网页速度很快<br/>
+缺点：1、只能打开一个页面；2、如果没安装orbot，每次第一次打开浏览器都会提示系统没有安装orbot；3、如果在页面点击链接很深入之后，返回会按原路返回。</p>
 
-</article>
+<h3>蓝火焰浏览器</h3>
 
+<p><a href="https://play.google.com/store/apps/details?id=com.blueflame.web&amp;hl=zh_CN">蓝火焰浏览器</a>是用android 2.x系统的浏览器框架封装的一个轻量级的浏览器。<br/>
+优点：支持多tab页面浏览<br/>
+缺点：打开t.co等缩短网站每次展开都提示用户选择浏览器，速度慢。</p>
+
+<p>总结：如果从应用里打开网页推荐orweb v2，如果长时间浏览推荐使用firefox。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-11T17:07:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/04/raspberry-pi/" title="Previous Post: raspberry pi(树莓派）相关记录">&laquo; raspberry pi(树莓派）相关记录</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -136,7 +211,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
