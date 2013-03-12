@@ -123,7 +123,8 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
 3、区域块有多个IP区域，则表示此区域块有多个中国IP分布，遍历查询，如果匹配就是中国IP，如果不匹配就是外国IP。<br/>
 情况2为理想情况，查询一次。情况3为恶劣情况，经过实际测试，202.14.*.*区域最恶劣，有40个区域块，202.14.*.*的IP要查询40次。虽然202.14.*.*区域的IP给中国分配了40次，但是不同次申请的区域是可以连续起来的，所以区域块内还可以优化。</p>
 
-<p>下面是用python实现的一个测试代码：</p>
+<p>下面是用python实现的一个测试代码：<br/>
+用法：从<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest</a>下载亚太IP分配表，保存为delegated-apnic-latest文本文件，将下面代码保存为isChinaIP.py，并运行之。</p>
 
 <script src="https://gist.github.com/xixitalk/5142241.js"></script>
 
