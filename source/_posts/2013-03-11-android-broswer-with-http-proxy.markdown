@@ -6,12 +6,12 @@ comments: true
 categories: android proxy
 ---
 
-之前一篇文章讲了在树莓派上搭建HTTP proxy的[原理][proxy_url]，这样就获得一个HTTP proxy，android上的[twidere][twidere_url]和[twitter][twidere_url]都支持HTTP proxy，可以在设置里进行配置。但是从[twidere][twidere_url]或者[twitter][twidere_url]打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。  
+之前一篇文章讲了在树莓派上搭建HTTP proxy的[原理][proxy_url]，这样就获得一个HTTP proxy，android上的[twidere][twidere_url]和[twitter][twitter_url]都支持HTTP proxy，可以在设置里进行配置。但是从[twidere][twidere_url]或者[twitter][twitter_url]打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。  
 
 ###Firefox
-android上的[Firefox][firefox_url]可以通过安装[Proxy Mobile][proxymobile_url]附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。
+android上的[Firefox][firefox_url]可以通过安装[Proxy Mobile][proxymobile_url]附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。  
 优点：支持多tab页面，浏览器功能完整  
-缺点：速度比较慢,最新版本的firefox有可能Proxy Mobile附件组件不兼容  
+缺点：速度比较慢,最新版本的firefox有可能Proxy Mobile附件组件不兼容
 
 ###orweb v2
 [orweb v2浏览器][orweb_url]原本是配合tor的android版本[orbot][orbot_url]的代理的，但是可以自定义其他的HTTP proxy。  
@@ -25,7 +25,7 @@ android上的[Firefox][firefox_url]可以通过安装[Proxy Mobile][proxymobile_
 
 总结：如果从应用里打开网页推荐orweb v2，如果长时间浏览推荐使用firefox。
 
-[proxy_url]:[/blog/2013-03-02-raspberry-pi-proxy/]
+[proxy_url]:/blog/2013/03/02/raspberry-pi-proxy/
 [firefox_url]:https://play.google.com/store/apps/details?id=org.mozilla.firefox
 [blueflame_url]:https://play.google.com/store/apps/details?id=com.blueflame.web&hl=zh_CN
 [orweb_url]:https://play.google.com/store/apps/details?id=info.guardianproject.browser
