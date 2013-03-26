@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-03-12T19:45:25+08:00</updated>
+  <updated>2013-03-26T20:12:37+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -67,6 +67,12 @@ git pull origin source
 <p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
 
 <pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
+</code></pre>
+
+<h2>嵌入gist代码</h2>
+
+<pre><code>{% gist 1059334 svg_bullets.rb %}
+{% gist 1059334 usage.scss %}
 </code></pre>
 
 <h2>markdown在线编辑器</h2>
