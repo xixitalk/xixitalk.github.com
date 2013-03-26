@@ -49,6 +49,11 @@ Octopress支持中文
 2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：
 	self.content = File.read(File.join(base, name), :encoding => "utf-8")
 
+嵌入gist代码
+-
+	{% gist 1059334 svg_bullets.rb %}
+	{% gist 1059334 usage.scss %}
+
 markdown在线编辑器
 -
 	http://mahua.jser.me/
