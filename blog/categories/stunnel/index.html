@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>利用Raspberry Pi加shadowsocks搭建代理服务 - xixitalk blog</title>
+  <title>Category: stunnel - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密， &hellip;">
+  <meta name="description" content="Category: stunnel">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy">
+  <link rel="canonical" href="http://xixitalk.github.comblog/categories/stunnel">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,105 +78,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">利用Raspberry Pi加shadowsocks搭建代理服务</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-02T12:31:00+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Stunnel</h1>
     
   </header>
-
-
-<div class="entry-content"><p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
-
-<p>原理如图：<br/>
-<img src="/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
-
-<p>说明：<br/>
-1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br/>
-2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br/>
-3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br/>
-4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br/>
-5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br/>
-6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br/>
-7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
 
-
-<time datetime="2013-03-02T12:31:00+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
-      
-
-<span class="categories">
+<article>
   
-    <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>, <a class='category' href='/blog/categories/shadowsocks/'>shadowsocks</a>
-  
-</span>
+<h1><a href="/blog/2013/04/08/stunnel-principle/">stunnel原理</a></h1>
+<time datetime="2013-04-08T16:31:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>08</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/stunnel/'>stunnel</a></span>
+</footer>
 
 
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/02/17/flask-twip-proxy/" title="Previous Post: 为flask_twip添加图片代理">&laquo; 为flask_twip添加图片代理</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/03/04/raspberry-pi/" title="Next Post: raspberry pi(树莓派）相关记录">raspberry pi(树莓派）相关记录 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -205,10 +136,7 @@
       var disqus_shortname = 'gitblog';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

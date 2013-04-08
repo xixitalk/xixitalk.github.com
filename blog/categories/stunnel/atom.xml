@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: stunnel | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/stunnel/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-04-08T16:38:38+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[stunnel原理]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/"/>
+    <updated>2013-04-08T16:31:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/04/08/stunnel-principle</id>
+    <content type="html"><![CDATA[<p>stunnel原理如图：<br/>
+<img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></p>
+]]></content>
+  </entry>
+  
+</feed>

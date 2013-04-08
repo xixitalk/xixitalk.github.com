@@ -9,9 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="世界上有五个区域互联网注册管理机构，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。点击这里可以获得亚太地址各个国家或地区申请到的IP地址区域。
-中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。
-IPv4地址格式是addr1.addr2. &hellip;">
+  <meta name="description" content="stunnel原理如图： ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +79,45 @@ IPv4地址格式是addr1.addr2. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/08/stunnel-principle/">Stunnel原理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-08T16:31:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/08/stunnel-principle/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>stunnel原理如图：<br/>
+<img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -799,98 +836,6 @@ $ git config --global user.email johndoe@example.com
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/23/octopress-command-note/">Octopress命令备忘录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-23T23:07:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/23/octopress-command-note/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>创建新文章</h2>
-
-<pre><code>rake new_post["TITLE"]
-</code></pre>
-
-<h2>生成静态HTML文章</h2>
-
-<pre><code>rake generate
-</code></pre>
-
-<h2>本地预览</h2>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
-
-<h2>发布到github空间</h2>
-
-<pre><code>rake deploy
-</code></pre>
-
-<h2>将文章的markdown文件上传到github服务器</h2>
-
-<pre><code>git add .
-git commit -m "add source post"
-git push origin source
-</code></pre>
-
-<h2>从github服务器更新本地仓库</h2>
-
-<pre><code>cd Octopress
-cd _deploy
-git pull origin master
-cd ..
-git pull origin source
-</code></pre>
-
-<h2>Octopress仓库说明</h2>
-
-<p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
-
-<h2>Octopress支持中文</h2>
-
-<p>1、rake new_post生成的markdown文件要改成UTF-8无签名格式。</p>
-
-<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
-
-<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
-</code></pre>
-
-<h2>markdown在线编辑器</h2>
-
-<pre><code>http://mahua.jser.me/
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -903,7 +848,7 @@ git pull origin source
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (1)</a></li><li><a href='/blog/categories/proxy'>proxy (2)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (2)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (1)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (2)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
 </section>
 
   

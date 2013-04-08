@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-03-26T20:15:55+08:00</updated>
+  <updated>2013-04-08T16:38:38+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -71,8 +71,8 @@ git pull origin source
 
 <h2>嵌入gist代码</h2>
 
-<pre><code>{% gist 1059334 svg_bullets.rb %}
-{% gist 1059334 usage.scss %}
+<pre><code>Liquid error: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. - connect(2)
+Liquid error: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. - connect(2)
 </code></pre>
 
 <h2>markdown在线编辑器</h2>

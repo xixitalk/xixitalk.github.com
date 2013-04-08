@@ -4,7 +4,7 @@
   <title><![CDATA[Category: proxy | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/proxy/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-03-26T20:15:55+08:00</updated>
+  <updated>2013-04-08T16:38:38+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,16 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[stunnel原理]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/"/>
+    <updated>2013-04-08T16:31:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/04/08/stunnel-principle</id>
+    <content type="html"><![CDATA[<p>stunnel原理如图：<br/>
+<img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[andrid上支持HTTP proxy代理的浏览器]]></title>
