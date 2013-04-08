@@ -4,7 +4,7 @@
   <title><![CDATA[Category: proxy | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/proxy/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-04-08T17:06:31+08:00</updated>
+  <updated>2013-04-08T17:59:05+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理</p>
 
 <p>stunnel原理如图：<br/>
-<img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></p>
+<a href="/static/images/2013/04/stunnel.png"><img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></a></p>
 
 <p>具体教程可参见下面篇博文：<br/>
 <a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br/>
