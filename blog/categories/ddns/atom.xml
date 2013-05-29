@@ -4,7 +4,7 @@
   <title><![CDATA[Category: DDNS | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/ddns/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-05-29T19:50:47+08:00</updated>
+  <updated>2013-05-29T22:08:18+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,13 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[用API更新3322.org的DDNS]]></title>
+    <title type="html"><![CDATA[用API更新3322.org免费二级域名的DDNS]]></title>
     <link href="http://xixitalk.github.com/blog/2013/05/29/update-ddns-with-api/"/>
     <updated>2013-05-29T19:22:00+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/05/29/update-ddns-with-api</id>
     <content type="html"><![CDATA[<p>用API更新3322.org免费二级域名的DDNS:<br/>
 1、注册3322.org的免费二级域名：<a href="http://www.pubyun.com/">http://www.pubyun.com/</a><br/>
-2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。</p>
+2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。用<a href="http://icanhazip.com">http://icanhazip.com</a>获得公网IP。</p>
 
 <script src="https://gist.github.com/xixitalk/5669646.js"></script>
 
