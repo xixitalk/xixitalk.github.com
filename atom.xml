@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-05-29T18:48:00+08:00</updated>
+  <updated>2013-05-29T19:50:47+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用API更新3322.org的DDNS]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/05/29/update-ddns-with-api/"/>
+    <updated>2013-05-29T19:22:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/05/29/update-ddns-with-api</id>
+    <content type="html"><![CDATA[<p>用API更新3322.org免费二级域名的DDNS:<br/>
+1、注册3322.org的免费二级域名：<a href="http://www.pubyun.com/">http://www.pubyun.com/</a><br/>
+2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。</p>
+
+<script src="https://gist.github.com/xixitalk/5669646.js"></script>
+
+
+<p>3、在cron里添加每N分钟执行updateDDNS.sh。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[stunnel原理]]></title>
