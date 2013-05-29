@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-04-08T17:59:05+08:00</updated>
+  <updated>2013-05-29T18:48:00+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -71,8 +71,43 @@ git pull origin source
 
 <h2>嵌入gist代码</h2>
 
-<pre><code>Liquid error: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. - connect(2)
-Liquid error: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. - connect(2)
+<pre><code><div><script src='https://gist.github.com/1059334.js?file=svg_bullets.rb'></script>
+<noscript><pre><code>require 'sass'
+
+module Sass::Script::Functions
+  def svg_circle(radius, color, circle_type)
+    img = if circle_type.value == &quot;disc&quot;
+      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
+                          stroke-width=&quot;0&quot; fill=&quot;#{color}&quot;/&gt;}
+    else
+      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
+                          stroke=&quot;#{color}&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;}
+    end
+    inline_image_string(svg_circle_envelope(img).gsub(/  +/, ' '), 'image/svg+xml')
+  end
+  private
+  def svg_circle_envelope(content)
+    %Q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;svg version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;#{content}&lt;/svg&gt;}
+  end
+end
+</code></pre></noscript></div>
+
+<div><script src='https://gist.github.com/1059334.js?file=usage.scss'></script>
+<noscript><pre><code>// Draw a list style image in svg using the radius and color specified.
+@mixin colored-bullet($radius, $color, $type: disc) {
+  list-style-type: $type;
+  list-style-image: svg-circle($radius, $color, $type);
+}
+
+
+ul {
+  @include colored-bullet(2px, $green, disc);
+  ul {
+    @include colored-bullet(2px, $green, circle);
+  }
+}
+</code></pre></noscript></div>
+
 </code></pre>
 
 <h2>markdown在线编辑器</h2>

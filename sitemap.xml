@@ -2,82 +2,82 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/06/03/my-first-post/</loc>
-        <lastmod>2012-11-27T08:27:12+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/06/04/second/</loc>
-        <lastmod>2012-11-27T08:27:17+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku/</loc>
-        <lastmod>2013-02-22T10:14:39+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/</loc>
-        <lastmod>2013-03-12T19:58:04+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/24/git-manual/</loc>
-        <lastmod>2012-11-27T11:18:25+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/27/markdown-manual/</loc>
-        <lastmod>2012-11-27T18:56:06+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://xixitalk.github.com/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/
         </loc>
-        <lastmod>2012-12-20T16:21:00+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://xixitalk.github.com/blog/2013/01/16/security-audit-finds-dev-outsourced-his-job-to-china/
         </loc>
-        <lastmod>2013-01-28T19:58:24+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy/</loc>
-        <lastmod>2013-02-18T11:39:12+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy/</loc>
-        <lastmod>2013-03-02T13:49:08+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/04/raspberry-pi/</loc>
-        <lastmod>2013-03-11T17:05:55+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy/</loc>
-        <lastmod>2013-03-11T18:54:44+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/</loc>
-        <lastmod>2013-03-12T20:07:09+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/</loc>
-        <lastmod>2013-04-08T17:58:45+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/about/</loc>
-        <lastmod>2013-01-29T19:43:47+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://xixitalk.github.com/blog/archives/</loc>
-        <lastmod>2013-04-08T17:58:45+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/categories/</loc>
-        <lastmod>2013-04-08T17:58:45+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
-        <loc>http://xixitalk.github.com/</loc>
-        <lastmod>2013-04-08T17:58:45+08:00</lastmod>
+        <loc>http://xixitalk.github.com/blog/archives/</loc>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/wishlist/</loc>
-        <lastmod>2013-01-29T19:59:32+08:00</lastmod>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://xixitalk.github.com/</loc>
+        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
     </url>
 </urlset>
