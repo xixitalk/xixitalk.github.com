@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-05-31T20:25:39+08:00</updated>
+  <updated>2013-05-31T21:15:49+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Octopress Post From Raspberrypi]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/05/31/octopress-post-from-raspberrypi/"/>
-    <updated>2013-05-31T00:00:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/05/31/octopress-post-from-raspberrypi</id>
-    <content type="html"><![CDATA[<p>&#8212; layout: post title: &#8220;&#8221; date: 2013-05-31 19:57:25 comments: true categories: octopress raspberrypi &#8212; 用网页发布到octopress</p>
+    <title type="html"><![CDATA[用网页发布到octopress]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi/"/>
+    <updated>2013-06-01T03:57:25+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi</id>
+    <content type="html"><![CDATA[<p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
 ]]></content>
   </entry>
   
