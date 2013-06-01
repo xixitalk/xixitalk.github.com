@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>用网页发布到octopress - xixitalk blog</title>
+  <title>用浏览器发布博客到octopress - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">用网页发布到octopress</h1>
+      <h1 class="entry-title">用浏览器发布博客到octopress</h1>
     
     
       <p class="meta">
@@ -111,7 +111,7 @@
 
 <p>cron 10分钟检查不好使，还是后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样比较正常。</p>
 
-<p>原理：浏览器网页编写，保存在GAE上，raspberry pi上定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传源代码到github。</p>
+<p>原理：浏览器网页编写，保存在GAE上，raspberry pi上定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
 </div>
 
 
