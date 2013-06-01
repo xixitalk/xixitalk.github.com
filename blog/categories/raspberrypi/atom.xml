@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-01T21:40:05+08:00</updated>
+  <updated>2013-06-01T22:14:38+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -23,6 +23,8 @@
 <p>cron 10分钟检查不好使，还是后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样比较正常。</p>
 
 <p>原理：浏览器网页编写，保存在GAE上，raspberry pi上定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
+
+<p>updated from my iPad with Safari</p>
 ]]></content>
   </entry>
   
