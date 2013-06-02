@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: life | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/life/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-03T00:07:44+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I have a dream]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream/"/>
+    <updated>2013-06-03T06:53:52+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream</id>
+    <content type="html"><![CDATA[<p>对带小院子的房子真是没有抵抗力啊。</p>
+]]></content>
+  </entry>
+  
+</feed>

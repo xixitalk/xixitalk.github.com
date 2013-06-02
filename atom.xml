@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-02T22:43:07+08:00</updated>
+  <updated>2013-06-03T00:07:44+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[I have a dream]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream/"/>
+    <updated>2013-06-03T06:53:52+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream</id>
+    <content type="html"><![CDATA[<p>对带小院子的房子真是没有抵抗力啊。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用浏览器发布博客到octopress]]></title>
