@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。 cron 10分钟检查不好使，还是后台shell while 循环检查，执行一次后 sleep 600秒这样比较正常。 原理：浏览器网页编写，保存在GAE上，raspberry &hellip;">
+  <meta name="description" content="用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。 可能是rake generate和rake deploy时间比较长，cron 10分钟检查不好使，发现没有效果，最后用后台shell while 循环检查，执行一次后 sleep &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,7 +112,7 @@
 
   <div class="entry-content"><p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
 
-<p>cron 10分钟检查不好使，还是后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样比较正常。</p>
+<p>可能是<code>rake generate</code>和<code>rake deploy</code>时间比较长，cron 10分钟检查不好使，发现没有效果，最后用后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样才正常。</p>
 
 <p>原理：浏览器网页编写，保存在GAE上，raspberry pi上定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
 
