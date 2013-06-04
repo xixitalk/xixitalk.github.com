@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-03T17:02:25+08:00</updated>
+  <updated>2013-06-04T10:10:12+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TestDisk 恢复误删数据的神器]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/04/TestDisk-Data-Recovery/"/>
+    <updated>2013-06-04T17:50:39+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/04/TestDisk-Data-Recovery</id>
+    <content type="html"><![CDATA[<p><img src="http://www.cgsecurity.org/mw/images/Testdisklogo_clear_100.png" alt="TestDisk" />
+TestDisk, Data Recovery</p>
+
+<p>恢复被删数据的神器TestDisk<br/>
+地址：<a href="http://www.cgsecurity.org/wiki/TestDisk">http://www.cgsecurity.org/wiki/TestDisk</a><br/>
+下载地址：<a href="http://www.cgsecurity.org/wiki/TestDisk_Download">http://www.cgsecurity.org/wiki/TestDisk_Download</a></p>
+
+<p>使用场景：数据删除（del删除、shift+d、清空回收站），没有覆盖下想恢复数据。</p>
+
+<p>优点：
+1.  支持多文件系统：FAT32、NTFS、ext2/ext3/ext4等都支持
+2.  支持多操作系统，DOS、windows、linux、BSD Unix、MacOS X
+3.  不像其他恢复软件要花几个小时的扫描后才能恢复，而是直接恢复，速度快
+4.  可以指定文件扩展名恢复某类型文件（恢复照片、视频最有效）</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[高速列车击中飞鸟，前窗玻璃受到多少牛顿的力？]]></title>
