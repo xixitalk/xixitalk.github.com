@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: life | xixitalk blog]]></title>
-  <link href="http://xixitalk.github.com/blog/categories/life/atom.xml" rel="self"/>
+  <title><![CDATA[Category: tech | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
   <updated>2013-06-06T10:22:14+08:00</updated>
   <id>http://xixitalk.github.com/</id>
@@ -36,15 +36,6 @@
 <p>有些中药有效成分实为西药，或者人工掺加西药成分提高表面效果。</p>
 
 <p>台湾药品食品检验局所出具的检查报告：《（民国）<a href="http://www.fda.gov.tw/tc/includes/GetFile.ashx?id=25&amp;chk=b4e40fbd-f8dd-4b56-9850-97d484aa0d67&amp;mid=141&amp;name=fdContent" title="九十八年度調製劑中藥檢出西藥成分之分析.pdf">九十八年度調製劑中藥檢出西藥成分之分析</a>》。报告中指出中药查出人工掺入次数最多的西药成分是：咖啡因。掺加咖啡因的结果是吃了药后症状很快感觉好了很多，因为咖啡因可以兴奋神经。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[I have a dream]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream/"/>
-    <updated>2013-06-03T06:53:52+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream</id>
-    <content type="html"><![CDATA[<p>对带小院子的房子真是没有抵抗力啊。</p>
 ]]></content>
   </entry>
   
