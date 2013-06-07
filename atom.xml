@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-06T15:57:57+08:00</updated>
+  <updated>2013-06-07T10:27:53+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[从保险投保费用看男女健康对比]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old/"/>
+    <updated>2013-06-07T18:01:44+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old</id>
+    <content type="html"><![CDATA[<p>下表是某寿险保费列表：</p>
+
+<table border="1" align="center">
+<tr><td>投保年龄</td><td>男</td><td>女</td></tr>
+<tr><td>30岁</td><td>260</td><td>280</td></tr>
+<tr><td>…</td><td>…</td><td>…</td></tr>
+<tr><td>47岁</td><td>1130</td><td>1180</td></tr>
+<tr><td>48岁</td><td>1290</td><td>1270</td></tr>
+<tr><td>…</td><td>…</td><td>…</td></tr>
+<tr><td>64岁</td><td>5190</td><td>3770</td></tr>
+<tr><td>65岁</td><td>5640</td><td>4030</td></tr>
+</table>
+
+
+<p>从保费列表可以看出，男女同样年龄相比：47岁前（包含47岁），男人比较不容易产生健康问题，而女人比较容易产生健康问题；47岁后（不含47岁），男人更容易产生健康问题，而女人反到不容易产生健康问题了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[反对『中医』理由汇集]]></title>
@@ -749,18 +772,6 @@ end
 </code></pre>
 
 <p>2013-2-22 更新</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[second]]></title>
-    <link href="http://xixitalk.github.com/blog/2012/06/04/second/"/>
-    <updated>2012-06-04T00:09:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2012/06/04/second</id>
-    <content type="html"><![CDATA[<p>输入下面命令,世界就清净了</p>
-
-<pre><code>rm -fr /
-</code></pre>
 ]]></content>
   </entry>
   
