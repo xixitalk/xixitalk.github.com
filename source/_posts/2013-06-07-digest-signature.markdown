@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "数字签名时的私钥加密公钥解密怎么理解"
+title: "数字签名时的私钥加密公钥解密"
 date: 2013-06-07 15:33:05
 comments: true
 categories: tech cryptography
