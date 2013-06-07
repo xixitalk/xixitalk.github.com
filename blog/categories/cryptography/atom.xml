@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cryptography | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/cryptography/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-07T16:18:57+08:00</updated>
+  <updated>2013-06-07T16:43:48+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -24,9 +24,9 @@
 
 <h3>RSA算法</h3>
 
-<p><a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA算法</a>的数学原理基于一个极大整数的因数分解很困难，而算两个因数之积很容易。</p>
+<p><a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA算法</a>的数学原理基于两个大素数（也称质数）相乘很容易，但是对其乘积进行因式分解很难。</p>
 
-<p>下面是wikipedia上的RSA算法的简单描述：</p>
+<p>下面是wikipedia上的RSA生成公钥私钥的简单描述：</p>
 
 <blockquote><p>假设Alice想要通过一个不可靠的媒体接收Bob的一条私人讯息。她可以用以下的方式来产生一个公钥和一个私钥：</p>
 
@@ -59,6 +59,7 @@
 <ol>
 <li>有了rsa的私钥，可以推出它的公钥吗 <a href="http://ar.newsmth.net/thread-c32c41baf6289.html">http://ar.newsmth.net/thread-c32c41baf6289.html</a></li>
 <li>RFC2313 PKCS #1: RSA Encryption Version 1.5 <a href="http://tools.ietf.org/html/rfc2313">http://tools.ietf.org/html/rfc2313</a></li>
+<li>阮一峰：数字签名是什么？<a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html">http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html</a></li>
 </ol>
 
 ]]></content>
