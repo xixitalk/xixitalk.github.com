@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>为flask_twip添加图片代理 - xixitalk blog</title>
+  <title>数字签名时的私钥加密公钥解密怎么理解 - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="为flask_twip添加图片代理 为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。
-demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2 在文件twip.py里增加import &hellip;">
+  <meta name="description" content="疑问：数字签名时的私钥加密 公钥解密怎么理解？ 前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的私钥解密 公钥解密是怎么回事呢？ RSA算法 RSA算法的数学原理基于一个极大整数的因数分解很困难，而算两个因数之积很容易 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2 在文�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/07/digest-signature">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +82,7 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2 在文�
   
   <header>
     
-      <h1 class="entry-title">为flask_twip添加图片代理</h1>
+      <h1 class="entry-title">数字签名时的私钥加密公钥解密怎么理解</h1>
     
     
       <p class="meta">
@@ -99,7 +98,7 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2 在文�
   
 
 
-<time datetime="2013-02-17T11:31:00+08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2013</time>
+<time datetime="2013-06-07T23:33:05+08:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,42 +107,49 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2 在文�
   </header>
 
 
-<div class="entry-content"><h2>为flask_twip添加图片代理</h2>
+<div class="entry-content"><p>疑问：数字签名时的<code>私钥加密 公钥解密</code>怎么理解？</p>
 
-<p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br/>
-demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
+<p>前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的<code>私钥解密 公钥解密</code>是怎么回事呢？</p>
 
-<h3>1、import urllib2</h3>
+<h3>RSA算法</h3>
 
-<p>在文件twip.py里增加import urllib2</p>
+<p><a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA算法</a>的数学原理基于一个极大整数的因数分解很困难，而算两个因数之积很容易。</p>
 
-<pre><code>import urllib2
-</code></pre>
+<p>下面是wikipedia上的RSA算法的简单描述：</p>
 
-<h3>2、增加/twip/getimg路径映射</h3>
+<blockquote><p>假设Alice想要通过一个不可靠的媒体接收Bob的一条私人讯息。她可以用以下的方式来产生一个公钥和一个私钥：</p>
 
-<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
+<blockquote><p>随意选择两个大的质数p和q，p不等于q，计算N=pq。
+根据欧拉函数，求得r= φ(n) = φ(p)φ(q) = (p-1)(q-1)
+选择一个小于r的整数e，求得e关于模r的模反元素，命名为d。（模反元素存在，当且仅当e与r互质）
+将p和q的记录销毁。</p></blockquote>
 
-<pre><code>('/getimg/',self.getimg),
-</code></pre>
+<p>(N,e)是公钥，(N,d)是私钥。Alice将她的公钥(N,e)传给Bob，而将她的私钥(N,d)藏起来。</p></blockquote>
 
-<h3>3、增加getimg函数</h3>
+<p>(N,e)和(N,d)是一对密钥对（pair keys），本身没有公钥和私钥的属性。(N,e)进行加密，只有(N,d)才能解密。反之亦然，(N,d)进行加密，只有(N,e)才能解密。并且二者不可互相推导，(N,e)推导不出(N,d），(N,d）推导不出(N,e)。</p>
 
-<p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a></p>
+<h3>不对称加密消息</h3>
 
-<script src="https://gist.github.com/xixitalk/4969986.js"></script>
+<p>假定(N,e)作为公钥，(N,d）作为私钥。Alice将她的公钥(N,e)传给Bob，而将她的私钥(N,d)藏起来。如果Bob要发信息给Alice，则先用Alice的公钥进行加密。Alice收到加密的信息后用自己的私钥进行解密。</p>
 
+<h3>数字签名</h3>
 
-<h3>4、浏览器访问https://YOURAPP.herokuapp.com/twip/getimg</h3>
+<p>假定(N,e)作为公钥，(N,d）作为私钥。<br/>
+数字签名的主要流程：Alice先将信息进行hash，对hash值用私钥(N,d)进行加密作为数字签名和信息一起发送。Bob收到信息和数字签名后，用Alice的公钥(N,e)进行解密，如果得到信息的hash值，就表示信息确实是Alice发出的((N,e)和(N,d)唯一对应)。再和信息计算所得的hash相比，如果一致就表示信息未造到篡改。</p>
 
-<p>访问https://YOURAPP.herokuapp.com/twip/getimg，输入图片地址或者网页地址即可。</p>
+<h3>为什么用ssh-keygen产生的私钥能导出公钥</h3>
 
-<h3>5、客户端使用</h3>
+<p>使用ssh-keygen命令会产生两个文件：id_rsa和id_rsa.pub。id_rsa是私钥，id_rsa.pub是公钥。id_rsa.pub包含其中一个密钥(key)，而id_rsa除了包含一个密钥(key)之外，还包含RSA的推导过程，如p、q、r等数值，这是为什么id_rsa比id_rsa.pub大的原因。因为包含RSA推导过程，导入id_rsa可以推导出id_rsa.pub，而id_rsa.pub不包含RSA推导过程，推导不出id_rsa。</p>
 
-<p>如果客户端获取图片的时候把不能访问的图片地址（以BLOCKEDIMGURL为例）以参数imgurl形式传给https://YOURAPP.herokuapp.com/twip/getimg就可以直接在客户端查看图片了。</p>
+<p>(N,e)和(N,d)不分公钥、私钥，一个作为公钥，另一个就作为私钥。但是ssh-keygen生成的id_rsa.pub只能是公钥，id_rsa只能是私钥，不可反了。</p>
 
-<pre><code>https://YOURAPP.herokuapp.com/twip/getimg?imgurl=BLOCKEDIMGURL
-</code></pre>
+<h3>参考</h3>
+
+<ol>
+<li>有了rsa的私钥，可以推出它的公钥吗 <a href="http://ar.newsmth.net/thread-c32c41baf6289.html">http://ar.newsmth.net/thread-c32c41baf6289.html</a></li>
+<li>RFC2313 PKCS #1: RSA Encryption Version 1.5 <a href="http://tools.ietf.org/html/rfc2313">http://tools.ietf.org/html/rfc2313</a></li>
+</ol>
+
 </div>
 
 
@@ -166,12 +172,12 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
   
 
 
-<time datetime="2013-02-17T11:31:00+08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2013</time>
+<time datetime="2013-06-07T23:33:05+08:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/flask-twip/'>flask_twip</a>
+    <a class='category' href='/blog/categories/cryptography/'>cryptography</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -187,10 +193,8 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/01/16/security-audit-finds-dev-outsourced-his-job-to-china/" title="Previous Post: Security audit finds dev OUTSOURCED his JOB to China">&laquo; Security audit finds dev OUTSOURCED his JOB to China</a>
+        <a class="basic-alignment left" href="/blog/2013/06/07/man-inflection-point-is-47-year-old/" title="Previous Post: 从保险投保费用看男女健康对比">&laquo; 从保险投保费用看男女健康对比</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/03/02/raspberry-pi-proxy/" title="Next Post: 利用Raspberry Pi加shadowsocks搭建代理服务">利用Raspberry Pi加shadowsocks搭建代理服务 &raquo;</a>
       
     </p>
   </footer>
@@ -230,8 +234,8 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/07/digest-signature/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/07/digest-signature/';
         var disqus_script = 'embed.js';
       
     (function () {

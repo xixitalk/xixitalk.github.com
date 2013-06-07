@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="输入下面命令,世界就清净了 rm -fr / ">
+  <meta name="description" content="flask_twip是@yegle写的一个可以搭建在heroku上的一个twip的port程序。 本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@xmchenyj的教程：http:// &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/23/flask-twip-on-heroku/">Flask_twip在heroku上搭建教程</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-23T21:01:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/23/flask-twip-on-heroku/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
+
+<p>本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@<a href="http://twitter.com/xmchenyj">xmchenyj</a>的教程：<a href="http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/">http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/</a></p>
+
+<p>补充说明：@xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器,这样和他教程结尾的备注才一致。</p>
+
+<pre><code>venv
+*.pyc
+</code></pre>
+
+<p>2013-2-22 更新</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -183,7 +231,7 @@
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (2)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (4)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (1)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (2)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (4)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (2)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
 </section>
 
   

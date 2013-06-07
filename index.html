@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="下表是某寿险保费列表： 投保年龄 男 女 30岁 260 280 ……… 47岁 1130 1180 48岁 1290 1270 ……… 64岁 5190 3770 65岁 5640 4030 从保费列表可以看出，男女同样年龄相比：47岁前（包含47岁），男人比较不容易产生健康问题， &hellip;">
+  <meta name="description" content="疑问：数字签名时的私钥加密 公钥解密怎么理解？ 前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的私钥解密 公钥解密是怎么回事呢？ RSA算法 RSA算法的数学原理基于一个极大整数的因数分解很困难，而算两个因数之积很容易 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/digest-signature/">数字签名时的私钥加密公钥解密怎么理解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T23:33:05+08:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/digest-signature/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>疑问：数字签名时的<code>私钥加密 公钥解密</code>怎么理解？</p>
+
+<p>前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的<code>私钥解密 公钥解密</code>是怎么回事呢？</p>
+
+<h3>RSA算法</h3>
+
+<p><a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA算法</a>的数学原理基于一个极大整数的因数分解很困难，而算两个因数之积很容易。</p>
+
+<p>下面是wikipedia上的RSA算法的简单描述：</p>
+
+<blockquote><p>假设Alice想要通过一个不可靠的媒体接收Bob的一条私人讯息。她可以用以下的方式来产生一个公钥和一个私钥：</p>
+
+<blockquote><p>随意选择两个大的质数p和q，p不等于q，计算N=pq。
+根据欧拉函数，求得r= φ(n) = φ(p)φ(q) = (p-1)(q-1)
+选择一个小于r的整数e，求得e关于模r的模反元素，命名为d。（模反元素存在，当且仅当e与r互质）
+将p和q的记录销毁。</p></blockquote>
+
+<p>(N,e)是公钥，(N,d)是私钥。Alice将她的公钥(N,e)传给Bob，而将她的私钥(N,d)藏起来。</p></blockquote>
+
+<p>(N,e)和(N,d)是一对密钥对（pair keys），本身没有公钥和私钥的属性。(N,e)进行加密，只有(N,d)才能解密。反之亦然，(N,d)进行加密，只有(N,e)才能解密。并且二者不可互相推导，(N,e)推导不出(N,d），(N,d）推导不出(N,e)。</p>
+
+<h3>不对称加密消息</h3>
+
+<p>假定(N,e)作为公钥，(N,d）作为私钥。Alice将她的公钥(N,e)传给Bob，而将她的私钥(N,d)藏起来。如果Bob要发信息给Alice，则先用Alice的公钥进行加密。Alice收到加密的信息后用自己的私钥进行解密。</p>
+
+<h3>数字签名</h3>
+
+<p>假定(N,e)作为公钥，(N,d）作为私钥。<br/>
+数字签名的主要流程：Alice先将信息进行hash，对hash值用私钥(N,d)进行加密作为数字签名和信息一起发送。Bob收到信息和数字签名后，用Alice的公钥(N,e)进行解密，如果得到信息的hash值，就表示信息确实是Alice发出的((N,e)和(N,d)唯一对应)。再和信息计算所得的hash相比，如果一致就表示信息未造到篡改。</p>
+
+<h3>为什么用ssh-keygen产生的私钥能导出公钥</h3>
+
+<p>使用ssh-keygen命令会产生两个文件：id_rsa和id_rsa.pub。id_rsa是私钥，id_rsa.pub是公钥。id_rsa.pub包含其中一个密钥(key)，而id_rsa除了包含一个密钥(key)之外，还包含RSA的推导过程，如p、q、r等数值，这是为什么id_rsa比id_rsa.pub大的原因。因为包含RSA推导过程，导入id_rsa可以推导出id_rsa.pub，而id_rsa.pub不包含RSA推导过程，推导不出id_rsa。</p>
+
+<p>(N,e)和(N,d)不分公钥、私钥，一个作为公钥，另一个就作为私钥。但是ssh-keygen生成的id_rsa.pub只能是公钥，id_rsa只能是私钥，不可反了。</p>
+
+<h3>参考</h3>
+
+<ol>
+<li>有了rsa的私钥，可以推出它的公钥吗 <a href="http://ar.newsmth.net/thread-c32c41baf6289.html">http://ar.newsmth.net/thread-c32c41baf6289.html</a></li>
+<li>RFC2313 PKCS #1: RSA Encryption Version 1.5 <a href="http://tools.ietf.org/html/rfc2313">http://tools.ietf.org/html/rfc2313</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -514,64 +594,6 @@ TestDisk, Data Recovery</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/11/func-is-china-ip/">算法：判断是否是中国IP？</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-11T19:11:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/11/func-is-china-ip/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>世界上有五个<a href="http://en.wikipedia.org/wiki/Regional_Internet_registry">区域互联网注册管理机构</a>，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">点击这里</a>可以获得亚太地址各个国家或地区申请到的IP地址区域。
-中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br/>
-IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.*.*表述的IP（65536个IP）。
-判断一个IP首先由addr1和addr2直接找到addr1.addr2.*.*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
-
-<p><img src="/static/images/2013/03/ipv4search.png" alt="Raspberry Pi代理原理图" /></p>
-
-<p>每一个区域块有三种情况：<br/>
-1、区域块为空<br/>
-如果区域块为空，则表示此区域块无中国IP分布。<br/>
-2、区域块有一个IP区域，则表示此区域有一个中国IP分布，查询一次是否匹配，如果匹配就是中国IP，如果不匹配就是外国IP。<br/>
-3、区域块有多个IP区域，则表示此区域块有多个中国IP分布，遍历查询，如果匹配就是中国IP，如果不匹配就是外国IP。<br/>
-情况2为理想情况，查询一次。情况3为恶劣情况，经过实际测试，202.14.*.*区域最恶劣，有40个区域块，202.14.*.*的IP要查询40次。虽然202.14.*.*区域的IP给中国分配了40次，但是不同次申请的区域是可以连续起来的，所以区域块内还可以优化。</p>
-
-<p>下面是用python实现的一个测试代码：<br/>
-用法：从<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest</a>下载亚太IP分配表，保存为delegated-apnic-latest文本文件，将下面代码保存为isChinaIP.py，并运行之。</p>
-
-<script src="https://gist.github.com/xixitalk/5142241.js"></script>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -584,7 +606,7 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (2)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (4)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (1)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (2)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (4)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (2)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
 </section>
 
   
