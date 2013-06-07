@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cryptography | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/cryptography/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-07T16:43:48+08:00</updated>
+  <updated>2013-06-07T18:08:51+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[数字签名时的私钥加密公钥解密怎么理解]]></title>
+    <title type="html"><![CDATA[数字签名时的私钥加密公钥解密]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/07/digest-signature/"/>
     <updated>2013-06-07T23:33:05+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/07/digest-signature</id>
