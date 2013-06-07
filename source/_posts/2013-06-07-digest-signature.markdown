@@ -10,9 +10,9 @@ categories: tech cryptography
 前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的`私钥解密 公钥解密`是怎么回事呢？
 
 ### RSA算法
-[RSA算法][rsa_url]的数学原理基于一个极大整数的因数分解很困难，而算两个因数之积很容易。
+[RSA算法][rsa_url]的数学原理基于两个大素数（也称质数）相乘很容易，但是对其乘积进行因式分解很难。
 
-下面是wikipedia上的RSA算法的简单描述：
+下面是wikipedia上的RSA生成公钥私钥的简单描述：
 > 假设Alice想要通过一个不可靠的媒体接收Bob的一条私人讯息。她可以用以下的方式来产生一个公钥和一个私钥：
 >> 随意选择两个大的质数p和q，p不等于q，计算N=pq。
 >> 根据欧拉函数，求得r= φ(n) = φ(p)φ(q) = (p-1)(q-1)
@@ -39,5 +39,6 @@ categories: tech cryptography
 
 1. 有了rsa的私钥，可以推出它的公钥吗 <http://ar.newsmth.net/thread-c32c41baf6289.html>
 2. RFC2313 PKCS #1: RSA Encryption Version 1.5 <http://tools.ietf.org/html/rfc2313>
+3. 阮一峰：数字签名是什么？<http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html>
 
 [rsa_url]:http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95
