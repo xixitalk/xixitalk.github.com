@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-07T10:27:53+08:00</updated>
+  <updated>2013-06-07T11:12:54+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -21,14 +21,14 @@
     <content type="html"><![CDATA[<p>下表是某寿险保费列表：</p>
 
 <table border="1" align="center">
-<tr><td>投保年龄</td><td>男</td><td>女</td></tr>
-<tr><td>30岁</td><td>260</td><td>280</td></tr>
+<tr><td> 投保年龄 </td><td> 男 </td><td> 女 </td></tr>
+<tr><td> 30岁 </td><td> 260 </td><td> 280 </td></tr>
 <tr><td>…</td><td>…</td><td>…</td></tr>
-<tr><td>47岁</td><td>1130</td><td>1180</td></tr>
-<tr><td>48岁</td><td>1290</td><td>1270</td></tr>
+<tr><td> 47岁 </td><td> 1130 </td><td> 1180 </td></tr>
+<tr><td> 48岁 </td><td> 1290 </td><td> 1270 </td></tr>
 <tr><td>…</td><td>…</td><td>…</td></tr>
-<tr><td>64岁</td><td>5190</td><td>3770</td></tr>
-<tr><td>65岁</td><td>5640</td><td>4030</td></tr>
+<tr><td> 64岁 </td><td> 5190 </td><td> 3770 </td></tr>
+<tr><td> 65岁 </td><td> 5640 </td><td> 4030 </td></tr>
 </table>
 
 
