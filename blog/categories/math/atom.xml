@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-08T23:41:48+08:00</updated>
+  <updated>2013-06-09T00:06:57+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -20,11 +20,11 @@
     <id>http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula</id>
     <content type="html"><![CDATA[<h3>欧拉公式</h3>
 
-<p><span> $$  \mathrm{e}<sup>{-</sup> \mathrm{i} \pi} + 1 = 0 $$ </span></p>
+<p><span>$$  \mathrm{e}\<sup>{-</sup> \mathrm{i} \pi} + 1 = 0 $$</span></p>
 
 <h3>一元二次方式求根公式</h3>
 
-<p><span> $$ x_{1,2} = \frac{-b \pm \sqrt{b<sup>2-4ac}}{2b}</sup> $$ </span></p>
+<p><span>$$ x_{1,2} = \frac{-b \pm \sqrt{b\<sup>2-4ac}}{2b}</sup> $$</span></p>
 ]]></content>
   </entry>
   
