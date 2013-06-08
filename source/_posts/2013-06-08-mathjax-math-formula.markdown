@@ -6,9 +6,10 @@ comments: true
 categories: math mathjax
 ---
 ### 欧拉公式
-<span> $$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$ </span>
+<span>$$  \mathrm{e}\^{- \mathrm{i} \pi} + 1 = 0 $$</span>
+
 
 ### 一元二次方式求根公式
-<span> $$ x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b} $$ </span>
+<span>$$ x_{1,2} = \frac{-b \pm \sqrt{b\^2-4ac}}{2b} $$</span>
 
 
