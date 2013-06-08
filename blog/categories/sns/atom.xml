@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: SNS | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/sns/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-08T10:22:14+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[foursquare添加venue]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/08/foursquare-add-venue/"/>
+    <updated>2013-06-08T17:52:12+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/08/foursquare-add-venue</id>
+    <content type="html"><![CDATA[<p>关键词：foursquare add venue 地标</p>
+
+<h3>foursquare添加venue</h3>
+
+<p>在<a href="https://foursquare.com/add_venue">https://foursquare.com/add_venue</a>可以添加新的venue<br/>
+PS:我现在也不知道能够添加venue的权限是什么？</p>
+
+<h3>venue各项数据</h3>
+
+<p>因为foursquare是全球的服务，添加的venue数据最好要有英文，特别是名称(Name)和地点(Address)，没有对应英文名称的可以用汉语拼音。名称不要附加分店信息，地址可以参考Google maps上的英文地址，方便别人通过地图进行查找和确认。twitter是venue所在地的twitter，不是创建者的twitter，电话同样是venue所在地的电话。<br/>
+地址上常用的英文：</p>
+
+<table>
+<tr><td>缩写</td><td>中文</td></tr>
+<tr><td> Ave</td><td> 大道</td></tr>
+<tr><td> Rd</td><td> 路</td></tr>
+<tr><td> Dist</td><td> 区</td></tr>
+<tr><td> St</td><td> 街</td></tr>
+<tr><td> No.xx</td><td> xx号</td></tr>
+</table>
+
+
+<p>扩展阅读：<br/>
+Recommendation of venue info style in China(中文)</p>
+
+<p><a href="https://docs.google.com/document/d/1yuNOafJZb9EhsEvtI2snxLt3jkDOR6mrOsI7sh8fHXk">https://docs.google.com/document/d/1yuNOafJZb9EhsEvtI2snxLt3jkDOR6mrOsI7sh8fHXk</a></p>
+]]></content>
+  </entry>
+  
+</feed>
