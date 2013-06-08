@@ -6,6 +6,13 @@ comments: true
 categories: bullshit
 ---
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+  });
+</script>
+<script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
 新闻来源：[飞鸟撞裂“子弹头”玻璃 高铁G38昨被迫在南京换车][news_url]
 
 > “昨天记者请一位物理工程师计算了一下飞鸟撞击高速运行中的动车的冲击力度，他计算后表示，如果以列车目前的最高时速300公里来计算，那么一只半斤重的鸽子，撞上前挡风玻璃后，其作用力可以达到5000牛顿左右，即使列车速度稍慢一点，估计也有3000牛顿左右的力，也就是相当于用300公斤的重物砸在玻璃上。”
@@ -15,6 +22,8 @@ categories: bullshit
 解释这个问题要进行几个条件假设，比如飞鸟的速度相对于高速列车可以忽略为0。因为需要计算撞击时间，设定飞鸟的身长15cm。因为列车的质量巨大，所以假定相撞后列车的速度并未影响。整个相撞的动量变化就是飞鸟的速度由0变成和列车相同的速度。
 
 ![动量定理](http://mathurl.com/jwle27y.png)
+
+$$ \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$
 
 根据动量定理，m为飞鸟质量（半斤重为0.25kg)，v为0，![v'](http://mathurl.com/p7vsqsf.png)为列车速度(300km/h=83.4m/s)，时间t为飞鸟速度由0变成列车速度的时长(0.15/83.4=0.001798)s，代入所得F计算约为11574牛顿。就是说飞鸟在0.001798s内速度从0变到83.4m/s，收到了11574牛顿的推力。根据牛顿第二定律，列车玻璃也受到了11574牛顿的撞击力。
 
