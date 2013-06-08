@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mathjax | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/mathjax/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-08T23:41:48+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[用mathjax显示数学公式]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula/"/>
+    <updated>2013-06-09T07:32:24+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula</id>
+    <content type="html"><![CDATA[<h3>欧拉公式</h3>
+
+<p><span> $$  \mathrm{e}<sup>{-</sup> \mathrm{i} \pi} + 1 = 0 $$ </span></p>
+
+<h3>一元二次方式求根公式</h3>
+
+<p><span> $$ x_{1,2} = \frac{-b \pm \sqrt{b<sup>2-4ac}}{2b}</sup> $$ </span></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-08T23:26:46+08:00</updated>
+  <updated>2013-06-08T23:41:48+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用mathjax显示数学公式]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula/"/>
+    <updated>2013-06-09T07:32:24+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula</id>
+    <content type="html"><![CDATA[<h3>欧拉公式</h3>
+
+<p><span> $$  \mathrm{e}<sup>{-</sup> \mathrm{i} \pi} + 1 = 0 $$ </span></p>
+
+<h3>一元二次方式求根公式</h3>
+
+<p><span> $$ x_{1,2} = \frac{-b \pm \sqrt{b<sup>2-4ac}}{2b}</sup> $$ </span></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[男人是否携带HPV病毒检查不出来]]></title>
@@ -605,62 +620,6 @@ Bob已经被公司解雇。</p>
 
 <p>Therefore, it is highly likely that the government have noticed this loophole in its censorship net, and is now trying to close it.<br/>
 综上所述，很大的可能显示政府已经注意到审查系统的这个漏洞，现在正在尝试尽力堵上这个漏洞。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[markdown manual]]></title>
-    <link href="http://xixitalk.github.com/blog/2012/11/27/markdown-manual/"/>
-    <updated>2012-11-27T14:56:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2012/11/27/markdown-manual</id>
-    <content type="html"><![CDATA[<h2>链接</h2>
-
-<p>第一种最简单方式，地址用&lt;>包含</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;http://www.example.com&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果：
-<a href="http://www.example.com">http://www.example.com</a></p>
-
-<p>第二种方式，这种方式适合短链接</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[xixitalk](http://twittter/xixitalk)
-</span><span class='line'>[xixitalk](http://twittter/xixitalk "xxiitalk")</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果：
-<a href="http://twittter/xixitalk">xixitalk</a>
-<a href="http://twittter/xixitalk" title="xxiitalk">xixitalk</a></p>
-
-<p>第三种方式，这种方式适合长链接，过长的链接使用第二种方式容易破坏句子的整体结构，使用这种方式可以把链接像论文参考一样罗列在结尾。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[xixitalk][xixitalk_id]
-</span><span class='line'>[xixitalk_id]:http://twittter/xixitalk "xxiitalk"  这行可以放在文件结尾，像论文参考</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果：
-<a href="http://twittter/xixitalk" title="xxiitalk">xixitalk</a>
-第四种方式，章节式链接</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[第二章 代码块](#codeblock)
-</span><span class='line'>
-</span><span class='line'>&lt;h2 id="codeblock"&gt;第二章 代码块&lt;/h2&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果：<br/>
-<a href="#codeblock">第二章 代码块</a></p>
-
-<h2 id="codeblock">第二章 代码块</h2>
-
 ]]></content>
   </entry>
   
