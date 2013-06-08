@@ -9,10 +9,9 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理 stunnel原理如图： 具体教程可参见下面篇博文：
-搭建SSLedge HTTPS代理
-通过 stunnel 搭建安全高性能的 sockts 代理服务器
-使用 Stunnel 加密 如何在 SSL 内加密任意 &hellip;">
+  <meta name="description" content="用API更新3322.org免费二级域名的DDNS:
+1、注册3322.org的免费二级域名：http://www.pubyun.com/
+2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +81,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/29/update-ddns-with-api/">用API更新3322.org免费二级域名的DDNS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-29T19:22:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/29/update-ddns-with-api/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>用API更新3322.org免费二级域名的DDNS:<br/>
+1、注册3322.org的免费二级域名：<a href="http://www.pubyun.com/">http://www.pubyun.com/</a><br/>
+2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。用<a href="http://icanhazip.com">http://icanhazip.com</a>获得公网IP。</p>
+
+<script src="https://gist.github.com/xixitalk/5669646.js"></script>
+
+
+<p>3、在cron里添加每N分钟执行updateDDNS.sh。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -691,161 +735,6 @@ Bob已经被公司解雇。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/24/git-manual/">Git Manual</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-24T21:54:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/24/git-manual/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>初始化目录</h2>
-
-<p>以下两种方式</p>
-
-<h3>空目录初始化</h3>
-
-<pre><code>git init  
-</code></pre>
-
-<h3>获取一个git仓库代码</h3>
-
-<pre><code>git clone https://github.com/yegle/flask_twip.git
-</code></pre>
-
-<h3>添加代码</h3>
-
-<pre><code>git add .
-git add -u
-</code></pre>
-
-<h3>提交到本地仓库</h3>
-
-<p>并未提交远程git仓库</p>
-
-<pre><code>git commit -m "bugs fixed log"
-git commit -a 自动add修改文件并提交。新建的文件不会add
-</code></pre>
-
-<h3>提交到仓库</h3>
-
-<pre><code>git push origin master
-</code></pre>
-
-<h3>删除文件</h3>
-
-<p>并未在git仓库删除,只是标记删除</p>
-
-<pre><code>git rm FILENAME
-</code></pre>
-
-<h3>分支(branch)操作</h3>
-
-<pre><code>git branch 显示所有分支，分支加*的是当前分支
-git branck experimental 创建一个名为experimental的分支
-git checkout experimental 切换到experimental分支
-</code></pre>
-
-<h3>rm删除的文件重新从服务器更新</h3>
-
-<pre><code>git checkout filename.c
-</code></pre>
-
-<h3>标记忽略文件</h3>
-
-<p>.gitignore标记忽略文件，详细<a href="http://help.github.com/ignore-files/">http://help.github.com/ignore-files/</a></p>
-
-<h3>撤销修改</h3>
-
-<p>如果还没有commit，可以用下面命令恢复到修改前最后一次commit的状态。</p>
-
-<pre><code>git checkout -- path/filename
-</code></pre>
-
-<h3>git里文件的三种状态</h3>
-
-<ul>
-<li>已提交（committed）  git commit之后</li>
-<li>已修改（modified）   文件修改之后</li>
-<li>已暂存（staged）     git add之后
-git push之后，文件的状态没有改变，依然是已提交(committed)状态。</li>
-</ul>
-
-
-<h3>git里文件流转的三个目录</h3>
-
-<ul>
-<li>工作目录</li>
-<li>暂存区域</li>
-<li>本地仓库
-工作目录是用户编辑的目录，git clone操作后的目录；暂存目录是git add之后加入索引文件；本地仓库是git commit之后将文件快照保持的地方。</li>
-</ul>
-
-
-<h3>git配置</h3>
-
-<pre><code>git config --list 查看配置
-</code></pre>
-
-<h3>git配置HTTP代理</h3>
-
-<pre><code>git config --global http.proxy example.com:8080
-</code></pre>
-
-<p>在.gitconfig文件可以看到：</p>
-
-<pre><code>[http]
-      proxy = example.com:8080
-</code></pre>
-
-<h3>配置git的默认用户名和邮箱</h3>
-
-<pre><code>$ git config --global user.name "John Doe"
-$ git config --global user.email johndoe@example.com
-</code></pre>
-
-<h3>git命令帮助</h3>
-
-<pre><code>git help add 查看git add帮助
-</code></pre>
-
-<h3>git手册</h3>
-
-<ul>
-<li><a href="http://git-scm.com/book/zh/">Pro Git</a></li>
-<li><a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/">Git 初學筆記 - 指令操作教學</a></li>
-<li><a href="http://gitbook.liuhui998.com/index.html">Git Community Book 中文版</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -860,7 +749,7 @@ $ git config --global user.email johndoe@example.com
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (2)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (4)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (2)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (2)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (4)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (2)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (1)</a></li></ul>
 </section>
 
   
