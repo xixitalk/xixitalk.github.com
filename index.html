@@ -511,11 +511,54 @@ TestDisk, Data Recovery</p>
   </header>
 
 
-  <div class="entry-content"><p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
+  <div class="entry-content"><h3>目标</h3>
+
+<p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
+
+<h3>设想</h3>
+
+<p>浏览器网页编写，保存在GAE上，raspberry pi上用shell定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
+
+<h3>硬件环境</h3>
+
+<p>需要一个全天运行的电脑（我的是树莓派），用于每10分钟进行检查是否服务器(GAE)上新的博文，并rake生成html格式的博文上传到github。</p>
+
+<h3>软件环境</h3>
+
+<p>树莓派上安装octopress所需的所有工具，生成一个不要密码的SSH密钥，把公钥上传到github上，这样<code>rake deploy</code>就不会提示输入密码了。</p>
+
+<h3>GAE网页设计</h3>
+
+<h4>面向shell的接口</h4>
+
+<p><code>/md/getnewpost?action=flag</code>  用于判断GAE上是否有新博文，1表示有新博文，0表示没有新博文 <br/>
+<code>/md/getnewpost?action=cleanflag</code> 将GAE上博文标志1变成0，用于<code>rake deploy</code>成功后使用</p>
+
+<p><code>/md/getnewpost?action=getfilename</code> 获得新博文的文件名<br/>
+<code>/md/getnewpost?action=getfilemd5</code> 获得新博文的md5，用于检验下载的完整性<br/>
+<code>/md/getnewpost?action=getfilecontent</code> 获得新博文的内容</p>
+
+<h4>面向用户的接口</h4>
+
+<p><code>/md/getnewpost?action=new</code> 用户要新建博文，浏览器访问该地址<br/>
+<code>/md/getnewpost?action=edit</code> 用户要重新编辑博文，浏览器访问该地址</p>
+
+<h4>用户不需要关心的接口</h4>
+
+<p><code>/md/getnewpost?action=save</code> edit之后保存按钮执行本接口<br/>
+<code>/md/getnewpost?action=publish</code> save后publish按钮执行本接口，将博文标志变成1</p>
+
+<h3>shell检查</h3>
+
+<ol>
+<li>先用<code>action=flag</code>获得博文标志。如果是0，GAE上无新博文，直接退出；如果是1，继续。</li>
+<li>获得新博文的文件名、md5、文件内容，用本地命令md5sum计算新博文的md5，与<code>action=getfilemd5</code>获得的md5进行比较。如果不一致，抓取博文出错退出；如果一致，抓取博文正确。</li>
+<li>将新博文拷贝到octopress到source/_posts目录下，调用<code>rake generate &amp;&amp; rake deploy</code>进行HTML博文生成和发布，调用<code>git push</code>将markdown博文上传到github服务器。</li>
+<li>调用<code>action=cleanflag</code>将GAE博文标志变成0，表示GAE上新博文已经成功发布。</li>
+</ol>
+
 
 <p>可能是<code>rake generate</code>和<code>rake deploy</code>时间比较长，cron 10分钟检查不好使，发现没有效果，最后用后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样才正常。</p>
-
-<p>原理：浏览器网页编写，保存在GAE上，raspberry pi上定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
 
 <p>updated from my iPad with Safari</p>
 </div>
