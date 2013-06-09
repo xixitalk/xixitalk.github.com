@@ -118,7 +118,8 @@ http://www.example.com 第二种方式，这种方式适合短链接
 <p>第一种最简单方式，地址用&lt;&gt;包含  </p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;http://www.example.com&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;http://www.example.com&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>效果：
 <a href="http://www.example.com">http://www.example.com</a></p>
@@ -127,7 +128,8 @@ http://www.example.com 第二种方式，这种方式适合短链接
 &lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
 <span class="line-number">2</span>
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">[xixitalk](http://twittter/xixitalk)
-</span><span class="line">[xixitalk](http://twittter/xixitalk "xxiitalk")</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+</span><span class="line">[xixitalk](http://twittter/xixitalk "xxiitalk")
+</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
 效果：
 <a href="http://twittter/xixitalk">xixitalk</a>
 <a href="http://twittter/xixitalk" title="xxiitalk">xixitalk</a></p>
@@ -136,7 +138,8 @@ http://www.example.com 第二种方式，这种方式适合短链接
 &lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
 <span class="line-number">2</span>
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">[xixitalk][xixitalk_id]
-</span><span class="line">[xixitalk_id]:http://twittter/xixitalk "xxiitalk"  这行可以放在文件结尾，像论文参考</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+</span><span class="line">[xixitalk_id]:http://twittter/xixitalk "xxiitalk"  这行可以放在文件结尾，像论文参考
+</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
 效果：
 [xixitalk][xixitalk_id]
 [xixitalk_id]: http://twittter/xixitalk “xxiitalk”  </p>
@@ -145,13 +148,15 @@ http://www.example.com 第二种方式，这种方式适合短链接
 &lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">[第二章 代码块](#codeblock)
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">[第二章](#chapter2)
 </span><span class="line">
-</span><span class="line">&lt;h2 id="codeblock"&gt;第二章 代码块&lt;/h2&gt;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+</span><span class="line">&lt;span id="chapter2"&gt;第二章 代码块&lt;/span&gt;
+</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
 效果：<br />
-<a href="#codeblock">第二章 代码块</a></p>
+<a href="#chapter2">第二章</a></p>
 
-<h2 id="codeblock">第二章 代码块</h2>
+<p><span id="chapter2">第二章 代码块</span></p>
+
 </div>
 
 
