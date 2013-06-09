@@ -11,6 +11,7 @@ categories: heroku git flask_twip twip twitter
 本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@[xmchenyj](http://twitter.com/xmchenyj)的教程：<http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/>
 
 补充说明：@xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器,这样和他教程结尾的备注才一致。
+
 	venv
 	*.pyc
 
