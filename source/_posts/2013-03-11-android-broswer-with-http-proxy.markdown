@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "andrid上支持HTTP proxy代理的浏览器"
+title: "android上支持HTTP proxy代理的浏览器"
 date: 2013-03-11 17:07
 comments: true
 categories: android proxy
