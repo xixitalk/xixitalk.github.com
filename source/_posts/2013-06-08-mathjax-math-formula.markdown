@@ -23,6 +23,10 @@ categories: math mathjax octopress
 
 如，单独居中的欧拉公式
 
+```
+$$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$
+```
+
 $$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$
 
 行内的欧拉公式$$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$显示

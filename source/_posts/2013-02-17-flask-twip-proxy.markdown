@@ -12,10 +12,12 @@ demo参见<https://xinhuanet.herokuapp.com/twip/getimg>
 
 ###1、import urllib2
 在文件twip.py里增加import urllib2
+
 	import urllib2
 
 ###2、增加/twip/getimg路径映射
 在twip.py文件的函数getMapper里增加/twip/getimg路径映射
+
 	('/getimg/',self.getimg),
 
 ###3、增加getimg函数

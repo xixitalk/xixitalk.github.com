@@ -18,6 +18,7 @@ categories: octopress raspberrypi
 树莓派上安装octopress所需的所有工具，生成一个不要密码的SSH密钥，把公钥上传到github上，这样`rake deploy`就不会提示输入密码了。
 
 ### GAE网页设计
+
 #### 面向shell的接口
 `/md/getnewpost?action=flag`  用于判断GAE上是否有新博文，1表示有新博文，0表示没有新博文   
 `/md/getnewpost?action=cleanflag` 将GAE上博文标志1变成0，用于`rake deploy`成功后使用  
