@@ -4,7 +4,7 @@
   <title><![CDATA[Category: proxy | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/proxy/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-09T13:10:12+08:00</updated>
+  <updated>2013-06-09T14:20:17+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -20,13 +20,14 @@
     <id>http://xixitalk.github.com/blog/2013/04/08/stunnel-principle</id>
     <content type="html"><![CDATA[<p>搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理</p>
 
-<p>stunnel原理如图：<br/>
+<p>stunnel原理如图：<br />
 <a href="/static/images/2013/04/stunnel.png"><img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></a></p>
 
-<p>具体教程可参见下面篇博文：<br/>
-<a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br/>
-<a href="https://wido.me/sunteya/setup-a-socks-proxy-server-pass-by-secure-firewall/">通过 stunnel 搭建安全高性能的 sockts 代理服务器</a><br/>
-<a href="http://www.ibm.com/developerworks/cn/security/s-stun/">使用 Stunnel 加密 如何在 SSL 内加密任意 TCP 连接</a>(提醒这篇文章发表于2001年，现在看来可能部分配置不适用)</p>
+<p>具体教程可参见下面篇博文：<br />
+<a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br />
+<a href="https://wido.me/sunteya/setup-a-socks-proxy-server-pass-by-secure-firewall/">通过 stunnel 搭建安全高性能的 sockts 代理服务器</a><br />
+<a href="http://www.ibm.com/developerworks/cn/security/s-stun/">使用 Stunnel 加密 如何在 SSL 内加密任意 TCP 连接</a>(提醒这篇文章发表于2001年，现在看来可能部分配置不适用)  </p>
+
 ]]></content>
   </entry>
   
@@ -35,27 +36,25 @@
     <link href="http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy/"/>
     <updated>2013-03-11T17:07:00+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy</id>
-    <content type="html"><![CDATA[<p>之前一篇文章讲了在树莓派上搭建HTTP proxy的<a href="/blog/2013/03/02/raspberry-pi-proxy/">原理</a>，这样就获得一个HTTP proxy，android上的<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>和<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>都支持HTTP proxy，可以在设置里进行配置。但是从<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>或者<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。</p>
+    <content type="html"><![CDATA[<p>之前一篇文章讲了在树莓派上搭建HTTP proxy的<a href="/blog/2013/03/02/raspberry-pi-proxy/">原理</a>，这样就获得一个HTTP proxy，android上的<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>和<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>都支持HTTP proxy，可以在设置里进行配置。但是从<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>或者<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。  </p>
 
-<h3>Firefox</h3>
-
-<p>android上的<a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Firefox</a>可以通过安装<a href="https://addons.mozilla.org/zh-CN/android/addon/proxy-mobile/">Proxy Mobile</a>附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。<br/>
-优点：支持多tab页面，浏览器功能完整<br/>
+<h3 id="firefox">Firefox</h3>
+<p>android上的<a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Firefox</a>可以通过安装<a href="https://addons.mozilla.org/zh-CN/android/addon/proxy-mobile/">Proxy Mobile</a>附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。<br />
+优点：支持多tab页面，浏览器功能完整<br />
 缺点：速度比较慢,最新版本的firefox有可能Proxy Mobile附件组件不兼容</p>
 
-<h3>orweb v2</h3>
-
-<p><a href="https://play.google.com/store/apps/details?id=info.guardianproject.browser">orweb v2浏览器</a>原本是配合tor的android版本<a href="https://play.google.com/store/apps/details?id=org.torproject.android">orbot</a>的代理的，但是可以自定义其他的HTTP proxy。<br/>
-优点：打开网页速度很快<br/>
+<h3 id="orweb-v2">orweb v2</h3>
+<p><a href="https://play.google.com/store/apps/details?id=info.guardianproject.browser">orweb v2浏览器</a>原本是配合tor的android版本<a href="https://play.google.com/store/apps/details?id=org.torproject.android">orbot</a>的代理的，但是可以自定义其他的HTTP proxy。<br />
+优点：打开网页速度很快<br />
 缺点：1、只能打开一个页面；2、如果没安装orbot，每次第一次打开浏览器都会提示系统没有安装orbot；3、如果在页面点击链接很深入之后，返回会按原路返回。</p>
 
-<h3>蓝火焰浏览器</h3>
-
-<p><a href="https://play.google.com/store/apps/details?id=com.blueflame.web&amp;hl=zh_CN">蓝火焰浏览器</a>是用android 2.x系统的浏览器框架封装的一个轻量级的浏览器。<br/>
-优点：支持多tab页面浏览<br/>
+<h3 id="section">蓝火焰浏览器</h3>
+<p><a href="https://play.google.com/store/apps/details?id=com.blueflame.web&amp;hl=zh_CN">蓝火焰浏览器</a>是用android 2.x系统的浏览器框架封装的一个轻量级的浏览器。<br />
+优点：支持多tab页面浏览<br />
 缺点：打开t.co等缩短网站每次展开都提示用户选择浏览器，速度慢。</p>
 
 <p>总结：如果从应用里打开网页推荐orweb v2，如果长时间浏览推荐使用firefox。</p>
+
 ]]></content>
   </entry>
   
@@ -66,17 +65,17 @@
     <id>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy</id>
     <content type="html"><![CDATA[<p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
 
-<p>原理如图：<br/>
+<p>原理如图：<br />
 <img src="/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
 
-<p>说明：<br/>
-1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br/>
-2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br/>
-3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br/>
-4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br/>
-5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br/>
-6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br/>
-7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。</p>
+<p>说明：<br />
+1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br />
+2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br />
+3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br />
+4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br />
+5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br />
+6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br />
+7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。  </p>
 ]]></content>
   </entry>
   

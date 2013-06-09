@@ -9,7 +9,11 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="创建新文章 rake new_post["TITLE"] 生成静态HTML文章 rake generate 本地预览 rake preview 通过http://127.0.0.1:4000访问 发布到github空间 rake deploy 将文章的markdown文件上传到github服务器 &hellip;">
+  <meta name="description" content="创建新文章
+rake new_post["TITLE"] 生成静态HTML文章
+rake generate 本地预览
+rake preview 通过&lt;http://127.0.0.1:4000&gt;访问 发布到github空间
+rake deploy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -44,11 +48,6 @@
 
 
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: { inlineMath: [['\\(','\\)']] }
-    });
-  </script>
   <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 </head>
@@ -115,36 +114,29 @@
   </header>
 
 
-<div class="entry-content"><h2>创建新文章</h2>
-
+<div class="entry-content"><h2 id="section">创建新文章</h2>
 <pre><code>rake new_post["TITLE"]
 </code></pre>
 
-<h2>生成静态HTML文章</h2>
-
+<h2 id="html">生成静态HTML文章</h2>
 <pre><code>rake generate
 </code></pre>
 
-<h2>本地预览</h2>
-
-<pre><code>rake preview
+<h2 id="section-1">本地预览</h2>
+<pre><code>rake preview 通过&lt;http://127.0.0.1:4000&gt;访问
 </code></pre>
 
-<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
-
-<h2>发布到github空间</h2>
-
+<h2 id="github">发布到github空间</h2>
 <pre><code>rake deploy
 </code></pre>
 
-<h2>将文章的markdown文件上传到github服务器</h2>
-
+<h2 id="markdowngithub">将文章的markdown文件上传到github服务器</h2>
 <pre><code>git add .
 git commit -m "add source post"
 git push origin source
 </code></pre>
 
-<h2>从github服务器更新本地仓库</h2>
+<h2 id="github-1">从github服务器更新本地仓库</h2>
 
 <pre><code>cd Octopress
 cd _deploy
@@ -153,72 +145,58 @@ cd ..
 git pull origin source
 </code></pre>
 
-<h2>Octopress仓库说明</h2>
-
+<h2 id="octopress">Octopress仓库说明</h2>
 <p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
 
-<h2>Octopress支持中文</h2>
-
+<h2 id="octopress-1">Octopress支持中文</h2>
 <p>1、rake new_post生成的markdown文件要改成UTF-8无签名格式。</p>
 
-<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
+<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：
+	self.content = File.read(File.join(base, name), :encoding =&gt; “utf-8”)</p>
 
-<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
-</code></pre>
-
-<h2>嵌入gist代码</h2>
-
+<h2 id="gist">嵌入gist代码</h2>
 <pre><code>&lt;div&gt;&lt;script src='https://gist.github.com/1059334.js?file=svg_bullets.rb'&gt;&lt;/script&gt;
 </code></pre>
+<noscript><pre><code>require 'sass'
 
-<p><noscript><pre><code>require 'sass'</p>
-
-<p>module Sass::Script::Functions
-  def svg_circle(radius, color, circle_type)</p>
-
-<pre><code>img = if circle_type.value == &amp;quot;disc&amp;quot;
-  %Q{&amp;lt;circle cx=&amp;quot;#{radius.value}&amp;quot; cy=&amp;quot;#{radius.value}&amp;quot; r=&amp;quot;#{radius.value}&amp;quot;
-                      stroke-width=&amp;quot;0&amp;quot; fill=&amp;quot;#{color}&amp;quot;/&amp;gt;}
-else
-  %Q{&amp;lt;circle cx=&amp;quot;#{radius.value}&amp;quot; cy=&amp;quot;#{radius.value}&amp;quot; r=&amp;quot;#{radius.value}&amp;quot;
-                      stroke=&amp;quot;#{color}&amp;quot; stroke-width=&amp;quot;1&amp;quot; fill=&amp;quot;white&amp;quot;/&amp;gt;}
-end
-inline_image_string(svg_circle_envelope(img).gsub(/  +/, ' '), 'image/svg+xml')
-</code></pre>
-
-<p>  end
+module Sass::Script::Functions
+  def svg_circle(radius, color, circle_type)
+    img = if circle_type.value == &quot;disc&quot;
+      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
+                          stroke-width=&quot;0&quot; fill=&quot;#{color}&quot;/&gt;}
+    else
+      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
+                          stroke=&quot;#{color}&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;}
+    end
+    inline_image_string(svg_circle_envelope(img).gsub(/  +/, ' '), 'image/svg+xml')
+  end
   private
-  def svg_circle_envelope(content)</p>
-
-<pre><code>%Q{&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;svg version=&amp;quot;1.1&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;#{content}&amp;lt;/svg&amp;gt;}
-</code></pre>
-
-<p>  end
+  def svg_circle_envelope(content)
+    %Q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;svg version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;#{content}&lt;/svg&gt;}
+  end
 end
-</code></pre></noscript></div></p>
+</code></pre></noscript>
+<p>&lt;/div&gt;</p>
 
 <pre><code>&lt;div&gt;&lt;script src='https://gist.github.com/1059334.js?file=usage.scss'&gt;&lt;/script&gt;
 </code></pre>
-
-<p><noscript><pre><code>// Draw a list style image in svg using the radius and color specified.
+<noscript><pre><code>// Draw a list style image in svg using the radius and color specified.
 @mixin colored-bullet($radius, $color, $type: disc) {
   list-style-type: $type;
   list-style-image: svg-circle($radius, $color, $type);
-}</p>
-
-<p>ul {
-  @include colored-bullet(2px, $green, disc);
-  ul {</p>
-
-<pre><code>@include colored-bullet(2px, $green, circle);
-</code></pre>
-
-<p>  }
 }
-</code></pre></noscript></div></p>
 
-<h2>markdown在线编辑器</h2>
 
+ul {
+  @include colored-bullet(2px, $green, disc);
+  ul {
+    @include colored-bullet(2px, $green, circle);
+  }
+}
+</code></pre></noscript>
+<p>&lt;/div&gt;</p>
+
+<h2 id="markdown">markdown在线编辑器</h2>
 <pre><code>http://mahua.jser.me/
 </code></pre>
 </div>

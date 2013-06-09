@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-09T13:10:12+08:00</updated>
+  <updated>2013-06-09T14:20:17+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,52 +18,43 @@
     <link href="http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi/"/>
     <updated>2013-06-01T03:57:25+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi</id>
-    <content type="html"><![CDATA[<h3>目标</h3>
-
+    <content type="html"><![CDATA[<h3 id="section">目标</h3>
 <p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
 
-<h3>设想</h3>
-
+<h3 id="section-1">设想</h3>
 <p>浏览器网页编写，保存在GAE上，raspberry pi上用shell定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
 
-<h3>硬件环境</h3>
-
+<h3 id="section-2">硬件环境</h3>
 <p>需要一个全天运行的电脑（我的是树莓派），用于每10分钟进行检查是否服务器(GAE)上新的博文，并rake生成html格式的博文上传到github。</p>
 
-<h3>软件环境</h3>
-
+<h3 id="section-3">软件环境</h3>
 <p>树莓派上安装octopress所需的所有工具，生成一个不要密码的SSH密钥，把公钥上传到github上，这样<code>rake deploy</code>就不会提示输入密码了。</p>
 
-<h3>GAE网页设计</h3>
+<h3 id="gae">GAE网页设计</h3>
+<p>#### 面向shell的接口
+<code>/md/getnewpost?action=flag</code>  用于判断GAE上是否有新博文，1表示有新博文，0表示没有新博文 <br />
+<code>/md/getnewpost?action=cleanflag</code> 将GAE上博文标志1变成0，用于<code>rake deploy</code>成功后使用  </p>
 
-<h4>面向shell的接口</h4>
+<p><code>/md/getnewpost?action=getfilename</code> 获得新博文的文件名<br />
+<code>/md/getnewpost?action=getfilemd5</code> 获得新博文的md5，用于检验下载的完整性<br />
+<code>/md/getnewpost?action=getfilecontent</code> 获得新博文的内容  </p>
 
-<p><code>/md/getnewpost?action=flag</code>  用于判断GAE上是否有新博文，1表示有新博文，0表示没有新博文 <br/>
-<code>/md/getnewpost?action=cleanflag</code> 将GAE上博文标志1变成0，用于<code>rake deploy</code>成功后使用</p>
+<h4 id="section-4">面向用户的接口</h4>
+<p><code>/md/getnewpost?action=new</code> 用户要新建博文，浏览器访问该地址<br />
+<code>/md/getnewpost?action=edit</code> 用户要重新编辑博文，浏览器访问该地址  </p>
 
-<p><code>/md/getnewpost?action=getfilename</code> 获得新博文的文件名<br/>
-<code>/md/getnewpost?action=getfilemd5</code> 获得新博文的md5，用于检验下载的完整性<br/>
-<code>/md/getnewpost?action=getfilecontent</code> 获得新博文的内容</p>
+<h4 id="section-5">用户不需要关心的接口</h4>
+<p><code>/md/getnewpost?action=save</code> edit之后保存按钮执行本接口<br />
+<code>/md/getnewpost?action=publish</code> save后publish按钮执行本接口，将博文标志变成1  </p>
 
-<h4>面向用户的接口</h4>
-
-<p><code>/md/getnewpost?action=new</code> 用户要新建博文，浏览器访问该地址<br/>
-<code>/md/getnewpost?action=edit</code> 用户要重新编辑博文，浏览器访问该地址</p>
-
-<h4>用户不需要关心的接口</h4>
-
-<p><code>/md/getnewpost?action=save</code> edit之后保存按钮执行本接口<br/>
-<code>/md/getnewpost?action=publish</code> save后publish按钮执行本接口，将博文标志变成1</p>
-
-<h3>shell检查</h3>
+<h3 id="shell">shell检查</h3>
 
 <ol>
-<li>先用<code>action=flag</code>获得博文标志。如果是0，GAE上无新博文，直接退出；如果是1，继续。</li>
-<li>获得新博文的文件名、md5、文件内容，用本地命令md5sum计算新博文的md5，与<code>action=getfilemd5</code>获得的md5进行比较。如果不一致，抓取博文出错退出；如果一致，抓取博文正确。</li>
-<li>将新博文拷贝到octopress到source/_posts目录下，调用<code>rake generate &amp;&amp; rake deploy</code>进行HTML博文生成和发布，调用<code>git push</code>将markdown博文上传到github服务器。</li>
-<li>调用<code>action=cleanflag</code>将GAE博文标志变成0，表示GAE上新博文已经成功发布。</li>
+  <li>先用<code>action=flag</code>获得博文标志。如果是0，GAE上无新博文，直接退出；如果是1，继续。  </li>
+  <li>获得新博文的文件名、md5、文件内容，用本地命令md5sum计算新博文的md5，与<code>action=getfilemd5</code>获得的md5进行比较。如果不一致，抓取博文出错退出；如果一致，抓取博文正确。</li>
+  <li>将新博文拷贝到octopress到source/_posts目录下，调用<code>rake generate &amp;&amp; rake deploy</code>进行HTML博文生成和发布，调用<code>git push</code>将markdown博文上传到github服务器。</li>
+  <li>调用<code>action=cleanflag</code>将GAE博文标志变成0，表示GAE上新博文已经成功发布。</li>
 </ol>
-
 
 <p>可能是<code>rake generate</code>和<code>rake deploy</code>时间比较长，cron 10分钟检查不好使，发现没有效果，最后用后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样才正常。</p>
 
@@ -78,10 +69,9 @@
     <id>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
     <content type="html"><![CDATA[<p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
-<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP</p>
+<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP<br />
+	sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp –dport 8222 -j DNAT –to-destination 192.168.1.106:22 </p>
 
-<pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
-</code></pre>
 ]]></content>
   </entry>
   
@@ -94,51 +84,45 @@
 
 <p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>
 
-<h3>入门教程</h3>
-
+<h3 id="section">入门教程</h3>
 <p>国内可以从ICKey买树莓派，这个售卖页面的“<a href="http://www.ickey.cn/raspberrypi.php">使用说明</a>”做入门教程不错，工具也都有现成的下载。</p>
 
-<h3>配件</h3>
+<h3 id="section-1">配件</h3>
+<p>电源只要满足700mA/5V都可以，但最好配置&gt;1.5A/5V的电源适配器，特别如果要挂载移动硬盘<br />
+USB的键盘鼠标，如果是PS/2接口的，需要一个转接器转化成USB<br />
+一根HDMI线<br />
+一张至少4G/class4的SD卡<br />
+一根microUSB线做电源线  </p>
 
-<p>电源只要满足700mA/5V都可以，但最好配置>1.5A/5V的电源适配器，特别如果要挂载移动硬盘<br/>
-USB的键盘鼠标，如果是PS/2接口的，需要一个转接器转化成USB<br/>
-一根HDMI线<br/>
-一张至少4G/class4的SD卡<br/>
-一根microUSB线做电源线</p>
+<h3 id="section-2">树莓派版本选择</h3>
+<p>官方推荐<a href="http://www.raspbian.org/">raspbian</a>系统，这个系统默认启动进入字符终端模式，可以用apt-get安装<a href="http://xbmc.org/">XBMC</a>应用，但是有些不稳定，没有其他三个<a href="http://xbmc.org/">XBMC</a>专门版本稳定，其次首次运行<a href="http://xbmc.org/">XBMC</a>起来要几十秒。<br />
+<a href="http://www.raspbmc.com/download/">raspbmc</a>、<a href="http://xbian.org/">xbian</a>、<a href="http://openelec.tv/get-openelec/download/viewcategory/10-raspberry-pi-builds">OpenELEC</a>三个都是<a href="http://xbmc.org/">XBMC</a>专用版本。<br />
+如果你的树莓派用来做服务器的话，推荐使用raspbian系统，raspbian有几乎和debian一样多的软件包，如lighttpd、mysql、php、apache等，正常开机不启动<a href="http://xbmc.org/">XBMC</a>，节省资源。<br />
+如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、obfsproxy、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。 </p>
 
-<h3>树莓派版本选择</h3>
-
-<p>官方推荐<a href="http://www.raspbian.org/">raspbian</a>系统，这个系统默认启动进入字符终端模式，可以用apt-get安装<a href="http://xbmc.org/">XBMC</a>应用，但是有些不稳定，没有其他三个<a href="http://xbmc.org/">XBMC</a>专门版本稳定，其次首次运行<a href="http://xbmc.org/">XBMC</a>起来要几十秒。<br/>
-<a href="http://www.raspbmc.com/download/">raspbmc</a>、<a href="http://xbian.org/">xbian</a>、<a href="http://openelec.tv/get-openelec/download/viewcategory/10-raspberry-pi-builds">OpenELEC</a>三个都是<a href="http://xbmc.org/">XBMC</a>专用版本。<br/>
-如果你的树莓派用来做服务器的话，推荐使用raspbian系统，raspbian有几乎和debian一样多的软件包，如lighttpd、mysql、php、apache等，正常开机不启动<a href="http://xbmc.org/">XBMC</a>，节省资源。<br/>
-如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、obfsproxy、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。</p>
-
-<h3>代理服务器</h3>
-
-<p>代理服务器的原理<a href="/blog/2013/03/02/raspberry-pi-proxy/">点击这里</a><br/>
-我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs、obfsproxy。<br/>
-polipo用于将socks5转化为HTTP代理，也可以用<a href="www.privoxy.org/">privoxy</a>，privoxy支持URL过滤，可以将一些常用的网站不通过SOCKS代理直接连接。<br/>
-nodejs用于跑nodejs版本的shadowsocks<br/>
+<h3 id="section-3">代理服务器</h3>
+<p>代理服务器的原理<a href="/blog/2013/03/02/raspberry-pi-proxy/">点击这里</a><br />
+我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs、obfsproxy。<br />
+polipo用于将socks5转化为HTTP代理，也可以用<a href="www.privoxy.org/">privoxy</a>，privoxy支持URL过滤，可以将一些常用的网站不通过SOCKS代理直接连接。<br />
+nodejs用于跑nodejs版本的shadowsocks<br />
 obfsproxy用于网络协议迷惑，将加密数据流伪装成普通数据流</p>
 
-<h3>XBMC视频播放</h3>
-
-<p>raspbmc本身就是个<a href="http://xbmc.org/">XBMC</a>优化版本，支持播放windows网络共享里的视频。<br/>
+<h3 id="xbmc">XBMC视频播放</h3>
+<p>raspbmc本身就是个<a href="http://xbmc.org/">XBMC</a>优化版本，支持播放windows网络共享里的视频。<br />
 安卓手机可以安装个XBMC remote应用来控制树莓派上的XBMC</p>
 
-<h3>挂载3.5寸移动硬盘</h3>
-
-<p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的数据端口。<br/>
-测试<a href="http://www.raspbian.org/">raspbian</a>和<a href="http://www.raspbmc.com/download/">raspbmc</a>都可以正常挂接。驱动要安装ntfs-3g，然后通过mount挂载，具体步骤可以参考这里<a href="http://www.ficklelife.com/index.php?id=2">raspbmc Automount an NTFS USB HDD</a>。<br/>
+<h3 id="section-4">挂载3.5寸移动硬盘</h3>
+<p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的数据端口。<br />
+测试<a href="http://www.raspbian.org/">raspbian</a>和<a href="http://www.raspbmc.com/download/">raspbmc</a>都可以正常挂接。驱动要安装ntfs-3g，然后通过mount挂载，具体步骤可以参考这里<a href="http://www.ficklelife.com/index.php?id=2">raspbmc Automount an NTFS USB HDD</a>。<br />
 最新版的<a href="http://www.raspbmc.com/download/">raspbmc</a>连mount都不用，插入移动硬盘后系统自动挂载，挂载在/media/[磁盘名]，磁盘名和移动硬盘挂接windows下的盘符卷标一样的。windows上可以将网络共享映射为本地磁盘，这样下载和使用都像本地磁盘没什么区别。</p>
 
 <p>警告：2.5寸的移动硬盘需要USB供电我没有尝试过。</p>
 
-<h3>网站服务器</h3>
-
-<p>lighttpd用于搭建一个简单的web server，这样可以使用pac文件。<br/>
-raspbmc本身带了ftp、samba、SSH服务，并且默认是打开的，可以在<a href="http://xbmc.org/">XBMC</a>界面：程序-raspbmc settings里打开关闭。<br/>
+<h3 id="section-5">网站服务器</h3>
+<p>lighttpd用于搭建一个简单的web server，这样可以使用pac文件。<br />
+raspbmc本身带了ftp、samba、SSH服务，并且默认是打开的，可以在<a href="http://xbmc.org/">XBMC</a>界面：程序-raspbmc settings里打开关闭。<br />
 samba服务默认将/home/pi和/media两个目录共享，windows可以通过网上邻居访问读写。</p>
+
 ]]></content>
   </entry>
   
@@ -149,17 +133,17 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
     <id>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy</id>
     <content type="html"><![CDATA[<p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
 
-<p>原理如图：<br/>
+<p>原理如图：<br />
 <img src="/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
 
-<p>说明：<br/>
-1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br/>
-2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br/>
-3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br/>
-4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br/>
-5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br/>
-6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br/>
-7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。</p>
+<p>说明：<br />
+1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br />
+2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br />
+3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br />
+4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br />
+5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br />
+6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br />
+7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。  </p>
 ]]></content>
   </entry>
   

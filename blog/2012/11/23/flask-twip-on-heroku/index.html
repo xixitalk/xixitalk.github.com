@@ -44,11 +44,6 @@
 
 
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: { inlineMath: [['\\(','\\)']] }
-    });
-  </script>
   <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 </head>
@@ -119,11 +114,9 @@
 
 <p>本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@<a href="http://twitter.com/xmchenyj">xmchenyj</a>的教程：<a href="http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/">http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/</a></p>
 
-<p>补充说明：@xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器,这样和他教程结尾的备注才一致。</p>
-
-<pre><code>venv
-*.pyc
-</code></pre>
+<p>补充说明：@xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器,这样和他教程结尾的备注才一致。
+	venv
+	*.pyc</p>
 
 <p>2013-2-22 更新</p>
 </div>

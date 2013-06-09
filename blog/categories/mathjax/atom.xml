@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mathjax | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/mathjax/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-09T13:10:12+08:00</updated>
+  <updated>2013-06-09T14:20:17+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -23,33 +23,27 @@
 <p>几点特殊说明如下：</p>
 
 <ol>
-<li><code>rdiscount</code> 要换成 <code>kramdown</code>，原因<code>rdiscount</code>会将公式的特殊字符转换成HTML的关键词sup、sub等。</li>
-<li>MathJax放在<code>source\_includes\custom\head.html</code>更合适，可以精简为下面,原因是kramdown不认inline单个$</li>
+  <li><code>rdiscount</code> 要换成 <code>kramdown</code>，原因<code>rdiscount</code>会将公式的特殊字符转换成HTML的关键词sup、sub等。</li>
+  <li>MathJax放在<code>source\_includes\custom\head.html</code>更合适，可以精简为下面,原因是kramdown不认inline单个$</li>
 </ol>
 
-
-<p>```<!-- mathjax config similar to math.stackexchange --></p>
-
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-
-
-<p>```</p>
+<p><code>&lt;!-- mathjax config similar to math.stackexchange --&gt;  
+&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"&gt;&lt;/script&gt;</code></p>
 
 <ol>
-<li>要按照博客的说明，解决公式右键点击白屏的问题</li>
-<li>用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</li>
+  <li>要按照博客的说明，解决公式右键点击白屏的问题</li>
+  <li>用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</li>
 </ol>
-
 
 <p>如，单独居中的欧拉公式</p>
 
-<p>$$  \mathrm{e}<sup>{-</sup> \mathrm{i} \pi} + 1 = 0 $$</p>
+<script type="math/tex; mode=display">  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 </script>
 
-<p>行内的欧拉公式$$  \mathrm{e}<sup>{-</sup> \mathrm{i} \pi} + 1 = 0 $$显示</p>
+<p>行内的欧拉公式<script type="math/tex">  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 </script>显示</p>
 
 <p>一元二次方式求根公式</p>
 
-<p>$$ x_{1,2} = \frac{-b \pm \sqrt{b<sup>2-4ac}}{2b}</sup> $$</p>
+<script type="math/tex; mode=display"> x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b} </script>
 ]]></content>
   </entry>
   

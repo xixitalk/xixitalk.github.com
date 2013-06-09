@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-09T13:10:12+08:00</updated>
+  <updated>2013-06-09T14:20:17+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,36 +18,29 @@
     <link href="http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/"/>
     <updated>2012-11-23T23:07:00+08:00</updated>
     <id>http://xixitalk.github.com/blog/2012/11/23/octopress-command-note</id>
-    <content type="html"><![CDATA[<h2>创建新文章</h2>
-
+    <content type="html"><![CDATA[<h2 id="section">创建新文章</h2>
 <pre><code>rake new_post["TITLE"]
 </code></pre>
 
-<h2>生成静态HTML文章</h2>
-
+<h2 id="html">生成静态HTML文章</h2>
 <pre><code>rake generate
 </code></pre>
 
-<h2>本地预览</h2>
-
-<pre><code>rake preview
+<h2 id="section-1">本地预览</h2>
+<pre><code>rake preview 通过&lt;http://127.0.0.1:4000&gt;访问
 </code></pre>
 
-<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
-
-<h2>发布到github空间</h2>
-
+<h2 id="github">发布到github空间</h2>
 <pre><code>rake deploy
 </code></pre>
 
-<h2>将文章的markdown文件上传到github服务器</h2>
-
+<h2 id="markdowngithub">将文章的markdown文件上传到github服务器</h2>
 <pre><code>git add .
 git commit -m "add source post"
 git push origin source
 </code></pre>
 
-<h2>从github服务器更新本地仓库</h2>
+<h2 id="github-1">从github服务器更新本地仓库</h2>
 
 <pre><code>cd Octopress
 cd _deploy
@@ -56,21 +49,16 @@ cd ..
 git pull origin source
 </code></pre>
 
-<h2>Octopress仓库说明</h2>
-
+<h2 id="octopress">Octopress仓库说明</h2>
 <p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
 
-<h2>Octopress支持中文</h2>
-
+<h2 id="octopress-1">Octopress支持中文</h2>
 <p>1、rake new_post生成的markdown文件要改成UTF-8无签名格式。</p>
 
-<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
+<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：
+	self.content = File.read(File.join(base, name), :encoding =&gt; “utf-8”)</p>
 
-<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
-</code></pre>
-
-<h2>嵌入gist代码</h2>
-
+<h2 id="gist">嵌入gist代码</h2>
 <pre><code><div><script src='https://gist.github.com/1059334.js?file=svg_bullets.rb'></script>
 <noscript><pre><code>require 'sass'
 
@@ -110,8 +98,7 @@ ul {
 
 </code></pre>
 
-<h2>markdown在线编辑器</h2>
-
+<h2 id="markdown">markdown在线编辑器</h2>
 <pre><code>http://mahua.jser.me/
 </code></pre>
 ]]></content>

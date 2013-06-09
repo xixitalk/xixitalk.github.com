@@ -44,11 +44,6 @@
 
 
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: { inlineMath: [['\\(','\\)']] }
-    });
-  </script>
   <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 </head>
@@ -120,10 +115,9 @@
 
   <div class="entry-content"><p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
-<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP</p>
+<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP<br />
+	sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp –dport 8222 -j DNAT –to-destination 192.168.1.106:22 </p>
 
-<pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
-</code></pre>
 </div>
   
   
@@ -161,14 +155,12 @@
   </header>
 
 
-  <div class="entry-content"><p>用API更新3322.org免费二级域名的DDNS:<br/>
-1、注册3322.org的免费二级域名：<a href="http://www.pubyun.com/">http://www.pubyun.com/</a><br/>
-2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。用<a href="http://icanhazip.com">http://icanhazip.com</a>获得公网IP。</p>
+  <div class="entry-content"><p>用API更新3322.org免费二级域名的DDNS:<br />
+1、注册3322.org的免费二级域名：<a href="http://www.pubyun.com/">http://www.pubyun.com/</a><br />
+2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。用<a href="http://icanhazip.com">http://icanhazip.com</a>获得公网IP。<br />
+<script src="https://gist.github.com/xixitalk/5669646.js"></script></p>
 
-<script src="https://gist.github.com/xixitalk/5669646.js"></script>
-
-
-<p>3、在cron里添加每N分钟执行updateDDNS.sh。</p>
+<p>3、在cron里添加每N分钟执行updateDDNS.sh。  </p>
 </div>
   
   
@@ -208,13 +200,14 @@
 
   <div class="entry-content"><p>搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理</p>
 
-<p>stunnel原理如图：<br/>
+<p>stunnel原理如图：<br />
 <a href="/static/images/2013/04/stunnel.png"><img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></a></p>
 
-<p>具体教程可参见下面篇博文：<br/>
-<a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br/>
-<a href="https://wido.me/sunteya/setup-a-socks-proxy-server-pass-by-secure-firewall/">通过 stunnel 搭建安全高性能的 sockts 代理服务器</a><br/>
-<a href="http://www.ibm.com/developerworks/cn/security/s-stun/">使用 Stunnel 加密 如何在 SSL 内加密任意 TCP 连接</a>(提醒这篇文章发表于2001年，现在看来可能部分配置不适用)</p>
+<p>具体教程可参见下面篇博文：<br />
+<a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br />
+<a href="https://wido.me/sunteya/setup-a-socks-proxy-server-pass-by-secure-firewall/">通过 stunnel 搭建安全高性能的 sockts 代理服务器</a><br />
+<a href="http://www.ibm.com/developerworks/cn/security/s-stun/">使用 Stunnel 加密 如何在 SSL 内加密任意 TCP 连接</a>(提醒这篇文章发表于2001年，现在看来可能部分配置不适用)  </p>
+
 </div>
   
   
@@ -253,25 +246,22 @@
 
 
   <div class="entry-content"><p>世界上有五个<a href="http://en.wikipedia.org/wiki/Regional_Internet_registry">区域互联网注册管理机构</a>，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">点击这里</a>可以获得亚太地址各个国家或地区申请到的IP地址区域。
-中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br/>
+中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br />
 IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.*.*表述的IP（65536个IP）。
 判断一个IP首先由addr1和addr2直接找到addr1.addr2.*.*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
 
 <p><img src="/static/images/2013/03/ipv4search.png" alt="Raspberry Pi代理原理图" /></p>
 
-<p>每一个区域块有三种情况：<br/>
-1、区域块为空<br/>
-如果区域块为空，则表示此区域块无中国IP分布。<br/>
-2、区域块有一个IP区域，则表示此区域有一个中国IP分布，查询一次是否匹配，如果匹配就是中国IP，如果不匹配就是外国IP。<br/>
-3、区域块有多个IP区域，则表示此区域块有多个中国IP分布，遍历查询，如果匹配就是中国IP，如果不匹配就是外国IP。<br/>
+<p>每一个区域块有三种情况：<br />
+1、区域块为空<br />
+如果区域块为空，则表示此区域块无中国IP分布。<br />
+2、区域块有一个IP区域，则表示此区域有一个中国IP分布，查询一次是否匹配，如果匹配就是中国IP，如果不匹配就是外国IP。<br />
+3、区域块有多个IP区域，则表示此区域块有多个中国IP分布，遍历查询，如果匹配就是中国IP，如果不匹配就是外国IP。<br />
 情况2为理想情况，查询一次。情况3为恶劣情况，经过实际测试，202.14.*.*区域最恶劣，有40个区域块，202.14.*.*的IP要查询40次。虽然202.14.*.*区域的IP给中国分配了40次，但是不同次申请的区域是可以连续起来的，所以区域块内还可以优化。</p>
 
-<p>下面是用python实现的一个测试代码：<br/>
-用法：从<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest</a>下载亚太IP分配表，保存为delegated-apnic-latest文本文件，将下面代码保存为isChinaIP.py，并运行之。</p>
-
-<script src="https://gist.github.com/xixitalk/5142241.js"></script>
-
-
+<p>下面是用python实现的一个测试代码：<br />
+用法：从<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest</a>下载亚太IP分配表，保存为delegated-apnic-latest文本文件，将下面代码保存为isChinaIP.py，并运行之。
+<script src="https://gist.github.com/xixitalk/5142241.js"></script></p>
 
 </div>
   
@@ -310,27 +300,25 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
   </header>
 
 
-  <div class="entry-content"><p>之前一篇文章讲了在树莓派上搭建HTTP proxy的<a href="/blog/2013/03/02/raspberry-pi-proxy/">原理</a>，这样就获得一个HTTP proxy，android上的<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>和<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>都支持HTTP proxy，可以在设置里进行配置。但是从<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>或者<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。</p>
+  <div class="entry-content"><p>之前一篇文章讲了在树莓派上搭建HTTP proxy的<a href="/blog/2013/03/02/raspberry-pi-proxy/">原理</a>，这样就获得一个HTTP proxy，android上的<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>和<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>都支持HTTP proxy，可以在设置里进行配置。但是从<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>或者<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。  </p>
 
-<h3>Firefox</h3>
-
-<p>android上的<a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Firefox</a>可以通过安装<a href="https://addons.mozilla.org/zh-CN/android/addon/proxy-mobile/">Proxy Mobile</a>附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。<br/>
-优点：支持多tab页面，浏览器功能完整<br/>
+<h3 id="firefox">Firefox</h3>
+<p>android上的<a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Firefox</a>可以通过安装<a href="https://addons.mozilla.org/zh-CN/android/addon/proxy-mobile/">Proxy Mobile</a>附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。<br />
+优点：支持多tab页面，浏览器功能完整<br />
 缺点：速度比较慢,最新版本的firefox有可能Proxy Mobile附件组件不兼容</p>
 
-<h3>orweb v2</h3>
-
-<p><a href="https://play.google.com/store/apps/details?id=info.guardianproject.browser">orweb v2浏览器</a>原本是配合tor的android版本<a href="https://play.google.com/store/apps/details?id=org.torproject.android">orbot</a>的代理的，但是可以自定义其他的HTTP proxy。<br/>
-优点：打开网页速度很快<br/>
+<h3 id="orweb-v2">orweb v2</h3>
+<p><a href="https://play.google.com/store/apps/details?id=info.guardianproject.browser">orweb v2浏览器</a>原本是配合tor的android版本<a href="https://play.google.com/store/apps/details?id=org.torproject.android">orbot</a>的代理的，但是可以自定义其他的HTTP proxy。<br />
+优点：打开网页速度很快<br />
 缺点：1、只能打开一个页面；2、如果没安装orbot，每次第一次打开浏览器都会提示系统没有安装orbot；3、如果在页面点击链接很深入之后，返回会按原路返回。</p>
 
-<h3>蓝火焰浏览器</h3>
-
-<p><a href="https://play.google.com/store/apps/details?id=com.blueflame.web&amp;hl=zh_CN">蓝火焰浏览器</a>是用android 2.x系统的浏览器框架封装的一个轻量级的浏览器。<br/>
-优点：支持多tab页面浏览<br/>
+<h3 id="section">蓝火焰浏览器</h3>
+<p><a href="https://play.google.com/store/apps/details?id=com.blueflame.web&amp;hl=zh_CN">蓝火焰浏览器</a>是用android 2.x系统的浏览器框架封装的一个轻量级的浏览器。<br />
+优点：支持多tab页面浏览<br />
 缺点：打开t.co等缩短网站每次展开都提示用户选择浏览器，速度慢。</p>
 
 <p>总结：如果从应用里打开网页推荐orweb v2，如果长时间浏览推荐使用firefox。</p>
+
 </div>
   
   
@@ -372,51 +360,45 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
 
 <p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>
 
-<h3>入门教程</h3>
-
+<h3 id="section">入门教程</h3>
 <p>国内可以从ICKey买树莓派，这个售卖页面的“<a href="http://www.ickey.cn/raspberrypi.php">使用说明</a>”做入门教程不错，工具也都有现成的下载。</p>
 
-<h3>配件</h3>
+<h3 id="section-1">配件</h3>
+<p>电源只要满足700mA/5V都可以，但最好配置&gt;1.5A/5V的电源适配器，特别如果要挂载移动硬盘<br />
+USB的键盘鼠标，如果是PS/2接口的，需要一个转接器转化成USB<br />
+一根HDMI线<br />
+一张至少4G/class4的SD卡<br />
+一根microUSB线做电源线  </p>
 
-<p>电源只要满足700mA/5V都可以，但最好配置>1.5A/5V的电源适配器，特别如果要挂载移动硬盘<br/>
-USB的键盘鼠标，如果是PS/2接口的，需要一个转接器转化成USB<br/>
-一根HDMI线<br/>
-一张至少4G/class4的SD卡<br/>
-一根microUSB线做电源线</p>
+<h3 id="section-2">树莓派版本选择</h3>
+<p>官方推荐<a href="http://www.raspbian.org/">raspbian</a>系统，这个系统默认启动进入字符终端模式，可以用apt-get安装<a href="http://xbmc.org/">XBMC</a>应用，但是有些不稳定，没有其他三个<a href="http://xbmc.org/">XBMC</a>专门版本稳定，其次首次运行<a href="http://xbmc.org/">XBMC</a>起来要几十秒。<br />
+<a href="http://www.raspbmc.com/download/">raspbmc</a>、<a href="http://xbian.org/">xbian</a>、<a href="http://openelec.tv/get-openelec/download/viewcategory/10-raspberry-pi-builds">OpenELEC</a>三个都是<a href="http://xbmc.org/">XBMC</a>专用版本。<br />
+如果你的树莓派用来做服务器的话，推荐使用raspbian系统，raspbian有几乎和debian一样多的软件包，如lighttpd、mysql、php、apache等，正常开机不启动<a href="http://xbmc.org/">XBMC</a>，节省资源。<br />
+如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、obfsproxy、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。 </p>
 
-<h3>树莓派版本选择</h3>
-
-<p>官方推荐<a href="http://www.raspbian.org/">raspbian</a>系统，这个系统默认启动进入字符终端模式，可以用apt-get安装<a href="http://xbmc.org/">XBMC</a>应用，但是有些不稳定，没有其他三个<a href="http://xbmc.org/">XBMC</a>专门版本稳定，其次首次运行<a href="http://xbmc.org/">XBMC</a>起来要几十秒。<br/>
-<a href="http://www.raspbmc.com/download/">raspbmc</a>、<a href="http://xbian.org/">xbian</a>、<a href="http://openelec.tv/get-openelec/download/viewcategory/10-raspberry-pi-builds">OpenELEC</a>三个都是<a href="http://xbmc.org/">XBMC</a>专用版本。<br/>
-如果你的树莓派用来做服务器的话，推荐使用raspbian系统，raspbian有几乎和debian一样多的软件包，如lighttpd、mysql、php、apache等，正常开机不启动<a href="http://xbmc.org/">XBMC</a>，节省资源。<br/>
-如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、obfsproxy、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。</p>
-
-<h3>代理服务器</h3>
-
-<p>代理服务器的原理<a href="/blog/2013/03/02/raspberry-pi-proxy/">点击这里</a><br/>
-我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs、obfsproxy。<br/>
-polipo用于将socks5转化为HTTP代理，也可以用<a href="www.privoxy.org/">privoxy</a>，privoxy支持URL过滤，可以将一些常用的网站不通过SOCKS代理直接连接。<br/>
-nodejs用于跑nodejs版本的shadowsocks<br/>
+<h3 id="section-3">代理服务器</h3>
+<p>代理服务器的原理<a href="/blog/2013/03/02/raspberry-pi-proxy/">点击这里</a><br />
+我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs、obfsproxy。<br />
+polipo用于将socks5转化为HTTP代理，也可以用<a href="www.privoxy.org/">privoxy</a>，privoxy支持URL过滤，可以将一些常用的网站不通过SOCKS代理直接连接。<br />
+nodejs用于跑nodejs版本的shadowsocks<br />
 obfsproxy用于网络协议迷惑，将加密数据流伪装成普通数据流</p>
 
-<h3>XBMC视频播放</h3>
-
-<p>raspbmc本身就是个<a href="http://xbmc.org/">XBMC</a>优化版本，支持播放windows网络共享里的视频。<br/>
+<h3 id="xbmc">XBMC视频播放</h3>
+<p>raspbmc本身就是个<a href="http://xbmc.org/">XBMC</a>优化版本，支持播放windows网络共享里的视频。<br />
 安卓手机可以安装个XBMC remote应用来控制树莓派上的XBMC</p>
 
-<h3>挂载3.5寸移动硬盘</h3>
-
-<p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的数据端口。<br/>
-测试<a href="http://www.raspbian.org/">raspbian</a>和<a href="http://www.raspbmc.com/download/">raspbmc</a>都可以正常挂接。驱动要安装ntfs-3g，然后通过mount挂载，具体步骤可以参考这里<a href="http://www.ficklelife.com/index.php?id=2">raspbmc Automount an NTFS USB HDD</a>。<br/>
+<h3 id="section-4">挂载3.5寸移动硬盘</h3>
+<p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的数据端口。<br />
+测试<a href="http://www.raspbian.org/">raspbian</a>和<a href="http://www.raspbmc.com/download/">raspbmc</a>都可以正常挂接。驱动要安装ntfs-3g，然后通过mount挂载，具体步骤可以参考这里<a href="http://www.ficklelife.com/index.php?id=2">raspbmc Automount an NTFS USB HDD</a>。<br />
 最新版的<a href="http://www.raspbmc.com/download/">raspbmc</a>连mount都不用，插入移动硬盘后系统自动挂载，挂载在/media/[磁盘名]，磁盘名和移动硬盘挂接windows下的盘符卷标一样的。windows上可以将网络共享映射为本地磁盘，这样下载和使用都像本地磁盘没什么区别。</p>
 
 <p>警告：2.5寸的移动硬盘需要USB供电我没有尝试过。</p>
 
-<h3>网站服务器</h3>
-
-<p>lighttpd用于搭建一个简单的web server，这样可以使用pac文件。<br/>
-raspbmc本身带了ftp、samba、SSH服务，并且默认是打开的，可以在<a href="http://xbmc.org/">XBMC</a>界面：程序-raspbmc settings里打开关闭。<br/>
+<h3 id="section-5">网站服务器</h3>
+<p>lighttpd用于搭建一个简单的web server，这样可以使用pac文件。<br />
+raspbmc本身带了ftp、samba、SSH服务，并且默认是打开的，可以在<a href="http://xbmc.org/">XBMC</a>界面：程序-raspbmc settings里打开关闭。<br />
 samba服务默认将/home/pi和/media两个目录共享，windows可以通过网上邻居访问读写。</p>
+
 </div>
   
   
@@ -456,17 +438,17 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
 
   <div class="entry-content"><p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
 
-<p>原理如图：<br/>
+<p>原理如图：<br />
 <img src="/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
 
-<p>说明：<br/>
-1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br/>
-2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br/>
-3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br/>
-4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br/>
-5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br/>
-6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br/>
-7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。</p>
+<p>说明：<br />
+1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br />
+2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br />
+3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br />
+4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br />
+5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br />
+6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br />
+7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。  </p>
 </div>
   
   
@@ -504,42 +486,30 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
   </header>
 
 
-  <div class="entry-content"><h2>为flask_twip添加图片代理</h2>
-
-<p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br/>
+  <div class="entry-content"><h2 id="flasktwip">为flask_twip添加图片代理</h2>
+<p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br />
 demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
 
-<h3>1、import urllib2</h3>
+<h3 id="import-urllib2">1、import urllib2</h3>
+<p>在文件twip.py里增加import urllib2
+	import urllib2</p>
 
-<p>在文件twip.py里增加import urllib2</p>
+<h3 id="twipgetimg">2、增加/twip/getimg路径映射</h3>
+<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射
+	(‘/getimg/’,self.getimg),</p>
 
-<pre><code>import urllib2
-</code></pre>
-
-<h3>2、增加/twip/getimg路径映射</h3>
-
-<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
-
-<pre><code>('/getimg/',self.getimg),
-</code></pre>
-
-<h3>3、增加getimg函数</h3>
-
-<p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a></p>
+<h3 id="getimg">3、增加getimg函数</h3>
+<p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a>  </p>
 
 <script src="https://gist.github.com/xixitalk/4969986.js"></script>
 
-
-<h3>4、浏览器访问https://YOURAPP.herokuapp.com/twip/getimg</h3>
-
+<h3 id="httpsyourappherokuappcomtwipgetimg">4、浏览器访问https://YOURAPP.herokuapp.com/twip/getimg</h3>
 <p>访问https://YOURAPP.herokuapp.com/twip/getimg，输入图片地址或者网页地址即可。</p>
 
-<h3>5、客户端使用</h3>
+<h3 id="section">5、客户端使用</h3>
+<p>如果客户端获取图片的时候把不能访问的图片地址（以BLOCKEDIMGURL为例）以参数imgurl形式传给https://YOURAPP.herokuapp.com/twip/getimg就可以直接在客户端查看图片了。
+	https://YOURAPP.herokuapp.com/twip/getimg?imgurl=BLOCKEDIMGURL</p>
 
-<p>如果客户端获取图片的时候把不能访问的图片地址（以BLOCKEDIMGURL为例）以参数imgurl形式传给https://YOURAPP.herokuapp.com/twip/getimg就可以直接在客户端查看图片了。</p>
-
-<pre><code>https://YOURAPP.herokuapp.com/twip/getimg?imgurl=BLOCKEDIMGURL
-</code></pre>
 </div>
   
   
@@ -579,58 +549,55 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
 
   <div class="entry-content"><p>来源：<a href="http://www.theregister.co.uk/2013/01/16/developer_oursources_job_china/">http://www.theregister.co.uk/2013/01/16/developer_oursources_job_china/</a></p>
 
-<h2>Security audit finds dev OUTSOURCED his JOB to China</h2>
+<h2 id="security-audit-finds-dev-outsourced-his-job-to-china">Security audit finds dev OUTSOURCED his JOB to China</h2>
+<p>##公司安全人员审计发现程序员外包自己工作给中国人
+###Cunning scheme netted him ‘best in company’ awards
+###狡猾的伎俩竟然让他获得了“最佳员工”称号</p>
 
-<h2>公司安全人员审计发现程序员外包自己工作给中国人</h2>
-
-<h3>Cunning scheme netted him &#8216;best in company&#8217; awards</h3>
-
-<h3>狡猾的伎俩竟然让他获得了“最佳员工”称号</h3>
-
-<p>By Iain Thomson in San Francisco<br/>
-由Iain Thomson从洛杉矶供稿<br/>
+<p>By Iain Thomson in San Francisco<br />
+由Iain Thomson从洛杉矶供稿<br />
 Posted in Security, 16th January 2013 01:29 GMT</p>
 
-<p>A security audit of a US critical infrastructure company last year revealed that its star developer had outsourced his own job to a Chinese subcontractor and was spending all his work time playing around on the internet.<br/>
+<p>A security audit of a US critical infrastructure company last year revealed that its star developer had outsourced his own job to a Chinese subcontractor and was spending all his work time playing around on the internet.<br />
 去年美国一家重要基础设施公司的安全审计人员发现他们一个明星程序员把他的工作外包给一个中国的外包商，工作时间他全部在网络上闲逛。</p>
 
-<p>The firm&#8217;s telecommunications supplier Verizon was called in after the company set up a basic VPN system with two-factor authentication so staff could work at home. The VPN traffic logs showed a regular series of logins to the company&#8217;s main server from Shenyang, China, using the credentials of the firm&#8217;s top programmer, &#8220;Bob&#8221;.<br/>
+<p>The firm’s telecommunications supplier Verizon was called in after the company set up a basic VPN system with two-factor authentication so staff could work at home. The VPN traffic logs showed a regular series of logins to the company’s main server from Shenyang, China, using the credentials of the firm’s top programmer, “Bob”.<br />
 公司用Verizon的网络搭建一个简单的两步认证的VPN系统，以便员工在家里也可以工作。VPN日志显示存在有规律的从中国沈阳登陆到公司主服务器的信息，用的认证信息是公司最优秀的程序员“Bob”的证书。</p>
 
-<p>&#8220;The company&#8217;s IT personnel were sure that the issue had to do with some kind of zero day malware that was able to initiate VPN connections from Bob&#8217;s desktop workstation via external proxy and then route that VPN traffic to China, only to be routed back to their concentrator,&#8221; said Verizon. &#8220;Yes, it is a bit of a convoluted theory, and like most convoluted theories, an incorrect one.&#8221;<br/>
+<p>“The company’s IT personnel were sure that the issue had to do with some kind of zero day malware that was able to initiate VPN connections from Bob’s desktop workstation via external proxy and then route that VPN traffic to China, only to be routed back to their concentrator,” said Verizon. “Yes, it is a bit of a convoluted theory, and like most convoluted theories, an incorrect one.”<br />
 “公司的IT部门原来认定从Bob的工作站电脑通过外部代理的连往中国又连接回来他们服务器的VPN连接是由于类似0-day的恶意软件造成的。”Verizon人说，“是的，这是一个有些绕的理论，像其他大多数绕的理论，是错误的”。</p>
 
-<p>After getting permission to study Bob&#8217;s computer habits, Verizon investigators found that he had hired a software consultancy in Shenyang to do his programming work for him, and had FedExed them his two-factor authentication token so they could log into his account. He was paying them a fifth of his six-figure salary to do the work and spent the rest of his time on other activities.<br/>
+<p>After getting permission to study Bob’s computer habits, Verizon investigators found that he had hired a software consultancy in Shenyang to do his programming work for him, and had FedExed them his two-factor authentication token so they could log into his account. He was paying them a fifth of his six-figure salary to do the work and spent the rest of his time on other activities.<br />
 在获得研究Bob使用电脑习惯的授权之后，Verizon调查人员发现他雇佣了一个位于沈阳的软件顾问公司为他工作，用FedExed给他们快递了他的两步授权数字证书，这样他们就可以用他的帐号登录。他拿他六位数工资的五分之一雇佣他们为他工作，把剩下的时间干其他事情。</p>
 
-<p>The analysis of his workstation found hundreds of PDF invoices from the Chinese contractors and determined that Bob&#8217;s typical work day consisted of:<br/>
+<p>The analysis of his workstation found hundreds of PDF invoices from the Chinese contractors and determined that Bob’s typical work day consisted of:<br />
 分析他的工作站电脑，发现几百个PDF格式的清单，这些清单是从他中国分包商发来的，拼凑出来Bob每天的典型生活是这样的：</p>
 
-<p>9:00 a.m. – Arrive and surf Reddit for a couple of hours. Watch cat videos<br/>
+<p>9:00 a.m. – Arrive and surf Reddit for a couple of hours. Watch cat videos<br />
 上午9：00 - 到公司，花几个小时浏览Reddit网站，看猫视频</p>
 
-<p>11:30 a.m. – Take lunch<br/>
+<p>11:30 a.m. – Take lunch<br />
 上午11：30  - 吃午饭</p>
 
-<p>1:00 p.m. – Ebay time<br/>
+<p>1:00 p.m. – Ebay time<br />
 下午1：00  - 逛Ebay</p>
 
-<p>2:00-ish p.m – Facebook updates, LinkedIn<br/>
+<p>2:00-ish p.m – Facebook updates, LinkedIn<br />
 下午2：00    -  更新Facebook和LinkedIn</p>
 
-<p>4:30 p.m. – End-of-day update e-mail to management<br/>
+<p>4:30 p.m. – End-of-day update e-mail to management<br />
 下午4：30 - 一天最后给上司发一份邮件</p>
 
-<p>5:00 p.m. – Go home<br/>
+<p>5:00 p.m. – Go home<br />
 下午5：00 - 回家</p>
 
-<p>The scheme worked very well for Bob. In his performance assessments by the firm&#8217;s human resources department, he was the firm&#8217;s top coder for many quarters and was considered expert in C, C++, Perl, Java, Ruby, PHP, and Python.<br/>
+<p>The scheme worked very well for Bob. In his performance assessments by the firm’s human resources department, he was the firm’s top coder for many quarters and was considered expert in C, C++, Perl, Java, Ruby, PHP, and Python.<br />
 这个阴谋对Bob来说很有效果。公司人力资源部门对他的绩效评价是：他是公司顶级的程序员，精通C、C++、Perl、Java、Ruby、PHP和Python编程语言。</p>
 
-<p>Further investigation found that the enterprising Bob had actually taken jobs with other firms and had outsourced that work too, netting him hundreds of thousands of dollars in profit as well as lots of time to hang around on internet messaging boards and checking out the latest Detective Mittens video.<br/>
+<p>Further investigation found that the enterprising Bob had actually taken jobs with other firms and had outsourced that work too, netting him hundreds of thousands of dollars in profit as well as lots of time to hang around on internet messaging boards and checking out the latest Detective Mittens video.<br />
 进一步调查发现，有“进取心”的Bob还从其他公司接活，并且活也外包出去。从而网罗了几十万美元，并且大量的时间在网上闲逛，浏览了最新的猫咪侦探的视频。</p>
 
-<p>Bob is no longer employed by the firm. <br/>
+<p>Bob is no longer employed by the firm. <br />
 Bob已经被公司解雇。</p>
 </div>
   
@@ -671,27 +638,26 @@ Bob已经被公司解雇。</p>
 
   <div class="entry-content"><p>来源:<a href="https://en.greatfire.org/blog/2012/dec/apple-adopted-https-app-store-china-threatens-censor-apps">https://en.greatfire.org/blog/2012/dec/apple-adopted-https-app-store-china-threatens-censor-apps</a></p>
 
-<h2>Apple adopted https in App Store. China threatens to censor apps.</h2>
-
-<h2>苹果应用商店启用https，中国要对应用进行审查</h2>
-
-<p>Submitted by percy on Thu, Dec 20, 2012
+<h2 id="apple-adopted-https-in-app-store-china-threatens-to-censor-apps">Apple adopted https in App Store. China threatens to censor apps.</h2>
+<p>##苹果应用商店启用https，中国要对应用进行审查
+Submitted by percy on Thu, Dec 20, 2012
 由percy于2012.12.20 星期四提交</p>
 
-<p>Recently, China threatens to require every app to have a license in order to go on sale, as reported by <a href="http://cn.nytimes.com/article/business/2012/12/19/cc19weiwuhui/">New York times</a>. The time is too coincidental as Apple adopted https on iTunes for searching and downloading Apps.<br/>
+<p>Recently, China threatens to require every app to have a license in order to go on sale, as reported by <a href="http://cn.nytimes.com/article/business/2012/12/19/cc19weiwuhui/">New York times</a>. The time is too coincidental as Apple adopted https on iTunes for searching and downloading Apps.<br />
 最近，<a href="http://cn.nytimes.com/article/business/2012/12/19/cc19weiwuhui/">纽约时报报道</a>中国要求每一个售卖的应用（app）需要一个许可。与此同时，苹果的iTunes搜索和下载应用都启用https链接。</p>
 
-<p>Before this adoption, searching for certain keywords such as &#8220;vpn&#8221; would lead to a connection reset on iTunes and visiting the page for certain Apps, such as VPN Express would also <a href="https://en.greatfire.org/itunes.apple.com/app/vpn-express-best-mobile-vpn/id375584677%3Fmt%3D8">cause a reset</a>, which means there is no way for users in China to search for or download certain Apps even if they are available in China App Store.<br/>
+<p>Before this adoption, searching for certain keywords such as “vpn” would lead to a connection reset on iTunes and visiting the page for certain Apps, such as VPN Express would also <a href="https://en.greatfire.org/itunes.apple.com/app/vpn-express-best-mobile-vpn/id375584677%3Fmt%3D8">cause a reset</a>, which means there is no way for users in China to search for or download certain Apps even if they are available in China App Store.<br />
 在启用https之前，在iTunes搜索某些特定的关键词，如“VPN”会导致<a href="https://en.greatfire.org/itunes.apple.com/app/vpn-express-best-mobile-vpn/id375584677%3Fmt%3D8">连接重置</a>，访问某些特定的应用，如VPN express也会导致连接重置，这以为着即使在中国区的苹果应用商店的某些应用，位于中国的用户也无法搜索和下载。</p>
 
-<p>But because now https is implemented by Apple on almost all connection to iTunes server, Great Firewall of China has no way to selectively block connection to certain contents. <a href="https://en.greatfire.org/https/itunes.apple.com/app/vpn-express-best-mobile-vpn/id375584677%3Fmt%3D8">A test to the same link</a> mentioned above with https  protocol yields no censorship.<br/>
+<p>But because now https is implemented by Apple on almost all connection to iTunes server, Great Firewall of China has no way to selectively block connection to certain contents. <a href="https://en.greatfire.org/https/itunes.apple.com/app/vpn-express-best-mobile-vpn/id375584677%3Fmt%3D8">A test to the same link</a> mentioned above with https  protocol yields no censorship.<br />
 现在因为苹果iTunes服务器的连接几乎全部切换到https，中国防火墙没有办法对某些内容选择进行连接阻止。<a href="https://en.greatfire.org/https/itunes.apple.com/app/vpn-express-best-mobile-vpn/id375584677%3Fmt%3D8">一个测试连接</a>表明通过https协议审查失效了。</p>
 
-<p>This change provides a commercial platform in China(China App Store uses CNY for payment) not subject to the arbitrary censorship of the government. For example, opendoor an app dedicated to circumventing the Internet is on sale on China App Store and users are willing to pay to remove ads in the app. Any other trading platform, such as Taobao(Chinese version of ebay) is actively censoring Internet Circumvention tools and selling anti-censorship tools there is not possible.<br/>
+<p>This change provides a commercial platform in China(China App Store uses CNY for payment) not subject to the arbitrary censorship of the government. For example, opendoor an app dedicated to circumventing the Internet is on sale on China App Store and users are willing to pay to remove ads in the app. Any other trading platform, such as Taobao(Chinese version of ebay) is actively censoring Internet Circumvention tools and selling anti-censorship tools there is not possible.<br />
 这个变化发生一个商业平台上（中国苹果商店使用人民币支付），它不受专制的审查系统管制。例如，一个在中国区苹果应用售卖的opendoor应用，它可以提供网络代理功能，用户愿意为去掉广告而付钱。其他交易平台，例如淘宝（中国版的ebay）正在积极的审查网络代理工具，在那里售卖反审查工具几乎不可能了。</p>
 
-<p>Therefore, it is highly likely that the government have noticed this loophole in its censorship net, and is now trying to close it.<br/>
+<p>Therefore, it is highly likely that the government have noticed this loophole in its censorship net, and is now trying to close it.<br />
 综上所述，很大的可能显示政府已经注意到审查系统的这个漏洞，现在正在尝试尽力堵上这个漏洞。</p>
+
 </div>
   
   

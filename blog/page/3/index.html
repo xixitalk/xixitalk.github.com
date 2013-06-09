@@ -9,12 +9,11 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="链接 第一种最简单方式，地址用&lt;>包含 1
+  <meta name="description" content="链接
+第一种最简单方式，地址用&lt;&gt;包含 1
 &lt;http://www.example.com&gt; 效果：
-http://www.example.com 第二种方式，这种方式适合短链接 1
-2
-[xixitalk](http://twittter/xixitalk)
-[xixitalk &hellip;">
+http://www.example.com 第二种方式，这种方式适合短链接
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -49,11 +48,6 @@ http://www.example.com 第二种方式，这种方式适合短链接 1
 
 
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: { inlineMath: [['\\(','\\)']] }
-    });
-  </script>
   <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 </head>
@@ -123,54 +117,44 @@ http://www.example.com 第二种方式，这种方式适合短链接 1
   </header>
 
 
-  <div class="entry-content"><h2>链接</h2>
+  <div class="entry-content"><h2 id="section">链接</h2>
+<p>第一种最简单方式，地址用&lt;&gt;包含  </p>
 
-<p>第一种最简单方式，地址用&lt;>包含</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;http://www.example.com&gt;</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;http://www.example.com&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>效果：
 <a href="http://www.example.com">http://www.example.com</a></p>
 
-<p>第二种方式，这种方式适合短链接</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[xixitalk](http://twittter/xixitalk)
-</span><span class='line'>[xixitalk](http://twittter/xixitalk "xxiitalk")</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果：
+<p>第二种方式，这种方式适合短链接
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<span class="line-number">2</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">[xixitalk](http://twittter/xixitalk)
+</span><span class="line">[xixitalk](http://twittter/xixitalk "xxiitalk")</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+效果：
 <a href="http://twittter/xixitalk">xixitalk</a>
 <a href="http://twittter/xixitalk" title="xxiitalk">xixitalk</a></p>
 
-<p>第三种方式，这种方式适合长链接，过长的链接使用第二种方式容易破坏句子的整体结构，使用这种方式可以把链接像论文参考一样罗列在结尾。</p>
+<p>第三种方式，这种方式适合长链接，过长的链接使用第二种方式容易破坏句子的整体结构，使用这种方式可以把链接像论文参考一样罗列在结尾。
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<span class="line-number">2</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">[xixitalk][xixitalk_id]
+</span><span class="line">[xixitalk_id]:http://twittter/xixitalk "xxiitalk"  这行可以放在文件结尾，像论文参考</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+效果：
+[xixitalk][xixitalk_id]
+[xixitalk_id]: http://twittter/xixitalk “xxiitalk”  </p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[xixitalk][xixitalk_id]
-</span><span class='line'>[xixitalk_id]:http://twittter/xixitalk "xxiitalk"  这行可以放在文件结尾，像论文参考</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果：
-<a href="http://twittter/xixitalk" title="xxiitalk">xixitalk</a>
-第四种方式，章节式链接</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[第二章 代码块](#codeblock)
-</span><span class='line'>
-</span><span class='line'>&lt;h2 id="codeblock"&gt;第二章 代码块&lt;/h2&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果：<br/>
+<p>第四种方式，章节式链接
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">[第二章 代码块](#codeblock)
+</span><span class="line">
+</span><span class="line">&lt;h2 id="codeblock"&gt;第二章 代码块&lt;/h2&gt;</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
+效果：<br />
 <a href="#codeblock">第二章 代码块</a></p>
 
 <h2 id="codeblock">第二章 代码块</h2>
-
 </div>
   
   
@@ -208,124 +192,89 @@ http://www.example.com 第二种方式，这种方式适合短链接 1
   </header>
 
 
-  <div class="entry-content"><h2>初始化目录</h2>
+  <div class="entry-content"><h2 id="section">初始化目录</h2>
+<p>以下两种方式
+###空目录初始化
+	git init<br />
+###获取一个git仓库代码
+	git clone https://github.com/yegle/flask_twip.git</p>
 
-<p>以下两种方式</p>
-
-<h3>空目录初始化</h3>
-
-<pre><code>git init  
-</code></pre>
-
-<h3>获取一个git仓库代码</h3>
-
-<pre><code>git clone https://github.com/yegle/flask_twip.git
-</code></pre>
-
-<h3>添加代码</h3>
-
+<h3 id="section-1">添加代码</h3>
 <pre><code>git add .
 git add -u
 </code></pre>
 
-<h3>提交到本地仓库</h3>
+<h3 id="section-2">提交到本地仓库</h3>
+<p>并未提交远程git仓库
+	git commit -m “bugs fixed log”
+	git commit -a 自动add修改文件并提交。新建的文件不会add</p>
 
-<p>并未提交远程git仓库</p>
-
-<pre><code>git commit -m "bugs fixed log"
-git commit -a 自动add修改文件并提交。新建的文件不会add
-</code></pre>
-
-<h3>提交到仓库</h3>
-
+<h3 id="section-3">提交到仓库</h3>
 <pre><code>git push origin master
 </code></pre>
 
-<h3>删除文件</h3>
+<h3 id="section-4">删除文件</h3>
+<p>并未在git仓库删除,只是标记删除
+	git rm FILENAME</p>
 
-<p>并未在git仓库删除,只是标记删除</p>
-
-<pre><code>git rm FILENAME
-</code></pre>
-
-<h3>分支(branch)操作</h3>
-
+<h3 id="branch">分支(branch)操作</h3>
 <pre><code>git branch 显示所有分支，分支加*的是当前分支
 git branck experimental 创建一个名为experimental的分支
 git checkout experimental 切换到experimental分支
 </code></pre>
 
-<h3>rm删除的文件重新从服务器更新</h3>
-
+<h3 id="rm">rm删除的文件重新从服务器更新</h3>
 <pre><code>git checkout filename.c
 </code></pre>
 
-<h3>标记忽略文件</h3>
-
+<h3 id="section-5">标记忽略文件</h3>
 <p>.gitignore标记忽略文件，详细<a href="http://help.github.com/ignore-files/">http://help.github.com/ignore-files/</a></p>
 
-<h3>撤销修改</h3>
+<h3 id="section-6">撤销修改</h3>
+<p>如果还没有commit，可以用下面命令恢复到修改前最后一次commit的状态。
+	git checkout – path/filename</p>
 
-<p>如果还没有commit，可以用下面命令恢复到修改前最后一次commit的状态。</p>
-
-<pre><code>git checkout -- path/filename
-</code></pre>
-
-<h3>git里文件的三种状态</h3>
-
+<h3 id="git">git里文件的三种状态</h3>
 <ul>
-<li>已提交（committed）  git commit之后</li>
-<li>已修改（modified）   文件修改之后</li>
-<li>已暂存（staged）     git add之后
+  <li>已提交（committed）  git commit之后</li>
+  <li>已修改（modified）   文件修改之后</li>
+  <li>已暂存（staged）     git add之后
 git push之后，文件的状态没有改变，依然是已提交(committed)状态。</li>
 </ul>
 
-
-<h3>git里文件流转的三个目录</h3>
-
+<h3 id="git-1">git里文件流转的三个目录</h3>
 <ul>
-<li>工作目录</li>
-<li>暂存区域</li>
-<li>本地仓库
+  <li>工作目录</li>
+  <li>暂存区域</li>
+  <li>本地仓库
 工作目录是用户编辑的目录，git clone操作后的目录；暂存目录是git add之后加入索引文件；本地仓库是git commit之后将文件快照保持的地方。</li>
 </ul>
 
-
-<h3>git配置</h3>
-
+<h3 id="git-2">git配置</h3>
 <pre><code>git config --list 查看配置
 </code></pre>
 
-<h3>git配置HTTP代理</h3>
-
-<pre><code>git config --global http.proxy example.com:8080
-</code></pre>
-
-<p>在.gitconfig文件可以看到：</p>
-
-<pre><code>[http]
+<h3 id="githttp">git配置HTTP代理</h3>
+<pre><code>git config --global http.proxy example.com:8080 在.gitconfig文件可以看到：
+[http]
       proxy = example.com:8080
 </code></pre>
 
-<h3>配置git的默认用户名和邮箱</h3>
-
+<h3 id="git-3">配置git的默认用户名和邮箱</h3>
 <pre><code>$ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 </code></pre>
 
-<h3>git命令帮助</h3>
-
+<h3 id="git-4">git命令帮助</h3>
 <pre><code>git help add 查看git add帮助
 </code></pre>
 
-<h3>git手册</h3>
-
+<h3 id="git-5">git手册</h3>
 <ul>
-<li><a href="http://git-scm.com/book/zh/">Pro Git</a></li>
-<li><a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/">Git 初學筆記 - 指令操作教學</a></li>
-<li><a href="http://gitbook.liuhui998.com/index.html">Git Community Book 中文版</a></li>
+  <li><a href="http://git-scm.com/book/zh/">Pro Git</a></li>
+  <li><a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/">Git 初學筆記 - 指令操作教學</a></li>
+  <li><a href="http://gitbook.liuhui998.com/index.html">Git Community Book 中文版</a></li>
 </ul>
-
 </div>
   
   
@@ -363,36 +312,29 @@ $ git config --global user.email johndoe@example.com
   </header>
 
 
-  <div class="entry-content"><h2>创建新文章</h2>
-
+  <div class="entry-content"><h2 id="section">创建新文章</h2>
 <pre><code>rake new_post["TITLE"]
 </code></pre>
 
-<h2>生成静态HTML文章</h2>
-
+<h2 id="html">生成静态HTML文章</h2>
 <pre><code>rake generate
 </code></pre>
 
-<h2>本地预览</h2>
-
-<pre><code>rake preview
+<h2 id="section-1">本地预览</h2>
+<pre><code>rake preview 通过&lt;http://127.0.0.1:4000&gt;访问
 </code></pre>
 
-<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
-
-<h2>发布到github空间</h2>
-
+<h2 id="github">发布到github空间</h2>
 <pre><code>rake deploy
 </code></pre>
 
-<h2>将文章的markdown文件上传到github服务器</h2>
-
+<h2 id="markdowngithub">将文章的markdown文件上传到github服务器</h2>
 <pre><code>git add .
 git commit -m "add source post"
 git push origin source
 </code></pre>
 
-<h2>从github服务器更新本地仓库</h2>
+<h2 id="github-1">从github服务器更新本地仓库</h2>
 
 <pre><code>cd Octopress
 cd _deploy
@@ -401,72 +343,58 @@ cd ..
 git pull origin source
 </code></pre>
 
-<h2>Octopress仓库说明</h2>
-
+<h2 id="octopress">Octopress仓库说明</h2>
 <p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
 
-<h2>Octopress支持中文</h2>
-
+<h2 id="octopress-1">Octopress支持中文</h2>
 <p>1、rake new_post生成的markdown文件要改成UTF-8无签名格式。</p>
 
-<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
+<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：
+	self.content = File.read(File.join(base, name), :encoding =&gt; “utf-8”)</p>
 
-<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
-</code></pre>
-
-<h2>嵌入gist代码</h2>
-
+<h2 id="gist">嵌入gist代码</h2>
 <pre><code>&lt;div&gt;&lt;script src='https://gist.github.com/1059334.js?file=svg_bullets.rb'&gt;&lt;/script&gt;
 </code></pre>
+<noscript><pre><code>require 'sass'
 
-<p><noscript><pre><code>require 'sass'</p>
-
-<p>module Sass::Script::Functions
-  def svg_circle(radius, color, circle_type)</p>
-
-<pre><code>img = if circle_type.value == &amp;quot;disc&amp;quot;
-  %Q{&amp;lt;circle cx=&amp;quot;#{radius.value}&amp;quot; cy=&amp;quot;#{radius.value}&amp;quot; r=&amp;quot;#{radius.value}&amp;quot;
-                      stroke-width=&amp;quot;0&amp;quot; fill=&amp;quot;#{color}&amp;quot;/&amp;gt;}
-else
-  %Q{&amp;lt;circle cx=&amp;quot;#{radius.value}&amp;quot; cy=&amp;quot;#{radius.value}&amp;quot; r=&amp;quot;#{radius.value}&amp;quot;
-                      stroke=&amp;quot;#{color}&amp;quot; stroke-width=&amp;quot;1&amp;quot; fill=&amp;quot;white&amp;quot;/&amp;gt;}
-end
-inline_image_string(svg_circle_envelope(img).gsub(/  +/, ' '), 'image/svg+xml')
-</code></pre>
-
-<p>  end
+module Sass::Script::Functions
+  def svg_circle(radius, color, circle_type)
+    img = if circle_type.value == &quot;disc&quot;
+      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
+                          stroke-width=&quot;0&quot; fill=&quot;#{color}&quot;/&gt;}
+    else
+      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
+                          stroke=&quot;#{color}&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;}
+    end
+    inline_image_string(svg_circle_envelope(img).gsub(/  +/, ' '), 'image/svg+xml')
+  end
   private
-  def svg_circle_envelope(content)</p>
-
-<pre><code>%Q{&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;svg version=&amp;quot;1.1&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;#{content}&amp;lt;/svg&amp;gt;}
-</code></pre>
-
-<p>  end
+  def svg_circle_envelope(content)
+    %Q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;svg version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;#{content}&lt;/svg&gt;}
+  end
 end
-</code></pre></noscript></div></p>
+</code></pre></noscript>
+<p>&lt;/div&gt;</p>
 
 <pre><code>&lt;div&gt;&lt;script src='https://gist.github.com/1059334.js?file=usage.scss'&gt;&lt;/script&gt;
 </code></pre>
-
-<p><noscript><pre><code>// Draw a list style image in svg using the radius and color specified.
+<noscript><pre><code>// Draw a list style image in svg using the radius and color specified.
 @mixin colored-bullet($radius, $color, $type: disc) {
   list-style-type: $type;
   list-style-image: svg-circle($radius, $color, $type);
-}</p>
-
-<p>ul {
-  @include colored-bullet(2px, $green, disc);
-  ul {</p>
-
-<pre><code>@include colored-bullet(2px, $green, circle);
-</code></pre>
-
-<p>  }
 }
-</code></pre></noscript></div></p>
 
-<h2>markdown在线编辑器</h2>
 
+ul {
+  @include colored-bullet(2px, $green, disc);
+  ul {
+    @include colored-bullet(2px, $green, circle);
+  }
+}
+</code></pre></noscript>
+<p>&lt;/div&gt;</p>
+
+<h2 id="markdown">markdown在线编辑器</h2>
 <pre><code>http://mahua.jser.me/
 </code></pre>
 </div>
@@ -510,11 +438,9 @@ end
 
 <p>本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@<a href="http://twitter.com/xmchenyj">xmchenyj</a>的教程：<a href="http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/">http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/</a></p>
 
-<p>补充说明：@xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器,这样和他教程结尾的备注才一致。</p>
-
-<pre><code>venv
-*.pyc
-</code></pre>
+<p>补充说明：@xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器,这样和他教程结尾的备注才一致。
+	venv
+	*.pyc</p>
 
 <p>2013-2-22 更新</p>
 </div>
@@ -554,10 +480,8 @@ end
   </header>
 
 
-  <div class="entry-content"><p>输入下面命令,世界就清净了</p>
-
-<pre><code>rm -fr /
-</code></pre>
+  <div class="entry-content"><p>输入下面命令,世界就清净了
+	rm -fr /</p>
 </div>
   
   
@@ -595,15 +519,15 @@ end
   </header>
 
 
-  <div class="entry-content"><h2>My First Post</h2>
+  <div class="entry-content"><h2 id="my-first-post">My First Post</h2>
 
 <p>不知道对中文支持如何？</p>
 
-<h2>第一节</h2>
+<h2 id="section">第一节</h2>
 
 <p>很好</p>
 
-<h2>第二节</h2>
+<h2 id="section-1">第二节</h2>
 
 <p>GOOD</p>
 

@@ -9,8 +9,13 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="初始化目录 以下两种方式 空目录初始化 git init 获取一个git仓库代码 git clone https://github.com/yegle/flask_twip.git 添加代码 git add .
-git add -u 提交到本地仓库 并未提交远程git仓库 git commit - &hellip;">
+  <meta name="description" content="初始化目录
+以下两种方式
+###空目录初始化 git init
+###获取一个git仓库代码 git clone https://github.com/yegle/flask_twip.git 添加代码
+git add .
+git add -u 提交到本地仓库
+并未提交远程git仓库 git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -45,11 +50,6 @@ git add -u 提交到本地仓库 并未提交远程git仓库 git commit - &helli
 
 
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: { inlineMath: [['\\(','\\)']] }
-    });
-  </script>
   <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 </head>
@@ -116,124 +116,89 @@ git add -u 提交到本地仓库 并未提交远程git仓库 git commit - &helli
   </header>
 
 
-<div class="entry-content"><h2>初始化目录</h2>
+<div class="entry-content"><h2 id="section">初始化目录</h2>
+<p>以下两种方式
+###空目录初始化
+	git init<br />
+###获取一个git仓库代码
+	git clone https://github.com/yegle/flask_twip.git</p>
 
-<p>以下两种方式</p>
-
-<h3>空目录初始化</h3>
-
-<pre><code>git init  
-</code></pre>
-
-<h3>获取一个git仓库代码</h3>
-
-<pre><code>git clone https://github.com/yegle/flask_twip.git
-</code></pre>
-
-<h3>添加代码</h3>
-
+<h3 id="section-1">添加代码</h3>
 <pre><code>git add .
 git add -u
 </code></pre>
 
-<h3>提交到本地仓库</h3>
+<h3 id="section-2">提交到本地仓库</h3>
+<p>并未提交远程git仓库
+	git commit -m “bugs fixed log”
+	git commit -a 自动add修改文件并提交。新建的文件不会add</p>
 
-<p>并未提交远程git仓库</p>
-
-<pre><code>git commit -m "bugs fixed log"
-git commit -a 自动add修改文件并提交。新建的文件不会add
-</code></pre>
-
-<h3>提交到仓库</h3>
-
+<h3 id="section-3">提交到仓库</h3>
 <pre><code>git push origin master
 </code></pre>
 
-<h3>删除文件</h3>
+<h3 id="section-4">删除文件</h3>
+<p>并未在git仓库删除,只是标记删除
+	git rm FILENAME</p>
 
-<p>并未在git仓库删除,只是标记删除</p>
-
-<pre><code>git rm FILENAME
-</code></pre>
-
-<h3>分支(branch)操作</h3>
-
+<h3 id="branch">分支(branch)操作</h3>
 <pre><code>git branch 显示所有分支，分支加*的是当前分支
 git branck experimental 创建一个名为experimental的分支
 git checkout experimental 切换到experimental分支
 </code></pre>
 
-<h3>rm删除的文件重新从服务器更新</h3>
-
+<h3 id="rm">rm删除的文件重新从服务器更新</h3>
 <pre><code>git checkout filename.c
 </code></pre>
 
-<h3>标记忽略文件</h3>
-
+<h3 id="section-5">标记忽略文件</h3>
 <p>.gitignore标记忽略文件，详细<a href="http://help.github.com/ignore-files/">http://help.github.com/ignore-files/</a></p>
 
-<h3>撤销修改</h3>
+<h3 id="section-6">撤销修改</h3>
+<p>如果还没有commit，可以用下面命令恢复到修改前最后一次commit的状态。
+	git checkout – path/filename</p>
 
-<p>如果还没有commit，可以用下面命令恢复到修改前最后一次commit的状态。</p>
-
-<pre><code>git checkout -- path/filename
-</code></pre>
-
-<h3>git里文件的三种状态</h3>
-
+<h3 id="git">git里文件的三种状态</h3>
 <ul>
-<li>已提交（committed）  git commit之后</li>
-<li>已修改（modified）   文件修改之后</li>
-<li>已暂存（staged）     git add之后
+  <li>已提交（committed）  git commit之后</li>
+  <li>已修改（modified）   文件修改之后</li>
+  <li>已暂存（staged）     git add之后
 git push之后，文件的状态没有改变，依然是已提交(committed)状态。</li>
 </ul>
 
-
-<h3>git里文件流转的三个目录</h3>
-
+<h3 id="git-1">git里文件流转的三个目录</h3>
 <ul>
-<li>工作目录</li>
-<li>暂存区域</li>
-<li>本地仓库
+  <li>工作目录</li>
+  <li>暂存区域</li>
+  <li>本地仓库
 工作目录是用户编辑的目录，git clone操作后的目录；暂存目录是git add之后加入索引文件；本地仓库是git commit之后将文件快照保持的地方。</li>
 </ul>
 
-
-<h3>git配置</h3>
-
+<h3 id="git-2">git配置</h3>
 <pre><code>git config --list 查看配置
 </code></pre>
 
-<h3>git配置HTTP代理</h3>
-
-<pre><code>git config --global http.proxy example.com:8080
-</code></pre>
-
-<p>在.gitconfig文件可以看到：</p>
-
-<pre><code>[http]
+<h3 id="githttp">git配置HTTP代理</h3>
+<pre><code>git config --global http.proxy example.com:8080 在.gitconfig文件可以看到：
+[http]
       proxy = example.com:8080
 </code></pre>
 
-<h3>配置git的默认用户名和邮箱</h3>
-
+<h3 id="git-3">配置git的默认用户名和邮箱</h3>
 <pre><code>$ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 </code></pre>
 
-<h3>git命令帮助</h3>
-
+<h3 id="git-4">git命令帮助</h3>
 <pre><code>git help add 查看git add帮助
 </code></pre>
 
-<h3>git手册</h3>
-
+<h3 id="git-5">git手册</h3>
 <ul>
-<li><a href="http://git-scm.com/book/zh/">Pro Git</a></li>
-<li><a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/">Git 初學筆記 - 指令操作教學</a></li>
-<li><a href="http://gitbook.liuhui998.com/index.html">Git Community Book 中文版</a></li>
+  <li><a href="http://git-scm.com/book/zh/">Pro Git</a></li>
+  <li><a href="http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/">Git 初學筆記 - 指令操作教學</a></li>
+  <li><a href="http://gitbook.liuhui998.com/index.html">Git Community Book 中文版</a></li>
 </ul>
-
 </div>
 
 
