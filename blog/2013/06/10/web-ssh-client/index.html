@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>flask_twip在heroku上搭建教程 - xixitalk blog</title>
+  <title>推荐一个web ssh client - xixitalk blog</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="flask_twip是@yegle写的一个可以搭建在heroku上的一个twip的port程序。 本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@xmchenyj的教程：http:// &hellip;">
+  <meta name="description" content="推荐一个免费的web ssh client https://www.sshd.org/server/quick-connect.html，免费稳定可靠，值得推荐。 还有一个http://www.serfish.com/console/，不过免费情况几乎没法用，不停的弹验证码骚扰。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/10/web-ssh-client">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +85,7 @@
   
   <header>
     
-      <h1 class="entry-title">Flask_twip在heroku上搭建教程</h1>
+      <h1 class="entry-title">推荐一个web Ssh Client</h1>
     
     
       <p class="meta">
@@ -101,7 +101,7 @@
   
 
 
-<time datetime="2012-11-23T21:01:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+<time datetime="2013-06-10T07:00:34+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -110,17 +110,10 @@
   </header>
 
 
-<div class="entry-content"><p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
+<div class="entry-content"><p>推荐一个免费的web ssh client <a href="https://www.sshd.org/server/quick-connect.html">https://www.sshd.org/server/quick-connect.html</a>，免费稳定可靠，值得推荐。</p>
 
-<p>本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@<a href="http://twitter.com/xmchenyj">xmchenyj</a>的教程：<a href="http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/">http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/</a></p>
+<p>还有一个<a href="http://www.serfish.com/console/">http://www.serfish.com/console/</a>，不过免费情况几乎没法用，不停的弹验证码骚扰。</p>
 
-<p>补充说明：@xmchenyj的教程在git init和git add .之前缺少建一个.gitignore文件，文件内容如下，表示venv目录和pyc文件不上传git服务器,这样和他教程结尾的备注才一致。</p>
-
-<pre><code>venv
-*.pyc
-</code></pre>
-
-<p>2013-2-22 更新</p>
 </div>
 
 
@@ -143,12 +136,12 @@
   
 
 
-<time datetime="2012-11-23T21:01:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+<time datetime="2013-06-10T07:00:34+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/flask-twip/'>flask_twip</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/twip/'>twip</a>, <a class='category' href='/blog/categories/twitter/'>twitter</a>
+    <a class='category' href='/blog/categories/ssh/'>ssh</a>
   
 </span>
 
@@ -164,10 +157,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/04/second/" title="Previous Post: second">&laquo; second</a>
+        <a class="basic-alignment left" href="/blog/2013/06/09/mathjax-math-formula/" title="Previous Post: 在octopress用mathjax显示数学公式">&laquo; 在octopress用mathjax显示数学公式</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/11/23/octopress-command-note/" title="Next Post: octopress命令备忘录">octopress命令备忘录 &raquo;</a>
       
     </p>
   </footer>
@@ -207,8 +198,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/';
         var disqus_script = 'embed.js';
       
     (function () {

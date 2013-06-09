@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ssh | xixitalk blog]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/ssh/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-09T23:16:24+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[推荐一个web ssh client]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/"/>
+    <updated>2013-06-10T07:00:34+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/10/web-ssh-client</id>
+    <content type="html"><![CDATA[<p>推荐一个免费的web ssh client <a href="https://www.sshd.org/server/quick-connect.html">https://www.sshd.org/server/quick-connect.html</a>，免费稳定可靠，值得推荐。</p>
+
+<p>还有一个<a href="http://www.serfish.com/console/">http://www.serfish.com/console/</a>，不过免费情况几乎没法用，不停的弹验证码骚扰。</p>
+
+]]></content>
+  </entry>
+  
+</feed>
