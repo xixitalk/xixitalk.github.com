@@ -37,11 +37,12 @@ categories: markdown
 
 第四种方式，章节式链接
 ```
-[第二章 代码块](#codeblock)
+[第二章](#chapter2)
 
-<h2 id="codeblock">第二章 代码块</h2>
+<span id="chapter2">第二章 代码块</span>
 ```
 效果：  
-[第二章 代码块](#codeblock)
+[第二章](#chapter2)
 
-<h2 id="codeblock">第二章 代码块</h2>
+<span id="chapter2">第二章 代码块</span>
+
