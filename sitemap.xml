@@ -18,11 +18,11 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/24/git-manual/</loc>
-        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:47+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/27/markdown-manual/</loc>
-        <lastmod>2013-06-09T15:14:47+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:47+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -38,7 +38,7 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy/</loc>
-        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy/</loc>
@@ -66,11 +66,11 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22/</loc>
-        <lastmod>2013-05-30T22:32:22+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi/</loc>
-        <lastmod>2013-06-08T11:34:53+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream/</loc>
@@ -90,7 +90,7 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old/</loc>
-        <lastmod>2013-06-07T11:11:23+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/07/digest-signature/</loc>
@@ -98,7 +98,7 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/08/foursquare-add-venue/</loc>
-        <lastmod>2013-06-08T16:29:42+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/08/man-vs-HPV/</loc>
@@ -106,7 +106,7 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula/</loc>
-        <lastmod>2013-06-09T14:59:32+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/about/</loc>
@@ -114,11 +114,11 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/categories/</loc>
-        <lastmod>2013-06-09T17:40:48+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/archives/</loc>
-        <lastmod>2013-06-09T17:40:48+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/wishlist/</loc>
@@ -126,6 +126,6 @@
     </url>
     <url>
         <loc>http://xixitalk.github.com/</loc>
-        <lastmod>2013-06-09T17:40:48+08:00</lastmod>
+        <lastmod>2013-06-09T18:43:49+08:00</lastmod>
     </url>
 </urlset>

@@ -118,12 +118,16 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2
 demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
 
 <h3 id="import-urllib2">1、import urllib2</h3>
-<p>在文件twip.py里增加import urllib2
-	import urllib2</p>
+<p>在文件twip.py里增加import urllib2</p>
+
+<pre><code>import urllib2
+</code></pre>
 
 <h3 id="twipgetimg">2、增加/twip/getimg路径映射</h3>
-<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射
-	(‘/getimg/’,self.getimg),</p>
+<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
+
+<pre><code>('/getimg/',self.getimg),
+</code></pre>
 
 <h3 id="getimg">3、增加getimg函数</h3>
 <p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a>  </p>

@@ -115,8 +115,10 @@
 
   <div class="entry-content"><p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
-<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP<br />
-	sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp –dport 8222 -j DNAT –to-destination 192.168.1.106:22 </p>
+<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP  </p>
+
+<pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
+</code></pre>
 
 </div>
   
@@ -491,12 +493,16 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
 demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
 
 <h3 id="import-urllib2">1、import urllib2</h3>
-<p>在文件twip.py里增加import urllib2
-	import urllib2</p>
+<p>在文件twip.py里增加import urllib2</p>
+
+<pre><code>import urllib2
+</code></pre>
 
 <h3 id="twipgetimg">2、增加/twip/getimg路径映射</h3>
-<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射
-	(‘/getimg/’,self.getimg),</p>
+<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
+
+<pre><code>('/getimg/',self.getimg),
+</code></pre>
 
 <h3 id="getimg">3、增加getimg函数</h3>
 <p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a>  </p>

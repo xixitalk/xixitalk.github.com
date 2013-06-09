@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-09T17:42:19+08:00</updated>
+  <updated>2013-06-09T18:45:59+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -36,6 +36,10 @@
 4、 用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</p>
 
 <p>如，单独居中的欧拉公式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <script type="math/tex; mode=display">  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 </script>
 
@@ -82,17 +86,38 @@ PS:我现在也不知道能够添加venue的权限是什么？</p>
 <h3 id="venue">venue各项数据</h3>
 <p>因为foursquare是全球的服务，添加的venue数据最好要有英文，特别是名称(Name)和地点(Address)，没有对应英文名称的可以用汉语拼音。名称不要附加分店信息，地址可以参考Google maps上的英文地址，方便别人通过地图进行查找和确认。twitter是venue所在地的twitter，不是创建者的twitter，电话同样是venue所在地的电话。<br />
 地址上常用的英文缩写：</p>
+
 <table>
-<tr><td>缩写</td><td>中文</td></tr>
-<tr><td> Ave</td><td> 大道</td></tr>
-<tr><td> Rd</td><td> 路</td></tr>
-<tr><td> Dist</td><td> 区</td></tr>
-<tr><td> St</td><td> 街</td></tr>
-<tr><td> No.xx</td><td> xx号</td></tr>
+  <tbody>
+    <tr>
+      <td>缩写</td>
+      <td>中文</td>
+    </tr>
+    <tr>
+      <td>Ave</td>
+      <td>大道</td>
+    </tr>
+    <tr>
+      <td>Rd</td>
+      <td>路</td>
+    </tr>
+    <tr>
+      <td>Dist</td>
+      <td>区</td>
+    </tr>
+    <tr>
+      <td>St</td>
+      <td>街</td>
+    </tr>
+    <tr>
+      <td>No.x</td>
+      <td>xx号</td>
+    </tr>
+  </tbody>
 </table>
 
-<p>扩展阅读：<br />
-Recommendation of venue info style in China(中文) </p>
+<h3 id="section">扩展阅读</h3>
+<p>Recommendation of venue info style in China(中文) </p>
 
 <p><a href="https://docs.google.com/document/d/1yuNOafJZb9EhsEvtI2snxLt3jkDOR6mrOsI7sh8fHXk">https://docs.google.com/document/d/1yuNOafJZb9EhsEvtI2snxLt3jkDOR6mrOsI7sh8fHXk</a></p>
 ]]></content>
@@ -151,18 +176,54 @@ Recommendation of venue info style in China(中文) </p>
     <link href="http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old/"/>
     <updated>2013-06-07T18:01:44+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old</id>
-    <content type="html"><![CDATA[<p>下表是某寿险保费列表：
-&lt;table border=&#8221;1&#8221; align=&#8221;center&#8221;&gt;</p>
-<tr><td> 投保年龄 </td><td> 男 </td><td> 女 </td></tr>
-<tr><td> 30岁 </td><td> 260 </td><td> 280 </td></tr>
-<tr><td>…</td><td>…</td><td>…</td></tr>
-<tr><td> 47岁 </td><td> 1130 </td><td> 1180 </td></tr>
-<tr><td> 48岁 </td><td> 1290 </td><td> 1270 </td></tr>
-<tr><td>…</td><td>…</td><td>…</td></tr>
-<tr><td> 64岁 </td><td> 5190 </td><td> 3770 </td></tr>
-<tr><td> 65岁 </td><td> 5640 </td><td> 4030 </td></tr>
-<p>&lt;/table&gt;
-从保费列表可以看出，男女同样年龄相比：47岁前（包含47岁），男人比较不容易产生健康问题，而女人比较容易产生健康问题；47岁后（不含47岁），男人更容易产生健康问题，而女人反到不容易产生健康问题了。</p>
+    <content type="html"><![CDATA[<p>下表是某寿险保费列表：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>投保年龄</td>
+      <td>男</td>
+      <td>女</td>
+    </tr>
+    <tr>
+      <td>30岁</td>
+      <td>260</td>
+      <td>280</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <td>47岁</td>
+      <td>1130</td>
+      <td>1180</td>
+    </tr>
+    <tr>
+      <td>48岁</td>
+      <td>1290</td>
+      <td>1270</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <td>64岁</td>
+      <td>5190</td>
+      <td>3770</td>
+    </tr>
+    <tr>
+      <td>65岁</td>
+      <td>5640</td>
+      <td>4030</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>从保费列表可以看出，男女同样年龄相比：47岁前（包含47岁），男人比较不容易产生健康问题，而女人比较容易产生健康问题；47岁后（不含47岁），男人更容易产生健康问题，而女人反到不容易产生健康问题了。</p>
 ]]></content>
   </entry>
   
@@ -270,8 +331,9 @@ TestDisk, Data Recovery</p>
 <p>树莓派上安装octopress所需的所有工具，生成一个不要密码的SSH密钥，把公钥上传到github上，这样<code>rake deploy</code>就不会提示输入密码了。</p>
 
 <h3 id="gae">GAE网页设计</h3>
-<p>#### 面向shell的接口
-<code>/md/getnewpost?action=flag</code>  用于判断GAE上是否有新博文，1表示有新博文，0表示没有新博文 <br />
+
+<h4 id="shell">面向shell的接口</h4>
+<p><code>/md/getnewpost?action=flag</code>  用于判断GAE上是否有新博文，1表示有新博文，0表示没有新博文 <br />
 <code>/md/getnewpost?action=cleanflag</code> 将GAE上博文标志1变成0，用于<code>rake deploy</code>成功后使用  </p>
 
 <p><code>/md/getnewpost?action=getfilename</code> 获得新博文的文件名<br />
@@ -286,7 +348,7 @@ TestDisk, Data Recovery</p>
 <p><code>/md/getnewpost?action=save</code> edit之后保存按钮执行本接口<br />
 <code>/md/getnewpost?action=publish</code> save后publish按钮执行本接口，将博文标志变成1  </p>
 
-<h3 id="shell">shell检查</h3>
+<h3 id="shell-1">shell检查</h3>
 
 <ol>
   <li>先用<code>action=flag</code>获得博文标志。如果是0，GAE上无新博文，直接退出；如果是1，继续。  </li>
@@ -308,8 +370,10 @@ TestDisk, Data Recovery</p>
     <id>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
     <content type="html"><![CDATA[<p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
-<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP<br />
-	sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp –dport 8222 -j DNAT –to-destination 192.168.1.106:22 </p>
+<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP  </p>
+
+<pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
+</code></pre>
 
 ]]></content>
   </entry>
@@ -481,12 +545,16 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
 demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
 
 <h3 id="import-urllib2">1、import urllib2</h3>
-<p>在文件twip.py里增加import urllib2
-	import urllib2</p>
+<p>在文件twip.py里增加import urllib2</p>
+
+<pre><code>import urllib2
+</code></pre>
 
 <h3 id="twipgetimg">2、增加/twip/getimg路径映射</h3>
-<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射
-	(‘/getimg/’,self.getimg),</p>
+<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
+
+<pre><code>('/getimg/',self.getimg),
+</code></pre>
 
 <h3 id="getimg">3、增加getimg函数</h3>
 <p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a>  </p>
