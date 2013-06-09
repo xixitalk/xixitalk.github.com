@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-09T19:00:47+08:00</updated>
+  <updated>2013-06-09T20:18:28+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -25,12 +25,15 @@
 <h3 id="rsa">RSA算法</h3>
 <p><a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA算法</a>的数学原理基于两个大素数（也称质数）相乘很容易，但是对其乘积进行因式分解很难。</p>
 
-<p>下面是wikipedia上的RSA生成公钥私钥的简单描述：
-&gt; 假设Alice想要通过一个不可靠的媒体接收Bob的一条私人讯息。她可以用以下的方式来产生一个公钥和一个私钥：
-» 随意选择两个大的质数p和q，p不等于q，计算N=pq。
-» 根据欧拉函数，求得r= φ(n) = φ(p)φ(q) = (p-1)(q-1)
-» 选择一个小于r的整数e，求得e关于模r的模反元素，命名为d。（模反元素存在，当且仅当e与r互质）
-» 将p和q的记录销毁。</p>
+<p>下面是wikipedia上的RSA生成公钥私钥的简单描述：</p>
+
+<blockquote>
+  <p>假设Alice想要通过一个不可靠的媒体接收Bob的一条私人讯息。她可以用以下的方式来产生一个公钥和一个私钥：
+&gt; 随意选择两个大的质数p和q，p不等于q，计算N=pq。
+&gt; 根据欧拉函数，求得r= φ(n) = φ(p)φ(q) = (p-1)(q-1)
+&gt; 选择一个小于r的整数e，求得e关于模r的模反元素，命名为d。（模反元素存在，当且仅当e与r互质）
+&gt; 将p和q的记录销毁。</p>
+</blockquote>
 
 <blockquote>
   <p>(N,e)是公钥，(N,d)是私钥。Alice将她的公钥(N,e)传给Bob，而将她的私钥(N,d)藏起来。</p>
