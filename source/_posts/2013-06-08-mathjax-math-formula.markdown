@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "在octopress用mathjax显示数学公式"
+title: "用mathjax显示数学公式"
 date: 2013-06-08 23:32:24
 comments: true
 categories: math mathjax octopress

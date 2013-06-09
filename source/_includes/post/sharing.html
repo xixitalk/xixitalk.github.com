@@ -8,4 +8,8 @@
   {% if site.facebook_like %}
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   {% endif %}
+  {% if site.my_tweet_button %}
+   share to: <a href="http://twitter.com/home?status=Blog:{{ page.title }} {{ site.url }}{{ page.url}}" target="_blank"><img src="/images/tweet.png" /></a>
+  {% endif %}
+
 </div>
