@@ -9,7 +9,8 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="具体可以参看这篇博客http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/ 几点特殊说明如下： rdiscount 要换成 kramdown， &hellip;">
+  <meta name="description" content="具体可以参看这篇博客http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/ 几点特殊说明如下：
+1、 rdiscount 要换成 kramdown， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,20 +113,15 @@
 
 <div class="entry-content"><p>具体可以参看这篇博客<a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/</a></p>
 
-<p>几点特殊说明如下：</p>
-
-<ol>
-  <li><code>rdiscount</code> 要换成 <code>kramdown</code>，原因<code>rdiscount</code>会将公式的特殊字符转换成HTML的关键词sup、sub等。</li>
-  <li>MathJax放在<code>source\_includes\custom\head.html</code>更合适，可以精简为下面,原因是kramdown不认inline单个$</li>
-</ol>
+<p>几点特殊说明如下：<br />
+1、 <code>rdiscount</code> 要换成 <code>kramdown</code>，原因<code>rdiscount</code>会将公式的特殊字符转换成HTML的关键词sup、sub等。
+2、 MathJax放在<code>source\_includes\custom\head.html</code>更合适，可以精简为下面,原因是kramdown不认inline单个$</p>
 
 <p><code>&lt;!-- mathjax config similar to math.stackexchange --&gt;  
 &lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"&gt;&lt;/script&gt;</code></p>
 
-<ol>
-  <li>要按照博客的说明，解决公式右键点击白屏的问题</li>
-  <li>用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</li>
-</ol>
+<p>3、 要按照博客的说明，解决公式右键点击白屏的问题
+4、 用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</p>
 
 <p>如，单独居中的欧拉公式</p>
 
