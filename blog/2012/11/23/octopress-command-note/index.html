@@ -9,11 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="创建新文章
-rake new_post["TITLE"] 生成静态HTML文章
-rake generate 本地预览
-rake preview 通过&lt;http://127.0.0.1:4000&gt;访问 发布到github空间
-rake deploy &hellip;">
+  <meta name="description" content="创建新文章 rake new_post["TITLE"] 生成静态HTML文章 rake generate 本地预览 rake preview 通过http://127.0.0.1:4000访问 发布到github空间 rake deploy 将文章的markdown文件上传到github服务器 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -115,22 +111,29 @@ rake deploy &hellip;">
 
 
 <div class="entry-content"><h2 id="section">创建新文章</h2>
+
 <pre><code>rake new_post["TITLE"]
 </code></pre>
 
 <h2 id="html">生成静态HTML文章</h2>
+
 <pre><code>rake generate
 </code></pre>
 
 <h2 id="section-1">本地预览</h2>
-<pre><code>rake preview 通过&lt;http://127.0.0.1:4000&gt;访问
+
+<pre><code>rake preview
 </code></pre>
 
+<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
+
 <h2 id="github">发布到github空间</h2>
+
 <pre><code>rake deploy
 </code></pre>
 
 <h2 id="markdowngithub">将文章的markdown文件上传到github服务器</h2>
+
 <pre><code>git add .
 git commit -m "add source post"
 git push origin source
@@ -151,50 +154,16 @@ git pull origin source
 <h2 id="octopress-1">Octopress支持中文</h2>
 <p>1、rake new_post生成的markdown文件要改成UTF-8无签名格式。</p>
 
-<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：
-	self.content = File.read(File.join(base, name), :encoding =&gt; “utf-8”)</p>
+<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
+
+<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
+</code></pre>
 
 <h2 id="gist">嵌入gist代码</h2>
-<pre><code>&lt;div&gt;&lt;script src='https://gist.github.com/1059334.js?file=svg_bullets.rb'&gt;&lt;/script&gt;
-</code></pre>
-<noscript><pre><code>require 'sass'
 
-module Sass::Script::Functions
-  def svg_circle(radius, color, circle_type)
-    img = if circle_type.value == &quot;disc&quot;
-      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
-                          stroke-width=&quot;0&quot; fill=&quot;#{color}&quot;/&gt;}
-    else
-      %Q{&lt;circle cx=&quot;#{radius.value}&quot; cy=&quot;#{radius.value}&quot; r=&quot;#{radius.value}&quot;
-                          stroke=&quot;#{color}&quot; stroke-width=&quot;1&quot; fill=&quot;white&quot;/&gt;}
-    end
-    inline_image_string(svg_circle_envelope(img).gsub(/  +/, ' '), 'image/svg+xml')
-  end
-  private
-  def svg_circle_envelope(content)
-    %Q{&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;svg version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;#{content}&lt;/svg&gt;}
-  end
-end
-</code></pre></noscript>
-<p>&lt;/div&gt;</p>
-
-<pre><code>&lt;div&gt;&lt;script src='https://gist.github.com/1059334.js?file=usage.scss'&gt;&lt;/script&gt;
-</code></pre>
-<noscript><pre><code>// Draw a list style image in svg using the radius and color specified.
-@mixin colored-bullet($radius, $color, $type: disc) {
-  list-style-type: $type;
-  list-style-image: svg-circle($radius, $color, $type);
-}
-
-
-ul {
-  @include colored-bullet(2px, $green, disc);
-  ul {
-    @include colored-bullet(2px, $green, circle);
-  }
-}
-</code></pre></noscript>
-<p>&lt;/div&gt;</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;script src="https://gist.github.com/xixitalk/5142241.js"&gt;&lt;/script&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="markdown">markdown在线编辑器</h2>
 <pre><code>http://mahua.jser.me/
