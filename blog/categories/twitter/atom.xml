@@ -4,7 +4,7 @@
   <title><![CDATA[Category: twitter | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/twitter/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T23:12:44+08:00</updated>
+  <updated>2013-06-10T23:23:31+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[分享到twitter的方法]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/11/share-to-twitter/"/>
+    <updated>2013-06-11T06:41:26+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/11/share-to-twitter</id>
+    <content type="html"><![CDATA[<p>分享到twitter的方法：</p>
+
+<!--more-->
+
+<p>第一种：https://twitter.com/share</p>
+
+<p><code>
+https://twitter.com/share?url=http://www.google.com&amp;hashtags=hash&amp;text=分享的文本
+</code></p>
+
+<p>url:是分享的url地址<br />
+text:是分享的文本<br />
+hashtags:是tag标签</p>
+
+<p><a href="https://twitter.com/share?url=http://xixitalk.github.com&amp;hashtags=twitterShare&amp;text=分享的文本">https://twitter.com/share?url=http://xixitalk.github.com&amp;hashtags=twitterShare&amp;text=分享的文本</a></p>
+
+<p>第二种：http://twitter.com/home</p>
+
+<p><code>
+http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/
+</code></p>
+
+<p><a href="http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/">http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[flask_twip在heroku上搭建教程]]></title>

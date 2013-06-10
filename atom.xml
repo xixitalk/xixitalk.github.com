@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T23:12:44+08:00</updated>
+  <updated>2013-06-10T23:23:31+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p>第一种：</p>
+<p>第一种：https://twitter.com/share</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">https://twitter.com/share?url=http://www.google.com&amp;hashtags=hash&amp;text=分享的文本
@@ -32,9 +32,9 @@
 text:是分享的文本<br />
 hashtags:是tag标签</p>
 
-<p><a href="https://twitter.com/share?url=http://www.google.com&amp;hashtags=hash&amp;text=分享的文本">https://twitter.com/share?url=http://www.google.com&amp;hashtags=hash&amp;text=分享的文本</a></p>
+<p><a href="https://twitter.com/share?url=http://xixitalk.github.com&amp;hashtags=twitterShare&amp;text=分享的文本">https://twitter.com/share?url=http://xixitalk.github.com&amp;hashtags=twitterShare&amp;text=分享的文本</a></p>
 
-<p>第二种：</p>
+<p>第二种：http://twitter.com/home</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/
