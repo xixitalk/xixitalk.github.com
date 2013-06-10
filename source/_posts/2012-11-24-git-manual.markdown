@@ -3,6 +3,7 @@ layout: post
 title: "git manual"
 date: 2012-11-24 21:54
 comments: true
+mathjax: false
 categories: git
 ---
 
@@ -17,6 +18,8 @@ categories: git
 ###获取一个git仓库代码
 
 	git clone https://github.com/yegle/flask_twip.git
+
+<!--more-->
 
 ###添加代码
 

@@ -3,9 +3,12 @@ layout: post
 title: "从保险投保费用看男女健康对比"
 date: 2013-06-07 10:01:44
 comments: true
+mathjax: false
 categories: life
 ---
 下表是某寿险保费列表：
+
+<!--more-->
 
 | 投保年龄 | 男   | 女   |
 | 30岁     | 260  | 280  |

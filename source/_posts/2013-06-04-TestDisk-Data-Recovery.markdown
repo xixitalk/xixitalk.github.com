@@ -3,13 +3,17 @@ layout: post
 title: "TestDisk 恢复误删数据的神器"
 date: 2013-06-04 09:50:39
 comments: true
+mathjax: false
 categories: software
 ---
 
 ![TestDisk](http://www.cgsecurity.org/mw/images/Testdisklogo_clear_100.png)
 TestDisk, Data Recovery
 
-恢复被删数据的神器TestDisk  
+恢复被删数据的神器TestDisk
+
+<!--more-->
+
 地址：<http://www.cgsecurity.org/wiki/TestDisk>  
 下载地址：<http://www.cgsecurity.org/wiki/TestDisk_Download>
 

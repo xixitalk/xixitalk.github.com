@@ -3,6 +3,7 @@ layout: post
 title: "my-first-post"
 date: 2012-06-03 23:44
 comments: true
+mathjax: false
 categories: test
 ---
 ## My First Post

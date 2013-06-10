@@ -3,6 +3,7 @@ layout: post
 title: "markdown manual"
 date: 2012-11-27 14:56
 comments: true
+mathjax: false
 categories: markdown
 ---
 
@@ -16,6 +17,8 @@ categories: markdown
 
 效果：
 <http://www.example.com>
+
+<!--more-->
 
 第二种方式，这种方式适合短链接
 

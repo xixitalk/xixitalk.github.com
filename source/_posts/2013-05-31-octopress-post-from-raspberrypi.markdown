@@ -3,6 +3,7 @@ layout: post
 title: "用浏览器发布博客到octopress"
 date: 2013-05-31 19:57:25
 comments: true
+mathjax: false
 categories: octopress raspberrypi
 ---
 ### 目标
@@ -10,6 +11,8 @@ categories: octopress raspberrypi
 
 ### 设想
 浏览器网页编写，保存在GAE上，raspberry pi上用shell定时检查抓取，下载到octopress的_posts目录下，调用`rake`进行发布，调用`git push`上传markdown源文件到github。
+
+<!--more-->
 
 ### 硬件环境
 需要一个全天运行的电脑（我的是树莓派），用于每10分钟进行检查是否服务器(GAE)上新的博文，并rake生成html格式的博文上传到github。

@@ -3,6 +3,7 @@ layout: post
 title: "octopress命令备忘录"
 date: 2012-11-23 23:07
 comments: true
+mathjax: false
 categories: git github octopress
 ---
 
@@ -10,6 +11,8 @@ categories: git github octopress
 -
 
 	rake new_post["TITLE"]
+
+<!--more-->
 
 生成静态HTML文章
 -

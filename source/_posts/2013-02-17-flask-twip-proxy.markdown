@@ -3,12 +3,15 @@ layout: post
 title: "为flask_twip添加图片代理"
 date: 2013-02-17 11:31
 comments: true
+mathjax: false
 categories: flask_twip
 ---
 
 ##为flask_twip添加图片代理
 为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。  
 demo参见<https://xinhuanet.herokuapp.com/twip/getimg>
+
+<!--more-->
 
 ###1、import urllib2
 在文件twip.py里增加import urllib2

@@ -3,6 +3,7 @@ layout: post
 title: "用mathjax显示数学公式"
 date: 2013-06-08 23:32:24
 comments: true
+mathjax: true
 categories: math mathjax octopress
 ---
 
@@ -20,6 +21,8 @@ categories: math mathjax octopress
 
 3、 要按照博客的说明，解决公式右键点击白屏的问题  
 4、 用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline
+
+<!--more-->
 
 如，单独居中的欧拉公式
 

@@ -3,6 +3,7 @@ layout: post
 title: "Security audit finds dev OUTSOURCED his JOB to China"
 date: 2013-01-16 14:38
 comments: true
+mathjax: false
 categories: funny
 ---
 
@@ -19,6 +20,8 @@ Posted in Security, 16th January 2013 01:29 GMT
 
 A security audit of a US critical infrastructure company last year revealed that its star developer had outsourced his own job to a Chinese subcontractor and was spending all his work time playing around on the internet.  
 去年美国一家重要基础设施公司的安全审计人员发现他们一个明星程序员把他的工作外包给一个中国的外包商，工作时间他全部在网络上闲逛。
+
+<!--more-->
 
 The firm's telecommunications supplier Verizon was called in after the company set up a basic VPN system with two-factor authentication so staff could work at home. The VPN traffic logs showed a regular series of logins to the company's main server from Shenyang, China, using the credentials of the firm's top programmer, "Bob".  
 公司用Verizon的网络搭建一个简单的两步认证的VPN系统，以便员工在家里也可以工作。VPN日志显示存在有规律的从中国沈阳登陆到公司主服务器的信息，用的认证信息是公司最优秀的程序员“Bob”的证书。

@@ -3,10 +3,13 @@ layout: post
 title: "android上支持HTTP proxy代理的浏览器"
 date: 2013-03-11 17:07
 comments: true
+mathjax: false
 categories: android proxy
 ---
 
 之前一篇文章讲了在树莓派上搭建HTTP proxy的[原理][proxy_url]，这样就获得一个HTTP proxy，android上的[twidere][twidere_url]和[twitter][twitter_url]都支持HTTP proxy，可以在设置里进行配置。但是从[twidere][twidere_url]或者[twitter][twitter_url]打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。  
+
+<!--more-->
 
 ###Firefox
 android上的[Firefox][firefox_url]可以通过安装[Proxy Mobile][proxymobile_url]附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。  

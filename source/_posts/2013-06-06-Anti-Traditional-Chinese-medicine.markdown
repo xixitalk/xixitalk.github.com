@@ -3,6 +3,7 @@ layout: post
 title: "反对『中医』理由汇集"
 date: 2013-06-06 09:59:58
 comments: true
+mathjax: false
 categories: life tech
 ---
 
@@ -15,6 +16,8 @@ categories: life tech
 
 ### 中药安神的机理是让人重金属中毒
 中药安神的机理是让人硫化汞（包含在朱砂中）轻微中毒，让人萎靡、反应迟钝，达到安神镇静效果
+
+<!--more-->
 
 ### 掺加西药成分
 有些中药有效成分实为西药，或者人工掺加西药成分提高表面效果。

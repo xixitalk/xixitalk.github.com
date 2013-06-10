@@ -3,10 +3,13 @@ layout: post
 title: "男人是否携带HPV病毒检查不出来"
 date: 2013-06-08 15:13:47
 comments: true
+mathjax: false
 categories: HPV
 ---
 关键词：man male HPV 男人 HPV病毒  
 参看这篇：[NBCNews:Guys, man up and get vaccinated: HPV is your responsibility](http://www.nbcnews.com/id/41853611/ns/health-sexual_health/t/guys-man-get-vaccinated-hpv-your-responsibility/)
+
+<!--more-->
 
 > First, unlike for women, there is no approved screening test for HPV infection in men. You can’t go to a clinic and find out if you carry it. You won’t know until a lesion shows up on your penis, in your mouth or throat, or in your anus.
 

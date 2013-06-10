@@ -3,6 +3,7 @@ layout: post
 title: "苹果应用商店启用https，中国要对应用进行审查"
 date: 2012-12-20 15:25
 comments: true
+mathjax: false
 categories: apple censor
 ---
 
@@ -15,6 +16,8 @@ Submitted by percy on Thu, Dec 20, 2012
 
 Recently, China threatens to require every app to have a license in order to go on sale, as reported by [New York times][NY_url]. The time is too coincidental as Apple adopted https on iTunes for searching and downloading Apps.  
 最近，[纽约时报报道][NY_url]中国要求每一个售卖的应用（app）需要一个许可。与此同时，苹果的iTunes搜索和下载应用都启用https链接。
+
+<!--more-->
 
 Before this adoption, searching for certain keywords such as "vpn" would lead to a connection reset on iTunes and visiting the page for certain Apps, such as VPN Express would also [cause a reset][reset_url], which means there is no way for users in China to search for or download certain Apps even if they are available in China App Store.  
 在启用https之前，在iTunes搜索某些特定的关键词，如“VPN”会导致[连接重置][reset_url]，访问某些特定的应用，如VPN express也会导致连接重置，这以为着即使在中国区的苹果应用商店的某些应用，位于中国的用户也无法搜索和下载。

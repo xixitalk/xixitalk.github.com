@@ -3,6 +3,7 @@ layout: post
 title: "I have a dream"
 date: 2013-06-02 22:53:52
 comments: true
+mathjax: false
 categories: life
 ---
 

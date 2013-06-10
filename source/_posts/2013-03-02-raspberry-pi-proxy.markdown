@@ -3,10 +3,13 @@ layout: post
 title: "利用Raspberry Pi加shadowsocks搭建代理服务"
 date: 2013-03-02 12:31
 comments: true
+mathjax: false
 categories: raspberrypi shadowsocks proxy
 ---
 
 设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。
+
+<!--more-->
 
 原理如图：  
 ![Raspberry Pi代理原理图](/static/images/2013/03/RaspberryPiProxy.png)

@@ -3,6 +3,7 @@ layout: post
 title: "算法：判断是否是中国IP？"
 date: 2013-03-11 19:11
 comments: true
+mathjax: false
 categories: network
 ---
 
@@ -10,6 +11,8 @@ categories: network
 中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。  
 IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.\*.\*表述的IP（65536个IP）。
 判断一个IP首先由addr1和addr2直接找到addr1.addr2.\*.\*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。
+
+<!--more-->
 
 ![Raspberry Pi代理原理图](/static/images/2013/03/ipv4search.png)
 

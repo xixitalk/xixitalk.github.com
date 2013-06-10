@@ -3,12 +3,15 @@ layout: post
 title: "raspberry pi(树莓派）相关记录"
 date: 2013-03-04 10:48
 comments: true
+mathjax: false
 categories: raspberrypi
 ---
 
 搜索关键词：raspberry pi 树莓派 教程 XBMC shadowsocks
 
 上周用一件旧东西和推友交换了个[raspberry pi][raspberrypi_url](树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+[XBMC][xbmc_url]视频播放+挂载3.5寸移动硬盘+网站服务器。
+
+<!--more-->
 
 ###入门教程
 国内可以从ICKey买树莓派，这个售卖页面的“[使用说明][ickey_url]”做入门教程不错，工具也都有现成的下载。
