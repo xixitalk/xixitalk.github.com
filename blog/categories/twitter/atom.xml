@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: twitter | xixitalk blog]]></title>
+  <title><![CDATA[Category: twitter | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/twitter/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T23:23:31+08:00</updated>
+  <updated>2013-06-11T00:51:19+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -41,7 +41,6 @@ http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ss
 </code></p>
 
 <p><a href="http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/">http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/</a></p>
-
 ]]></content>
   </entry>
   
