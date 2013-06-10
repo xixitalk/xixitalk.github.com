@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T00:45:22+08:00</updated>
+  <updated>2013-06-10T19:12:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -21,6 +21,8 @@
     <content type="html"><![CDATA[<p>疑问：数字签名时的<code>私钥加密 公钥解密</code>怎么理解？</p>
 
 <p>前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的<code>私钥加密 公钥解密</code>是怎么回事呢？</p>
+
+<!--more-->
 
 <h3 id="rsa">RSA算法</h3>
 <p><a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA算法</a>的数学原理基于两个大素数（也称质数）相乘很容易，但是对其乘积进行因式分解很难。</p>
@@ -78,6 +80,8 @@
 
 <h3 id="section-2">中药安神的机理是让人重金属中毒</h3>
 <p>中药安神的机理是让人硫化汞（包含在朱砂中）轻微中毒，让人萎靡、反应迟钝，达到安神镇静效果</p>
+
+<!--more-->
 
 <h3 id="section-3">掺加西药成分</h3>
 <p>有些中药有效成分实为西药，或者人工掺加西药成分提高表面效果。</p>

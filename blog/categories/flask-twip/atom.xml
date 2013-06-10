@@ -4,7 +4,7 @@
   <title><![CDATA[Category: flask_twip | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/flask-twip/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T00:45:22+08:00</updated>
+  <updated>2013-06-10T19:12:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -21,6 +21,8 @@
     <content type="html"><![CDATA[<h2 id="flasktwip">为flask_twip添加图片代理</h2>
 <p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br />
 demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
+
+<!--more-->
 
 <h3 id="import-urllib2">1、import urllib2</h3>
 <p>在文件twip.py里增加import urllib2</p>
@@ -55,6 +57,8 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
     <updated>2012-11-23T21:01:00+08:00</updated>
     <id>http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
+
+<!--more-->
 
 <p>本教程使用的flask_twip-0.0.1版本，保存的OAuth是临时文件会丢失，而最新的flask_twip已经使用数据库保存不会丢失。详细参见@<a href="http://twitter.com/xmchenyj">xmchenyj</a>的教程：<a href="http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/">http://xmchenyj.wordpress.com/2013/01/24/%E9%80%9A%E8%BF%87ubuntu-12-04-lts%E5%9C%A8heroku%E4%B8%8A%E9%83%A8%E7%BD%B2flask_twip/</a></p>
 

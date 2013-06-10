@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T00:45:22+08:00</updated>
+  <updated>2013-06-10T19:12:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -23,6 +23,8 @@
 
 <h3 id="section-1">设想</h3>
 <p>浏览器网页编写，保存在GAE上，raspberry pi上用shell定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
+
+<!--more-->
 
 <h3 id="section-2">硬件环境</h3>
 <p>需要一个全天运行的电脑（我的是树莓派），用于每10分钟进行检查是否服务器(GAE)上新的博文，并rake生成html格式的博文上传到github。</p>
@@ -70,6 +72,8 @@
     <id>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
     <content type="html"><![CDATA[<p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
+<!--more-->
+
 <p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP  </p>
 
 <pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
@@ -86,6 +90,8 @@
     <content type="html"><![CDATA[<p>搜索关键词：raspberry pi 树莓派 教程 XBMC shadowsocks</p>
 
 <p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>
+
+<!--more-->
 
 <h3 id="section">入门教程</h3>
 <p>国内可以从ICKey买树莓派，这个售卖页面的“<a href="http://www.ickey.cn/raspberrypi.php">使用说明</a>”做入门教程不错，工具也都有现成的下载。</p>
@@ -135,6 +141,8 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
     <updated>2013-03-02T12:31:00+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy</id>
     <content type="html"><![CDATA[<p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
+
+<!--more-->
 
 <p>原理如图：<br />
 <img src="/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>

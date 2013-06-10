@@ -4,7 +4,7 @@
   <title><![CDATA[Category: software | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T00:45:22+08:00</updated>
+  <updated>2013-06-10T19:12:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -21,8 +21,11 @@
     <content type="html"><![CDATA[<p><img src="http://www.cgsecurity.org/mw/images/Testdisklogo_clear_100.png" alt="TestDisk" />
 TestDisk, Data Recovery</p>
 
-<p>恢复被删数据的神器TestDisk<br />
-地址：<a href="http://www.cgsecurity.org/wiki/TestDisk">http://www.cgsecurity.org/wiki/TestDisk</a><br />
+<p>恢复被删数据的神器TestDisk</p>
+
+<!--more-->
+
+<p>地址：<a href="http://www.cgsecurity.org/wiki/TestDisk">http://www.cgsecurity.org/wiki/TestDisk</a><br />
 下载地址：<a href="http://www.cgsecurity.org/wiki/TestDisk_Download">http://www.cgsecurity.org/wiki/TestDisk_Download</a></p>
 
 <p>使用场景：数据删除（del删除、shift+d、清空回收站），没有覆盖下想恢复数据。</p>

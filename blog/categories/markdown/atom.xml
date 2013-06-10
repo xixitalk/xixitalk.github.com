@@ -4,7 +4,7 @@
   <title><![CDATA[Category: markdown | xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/blog/categories/markdown/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T00:45:22+08:00</updated>
+  <updated>2013-06-10T19:12:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -28,6 +28,8 @@
 
 <p>效果：
 <a href="http://www.example.com">http://www.example.com</a></p>
+
+<!--more-->
 
 <p>第二种方式，这种方式适合短链接</p>
 

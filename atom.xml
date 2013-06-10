@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk blog]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-10T00:45:22+08:00</updated>
+  <updated>2013-06-10T19:12:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -20,8 +20,9 @@
     <id>http://xixitalk.github.com/blog/2013/06/10/web-ssh-client</id>
     <content type="html"><![CDATA[<p>推荐一个免费的web ssh client <a href="https://www.sshd.org/server/quick-connect.html">https://www.sshd.org/server/quick-connect.html</a>，免费稳定可靠，值得推荐。</p>
 
-<p>还有一个<a href="http://www.serfish.com/console/">http://www.serfish.com/console/</a>，不过免费情况几乎没法用，不停的弹验证码骚扰。</p>
+<!--more-->
 
+<p>还有一个<a href="http://www.serfish.com/console/">http://www.serfish.com/console/</a>，不过免费情况几乎没法用，不停的弹验证码骚扰。</p>
 ]]></content>
   </entry>
   
@@ -47,6 +48,8 @@
 <p>3、 要按照博客的说明，解决公式右键点击白屏的问题<br />
 4、 用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</p>
 
+<!--more-->
+
 <p>如，单独居中的欧拉公式</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -71,6 +74,8 @@
     <content type="html"><![CDATA[<p>关键词：man male HPV 男人 HPV病毒<br />
 参看这篇：<a href="http://www.nbcnews.com/id/41853611/ns/health-sexual_health/t/guys-man-get-vaccinated-hpv-your-responsibility/">NBCNews:Guys, man up and get vaccinated: HPV is your responsibility</a></p>
 
+<!--more-->
+
 <blockquote>
   <p>First, unlike for women, there is no approved screening test for HPV infection in men. You can’t go to a clinic and find out if you carry it. You won’t know until a lesion shows up on your penis, in your mouth or throat, or in your anus.</p>
 </blockquote>
@@ -92,8 +97,9 @@
 
 <h3 id="foursquarevenue">foursquare添加venue</h3>
 <p>在浏览器里访问<a href="https://foursquare.com/add_venue">https://foursquare.com/add_venue</a>可以添加新的venue。<br />
-在客户端里，Check in后进行搜索，搜索列表的最下端提示：Not listed,add this place to check in here,点击进行添加venue。<br />
-PS:我现在也不知道能够添加venue的权限是什么？</p>
+在客户端里，Check in后进行搜索，搜索列表的最下端提示：Not listed,add this place to check in here,点击进行添加venue。  </p>
+
+<!--more-->
 
 <h3 id="venue">venue各项数据</h3>
 <p>因为foursquare是全球的服务，添加的venue数据最好要有英文，特别是名称(Name)和地点(Address)，没有对应英文名称的可以用汉语拼音。名称不要附加分店信息，地址可以参考Google maps上的英文地址，方便别人通过地图进行查找和确认。twitter是venue所在地的twitter，不是创建者的twitter，电话同样是venue所在地的电话。<br />
@@ -144,6 +150,8 @@ PS:我现在也不知道能够添加venue的权限是什么？</p>
 
 <p>前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的<code>私钥加密 公钥解密</code>是怎么回事呢？</p>
 
+<!--more-->
+
 <h3 id="rsa">RSA算法</h3>
 <p><a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA算法</a>的数学原理基于两个大素数（也称质数）相乘很容易，但是对其乘积进行因式分解很难。</p>
 
@@ -192,6 +200,8 @@ PS:我现在也不知道能够添加venue的权限是什么？</p>
     <updated>2013-06-07T18:01:44+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old</id>
     <content type="html"><![CDATA[<p>下表是某寿险保费列表：</p>
+
+<!--more-->
 
 <table>
   <tbody>
@@ -257,6 +267,8 @@ PS:我现在也不知道能够添加venue的权限是什么？</p>
 <h3 id="section-2">中药安神的机理是让人重金属中毒</h3>
 <p>中药安神的机理是让人硫化汞（包含在朱砂中）轻微中毒，让人萎靡、反应迟钝，达到安神镇静效果</p>
 
+<!--more-->
+
 <h3 id="section-3">掺加西药成分</h3>
 <p>有些中药有效成分实为西药，或者人工掺加西药成分提高表面效果。</p>
 
@@ -278,8 +290,11 @@ PS:我现在也不知道能够添加venue的权限是什么？</p>
     <content type="html"><![CDATA[<p><img src="http://www.cgsecurity.org/mw/images/Testdisklogo_clear_100.png" alt="TestDisk" />
 TestDisk, Data Recovery</p>
 
-<p>恢复被删数据的神器TestDisk<br />
-地址：<a href="http://www.cgsecurity.org/wiki/TestDisk">http://www.cgsecurity.org/wiki/TestDisk</a><br />
+<p>恢复被删数据的神器TestDisk</p>
+
+<!--more-->
+
+<p>地址：<a href="http://www.cgsecurity.org/wiki/TestDisk">http://www.cgsecurity.org/wiki/TestDisk</a><br />
 下载地址：<a href="http://www.cgsecurity.org/wiki/TestDisk_Download">http://www.cgsecurity.org/wiki/TestDisk_Download</a></p>
 
 <p>使用场景：数据删除（del删除、shift+d、清空回收站），没有覆盖下想恢复数据。</p>
@@ -310,9 +325,11 @@ TestDisk, Data Recovery</p>
 
 <p>解释这个问题要进行几个条件假设，比如飞鸟的速度相对于高速列车可以忽略为0。因为需要计算撞击时间，设定飞鸟的身长15cm。因为列车的质量巨大，所以假定相撞后列车的速度并未影响。整个相撞的动量变化就是飞鸟的速度由0变成和列车相同的速度。</p>
 
-<p><span> <script type="math/tex"> Ft=mv'-mv </script> </span></p>
+<!--more-->
 
-<p>根据动量定理，m为飞鸟质量（半斤重为0.25kg)，v为0，<span> \( v’ \) </span>为列车速度(300km/h=83.4m/s)，时间t为飞鸟速度由0变成列车速度的时长(0.15/83.4=0.001798)s，代入所得F计算约为11574牛顿。就是说飞鸟在0.001798s内速度从0变到83.4m/s，收到了11574牛顿的推力。根据牛顿第二定律，列车玻璃也受到了11574牛顿的撞击力。</p>
+<script type="math/tex; mode=display"> Ft=mv'-mv </script>
+
+<p>根据动量定理，m为飞鸟质量（半斤重为0.25kg)，v为0，<script type="math/tex"> v' </script> 为列车速度(300km/h=83.4m/s)，时间t为飞鸟速度由0变成列车速度的时长(0.15/83.4=0.001798)s，代入所得F计算约为11574牛顿。就是说飞鸟在0.001798s内速度从0变到83.4m/s，收到了11574牛顿的推力。根据牛顿第二定律，列车玻璃也受到了11574牛顿的撞击力。</p>
 
 <p>如果是按照新闻所说的收到5000牛顿左右的撞击力，飞鸟的身长假设要在34cm，但说相当于用300公斤的重物砸在玻璃上并不准确，因为“砸”这个词的物理含义是有速度的，不同的速度作用玻璃的力更是不同。</p>
 
@@ -338,6 +355,8 @@ TestDisk, Data Recovery</p>
 
 <h3 id="section-1">设想</h3>
 <p>浏览器网页编写，保存在GAE上，raspberry pi上用shell定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
+
+<!--more-->
 
 <h3 id="section-2">硬件环境</h3>
 <p>需要一个全天运行的电脑（我的是树莓派），用于每10分钟进行检查是否服务器(GAE)上新的博文，并rake生成html格式的博文上传到github。</p>
@@ -385,6 +404,8 @@ TestDisk, Data Recovery</p>
     <id>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
     <content type="html"><![CDATA[<p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
+<!--more-->
+
 <p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP  </p>
 
 <pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
@@ -400,8 +421,11 @@ TestDisk, Data Recovery</p>
     <id>http://xixitalk.github.com/blog/2013/05/29/update-ddns-with-api</id>
     <content type="html"><![CDATA[<p>用API更新3322.org免费二级域名的DDNS:<br />
 1、注册3322.org的免费二级域名：<a href="http://www.pubyun.com/">http://www.pubyun.com/</a><br />
-2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。用<a href="http://icanhazip.com">http://icanhazip.com</a>获得公网IP。<br />
-<script src="https://gist.github.com/xixitalk/5669646.js"></script></p>
+2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username:password替换为你自己在3322注册的帐号。用<a href="http://icanhazip.com">http://icanhazip.com</a>获得公网IP。</p>
+
+<!--more-->
+
+<script src="https://gist.github.com/xixitalk/5669646.js"></script>
 
 <p>3、在cron里添加每N分钟执行updateDDNS.sh。  </p>
 ]]></content>
@@ -414,8 +438,11 @@ TestDisk, Data Recovery</p>
     <id>http://xixitalk.github.com/blog/2013/04/08/stunnel-principle</id>
     <content type="html"><![CDATA[<p>搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理</p>
 
-<p>stunnel原理如图：<br />
-<a href="http://xixitalk.github.com/static/images/2013/04/stunnel.png"><img src="http://xixitalk.github.com/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></a></p>
+<p>stunnel原理如图：</p>
+
+<!--more-->
+
+<p><a href="http://xixitalk.github.com/static/images/2013/04/stunnel.png"><img src="http://xixitalk.github.com/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></a></p>
 
 <p>具体教程可参见下面篇博文：<br />
 <a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br />
@@ -434,6 +461,8 @@ TestDisk, Data Recovery</p>
 中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br />
 IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.*.*表述的IP（65536个IP）。
 判断一个IP首先由addr1和addr2直接找到addr1.addr2.*.*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
+
+<!--more-->
 
 <p><img src="http://xixitalk.github.com/static/images/2013/03/ipv4search.png" alt="Raspberry Pi代理原理图" /></p>
 
@@ -457,6 +486,8 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
     <updated>2013-03-11T17:07:00+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy</id>
     <content type="html"><![CDATA[<p>之前一篇文章讲了在树莓派上搭建HTTP proxy的<a href="http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy/">原理</a>，这样就获得一个HTTP proxy，android上的<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>和<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>都支持HTTP proxy，可以在设置里进行配置。但是从<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>或者<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。  </p>
+
+<!--more-->
 
 <h3 id="firefox">Firefox</h3>
 <p>android上的<a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Firefox</a>可以通过安装<a href="https://addons.mozilla.org/zh-CN/android/addon/proxy-mobile/">Proxy Mobile</a>附加组件支持HTTP proxy，还支持DNS通过SOCKS进行远程解析。<br />
@@ -486,6 +517,8 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
     <content type="html"><![CDATA[<p>搜索关键词：raspberry pi 树莓派 教程 XBMC shadowsocks</p>
 
 <p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>
+
+<!--more-->
 
 <h3 id="section">入门教程</h3>
 <p>国内可以从ICKey买树莓派，这个售卖页面的“<a href="http://www.ickey.cn/raspberrypi.php">使用说明</a>”做入门教程不错，工具也都有现成的下载。</p>
@@ -536,6 +569,8 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
     <id>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy</id>
     <content type="html"><![CDATA[<p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
 
+<!--more-->
+
 <p>原理如图：<br />
 <img src="http://xixitalk.github.com/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
 
@@ -558,6 +593,8 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
     <content type="html"><![CDATA[<h2 id="flasktwip">为flask_twip添加图片代理</h2>
 <p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br />
 demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
+
+<!--more-->
 
 <h3 id="import-urllib2">1、import urllib2</h3>
 <p>在文件twip.py里增加import urllib2</p>
@@ -604,6 +641,8 @@ Posted in Security, 16th January 2013 01:29 GMT</p>
 
 <p>A security audit of a US critical infrastructure company last year revealed that its star developer had outsourced his own job to a Chinese subcontractor and was spending all his work time playing around on the internet.<br />
 去年美国一家重要基础设施公司的安全审计人员发现他们一个明星程序员把他的工作外包给一个中国的外包商，工作时间他全部在网络上闲逛。</p>
+
+<!--more-->
 
 <p>The firm’s telecommunications supplier Verizon was called in after the company set up a basic VPN system with two-factor authentication so staff could work at home. The VPN traffic logs showed a regular series of logins to the company’s main server from Shenyang, China, using the credentials of the firm’s top programmer, “Bob”.<br />
 公司用Verizon的网络搭建一个简单的两步认证的VPN系统，以便员工在家里也可以工作。VPN日志显示存在有规律的从中国沈阳登陆到公司主服务器的信息，用的认证信息是公司最优秀的程序员“Bob”的证书。</p>

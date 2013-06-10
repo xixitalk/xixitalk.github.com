@@ -46,8 +46,6 @@ IPv4地址格式是addr1.addr2. &hellip;">
 
 
 
-  <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-
 </head>
 
 <body   >
@@ -117,6 +115,8 @@ IPv4地址格式是addr1.addr2. &hellip;">
 IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.*.*表述的IP（65536个IP）。
 判断一个IP首先由addr1和addr2直接找到addr1.addr2.*.*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
 
+<!--more-->
+
 <p><img src="/static/images/2013/03/ipv4search.png" alt="Raspberry Pi代理原理图" /></p>
 
 <p>每一个区域块有三种情况：<br />
@@ -175,15 +175,10 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
 </div>
 
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/03/11/android-broswer-with-http-proxy/" title="Previous Post: android上支持HTTP proxy代理的浏览器">&laquo; android上支持HTTP proxy代理的浏览器</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/04/08/stunnel-principle/" title="Next Post: stunnel原理">stunnel原理 &raquo;</a>
-      
-    </p>
-  </footer>
+
+
+
+</footer>
 </article>
 
   <section>
