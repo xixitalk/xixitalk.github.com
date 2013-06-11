@@ -6,7 +6,7 @@ comments: true
 mathjax: false
 categories: movie
 ---
-刚才在推上看到 [@justone_he](http://twittter/justone_he) 推荐电影《stan up guys》，下载一看果然不错。
+刚才在推上看到 [@justone_he](http://twitter.com/justone_he) 推荐电影《stan up guys》，下载一看果然不错。
 
 ![stan up guys](http://img31.mtime.cn/mt/2013/01/19/125146.96635645.jpg)  
 imdb:<http://www.imdb.com/title/tt1389096/>
