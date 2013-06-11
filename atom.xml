@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-11T00:51:19+08:00</updated>
+  <updated>2013-06-11T21:47:01+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[推荐电影《stan up guys 哥们站直了》]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/12/movie-stan-up-guys/"/>
+    <updated>2013-06-12T04:12:01+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/12/movie-stan-up-guys</id>
+    <content type="html"><![CDATA[<p><img src="http://img31.mtime.cn/mt/2013/01/19/125146.96635645.jpg" alt="stan up guys" /><br />
+imdb:<a href="http://www.imdb.com/title/tt1389096/">http://www.imdb.com/title/tt1389096/</a></p>
+
+<p>看头：阿尔·帕西诺 克里斯托弗·沃肯老戏骨的精彩表演。</p>
+
+<p>维尔（阿尔·帕西诺饰）28年前犯事入狱，在监狱里一句也没说出卖兄弟的话，但是一个黑老大认为是他乱枪打死自己的儿子。他在监狱里坐了28年牢终于假释出狱，老基友达克（克里斯托弗·沃肯饰）来接他，年过花甲的维尔和达克重述衷肠，缅怀过去年青时光。维尔看似平静，心里却知道入狱前的仇人要向他动手了，动手的人是谁呢？</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[分享到twitter的方法]]></title>
@@ -613,44 +627,6 @@ samba服务默认将/home/pi和/media两个目录共享，windows可以通过网
 5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br />
 6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br />
 7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。  </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[为flask_twip添加图片代理]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy/"/>
-    <updated>2013-02-17T11:31:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy</id>
-    <content type="html"><![CDATA[<h2 id="flasktwip">为flask_twip添加图片代理</h2>
-<p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br />
-demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
-
-<!--more-->
-
-<h3 id="import-urllib2">1、import urllib2</h3>
-<p>在文件twip.py里增加import urllib2</p>
-
-<pre><code>import urllib2
-</code></pre>
-
-<h3 id="twipgetimg">2、增加/twip/getimg路径映射</h3>
-<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
-
-<pre><code>('/getimg/',self.getimg),
-</code></pre>
-
-<h3 id="getimg">3、增加getimg函数</h3>
-<p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a>  </p>
-
-<script src="https://gist.github.com/xixitalk/4969986.js"></script>
-
-<h3 id="httpsyourappherokuappcomtwipgetimg">4、浏览器访问https://YOURAPP.herokuapp.com/twip/getimg</h3>
-<p>访问https://YOURAPP.herokuapp.com/twip/getimg，输入图片地址或者网页地址即可。</p>
-
-<h3 id="section">5、客户端使用</h3>
-<p>如果客户端获取图片的时候把不能访问的图片地址（以BLOCKEDIMGURL为例）以参数imgurl形式传给https://YOURAPP.herokuapp.com/twip/getimg就可以直接在客户端查看图片了。
-	https://YOURAPP.herokuapp.com/twip/getimg?imgurl=BLOCKEDIMGURL</p>
-
 ]]></content>
   </entry>
   
