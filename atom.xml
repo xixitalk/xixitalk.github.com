@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-12T00:09:49+08:00</updated>
+  <updated>2013-06-12T00:53:43+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[曹操的《短歌行》]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/12/duan-ge-xing-caocao/"/>
+    <updated>2013-06-12T08:37:14+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/12/duan-ge-xing-caocao</id>
+    <content type="html"><![CDATA[<p>Dǔan   gē    xīng        cǎo  cao
+短      歌    行          曹   操 </p>
+
+<!--more-->
+
+<p>Duì  jiǔ  dāng  gē   rén  shēng   jǐ  hé
+对   酒   当  歌，   人     生   几  何？ 
+Pì  rú  zhāo  lù  qù  rì  kǔ  duō
+譬  如   朝   露，去 日  苦    多。 
+Kǎi  dāng  yǐ  kāng  yō u  sī   nán  wàng
+慨     当  以   慷，  忧   思   难    忘。
+Hé  yǐ   jiě  yōu  wéi  yǒu  dù  kāng
+何   以  解   忧， 唯   有   杜  康。 
+Qīng  qīng   zǐ  jīn   yōu   yōu   wǒ   xīn
+青      青   子   衿， 悠     悠    我    心。 
+Dàn  wéi  jūn  gù   chén  yín  zhì   jīn
+但    为   君   故，  沉   吟   至   今。 
+Yōu  yōu  lù  míng  shí   yě  zhī  píng
+呦    呦   鹿  鸣 ， 食   野   之  苹 。
+Wǒ   yǒu  jiā  bīn    gǔ   sè  chuī  shēng
+我    有   嘉   宾，   鼓   瑟   吹   笙。
+Míng   míng   rú   yuè    hé  shí  kě  duō 
+明       明    如    月，  何  时   可  掇。 
+Yōu  cóng  zhōng  lái     bù  kě  duàn  jué
+忧     从    中    来 ，  不  可   断   绝。
+Yuè  mò  dù  qiān   wǎng  yòng  xiāng  cún 
+越    陌   度  阡 ，  枉     用    相    存。 
+Qì   kuò  tán  yàn  xīn  niàn  jiù  ēn 
+契    阔   谈  宴 ，心    念   旧  恩。
+Yuè   míng   xīng  xī   wū  què  nán   fēi 
+月     明     星   稀 ，乌   鹊   南    飞。
+Rào  shù   sān   zā   hé  zhī   kě   yī
+绕    树    三   匝 ，何   枝   可   依？
+Shān  bù  yàn  gāo   hǎi  bù   yàn   shēn
+山    不   厌   高 ， 海   不   厌    深 。 
+Zhōu  gōng  tǔ   bǔ  tiān  xià  guī   xīn 
+周      公   吐  哺 ，天   下   归   心 。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[推荐电影《stand up guys 哥们站直了》]]></title>
@@ -620,29 +665,6 @@ obfsproxy用于网络协议迷惑，将加密数据流伪装成普通数据流</
 raspbmc本身带了ftp、samba、SSH服务，并且默认是打开的，可以在<a href="http://xbmc.org/">XBMC</a>界面：程序-raspbmc settings里打开关闭。<br />
 samba服务默认将/home/pi和/media两个目录共享，windows可以通过网上邻居访问读写。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[利用Raspberry Pi加shadowsocks搭建代理服务]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy/"/>
-    <updated>2013-03-02T12:31:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy</id>
-    <content type="html"><![CDATA[<p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
-
-<!--more-->
-
-<p>原理如图：<br />
-<img src="http://xixitalk.github.com/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
-
-<p>说明：<br />
-1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br />
-2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br />
-3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br />
-4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br />
-5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br />
-6. 路由器的公网IP变化比较快，如果路由器支持二级域名登录（TP link支持kmdns的二级域名登录，kmdns提供一个免费的二级域名），在外可以用域名加端口的方式，这样就可以防止公网IP变了无法使用的情况。<br />
-7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。  </p>
 ]]></content>
   </entry>
   
