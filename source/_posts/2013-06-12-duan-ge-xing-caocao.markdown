@@ -4,10 +4,12 @@ title: "曹操的《短歌行》"
 date: 2013-06-12 00:37:14
 comments: true
 mathjax: false
-categories: 
+categories: art
 ---
 Dǔan   gē    xīng        cǎo  cao  
 短      歌    行          曹   操 
+
+最喜欢曹操的《短歌行》
 
 <!--more-->
 
