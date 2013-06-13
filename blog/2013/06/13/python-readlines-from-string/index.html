@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>stunnel原理 - xixitalk's snippet</title>
+  <title>python从字符串用readlines读取操作 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理 stunnel原理如图： 具体教程可参见下面篇博文：
-搭建SSLedge HTTPS代理
-通过 stunnel 搭建安全高性能的 sockts 代理服务器
-使用 Stunnel 加密 如何在 SSL 内加密任意 &hellip;">
+  <meta name="description" content="场景：用cURL命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作 用cURL命令POST文件 1
+curl --form "fileupload=@filename.txt" http://example.com/resource.cgi 服务器端解析 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/04/08/stunnel-principle">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">stunnel原理</h1>
+      <h1 class="entry-title">python从字符串用readlines读取操作</h1>
     
     
       <p class="meta">
@@ -102,7 +100,7 @@
   
 
 
-<time datetime="2013-04-08T16:31:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+<time datetime="2013-06-13T17:57:17+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -111,19 +109,53 @@
   </header>
 
 
-<div class="entry-content"><p>搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理</p>
-
-<p>stunnel原理如图：</p>
+<div class="entry-content"><p>场景：用<a href="http://curl.haxx.se/">cURL</a>命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作</p>
 
 <!--more-->
 
-<p><a href="/static/images/2013/04/stunnel.png"><img src="/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></a></p>
+<h3 id="curlpost">用cURL命令POST文件</h3>
 
-<p>具体教程可参见下面篇博文：<br />
-<a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br />
-<a href="https://wido.me/sunteya/setup-a-socks-proxy-server-pass-by-secure-firewall/">通过 stunnel 搭建安全高性能的 sockts 代理服务器</a><br />
-<a href="http://www.ibm.com/developerworks/cn/security/s-stun/">使用 Stunnel 加密 如何在 SSL 内加密任意 TCP 连接</a>(提醒这篇文章发表于2001年，现在看来可能部分配置不适用)  </p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl --form "fileupload=@filename.txt" http://example.com/resource.cgi
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h3 id="section">服务器端解析</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import StringIO
+</span><span class="line">
+</span><span class="line">class Markdown():
+</span><span class="line">   def get(self):
+</span><span class="line">       pass
+</span><span class="line">
+</span><span class="line">   def post(self):
+</span><span class="line">       filecontent = ...
+</span><span class="line">       bufStr = StringIO.StringIO(filecontent)
+</span><span class="line">	for oneline in bufStr.readlines():
+</span><span class="line">		oneline = oneline.replace('\n','')
+</span><span class="line">		print oneline
+</span><span class="line">
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>参考：</p>
+
+<p>What is the cURL command-line syntax to do a POST request? <a href="http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request">http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request</a></p>
+
+<p>Python readline() from a string? <a href="http://stackoverflow.com/questions/7472839/python-readline-from-a-string">http://stackoverflow.com/questions/7472839/python-readline-from-a-string</a></p>
+
+<p>Using cURL to automate HTTP jobs <a href="http://curl.haxx.se/docs/httpscripting.html">http://curl.haxx.se/docs/httpscripting.html</a></p>
 </div>
 
 
@@ -146,12 +178,12 @@
   
 
 
-<time datetime="2013-04-08T16:31:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+<time datetime="2013-06-13T17:57:17+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/stunnel/'>stunnel</a>
+    <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -163,7 +195,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:stunnel原理 http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:python从字符串用readlines读取操作 http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -209,8 +241,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/';
         var disqus_script = 'embed.js';
       
     (function () {

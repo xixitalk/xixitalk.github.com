@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: python | xixitalk's snippet]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-13T10:11:26+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[python从字符串用readlines读取操作]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/"/>
+    <updated>2013-06-13T17:57:17+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string</id>
+    <content type="html"><![CDATA[<p>场景：用<a href="http://curl.haxx.se/">cURL</a>命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作</p>
+
+<!--more-->
+
+<h3 id="curlpost">用cURL命令POST文件</h3>
+
+<p><code>
+curl --form "fileupload=@filename.txt" http://example.com/resource.cgi
+</code></p>
+
+<h3 id="section">服务器端解析</h3>
+
+<p>```
+import StringIO</p>
+
+<p>class Markdown():
+   def get(self):
+       pass</p>
+
+<p>def post(self):
+       filecontent = …
+       bufStr = StringIO.StringIO(filecontent)
+	for oneline in bufStr.readlines():
+		oneline = oneline.replace(‘\n’,’’)
+		print oneline</p>
+
+<p>```</p>
+
+<p>参考：</p>
+
+<p>What is the cURL command-line syntax to do a POST request? <a href="http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request">http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request</a></p>
+
+<p>Python readline() from a string? <a href="http://stackoverflow.com/questions/7472839/python-readline-from-a-string">http://stackoverflow.com/questions/7472839/python-readline-from-a-string</a></p>
+
+<p>Using cURL to automate HTTP jobs <a href="http://curl.haxx.se/docs/httpscripting.html">http://curl.haxx.se/docs/httpscripting.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>
