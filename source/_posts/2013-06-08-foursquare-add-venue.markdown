@@ -26,6 +26,9 @@ categories: foursquare SNS
 | St   | 街   |
 | No.x | xx号 |
 
+###申请SU1（SuperUser）
+<https://foursquare.com/xixitalk/upgrade>，xixitalk替换成你自己的用户名。
+
 ### 扩展阅读
 Recommendation of venue info style in China(中文) 
 
