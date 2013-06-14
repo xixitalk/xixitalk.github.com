@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>raspberry Pi上安装Go lang - xixitalk's snippet</title>
+  <title>raspberry Pi上安装Go lang并编译cow proxy - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="详细：http://dave.cheney.net/unofficial-arm-tarballs ARMv6 (Raspberry Pi, etc)
+  <meta name="description" content="安装go语言 详细：http://dave.cheney.net/unofficial-arm-tarballs ARMv6 (Raspberry Pi, etc)
 go1.1.linux-arm~armv6-1.tar.gz
 sha1sum &hellip;">
   
@@ -85,7 +85,7 @@ sha1sum &hellip;">
   
   <header>
     
-      <h1 class="entry-title">raspberry Pi上安装Go lang</h1>
+      <h1 class="entry-title">raspberry Pi上安装Go lang并编译cow proxy</h1>
     
     
       <p class="meta">
@@ -110,7 +110,9 @@ sha1sum &hellip;">
   </header>
 
 
-<div class="entry-content"><p>详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
+<div class="entry-content"><h3 id="go">安装go语言</h3>
+
+<p>详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
 
 <p>ARMv6 (Raspberry Pi, etc)<br />
 <a href="http://dave.cheney.net/paste/go1.1.linux-arm~armv6-1.tar.gz">go1.1.linux-arm~armv6-1.tar.gz</a><br />
@@ -118,6 +120,45 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
 
 <!--more-->
 
+<p>解压到/home/pi/go目录即可</p>
+
+<h3 id="go-1">设置go语言编译环境变量</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">export GOROOT=/home/pi/go/go
+</span><span class="line">export GOPATH=/home/pi/go/mygo
+</span><span class="line">export PATH=$PATH:$GOROOT/bin
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果系统没有安装mercurial软件包，则需要用<code>apt-get</code>安装mercurial软件，cow proxy需要用到go语言的crypto package，<code>go get</code>会调用<code>hg</code>命令来获得。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install mercurial
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="cow-proxy">编译cow proxy</h3>
+
+<p>编译cow proxy</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">go get github.com/cyfdecyf/cow
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果上面的命令出现go build出错<code>signal: killed</code>，再单独build</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">go build github.com/cyfdecyf/cow
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>编译好的cow二进制文件位于/home/pi/go/mygo目录下。</p>
+
+<h3 id="section">更新再编译</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">go get -u  github.com/cyfdecyf/cow
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 </div>
 
 
@@ -145,7 +186,7 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/golang/'>golang</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>
+    <a class='category' href='/blog/categories/cowproxy/'>cowproxy</a>, <a class='category' href='/blog/categories/golang/'>golang</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>
   
 </span>
 
@@ -157,7 +198,7 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:raspberry Pi上安装Go lang http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:raspberry Pi上安装Go lang并编译cow proxy http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -181,7 +222,7 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (3)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (5)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (3)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (3)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/life'>life (3)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (3)</a></li><li><a href='/blog/categories/proxy'>proxy (3)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (5)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (1)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (3)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (3)</a></li></ul>
 </section>
 
   

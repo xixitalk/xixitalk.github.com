@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: golang | xixitalk's snippet]]></title>
-  <link href="http://xixitalk.github.com/blog/categories/golang/atom.xml" rel="self"/>
+  <title><![CDATA[Category: cowproxy | xixitalk's snippet]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/cowproxy/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
   <updated>2013-06-14T21:37:11+08:00</updated>
   <id>http://xixitalk.github.com/</id>
