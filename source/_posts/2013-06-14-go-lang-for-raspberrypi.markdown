@@ -34,7 +34,7 @@ sudo apt-get install mercurial
 
 ###编译cow proxy
 
-编译cow proxy
+编译[cow proxy](https://github.com/cyfdecyf/cow)
 
 ```
 go get github.com/cyfdecyf/cow
@@ -48,7 +48,9 @@ go build github.com/cyfdecyf/cow
 
 编译好的cow二进制文件位于/home/pi/go/mygo目录下。
 
-###更新再编译
+我已经编译好的二进制在<https://github.com/xixitalk/build/tree/master/cow>
+
+###下次更新再编译
 
 ```
 go get -u  github.com/cyfdecyf/cow
