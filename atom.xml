@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-14T09:45:38+08:00</updated>
+  <updated>2013-06-14T12:02:03+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[raspberry Pi上安装Go lang]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/"/>
+    <updated>2013-06-14T19:48:41+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi</id>
+    <content type="html"><![CDATA[<p>详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
+
+<p>ARMv6 (Raspberry Pi, etc)<br />
+<a href="http://dave.cheney.net/paste/go1.1.linux-arm~armv6-1.tar.gz">go1.1.linux-arm~armv6-1.tar.gz</a><br />
+sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
+
+<!--more-->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[支持twitter的AppEngine-OAuth-Library]]></title>
@@ -643,27 +659,6 @@ TestDisk, Data Recovery</p>
 <script src="https://gist.github.com/xixitalk/5669646.js"></script>
 
 <p>3、在cron里添加每N分钟执行updateDDNS.sh。  </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[stunnel原理]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/"/>
-    <updated>2013-04-08T16:31:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/04/08/stunnel-principle</id>
-    <content type="html"><![CDATA[<p>搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理</p>
-
-<p>stunnel原理如图：</p>
-
-<!--more-->
-
-<p><a href="http://xixitalk.github.com/static/images/2013/04/stunnel.png"><img src="http://xixitalk.github.com/static/images/2013/04/stunnel.png" alt="stunnel原理图" /></a></p>
-
-<p>具体教程可参见下面篇博文：<br />
-<a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br />
-<a href="https://wido.me/sunteya/setup-a-socks-proxy-server-pass-by-secure-firewall/">通过 stunnel 搭建安全高性能的 sockts 代理服务器</a><br />
-<a href="http://www.ibm.com/developerworks/cn/security/s-stun/">使用 Stunnel 加密 如何在 SSL 内加密任意 TCP 连接</a>(提醒这篇文章发表于2001年，现在看来可能部分配置不适用)  </p>
-
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-14T09:45:38+08:00</updated>
+  <updated>2013-06-14T12:02:03+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[raspberry Pi上安装Go lang]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/"/>
+    <updated>2013-06-14T19:48:41+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi</id>
+    <content type="html"><![CDATA[<p>详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
+
+<p>ARMv6 (Raspberry Pi, etc)<br />
+<a href="http://dave.cheney.net/paste/go1.1.linux-arm~armv6-1.tar.gz">go1.1.linux-arm~armv6-1.tar.gz</a><br />
+sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
+
+<!--more-->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用浏览器发布博客到octopress]]></title>
