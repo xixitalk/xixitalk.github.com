@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "raspberry Pi上安装Go lang并编译cow proxy"
+title: "Raspberry Pi上安装Go lang并编译cow proxy"
 date: 2013-06-14 11:48:41
 comments: true
 mathjax: false
@@ -8,7 +8,7 @@ categories: golang raspberrypi cowproxy
 ---
 ###安装go语言
 
-详细：<http://dave.cheney.net/unofficial-arm-tarballs>
+选用非官方的二进制软件包，详细：<http://dave.cheney.net/unofficial-arm-tarballs>
 
 ARMv6 (Raspberry Pi, etc)  
 [go1.1.linux-arm~armv6-1.tar.gz](http://dave.cheney.net/paste/go1.1.linux-arm~armv6-1.tar.gz)  
@@ -34,7 +34,8 @@ sudo apt-get install mercurial
 
 ###编译cow proxy
 
-编译[cow proxy](https://github.com/cyfdecyf/cow)
+[cow proxy](https://github.com/cyfdecyf/cow)是[@cyfdecyf](http://twitter.com/cyfdecyf)用go语言编写的一个自动代理，代码开源，支持二级socks代理。  
+用下面的命令编译
 
 ```
 go get github.com/cyfdecyf/cow
@@ -50,7 +51,7 @@ go build github.com/cyfdecyf/cow
 
 我已经编译好的二进制在<https://github.com/xixitalk/build/tree/master/cow>
 
-###下次更新再编译
+###下一次更新代码再编译
 
 ```
 go get -u  github.com/cyfdecyf/cow
