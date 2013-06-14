@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cowproxy | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/cowproxy/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-14T21:37:11+08:00</updated>
+  <updated>2013-06-14T22:01:34+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -46,7 +46,7 @@ sudo apt-get install mercurial
 
 <h3 id="cow-proxy">编译cow proxy</h3>
 
-<p>编译cow proxy</p>
+<p>编译<a href="https://github.com/cyfdecyf/cow">cow proxy</a></p>
 
 <p><code>
 go get github.com/cyfdecyf/cow
@@ -60,7 +60,9 @@ go build github.com/cyfdecyf/cow
 
 <p>编译好的cow二进制文件位于/home/pi/go/mygo目录下。</p>
 
-<h3 id="section">更新再编译</h3>
+<p>我已经编译好的二进制在<a href="https://github.com/xixitalk/build/tree/master/cow">https://github.com/xixitalk/build/tree/master/cow</a></p>
+
+<h3 id="section">下次更新再编译</h3>
 
 <p><code>
 go get -u  github.com/cyfdecyf/cow
