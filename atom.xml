@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-13T23:07:17+08:00</updated>
+  <updated>2013-06-14T09:45:38+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[支持twitter的AppEngine-OAuth-Library]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library/"/>
+    <updated>2013-06-14T17:13:55+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library</id>
+    <content type="html"><![CDATA[<p>自己在GAE上写了个浏览twitter的web页面，虽然丑陋但是自我感觉良好，使用的是v1.0的API，这两天twitter停用了v1.0的API，换用v1.1，调试了一下没有调试好，还是直接用别人造好的轮子吧。</p>
+
+<p>AppEngine-OAuth-Library <a href="https://github.com/mikeknapp/AppEngine-OAuth-Library">https://github.com/mikeknapp/AppEngine-OAuth-Library</a></p>
+
+<!--more-->
+
+<p>或者直接使用OAuth还简单一些，另一个<a href="https://developers.google.com/appengine/docs/python/oauth/">https://developers.google.com/appengine/docs/python/oauth/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[李娟《我的阿勒泰》]]></title>
@@ -648,34 +663,6 @@ TestDisk, Data Recovery</p>
 <a href="https://w3.owind.com/pub/ssledge/">搭建SSLedge HTTPS代理</a><br />
 <a href="https://wido.me/sunteya/setup-a-socks-proxy-server-pass-by-secure-firewall/">通过 stunnel 搭建安全高性能的 sockts 代理服务器</a><br />
 <a href="http://www.ibm.com/developerworks/cn/security/s-stun/">使用 Stunnel 加密 如何在 SSL 内加密任意 TCP 连接</a>(提醒这篇文章发表于2001年，现在看来可能部分配置不适用)  </p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[算法：判断是否是中国IP？]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/"/>
-    <updated>2013-03-11T19:11:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip</id>
-    <content type="html"><![CDATA[<p>世界上有五个<a href="http://en.wikipedia.org/wiki/Regional_Internet_registry">区域互联网注册管理机构</a>，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">点击这里</a>可以获得亚太地址各个国家或地区申请到的IP地址区域。
-中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br />
-IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.*.*表述的IP（65536个IP）。
-判断一个IP首先由addr1和addr2直接找到addr1.addr2.*.*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
-
-<!--more-->
-
-<p><img src="http://xixitalk.github.com/static/images/2013/03/ipv4search.png" alt="Raspberry Pi代理原理图" /></p>
-
-<p>每一个区域块有三种情况：<br />
-1、区域块为空<br />
-如果区域块为空，则表示此区域块无中国IP分布。<br />
-2、区域块有一个IP区域，则表示此区域有一个中国IP分布，查询一次是否匹配，如果匹配就是中国IP，如果不匹配就是外国IP。<br />
-3、区域块有多个IP区域，则表示此区域块有多个中国IP分布，遍历查询，如果匹配就是中国IP，如果不匹配就是外国IP。<br />
-情况2为理想情况，查询一次。情况3为恶劣情况，经过实际测试，202.14.*.*区域最恶劣，有40个区域块，202.14.*.*的IP要查询40次。虽然202.14.*.*区域的IP给中国分配了40次，但是不同次申请的区域是可以连续起来的，所以区域块内还可以优化。</p>
-
-<p>下面是用python实现的一个测试代码：<br />
-用法：从<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest</a>下载亚太IP分配表，保存为delegated-apnic-latest文本文件，将下面代码保存为isChinaIP.py，并运行之。
-<script src="https://gist.github.com/xixitalk/5142241.js"></script></p>
 
 ]]></content>
   </entry>

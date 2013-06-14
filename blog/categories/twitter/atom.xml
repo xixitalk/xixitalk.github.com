@@ -4,7 +4,7 @@
   <title><![CDATA[Category: twitter | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/twitter/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-13T23:07:17+08:00</updated>
+  <updated>2013-06-14T09:45:38+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[支持twitter的AppEngine-OAuth-Library]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library/"/>
+    <updated>2013-06-14T17:13:55+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library</id>
+    <content type="html"><![CDATA[<p>自己在GAE上写了个浏览twitter的web页面，虽然丑陋但是自我感觉良好，使用的是v1.0的API，这两天twitter停用了v1.0的API，换用v1.1，调试了一下没有调试好，还是直接用别人造好的轮子吧。</p>
+
+<p>AppEngine-OAuth-Library <a href="https://github.com/mikeknapp/AppEngine-OAuth-Library">https://github.com/mikeknapp/AppEngine-OAuth-Library</a></p>
+
+<!--more-->
+
+<p>或者直接使用OAuth还简单一些，另一个<a href="https://developers.google.com/appengine/docs/python/oauth/">https://developers.google.com/appengine/docs/python/oauth/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[分享到twitter的方法]]></title>
