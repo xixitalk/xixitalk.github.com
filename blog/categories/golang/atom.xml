@@ -4,7 +4,7 @@
   <title><![CDATA[Category: golang | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/golang/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-14T22:01:34+08:00</updated>
+  <updated>2013-06-14T22:15:48+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,13 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[raspberry Pi上安装Go lang并编译cow proxy]]></title>
+    <title type="html"><![CDATA[Raspberry Pi上安装Go lang并编译cow proxy]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/"/>
     <updated>2013-06-14T19:48:41+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi</id>
     <content type="html"><![CDATA[<h3 id="go">安装go语言</h3>
 
-<p>详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
+<p>选用非官方的二进制软件包，详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
 
 <p>ARMv6 (Raspberry Pi, etc)<br />
 <a href="http://dave.cheney.net/paste/go1.1.linux-arm~armv6-1.tar.gz">go1.1.linux-arm~armv6-1.tar.gz</a><br />
@@ -46,7 +46,8 @@ sudo apt-get install mercurial
 
 <h3 id="cow-proxy">编译cow proxy</h3>
 
-<p>编译<a href="https://github.com/cyfdecyf/cow">cow proxy</a></p>
+<p><a href="https://github.com/cyfdecyf/cow">cow proxy</a>是<a href="http://twitter.com/cyfdecyf">@cyfdecyf</a>用go语言编写的一个自动代理，代码开源，支持二级socks代理。<br />
+用下面的命令编译</p>
 
 <p><code>
 go get github.com/cyfdecyf/cow
@@ -62,7 +63,7 @@ go build github.com/cyfdecyf/cow
 
 <p>我已经编译好的二进制在<a href="https://github.com/xixitalk/build/tree/master/cow">https://github.com/xixitalk/build/tree/master/cow</a></p>
 
-<h3 id="section">下次更新再编译</h3>
+<h3 id="section">下一次更新代码再编译</h3>
 
 <p><code>
 go get -u  github.com/cyfdecyf/cow
