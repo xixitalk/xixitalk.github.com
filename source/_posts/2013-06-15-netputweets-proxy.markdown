@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "在国内搭建带代理的奶瓶腿"
+title: "搭建带代理的奶瓶腿"
 date: 2013-06-15 21:39:29
 comments: true
 mathjax: false
