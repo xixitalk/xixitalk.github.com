@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>推荐一个web ssh client - xixitalk's snippet</title>
+  <title>在国内搭建奶瓶腿（netputweets） - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="推荐一个免费的web ssh client https://www.sshd.org/server/quick-connect.html，免费稳定可靠，值得推荐。 还有一个http://www.serfish.com/console/，不过免费情况几乎没法用，不停的弹验证码骚扰。
-">
+  <meta name="description" content="今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadownsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。 下载奶瓶腿代码 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/10/web-ssh-client">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">推荐一个web ssh client</h1>
+      <h1 class="entry-title">在国内搭建奶瓶腿（netputweets）</h1>
     
     
       <p class="meta">
@@ -100,7 +99,7 @@
   
 
 
-<time datetime="2013-06-10T07:00:34+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2013</time>
+<time datetime="2013-06-16T05:39:29+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,11 +108,38 @@
   </header>
 
 
-<div class="entry-content"><p>推荐一个免费的web ssh client <a href="https://www.sshd.org/server/quick-connect.html">https://www.sshd.org/server/quick-connect.html</a>，免费稳定可靠，值得推荐。</p>
+<div class="entry-content"><p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadownsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
 
 <!--more-->
 
-<p>还有一个<a href="http://www.serfish.com/console/">http://www.serfish.com/console/</a>，不过免费情况几乎没法用，不停的弹验证码骚扰。</p>
+<h3 id="section">下载奶瓶腿代码</h3>
+
+<p>把奶瓶腿的代码放在apache的浏览的根目录：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">git clone git@github.com:netputer/netputweets.git
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以将目录netputweets修改为t。</p>
+
+<h3 id="section-1">安装好奶瓶腿所要的环境</h3>
+
+<p>apache、php5+、cURL、URL Rewrite等，这部分略过。</p>
+
+<h3 id="section-2">添加代理</h3>
+
+<p>假设代理是：HTTP 192.168.1.106:8118,其他格式代理相应修改。<br />
+修改img.php、class.upload.php、twitter.php、handler.php文件里在所有执行<code>curl_exec</code>函数前添加：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>setup.php</code>文件里的<code>curl_exec</code>前不要修改。</p>
+
+<h3 id="section-3">安装奶瓶腿</h3>
+
+<p>浏览器里访问http://xxxxx.org/t/setup.php，进行奶瓶腿安装。</p>
 </div>
 
 
@@ -136,12 +162,12 @@
   
 
 
-<time datetime="2013-06-10T07:00:34+08:00" pubdate data-updated="true">Jun 10<span>th</span>, 2013</time>
+<time datetime="2013-06-16T05:39:29+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ssh/'>ssh</a>
+    <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/twitter/'>twitter</a>
   
 </span>
 
@@ -153,7 +179,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:推荐一个web ssh client http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:在国内搭建奶瓶腿（netputweets） http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -199,8 +225,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/';
         var disqus_script = 'embed.js';
       
     (function () {
