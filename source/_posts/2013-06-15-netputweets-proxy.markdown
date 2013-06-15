@@ -3,7 +3,7 @@ layout: post
 title: "搭建带代理的奶瓶腿"
 date: 2013-06-15 21:39:29
 comments: true
-mathjax: false
+mathjax: true
 categories: twitter proxy
 ---
 
@@ -41,4 +41,8 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
 浏览器里访问http://xxxxx.org/t/setup.php，进行奶瓶腿安装。安装后正常进行twitter帐号关联。
 
 ![netputweets](https://pbs.twimg.com/media/BMzloh6CMAEonlF.png:large)
+
+### 推文两次base64编码防止敏感词过滤
+
+推文进行base64两次编码，客户端浏览器进行base64两次解码，这样可以防止敏感词过滤。缺点是推文字节会变成原来的$$ \frac{16}{9} $$
 
