@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "在国内搭建奶瓶腿（netputweets）"
+title: "在国内搭建带代理的奶瓶腿（netputweets）"
 date: 2013-06-15 21:39:29
 comments: true
 mathjax: false
@@ -38,4 +38,7 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
 
 ### 安装奶瓶腿
 
-浏览器里访问http://xxxxx.org/t/setup.php，进行奶瓶腿安装。
+浏览器里访问http://xxxxx.org/t/setup.php，进行奶瓶腿安装。安装后正常进行twitter帐号关联。
+
+![netputweets](https://pbs.twimg.com/media/BMzloh6CMAEonlF.png:large)
+
