@@ -4,7 +4,7 @@
   <title><![CDATA[Category: twitter | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/twitter/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-16T09:22:20+08:00</updated>
+  <updated>2013-06-16T13:12:56+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,7 +18,7 @@
     <link href="http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/"/>
     <updated>2013-06-16T05:39:29+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy</id>
-    <content type="html"><![CDATA[<p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadownsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
+    <content type="html"><![CDATA[<p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
 
 <!--more-->
 
