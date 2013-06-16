@@ -7,7 +7,7 @@ mathjax: true
 categories: twitter proxy
 ---
 
-今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadownsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。
+今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。
 
 <!--more-->
 
