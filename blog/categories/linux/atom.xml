@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-18T21:51:40+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[grep命令手册]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/grep-man/"/>
+    <updated>2013-06-19T01:51:43+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/grep-man</id>
+    <content type="html"><![CDATA[<p>详细<a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
+
+<p>常用：</p>
+
+<p><code>
+grep -r -n -I Search_String  DIR
+</code></p>
+
+<p>-I 跳过二进制文件<br />
+-r 递归子目录<br />
+-n 显示匹配的行号</p>
+
+<!--more-->
+
+<p>```
+grep –help<br />
+匹配模式选择:<br />
+ -E, –extended-regexp     扩展正则表达式egrep<br />
+ -F, –fixed-strings       一个换行符分隔的字符串的集合fgrep<br />
+ -G, –basic-regexp        基本正则<br />
+ -P, –perl-regexp         调用的perl正则<br />
+ -e, –regexp=PATTERN      后面根正则模式，默认无<br />
+ -f, –file=FILE           从文件中获得匹配模式<br />
+ -i, –ignore-case         不区分大小写<br />
+ -w, –word-regexp         匹配整个单词<br />
+ -x, –line-regexp         匹配整行<br />
+ -z, –null-data           a data line ends in 0 byte, not newline  </p>
+
+<p>杂项:<br />
+ -s, –no-messages         不显示错误信息<br />
+ -v, –invert-match        显示不匹配的行<br />
+ -V, –version             显示版本号<br />
+ –help                    显示帮助信息<br />
+ –mmap                use memory-mapped input if possible  </p>
+
+<p>输入控制:<br />
+ -m, –max-count=NUM       匹配的最大数<br />
+ -b, –byte-offset         打印匹配行前面打印该行所在的块号码。<br />
+ -n, –line-number         显示的加上匹配所在的行号<br />
+ –line-buffered           刷新输出每一行<br />
+ -H, –with-filename       当搜索多个文件时，显示匹配文件名前缀<br />
+ -h, –no-filename         当搜索多个文件时，不显示匹配文件名前缀<br />
+ –label=LABEL            print LABEL as filename for standard input<br />
+ -o, –only-matching       show only the part of a line matching PATTERN<br />
+ -q, –quiet, –silent     不显示任何东西<br />
+ –binary-files=TYPE   assume that binary files are TYPE<br />
+ TYPE is ‘binary’, ‘text’, or ‘without-match’<br />
+ -a, –text                匹配二进制的东西<br />
+ -I                        不匹配二进制的东西<br />
+ -d, –directories=ACTION  目录操作，读取，递归，跳过<br />
+ ACTION is ‘read’, ‘recurse’, or ‘skip’<br />
+ -D, –devices=ACTION      设置对设备，FIFO,管道的操作，读取，跳过<br />
+ ACTION is ‘read’ or ‘skip’<br />
+ -R, -r, –recursive       递归调用<br />
+ –include=PATTERN     files that match PATTERN will be examined<br />
+ –exclude=PATTERN     files that match PATTERN will be skipped.<br />
+ –exclude-from=FILE   files that match PATTERN in FILE will be skipped.<br />
+ -L, –files-without-match 匹配多个文件时，显示不匹配的文件名<br />
+ -l, –files-with-matches  匹配多个文件时，显示匹配的文件名<br />
+ -c, –count               显示匹配了多少次<br />
+ -Z, –null                print 0 byte after FILE name  </p>
+
+<p>文件控制:<br />
+ -B, –before-context=NUM  打印匹配本身以及前面的几个行由NUM控制<br />
+ -A, –after-context=NUM   打印匹配本身以及随后的几个行由NUM控制<br />
+ -C, –context=NUM         打印匹配本身以及随后，前面的几个行由NUM控制<br />
+ -NUM                      根-C的用法一样的<br />
+ –color[=WHEN],<br />
+ –colour[=WHEN]       use markers to distinguish the matching string<br />
+ WHEN may be <code>always', </code>never’ or <code>auto'.  
+ -U, --binary              do not strip CR characters at EOL (MSDOS)  
+ -u, --unix-byte-offsets   report offsets as if CRs were not there (MSDOS)  
+</code>``</p>
+]]></content>
+  </entry>
+  
+</feed>
