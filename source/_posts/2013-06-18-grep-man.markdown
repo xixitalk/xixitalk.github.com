@@ -1,0 +1,19 @@
+---
+layout: post
+title: "grep命令手册"
+date: 2013-06-18 17:51:43
+comments: true
+mathjax: false
+categories: 
+---
+详细<http://blog.51yip.com/linux/1008.html>
+
+常用：
+
+```
+grep -r -n -I Search_String  DIR
+```
+
+-I 跳过二进制文件
+
+<!--more-->
