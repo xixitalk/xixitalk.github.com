@@ -9,7 +9,8 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。 ">
+  <meta name="description" content="详细http://blog.51yip.com/linux/1008.html 常用： 1
+grep -r -n -I Search_String DIR -I 跳过二进制文件 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/19/grep-man/">grep命令手册</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-19T01:51:43+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/19/grep-man/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>详细<a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
+
+<p>常用：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">grep -r -n -I Search_String  DIR
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>-I 跳过二进制文件</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/06/19/grep-man/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -484,53 +536,6 @@ imdb:<a href="http://www.imdb.com/title/tt1389096/">http://www.imdb.com/title/tt
   
     <footer>
       <a rel="full-article" href="/blog/2013/06/10/web-ssh-client/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/09/mathjax-math-formula/">用mathjax显示数学公式</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-09T07:32:24+08:00" pubdate data-updated="true">Jun 9<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/09/mathjax-math-formula/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>具体可以参看这篇博客<a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/</a></p>
-
-<p>几点特殊说明如下：<br />
-1、 <code>rdiscount</code> 要换成 <code>kramdown</code>，原因<code>rdiscount</code>会将公式的特殊字符转换成HTML的关键词sup、sub等。<br />
-2、 MathJax放在<code>source\_includes\custom\head.html</code>更合适，可以精简为下面,原因是kramdown不认inline单个$  </p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/06/09/mathjax-math-formula/">Read on &rarr;</a>
     </footer>
   
 

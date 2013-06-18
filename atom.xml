@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-16T13:12:56+08:00</updated>
+  <updated>2013-06-18T21:03:57+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[grep命令手册]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/grep-man/"/>
+    <updated>2013-06-19T01:51:43+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/grep-man</id>
+    <content type="html"><![CDATA[<p>详细<a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
+
+<p>常用：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">grep -r -n -I Search_String  DIR
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>-I 跳过二进制文件</p>
+
+<!--more-->
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[搭建带代理的奶瓶腿]]></title>
@@ -716,23 +735,6 @@ TestDisk, Data Recovery</p>
 <p>可能是<code>rake generate</code>和<code>rake deploy</code>时间比较长，cron 10分钟检查不好使，发现没有效果，最后用后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样才正常。</p>
 
 <p>updated from my iPad with Safari</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[用iptables将8222端口转向22（SSH）]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22/"/>
-    <updated>2013-05-30T21:53:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
-    <content type="html"><![CDATA[<p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
-
-<!--more-->
-
-<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP  </p>
-
-<pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
-</code></pre>
-
 ]]></content>
   </entry>
   
