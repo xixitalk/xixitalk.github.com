@@ -14,6 +14,12 @@ Fetch images from Flickr to show in Octopress/Jekyll <http://blog.pixarea.com/20
 
 <!--more-->
 
-测试：
+国内不能直接访问`flickr.com`，需要设置代理，假设设置一个HTTP代理，修改文件`plugins/flickr_image.rb`,在`FlickRaw.api_key`和`FlickRaw.shared_secret`代码行下添加如下代理。
 
-{% flickr_image 6293807068 m %}
+```
+FlickRaw.proxy = "http://192.168.1.106:8118/"
+```
+
+实例测试：
+
+{% flickr_image 6293807068 b %}
