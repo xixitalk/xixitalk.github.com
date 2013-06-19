@@ -13,11 +13,14 @@ octopress随着文件越来越多，`rake generate`越来越慢。这样可以�
 
 ```
 rake isolate[new post filename]
+rake preview
 rake integrate
 rake gen_deploy
 ```
 
 `rake isolate`进行隔离，`rake integrate`进行隔离还原，`rake gen_deploy`进行生成和发布。
+
+不过这个加快只是能够节省preview的时间而已，早点让你看到新博客的预览页面,并没有节省`rake generate && rake deploy`一起的时间。
 
 参考：
 
