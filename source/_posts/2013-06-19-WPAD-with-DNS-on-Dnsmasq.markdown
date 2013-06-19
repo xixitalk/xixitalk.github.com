@@ -32,8 +32,6 @@ txt-record=host.co.nz,"service:wpad:!http://wpad.host.co.nz:80/proxy.pac"
 srv-host=wpad.tcp.host.co.nz,wpad.host.co.nz,80
 ```
 
-参考：
-
-Automatic Proxy Configuration  <http://users.telenet.be/mydotcom/library/network/pac.htm>
-
+参考：  
+Automatic Proxy Configuration  <http://users.telenet.be/mydotcom/library/network/pac.htm>  
 [Dnsmasq-discuss] wpad and DNS <http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html>
