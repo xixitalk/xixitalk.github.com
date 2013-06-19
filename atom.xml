@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-19T20:26:34+08:00</updated>
+  <updated>2013-06-19T20:54:09+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -98,9 +98,15 @@
 
 <!--more-->
 
-<p>测试：</p>
+<p>国内不能直接访问<code>flickr.com</code>，需要设置代理，假设设置一个HTTP代理，修改文件<code>plugins/flickr_image.rb</code>,在<code>FlickRaw.api_key</code>和<code>FlickRaw.shared_secret</code>代码行下添加如下代理。</p>
 
-<p><a href="http://www.flickr.com/photos/xixitalk/6293807068/"><img src="http://farm7.static.flickr.com/6216/6293807068_038b43f12d_m.jpg" title="" /></a></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">FlickRaw.proxy = "http://192.168.1.106:8118/"
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>实例测试：</p>
+
+<p><a href="http://www.flickr.com/photos/xixitalk/6293807068/"><img src="http://farm7.static.flickr.com/6216/6293807068_038b43f12d_b.jpg" title="" /></a></p>
 ]]></content>
   </entry>
   
