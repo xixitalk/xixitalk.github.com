@@ -14,3 +14,6 @@ Fetch images from Flickr to show in Octopress/Jekyll <http://blog.pixarea.com/20
 
 <!--more-->
 
+测试：
+
+{% flickr_image 6293807068 m %}
