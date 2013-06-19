@@ -15,7 +15,8 @@ categories: WPAD dnsmasq
 
 <!--more-->
 
-### Dnsmasq上通过HDCP分发WPAD，在dnsmasq.conf里这样配置
+### Dnsmasq上通过HDCP分发WPAD
+在dnsmasq.conf里这样配置
 
 ```
 ## dnsmasq is a combined dns and dhcp server
@@ -23,7 +24,8 @@ categories: WPAD dnsmasq
 dhcp-option=252,http://your.server.here/wpad.dat 
 ```
 
-### Dnsmasq上通过DNS分发WPAD，在dnsmasq.conf里这样配置
+### Dnsmasq上通过DNS分发WPAD
+在dnsmasq.conf里这样配置
 
 ```
 txt-record=host.co.nz,"service:wpad:!http://wpad.host.co.nz:80/proxy.pac"
