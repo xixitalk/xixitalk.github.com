@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-19T22:02:36+08:00</updated>
+  <updated>2013-06-19T22:21:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -25,12 +25,16 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
+<span class="line-number">4</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">rake isolate[new post filename]
+</span><span class="line">rake preview
 </span><span class="line">rake integrate
 </span><span class="line">rake gen_deploy
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><code>rake isolate</code>进行隔离，<code>rake integrate</code>进行隔离还原，<code>rake gen_deploy</code>进行生成和发布。</p>
+
+<p>不过这个加快只是能够节省preview的时间而已，早点让你看到新博客的预览页面,并没有节省<code>rake generate &amp;&amp; rake deploy</code>一起的时间。</p>
 
 <p>参考：</p>
 

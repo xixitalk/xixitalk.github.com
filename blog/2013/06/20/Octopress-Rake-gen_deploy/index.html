@@ -12,9 +12,11 @@
   <meta name="description" content="octopress随着文件越来越多，rake generate越来越慢。这样可以加快速度。 1
 2
 3
+4
 rake isolate[new post filename]
+rake preview
 rake integrate
-rake gen_deploy rake isolate进行隔离，rake &hellip;">
+rake gen_deploy rake isolate进行隔离， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -120,12 +122,16 @@ rake gen_deploy rake isolate进行隔离，rake &hellip;">
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
+<span class="line-number">4</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">rake isolate[new post filename]
+</span><span class="line">rake preview
 </span><span class="line">rake integrate
 </span><span class="line">rake gen_deploy
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><code>rake isolate</code>进行隔离，<code>rake integrate</code>进行隔离还原，<code>rake gen_deploy</code>进行生成和发布。</p>
+
+<p>不过这个加快只是能够节省preview的时间而已，早点让你看到新博客的预览页面,并没有节省<code>rake generate &amp;&amp; rake deploy</code>一起的时间。</p>
 
 <p>参考：</p>
 
