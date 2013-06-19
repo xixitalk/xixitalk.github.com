@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-19T16:07:50+08:00</updated>
+  <updated>2013-06-19T20:26:34+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,7 +14,37 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Dnsmasq上通过DNS分发WPAD]]></title>
+    <title type="html"><![CDATA[从已经存在的octopress新建环境]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress/"/>
+    <updated>2013-06-20T02:45:41+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress</id>
+    <content type="html"><![CDATA[<p>场景需求：为已经存在的octopress博客在另一个目录或者主机新建一个octopress发布环境</p>
+
+<h3 id="sourcemaster">获得source和master分支代码</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git clone -b source git@github.com:xixitalk/xixitalk.github.com.git octopress
+</span><span class="line">$ cd octopress
+</span><span class="line">$ git clone git@github.com:xixitalk/xixitalk.github.com.git _deploy 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<!--more-->
+
+<p>如果更改了Gemfile内容，用<code>bundle install</code>更新安装</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">bundle install
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>参考：</p>
+
+<p>Clone Your Octopress to Blog From Two Places <a href="http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/">http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dnsmasq上分发WPAD]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq/"/>
     <updated>2013-06-19T22:34:04+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq</id>
@@ -46,9 +76,12 @@
 </span><span class="line">srv-host=wpad.tcp.host.co.nz,wpad.host.co.nz,80
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>参考：<br />
-Automatic Proxy Configuration  <a href="http://users.telenet.be/mydotcom/library/network/pac.htm">http://users.telenet.be/mydotcom/library/network/pac.htm</a><br />
-[Dnsmasq-discuss] wpad and DNS <a href="http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html">http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html</a></p>
+<p>参考：</p>
+
+<ol>
+  <li>Automatic Proxy Configuration  <a href="http://users.telenet.be/mydotcom/library/network/pac.htm">http://users.telenet.be/mydotcom/library/network/pac.htm</a>  </li>
+  <li>[Dnsmasq-discuss] wpad and DNS <a href="http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html">http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html</a></li>
+</ol>
 ]]></content>
   </entry>
   
@@ -65,6 +98,9 @@ Automatic Proxy Configuration  <a href="http://users.telenet.be/mydotcom/library
 
 <!--more-->
 
+<p>测试：</p>
+
+<p><a href="http://www.flickr.com/photos/xixitalk/6293807068/"><img src="http://farm7.static.flickr.com/6216/6293807068_038b43f12d_m.jpg" title="" /></a></p>
 ]]></content>
   </entry>
   
@@ -825,32 +861,6 @@ TestDisk, Data Recovery</p>
   <li>不像其他恢复软件要花几个小时的扫描后才能恢复，而是直接恢复，速度快</li>
   <li>可以指定文件扩展名恢复某类型文件（恢复照片、视频最有效）</li>
 </ol>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[高速列车击中飞鸟，前窗玻璃受到多少牛顿的力？]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/03/bird-strike/"/>
-    <updated>2013-06-03T23:39:25+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/03/bird-strike</id>
-    <content type="html"><![CDATA[<p>新闻来源：<a href="http://kb.dsqq.cn/html/2013-06/03/content_270372.htm">飞鸟撞裂“子弹头”玻璃 高铁G38昨被迫在南京换车</a></p>
-
-<blockquote>
-  <p>“昨天记者请一位物理工程师计算了一下飞鸟撞击高速运行中的动车的冲击力度，他计算后表示，如果以列车目前的最高时速300公里来计算，那么一只半斤重的鸽子，撞上前挡风玻璃后，其作用力可以达到5000牛顿左右，即使列车速度稍慢一点，估计也有3000牛顿左右的力，也就是相当于用300公斤的重物砸在玻璃上。”</p>
-</blockquote>
-
-<p>问题：高速列车击中飞鸟，前窗玻璃受到多少牛顿的力？</p>
-
-<p>解释这个问题要进行几个条件假设，比如飞鸟的速度相对于高速列车可以忽略为0。因为需要计算撞击时间，设定飞鸟的身长15cm。因为列车的质量巨大，所以假定相撞后列车的速度并未影响。整个相撞的动量变化就是飞鸟的速度由0变成和列车相同的速度。</p>
-
-<!--more-->
-
-<script type="math/tex; mode=display"> Ft=mv'-mv </script>
-
-<p>根据动量定理，m为飞鸟质量（半斤重为0.25kg)，v为0，<script type="math/tex"> v' </script> 为列车速度(300km/h=83.4m/s)，时间t为飞鸟速度由0变成列车速度的时长(0.15/83.4=0.001798)s，代入所得F计算约为11574牛顿。就是说飞鸟在0.001798s内速度从0变到83.4m/s，收到了11574牛顿的推力。根据牛顿第二定律，列车玻璃也受到了11574牛顿的撞击力。</p>
-
-<p>如果是按照新闻所说的收到5000牛顿左右的撞击力，飞鸟的身长假设要在34cm，但说相当于用300公斤的重物砸在玻璃上并不准确，因为“砸”这个词的物理含义是有速度的，不同的速度作用玻璃的力更是不同。</p>
-
 ]]></content>
   </entry>
   

@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: stunnel - xixitalk's snippet</title>
+  <title>从已经存在的octopress新建环境 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: stunnel">
+  <meta name="description" content="场景需求：为已经存在的octopress博客在另一个目录或者主机新建一个octopress发布环境 获得source和master分支代码 1
+2
+3
+$ git clone -b source git@github.com:xixitalk/xixitalk.github.com.git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.comblog/categories/stunnel">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,36 +82,113 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: stunnel</h1>
+    
+      <h1 class="entry-title">从已经存在的octopress新建环境</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-20T02:45:41+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><p>场景需求：为已经存在的octopress博客在另一个目录或者主机新建一个octopress发布环境</p>
+
+<h3 id="sourcemaster">获得source和master分支代码</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git clone -b source git@github.com:xixitalk/xixitalk.github.com.git octopress
+</span><span class="line">$ cd octopress
+</span><span class="line">$ git clone git@github.com:xixitalk/xixitalk.github.com.git _deploy 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<!--more-->
+
+<p>如果更改了Gemfile内容，用<code>bundle install</code>更新安装</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">bundle install
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>参考：</p>
+
+<p>Clone Your Octopress to Blog From Two Places <a href="http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/">http://blog.zerosharp.com/clone-your-octopress-to-blog-from-two-places/</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <div id="blog-archives" class="category">
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
 
 
 
   
-  <h2>2013</h2>
 
-<article>
+
+<time datetime="2013-06-20T02:45:41+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2013</time>
+      
+
+<span class="categories">
   
-<h1><a href="/blog/2013/04/08/stunnel-principle/">stunnel原理</a></h1>
-<time datetime="2013-04-08T16:31:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>08</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/stunnel/'>stunnel</a></span>
-</footer>
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
 
 
-</article>
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:从已经存在的octopress新建环境 http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress/" target="_blank"><img src="/images/tweet.png" /></a>
+  
 
 </div>
 
-  
+    
+
+
+
+</footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -137,7 +217,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

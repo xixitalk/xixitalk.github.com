@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dnsmasq | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/dnsmasq/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-19T16:07:50+08:00</updated>
+  <updated>2013-06-19T20:26:34+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Dnsmasq上通过DNS分发WPAD]]></title>
+    <title type="html"><![CDATA[Dnsmasq上分发WPAD]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq/"/>
     <updated>2013-06-19T22:34:04+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq</id>
@@ -43,9 +43,12 @@ txt-record=host.co.nz,"service:wpad:!http://wpad.host.co.nz:80/proxy.pac"
 srv-host=wpad.tcp.host.co.nz,wpad.host.co.nz,80
 </code></p>
 
-<p>参考：<br />
-Automatic Proxy Configuration  <a href="http://users.telenet.be/mydotcom/library/network/pac.htm">http://users.telenet.be/mydotcom/library/network/pac.htm</a><br />
-[Dnsmasq-discuss] wpad and DNS <a href="http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html">http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html</a></p>
+<p>参考：</p>
+
+<ol>
+  <li>Automatic Proxy Configuration  <a href="http://users.telenet.be/mydotcom/library/network/pac.htm">http://users.telenet.be/mydotcom/library/network/pac.htm</a>  </li>
+  <li>[Dnsmasq-discuss] wpad and DNS <a href="http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html">http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html</a></li>
+</ol>
 ]]></content>
   </entry>
   

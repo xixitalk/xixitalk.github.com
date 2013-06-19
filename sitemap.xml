@@ -2,180 +2,184 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/06/03/my-first-post/</loc>
-        <lastmod>2013-06-10T18:59:46+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/06/04/second/</loc>
-        <lastmod>2013-06-10T18:59:46+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/23/flask-twip-on-heroku/</loc>
-        <lastmod>2013-06-10T19:10:14+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/</loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/24/git-manual/</loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2012/11/27/markdown-manual/</loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://xixitalk.github.com/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/
         </loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://xixitalk.github.com/blog/2013/01/16/security-audit-finds-dev-outsourced-his-job-to-china/
         </loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/02/17/flask-twip-proxy/</loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/02/raspberry-pi-proxy/</loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/04/raspberry-pi/</loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/11/android-broswer-with-http-proxy/</loc>
-        <lastmod>2013-06-10T19:10:15+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/04/08/stunnel-principle/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/05/29/update-ddns-with-api/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/03/i-have-a-dream/</loc>
-        <lastmod>2013-06-10T18:59:48+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/03/bird-strike/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/04/TestDisk-Data-Recovery/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/06/Anti-Traditional-Chinese-medicine/</loc>
-        <lastmod>2013-06-10T19:10:16+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old/</loc>
-        <lastmod>2013-06-10T19:10:17+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/07/digest-signature/</loc>
-        <lastmod>2013-06-10T19:10:17+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/08/foursquare-add-venue/</loc>
-        <lastmod>2013-06-13T23:05:47+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/08/man-vs-HPV/</loc>
-        <lastmod>2013-06-10T19:10:17+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula/</loc>
-        <lastmod>2013-06-10T19:36:02+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/</loc>
-        <lastmod>2013-06-10T19:10:17+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/11/share-to-twitter/</loc>
-        <lastmod>2013-06-11T00:49:21+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/12/movie-stan-up-guys/</loc>
-        <lastmod>2013-06-13T08:44:03+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/12/duan-ge-xing-caocao/</loc>
-        <lastmod>2013-06-12T10:52:43+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/</loc>
-        <lastmod>2013-06-13T10:09:58+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/14/wo-de-aletai/</loc>
-        <lastmod>2013-06-13T20:29:25+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library/</loc>
-        <lastmod>2013-06-14T09:44:05+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/</loc>
-        <lastmod>2013-06-14T22:14:48+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/</loc>
-        <lastmod>2013-06-16T13:09:02+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/19/grep-man/</loc>
-        <lastmod>2013-06-19T09:39:03+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress/
         </loc>
-        <lastmod>2013-06-19T10:25:32+08:00</lastmod>
+        <lastmod>2013-06-19T20:06:11+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq/</loc>
-        <lastmod>2013-06-19T16:06:21+08:00</lastmod>
+        <lastmod>2013-06-19T18:30:40+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress/</loc>
+        <lastmod>2013-06-19T20:05:13+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/about/</loc>
-        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
+        <lastmod>2013-06-19T18:27:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/categories/</loc>
-        <lastmod>2013-06-19T16:06:21+08:00</lastmod>
+        <lastmod>2013-06-19T20:06:11+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/blog/archives/</loc>
-        <lastmod>2013-06-19T16:06:21+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://xixitalk.github.com/wishlist/</loc>
-        <lastmod>2013-05-28T22:08:36+08:00</lastmod>
+        <lastmod>2013-06-19T20:06:11+08:00</lastmod>
     </url>
     <url>
         <loc>http://xixitalk.github.com/</loc>
-        <lastmod>2013-06-19T16:06:21+08:00</lastmod>
+        <lastmod>2013-06-19T20:06:11+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://xixitalk.github.com/wishlist/</loc>
+        <lastmod>2013-06-19T18:27:30+08:00</lastmod>
     </url>
 </urlset>
