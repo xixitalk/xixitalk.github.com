@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: flickr | xixitalk's snippet]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/flickr/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-19T10:27:01+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在octopress里插入flickr的图片]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress/"/>
+    <updated>2013-06-19T18:17:24+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress</id>
+    <content type="html"><![CDATA[<p>flickr更新之后，免费空间大，同时可以上传质量很好的图片，instrgram图片质量太差。</p>
+
+<p>参考这篇Insert a Image From Flickr in Octopress <a href="http://blog.ychuang.org/blog/2012/11/14/insert-a-image-from-flickr-in-octopress/">http://blog.ychuang.org/blog/2012/11/14/insert-a-image-from-flickr-in-octopress/</a></p>
+
+<p>Fetch images from Flickr to show in Octopress/Jekyll <a href="http://blog.pixarea.com/2012/07/fetch-images-from-flickr-to-show-in-octopress-slash-jekyll">http://blog.pixarea.com/2012/07/fetch-images-from-flickr-to-show-in-octopress-slash-jekyll</a></p>
+
+<!--more-->
+
+]]></content>
+  </entry>
+  
+</feed>
