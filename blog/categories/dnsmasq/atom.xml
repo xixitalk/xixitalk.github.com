@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dnsmasq | xixitalk's snippet]]></title>
+  <link href="http://xixitalk.github.com/blog/categories/dnsmasq/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.com/"/>
+  <updated>2013-06-19T14:54:58+08:00</updated>
+  <id>http://xixitalk.github.com/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dnsmasq上通过DNS分发WPAD]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq/"/>
+    <updated>2013-06-19T22:34:04+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Web_Proxy_Autodiscovery_Protocol">WPAD</a>全称是Web Proxy Auto-Discovery，可以通过DHCP或者DNS进行代理分发，这样局域网里客户端连接上后自动进行代理。</p>
+
+<p><a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>为一个轻量的DNS和DHCP服务器。dnsmasq.conf配置说明<a href="http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq.conf.example">dnsmasq.conf.example</a>。</p>
+
+<p>以下配置为资料搜集，仅供参考，我并未实践，并且在我实践过程中可能随时修改，有疑问可以交流但不要期望获得答案。</p>
+
+<!--more-->
+
+<h3 id="dnsmasqhdcpwpaddnsmasqconf">Dnsmasq上通过HDCP分发WPAD，在dnsmasq.conf里这样配置</h3>
+
+<p><code>
+## dnsmasq is a combined dns and dhcp server
+## 	/etc/dnsmasq.conf
+dhcp-option=252,http://your.server.here/wpad.dat 
+</code></p>
+
+<h3 id="dnsmasqdnswpaddnsmasqconf">Dnsmasq上通过DNS分发WPAD，在dnsmasq.conf里这样配置</h3>
+
+<p><code>
+txt-record=host.co.nz,"service:wpad:!http://wpad.host.co.nz:80/proxy.pac"
+srv-host=wpad.tcp.host.co.nz,wpad.host.co.nz,80
+</code></p>
+
+<p>参考：</p>
+
+<p>Automatic Proxy Configuration  <a href="http://users.telenet.be/mydotcom/library/network/pac.htm">http://users.telenet.be/mydotcom/library/network/pac.htm</a></p>
+
+<p>[Dnsmasq-discuss] wpad and DNS <a href="http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html">http://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2006q1/000561.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>
