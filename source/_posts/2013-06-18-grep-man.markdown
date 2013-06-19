@@ -6,9 +6,11 @@ comments: true
 mathjax: false
 categories: linux
 ---
-详细<http://blog.51yip.com/linux/1008.html>
+详细参看这个博文 <http://blog.51yip.com/linux/1008.html>
 
-常用：
+GNU Grep 2.14 <http://www.gnu.org/software/grep/manual/grep.html>
+
+我常用grep命令是这样的：
 
 ```
 grep -r -n -I Search_String  DIR
@@ -16,7 +18,9 @@ grep -r -n -I Search_String  DIR
 
 -I 跳过二进制文件  
 -r 递归子目录  
--n 显示匹配的行号
+-n 显示匹配的行号  
+Search_String 寻找匹配的字符串  
+DIR 查找的目录范围
 
 <!--more-->
 
