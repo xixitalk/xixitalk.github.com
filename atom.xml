@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-19T20:54:09+08:00</updated>
+  <updated>2013-06-19T22:02:36+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress加快rake generate速度]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy/"/>
+    <updated>2013-06-20T05:35:54+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy</id>
+    <content type="html"><![CDATA[<p>octopress随着文件越来越多，<code>rake generate</code>越来越慢。这样可以加快速度。</p>
+
+<!--more-->
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">rake isolate[new post filename]
+</span><span class="line">rake integrate
+</span><span class="line">rake gen_deploy
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>rake isolate</code>进行隔离，<code>rake integrate</code>进行隔离还原，<code>rake gen_deploy</code>进行生成和发布。</p>
+
+<p>参考：</p>
+
+<ol>
+  <li>Some Octopress Rake Tips <a href="http://robdodson.me/blog/2012/06/11/some-octopress-rake-tips/">http://robdodson.me/blog/2012/06/11/some-octopress-rake-tips/</a></li>
+  <li>縮短重新產生文章的時間 <a href="http://blog.eddie.com.tw/2011/10/30/speed-up-octopress-post-regeneration/">http://blog.eddie.com.tw/2011/10/30/speed-up-octopress-post-regeneration/</a></li>
+  <li>加快generate的速度 <a href="http://blog.kent-chiu.com/blog/2013/03/04/octopress-configuration/">http://blog.kent-chiu.com/blog/2013/03/04/octopress-configuration/</a></li>
+</ol>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[从已经存在的octopress新建环境]]></title>
@@ -839,34 +868,6 @@ hashtags:是tag标签</p>
 民国初始，教育法没有把中医学列入教育内容，之后1929年通过了废除旧医法案，后因中医界人士强烈反对，实际并未推行。<br />
 新中国建国初，卫生部曾提议废除中医，没被中央采纳。文革时中医受政策性扶持，快速发展。1982年新宪法明确“发展现代医药和我国传统医药”，中医和西医并重发展。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[TestDisk 恢复误删数据的神器]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/04/TestDisk-Data-Recovery/"/>
-    <updated>2013-06-04T17:50:39+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/04/TestDisk-Data-Recovery</id>
-    <content type="html"><![CDATA[<p><img src="http://www.cgsecurity.org/mw/images/Testdisklogo_clear_100.png" alt="TestDisk" />
-TestDisk, Data Recovery</p>
-
-<p>恢复被删数据的神器TestDisk</p>
-
-<!--more-->
-
-<p>地址：<a href="http://www.cgsecurity.org/wiki/TestDisk">http://www.cgsecurity.org/wiki/TestDisk</a><br />
-下载地址：<a href="http://www.cgsecurity.org/wiki/TestDisk_Download">http://www.cgsecurity.org/wiki/TestDisk_Download</a></p>
-
-<p>使用场景：数据删除（del删除、shift+d、清空回收站），没有覆盖下想恢复数据。</p>
-
-<p>优点：</p>
-
-<ol>
-  <li>支持多文件系统：FAT32、NTFS、ext2/ext3/ext4等都支持</li>
-  <li>支持多操作系统，DOS、windows、linux、BSD Unix、MacOS X</li>
-  <li>不像其他恢复软件要花几个小时的扫描后才能恢复，而是直接恢复，速度快</li>
-  <li>可以指定文件扩展名恢复某类型文件（恢复照片、视频最有效）</li>
-</ol>
 ]]></content>
   </entry>
   

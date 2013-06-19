@@ -5,11 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: cowproxy - xixitalk's snippet</title>
+  <title>octopress加快rake generate速度 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: cowproxy">
+  <meta name="description" content="octopress随着文件越来越多，rake generate越来越慢。这样可以加快速度。 1
+2
+3
+rake isolate[new post filename]
+rake integrate
+rake gen_deploy rake isolate进行隔离，rake &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.comblog/categories/cowproxy">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,36 +84,112 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: cowproxy</h1>
+    
+      <h1 class="entry-title">octopress加快rake generate速度</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-20T05:35:54+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><p>octopress随着文件越来越多，<code>rake generate</code>越来越慢。这样可以加快速度。</p>
+
+<!--more-->
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">rake isolate[new post filename]
+</span><span class="line">rake integrate
+</span><span class="line">rake gen_deploy
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>rake isolate</code>进行隔离，<code>rake integrate</code>进行隔离还原，<code>rake gen_deploy</code>进行生成和发布。</p>
+
+<p>参考：</p>
+
+<ol>
+  <li>Some Octopress Rake Tips <a href="http://robdodson.me/blog/2012/06/11/some-octopress-rake-tips/">http://robdodson.me/blog/2012/06/11/some-octopress-rake-tips/</a></li>
+  <li>縮短重新產生文章的時間 <a href="http://blog.eddie.com.tw/2011/10/30/speed-up-octopress-post-regeneration/">http://blog.eddie.com.tw/2011/10/30/speed-up-octopress-post-regeneration/</a></li>
+  <li>加快generate的速度 <a href="http://blog.kent-chiu.com/blog/2013/03/04/octopress-configuration/">http://blog.kent-chiu.com/blog/2013/03/04/octopress-configuration/</a></li>
+</ol>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <div id="blog-archives" class="category">
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
 
 
 
   
-  <h2>2013</h2>
 
-<article>
+
+<time datetime="2013-06-20T05:35:54+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2013</time>
+      
+
+<span class="categories">
   
-<h1><a href="/blog/2013/06/14/go-lang-for-raspberrypi/">Raspberry Pi上安装Go lang并编译cow proxy</a></h1>
-<time datetime="2013-06-14T19:48:41+08:00" pubdate><span class='month'>Jun</span> <span class='day'>14</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/cowproxy/'>cowproxy</a>, <a class='category' href='/blog/categories/golang/'>golang</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a></span>
-</footer>
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
 
 
-</article>
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:octopress加快rake generate速度 http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy/" target="_blank"><img src="/images/tweet.png" /></a>
+  
 
 </div>
 
-  
+    
+
+
+
+</footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -137,7 +218,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

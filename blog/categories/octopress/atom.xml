@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-19T20:54:09+08:00</updated>
+  <updated>2013-06-19T22:02:36+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress加快rake generate速度]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy/"/>
+    <updated>2013-06-20T05:35:54+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy</id>
+    <content type="html"><![CDATA[<p>octopress随着文件越来越多，<code>rake generate</code>越来越慢。这样可以加快速度。</p>
+
+<!--more-->
+
+<p><code>
+rake isolate[new post filename]
+rake integrate
+rake gen_deploy
+</code></p>
+
+<p><code>rake isolate</code>进行隔离，<code>rake integrate</code>进行隔离还原，<code>rake gen_deploy</code>进行生成和发布。</p>
+
+<p>参考：</p>
+
+<ol>
+  <li>Some Octopress Rake Tips <a href="http://robdodson.me/blog/2012/06/11/some-octopress-rake-tips/">http://robdodson.me/blog/2012/06/11/some-octopress-rake-tips/</a></li>
+  <li>縮短重新產生文章的時間 <a href="http://blog.eddie.com.tw/2011/10/30/speed-up-octopress-post-regeneration/">http://blog.eddie.com.tw/2011/10/30/speed-up-octopress-post-regeneration/</a></li>
+  <li>加快generate的速度 <a href="http://blog.kent-chiu.com/blog/2013/03/04/octopress-configuration/">http://blog.kent-chiu.com/blog/2013/03/04/octopress-configuration/</a></li>
+</ol>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[从已经存在的octopress新建环境]]></title>
@@ -154,74 +181,6 @@ $$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$
 <p>可能是<code>rake generate</code>和<code>rake deploy</code>时间比较长，cron 10分钟检查不好使，发现没有效果，最后用后台shell <code>while</code> 循环检查，执行一次后 <code>sleep</code> 600秒这样才正常。</p>
 
 <p>updated from my iPad with Safari</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[octopress命令备忘录]]></title>
-    <link href="http://xixitalk.github.com/blog/2012/11/23/octopress-command-note/"/>
-    <updated>2012-11-23T23:07:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2012/11/23/octopress-command-note</id>
-    <content type="html"><![CDATA[<h2 id="section">创建新文章</h2>
-
-<pre><code>rake new_post["TITLE"]
-</code></pre>
-
-<!--more-->
-
-<h2 id="html">生成静态HTML文章</h2>
-
-<pre><code>rake generate
-</code></pre>
-
-<h2 id="section-1">本地预览</h2>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>通过<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>访问</p>
-
-<h2 id="github">发布到github空间</h2>
-
-<pre><code>rake deploy
-</code></pre>
-
-<h2 id="markdowngithub">将文章的markdown文件上传到github服务器</h2>
-
-<pre><code>git add .
-git commit -m "add source post"
-git push origin source
-</code></pre>
-
-<h2 id="github-1">从github服务器更新本地仓库</h2>
-
-<pre><code>cd Octopress
-cd _deploy
-git pull origin master
-cd ..
-git pull origin source
-</code></pre>
-
-<h2 id="octopress">Octopress仓库说明</h2>
-<p>Octopress的github分master和source分支，octopress目录下，除_deploy目录外的文件上传到source分支。_deploy目录内容上传到master分支。</p>
-
-<h2 id="octopress-1">Octopress支持中文</h2>
-<p>1、rake new_post生成的markdown文件要改成UTF-8无签名格式。</p>
-
-<p>2、在ruby编译器目录里搜索convertible.rb，将28行修改如下：</p>
-
-<pre><code>self.content = File.read(File.join(base, name), :encoding =&gt; "utf-8")
-</code></pre>
-
-<h2 id="gist">嵌入gist代码</h2>
-
-<p><code>
-&lt;script src="https://gist.github.com/xixitalk/5142241.js"&gt;&lt;/script&gt;
-</code></p>
-
-<h2 id="markdown">markdown在线编辑器</h2>
-<pre><code>http://mahua.jser.me/
-</code></pre>
 ]]></content>
   </entry>
   
