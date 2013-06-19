@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dnsmasq | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/dnsmasq/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-19T14:54:58+08:00</updated>
+  <updated>2013-06-19T15:31:30+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -26,7 +26,8 @@
 
 <!--more-->
 
-<h3 id="dnsmasqhdcpwpaddnsmasqconf">Dnsmasq上通过HDCP分发WPAD，在dnsmasq.conf里这样配置</h3>
+<h3 id="dnsmasqhdcpwpad">Dnsmasq上通过HDCP分发WPAD</h3>
+<p>在dnsmasq.conf里这样配置</p>
 
 <p><code>
 ## dnsmasq is a combined dns and dhcp server
@@ -34,7 +35,8 @@
 dhcp-option=252,http://your.server.here/wpad.dat 
 </code></p>
 
-<h3 id="dnsmasqdnswpaddnsmasqconf">Dnsmasq上通过DNS分发WPAD，在dnsmasq.conf里这样配置</h3>
+<h3 id="dnsmasqdnswpad">Dnsmasq上通过DNS分发WPAD</h3>
+<p>在dnsmasq.conf里这样配置</p>
 
 <p><code>
 txt-record=host.co.nz,"service:wpad:!http://wpad.host.co.nz:80/proxy.pac"
