@@ -40,9 +40,8 @@ FlickRaw.proxy = "http://192.168.1.106:8118/"
 
 ### 实例测试
 
-```
-{% flickr_image 6293807068 b %}
-```
+代码里这样使用
+<script src="https://gist.github.com/3156265.js?file=2012-07-21-post-with-images-from-flickr.markdown_"></script>
 
 `b`是指big，图片大小约为1024x768，基本可以满足博客显示。如果要更小图片，可以用`m`,表示medium。再小的用`sq`,表示square thumbnail。
 
