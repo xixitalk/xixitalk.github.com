@@ -4,7 +4,7 @@ title: "世界卫生组织（WHO）对转基因技术的看法"
 date: 2013-06-21 11:23:57
 comments: true
 mathjax: false
-categories: 
+categories: transgene
 ---
 
 世界卫生组织（WHO）2005年的生物技术报告 <http://www.who.int/foodsafety/fs_management/No_04_Biotech_Jun05_ch.pdf>
