@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-22T10:04:47+08:00</updated>
+  <updated>2013-06-22T21:28:20+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>场景：两个路由器都一个局域网，每个局域网电脑想直接访问另一个局域网的电脑</p>
 
 <!--more-->
+
+<p><a href="http://www.flickr.com/photos/xixitalk/9108420474/"><img src="http://farm6.static.flickr.com/5544/9108420474_421bdc9dc4_b.jpg" title="跨路由器访问设置" /></a></p>
+
 ]]></content>
   </entry>
   
