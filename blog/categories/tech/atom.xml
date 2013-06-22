@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-21T19:19:44+08:00</updated>
+  <updated>2013-06-22T10:04:47+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[搭建局域网跨路由网络]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/22/routing-cross/"/>
+    <updated>2013-06-22T17:34:57+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/22/routing-cross</id>
+    <content type="html"><![CDATA[<p>场景：两个路由器都一个局域网，每个局域网电脑想直接访问另一个局域网的电脑</p>
+
+<!--more-->
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[python从字符串用readlines读取操作]]></title>

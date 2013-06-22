@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-21T19:19:44+08:00</updated>
+  <updated>2013-06-22T10:04:47+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[搭建局域网跨路由网络]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/22/routing-cross/"/>
+    <updated>2013-06-22T17:34:57+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/22/routing-cross</id>
+    <content type="html"><![CDATA[<p>场景：两个路由器都一个局域网，每个局域网电脑想直接访问另一个局域网的电脑</p>
+
+<!--more-->
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[世界卫生组织（WHO）对转基因技术的看法]]></title>
@@ -830,64 +841,6 @@ hashtags:是tag标签</p>
   <li>阮一峰：数字签名是什么？<a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html">http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html</a></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[从保险投保费用看男女健康对比]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old/"/>
-    <updated>2013-06-07T18:01:44+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/07/man-inflection-point-is-47-year-old</id>
-    <content type="html"><![CDATA[<p>下表是某寿险保费列表：</p>
-
-<!--more-->
-
-<table>
-  <tbody>
-    <tr>
-      <td>投保年龄</td>
-      <td>男</td>
-      <td>女</td>
-    </tr>
-    <tr>
-      <td>30岁</td>
-      <td>260</td>
-      <td>280</td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-    </tr>
-    <tr>
-      <td>47岁</td>
-      <td>1130</td>
-      <td>1180</td>
-    </tr>
-    <tr>
-      <td>48岁</td>
-      <td>1290</td>
-      <td>1270</td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-    </tr>
-    <tr>
-      <td>64岁</td>
-      <td>5190</td>
-      <td>3770</td>
-    </tr>
-    <tr>
-      <td>65岁</td>
-      <td>5640</td>
-      <td>4030</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>从保费列表可以看出，男女同样年龄相比：47岁前（包含47岁），男人比较不容易产生健康问题，而女人比较容易产生健康问题；47岁后（不含47岁），男人更容易产生健康问题，而女人反到不容易产生健康问题了。</p>
 ]]></content>
   </entry>
   
