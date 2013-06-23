@@ -6,11 +6,11 @@ comments: true
 mathjax: false
 categories: life
 ---
-第一个信息来源<http://www.irf.net/index.php?option=com_content&view=article&id=394%3Apork-forbidden&catid=71%3Amost-common-questions-asked-by-non-muslim&Itemid=199>
+第一个信息来源[FAQs Most Common Questions asked by Non MuslimsPORK FORBIDDEN][first_url]
 
-第二个信息来源<http://www.islamicvoice.com/february.99/zakir.htm>,和上面地址的内容大部分相同，比第一个信息更正式一些。
+第二个信息来源[Questions Commonly Asked by Non-Muslims - VI : Why is Pork Forbidden?][second_url],和第一个信息地址的内容大部分相同，比第一个信息更正式一些。
 
-说明：下面是穆斯林向非穆斯林说明他们不吃猪肉的原因，这里尊重宗教信仰自由，无冒犯之意，信息本意以英文为准，翻译不准确的地方请留言。作者是[Dr. Zakir Naik](http://www.irf.net/index.php?option=com_content&view=article&id=22&Itemid=54)，他是[Islamic Research Foundation](http://www.irf.net/)的President。
+说明：下面是穆斯林向非穆斯林说明他们不吃猪肉的原因，这里尊重宗教信仰自由，无冒犯之意，信息本意以英文为准，翻译不准确的地方请留言。作者是[Dr. Zakir Naik][dr_url]，他是[Islamic Research Foundation](http://www.irf.net/)的President。
 
 PORK FORBIDDEN  
 禁食猪肉
@@ -81,3 +81,7 @@ The pig is the most shameless animal on the face of the earth. It is the only an
 
 猪是地球上最没有廉耻的动物，它们是唯一一种会邀请朋友和自己配偶进行交媾的动物。在美国，大部分人食用猪肉。舞会之后，他们经常相互交换妻子。比如，很多人会这样说"你和我的妻子睡觉，我和你的妻子睡觉"。如果你食用猪肉，你的行为就会变成猪一样。我们印度人眼中认为美国很高级很厉害。如果他们做什么，我们也跟着效仿，不出几年，根据Island magazine的一篇文章，换妻就会在孟买的富人圈里很普遍。
 
+
+[first_url]:http://www.irf.net/index.php?option=com_content&view=article&id=394%3Apork-forbidden&catid=71%3Amost-common-questions-asked-by-non-muslim&Itemid=199
+[second_url]:http://www.islamicvoice.com/february.99/zakir.htm
+[dr_url]:http://www.irf.net/index.php?option=com_content&view=article&id=22&Itemid=54
