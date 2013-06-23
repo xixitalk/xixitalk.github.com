@@ -6,11 +6,11 @@ comments: true
 mathjax: false
 categories: life
 ---
-第一个信息来源[FAQs Most Common Questions asked by Non MuslimsPORK FORBIDDEN][first_url]
+第一个信息来源 [FAQs Most Common Questions asked by Non Muslims：PORK FORBIDDEN][first_url]
 
-第二个信息来源[Questions Commonly Asked by Non-Muslims - VI : Why is Pork Forbidden?][second_url],和第一个信息地址的内容大部分相同，比第一个信息更正式一些。
+第二个信息来源 [Questions Commonly Asked by Non-Muslims - VI : Why is Pork Forbidden?][second_url],和第一个信息地址的内容大部分相同，比第一个信息更正式一些。
 
-说明：下面是穆斯林向非穆斯林说明他们不吃猪肉的原因，这里尊重宗教信仰自由，无冒犯之意，信息本意以英文为准，翻译不准确的地方请留言。作者是[Dr. Zakir Naik][dr_url]，他是[Islamic Research Foundation](http://www.irf.net/)的President。
+说明：下面是穆斯林向非穆斯林说明他们不吃猪肉的几点原因。这里尊重宗教信仰自由，转载此处并无冒犯之意，原因说明本意以英文为准，翻译不准确的地方请留言。作者是[Dr. Zakir Naik][dr_url]，他是[Islamic Research Foundation](http://www.irf.net/)的President。
 
 PORK FORBIDDEN  
 禁食猪肉
