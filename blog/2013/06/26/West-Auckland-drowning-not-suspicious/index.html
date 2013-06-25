@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>算法：判断是否是中国IP？ - xixitalk's snippet</title>
+  <title>西奥克兰发生一起自杀溺亡 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="世界上有五个区域互联网注册管理机构，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。点击这里可以获得亚太地址各个国家或地区申请到的IP地址区域。
-中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。
-IPv4地址格式是addr1.addr2. &hellip;">
+  <meta name="description" content="来源:Body found in Auckland stream Police say the death of a man found in a stream bordering the west Auckland suburbs of Henderson and Massey was not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ IPv4地址格式是addr1.addr2. &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +83,7 @@ IPv4地址格式是addr1.addr2. &hellip;">
   
   <header>
     
-      <h1 class="entry-title">算法：判断是否是中国IP？</h1>
+      <h1 class="entry-title">西奥克兰发生一起自杀溺亡</h1>
     
     
       <p class="meta">
@@ -101,7 +99,7 @@ IPv4地址格式是addr1.addr2. &hellip;">
   
 
 
-<time datetime="2013-03-11T19:11:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
+<time datetime="2013-06-26T00:57:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -110,26 +108,35 @@ IPv4地址格式是addr1.addr2. &hellip;">
   </header>
 
 
-<div class="entry-content"><p>世界上有五个<a href="http://en.wikipedia.org/wiki/Regional_Internet_registry">区域互联网注册管理机构</a>，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">点击这里</a>可以获得亚太地址各个国家或地区申请到的IP地址区域。
-中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br />
-IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.*.*表述的IP（65536个IP）。
-判断一个IP首先由addr1和addr2直接找到addr1.addr2.*.*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
+<div class="entry-content"><p>来源:<a href="http://www.3news.co.nz/West-Auckland-drowning-not-suspicious/tabid/423/articleID/302561/Default.aspx">Body found in Auckland stream</a></p>
+
+<p>Police say the death of a man found in a stream bordering the west Auckland suburbs of Henderson and Massey was not suspicious.<br />
+据警方资料，在西奥克兰Henderson和Massey边界的河流里发现了一名死亡男子，自杀溺亡可能明显。</p>
 
 <!--more-->
 
-<p><img src="/static/images/2013/03/ipv4search.png" alt="Raspberry Pi代理原理图" /></p>
+<p>Ranui resident Jimmy Wang Liyu, 78, drowned in the Huruhuru Stream on Friday.<br />
+Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
 
-<p>每一个区域块有三种情况：<br />
-1、区域块为空<br />
-如果区域块为空，则表示此区域块无中国IP分布。<br />
-2、区域块有一个IP区域，则表示此区域有一个中国IP分布，查询一次是否匹配，如果匹配就是中国IP，如果不匹配就是外国IP。<br />
-3、区域块有多个IP区域，则表示此区域块有多个中国IP分布，遍历查询，如果匹配就是中国IP，如果不匹配就是外国IP。<br />
-情况2为理想情况，查询一次。情况3为恶劣情况，经过实际测试，202.14.*.*区域最恶劣，有40个区域块，202.14.*.*的IP要查询40次。虽然202.14.*.*区域的IP给中国分配了40次，但是不同次申请的区域是可以连续起来的，所以区域块内还可以优化。</p>
+<p>Police say local residents were helpful in quickly reporting the incident, which allowed quick recovery of Mr Liyu’s body.<br />
+据警察说，他们根据当地居民的及时报告，很快找回了Liyu先生的尸体。</p>
 
-<p>下面是用python实现的一个测试代码：<br />
-用法：从<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest</a>下载亚太IP分配表，保存为delegated-apnic-latest文本文件，将下面代码保存为isChinaIP.py，并运行之。
-<script src="https://gist.github.com/xixitalk/5142241.js"></script></p>
+<p>Read More:<a href="http://www.3news.co.nz/Body-found-in-Auckland-stream/tabid/423/articleID/302335/Default.aspx">Body found in Auckland stream</a></p>
 
+<p>Police are asking for help to identify the man<br />
+警方正在向公众征求帮助用以识别该男子的身份</p>
+
+<p>The body of a man has been found in a stream which borders the suburbs of Henderson and Massey in west Auckland.<br />
+西奥克兰Henderson和Massey边界的河流里发现了一名死亡男子。</p>
+
+<p>Police were called to Huruhuru Stream, Henderson about 4pm today.<br />
+今天下午4点警方接到Henderson Huruhuru河流地区的报警。</p>
+
+<p>They are asking for help to identify the man who is described as Asian, approximately 60 years old and of medium build.<br />
+该名亚裔男子，60岁左右，中等身材。警方正在为了确认他身份征求公众的帮助。</p>
+
+<p>He was wearing a brown jumper, jeans and white New Balance sports shoes.<br />
+他身穿棕色卫衣，牛仔裤和白色New Balance运动鞋。</p>
 </div>
 
 
@@ -152,12 +159,12 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
   
 
 
-<time datetime="2013-03-11T19:11:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
+<time datetime="2013-06-26T00:57:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/network/'>network</a>
+    <a class='category' href='/blog/categories/english/'>english</a>
   
 </span>
 
@@ -169,7 +176,7 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:算法：判断是否是中国IP？ http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:西奥克兰发生一起自杀溺亡 http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -215,8 +222,8 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious/';
         var disqus_script = 'embed.js';
       
     (function () {
