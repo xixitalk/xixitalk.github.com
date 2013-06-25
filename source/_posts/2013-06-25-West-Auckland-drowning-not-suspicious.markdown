@@ -6,7 +6,7 @@ comments: true
 mathjax: false
 categories: english
 ---
-来源:[Body found in Auckland stream](http://www.3news.co.nz/West-Auckland-drowning-not-suspicious/tabid/423/articleID/302561/Default.aspx)
+来源:[West Auckland drowning not suspicious](http://www.3news.co.nz/West-Auckland-drowning-not-suspicious/tabid/423/articleID/302561/Default.aspx)
 
 Police say the death of a man found in a stream bordering the west Auckland suburbs of Henderson and Massey was not suspicious.  
 据警方资料，在西奥克兰Henderson和Massey边界的河流里发现了一名死亡男子，自杀溺亡可能明显。
