@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-25T09:10:43+08:00</updated>
+  <updated>2013-06-25T11:15:56+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,7 +18,7 @@
     <link href="http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/"/>
     <updated>2013-06-25T16:57:52+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error</id>
-    <content type="html"><![CDATA[<p><code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误</p>
+    <content type="html"><![CDATA[<p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
 
 <p><code>
  raspbmc kernel: nf_conntrack: table full, dropping packet
@@ -26,10 +26,14 @@
 
 <!--more-->
 
+<p>先试试下面这种方法能不能解决问题，默认<code>nf_conntrack_max</code>是7xxx，树莓派的内存不大，暂时设置<code>20000</code></p>
+
 <p><code>
-sysctl -w "net.netfilter.nf_conntrack_max=20000"
-sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
+sudo sysctl -w "net.netfilter.nf_conntrack_max=20000"
+sudo sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
 </code></p>
+
+<p>参考：</p>
 
 <p><a href="http://www.wendangz.com/idc/linux/967.html">http://www.wendangz.com/idc/linux/967.html</a></p>
 ]]></content>
