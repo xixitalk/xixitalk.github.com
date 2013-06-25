@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>高速列车击中飞鸟，前窗玻璃受到多少牛顿的力？ - xixitalk's snippet</title>
+  <title>树莓派nf_conntrack错误 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="新闻来源：飞鸟撞裂“子弹头”玻璃 高铁G38昨被迫在南京换车 “昨天记者请一位物理工程师计算了一下飞鸟撞击高速运行中的动车的冲击力度，他计算后表示，如果以列车目前的最高时速300公里来计算，那么一只半斤重的鸽子，撞上前挡风玻璃后，其作用力可以达到5000牛顿左右，即使列车速度稍慢一点， &hellip;">
+  <meta name="description" content="/var/log/syslog和/var/log/messages出现大量的nf_conntrack错误 1 raspbmc kernel: nf_conntrack: table full, dropping packet 1
+2
+sysctl -w "net.netfilter. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/03/bird-strike">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +85,7 @@
   
   <header>
     
-      <h1 class="entry-title">高速列车击中飞鸟，前窗玻璃受到多少牛顿的力？</h1>
+      <h1 class="entry-title">树莓派nf_conntrack错误</h1>
     
     
       <p class="meta">
@@ -99,7 +101,7 @@
   
 
 
-<time datetime="2013-06-03T23:39:25+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time>
+<time datetime="2013-06-25T16:57:52+08:00" pubdate data-updated="true">Jun 25<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,24 +110,21 @@
   </header>
 
 
-<div class="entry-content"><p>新闻来源：<a href="http://kb.dsqq.cn/html/2013-06/03/content_270372.htm">飞鸟撞裂“子弹头”玻璃 高铁G38昨被迫在南京换车</a></p>
+<div class="entry-content"><p><code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误</p>
 
-<blockquote>
-  <p>“昨天记者请一位物理工程师计算了一下飞鸟撞击高速运行中的动车的冲击力度，他计算后表示，如果以列车目前的最高时速300公里来计算，那么一只半斤重的鸽子，撞上前挡风玻璃后，其作用力可以达到5000牛顿左右，即使列车速度稍慢一点，估计也有3000牛顿左右的力，也就是相当于用300公斤的重物砸在玻璃上。”</p>
-</blockquote>
-
-<p>问题：高速列车击中飞鸟，前窗玻璃受到多少牛顿的力？</p>
-
-<p>解释这个问题要进行几个条件假设，比如飞鸟的速度相对于高速列车可以忽略为0。因为需要计算撞击时间，设定飞鸟的身长15cm。因为列车的质量巨大，所以假定相撞后列车的速度并未影响。整个相撞的动量变化就是飞鸟的速度由0变成和列车相同的速度。</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"> raspbmc kernel: nf_conntrack: table full, dropping packet
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <!--more-->
 
-<script type="math/tex; mode=display"> Ft=mv'-mv </script>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sysctl -w "net.netfilter.nf_conntrack_max=20000"
+</span><span class="line">sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>根据动量定理，m为飞鸟质量（半斤重为0.25kg)，v为0，<script type="math/tex"> v' </script> 为列车速度(300km/h=83.4m/s)，时间t为飞鸟速度由0变成列车速度的时长(0.15/83.4=0.001798)s，代入所得F计算约为11574牛顿。就是说飞鸟在0.001798s内速度从0变到83.4m/s，收到了11574牛顿的推力。根据牛顿第二定律，列车玻璃也受到了11574牛顿的撞击力。</p>
-
-<p>如果是按照新闻所说的收到5000牛顿左右的撞击力，飞鸟的身长假设要在34cm，但说相当于用300公斤的重物砸在玻璃上并不准确，因为“砸”这个词的物理含义是有速度的，不同的速度作用玻璃的力更是不同。</p>
-
+<p><a href="http://www.wendangz.com/idc/linux/967.html">http://www.wendangz.com/idc/linux/967.html</a></p>
 </div>
 
 
@@ -148,12 +147,12 @@
   
 
 
-<time datetime="2013-06-03T23:39:25+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time>
+<time datetime="2013-06-25T16:57:52+08:00" pubdate data-updated="true">Jun 25<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/bullshit/'>bullshit</a>
+    <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>
   
 </span>
 
@@ -165,15 +164,13 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:高速列车击中飞鸟，前窗玻璃受到多少牛顿的力？ http://xixitalk.github.com/blog/2013/06/03/bird-strike/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:树莓派nf_conntrack错误 http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
 
     
 
-
-    <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 
 </footer>
@@ -213,8 +210,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/03/bird-strike/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/03/bird-strike/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/';
         var disqus_script = 'embed.js';
       
     (function () {

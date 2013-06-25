@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-23T15:56:49+08:00</updated>
+  <updated>2013-06-25T09:10:43+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/"/>
+    <updated>2013-06-25T16:57:52+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error</id>
+    <content type="html"><![CDATA[<p><code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"> raspbmc kernel: nf_conntrack: table full, dropping packet
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--more-->
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sysctl -w "net.netfilter.nf_conntrack_max=20000"
+</span><span class="line">sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><a href="http://www.wendangz.com/idc/linux/967.html">http://www.wendangz.com/idc/linux/967.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[穆斯林禁食猪肉常见问答]]></title>
@@ -821,62 +844,6 @@ hashtags:是tag标签</p>
 <p>扩展阅读：</p>
 
 <p>HPV testing for men <a href="http://answers.google.com/answers/threadview/id/564071.html">http://answers.google.com/answers/threadview/id/564071.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[foursquare添加venue]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/08/foursquare-add-venue/"/>
-    <updated>2013-06-08T17:52:12+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/08/foursquare-add-venue</id>
-    <content type="html"><![CDATA[<p>关键词：foursquare add venue 地标</p>
-
-<h3 id="foursquarevenue">foursquare添加venue</h3>
-<p>在浏览器里访问<a href="https://foursquare.com/add_venue">https://foursquare.com/add_venue</a>可以添加新的venue。<br />
-在客户端里，Check in后进行搜索，搜索列表的最下端提示：Not listed,add this place to check in here,点击进行添加venue。  </p>
-
-<!--more-->
-
-<h3 id="venue">venue各项数据</h3>
-<p>因为foursquare是全球的服务，添加的venue数据最好要有英文，特别是名称(Name)和地点(Address)，没有对应英文名称的可以用汉语拼音。名称不要附加分店信息，地址可以参考Google maps上的英文地址，方便别人通过地图进行查找和确认。twitter是venue所在地的twitter，不是创建者的twitter，电话同样是venue所在地的电话。<br />
-地址上常用的英文缩写：</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>缩写</td>
-      <td>中文</td>
-    </tr>
-    <tr>
-      <td>Ave</td>
-      <td>大道</td>
-    </tr>
-    <tr>
-      <td>Rd</td>
-      <td>路</td>
-    </tr>
-    <tr>
-      <td>Dist</td>
-      <td>区</td>
-    </tr>
-    <tr>
-      <td>St</td>
-      <td>街</td>
-    </tr>
-    <tr>
-      <td>No.x</td>
-      <td>xx号</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="su1superuser">申请SU1（SuperUser）</h3>
-<p><a href="https://foursquare.com/xixitalk/upgrade">https://foursquare.com/xixitalk/upgrade</a>，xixitalk替换成你自己的用户名。</p>
-
-<h3 id="section">扩展阅读</h3>
-<p>Recommendation of venue info style in China(中文) </p>
-
-<p><a href="https://docs.google.com/document/d/1yuNOafJZb9EhsEvtI2snxLt3jkDOR6mrOsI7sh8fHXk">https://docs.google.com/document/d/1yuNOafJZb9EhsEvtI2snxLt3jkDOR6mrOsI7sh8fHXk</a></p>
 ]]></content>
   </entry>
   
