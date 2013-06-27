@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-06-25T22:00:40+08:00</updated>
+  <updated>2013-06-27T18:24:31+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[邯郸一家三口捞寻坠落粪坑手机致两人身亡]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/06/27/death-for-sesame/"/>
+    <updated>2013-06-27T18:59:21+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/27/death-for-sesame</id>
+    <content type="html"><![CDATA[<p>新闻来源<a href="http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm">http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm</a></p>
+
+<p>女儿手机掉粪坑，下粪坑捞手机被毒倒，父母赶到也被毒倒。</p>
+
+<!--more-->
+
+<p>无独有偶，<a href="http://csxb.bandao.cn/data/20120917/html/32/content_6.html">北爱尔兰也发生过一条宠物狗掉粪坑，一家四口为救它死了仨</a>，幸存那个人也因吸入大量的粪便和沼气，肺部、食管、呼吸道等器官受损严重。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[西奥克兰发生一起自杀溺亡]]></title>
@@ -823,46 +839,6 @@ hashtags:是tag标签</p>
 <!--more-->
 
 <p>还有一个<a href="http://www.serfish.com/console/">http://www.serfish.com/console/</a>，不过免费情况几乎没法用，不停的弹验证码骚扰。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[用mathjax显示数学公式]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula/"/>
-    <updated>2013-06-09T07:32:24+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/09/mathjax-math-formula</id>
-    <content type="html"><![CDATA[<p>具体可以参看这篇博客<a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/</a></p>
-
-<p>几点特殊说明如下：<br />
-1、 <code>rdiscount</code> 要换成 <code>kramdown</code>，原因<code>rdiscount</code>会将公式的特殊字符转换成HTML的关键词sup、sub等。<br />
-2、 MathJax放在<code>source\_includes\custom\head.html</code>更合适，可以精简为下面,原因是kramdown不认inline单个$  </p>
-
-<!--more-->
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;!-- mathjax config similar to math.stackexchange --&gt;  
-</span><span class="line">
-</span><span class="line">&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"&gt;&lt;/script&gt;
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>3、 要按照博客的说明，解决公式右键点击白屏的问题<br />
-4、 用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</p>
-
-<p>如，单独居中的欧拉公式</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<script type="math/tex; mode=display">  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 </script>
-
-<p>行内的欧拉公式<script type="math/tex">  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 </script>显示</p>
-
-<p>一元二次方式求根公式</p>
-
-<script type="math/tex; mode=display"> x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b} </script>
 ]]></content>
   </entry>
   
