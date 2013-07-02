@@ -6,7 +6,7 @@ comments: true
 mathjax: false
 categories: base64
 ---
-用base64进行关键词编码
+用base64对关键词进行两次编码，浏览器客户端用javascript进行两次解码。对于支持javascript的浏览器来说透明，目的是防止关键词过滤。
 
 <!--more-->
 
