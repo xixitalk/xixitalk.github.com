@@ -1,0 +1,16 @@
+---
+layout: post
+title: "用base64进行关键词编码"
+date: 2013-07-02 22:01:04
+comments: true
+mathjax: false
+categories: base64
+---
+用base64进行关键词编码
+
+<!--more-->
+
+如
+
+{% base64_2 防火墙 民主 自由 %}
+
