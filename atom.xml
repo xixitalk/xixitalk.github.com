@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-03T19:15:12+08:00</updated>
+  <updated>2013-07-04T07:18:02+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[中国社会现状及未来发展]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/04/china-society/"/>
+    <updated>2013-07-04T07:10:53+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/04/china-society</id>
+    <content type="html"><![CDATA[<p><a href="http://cn.nytimes.com/china/20130625/cc25lifan2/">李凡（下）：中国转型能否避免崩溃一途?</a></p>
+
+<!--more-->
+
+<p>{% base64_2<br />
+3. 中国转型能否避免崩溃一途?
+中国没有反对党，没有言论自由，还是极权主义，还不是威权主义。中国只有两种结果：转型成功或者崩溃。中国的出路只能是崩溃，社会主义国家没有成功的先例。
+%}</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用base64进行关键词编码]]></title>
@@ -812,37 +828,6 @@ imdb:<a href="http://www.imdb.com/title/tt1389096/">http://www.imdb.com/title/tt
 <p><img src="http://uk.web.img2.acsta.net/medias/nmedia/18/95/98/07/20483671.jpg" alt="stand up guys" /></p>
 
 <p>人人影视不解释 <a href="http://www.yyets.com/resource/28117">http://www.yyets.com/resource/28117</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[分享到twitter的方法]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/11/share-to-twitter/"/>
-    <updated>2013-06-11T06:41:26+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/11/share-to-twitter</id>
-    <content type="html"><![CDATA[<p>分享到twitter的方法：</p>
-
-<!--more-->
-
-<p>第一种：https://twitter.com/share</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">https://twitter.com/share?url=http://www.google.com&amp;hashtags=hash&amp;text=分享的文本
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>url:是分享的url地址<br />
-text:是分享的文本<br />
-hashtags:是tag标签</p>
-
-<p><a href="https://twitter.com/share?url=http://xixitalk.github.com&amp;hashtags=twitterShare&amp;text=分享的文本">https://twitter.com/share?url=http://xixitalk.github.com&amp;hashtags=twitterShare&amp;text=分享的文本</a></p>
-
-<p>第二种：http://twitter.com/home</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><a href="http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/">http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ssh%20client%20http://xixitalk.github.com/blog/2013/06/10/web-ssh-client/</a></p>
 ]]></content>
   </entry>
   
