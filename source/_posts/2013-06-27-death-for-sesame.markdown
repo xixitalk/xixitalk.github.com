@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "邯郸一家三口捞寻坠落粪坑手机致两人身亡"
+title: "达尔文奖"
 date: 2013-06-27 10:59:21
 comments: true
 mathjax: false
