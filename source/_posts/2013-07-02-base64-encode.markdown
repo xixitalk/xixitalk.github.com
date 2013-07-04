@@ -23,9 +23,4 @@ GFW 民主 自由 胡锦涛 江泽民
 把<https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js>保存为base64.js，放到`octopress\source\javascripts`目录。
 
 ###使用base64_block使用
-
-```
-{% base64_block %}
-This text will be encoded twice with base64
-{% endbase64_block %}
-```
+使用`base64_block`和`endbase64_block`包含需要编码的段落。详细参看`base64_block.rb`文件前部的注释说明。注意：一篇文章里只能有一个`base64_block`块。
