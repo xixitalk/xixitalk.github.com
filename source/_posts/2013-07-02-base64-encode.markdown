@@ -10,8 +10,22 @@ categories: base64
 
 <!--more-->
 
-如
+如(查看网页源代码)
+
 {% base64_block %}
- 防火墙 民主 自由 邓小平 胡锦涛 江泽民 习近平 法轮功 西藏 新疆 
+GFW 民主 自由 胡锦涛 江泽民 
 {% endbase64_block %}
 
+###base64_block.rb
+把<https://gist.github.com/xixitalk/5927023>代码保存为base64_block.rb，放到`octopress\plugins`目录。
+
+###base64.js
+把<https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js>保存为base64.js，放到`octopress\source\javascripts`目录。
+
+###使用base64_block使用
+
+```
+{% base64_block %}
+This text will be encoded twice with base64
+{% endbase64_block %}
+```
