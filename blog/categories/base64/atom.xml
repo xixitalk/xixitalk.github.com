@@ -4,7 +4,7 @@
   <title><![CDATA[Category: base64 | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/base64/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-04T19:17:11+08:00</updated>
+  <updated>2013-07-04T20:04:37+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -22,9 +22,21 @@
 
 <!--more-->
 
-<p>如
-<script src='/javascripts/base64.js' type='text/javascript'> </script> <span id='base64_block'>Q2lEcG1MTG5nYXZsb3BrZzVyQ1I1TGk3SU9pSHF1ZVVzU0RwZ3BQbHNJL2x1Yk1nNklPaDZaU201cmFiSU9heG4rYXp2ZWF3a1NEa3VhRG92NUhsdWJNZzVyT1Y2TDJ1NVlxZklPaWx2K2lYanlEbWxyRG5sb1lnQ2c9PQ==</span> <script type='text/javascript'> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
+<p>如(查看网页源代码)</p>
 
+<p><script src='/javascripts/base64.js' type='text/javascript'> </script> <span id='base64_block'>Q2tkR1Z5RG1zSkhrdUxzZzZJZXE1NVN4SU9pRG9lbVVwdWEybXlEbXNaL21zNzNtc0pFZ0NnPT0=</span> <script type='text/javascript'> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
+
+<h3 id="base64blockrb">base64_block.rb</h3>
+<p>把<a href="https://gist.github.com/xixitalk/5927023">https://gist.github.com/xixitalk/5927023</a>代码保存为base64_block.rb，放到<code>octopress\plugins</code>目录。</p>
+
+<h3 id="base64js">base64.js</h3>
+<p>把<a href="https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js">https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js</a>保存为base64.js，放到<code>octopress\source\javascripts</code>目录。</p>
+
+<h3 id="base64block">使用base64_block使用</h3>
+
+<p><code>
+<script src='/javascripts/base64.js' type='text/javascript'> </script> <span id='base64_block'>Q2xSb2FYTWdkR1Y0ZENCM2FXeHNJR0psSUdWdVkyOWtaV1FnZEhkcFkyVWdkMmwwYUNCaVlYTmxOalFL</span> <script type='text/javascript'> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script>
+</code></p>
 ]]></content>
   </entry>
   

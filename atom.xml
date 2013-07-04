@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-04T19:17:11+08:00</updated>
+  <updated>2013-07-04T20:04:37+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -36,9 +36,24 @@
 
 <!--more-->
 
-<p>如
-<script src="http://xixitalk.github.com/javascripts/base64.js" type="text/javascript"> </script> <span id="base64_block">RFFvZzZaaXk1NEdyNWFLWklPYXdrZVM0dXlEb2g2cm5sTEVnNllLVDViQ1A1Ym16SU9pRG9lbVVwdWEybXlEbXNaL21zNzNtc0pFZzVMbWc2TCtSNWJteklPYXpsZWk5cnVXS255RG9wYi9vbDQ4ZzVwYXc1NWFHSUEwSw==</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
+<p>如(查看网页源代码)</p>
 
+<script src="http://xixitalk.github.com/javascripts/base64.js" type="text/javascript"> </script>
+<p><span id="base64_block">RFFwSFJsY2c1ckNSNUxpN0lPaUhxdWVVc1NEb2c2SHBsS2JtdHBzZzVyR2Y1ck85NXJDUklBMEs=</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
+
+<h3 id="base64blockrb">base64_block.rb</h3>
+<p>把<a href="https://gist.github.com/xixitalk/5927023">https://gist.github.com/xixitalk/5927023</a>代码保存为base64_block.rb，放到<code>octopress\plugins</code>目录。</p>
+
+<h3 id="base64js">base64.js</h3>
+<p>把<a href="https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js">https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js</a>保存为base64.js，放到<code>octopress\source\javascripts</code>目录。</p>
+
+<h3 id="base64block">使用base64_block使用</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"><script src="http://xixitalk.github.com/javascripts/base64.js" type="text/javascript"> </script> <span id="base64_block">RFFvOEwzTndZVzQrUEhOd1lXNGdZMnhoYzNNOUoyeHBibVVuUGxSb2FYTWdkR1Y0ZENCM2FXeHNJR0psSUdWdVkyOWtaV1FnZEhkcFkyVWdkMmwwYUNCaVlYTmxOalFOQ2p3dmMzQmhiajQ4YzNCaGJpQmpiR0Z6Y3owbmJHbHVaU2Mr</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
   </entry>
   
