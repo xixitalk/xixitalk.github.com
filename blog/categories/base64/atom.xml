@@ -4,7 +4,7 @@
   <title><![CDATA[Category: base64 | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/base64/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-04T07:34:46+08:00</updated>
+  <updated>2013-07-04T19:17:11+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -23,7 +23,7 @@
 <!--more-->
 
 <p>如
-<script src='/javascripts/base64.js' type='text/javascript'> </script> <span id='base64_2'>NlppeTU0R3I1YUtaSU9hd2tlUzR1eURvaDZybmxMRWc2WUtUNWJDUDVibXpJT2lEb2VtVXB1YTJteURtc1ovbXM3M21zSkVnNUxtZzZMK1I1Ym16SU9hemxlaTlydVdLbnlEb3BiL29sNDhnNXBhdzU1YUdJQT09</span> <script type='text/javascript'> var line_name = 'base64_2';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
+<script src='/javascripts/base64.js' type='text/javascript'> </script> <span id='base64_block'>Q2lEcG1MTG5nYXZsb3BrZzVyQ1I1TGk3SU9pSHF1ZVVzU0RwZ3BQbHNJL2x1Yk1nNklPaDZaU201cmFiSU9heG4rYXp2ZWF3a1NEa3VhRG92NUhsdWJNZzVyT1Y2TDJ1NVlxZklPaWx2K2lYanlEbWxyRG5sb1lnQ2c9PQ==</span> <script type='text/javascript'> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
 
 ]]></content>
   </entry>
