@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-04T22:21:38+08:00</updated>
+  <updated>2013-07-05T15:56:09+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[乙肝五项指标]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes/"/>
+    <updated>2013-07-05T23:41:59+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes</id>
+    <content type="html"><![CDATA[<p>乙型肝炎病毒表面抗原	HBsAg	阴性<br />
+乙型肝炎病毒表面抗体	HBsAb	阳性<br />
+乙型肝炎病毒e抗原	HBeAg	阴性<br />
+乙型肝炎病毒e抗体	HBeAb	阴性<br />
+乙型肝炎病毒核心抗体	HBcAb	阴性  </p>
+
+<p>最好的结果是阴、阳、阴、阴、阴，表示未携带乙肝病毒，并且有乙肝疫苗抗体。</p>
+
+<!--more-->
+
+<p>如果五项全是阴，表示未携带乙肝病毒，但是未有乙肝疫苗抗体，需要注射乙肝疫苗抗体。<br />
+其他“小三阳”和“大三阳”自行搜索吧。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[中国社会现状及未来发展]]></title>
@@ -809,36 +830,6 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
 
 <p>Zhōu  gōng  tǔ   bǔ  tiān  xià  guī   xīn <br />
 周      公   吐  哺 ，天   下   归   心 。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[推荐电影《stand up guys 哥们站直了》]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/12/movie-stan-up-guys/"/>
-    <updated>2013-06-12T04:12:01+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/12/movie-stan-up-guys</id>
-    <content type="html"><![CDATA[<p>刚才在推上看到 <a href="http://twitter.com/justone_he">@justone_he</a> 推荐电影《stand up guys》，下载一看果然不错。</p>
-
-<p><img src="http://www.impawards.com/2012/posters/stand_up_guys_ver3.jpg" alt="stand up guys" /><br />
-imdb:<a href="http://www.imdb.com/title/tt1389096/">http://www.imdb.com/title/tt1389096/</a></p>
-
-<p>看头：阿尔·帕西诺、克里斯托弗·沃肯和艾伦·阿金老戏骨的精彩表演。</p>
-
-<p>维尔（阿尔·帕西诺饰）28年前犯事入狱，在监狱里一句也没说出卖兄弟的话，但是一个黑老大认为是他乱枪打死自己唯一的儿子。维尔在监狱里坐了28年牢终于假释出狱，老基友达克（克里斯托弗·沃肯饰）来接他，年过花甲的维尔和达克重述衷肠，缅怀过去年青时光，庆祝狂欢一下生活重新开始。维尔却慢慢感觉到了黑老大要向他动手了，杀手是谁呢？</p>
-
-<!-- more -->
-
-<p><img src="http://images.screenrush.co.uk/medias/nmedia/18/93/48/96/20259392.jpg" alt="stand up guys" /></p>
-
-<p><img src="http://images.screenrush.co.uk/medias/nmedia/18/93/18/04/20240304.jpg" alt="stand up guys" /></p>
-
-<p><img src="http://images.screenrush.co.uk/medias/nmedia/18/95/98/07/20483674.jpg" alt="stand up guys" /></p>
-
-<p><img src="http://www.movie-moron.com/wp-content/gallery/review/stand-up-guys-review-2.jpg" alt="stand up guys" /></p>
-
-<p><img src="http://uk.web.img2.acsta.net/medias/nmedia/18/95/98/07/20483671.jpg" alt="stand up guys" /></p>
-
-<p>人人影视不解释 <a href="http://www.yyets.com/resource/28117">http://www.yyets.com/resource/28117</a></p>
 ]]></content>
   </entry>
   
