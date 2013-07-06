@@ -24,3 +24,13 @@ GFW 民主 自由 胡锦涛 江泽民
 
 ###使用base64_block使用
 使用`base64_block`和`endbase64_block`包含需要编码的段落。详细参看`base64_block.rb`文件前部的注释说明。注意：一篇文章里只能有一个`base64_block`块。
+
+{% raw %}
+
+```
+{% base64_block %}
+这些信息会被编码
+{% endbase64_block %}
+```
+
+{% endraw %}
