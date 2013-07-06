@@ -4,7 +4,7 @@
   <title><![CDATA[Category: society | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/society/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-06T06:29:46+00:00</updated>
+  <updated>2013-07-06T08:05:40+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,7 +18,9 @@
     <link href="http://xixitalk.github.com/blog/2013/07/05/what-will-happen-if-only-one-woman-left/"/>
     <updated>2013-07-05T22:33:32+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/07/05/what-will-happen-if-only-one-woman-left</id>
-    <content type="html"><![CDATA[<p><blockquote><p>【如果世界上只剩一个女人，将会发生什么？】J大神：@煽动安全 同学提到的文章已经全部翻译完成。 供君观赏。 http://zhi.hu/TwlK （分享自 @知乎） 真实事件回答假设性大题，故事很长，但强烈推荐。</p><footer><strong>欧米(‏@omegaleeV)</strong> <cite><a href='https://twitter.com/omegaleeV/status/353114879214882817'>twitter.com/omegaleeV/status/&hellip;</a></cite></footer></blockquote></p>
+    <content type="html"><![CDATA[<p>{% blockquote 欧米(‏@omegaleeV) https://twitter.com/omegaleeV/status/353114879214882817 %}
+【如果世界上只剩一个女人，将会发生什么？】J大神：@煽动安全 同学提到的文章已经全部翻译完成。 供君观赏。 http://zhi.hu/TwlK （分享自 @知乎） 真实事件回答假设性大题，故事很长，但强烈推荐。
+{% endblockquote %}</p>
 
 <!--more-->
 
@@ -210,7 +212,21 @@
 
 <!--more-->
 
-<p><script src='/javascripts/base64.js' type='text/javascript'> </script> <span id='base64_block'>Q2pFdUlPUzRyZVdidmVhVXYrYXl1K2Fvb2VXOGoraUR2ZWkxc09Xa211aS9uTys4bnp4aWNpQXZQZ3JrdTQ0eU1EQXk1Ym0wNWJ5QTVhZUw3N3lNNUxpdDVadTk1Nkd1NWE2ZTVZZTY1NDZ3NUxxRzVMaUE1TGlxNXBhdzU1cUU1cFMvNXJLNzVxaWg1YnlQNzd5TTZMK1o1YkN4NXBpdjVMaU41WkNNNUxxTzVMdWw1YjZBNTd1STZMcXI1TGlBNVlXYTVZaTI1NXFFNG9DYzZabVE1THU3NUxpQTVZV2E1WWkyNG9DZDVxaWg1YnlQNG9DVTRvQ1U1WnlvNUxpQTVZV2E1TGlUNXBTLzU1cUU1WW1ONW8rUTVMaUw3N3lNNVkrcTVZV0I2SzY0NXB5QTZhdVk2YUtHNWErODVMcTY1WnlvNUx1NzVMaWs1YkdLNTVxRTVwUy81cks3NXFpaDVieVA0NENDNUxpTjZLYUI1TDJPNUx5dzZMK1o1NmVONXBTLzVySzc1cWloNWJ5UDU1cUU1WWliNXBhdzU0bTU1b0NuNVpLTTU1U2Y1Wkc5NVlxYjQ0Q0M1Ynk2NUxxNjVwUy81cks3NTVxRTVwZTI1THVqNVkrdjZJTzk2TCtINVk2NzVMcUdMT0tBbk9XNHVPUzZ1dWFVditheXUrS0FuZVdQcitpRHZlUzhtdVM1b09TN3BlUzR1dVc0dU9TNmh1T0FndWVPc09XY3FPYVlyK0tBbk9TNGcrbSttZWF5dSthd3RPS0FuZU9BZ3VLQW5PYU9xT2loak9XNGd1V2N1dUtBbmVhWXIrV0ZtdWltZ2VtU3NlKzhqT0tBbk9tYWtPVzlvdVM0bHVpaXJlS0FuZWFZcitXRm11aW1nZVdSdmVPQWd1V0ZtdWFkZythdmxPVzdpZWEwZ2VhYnRPbUhqZWltZ2UrOGpPV091K2VKdWVhZGcrV01sdWFZcittZHFlaUhxdVczc2VlYWhPV1J2ZVM0amVXUHIraUR2ZVdIdXVlT3NPZWFoT1M2aSthRGhlT0Fnand2Y0Q0S0NqeHdJQzgrQ2p4dmJENEtJQ0E4YkdrKzVMaTY1THVBNUxtSTU0Nnc1WnlvNTVxRTVvU1A2SytHNWIyaTVvQ0I1WStZNWI2WDVxK1U2TDZENWJlbUlEeGljaUF2UGdybnBMN2t2SnJtc0pIa3ZKZm5tb1RtaEkvb3I0Ym1yNVRvdm9QbHQ2YnZ2SXptc0pIa3ZKZm5tb1RwbTRia3ZaUG9yckRsdjRibW1LL21yNXZtbDdia3U2UGpnSUxtcjV2bWw3Ymt1NlBrdXJya3VycnBnNzNtbklubHQ2WGt2Wnp2dkl6bXNxSGt1NERrdVlqb3RLdmxyNHpsdDY3b3Q1M3Z2SXpsdDZYa3VycnBtTGJudXFmbW1LL3Bvb2Jscjd6cG1MYm51cWZ2dkl6bHViTHBnNmptc3FIbW5JbnBtby9rdnIvbWlaUGt1cnJqZ0lMa3VKem1yS2ZsaGJIa3VxZmt1THZrdVlubm9MVGt1cWZvdmF6bG5vdm1tSy9tc0pIa3ZKZm1uSW5pZ0p6b2g2cm5sTEhtc0pIa3VMdmlnSjNubW9UcG00Ymt2WlBvcnJEbHY0YnZ2SXpsdlpQbGhiSGt1cWZrdUx2a3VZbmxrb3pvaTQvb2daVG1xS0hsdkkvbGg3cm5qckRwbDY3cG9wam5tb1RtbDdibGdKbnZ2SXptc0pIa3ZKZm1qNURsaDdybHZvRG9oNnJubExIbXNKSGt1THZvdmF6dnZJemt1SzNsbTczbXNxSG1uSW5vdjVubnA0M3BtNGJrdlpQb3JyRGx2NGJqZ0lMa3VLM2xtNzNtc0pIa3ZKZmxyN25pZ0p6b2g2cm5sTEhtc0pIa3VMdmlnSjNrdUkzbm9hN2xycHJ2dkl6bHI3bmt1STNub2E3bHJwcm5tb1RrdUp6b3BiL2xzTEhrdkpybHZwZmxoN3JvdjVubW9MZm51NVBvcnJydnZKcmt1SzNsbTczbWtKN29oNnJubExIbXNKSGt1THZrdkpybW03VGt1YkhqZ0lMbGhacmxrb3ptbEwvbHVwemt1Wi9wb2JybGlyL292NW5tb0xmbHJxUGt2S0RqZ0lMa3VLM2xtNzNtc3FIbW5JbmxqNDNscjdubGhacnZ2SXpsdlpQbGhacmxrb3ptbEwvbHVwem1sTC9uclpibW5iN25tb1RtbDdibGdKbnZ2SXprdUkza3ZKcmt1b25sajVibWxML21zcnZtbllQbGlLbnZ2SXpvZ0l6bW1LL251N1RtbllQa3VMN25pWXpwbDdua3VvdnZ2SXpwZ0tEbWlKRG5tb1RudTVQbW5wemxzTEhtbUsvbWxML25yWmJsajRqbnRLZmx2S0RvdGJmbW5hWGpnSUk4TDJ4cFBnbzhMMjlzUGdvS1BIQWdMejRLUEc5c1Bnb2dJRHhzYVQ3a3VLM2xtNzNvdmF6bG5vdm9nNzNsa0ticGdiL2xoWTNsdEtubXVvUGt1SURwZ0pRL0lEeGljaUF2UGdya3VLM2xtNzNtc3FIbW5JbmxqNDNscjdubGhacnZ2SXptc3FIbW5Jbm9xSURvcnJyb2g2cm5sTEh2dkl6b3Y1am1tSy9tbm9IbW5ZUGt1THZrdVludnZJem92NWprdUkzbW1LL2xxSUhtbllQa3VMdmt1WW5qZ0lMa3VLM2xtNzNsajZybW5Jbmt1S1RucDQzbnU1UG1ucHp2dkpyb3Zhemxub3ZtaUpEbGlwL21pSmJvZ0lYbHRLbm11b1BqZ0lMa3VLM2xtNzNubW9UbGg3cm90Ni9sajZyb2c3M21tSy9sdEtubXVvUHZ2SXpucEw3a3ZKcmt1THZrdVlubG03M2xycmJtc3FIbW5Jbm1pSkRsaXAvb3Zhemxub3ZubW9UbGhZamt2b3ZqZ0lJSw==</span> <script type='text/javascript'> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></li>
+<p>{% base64_block %}
+1. 中国政治模式能走多远？<br />
+从2002年开始，中国确实出现了一个新的政治模式，这就是不同于以往终身一党制的“限任一党制”模式——在一党专政的前提下，只允许最高领导人在任两届的政治模式。不要低估这种政治模式的创新特性和生命力。强人政治的时代可能过去了,“常人政治”可能会习以为常了。现在是“七龙治水”。“推行市场”是党要钱，“隐形世袭”是党要命。党权比廉洁更重要，去特权化是革自己的命不可能出现的事情。</p>
+
+<p />
+<ol>
+  <li>为什么现在的意识形态变得比较左 <br />
+社会民众的意识比较左，民众的集体记忆是毛时代。毛时代人人都有工作，没什么贫富差距，工人阶级是领导阶级，干部没有随便打人。东欧共产主义破产转型是民众有“自由民主”的集体记忆，当共产主义和苏联模式出现问题的时候，民众提出往自由民主转，中国没有这种集体记忆。中国民众对“自由民主”不确定，对不确定的东西就会得出这样结论：中国搞自由民主会更乱。党和政府也顺势这样宣传。中国没有反对党，当党和政府政策松的时候，不会争取政治权利，而是维权举牌闹事，造成的结果就是政策又紧张起来。</li>
+</ol>
+
+<p />
+<ol>
+  <li>中国转型能否避免崩溃一途? <br />
+中国没有反对党，没有言论自由，还是极权主义，还不是威权主义。中国只有两种结果：转型成功或者崩溃。中国的出路只能是崩溃，社会主义国家没有成功转型的先例。
+{% endbase64_block %}</li>
 </ol>
 ]]></content>
   </entry>
