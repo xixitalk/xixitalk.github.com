@@ -4,7 +4,7 @@
   <title><![CDATA[Category: base64 | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/base64/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-06T06:15:10+00:00</updated>
+  <updated>2013-07-06T06:29:46+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -37,11 +37,10 @@
 
 <p></p>
 
-<p><code>
-{% base64_block %}
+<pre><code>{% base64_block %}
 这些信息会被编码
 {% endbase64_block %}
-</code></p>
+</code></pre>
 
 <p></p>
 ]]></content>
