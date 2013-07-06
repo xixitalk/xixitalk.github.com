@@ -27,10 +27,10 @@ GFW 民主 自由 胡锦涛 江泽民
 
 {% raw %}
 
-```
+~~~
 {% base64_block %}
 这些信息会被编码
 {% endbase64_block %}
-```
+~~~
 
 {% endraw %}
