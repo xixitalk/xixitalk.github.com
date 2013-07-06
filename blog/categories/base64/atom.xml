@@ -4,7 +4,7 @@
   <title><![CDATA[Category: base64 | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/base64/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-05T22:51:28+08:00</updated>
+  <updated>2013-07-06T00:39:27+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[用base64进行关键词编码]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/03/base64-encode/"/>
-    <updated>2013-07-03T06:01:04+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/03/base64-encode</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/02/base64-encode/"/>
+    <updated>2013-07-02T22:01:04+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/02/base64-encode</id>
     <content type="html"><![CDATA[<p>用base64对关键词进行两次编码，浏览器客户端用javascript进行两次解码。对于支持javascript的浏览器来说透明，目的是防止关键词过滤。</p>
 
 <!--more-->

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-05T22:51:28+08:00</updated>
+  <updated>2013-07-06T00:39:27+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,9 +14,26 @@
 
   
   <entry>
+    <title type="html"><![CDATA[中国时区：CCT]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/06/china-coast-time/"/>
+    <updated>2013-07-06T08:17:55+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/06/china-coast-time</id>
+    <content type="html"><![CDATA[<p>octopress的<code>rake generate</code>的时候，如果时间在晚上22：00到24：00左右，发现生成的博客HTML文件日期会是第二天的日期。Google之后有人说要加<code>TZ=CCT</code>来设定时区。</p>
+
+<!--more-->
+
+<p>CCT（China Coast Time）是中国沿海时间。在用户目录下<code>.profile</code>或者<code>.bashrc</code>加入<code>TZ=CCT</code>。</p>
+
+<p><code>
+export TZ=CCT
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[搭建局域网跨路由网络]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/22/routing-cross/"/>
-    <updated>2013-06-22T17:34:57+08:00</updated>
+    <updated>2013-06-22T09:34:57+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/22/routing-cross</id>
     <content type="html"><![CDATA[<p>场景：两个路由器每个都组建一个局域网，每个局域网里的电脑想访问另一个局域网的电脑。</p>
 
@@ -30,7 +47,7 @@
   <entry>
     <title type="html"><![CDATA[python从字符串用readlines读取操作]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/"/>
-    <updated>2013-06-13T17:57:17+08:00</updated>
+    <updated>2013-06-13T09:57:17+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string</id>
     <content type="html"><![CDATA[<p>场景：用<a href="http://curl.haxx.se/">cURL</a>命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作</p>
 
@@ -73,7 +90,7 @@ import StringIO</p>
   <entry>
     <title type="html"><![CDATA[数字签名时的私钥加密公钥解密]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/07/digest-signature/"/>
-    <updated>2013-06-07T23:33:05+08:00</updated>
+    <updated>2013-06-07T15:33:05+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/07/digest-signature</id>
     <content type="html"><![CDATA[<p>疑问：数字签名时的<code>私钥加密 公钥解密</code>怎么理解？</p>
 
@@ -123,7 +140,7 @@ import StringIO</p>
   <entry>
     <title type="html"><![CDATA[反对『中医』理由汇集]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/06/Anti-Traditional-Chinese-medicine/"/>
-    <updated>2013-06-06T17:59:58+08:00</updated>
+    <updated>2013-06-06T09:59:58+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/06/Anti-Traditional-Chinese-medicine</id>
     <content type="html"><![CDATA[<h3 id="section">中药制剂是大分子，容易造成肾衰</h3>
 <p>中药制剂是大分子，输液进入血液循环系统，造成肾衰。

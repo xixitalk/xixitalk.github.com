@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-05T22:51:28+08:00</updated>
+  <updated>2013-07-06T00:39:27+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,10 +14,27 @@
 
   
   <entry>
+    <title type="html"><![CDATA[中国时区：CCT]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/06/china-coast-time/"/>
+    <updated>2013-07-06T08:17:55+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/06/china-coast-time</id>
+    <content type="html"><![CDATA[<p>octopress的<code>rake generate</code>的时候，如果时间在晚上22：00到24：00左右，发现生成的博客HTML文件日期会是第二天的日期。Google之后有人说要加<code>TZ=CCT</code>来设定时区。</p>
+
+<!--more-->
+
+<p>CCT（China Coast Time）是中国沿海时间。在用户目录下<code>.profile</code>或者<code>.bashrc</code>加入<code>TZ=CCT</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">export TZ=CCT
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[如果世界上只剩一个女人，将会发生什么？]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/06/what-will-happen-if-only-one-woman-left/"/>
-    <updated>2013-07-06T06:33:32+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/06/what-will-happen-if-only-one-woman-left</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/05/what-will-happen-if-only-one-woman-left/"/>
+    <updated>2013-07-05T22:33:32+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/05/what-will-happen-if-only-one-woman-left</id>
     <content type="html"><![CDATA[<blockquote><p>【如果世界上只剩一个女人，将会发生什么？】J大神：@煽动安全 同学提到的文章已经全部翻译完成。 供君观赏。 http://zhi.hu/TwlK （分享自 @知乎） 真实事件回答假设性大题，故事很长，但强烈推荐。</p><footer><strong>欧米(‏@omegaleeV)</strong> <cite><a href="https://twitter.com/omegaleeV/status/353114879214882817">twitter.com/omegaleeV/status/&hellip;</a></cite></footer></blockquote>
 
 <!--more-->
@@ -205,7 +222,7 @@
   <entry>
     <title type="html"><![CDATA[乙肝五项指标]]></title>
     <link href="http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes/"/>
-    <updated>2013-07-05T23:41:59+08:00</updated>
+    <updated>2013-07-05T15:41:59+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes</id>
     <content type="html"><![CDATA[<p>乙型肝炎病毒表面抗原      HBsAg	    阴性<br />
 乙型肝炎病毒表面抗体      HBsAb	    阳性<br />
@@ -225,9 +242,9 @@
   
   <entry>
     <title type="html"><![CDATA[中国社会现状及未来发展]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/04/china-society/"/>
-    <updated>2013-07-04T07:10:53+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/04/china-society</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/03/china-society/"/>
+    <updated>2013-07-03T23:10:53+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/03/china-society</id>
     <content type="html"><![CDATA[<p><a href="http://cn.nytimes.com/china/20130703/cc03fangshaowei/">方绍伟：中国政治模式能走多远？</a></p>
 
 <p><a href="http://cn.nytimes.com/china/20130624/cc24lifan1/">李凡（上）：为什么现在的意识形态变得比较左</a><br />
@@ -242,9 +259,9 @@
   
   <entry>
     <title type="html"><![CDATA[用base64进行关键词编码]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/03/base64-encode/"/>
-    <updated>2013-07-03T06:01:04+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/03/base64-encode</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/02/base64-encode/"/>
+    <updated>2013-07-02T22:01:04+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/02/base64-encode</id>
     <content type="html"><![CDATA[<p>用base64对关键词进行两次编码，浏览器客户端用javascript进行两次解码。对于支持javascript的浏览器来说透明，目的是防止关键词过滤。</p>
 
 <!--more-->
@@ -268,7 +285,7 @@
   <entry>
     <title type="html"><![CDATA[达尔文奖]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/27/death-for-sesame/"/>
-    <updated>2013-06-27T18:59:21+08:00</updated>
+    <updated>2013-06-27T10:59:21+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/27/death-for-sesame</id>
     <content type="html"><![CDATA[<p>新闻来源<a href="http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm">http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm</a></p>
 
@@ -285,9 +302,9 @@
   
   <entry>
     <title type="html"><![CDATA[西奥克兰发生一起自杀溺亡]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious/"/>
-    <updated>2013-06-26T00:57:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/25/West-Auckland-drowning-not-suspicious/"/>
+    <updated>2013-06-25T16:57:00+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/25/West-Auckland-drowning-not-suspicious</id>
     <content type="html"><![CDATA[<p>来源:<a href="http://www.3news.co.nz/West-Auckland-drowning-not-suspicious/tabid/423/articleID/302561/Default.aspx">West Auckland drowning not suspicious</a></p>
 
 <p>Police say the death of a man found in a stream bordering the west Auckland suburbs of Henderson and Massey was not suspicious.<br />
@@ -323,7 +340,7 @@ Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
   <entry>
     <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/"/>
-    <updated>2013-06-25T16:57:52+08:00</updated>
+    <updated>2013-06-25T08:57:52+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error</id>
     <content type="html"><![CDATA[<p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
 
@@ -350,7 +367,7 @@ Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
   <entry>
     <title type="html"><![CDATA[穆斯林禁食猪肉常见问答]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/23/PORK-FORBIDDEN/"/>
-    <updated>2013-06-23T15:42:11+08:00</updated>
+    <updated>2013-06-23T07:42:11+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/23/PORK-FORBIDDEN</id>
     <content type="html"><![CDATA[<p>第一个信息来源 <a href="http://www.irf.net/index.php?option=com_content&amp;view=article&amp;id=394%3Apork-forbidden&amp;catid=71%3Amost-common-questions-asked-by-non-muslim&amp;Itemid=199">FAQs Most Common Questions asked by Non Muslims：PORK FORBIDDEN</a></p>
 
@@ -433,7 +450,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[搭建局域网跨路由网络]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/22/routing-cross/"/>
-    <updated>2013-06-22T17:34:57+08:00</updated>
+    <updated>2013-06-22T09:34:57+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/22/routing-cross</id>
     <content type="html"><![CDATA[<p>场景：两个路由器每个都组建一个局域网，每个局域网里的电脑想访问另一个局域网的电脑。</p>
 
@@ -447,7 +464,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[世界卫生组织（WHO）对转基因技术的看法]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/21/WHO-Transgene/"/>
-    <updated>2013-06-21T19:23:57+08:00</updated>
+    <updated>2013-06-21T11:23:57+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/21/WHO-Transgene</id>
     <content type="html"><![CDATA[<p>世界卫生组织（WHO）2005年的生物技术报告 <a href="http://www.who.int/foodsafety/fs_management/No_04_Biotech_Jun05_ch.pdf">http://www.who.int/foodsafety/fs_management/No_04_Biotech_Jun05_ch.pdf</a></p>
 
@@ -465,9 +482,9 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   
   <entry>
     <title type="html"><![CDATA[octopress加快rake generate速度]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy/"/>
-    <updated>2013-06-20T05:35:54+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/Octopress-Rake-gen_deploy/"/>
+    <updated>2013-06-19T21:35:54+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/Octopress-Rake-gen_deploy</id>
     <content type="html"><![CDATA[<p>octopress随着文件越来越多，<code>rake generate</code>越来越慢。这样可以加快速度。</p>
 
 <!--more-->
@@ -498,9 +515,9 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   
   <entry>
     <title type="html"><![CDATA[从已经存在的octopress新建环境]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress/"/>
-    <updated>2013-06-20T02:45:41+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/clone-from-exist-octopress/"/>
+    <updated>2013-06-19T18:45:41+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/clone-from-exist-octopress</id>
     <content type="html"><![CDATA[<p>场景需求：为已经存在的octopress博客在另一个目录或者主机新建一个octopress发布环境</p>
 
 <h3 id="sourcemaster">获得source和master分支代码</h3>
@@ -529,7 +546,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[Dnsmasq上分发WPAD]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq/"/>
-    <updated>2013-06-19T22:34:04+08:00</updated>
+    <updated>2013-06-19T14:34:04+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Web_Proxy_Autodiscovery_Protocol">WPAD</a>全称是Web Proxy Auto-Discovery，可以通过DHCP或者DNS进行代理分发，这样局域网里客户端连接上后自动进行代理。</p>
 
@@ -571,7 +588,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[octopress里插入flickr的图片]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress/"/>
-    <updated>2013-06-19T18:17:24+08:00</updated>
+    <updated>2013-06-19T10:17:24+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com">flickr</a>更新之后，免费1T空间，同时可以上传质量很好的图片。<a href="http://www.instagram.com">instagram</a>的图片质量太差了。</p>
 
@@ -625,9 +642,9 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   
   <entry>
     <title type="html"><![CDATA[grep命令手册]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/19/grep-man/"/>
-    <updated>2013-06-19T01:51:43+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/19/grep-man</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/18/grep-man/"/>
+    <updated>2013-06-18T17:51:43+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/18/grep-man</id>
     <content type="html"><![CDATA[<p>详细参看这个博文 <a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
 
 <p>GNU Grep 2.14 <a href="http://www.gnu.org/software/grep/manual/grep.html">http://www.gnu.org/software/grep/manual/grep.html</a></p>
@@ -766,9 +783,9 @@ DIR 查找的目录范围</p>
   
   <entry>
     <title type="html"><![CDATA[搭建带代理的奶瓶腿]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/"/>
-    <updated>2013-06-16T05:39:29+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/15/netputweets-proxy/"/>
+    <updated>2013-06-15T21:39:29+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/15/netputweets-proxy</id>
     <content type="html"><![CDATA[<p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
 
 <!--more-->
@@ -814,7 +831,7 @@ DIR 查找的目录范围</p>
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上安装Go lang并编译cow proxy]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/"/>
-    <updated>2013-06-14T19:48:41+08:00</updated>
+    <updated>2013-06-14T11:48:41+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi</id>
     <content type="html"><![CDATA[<h3 id="go">安装go语言</h3>
 
@@ -874,7 +891,7 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
   <entry>
     <title type="html"><![CDATA[支持twitter的AppEngine-OAuth-Library]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library/"/>
-    <updated>2013-06-14T17:13:55+08:00</updated>
+    <updated>2013-06-14T09:13:55+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library</id>
     <content type="html"><![CDATA[<p>自己在GAE上写了个浏览twitter的web页面，虽然丑陋但是自我感觉良好，使用的是v1.0的API，这两天twitter停用了v1.0的API，换用v1.1，调试了一下没有调试好，还是直接用别人造好的轮子吧。</p>
 
@@ -888,9 +905,9 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
   
   <entry>
     <title type="html"><![CDATA[李娟《我的阿勒泰》]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/14/wo-de-aletai/"/>
-    <updated>2013-06-14T00:11:55+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/14/wo-de-aletai</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/13/wo-de-aletai/"/>
+    <updated>2013-06-13T16:11:55+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/13/wo-de-aletai</id>
     <content type="html"><![CDATA[<p>李娟《我的阿勒泰》</p>
 
 <p><img src="http://img3.douban.com/lpic/s4507495.jpg" alt="我的阿勒泰" /></p>
@@ -902,61 +919,6 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
 <blockquote>
   <p>每次回家的前一天，总是在超市里转啊,转啊。转到“中老年专柜”，看到麦片，就买回去了。我回到家，说：“这是麦片。”她们都很高兴的样子，因为只听说过，从没吃过。我也没吃过，但还是想当然地煮了一大锅。先给外婆盛一碗，她笑眯眯喝了一口，然后又默默地喝了一口，说：“好喝。”然后，就死活也不肯喝第三口了。</p>
 </blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[python从字符串用readlines读取操作]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/"/>
-    <updated>2013-06-13T17:57:17+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string</id>
-    <content type="html"><![CDATA[<p>场景：用<a href="http://curl.haxx.se/">cURL</a>命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作</p>
-
-<!--more-->
-
-<h3 id="curlpost">用cURL命令POST文件</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl --form "fileupload=@filename.txt" http://example.com/resource.cgi
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section">服务器端解析</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import StringIO
-</span><span class="line">
-</span><span class="line">class Markdown():
-</span><span class="line">   def get(self):
-</span><span class="line">       pass
-</span><span class="line">
-</span><span class="line">   def post(self):
-</span><span class="line">       filecontent = ...
-</span><span class="line">       bufStr = StringIO.StringIO(filecontent)
-</span><span class="line">	for oneline in bufStr.readlines():
-</span><span class="line">		oneline = oneline.replace('\n','')
-</span><span class="line">		print oneline
-</span><span class="line">
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>参考：</p>
-
-<p>What is the cURL command-line syntax to do a POST request? <a href="http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request">http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request</a></p>
-
-<p>Python readline() from a string? <a href="http://stackoverflow.com/questions/7472839/python-readline-from-a-string">http://stackoverflow.com/questions/7472839/python-readline-from-a-string</a></p>
-
-<p>Using cURL to automate HTTP jobs <a href="http://curl.haxx.se/docs/httpscripting.html">http://curl.haxx.se/docs/httpscripting.html</a></p>
 ]]></content>
   </entry>
   

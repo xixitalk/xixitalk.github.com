@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-05T22:51:28+08:00</updated>
+  <updated>2013-07-06T00:39:27+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[grep命令手册]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/19/grep-man/"/>
-    <updated>2013-06-19T01:51:43+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/19/grep-man</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/18/grep-man/"/>
+    <updated>2013-06-18T17:51:43+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/18/grep-man</id>
     <content type="html"><![CDATA[<p>详细参看这个博文 <a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
 
 <p>GNU Grep 2.14 <a href="http://www.gnu.org/software/grep/manual/grep.html">http://www.gnu.org/software/grep/manual/grep.html</a></p>

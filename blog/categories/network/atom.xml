@@ -4,7 +4,7 @@
   <title><![CDATA[Category: network | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/network/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-05T22:51:28+08:00</updated>
+  <updated>2013-07-06T00:39:27+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[算法：判断是否是中国IP？]]></title>
     <link href="http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip/"/>
-    <updated>2013-03-11T19:11:00+08:00</updated>
+    <updated>2013-03-11T19:11:00+00:00</updated>
     <id>http://xixitalk.github.com/blog/2013/03/11/func-is-china-ip</id>
     <content type="html"><![CDATA[<p>世界上有五个<a href="http://en.wikipedia.org/wiki/Regional_Internet_registry">区域互联网注册管理机构</a>，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">点击这里</a>可以获得亚太地址各个国家或地区申请到的IP地址区域。
 中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br />
