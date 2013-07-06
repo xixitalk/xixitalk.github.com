@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-06T04:24:53+00:00</updated>
+  <updated>2013-07-06T06:00:10+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -275,6 +275,15 @@
 
 <h3 id="base64block">使用base64_block使用</h3>
 <p>使用<code>base64_block</code>和<code>endbase64_block</code>包含需要编码的段落。详细参看<code>base64_block.rb</code>文件前部的注释说明。注意：一篇文章里只能有一个<code>base64_block</code>块。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">{% base64_block %}
+</span><span class="line">这些信息会被编码
+</span><span class="line">{% endbase64_block %}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 ]]></content>
   </entry>
   
