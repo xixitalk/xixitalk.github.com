@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-09T00:31:34+00:00</updated>
+  <updated>2013-07-09T06:10:06+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -184,25 +184,24 @@ go get -u  github.com/cyfdecyf/cow
 <p>电源只要满足700mA/5V都可以，但最好配置&gt;1.5A/5V的电源适配器，特别如果要挂载移动硬盘<br />
 USB的键盘鼠标，如果是PS/2接口的，需要一个转接器转化成USB<br />
 一根HDMI线<br />
-一张至少4G/class4的SD卡<br />
+一张至少4G/class4的SD卡，注意<a href="http://elinux.org/RPi_SD_cards">有些SD卡不兼容</a><br />
 一根microUSB线做电源线  </p>
 
 <h3 id="section-2">树莓派版本选择</h3>
 <p>官方推荐<a href="http://www.raspbian.org/">raspbian</a>系统，这个系统默认启动进入字符终端模式，可以用apt-get安装<a href="http://xbmc.org/">XBMC</a>应用，但是有些不稳定，没有其他三个<a href="http://xbmc.org/">XBMC</a>专门版本稳定，其次首次运行<a href="http://xbmc.org/">XBMC</a>起来要几十秒。<br />
 <a href="http://www.raspbmc.com/download/">raspbmc</a>、<a href="http://xbian.org/">xbian</a>、<a href="http://openelec.tv/get-openelec/download/viewcategory/10-raspberry-pi-builds">OpenELEC</a>三个都是<a href="http://xbmc.org/">XBMC</a>专用版本。<br />
 如果你的树莓派用来做服务器的话，推荐使用raspbian系统，raspbian有几乎和debian一样多的软件包，如lighttpd、mysql、php、apache等，正常开机不启动<a href="http://xbmc.org/">XBMC</a>，节省资源。<br />
-如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、obfsproxy、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。 </p>
+如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。 </p>
 
 <h3 id="section-3">代理服务器</h3>
 <p>代理服务器的原理<a href="/blog/2013/03/02/raspberry-pi-proxy/">点击这里</a><br />
-我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs、obfsproxy。<br />
-polipo用于将socks5转化为HTTP代理，也可以用<a href="www.privoxy.org/">privoxy</a>，privoxy支持URL过滤，可以将一些常用的网站不通过SOCKS代理直接连接。<br />
-nodejs用于跑nodejs版本的shadowsocks<br />
-obfsproxy用于网络协议迷惑，将加密数据流伪装成普通数据流</p>
+我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs版的shadowsocks和<a href="https://github.com/cyfdecyf/cow">cow</a>。<br />
+polipo用于将socks5转化为HTTP代理。polipo主要是做代理备份，正常情况下是使用<a href="https://github.com/cyfdecyf/cow">cow</a>，cow可以设置上级代理是shadowsocks的socks5代理，cow可以自动判断网站是直接连接还是通过socks5代理。</p>
 
 <h3 id="xbmc">XBMC视频播放</h3>
 <p>raspbmc本身就是个<a href="http://xbmc.org/">XBMC</a>优化版本，支持播放windows网络共享里的视频。<br />
-安卓手机可以安装个XBMC remote应用来控制树莓派上的XBMC</p>
+安卓手机可以安装个XBMC remote应用来控制树莓派上的XBMC<br />
+可以配置NFS，这样iPad上的xbmc可以远程播放树莓派连接的移动电源里的视频。iPad上的xbmc也可以通过sabma连接，但是总是连接超时，所以我该用NFS来连接。</p>
 
 <h3 id="section-4">挂载3.5寸移动硬盘</h3>
 <p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的数据端口。<br />
@@ -214,7 +213,7 @@ obfsproxy用于网络协议迷惑，将加密数据流伪装成普通数据流</
 <h3 id="section-5">网站服务器</h3>
 <p>lighttpd用于搭建一个简单的web server，这样可以使用pac文件。<br />
 raspbmc本身带了ftp、samba、SSH服务，并且默认是打开的，可以在<a href="http://xbmc.org/">XBMC</a>界面：程序-raspbmc settings里打开关闭。<br />
-samba服务默认将/home/pi和/media两个目录共享，windows可以通过网上邻居访问读写。</p>
+samba服务默认将/home/pi和/media两个目录共享，windows可以通过网上邻居访问读写,windows上可以将连接在树莓派的移动硬盘映射为一个盘符，用迅雷下载视频文件，然后在树莓派上的xbmc直接播放。  </p>
 
 ]]></content>
   </entry>
