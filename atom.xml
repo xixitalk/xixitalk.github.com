@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-09T06:57:08+00:00</updated>
+  <updated>2013-07-10T08:11:04+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux常用命令和配置]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/10/linux-command/"/>
+    <updated>2013-07-10T16:08:18+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/10/linux-command</id>
+    <content type="html"><![CDATA[<h3 id="test">添加新用户test</h3>
+
+<pre><code>useradd test
+passwd test
+mkdir /home/test
+chown test /home/test
+</code></pre>
+
+<!--more-->
+
+<p>将用户test加到管理员组</p>
+
+<pre><code>gpasswd -a test admin
+</code></pre>
+
+<h3 id="ubuntusamba">ubuntu重启samba</h3>
+
+<pre><code>sudo service smbd start
+sudo service smbd stop
+sudo service smbd restart
+</code></pre>
+
+<h3 id="terminal">在terminal里方向键翻不出历史命令</h3>
+<p>修改设置用户shell为bash，debian和ubuntu的新版本默认是dash</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[最近一些有趣的网页]]></title>
@@ -914,21 +947,6 @@ sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">go get -u  github.com/cyfdecyf/cow
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[支持twitter的AppEngine-OAuth-Library]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library/"/>
-    <updated>2013-06-14T09:13:55+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/14/AppEngine-OAuth-Library</id>
-    <content type="html"><![CDATA[<p>自己在GAE上写了个浏览twitter的web页面，虽然丑陋但是自我感觉良好，使用的是v1.0的API，这两天twitter停用了v1.0的API，换用v1.1，调试了一下没有调试好，还是直接用别人造好的轮子吧。</p>
-
-<p>AppEngine-OAuth-Library <a href="https://github.com/mikeknapp/AppEngine-OAuth-Library">https://github.com/mikeknapp/AppEngine-OAuth-Library</a></p>
-
-<!--more-->
-
-<p>或者直接使用OAuth还简单一些，另一个<a href="https://developers.google.com/appengine/docs/python/oauth/">https://developers.google.com/appengine/docs/python/oauth/</a></p>
 ]]></content>
   </entry>
   
