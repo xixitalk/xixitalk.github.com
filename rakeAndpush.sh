@@ -4,7 +4,7 @@ write_log()
 {
     now_time='['$(date +"%Y-%m-%d %H:%M:%S")']'
     echo $1
-    echo ${now_time} $1 >> /tmp/check.log
+    echo ${now_time} $1 >> /tmp/git.txt
 }
 
 oldnum=$(cat ._posts.md5 | wc -l)
@@ -28,7 +28,7 @@ if [ -z $newpostname ]; then
     exit 2
 fi
 
-echo "generate and deoploy"
+write_log "rake generate"
 rake generate > /dev/null 2>&1
 rakeret=$?
 if [ $rakeret -ne 0 ]; then
@@ -36,6 +36,7 @@ if [ $rakeret -ne 0 ]; then
     exit 3
 fi
 
+write_log "rake deoploy"
 rake deploy > /dev/null 2>&1
 rakeret=$?
 if [ $rakeret -ne 0 ]; then
@@ -49,8 +50,8 @@ git add source/_posts/*.markdown
 echo "git commit -m $newpostname"
 git commit -m  "$newpostname"
 
-echo "git push origin source"
-git push origin source
+write_log "git push origin source"
+git push origin source > /dev/null 2>&1
 rakeret=$?
 if [ $rakeret -ne 0 ]; then
     write_log "rake push error"${rakeret}
