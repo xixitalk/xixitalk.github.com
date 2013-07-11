@@ -24,9 +24,7 @@
 
 <p>如(查看网页源代码)</p>
 
-<p>{% base64_block %}
-GFW 民主 自由 胡锦涛 江泽民 
-{% endbase64_block %}</p>
+<p><script src='/javascripts/base64.js' type='text/javascript'> </script> <span id='base64_block'>Q2tkR1Z5RG1zSkhrdUxzZzZJZXE1NVN4SU9pRG9lbVVwdWEybXlEbXNaL21zNzNtc0pFZ0NnPT0=</span> <script type='text/javascript'> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
 
 <h3 id="base64blockrb">base64_block.rb</h3>
 <p>把<a href="https://gist.github.com/xixitalk/5927023">https://gist.github.com/xixitalk/5927023</a>代码保存为base64_block.rb，放到<code>octopress\plugins</code>目录。</p>
@@ -37,14 +35,14 @@ GFW 民主 自由 胡锦涛 江泽民
 <h3 id="base64block">使用base64_block使用</h3>
 <p>使用<code>base64_block</code>和<code>endbase64_block</code>包含需要编码的段落。详细参看<code>base64_block.rb</code>文件前部的注释说明。注意：一篇文章里只能有一个<code>base64_block</code>块。</p>
 
-<p>{% raw %}</p>
+<p></p>
 
 <pre><code>{% base64_block %}
 这些信息会被编码
 {% endbase64_block %}
 </code></pre>
 
-<p>{% endraw %}</p>
+<p></p>
 ]]></content>
   </entry>
   
