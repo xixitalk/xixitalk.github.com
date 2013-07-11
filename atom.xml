@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-11T10:12:15+00:00</updated>
+  <updated>2013-07-11T21:42:59+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[《美丽新世界》]]></title>
     <link href="http://xixitalk.github.com/blog/2013/07/11/Brave-New-World/"/>
-    <updated>2013-07-11T15:49:04+00:00</updated>
+    <updated>2013-07-11T23:49:04+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/07/11/Brave-New-World</id>
     <content type="html"><![CDATA[<p><a href="http://www.ruanyifeng.com/blog/2011/03/brave_new_world.html">阮一峰《美丽新世界》读后感》</a></p>
 
@@ -33,9 +33,9 @@
   
   <entry>
     <title type="html"><![CDATA[linux常用命令和配置]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/10/linux-command/"/>
-    <updated>2013-07-10T16:08:18+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/10/linux-command</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/11/linux-command/"/>
+    <updated>2013-07-11T00:08:18+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/11/linux-command</id>
     <content type="html"><![CDATA[<h3 id="test">添加新用户test</h3>
 
 <pre><code>useradd test
@@ -66,9 +66,9 @@ sudo service smbd restart
   
   <entry>
     <title type="html"><![CDATA[最近一些有趣的网页]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/08/funny-site/"/>
-    <updated>2013-07-08T22:51:46+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/08/funny-site</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/09/funny-site/"/>
+    <updated>2013-07-09T06:51:46+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/09/funny-site</id>
     <content type="html"><![CDATA[<h3 id="section">宇宙囧片王：天机•富春山居图</h3>
 <p><a href="http://pulolesu.proresu.com/dream/kuso/switch1.html">宇宙囧片王：天机•富春山居图（上）</a><br />
 <a href="http://pulolesu.proresu.com/dream/kuso/switch2.html">宇宙囧片王：天机•富春山居图（中）</a><br />
@@ -89,7 +89,7 @@ sudo service smbd restart
   <entry>
     <title type="html"><![CDATA[中国时区：CCT]]></title>
     <link href="http://xixitalk.github.com/blog/2013/07/06/china-coast-time/"/>
-    <updated>2013-07-06T08:17:55+00:00</updated>
+    <updated>2013-07-06T16:17:55+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/07/06/china-coast-time</id>
     <content type="html"><![CDATA[<p>octopress的<code>rake generate</code>的时候，如果时间在晚上22：00到24：00左右，发现生成的博客HTML文件日期会是第二天的日期。Google之后有人说要加<code>TZ=CCT</code>来设定时区。</p>
 
@@ -99,14 +99,19 @@ sudo service smbd restart
 
 <pre><code>export TZ=CCT
 </code></pre>
+
+<p>可能<code>Asia/Shanghai</code>更好些</p>
+
+<pre><code>export TZ='Asia/Shanghai'
+</code></pre>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[如果世界上只剩一个女人，将会发生什么？]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/05/what-will-happen-if-only-one-woman-left/"/>
-    <updated>2013-07-05T22:33:32+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/05/what-will-happen-if-only-one-woman-left</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/06/what-will-happen-if-only-one-woman-left/"/>
+    <updated>2013-07-06T06:33:32+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/06/what-will-happen-if-only-one-woman-left</id>
     <content type="html"><![CDATA[<blockquote><p>【如果世界上只剩一个女人，将会发生什么？】J大神：@煽动安全 同学提到的文章已经全部翻译完成。 供君观赏。 http://zhi.hu/TwlK （分享自 @知乎） 真实事件回答假设性大题，故事很长，但强烈推荐。</p><footer><strong>欧米(‏@omegaleeV)</strong> <cite><a href="https://twitter.com/omegaleeV/status/353114879214882817">twitter.com/omegaleeV/status/&hellip;</a></cite></footer></blockquote>
 
 <!--more-->
@@ -290,7 +295,7 @@ sudo service smbd restart
   <entry>
     <title type="html"><![CDATA[乙肝五项指标]]></title>
     <link href="http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes/"/>
-    <updated>2013-07-05T15:41:59+00:00</updated>
+    <updated>2013-07-05T23:41:59+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes</id>
     <content type="html"><![CDATA[<p>乙型肝炎病毒表面抗原      HBsAg	    阴性<br />
 乙型肝炎病毒表面抗体      HBsAb	    阳性<br />
@@ -310,9 +315,9 @@ sudo service smbd restart
   
   <entry>
     <title type="html"><![CDATA[中国社会现状及未来发展]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/03/china-society/"/>
-    <updated>2013-07-03T23:10:53+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/03/china-society</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/04/china-society/"/>
+    <updated>2013-07-04T07:10:53+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/04/china-society</id>
     <content type="html"><![CDATA[<p><a href="http://cn.nytimes.com/china/20130703/cc03fangshaowei/">方绍伟：中国政治模式能走多远？</a></p>
 
 <p><a href="http://cn.nytimes.com/china/20130624/cc24lifan1/">李凡（上）：为什么现在的意识形态变得比较左</a><br />
@@ -327,9 +332,9 @@ sudo service smbd restart
   
   <entry>
     <title type="html"><![CDATA[用base64进行关键词编码]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/02/base64-encode/"/>
-    <updated>2013-07-02T22:01:04+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/02/base64-encode</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/03/base64-encode/"/>
+    <updated>2013-07-03T06:01:04+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/03/base64-encode</id>
     <content type="html"><![CDATA[<p>用base64对关键词进行两次编码，浏览器客户端用javascript进行两次解码。对于支持javascript的浏览器来说透明，目的是防止关键词过滤。</p>
 
 <!--more-->
@@ -359,7 +364,7 @@ sudo service smbd restart
   <entry>
     <title type="html"><![CDATA[达尔文奖]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/27/death-for-sesame/"/>
-    <updated>2013-06-27T10:59:21+00:00</updated>
+    <updated>2013-06-27T18:59:21+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/27/death-for-sesame</id>
     <content type="html"><![CDATA[<p>新闻来源<a href="http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm">http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm</a></p>
 
@@ -376,9 +381,9 @@ sudo service smbd restart
   
   <entry>
     <title type="html"><![CDATA[西奥克兰发生一起自杀溺亡]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/25/West-Auckland-drowning-not-suspicious/"/>
-    <updated>2013-06-25T16:57:00+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/25/West-Auckland-drowning-not-suspicious</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious/"/>
+    <updated>2013-06-26T00:57:00+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious</id>
     <content type="html"><![CDATA[<p>来源:<a href="http://www.3news.co.nz/West-Auckland-drowning-not-suspicious/tabid/423/articleID/302561/Default.aspx">West Auckland drowning not suspicious</a></p>
 
 <p>Police say the death of a man found in a stream bordering the west Auckland suburbs of Henderson and Massey was not suspicious.<br />
@@ -414,7 +419,7 @@ Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
   <entry>
     <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/"/>
-    <updated>2013-06-25T08:57:52+00:00</updated>
+    <updated>2013-06-25T16:57:52+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error</id>
     <content type="html"><![CDATA[<p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
 
@@ -441,7 +446,7 @@ Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
   <entry>
     <title type="html"><![CDATA[穆斯林禁食猪肉常见问答]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/23/PORK-FORBIDDEN/"/>
-    <updated>2013-06-23T07:42:11+00:00</updated>
+    <updated>2013-06-23T15:42:11+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/23/PORK-FORBIDDEN</id>
     <content type="html"><![CDATA[<p>第一个信息来源 <a href="http://www.irf.net/index.php?option=com_content&amp;view=article&amp;id=394%3Apork-forbidden&amp;catid=71%3Amost-common-questions-asked-by-non-muslim&amp;Itemid=199">FAQs Most Common Questions asked by Non Muslims：PORK FORBIDDEN</a></p>
 
@@ -524,7 +529,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[搭建局域网跨路由网络]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/22/routing-cross/"/>
-    <updated>2013-06-22T09:34:57+00:00</updated>
+    <updated>2013-06-22T17:34:57+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/22/routing-cross</id>
     <content type="html"><![CDATA[<p>场景：两个路由器每个都组建一个局域网，每个局域网里的电脑想访问另一个局域网的电脑。</p>
 
@@ -538,7 +543,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[世界卫生组织（WHO）对转基因技术的看法]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/21/WHO-Transgene/"/>
-    <updated>2013-06-21T11:23:57+00:00</updated>
+    <updated>2013-06-21T19:23:57+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/21/WHO-Transgene</id>
     <content type="html"><![CDATA[<p>世界卫生组织（WHO）2005年的生物技术报告 <a href="http://www.who.int/foodsafety/fs_management/No_04_Biotech_Jun05_ch.pdf">http://www.who.int/foodsafety/fs_management/No_04_Biotech_Jun05_ch.pdf</a></p>
 
@@ -556,9 +561,9 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   
   <entry>
     <title type="html"><![CDATA[octopress加快rake generate速度]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/19/Octopress-Rake-gen_deploy/"/>
-    <updated>2013-06-19T21:35:54+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/19/Octopress-Rake-gen_deploy</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy/"/>
+    <updated>2013-06-20T05:35:54+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/20/Octopress-Rake-gen_deploy</id>
     <content type="html"><![CDATA[<p>octopress随着文件越来越多，<code>rake generate</code>越来越慢。这样可以加快速度。</p>
 
 <!--more-->
@@ -589,9 +594,9 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   
   <entry>
     <title type="html"><![CDATA[从已经存在的octopress新建环境]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/19/clone-from-exist-octopress/"/>
-    <updated>2013-06-19T18:45:41+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/19/clone-from-exist-octopress</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress/"/>
+    <updated>2013-06-20T02:45:41+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/20/clone-from-exist-octopress</id>
     <content type="html"><![CDATA[<p>场景需求：为已经存在的octopress博客在另一个目录或者主机新建一个octopress发布环境</p>
 
 <h3 id="sourcemaster">获得source和master分支代码</h3>
@@ -620,7 +625,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[Dnsmasq上分发WPAD]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq/"/>
-    <updated>2013-06-19T14:34:04+00:00</updated>
+    <updated>2013-06-19T22:34:04+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Web_Proxy_Autodiscovery_Protocol">WPAD</a>全称是Web Proxy Auto-Discovery，可以通过DHCP或者DNS进行代理分发，这样局域网里客户端连接上后自动进行代理。</p>
 
@@ -662,7 +667,7 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <entry>
     <title type="html"><![CDATA[octopress里插入flickr的图片]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress/"/>
-    <updated>2013-06-19T10:17:24+00:00</updated>
+    <updated>2013-06-19T18:17:24+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com">flickr</a>更新之后，免费1T空间，同时可以上传质量很好的图片。<a href="http://www.instagram.com">instagram</a>的图片质量太差了。</p>
 
@@ -722,9 +727,9 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   
   <entry>
     <title type="html"><![CDATA[grep命令手册]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/18/grep-man/"/>
-    <updated>2013-06-18T17:51:43+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/18/grep-man</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/grep-man/"/>
+    <updated>2013-06-19T01:51:43+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/grep-man</id>
     <content type="html"><![CDATA[<p>详细参看这个博文 <a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
 
 <p>GNU Grep 2.14 <a href="http://www.gnu.org/software/grep/manual/grep.html">http://www.gnu.org/software/grep/manual/grep.html</a></p>
@@ -863,9 +868,9 @@ DIR 查找的目录范围</p>
   
   <entry>
     <title type="html"><![CDATA[搭建带代理的奶瓶腿]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/15/netputweets-proxy/"/>
-    <updated>2013-06-15T21:39:29+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/15/netputweets-proxy</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/"/>
+    <updated>2013-06-16T05:39:29+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy</id>
     <content type="html"><![CDATA[<p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
 
 <!--more-->

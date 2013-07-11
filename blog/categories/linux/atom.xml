@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-11T10:12:15+00:00</updated>
+  <updated>2013-07-11T21:42:59+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[linux常用命令和配置]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/10/linux-command/"/>
-    <updated>2013-07-10T16:08:18+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/10/linux-command</id>
+    <link href="http://xixitalk.github.com/blog/2013/07/11/linux-command/"/>
+    <updated>2013-07-11T00:08:18+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/11/linux-command</id>
     <content type="html"><![CDATA[<h3 id="test">添加新用户test</h3>
 
 <pre><code>useradd test
@@ -49,7 +49,7 @@ sudo service smbd restart
   <entry>
     <title type="html"><![CDATA[中国时区：CCT]]></title>
     <link href="http://xixitalk.github.com/blog/2013/07/06/china-coast-time/"/>
-    <updated>2013-07-06T08:17:55+00:00</updated>
+    <updated>2013-07-06T16:17:55+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/07/06/china-coast-time</id>
     <content type="html"><![CDATA[<p>octopress的<code>rake generate</code>的时候，如果时间在晚上22：00到24：00左右，发现生成的博客HTML文件日期会是第二天的日期。Google之后有人说要加<code>TZ=CCT</code>来设定时区。</p>
 
@@ -59,14 +59,19 @@ sudo service smbd restart
 
 <pre><code>export TZ=CCT
 </code></pre>
+
+<p>可能<code>Asia/Shanghai</code>更好些</p>
+
+<pre><code>export TZ='Asia/Shanghai'
+</code></pre>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[grep命令手册]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/18/grep-man/"/>
-    <updated>2013-06-18T17:51:43+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/18/grep-man</id>
+    <link href="http://xixitalk.github.com/blog/2013/06/19/grep-man/"/>
+    <updated>2013-06-19T01:51:43+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/06/19/grep-man</id>
     <content type="html"><![CDATA[<p>详细参看这个博文 <a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
 
 <p>GNU Grep 2.14 <a href="http://www.gnu.org/software/grep/manual/grep.html">http://www.gnu.org/software/grep/manual/grep.html</a></p>

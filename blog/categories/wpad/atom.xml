@@ -4,7 +4,7 @@
   <title><![CDATA[Category: WPAD | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/wpad/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-11T10:12:15+00:00</updated>
+  <updated>2013-07-11T21:42:59+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Dnsmasq上分发WPAD]]></title>
     <link href="http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq/"/>
-    <updated>2013-06-19T14:34:04+00:00</updated>
+    <updated>2013-06-19T22:34:04+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/06/19/WPAD-with-DNS-on-Dnsmasq</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Web_Proxy_Autodiscovery_Protocol">WPAD</a>全称是Web Proxy Auto-Discovery，可以通过DHCP或者DNS进行代理分发，这样局域网里客户端连接上后自动进行代理。</p>
 
