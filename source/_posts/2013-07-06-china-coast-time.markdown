@@ -15,3 +15,9 @@ CCT（China Coast Time）是中国沿海时间。在用户目录下`.profile`或
 ~~~
 export TZ=CCT
 ~~~
+
+可能`Asia/Shanghai`更好些
+
+~~~
+export TZ='Asia/Shanghai'
+~~~
