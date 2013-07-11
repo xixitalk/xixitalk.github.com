@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-10T08:11:04+00:00</updated>
+  <updated>2013-07-11T08:03:32+00:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[《美丽新世界》]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/11/Brave-New-World/"/>
+    <updated>2013-07-11T15:49:04+00:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/11/Brave-New-World</id>
+    <content type="html"><![CDATA[<p><a href="http://www.ruanyifeng.com/blog/2011/03/brave_new_world.html">阮一峰《美丽新世界》读后感》</a></p>
+
+<!--more-->
+
+<p><a href="http://www.guokr.com/blog/310237/">金色葡萄《如何拒绝进入美丽新世界》</a></p>
+
+<p><a href="http://www.zhihu.com/question/19986748">知乎《如何评价阿道司 · 赫胥黎《美丽新世界》？它和《1984》对现实的影响有何异同？最重要的，书中的世界会有到来的一天吗？》</a></p>
+
+<p><img src="http://ww2.sinaimg.cn/large/5ff29ca4jw1dft3aqb0pkj.jpg" alt="image" /></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux常用命令和配置]]></title>
@@ -887,66 +905,6 @@ DIR 查找的目录范围</p>
 
 <p>推文进行base64两次编码，客户端浏览器进行base64两次解码，这样可以防止敏感词过滤。缺点是按照base64的特点两次编码推文字节会变成原来的<script type="math/tex"> \frac{16}{9} </script>。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Raspberry Pi上安装Go lang并编译cow proxy]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/"/>
-    <updated>2013-06-14T11:48:41+00:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi</id>
-    <content type="html"><![CDATA[<h3 id="go">安装go语言</h3>
-
-<p>选用非官方的二进制软件包，详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
-
-<p>ARMv6 (Raspberry Pi, etc)<br />
-<a href="http://dave.cheney.net/paste/go1.1.linux-arm~armv6-1.tar.gz">go1.1.linux-arm~armv6-1.tar.gz</a><br />
-sha1sum 2a76c9799aa5410090234edfda36ef69f5f99a42</p>
-
-<!--more-->
-
-<p>解压到/home/pi/go目录即可</p>
-
-<h3 id="go-1">设置go语言编译环境变量</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">export GOROOT=/home/pi/go/go
-</span><span class="line">export GOPATH=/home/pi/go/mygo
-</span><span class="line">export PATH=$PATH:$GOROOT/bin
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果系统没有安装mercurial软件包，则需要用<code>apt-get</code>安装mercurial软件，cow proxy需要用到go语言的crypto package，<code>go get</code>会调用<code>hg</code>命令来获得。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install mercurial
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="cow-proxy">编译cow proxy</h3>
-
-<p><a href="https://github.com/cyfdecyf/cow">cow proxy</a>是<a href="http://twitter.com/cyfdecyf">@cyfdecyf</a>用go语言编写的一个自动代理，代码开源，支持二级socks代理。<br />
-用下面的命令编译</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">go get github.com/cyfdecyf/cow
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果上面的命令出现go build出错<code>signal: killed</code>，再单独build</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">go build github.com/cyfdecyf/cow
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>编译好的cow二进制文件位于/home/pi/go/mygo目录下。</p>
-
-<p>我已经编译好的二进制在<a href="https://github.com/xixitalk/build/tree/master/cow">https://github.com/xixitalk/build/tree/master/cow</a></p>
-
-<h3 id="section">下一次更新代码再编译</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">go get -u  github.com/cyfdecyf/cow
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
   </entry>
   
