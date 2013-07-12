@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ssh | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/ssh/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-11T23:48:17+08:00</updated>
+  <updated>2013-07-12T08:55:57+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git ssh使用代理]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy/"/>
+    <updated>2013-07-12T16:23:33+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy</id>
+    <content type="html"><![CDATA[<p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
+
+<p>树莓派上有<code>socks5</code>代理和<code>http</code>代理，下面配置<code>git ssh</code>通过代理进行<code>git</code>操作。</p>
+
+<!--more-->
+
+<h3 id="git-sshsocks5">git ssh通过socks5代理</h3>
+<p><a href="http://chunyemen.org/archives/813">在Mac OSX上通过SSH代理实现github访问</a></p>
+
+<h3 id="git-sshhttp">git ssh通过http代理</h3>
+<p><a href="http://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></p>
+
+<h3 id="section">我的配置</h3>
+<p>通过<code>socks5</code>代理配置比较繁琐，配置后<code>git push</code>成功了一次，但是后面还是一直提示失败，找不到原因。后来改用<code>http</code>代理，代理成功。我的详细配置如下。</p>
+
+<h4 id="corkscrew">安装corkscrew</h4>
+<p>如果系统里没有安装<code>corkscrew</code>，进行安装。</p>
+
+<pre><code>sudo apt-get install corkscrew
+</code></pre>
+
+<h4 id="sshconfig">配置ssh的.config</h4>
+<p>配置<code>~/.ssh/config</code>,如果<code>config</code>没有创建一个。我的<code>http</code>代理是<code>127.0.0.1:8118</code>，用户名是<code>pi</code>。</p>
+
+<pre><code>Host github.com
+User git
+ProxyCommand corkscrew 127.0.0.1 8118 %h %p
+IdentityFile /home/pi/.ssh/id_rsa
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[推荐一个web ssh client]]></title>

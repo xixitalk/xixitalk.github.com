@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-11T23:48:17+08:00</updated>
+  <updated>2013-07-12T08:55:57+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git ssh使用代理]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy/"/>
+    <updated>2013-07-12T16:23:33+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy</id>
+    <content type="html"><![CDATA[<p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
+
+<p>树莓派上有<code>socks5</code>代理和<code>http</code>代理，下面配置<code>git ssh</code>通过代理进行<code>git</code>操作。</p>
+
+<!--more-->
+
+<h3 id="git-sshsocks5">git ssh通过socks5代理</h3>
+<p><a href="http://chunyemen.org/archives/813">在Mac OSX上通过SSH代理实现github访问</a></p>
+
+<h3 id="git-sshhttp">git ssh通过http代理</h3>
+<p><a href="http://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></p>
+
+<h3 id="section">我的配置</h3>
+<p>通过<code>socks5</code>代理配置比较繁琐，配置后<code>git push</code>成功了一次，但是后面还是一直提示失败，找不到原因。后来改用<code>http</code>代理，代理成功。我的详细配置如下。</p>
+
+<h4 id="corkscrew">安装corkscrew</h4>
+<p>如果系统里没有安装<code>corkscrew</code>，进行安装。</p>
+
+<pre><code>sudo apt-get install corkscrew
+</code></pre>
+
+<h4 id="sshconfig">配置ssh的.config</h4>
+<p>配置<code>~/.ssh/config</code>,如果<code>config</code>没有创建一个。我的<code>http</code>代理是<code>127.0.0.1:8118</code>，用户名是<code>pi</code>。</p>
+
+<pre><code>Host github.com
+User git
+ProxyCommand corkscrew 127.0.0.1 8118 %h %p
+IdentityFile /home/pi/.ssh/id_rsa
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《美丽新世界》]]></title>
@@ -863,53 +901,6 @@ DIR 查找的目录范围</p>
 </span><span class="line"> -U, --binary              do not strip CR characters at EOL (MSDOS)  
 </span><span class="line"> -u, --unix-byte-offsets   report offsets as if CRs were not there (MSDOS)  
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[搭建带代理的奶瓶腿]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy/"/>
-    <updated>2013-06-16T05:39:29+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/16/netputweets-proxy</id>
-    <content type="html"><![CDATA[<p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
-
-<!--more-->
-
-<h3 id="section">下载奶瓶腿代码</h3>
-
-<p>把奶瓶腿的代码放在apache的浏览的根目录：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">git clone git@github.com:netputer/netputweets.git
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以将目录netputweets修改为t。</p>
-
-<h3 id="section-1">安装好奶瓶腿所要的环境</h3>
-
-<p>apache、php5+、cURL、URL Rewrite等，这部分略过。</p>
-
-<h3 id="section-2">添加代理</h3>
-
-<p>假设代理是：HTTP 192.168.1.106:8118,其他格式代理相应修改。<br />
-修改img.php、class.upload.php、twitter.php、handler.php文件里在所有执行<code>curl_exec</code>函数前添加：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><code>setup.php</code>文件里的<code>curl_exec</code>前不要修改。</p>
-
-<h3 id="section-3">安装奶瓶腿</h3>
-
-<p>浏览器里访问http://xxxxx.org/t/setup.php，进行奶瓶腿安装。安装后正常进行twitter帐号关联。</p>
-
-<p><img src="https://pbs.twimg.com/media/BMzloh6CMAEonlF.png:large" alt="netputweets" /></p>
-
-<h3 id="base64">推文两次base64编码防止敏感词过滤</h3>
-
-<p>推文进行base64两次编码，客户端浏览器进行base64两次解码，这样可以防止敏感词过滤。缺点是按照base64的特点两次编码推文字节会变成原来的<script type="math/tex"> \frac{16}{9} </script>。</p>
-
 ]]></content>
   </entry>
   

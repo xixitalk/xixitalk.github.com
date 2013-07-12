@@ -5,15 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>最近一些有趣的网页 - xixitalk's snippet</title>
+  <title>git ssh使用代理 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="宇宙囧片王：天机•富春山居图
-宇宙囧片王：天机•富春山居图（上）
-宇宙囧片王：天机•富春山居图（中）
-宇宙囧片王：天机•富春山居图（下） 少年Ma的奇幻历史漂流之旅
-马伯庸的新博文《少年Ma的奇幻历史漂流之旅》讲述一个村级的博物馆竟然有大批清、明、元、唐、隋、晋、东汉、西周、商、夏、尧舜、炎帝、 &hellip;">
+  <meta name="description" content="昨天在树莓派上发现通过ssh方式向github.com的代码仓库git push代码一直提示连接github.com的22端口失败。而HTTP和HTTPS访问github.com正常，怀疑github.com的22端口被墙了。使用ssh方式的特点是可以不用输入密码，方便在shell里进行自动操作， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/07/09/funny-site">
+  <link rel="canonical" href="http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -87,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">最近一些有趣的网页</h1>
+      <h1 class="entry-title">git ssh使用代理</h1>
     
     
       <p class="meta">
@@ -103,7 +99,7 @@
   
 
 
-<time datetime="2013-07-09T06:51:46+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+<time datetime="2013-07-12T16:23:33+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -112,20 +108,36 @@
   </header>
 
 
-<div class="entry-content"><h3 id="section">宇宙囧片王：天机•富春山居图</h3>
-<p><a href="http://pulolesu.proresu.com/dream/kuso/switch1.html">宇宙囧片王：天机•富春山居图（上）</a><br />
-<a href="http://pulolesu.proresu.com/dream/kuso/switch2.html">宇宙囧片王：天机•富春山居图（中）</a><br />
-<a href="http://pulolesu.proresu.com/dream/kuso/switch3.html">宇宙囧片王：天机•富春山居图（下）</a></p>
+<div class="entry-content"><p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
+
+<p>树莓派上有<code>socks5</code>代理和<code>http</code>代理，下面配置<code>git ssh</code>通过代理进行<code>git</code>操作。</p>
 
 <!--more-->
 
-<h3 id="ma">少年Ma的奇幻历史漂流之旅</h3>
-<p>马伯庸的新博文《<a href="http://blog.sina.com.cn/s/blog_561ee4750101cdr3.html">少年Ma的奇幻历史漂流之旅</a>》讲述一个村级的博物馆竟然有大批清、明、元、唐、隋、晋、东汉、西周、商、夏、尧舜、炎帝、黄帝各个时代的珍品，去过北京故宫和台湾故宫的人们，不能不去齐名的河北衡水市某村级<strike>冀宝斋</strike>博物馆。</p>
+<h3 id="git-sshsocks5">git ssh通过socks5代理</h3>
+<p><a href="http://chunyemen.org/archives/813">在Mac OSX上通过SSH代理实现github访问</a></p>
 
-<h3 id="section-1">看个美女贴调节一下</h3>
-<p>水木社区<a href="http://www.newsmth.net/bbstcon.php?board=DSLR&amp;gid=808516395">这哥们的摄影水平怎么样？</a></p>
+<h3 id="git-sshhttp">git ssh通过http代理</h3>
+<p><a href="http://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></p>
 
-<p><img src="http://att.newsmth.net/att.php?p.179.808516395.2462602.jpg" alt="imgs" /></p>
+<h3 id="section">我的配置</h3>
+<p>通过<code>socks5</code>代理配置比较繁琐，配置后<code>git push</code>成功了一次，但是后面还是一直提示失败，找不到原因。后来改用<code>http</code>代理，代理成功。我的详细配置如下。</p>
+
+<h4 id="corkscrew">安装corkscrew</h4>
+<p>如果系统里没有安装<code>corkscrew</code>，进行安装。</p>
+
+<pre><code>sudo apt-get install corkscrew
+</code></pre>
+
+<h4 id="sshconfig">配置ssh的.config</h4>
+<p>配置<code>~/.ssh/config</code>,如果<code>config</code>没有创建一个。我的<code>http</code>代理是<code>127.0.0.1:8118</code>，用户名是<code>pi</code>。</p>
+
+<pre><code>Host github.com
+User git
+ProxyCommand corkscrew 127.0.0.1 8118 %h %p
+IdentityFile /home/pi/.ssh/id_rsa
+</code></pre>
+
 </div>
 
 
@@ -148,12 +160,12 @@
   
 
 
-<time datetime="2013-07-09T06:51:46+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+<time datetime="2013-07-12T16:23:33+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/life/'>life</a>
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/ssh/'>ssh</a>
   
 </span>
 
@@ -165,7 +177,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:最近一些有趣的网页 http://xixitalk.github.com/blog/2013/07/09/funny-site/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:git ssh使用代理 http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -211,8 +223,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/07/09/funny-site/';
-        var disqus_url = 'http://xixitalk.github.com/blog/2013/07/09/funny-site/';
+        var disqus_identifier = 'http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy/';
+        var disqus_url = 'http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy/';
         var disqus_script = 'embed.js';
       
     (function () {
