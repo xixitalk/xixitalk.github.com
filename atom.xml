@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-12T22:45:28+08:00</updated>
+  <updated>2013-07-16T10:13:57+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -76,7 +76,9 @@ IdentityFile /home/pi/.ssh/id_rsa
     <link href="http://xixitalk.github.com/blog/2013/07/11/linux-command/"/>
     <updated>2013-07-11T00:08:18+08:00</updated>
     <id>http://xixitalk.github.com/blog/2013/07/11/linux-command</id>
-    <content type="html"><![CDATA[<h3 id="test">添加新用户test</h3>
+    <content type="html"><![CDATA[<p>下面是最近工作需要用到的命令，记录下来以供查阅。</p>
+
+<h3 id="test">添加新用户test</h3>
 
 <pre><code>useradd test
 passwd test
@@ -101,6 +103,33 @@ sudo service smbd restart
 <h3 id="terminal">在terminal里方向键翻不出历史命令</h3>
 <p>修改设置用户shell为bash，debian和ubuntu的新版本默认是dash</p>
 
+<h3 id="svn">SVN命令操作</h3>
+
+<h4 id="checkout">checkout</h4>
+
+<pre><code>svn checkout http://10.41.1.1/svn/project/tags/  --username test
+</code></pre>
+
+<h4 id="update">update</h4>
+
+<pre><code>svn update   //更新到最新
+svn update --revision N //更新到版本N，-r
+</code></pre>
+
+<h4 id="add">add</h4>
+
+<pre><code>svn add file  //添加文件到版本管理里，需要commit操作才到远程代码仓库，file支持通配符
+</code></pre>
+
+<h4 id="commit">commit</h4>
+
+<pre><code>svn commit -m "bugs fix"
+</code></pre>
+
+<h4 id="log">log</h4>
+
+<pre><code>svn log [PATH]  //查看修改提交的commit log
+</code></pre>
 ]]></content>
   </entry>
   

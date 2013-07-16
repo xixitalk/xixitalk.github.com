@@ -9,10 +9,10 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="添加新用户test useradd test
+  <meta name="description" content="下面是最近工作需要用到的命令，记录下来以供查阅。 添加新用户test useradd test
 passwd test
 mkdir /home/test
-chown test /home/test 将用户test加到管理员组 gpasswd -a test admin ubuntu重启samba sudo service smbd start &hellip;">
+chown test /home/test 将用户test加到管理员组 gpasswd -a test admin ubuntu重启samba &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +109,9 @@ chown test /home/test 将用户test加到管理员组 gpasswd -a test admin ubun
   </header>
 
 
-<div class="entry-content"><h3 id="test">添加新用户test</h3>
+<div class="entry-content"><p>下面是最近工作需要用到的命令，记录下来以供查阅。</p>
+
+<h3 id="test">添加新用户test</h3>
 
 <pre><code>useradd test
 passwd test
@@ -134,6 +136,33 @@ sudo service smbd restart
 <h3 id="terminal">在terminal里方向键翻不出历史命令</h3>
 <p>修改设置用户shell为bash，debian和ubuntu的新版本默认是dash</p>
 
+<h3 id="svn">SVN命令操作</h3>
+
+<h4 id="checkout">checkout</h4>
+
+<pre><code>svn checkout http://10.41.1.1/svn/project/tags/  --username test
+</code></pre>
+
+<h4 id="update">update</h4>
+
+<pre><code>svn update   //更新到最新
+svn update --revision N //更新到版本N，-r
+</code></pre>
+
+<h4 id="add">add</h4>
+
+<pre><code>svn add file  //添加文件到版本管理里，需要commit操作才到远程代码仓库，file支持通配符
+</code></pre>
+
+<h4 id="commit">commit</h4>
+
+<pre><code>svn commit -m "bugs fix"
+</code></pre>
+
+<h4 id="log">log</h4>
+
+<pre><code>svn log [PATH]  //查看修改提交的commit log
+</code></pre>
 </div>
 
 
