@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-16T10:13:57+08:00</updated>
+  <updated>2013-07-17T17:45:31+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[托马斯·潘恩《常识》第一章]]></title>
+    <link href="http://xixitalk.github.com/blog/2013/07/18/Common-Sense-chapter-1/"/>
+    <updated>2013-07-18T01:36:51+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2013/07/18/Common-Sense-chapter-1</id>
+    <content type="html"><![CDATA[<h4 id="of-the-origin-and-design-of-government-in-generalwith-concise-remarks-on-the-english-constitution">OF THE ORIGIN AND DESIGN OF GOVERNMENT IN GENERAL,WITH CONCISE REMARKS ON THE ENGLISH CONSTITUTION</h4>
+<p>#### 常规的政府起源和设计，兼简评英国制度</p>
+
+<!--more-->
+
+<p>SOME writers have so confounded society with government, as to leave little or no distinction between them; whereas they are not only different,but have different origins. Society is produced by our wants, and government by wickedness; the former promotes our happiness POSITIVELY by uniting our affections, the latter NEGATIVELY by restraining our vices. The one encourages intercourse, the other creates distinctions. The first is a patron, the last a punisher.</p>
+
+<p><strong>一些</strong> 写小册子（发表政治见解）的人混淆社会和政府的区别，认为他们区别很小或者没有区别。二者不仅不同，连起源都不同。社会起源于人的需求，而政府起源于人的邪恶。</p>
+
+<p>writers：当时美洲流行写小册子发表政治见解。这里的writers就是当时写小册子的那些人。本书也是当时的一个小册子。</p>
+
+<p>Society in every state is a blessing, but government even in its best state is
+but a necessary evil; in its worst state an intolerable one; for when we
+suffer, or are exposed to the same miseries BY A GOVERNMENT, which
+we might expect in a country WITHOUT GOVERNMENT, our calamity is
+heightened by reflecting that we furnish the means by which we suffer.
+Government, like dress, is the badge of lost innocence; the palaces of kings
+are built on the ruins of the bowers of paradise. For were the impulses of
+conscience clear, uniform, and irresistibly obeyed, man would need no
+other lawgiver; but that not being the case, he finds it necessary to
+surrender up a part of his property to furnish means for the protection of the
+rest; and this he is induced to do by the same prudence which in every other
+case advises him out of two evils to choose the least. WHEREFORE,
+security being the true design and end of government, it unanswerably
+follows that whatever FORM thereof appears most likely to ensure it to us,
+with the least expence and greatest benefit, is preferable to all others.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[git ssh使用代理]]></title>
@@ -791,147 +825,6 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
   <li>Insert a Image From Flickr in Octopress <a href="http://blog.ychuang.org/blog/2012/11/14/insert-a-image-from-flickr-in-octopress/">http://blog.ychuang.org/blog/2012/11/14/insert-a-image-from-flickr-in-octopress/</a></li>
   <li>Fetch images from Flickr to show in Octopress/Jekyll <a href="http://blog.pixarea.com/2012/07/fetch-images-from-flickr-to-show-in-octopress-slash-jekyll">http://blog.pixarea.com/2012/07/fetch-images-from-flickr-to-show-in-octopress-slash-jekyll</a></li>
 </ol>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[grep命令手册]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/19/grep-man/"/>
-    <updated>2013-06-19T01:51:43+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/19/grep-man</id>
-    <content type="html"><![CDATA[<p>详细参看这个博文 <a href="http://blog.51yip.com/linux/1008.html">http://blog.51yip.com/linux/1008.html</a></p>
-
-<p>GNU Grep 2.14 <a href="http://www.gnu.org/software/grep/manual/grep.html">http://www.gnu.org/software/grep/manual/grep.html</a></p>
-
-<p>我常用grep命令是这样的：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">grep -r -n -I Search_String  DIR
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>-I 跳过二进制文件<br />
--r 递归子目录<br />
--n 显示匹配的行号<br />
-Search_String 寻找匹配的字符串<br />
-DIR 查找的目录范围</p>
-
-<!--more-->
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">grep --help  
-</span><span class="line">匹配模式选择:  
-</span><span class="line"> -E, --extended-regexp     扩展正则表达式egrep  
-</span><span class="line"> -F, --fixed-strings       一个换行符分隔的字符串的集合fgrep  
-</span><span class="line"> -G, --basic-regexp        基本正则  
-</span><span class="line"> -P, --perl-regexp         调用的perl正则  
-</span><span class="line"> -e, --regexp=PATTERN      后面根正则模式，默认无  
-</span><span class="line"> -f, --file=FILE           从文件中获得匹配模式  
-</span><span class="line"> -i, --ignore-case         不区分大小写  
-</span><span class="line"> -w, --word-regexp         匹配整个单词  
-</span><span class="line"> -x, --line-regexp         匹配整行  
-</span><span class="line"> -z, --null-data           a data line ends in 0 byte, not newline  
-</span><span class="line">  
-</span><span class="line">杂项:  
-</span><span class="line"> -s, --no-messages         不显示错误信息  
-</span><span class="line"> -v, --invert-match        显示不匹配的行  
-</span><span class="line"> -V, --version             显示版本号  
-</span><span class="line"> --help                    显示帮助信息  
-</span><span class="line"> --mmap                use memory-mapped input if possible  
-</span><span class="line">  
-</span><span class="line">输入控制:  
-</span><span class="line"> -m, --max-count=NUM       匹配的最大数  
-</span><span class="line"> -b, --byte-offset         打印匹配行前面打印该行所在的块号码。  
-</span><span class="line"> -n, --line-number         显示的加上匹配所在的行号  
-</span><span class="line"> --line-buffered           刷新输出每一行  
-</span><span class="line"> -H, --with-filename       当搜索多个文件时，显示匹配文件名前缀  
-</span><span class="line"> -h, --no-filename         当搜索多个文件时，不显示匹配文件名前缀  
-</span><span class="line"> --label=LABEL            print LABEL as filename for standard input  
-</span><span class="line"> -o, --only-matching       show only the part of a line matching PATTERN  
-</span><span class="line"> -q, --quiet, --silent     不显示任何东西  
-</span><span class="line"> --binary-files=TYPE   assume that binary files are TYPE  
-</span><span class="line"> TYPE is 'binary', 'text', or 'without-match'  
-</span><span class="line"> -a, --text                匹配二进制的东西  
-</span><span class="line"> -I                        不匹配二进制的东西  
-</span><span class="line"> -d, --directories=ACTION  目录操作，读取，递归，跳过  
-</span><span class="line"> ACTION is 'read', 'recurse', or 'skip'  
-</span><span class="line"> -D, --devices=ACTION      设置对设备，FIFO,管道的操作，读取，跳过  
-</span><span class="line"> ACTION is 'read' or 'skip'  
-</span><span class="line"> -R, -r, --recursive       递归调用  
-</span><span class="line"> --include=PATTERN     files that match PATTERN will be examined  
-</span><span class="line"> --exclude=PATTERN     files that match PATTERN will be skipped.  
-</span><span class="line"> --exclude-from=FILE   files that match PATTERN in FILE will be skipped.  
-</span><span class="line"> -L, --files-without-match 匹配多个文件时，显示不匹配的文件名  
-</span><span class="line"> -l, --files-with-matches  匹配多个文件时，显示匹配的文件名  
-</span><span class="line"> -c, --count               显示匹配了多少次  
-</span><span class="line"> -Z, --null                print 0 byte after FILE name  
-</span><span class="line">  
-</span><span class="line">文件控制:  
-</span><span class="line"> -B, --before-context=NUM  打印匹配本身以及前面的几个行由NUM控制  
-</span><span class="line"> -A, --after-context=NUM   打印匹配本身以及随后的几个行由NUM控制  
-</span><span class="line"> -C, --context=NUM         打印匹配本身以及随后，前面的几个行由NUM控制  
-</span><span class="line"> -NUM                      根-C的用法一样的  
-</span><span class="line"> --color[=WHEN],  
-</span><span class="line"> --colour[=WHEN]       use markers to distinguish the matching string  
-</span><span class="line"> WHEN may be `always', `never' or `auto'.  
-</span><span class="line"> -U, --binary              do not strip CR characters at EOL (MSDOS)  
-</span><span class="line"> -u, --unix-byte-offsets   report offsets as if CRs were not there (MSDOS)  
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
   </entry>
   
