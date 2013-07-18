@@ -7,13 +7,14 @@ mathjax: false
 categories: society
 ---
 #### OF THE ORIGIN AND DESIGN OF GOVERNMENT IN GENERAL,WITH CONCISE REMARKS ON THE ENGLISH CONSTITUTION
+
 #### 常规的政府起源和设计，兼简评英国制度
 
 <!--more-->
 
 SOME writers have so confounded society with government, as to leave little or no distinction between them; whereas they are not only different,but have different origins. Society is produced by our wants, and government by wickedness; the former promotes our happiness POSITIVELY by uniting our affections, the latter NEGATIVELY by restraining our vices. The one encourages intercourse, the other creates distinctions. The first is a patron, the last a punisher.
 
-__一些__ 写小册子（发表政治见解）的人混淆社会和政府的区别，认为他们区别很小或者没有区别。二者不仅不同，连起源都不同。社会起源于人的需求，而政府起源于人的邪恶。
+__一些__ 写小册子（发表政治见解）的人混淆社会和政府的区别，认为二者区别很小或者没有区别。二者不仅不同，连起源都不同。社会起源于人的需求，而政府起源于人的邪恶。
 
 writers：当时美洲流行写小册子发表政治见解。这里的writers就是当时写小册子的那些人。本书也是当时的一个小册子。
 
