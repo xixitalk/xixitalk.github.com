@@ -4,7 +4,7 @@
   <title><![CDATA[Category: flickr | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/flickr/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-07-18T21:29:07+08:00</updated>
+  <updated>2013-07-20T12:13:20+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -53,12 +53,12 @@ FlickRaw.proxy = "http://192.168.1.106:8118/"
 <h3 id="section">实例测试</h3>
 
 <p>代码里这样使用
-{% raw %}</p>
+</p>
 
 <pre><code>{% flickr_image 6293807068 b %}
 </code></pre>
 
-<p>{% endraw %}</p>
+<p></p>
 
 <p>更多用例：</p>
 
@@ -66,7 +66,16 @@ FlickRaw.proxy = "http://192.168.1.106:8118/"
 
 <p><code>b</code>是指big，图片大小约为1024x768，基本可以满足博客显示。如果要更小图片，可以用<code>m</code>,表示medium。再小的用<code>sq</code>,表示square thumbnail。</p>
 
-<p>{% flickr_image 6293807068 b %}</p>
+<p>Liquid error: 746: unexpected token at '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<title>Proxy error: 504 Connect to api.flickr.com:80 failed: No space left on device.</title>
+</head><body>
+<h1>504 Connect to api.flickr.com:80 failed: No space left on device</h1>
+<p>The following error occurred while trying to access <strong>http://api.flickr.com/services/rest/</strong>:<br><br>
+<strong>504 Connect to api.flickr.com:80 failed: No space left on device</strong></p>
+<hr>Generated Sat, 20 Jul 2013 12:16:28 CST by Polipo on <em>raspbmc:8118</em>.
+</body></html>
+'</p>
 
 <h3 id="section-1">参考</h3>
 
