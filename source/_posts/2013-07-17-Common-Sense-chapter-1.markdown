@@ -6,9 +6,9 @@ comments: true
 mathjax: false
 categories: society
 ---
-#### OF THE ORIGIN AND DESIGN OF GOVERNMENT IN GENERAL,WITH CONCISE REMARKS ON THE ENGLISH CONSTITUTION
+### OF THE ORIGIN AND DESIGN OF GOVERNMENT IN GENERAL,WITH CONCISE REMARKS ON THE ENGLISH CONSTITUTION
 
-#### 常规的政府起源和设计，兼简评英国制度
+### 常规的政府起源和设计，兼简评英国制度
 
 <!--more-->
 
