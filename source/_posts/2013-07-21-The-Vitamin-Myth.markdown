@@ -8,11 +8,13 @@ categories: life
 ---
 来源：[The Vitamin Myth: Why We Think We Need Supplements](http://www.theatlantic.com/health/archive/2013/07/the-vitamin-myth-why-we-think-we-need-supplements/277947/) by [PAUL OFFIT](http://www.theatlantic.com/paul-offit/)
 
-### 维生素迷信：为什么我们要补充维生素
-
-<!--more-->
+中文翻译：[维生素迷信：为什么我们认为我们需要补充维生素](http://ww3.sinaimg.cn/large/7c3fe21bjw1e6th1c1puxj20hsf4k4qs.jpg)  by @蕨代霜蛟
 
 Nutrition experts contend that all we need is what's typically found in a routine diet. Industry representatives, backed by a fascinating history, argue that foods don't contain enough, and we need supplements. Fortunately, many excellent studies have now resolved the issue.
+
+### 维生素迷信：为什么我们认为我们需要补充维生素
+
+<!--more-->
 
 On October 10, 2011, researchers from the University of Minnesota found that women who took supplemental multivitamins died at rates higher than those who didn't. Two days later, researchers from the Cleveland Clinic found that men who took vitamin E had an increased risk of prostate cancer. "It's been a tough week for vitamins," said Carrie Gann of ABC News.
 
