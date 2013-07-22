@@ -12,6 +12,8 @@ categories: life
 
 Nutrition experts contend that all we need is what's typically found in a routine diet. Industry representatives, backed by a fascinating history, argue that foods don't contain enough, and we need supplements. Fortunately, many excellent studies have now resolved the issue.
 
+营养学家主张我们所需的营养物质都要来自常规食物。回顾这段迷人的历史，工业化代表们认为食物包含的营养并不够人体所需，我们需要另外补充营养物质。幸运的是，现在许多杰出的研究表明已经解决了这个争论。
+
 ### 维生素迷信：为什么我们认为我们需要补充维生素
 
 <!--more-->
@@ -111,3 +113,5 @@ How could this be? Given that free radicals clearly damage cells -- and given th
 In May 1980, during an interview at Oregon State University, Linus Pauling was asked, "Does vitamin C have any side effects on long-term use of, let's say, gram quantities?" Pauling's answer was quick and decisive. "No," he replied.
 
 Seven months later, his wife was dead of stomach cancer. In 1994, Linus Pauling died of prostate cancer.
+
+七个月后，他的妻子死于胃癌。1994年，Linus Pauling死于前列腺癌。
