@@ -20,9 +20,15 @@ Nutrition experts contend that all we need is what's typically found in a routin
 
 On October 10, 2011, researchers from the University of Minnesota found that women who took supplemental multivitamins died at rates higher than those who didn't. Two days later, researchers from the Cleveland Clinic found that men who took vitamin E had an increased risk of prostate cancer. "It's been a tough week for vitamins," said Carrie Gann of ABC News.
 
+2011.10.10 明尼苏达大学的研究表明：女性服用多种维生素的死亡几率高于不服用。两天后，Cleveland诊所研究表明：男人服用维生素E会增加获得前列腺癌的风险。ABC News的Carrie Gann说“这真是维生素备受打击的一周”。
+
 These findings weren't new. Seven previous studies had already shown that vitamins increased the risk of cancer and heart disease and shortened lives. Still, in 2012, more than half of all Americans took some form of vitamin supplements. What few people realize, however, is that their fascination with vitamins can be traced back to one man. A man who was so spectacularly right that he won two Nobel Prizes and so spectacularly wrong that he was arguably the world's greatest quack.
 
+这些发现一点都不新奇。早前的七个研究已经显示：维生素会增加获得癌症和心脏疾病的风险，缩短寿命。尽管如此，2012年美国仍有超过一半人服用某种形式的维生素。不过很少有人知道他们对维生素的迷恋可以追溯到一个人。这个人无比的正确：他赢得了两次诺贝尔奖。而又无比的错误：他可能是世界上最大的冒牌医生。
+
 > When Albert Einstein was asked what he thought of Pauling's work, he shrugged his shoulders. "It was too complicated for me."
+
+> 当艾尔伯特·爱因斯坦被问到他怎么看待Pauling的研究的时候，他耸耸肩说，“这对我来说太复杂了”。
 
 In 1931, Linus Pauling published a paper in the Journal of the American Chemical Society titled "The Nature of the Chemical Bond." Before publication, chemists knew of two types of chemical bonds: ionic, where one atom gives up an electron to another; and covalent, where atoms share electrons. Pauling argued that it wasn't that simple -- electron sharing was somewhere between ionic and covalent. Pauling's idea revolutionized the field, marrying quantum physics with chemistry. His concept was so revolutionary in fact that when the journal editor received the manuscript, he couldn't find anyone qualified to review it. When Albert Einstein was asked what he thought of Pauling's work, he shrugged his shoulders. "It was too complicated for me," he said.
 
