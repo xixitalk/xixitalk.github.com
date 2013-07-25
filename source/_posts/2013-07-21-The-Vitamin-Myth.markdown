@@ -58,7 +58,11 @@ The turning point came in March 1966, when Pauling was 65 years old. He had just
 
 Pauling followed Stone's advice. "I began to feel livelier and healthier," he said. "In particular, the severe colds I had suffered several times a year all my life no longer occurred. After a few years, I increased my intake of vitamin C to ten times, then twenty times, and then three hundred times the RDA: now 18,000 milligrams per day."
 
+Pauling采纳了医生斯通的建议。“我开始感觉更有活力也更健康”，他说，“之前我每年总要得几次的重感冒再也没有出现了。几年后，我每天服用维生素C的剂量增加到了人体每日摄取推荐量（RDA）的10倍，之后是20倍，现在是300倍：18000毫克”。
+
 From that day forward, people would remember Linus Pauling for one thing: vitamin C.
+
+从那天开始，人们因为一个东西记住了Linus Pauling：维生素C。
 
 In 1970, Pauling published Vitamin C and the Common Cold, urging the public to take 3,000 milligrams of vitamin C every day (about 50 times the recommended daily allowance). Pauling believed that the common cold would soon be a historical footnote. "It will take decades to eradicate the common cold completely," he wrote, "but it can, I believe, be controlled entirely in the United States and some other countries within a few years. I look forward to witnessing this step toward a better world." Pauling's book became an instant best seller. Paperback versions were printed in 1971 and 1973, and an expanded edition titled Vitamin C, the Common Cold and the Flu, published three years later, promised to ward off a predicted swine flu pandemic. Sales of vitamin C doubled, tripled, and quadrupled. Drugstores couldn't keep up with demand. By the mid-1970s, 50 million Americans were following Pauling's advice. Vitamin manufacturers called it "the Linus Pauling effect."
 
@@ -133,3 +137,4 @@ In May 1980, during an interview at Oregon State University, Linus Pauling was a
 Seven months later, his wife was dead of stomach cancer. In 1994, Linus Pauling died of prostate cancer.
 
 七个月后，他的妻子死于胃癌。1994年，Linus Pauling死于前列腺癌。
+
