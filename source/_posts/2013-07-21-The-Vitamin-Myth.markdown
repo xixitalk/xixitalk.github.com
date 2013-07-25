@@ -32,15 +32,23 @@ These findings weren't new. Seven previous studies had already shown that vitami
 
 In 1931, Linus Pauling published a paper in the Journal of the American Chemical Society titled "The Nature of the Chemical Bond." Before publication, chemists knew of two types of chemical bonds: ionic, where one atom gives up an electron to another; and covalent, where atoms share electrons. Pauling argued that it wasn't that simple -- electron sharing was somewhere between ionic and covalent. Pauling's idea revolutionized the field, marrying quantum physics with chemistry. His concept was so revolutionary in fact that when the journal editor received the manuscript, he couldn't find anyone qualified to review it. When Albert Einstein was asked what he thought of Pauling's work, he shrugged his shoulders. "It was too complicated for me," he said.
 
+1931年，Linus Pauling在美国化学学会期刊上发表了一篇题目为《化学键的本质》的论文。在发表之前，化学家们认为共有两种化学键：一个原子的电子被另一个原子抢走的离子键和原子间共享电子的共价键。Pauling辩称事情没这么简单：电子共享也存在离子键和共价键之间。Pauling的观点革命了这个领域，他把量子物理和化学结合了起来。他的观念如此的具有革命性，以至于期刊编辑收到论文手稿后找不到有资格审阅的人。当艾尔伯特·爱因斯坦被问到他怎么看待Pauling的研究的时候，他耸耸肩说，“这对我来说太复杂了”。
+
 For this single paper, Pauling received the Langmuir Prize as the most outstanding young chemist in the United States, became the youngest person elected to the National Academy of Sciences, was made a full professor at Caltech, and won the Nobel Prize in Chemistry. He was 30 years old.
+
+凭借单单这一篇论文，Pauling作为美国最杰出青年化学家赢得了朗米尔奖（Langmuir Prize）。入选美国国家科学院，成为其最年轻的成员，被加州理工学院授予终身教授职位，赢得了诺贝尔化学奖。那年他才30岁。
 
 In 1949, Pauling published a paper in Science titled "Sickle Cell Anemia, a Molecular Disease." At the time, scientists knew that hemoglobin (the protein in blood that transports oxygen) crystallized in the veins of people with sickle-cell anemia, causing joint pain, blood clots, and death. But they didn't know why. Pauling was the first to show that sickle hemoglobin had a slightly different electrical charge -- a quality that dramatically affected how the hemoglobin reacted with oxygen. His finding gave birth to the field of molecular biology.
 
+1949年，Pauling在《科学》上发表了一篇题为《镰状细胞贫血是一种分子特征的疾病》的论文。当时，科学家知道血红蛋白（血液中一种传输氧气的蛋白）在患镰状细胞贫血人的静脉里结晶引起疼痛、血栓和死亡，但是大家都不知道为什么。Pauling第一次揭示了镰状性血红蛋白有轻微了电荷差别，这种特性显著影响了血红蛋白和氧气的相互作用。他的发现开创了分子生物学这一新领域。
+
 In 1951, Pauling published a paper in the Proceedings of the National Academy of Sciences titled "The Structure of Proteins." Scientists knew that proteins were composed of a series of amino acids. Pauling proposed that proteins also had a secondary structure determined by how they folded upon themselves. He called one configuration the alpha helix -- later used by James Watson and Francis Crick to explain the structure of DNA.
+
+1951年，Pauling在美国国家科学院一次会议中发表了一篇题目为《蛋白质的结构》的论文。当时科学家们知道蛋白质由氨基酸序列组成。Pauling提出蛋白质还有二级结构，这种结构取别于蛋白质自我折叠的方式。他将其中一种结构称为α螺旋。这种看法后来被James Watson和Francis Crick借用解释DNA结构。
 
 > At least 15 studies have now shown that vitamin C doesn't treat the common cold.
 
-> 至少有15个研究表明维生素C并不能治好普通感冒。
+> 至少有15个研究表明维生素C并不能治愈普通感冒。
 
 In 1961, Pauling collected blood from gorillas, chimpanzees, and monkeys at the San Diego Zoo. He wanted to see whether mutations in hemoglobin could be used as a kind of evolutionary clock. Pauling showed that humans had diverged from gorillas about 11 million years ago, much earlier than scientists had suspected. A colleague later remarked, "At one stroke he united the fields of paleontology, evolutionary biology, and molecular biology."
 
@@ -137,4 +145,3 @@ In May 1980, during an interview at Oregon State University, Linus Pauling was a
 Seven months later, his wife was dead of stomach cancer. In 1994, Linus Pauling died of prostate cancer.
 
 七个月后，他的妻子死于胃癌。1994年，Linus Pauling死于前列腺癌。
-
