@@ -142,7 +142,11 @@ In 2007, researchers from the National Cancer Institute examined 11,000 men who 
 
 In 2008, a review of all existing studies involving more than 230,000 people who did or did not receive supplemental antioxidants found that vitamins increased the risk of cancer and heart disease.
 
+2008年，一份对现存所有研究的分析报告指出：维生素会增加患得癌症和心脏疾病的风险。这些研究涉及23万服用或者不服用附加抗氧化剂的人员。
+
 On October 10, 2011, researchers from the University of Minnesota evaluated 39,000 older women and found that those who took supplemental multivitamins, magnesium, zinc, copper, and iron died at rates higher than those who didn't. They concluded, "Based on existing evidence, we see little justification for the general and widespread use of dietary supplements."
+
+2011.10.10，明尼苏达州立大学评估了3万9千名老年妇女的研究发现：服用多种维生素、镁锌铜铁的人死亡几率比不服用的人高。他们下结论说，“基于现存的研究证据，我们找不到普通广泛服用饮食补充剂的正当理由”。
 
 Two days later, on October 12, researchers from the Cleveland Clinic published the results of a study of 36,000 men who took vitamin E, selenium, both, or neither. They found that those receiving vitamin E had a 17 percent greater risk of prostate cancer. In response to the study, Steven Nissen, chairman of cardiology at the Cleveland Clinic, said, "The concept of multivitamins was sold to Americans by an eager nutraceutical industry to generate profits. There was never any scientific data supporting their usage." On October 25, a headline in the Wall Street Journal asked, "Is This the End of Popping Vitamins?" Studies haven't hurt sales. In 2010, the vitamin industry grossed $28 billion, up 4.4 percent from the year before. "The thing to do with [these reports] is just ride them out," said Joseph Fortunato, chief executive of General Nutrition Centers. "We see no impact on our business."
 
