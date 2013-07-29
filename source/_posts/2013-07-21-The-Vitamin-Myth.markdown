@@ -104,6 +104,8 @@ Other studies followed. After Pauling's pronouncement, researchers at the Univer
 
 Although study after study showed that he was wrong, Pauling refused to believe it, continuing to promote vitamin C in speeches, popular articles, and books. When he occasionally appeared before the media with obvious cold symptoms, he said he was suffering from allergies.
 
+虽然一个接一个研究显示Pauling错了， 但是他拒绝承认， 继续在演讲、文章和书中推销维生素C｡当他偶尔出现感冒症状时，他说这是过敏造成的（不是感冒）。
+
 Then Linus Pauling upped the ante. He claimed that vitamin C not only prevented colds; it cured cancer.
 
 Linus Pauling提高了赌注。他宣称维生素C不仅能预防感冒，还能治愈癌症。
