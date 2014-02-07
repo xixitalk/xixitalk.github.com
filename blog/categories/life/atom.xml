@@ -4,7 +4,7 @@
   <title><![CDATA[Category: life | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/blog/categories/life/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2013-11-15T17:21:31+08:00</updated>
+  <updated>2014-02-07T12:49:43+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[心脏骤停急救]]></title>
+    <link href="http://xixitalk.github.com/blog/2014/02/07/CPR-AED/"/>
+    <updated>2014-02-07T19:11:10+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2014/02/07/CPR-AED</id>
+    <content type="html"><![CDATA[<h1 id="section">概述</h1>
+<p>心脏骤停急救五个步骤，其中前三个在医护人员到达之前非医护人员可以做：求救、CPR、电击除颤</p>
+
+<p><img src="http://crashingpatient.com/wp-content/images/acls/new%20chain.jpg" alt="五个步骤" title="心脏骤停急救五个步骤" /></p>
+
+<p>CPR：Cardiopulmonary resuscitation (CPR) 心肺复苏术</p>
+
+<!--more-->
+
+<h1 id="section-1">实施过程</h1>
+<p><img src="http://www.surefirecpr.com/wp-content/uploads/2011/01/Los-Angeles-BLS-CPR-Algorhtym.jpeg" alt="急救过程" title="急救过程" />
+## 第一部分 呼救
+### 检查病人反应
+要点：手拍病人左肩，在左耳呼叫病人，无反应再换右侧。<br />
+注释：两侧呼叫防止病人单侧耳聋听不到，拍肩部而不是头部是防止病人有颈椎疾病等造成加重病情。<br />
+检查结果：如果病人无呼吸或者呼吸不正常、无脉搏、无反应，则启动紧急求救系统。<br />
+### 拨打120或者911进行呼叫
+如果现场有人可以请人拨打120或者911进行紧急呼叫。如果只有一个人先进性CPR两分钟再进行电话呼叫。<br />
+电话呼叫要点：说清楚地点，病人性别大概年龄，联系方式，简单情况：如无脉搏无呼吸。<br />
+## 第二部分 CPR心肺复苏术
+心肺复苏术包括胸部按压和人工呼吸
+### 胸部按压
+按压位置：病人两乳头连线中心，位于胸骨之上<br />
+手法：双手交叉相扣；接触胸骨的掌根使力，手指翘起不用力<br />
+注释：不要按压病人肋骨防止造成肋骨骨折<br />
+要点：至少100次/分钟，下压至少5厘米<br />
+### 人工呼吸
+保持气管畅通：病人仰头抬颌<br />
+手法：嘴对嘴封闭病人的嘴，吹起时捏紧病人鼻子，吹起持续1秒钟看到病人胸部明显起伏为宜。<br />
+注释：有的AED里有人工呼吸面罩，这样可以避免直接病人可以有效防止感染<br />
+### 胸部按压和人工呼吸交替进行
+30次胸部按压后进行2次人工呼吸，然后再循环。
+## 第三部分 自动心室除颤AED设备
+有些公共场所有AED设备，取出来拆开。8岁或者小于25kg的小孩不建议用AED设备。<br />
+电极位置：右胸正前一个，另一个贴左胸侧下（电极上有图示）<br />
+要点：2分钟用AED做一次除颤，除颤时停止胸部按压和人工呼吸，不要肉体接触病人，防止除颤时被电击。<br />
+AED除颤通常一次即可，除颤后立即进行胸部按压；如果电击除颤多次，第3次后要等37秒后才能进行胸部按压。  </p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[维多利亚的秘密的创始人的秘密]]></title>
@@ -294,24 +339,6 @@
 
 <p>如果五项全是阴，表示未携带乙肝病毒，但是未有乙肝疫苗抗体，需要注射乙肝疫苗抗体。<br />
 其他“小三阳”和“大三阳”自行搜索吧。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[达尔文奖]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/27/death-for-sesame/"/>
-    <updated>2013-06-27T18:59:21+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/27/death-for-sesame</id>
-    <content type="html"><![CDATA[<p>新闻来源<a href="http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm">http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm</a></p>
-
-<p>女儿手机掉粪坑，下粪坑捞手机被毒倒，父母赶到也被毒倒。</p>
-
-<!--more-->
-
-<p>无独有偶，<a href="http://csxb.bandao.cn/data/20120917/html/32/content_6.html">北爱尔兰也发生过一条宠物狗掉粪坑，一家四口为救它死了仨</a>，幸存那个人也因吸入大量的粪便和沼气，肺部、食管、呼吸道等器官受损严重。</p>
-
-<p><a href="http://www.darwinawards.com/">达尔文奖</a>奖给那些“让自己愚蠢的基因不再自由地传播出去”，对人类的进化做出了贡献了的人们。维基百科：<a href="https://zh.wikipedia.org/wiki/%E8%BE%BE%E5%B0%94%E6%96%87%E5%A5%96">达尔文奖</a>。</p>
 
 ]]></content>
   </entry>
