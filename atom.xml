@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2014-02-07T14:24:28+08:00</updated>
+  <updated>2014-02-07T14:37:48+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -23,7 +23,9 @@
 
 <p><img src="http://crashingpatient.com/wp-content/images/acls/new%20chain.jpg" alt="五个步骤" title="心脏骤停急救五个步骤" /></p>
 
-<p>CPR：Cardiopulmonary resuscitation (CPR) 心肺复苏术</p>
+<p>CPR：Cardiopulmonary resuscitation (CPR) 心肺复苏术
+AED：Automated External Defibrillator 自动外置式心脏除颤仪
+VF：Ventricular Fibrillation心室纤维性颤动</p>
 
 <!--more-->
 
@@ -38,7 +40,7 @@
 检查结果：如果病人无呼吸或者呼吸不正常、无脉搏、无反应，则启动紧急求救流程。  </p>
 
 <h4 id="section-4">拨打120或者911进行呼叫</h4>
-<p>如果现场有人可以请人拨打120或者911进行紧急呼叫。如果只有一个人先进性CPR两分钟再进行电话呼叫。<br />
+<p>如果现场有人可以请人拨打120或者911进行紧急呼叫。如果只有一个人先进行CPR两分钟再进行电话呼叫。<br />
 电话呼叫要点：说清楚地点，病人性别大概年龄，联系方式，简单情况：如无脉搏无呼吸。  </p>
 
 <h3 id="cpr">2.2 第二部分 CPR心肺复苏术</h3>
@@ -54,20 +56,21 @@
 <img src="http://xixitalkgithubio.qiniudn.com/cpr3.jpg" alt="图" title="按压姿势" /></p>
 
 <h4 id="section-6">人工呼吸</h4>
-<p>保持气管畅通：病人仰头抬颌<br />
-手法：嘴对嘴封闭病人的嘴，吹起时捏紧病人鼻子，吹起持续1秒钟看到病人胸部明显起伏为宜。<br />
+<p>保持气管畅通：病人仰头抬颏<br />
+手法：嘴对嘴注意要完全封闭病人的嘴，吹气时捏紧病人鼻子，吹气持续1秒钟看到病人胸部明显起伏为宜。<br />
 注释：有的AED里有人工呼吸面罩，这样可以避免直接病人可以有效防止感染<br />
 <img src="http://xixitalkgithubio.qiniudn.com/cpr4.jpg" alt="图" title="仰头抬颌" />
 ![图]（http://fe867b.medialib.glogster.com/media/c0/c002518e7e45d01352966fe823e718310a9d9c4efc685e47f726d8d169617fca/cpr-steps-picture.gif  “人工呼吸”)</p>
 
 <h4 id="section-7">胸部按压和人工呼吸交替进行</h4>
-<p>30次胸部按压后进行2次人工呼吸，然后再循环。</p>
+<p>30次胸部按压后进行2次人工呼吸，然后循环操作。</p>
 
 <h3 id="aed">2.3 第三部分 自动心室除颤AED设备</h3>
-<p>有些公共场所有AED设备，取出来拆开按图例和语音提示操作。小于8岁或者小于25kg的小孩不建议用AED设备。AED并不能使病人恢复心律，AED除颤后还要配合胸部按压和人工呼吸操作。<br />
+<p>心脏骤停最多的原因是心室颤动（VF），有些公共场所有AED设备，拆开AED设备按图例和语音提示操作。小于8岁或者小于25kg的小孩不建议用AED设备。AED能有效的将VF病人除颤，并不一定能使病人恢复心律，AED除颤后还要配合胸部按压和人工呼吸操作。<br />
 电极位置：右胸正前一个，另一个贴左胸侧下（电极上有图示）<br />
 要点：2分钟用AED做一次除颤，除颤时停止胸部按压和人工呼吸，不要肉体接触病人，防止除颤时被电击。<br />
-AED除颤通常一次即可，除颤后立即进行胸部按压；如果电击除颤多次，第3次后要等37秒后才能进行胸部按压。</p>
+AED除颤通常一次即可，除颤后立即进行胸部按压；如果电击除颤多次，第3次后要等37秒后才能进行胸部按压。
+<img src="http://xixitalkgithubio.qiniudn.com/cpr5.jpg" alt="图" title="电极位置" /></p>
 
 <h2 id="section-8">更多资料</h2>
 
