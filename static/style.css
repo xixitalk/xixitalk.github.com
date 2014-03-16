@@ -1,0 +1,18 @@
+<style> 
+div{ 
+border:1px   solid   blue; 
+background-color:pink; 
+height:300px; 
+width:300px; 
+} 
+img   {
+width:48px; 
+height:48px; 
+} 
+img.left{ 
+float:left; 
+}; 
+img.right{ 
+float:right; 
+}; 
+</style> 
