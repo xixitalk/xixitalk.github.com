@@ -15,11 +15,14 @@ categories: tech
 <!--more-->
 
 在使用smtplib操作文件前部添加：
-    from httplib2 import socks
-    import socket
-    socket.socket = socks.socksocket
-    socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
+
+~~~
+from httplib2 import socks
+import socket
+socket.socket = socks.socksocket
+socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
+~~~
 
 经测试邮件发送正常，待后续观察。
 
-socks支持SOCKS和HTTP代理，如果是HTTP代理上述代码自行替换之。
+socks支持SOCKS4、SOCKS5和HTTP代理，上述代码自行替换之。
