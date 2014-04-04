@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.com/"/>
-  <updated>2014-03-26T10:44:31+08:00</updated>
+  <updated>2014-04-04T10:07:46+08:00</updated>
   <id>http://xixitalk.github.com/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[python里用smtplib发邮件使用代理]]></title>
+    <link href="http://xixitalk.github.com/blog/2014/04/04/smtplib-with-proxy/"/>
+    <updated>2014-04-04T17:51:49+08:00</updated>
+    <id>http://xixitalk.github.com/blog/2014/04/04/smtplib-with-proxy</id>
+    <content type="html"><![CDATA[<p>关键词：smtplib mail proxy</p>
+
+<p>树莓派上一个cron python程序直接用smtplib发送gmail邮件昨天出现问题了，错误是：socket.error: [Errno 97] Address family not supported by protocol，之前都是好好的，我用的smtp.gmail.com，端口是587。</p>
+
+<p>我搜索了一圈，觉得原因是国家防火墙搞得鬼，如果smtplib添加代理就可以避免这种情况。搜索了很多方法都觉得不好使，突然想到以前为google app engine的appcfg.py使用SocksiPy添加代理的方法，并且SocksiPy现在被包含在httplib2的库里了，这样就更方便了。</p>
+
+<!--more-->
+
+<p>在使用smtplib操作文件前部添加：
+    from httplib2 import socks
+    import socket
+    socket.socket = socks.socksocket
+    socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,”192.168.1.106”,1081)</p>
+
+<p>经测试邮件发送正常，待后续观察。</p>
+
+<p>socks支持SOCKS和HTTP代理，如果是HTTP代理上述代码自行替换之。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[科学作为一种志业]]></title>
@@ -2152,20 +2177,6 @@ The fact that consumption of pork is prohibited in Islam is well-known. The foll
 <p>The pig is the most shameless animal on the face of the earth. It is the only animal that invites its friends to have sex with its mate. In America, most people consume pork. Many times after dance parties, they have swapping of wives; i.e. many say “you sleep with my wife and I will sleep with your wife”. If you eat pigs then you behave like pigs. We Indians look upon America to be very advanced and sophisticated. Whatever they do, we follow after a few years. According to an article in Island magazine, this practice of swapping wives has become common in the affluent circles of Mumbai.</p>
 
 <p>猪是地球上最没有廉耻的动物，它们是唯一一种会邀请朋友和自己配偶进行交媾的动物。在美国，大部分人食用猪肉。舞会之后，他们经常相互交换妻子。比如，很多人会这样说”你和我的妻子睡觉，我和你的妻子睡觉”。如果你食用猪肉，你的行为就会变成猪一样。我们印度人眼中认为美国很高级很厉害。如果他们做什么，我们也跟着效仿，不出几年，根据Island magazine的一篇文章，换妻就会在孟买的富人圈里很普遍。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[搭建局域网跨路由网络]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/22/routing-cross/"/>
-    <updated>2013-06-22T17:34:57+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/22/routing-cross</id>
-    <content type="html"><![CDATA[<p>场景：两个路由器每个都组建一个局域网，每个局域网里的电脑想访问另一个局域网的电脑。</p>
-
-<!--more-->
-
-<p><a href="http://www.flickr.com/photos/xixitalk/9108420474/"><img src="http://farm6.static.flickr.com/5544/9108420474_421bdc9dc4_b.jpg" title="跨路由器访问设置" /></a></p>
 
 ]]></content>
   </entry>
