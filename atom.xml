@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-04-06T21:04:15+08:00</updated>
+  <updated>2014-04-06T21:24:14+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,32 +18,53 @@
     <link href="http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline/"/>
     <updated>2014-04-07T04:20:25+08:00</updated>
     <id>http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline</id>
-    <content type="html"><![CDATA[<p>事情是这样的：我用<a href="https://github.com/bear/python-twitter">twitter-python</a>在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡</p>
+    <content type="html"><![CDATA[<p>事情是这样的：我用<a href="https://github.com/bear/python-twitter">twitter-python</a>在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡获得推友收藏列表和fo人的api返回都是正常的，就是REST的api出这种错误。</p>
 
 <!--more-->
 
-<p>、、、
-Traceback (most recent call last):
-  File “hottweetdo.py”, line 184, in <module>
-    main()
-  File &#8220;hottweetdo.py&#8221;, line 127, in main
-    status = api2.GetUserTimeline(since_id=since_id1,count=200)
-  File &#8220;/media/westdata/read/python-twitter-master/twitter/api.py&#8221;, line 633, in GetUserTimeline
-    json = self._RequestUrl(url, &#8216;GET&#8217;, data=parameters)
-  File &#8220;/media/westdata/read/python-twitter-master/twitter/api.py&#8221;, line 3383, in _RequestUrl
-    timeout=self._requests_timeout
-  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/api.py&#8221;, line 55, in get
-    return request(&#8216;get&#8217;, url, **kwargs)
-  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/api.py&#8221;, line 44, in request
-    return session.request(method=method, url=url, **kwargs)
-  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/sessions.py&#8221;, line 383, in request
-    resp = self.send(prep, **send_kwargs)
-  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/sessions.py&#8221;, line 486, in send
-    r = adapter.send(request, **kwargs)
-  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/adapters.py&#8221;, line 382, in send
-    raise ConnectionError(e)
-requests.exceptions.ConnectionError: HTTPSConnectionPool(host=&#8217;api.twitter.com&#8217;, port=443): Max retries exceeded with url: /1.1/statuses/user_timeline.json?count=200 (Caused by &lt;class &#8216;httplib.BadStatusLine&#8217;&gt;: &#8221;)
-、、、</module></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">Traceback (most recent call last):
+</span><span class="line">  File "hottweetdo.py", line 183, in &lt;module&gt;
+</span><span class="line">    main()
+</span><span class="line">  File "hottweetdo.py", line 126, in main
+</span><span class="line">    status = api2.GetHomeTimeline(since_id=since_id1,count=200)
+</span><span class="line">  File "/media/westdata/read/python-twitter-master/twitter/api.py", line 541, in GetHomeTimeline
+</span><span class="line">    json = self._RequestUrl(url, 'GET', data=parameters)
+</span><span class="line">  File "/media/westdata/read/python-twitter-master/twitter/api.py", line 3383, in _RequestUrl
+</span><span class="line">    timeout=self._requests_timeout
+</span><span class="line">  File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 55, in get
+</span><span class="line">    return request('get', url, **kwargs)
+</span><span class="line">  File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 44, in request
+</span><span class="line">    return session.request(method=method, url=url, **kwargs)
+</span><span class="line">  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 383, in request
+</span><span class="line">    resp = self.send(prep, **send_kwargs)
+</span><span class="line">  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 486, in send
+</span><span class="line">    r = adapter.send(request, **kwargs)
+</span><span class="line">  File "/usr/local/lib/python2.7/dist-packages/requests/adapters.py", line 382, in send
+</span><span class="line">    raise ConnectionError(e)
+</span><span class="line">requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/home_timeline.json?count=200 (Caused by &lt;class 'httplib.BadStatusLine'&gt;: '')
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>代码很简单，就是用四个key生成一个api对象，然后直接调用<code>GetHomeTimeline</code></p>
 
 <p>我google之后， 看到很多类似的分析， 但是我都尝试了， 还是没有解决｡尝试罗列如下｡</p>
 
