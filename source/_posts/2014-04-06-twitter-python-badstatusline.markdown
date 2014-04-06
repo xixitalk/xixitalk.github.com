@@ -6,17 +6,17 @@ comments: true
 mathjax: false
 categories: tech
 ---
-事情是这样的：我用[twitter-python](https://github.com/bear/python-twitter)在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡
+事情是这样的：我用[twitter-python](https://github.com/bear/python-twitter)在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡获得推友收藏列表和fo人的api返回都是正常的，就是REST的api出这种错误。
 
 <!--more-->
 
-、、、
+```
 Traceback (most recent call last):
-  File "hottweetdo.py", line 184, in <module>
+  File "hottweetdo.py", line 183, in <module>
     main()
-  File "hottweetdo.py", line 127, in main
-    status = api2.GetUserTimeline(since_id=since_id1,count=200)
-  File "/media/westdata/read/python-twitter-master/twitter/api.py", line 633, in GetUserTimeline
+  File "hottweetdo.py", line 126, in main
+    status = api2.GetHomeTimeline(since_id=since_id1,count=200)
+  File "/media/westdata/read/python-twitter-master/twitter/api.py", line 541, in GetHomeTimeline
     json = self._RequestUrl(url, 'GET', data=parameters)
   File "/media/westdata/read/python-twitter-master/twitter/api.py", line 3383, in _RequestUrl
     timeout=self._requests_timeout
@@ -30,8 +30,10 @@ Traceback (most recent call last):
     r = adapter.send(request, **kwargs)
   File "/usr/local/lib/python2.7/dist-packages/requests/adapters.py", line 382, in send
     raise ConnectionError(e)
-requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/user_timeline.json?count=200 (Caused by <class 'httplib.BadStatusLine'>: '')
-、、、
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/home_timeline.json?count=200 (Caused by <class 'httplib.BadStatusLine'>: '')
+```
+
+代码很简单，就是用四个key生成一个api对象，然后直接调用`GetHomeTimeline`
 
 我google之后， 看到很多类似的分析， 但是我都尝试了， 还是没有解决｡尝试罗列如下｡
 
