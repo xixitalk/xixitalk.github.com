@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: flickr | xixitalk's snippet]]></title>
-  <link href="http://xixitalk.github.com/blog/categories/flickr/atom.xml" rel="self"/>
-  <link href="http://xixitalk.github.com/"/>
-  <updated>2014-04-04T10:23:56+08:00</updated>
-  <id>http://xixitalk.github.com/</id>
+  <link href="http://xixitalk.github.io/blog/categories/flickr/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.io/"/>
+  <updated>2014-04-06T21:04:15+08:00</updated>
+  <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[octopress里插入flickr的图片]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress/"/>
     <updated>2013-06-19T18:17:24+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress</id>
+    <id>http://xixitalk.github.io/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com">flickr</a>更新之后，免费1T空间，同时可以上传质量很好的图片。<a href="http://www.instagram.com">instagram</a>的图片质量太差了。</p>
 
 <!--more-->

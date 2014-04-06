@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: iptables | xixitalk's snippet]]></title>
-  <link href="http://xixitalk.github.com/blog/categories/iptables/atom.xml" rel="self"/>
-  <link href="http://xixitalk.github.com/"/>
-  <updated>2014-04-04T10:23:56+08:00</updated>
-  <id>http://xixitalk.github.com/</id>
+  <link href="http://xixitalk.github.io/blog/categories/iptables/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.io/"/>
+  <updated>2014-04-06T21:04:15+08:00</updated>
+  <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[用iptables将8222端口转向22（SSH）]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22/"/>
+    <link href="http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22/"/>
     <updated>2013-05-30T21:53:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
+    <id>http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
     <content type="html"><![CDATA[<p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
 <!--more-->

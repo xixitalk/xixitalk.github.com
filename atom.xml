@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[xixitalk's snippet]]></title>
-  <link href="http://xixitalk.github.com/atom.xml" rel="self"/>
-  <link href="http://xixitalk.github.com/"/>
-  <updated>2014-04-04T10:23:56+08:00</updated>
-  <id>http://xixitalk.github.com/</id>
+  <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.io/"/>
+  <updated>2014-04-06T21:04:15+08:00</updated>
+  <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
     
@@ -14,10 +14,66 @@
 
   
   <entry>
+    <title type="html"><![CDATA[twitter-python BadStatusLine错误]]></title>
+    <link href="http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline/"/>
+    <updated>2014-04-07T04:20:25+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline</id>
+    <content type="html"><![CDATA[<p>事情是这样的：我用<a href="https://github.com/bear/python-twitter">twitter-python</a>在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡</p>
+
+<!--more-->
+
+<p>、、、
+Traceback (most recent call last):
+  File “hottweetdo.py”, line 184, in <module>
+    main()
+  File &#8220;hottweetdo.py&#8221;, line 127, in main
+    status = api2.GetUserTimeline(since_id=since_id1,count=200)
+  File &#8220;/media/westdata/read/python-twitter-master/twitter/api.py&#8221;, line 633, in GetUserTimeline
+    json = self._RequestUrl(url, &#8216;GET&#8217;, data=parameters)
+  File &#8220;/media/westdata/read/python-twitter-master/twitter/api.py&#8221;, line 3383, in _RequestUrl
+    timeout=self._requests_timeout
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/api.py&#8221;, line 55, in get
+    return request(&#8216;get&#8217;, url, **kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/api.py&#8221;, line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/sessions.py&#8221;, line 383, in request
+    resp = self.send(prep, **send_kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/sessions.py&#8221;, line 486, in send
+    r = adapter.send(request, **kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/adapters.py&#8221;, line 382, in send
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host=&#8217;api.twitter.com&#8217;, port=443): Max retries exceeded with url: /1.1/statuses/user_timeline.json?count=200 (Caused by &lt;class &#8216;httplib.BadStatusLine&#8217;&gt;: &#8221;)
+、、、</module></p>
+
+<p>我google之后， 看到很多类似的分析， 但是我都尝试了， 还是没有解决｡尝试罗列如下｡</p>
+
+<h3 id="bad-proxy-server">bad proxy server</h3>
+<p>有人说是bad proxy server,程序确实使用代理了， 代理是shadowsocks+polipo， 代理设置在环境变量HTTP_PROXY和HTTPS_PROXY｡我尝试了不同地区的代理， 甚至切换了不同卖家的代理， 依然出错｡</p>
+
+<h3 id="dns">DNS问题</h3>
+<p>尝试了不同的DNS server不起作用</p>
+
+<h3 id="httplib2-08-077">httplib2 0.8的问题， 使用0.7.7</h3>
+<p>不起作用</p>
+
+<h3 id="twitter-api">twitter API的问题</h3>
+<p>twitter-python的一个issue解答说是twitter API诡异的问题｡问题是我只能等待吗？</p>
+
+<h3 id="maxretries5">设置maxretries为5</h3>
+<p>不起作用</p>
+
+<h3 id="requestssession-keep-alivefalse">设置requests的session keep-alive为False</h3>
+<p>不起作用</p>
+
+<p>请python高手或者twitter api高手指点迷津，可以直接在下面留言，或者推上@我。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[python里用smtplib发邮件使用代理]]></title>
-    <link href="http://xixitalk.github.com/blog/2014/04/04/smtplib-with-proxy/"/>
+    <link href="http://xixitalk.github.io/blog/2014/04/04/smtplib-with-proxy/"/>
     <updated>2014-04-04T17:51:49+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2014/04/04/smtplib-with-proxy</id>
+    <id>http://xixitalk.github.io/blog/2014/04/04/smtplib-with-proxy</id>
     <content type="html"><![CDATA[<p>关键词：smtplib mail proxy</p>
 
 <p>树莓派上一个cron python程序直接用smtplib发送gmail邮件昨天出现问题了，错误是：socket.error: [Errno 97] Address family not supported by protocol，之前都是好好的，我用的smtp.gmail.com，端口是587。</p>
@@ -42,9 +98,9 @@ socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
   
   <entry>
     <title type="html"><![CDATA[科学作为一种志业]]></title>
-    <link href="http://xixitalk.github.com/blog/2014/03/26/Science-as-a-Vocation/"/>
+    <link href="http://xixitalk.github.io/blog/2014/03/26/Science-as-a-Vocation/"/>
     <updated>2014-03-26T18:08:49+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2014/03/26/Science-as-a-Vocation</id>
+    <id>http://xixitalk.github.io/blog/2014/03/26/Science-as-a-Vocation</id>
     <content type="html"><![CDATA[<p>中文：<a href="http://blog.sciencenet.cn/blog-449420-610439.html">http://blog.sciencenet.cn/blog-449420-610439.html</a><br />
 英文：<a href="http://anthropos-lab.net/wp/wp-content/uploads/2011/12/Weber-Science-as-a-Vocation.pdf">http://anthropos-lab.net/wp/wp-content/uploads/2011/12/Weber-Science-as-a-Vocation.pdf</a></p>
 
@@ -1030,9 +1086,9 @@ who holds the fibers of his very life. </p>
   
   <entry>
     <title type="html"><![CDATA[韦伯：政治作为一种志业]]></title>
-    <link href="http://xixitalk.github.com/blog/2014/03/25/Politics-as-a-Vocation/"/>
+    <link href="http://xixitalk.github.io/blog/2014/03/25/Politics-as-a-Vocation/"/>
     <updated>2014-03-25T17:50:57+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2014/03/25/Politics-as-a-Vocation</id>
+    <id>http://xixitalk.github.io/blog/2014/03/25/Politics-as-a-Vocation</id>
     <content type="html"><![CDATA[<p>马克斯‧韦伯(Max Weber, 1864-1920)，德国学者，与马克思、涂尔干齐名，并列为现代社会学的「奠基者」。他不但是当代西方有影响力的社会科学家之一，也是现代文化比较研究的先驱人物。历任柏林、弗莱堡及海德堡等大学教授，曾主编Archiv fur Sozialwissenschaft und Sozialpolitik与Grundriss der Sozialokonomik。一生著述甚多，以《新教伦理与资本主义精神》、《宗教社会学论文集》及《经济与社会》等最为脍炙人口。</p>
 
 <p><img src="http://www.liberal-vision.org/wp-content/uploads/2010/03/weber.jpg" alt="Max Webber" title="Max Webber" /></p>
@@ -1256,9 +1312,9 @@ who holds the fibers of his very life. </p>
   
   <entry>
     <title type="html"><![CDATA[心脏骤停急救]]></title>
-    <link href="http://xixitalk.github.com/blog/2014/02/07/CPR-AED/"/>
+    <link href="http://xixitalk.github.io/blog/2014/02/07/CPR-AED/"/>
     <updated>2014-02-07T19:11:10+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2014/02/07/CPR-AED</id>
+    <id>http://xixitalk.github.io/blog/2014/02/07/CPR-AED</id>
     <content type="html"><![CDATA[<h2 id="section">1. 概述</h2>
 <p>心脏骤停急救分五个步骤，其中前三个在医护人员到达之前非医护人员可以做的：电话求救、CPR、电击除颤</p>
 
@@ -1326,9 +1382,9 @@ AED除颤通常一次即可，除颤后应立即进行胸部按压；如果电�
   
   <entry>
     <title type="html"><![CDATA[维多利亚的秘密的创始人的秘密]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/11/01/Roy-Raymond/"/>
+    <link href="http://xixitalk.github.io/blog/2013/11/01/Roy-Raymond/"/>
     <updated>2013-11-01T01:24:19+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/11/01/Roy-Raymond</id>
+    <id>http://xixitalk.github.io/blog/2013/11/01/Roy-Raymond</id>
     <content type="html"><![CDATA[<blockquote><p>http://www.slate.com/articles/business/when_big_businesses_were_small … 维多利亚的秘密背后的悲剧：1977年，斯坦福的MBA想给太太买内衣，但是在店里觉得尴尬无比，于是就开了自己的内衣店。1982年1百万卖掉。 1993年他跳下金门大桥</p><footer><strong>柯冰(‏@laojiang2010)</strong> <cite><a href="https://twitter.com/laojiang2010/status/395660825291022336">twitter.com/laojiang2010/status/&hellip;</a></cite></footer></blockquote>
 
 <!--more-->
@@ -1353,9 +1409,9 @@ AED除颤通常一次即可，除颤后应立即进行胸部按压；如果电�
   
   <entry>
     <title type="html"><![CDATA[The Vitamin Myth: Why We Think We Need Supplements]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/21/The-Vitamin-Myth/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/21/The-Vitamin-Myth/"/>
     <updated>2013-07-21T21:10:46+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/21/The-Vitamin-Myth</id>
+    <id>http://xixitalk.github.io/blog/2013/07/21/The-Vitamin-Myth</id>
     <content type="html"><![CDATA[<p>来源：<a href="http://www.theatlantic.com/health/archive/2013/07/the-vitamin-myth-why-we-think-we-need-supplements/277947/">The Vitamin Myth: Why We Think We Need Supplements</a> by <a href="http://www.theatlantic.com/paul-offit/">PAUL OFFIT</a></p>
 
 <p>中文翻译：<a href="http://ww3.sinaimg.cn/large/7c3fe21bjw1e6th1c1puxj20hsf4k4qs.jpg">维生素迷信：为什么我们认为我们需要补充维生素</a>  by @蕨代霜蛟</p>
@@ -1568,9 +1624,9 @@ AED除颤通常一次即可，除颤后应立即进行胸部按压；如果电�
   
   <entry>
     <title type="html"><![CDATA[托马斯·潘恩《常识》第一章]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/18/Common-Sense-chapter-1/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/18/Common-Sense-chapter-1/"/>
     <updated>2013-07-18T01:36:51+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/18/Common-Sense-chapter-1</id>
+    <id>http://xixitalk.github.io/blog/2013/07/18/Common-Sense-chapter-1</id>
     <content type="html"><![CDATA[<h3 id="of-the-origin-and-design-of-government-in-generalwith-concise-remarks-on-the-english-constitution">OF THE ORIGIN AND DESIGN OF GOVERNMENT IN GENERAL,WITH CONCISE REMARKS ON THE ENGLISH CONSTITUTION</h3>
 
 <h3 id="section">常规的政府起源和设计，兼简评英国制度</h3>
@@ -1603,9 +1659,9 @@ with the least expence and greatest benefit, is preferable to all others.</p>
   
   <entry>
     <title type="html"><![CDATA[git ssh使用代理]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy/"/>
     <updated>2013-07-12T16:23:33+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/12/git-ssh-proxy</id>
+    <id>http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy</id>
     <content type="html"><![CDATA[<p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
 
 <p>树莓派上有<code>socks5</code>代理和<code>http</code>代理，下面配置<code>git ssh</code>通过代理进行<code>git</code>操作。</p>
@@ -1641,9 +1697,9 @@ IdentityFile /home/pi/.ssh/id_rsa
   
   <entry>
     <title type="html"><![CDATA[《美丽新世界》]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/11/Brave-New-World/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/11/Brave-New-World/"/>
     <updated>2013-07-11T23:49:04+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/11/Brave-New-World</id>
+    <id>http://xixitalk.github.io/blog/2013/07/11/Brave-New-World</id>
     <content type="html"><![CDATA[<p><a href="http://www.ruanyifeng.com/blog/2011/03/brave_new_world.html">阮一峰《美丽新世界》读后感》</a></p>
 
 <p><a href="http://www.guokr.com/blog/310237/">金色葡萄《如何拒绝进入美丽新世界》</a></p>
@@ -1652,7 +1708,7 @@ IdentityFile /home/pi/.ssh/id_rsa
 
 <!--more-->
 
-<script src="http://xixitalk.github.com/javascripts/base64.js" type="text/javascript"> </script>
+<script src="http://xixitalk.github.io/javascripts/base64.js" type="text/javascript"> </script>
 <p><span id="base64_block">RFFybHBhWGxxSUhsc0pUbm1vVGpnSW94T1RnMDQ0Q0w1WktNNkxXcjZJT2w2YnVPNTVxRTQ0Q0s1NzZPNUxpOTVwYXc1TGlXNTVXTTQ0Q0w1cGl2NWErNTVweXE1cDJsNTZTKzVMeWE1NXFFNUxpazU2ZU42YUtFNktlQjQ0Q0M0NENLTVRrNE5PT0FpK2FZcitXdnVlV0ZzZVM2cCtTNHUrUzVpZWFlZ2VhZGcrZWt2dVM4bXVhY3F1YWRwZWVhaE9hUGorZTdtTys4ak9lT3NPV2NxT1dGdU9XZWkrZWFoT2VrdnVTOG11ZXh1K1dlaSthWXIrYWNuZW15bk8rOGpPUzdqdW1BaittY3N1ZWFoT1Mvb2VhQnIrYWRwZWVjaSthY25lbXluT2VhaE9tN2tlYWFsK2VVbXVpSHMrV2twK1drcCtpMmhlV0h1dVM2aHVTNXB1UzRyZWVhaE9taWhPaW9nT09BZ3VpTGoraUJsT1dTak9TNHJlV2J2ZWVhaE9pL2tlUzdvK1dPaHVXUHN1UzRpdVdTak9TNXB1UzRyZVdsa2VXUWlPZWFoT1M2aStTN3R1UzVuK1craU9Xa211KzhqT1M0cmVXYnZlZU9zT1djcU9XK2lPV2ttdWFXdWVtZG91UzVuK21EdmVpRHZlYUp2dVdJc09XOXNlV3RrT09BZ3VpQWpPT0FpdWUranVTNHZlYVdzT1M0bHVlVmpPT0FpK2FZcitXdnVlYXNwK2Ewc3VlK2p1V2J2ZWF3a2VTNHUrV2J2ZVd1dHVhY3F1YWRwZWVhaE9hUGorZTdtTys4ak9hS2dPYWNyK21kcWVhV3NPKzhqT1Mvb2VhQnIrZUlodWVDdU8rOGpPV29zZVM1a09pSHMrYXR1K09BZ2cwS1BIQStQQzl3UGcwSzVMaXQ1WnU5NTQ2dzVaeW81NXFFNTZTKzVMeWE1WVcyNWE2ZTVwaXY1TGlrNklDRjU1cUU1WStnNVlxZzQ0Q0M1TGlLNWJHQzVidTY1NjJSNkwrYjZLR001cGF3NlplNzVhNmg1cCtsNzd5TTVadSs1TG1tNWE2aDVwK2w3N3lNNTcyUjU3dWM1YTZoNXArbDc3eU02S2lBNks2NjVwV1A1b1NmNksrTjZMK0g1cnVrNzd5TTVvbVQ1WWU3NWJ5QzZLNnU3N3lNNW91bTVvaXE1TGlLNks2Lzc3eU01cHEwNVlxYjVvdUc2TCtCNzd5TTVydWw1NVNvNVlxejVwUzU3N3lNNXBxMDVZcWI1N3UwNTZpejc3eU01YTZhNTRLNTU1dVI1bzZuNzd5TTZMK1o1cTJqNXBpdjQ0Q0tNVGs0Tk9PQWkrbUhqT2FQaitlN21PZWFoT1M0aytXSXR1ZTduK2F5dSthZXR1YWVoT09BZ3VpQWpPUzRpK1d4Z3Vhd2tlUzhsK1drcCttRHFPV0lodWVEcmVpaHQrV0ZxK1dOcHVhdXRlV3RrT1dGdStlVW4rYVluK1c2cCsrOGpPaXZyZWlvZ09TNHUrV0txT21ZaWVXSnN1KzhqT1M0amVpd2lPYVV2K2F5dStXU2pPYWRnK1dJcWUrOGpPYXlvZWFjaWVtQWllUzR2dWFkZytXUGlPYUFqdWFndCsrOGpPbWpuK1dUZ2VpTnIrV1RnZVd1aWVXRnFPV05zZWFjdXVXUGlPYUFqdWFndCsrOGpPZU9yK1dpZytheG9lYWZrK2lIdE9lWmpPV1BpT2FBanVhZ3QrKzhqT21UdXVXa3FlZWJsdVdjc09tQWllZW5nT1dvc2VTNWtPKzhqT2VEcmVpaHQrZVV0ZVd0a09TNnArV1RnZSs4ak9hdG8rYURzK09BaXVXb3NlUzVrT2lIcythdHUrT0FpK2l2dE9lYWhPbUNvK2FndCsrOG11UzZ1dWV4dSthY2llV0hvT2kva2VhWG9PbVprT2VhaE9hMmlPbUJvK1dvc2VTNWtPZWFoT2Fzc3VhY20rT0FnZzBLUEhBK1BDOXdQZzBLNUxpTDZaMmk1cHlKNUxpcTVyeXI1NVM3NWErNTVhV2w1YWlCNWJDVTU1cUU0NENLTVRrNE5PT0FpK1dTak9pMXEraURwZW03anVlYWhPT0FpdWUranVTNHZlYVdzT1M0bHVlVmpPT0FpK2kvbStpaGpPV3Z1ZWF2bE8rOGpPZTdrK2l1dXVpdnRPaTFxK2lEcGVtN2p1V3Z1ZWFjcXVhZHBlZWFoT21paE9pb2dPaTJoZWkvaCtTNmh1V2xwZVdvZ2VXd2xPKzhqT21DbythWXIrV2JvT1M0dXVTN2x1ZXJtZVdjcU9hc3ArYTBzdWUranVhMHN1YXdrZVM0dStXSXR1VzZwdVdidmVXdXR1ZWFoT2lua3VXNnB1YWRwZWl2dE9lYWhPKzhqT2VybWVXY3FPV0ZzZVM2cCtTNHUrUzVpZWFlZ2VhZGcrV2J2ZVd1dHVhZHBlaXZ0T1dscGVXb2dlV3dsT1M0Z09lQ3VlUzVuK1M0amVpK2srUzZqdWkxcStpRHBlbTdqdU9BZ2cwSw==</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
 
 <p><img src="http://ww2.sinaimg.cn/large/5ff29ca4jw1dft3aqb0pkj.jpg" alt="image" /></p>
@@ -1661,9 +1717,9 @@ IdentityFile /home/pi/.ssh/id_rsa
   
   <entry>
     <title type="html"><![CDATA[linux常用命令和配置]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/11/linux-command/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/11/linux-command/"/>
     <updated>2013-07-11T00:08:18+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/11/linux-command</id>
+    <id>http://xixitalk.github.io/blog/2013/07/11/linux-command</id>
     <content type="html"><![CDATA[<p>下面是最近工作需要用到的命令，记录下来以供查阅。</p>
 
 <h3 id="test">添加新用户test</h3>
@@ -1723,9 +1779,9 @@ svn update --revision N //更新到版本N，-r
   
   <entry>
     <title type="html"><![CDATA[最近一些有趣的网页]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/09/funny-site/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/09/funny-site/"/>
     <updated>2013-07-09T06:51:46+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/09/funny-site</id>
+    <id>http://xixitalk.github.io/blog/2013/07/09/funny-site</id>
     <content type="html"><![CDATA[<h3 id="section">宇宙囧片王：天机•富春山居图</h3>
 <p><a href="http://pulolesu.proresu.com/dream/kuso/switch1.html">宇宙囧片王：天机•富春山居图（上）</a><br />
 <a href="http://pulolesu.proresu.com/dream/kuso/switch2.html">宇宙囧片王：天机•富春山居图（中）</a><br />
@@ -1745,9 +1801,9 @@ svn update --revision N //更新到版本N，-r
   
   <entry>
     <title type="html"><![CDATA[中国时区：CCT]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/06/china-coast-time/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/06/china-coast-time/"/>
     <updated>2013-07-06T16:17:55+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/06/china-coast-time</id>
+    <id>http://xixitalk.github.io/blog/2013/07/06/china-coast-time</id>
     <content type="html"><![CDATA[<p>octopress的<code>rake generate</code>的时候，如果时间在晚上22：00到24：00左右，发现生成的博客HTML文件日期会是第二天的日期。Google之后有人说要加<code>TZ=CCT</code>来设定时区。</p>
 
 <!--more-->
@@ -1766,9 +1822,9 @@ svn update --revision N //更新到版本N，-r
   
   <entry>
     <title type="html"><![CDATA[如果世界上只剩一个女人，将会发生什么？]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/06/what-will-happen-if-only-one-woman-left/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/06/what-will-happen-if-only-one-woman-left/"/>
     <updated>2013-07-06T06:33:32+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/06/what-will-happen-if-only-one-woman-left</id>
+    <id>http://xixitalk.github.io/blog/2013/07/06/what-will-happen-if-only-one-woman-left</id>
     <content type="html"><![CDATA[<blockquote><p>【如果世界上只剩一个女人，将会发生什么？】J大神：@煽动安全 同学提到的文章已经全部翻译完成。 供君观赏。 http://zhi.hu/TwlK （分享自 @知乎） 真实事件回答假设性大题，故事很长，但强烈推荐。</p><footer><strong>欧米(‏@omegaleeV)</strong> <cite><a href="https://twitter.com/omegaleeV/status/353114879214882817">twitter.com/omegaleeV/status/&hellip;</a></cite></footer></blockquote>
 
 <!--more-->
@@ -1951,9 +2007,9 @@ svn update --revision N //更新到版本N，-r
   
   <entry>
     <title type="html"><![CDATA[乙肝五项指标]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/05/Second-liver-5-indexes/"/>
     <updated>2013-07-05T23:41:59+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/05/Second-liver-5-indexes</id>
+    <id>http://xixitalk.github.io/blog/2013/07/05/Second-liver-5-indexes</id>
     <content type="html"><![CDATA[<p>乙型肝炎病毒表面抗原      HBsAg	    阴性<br />
 乙型肝炎病毒表面抗体      HBsAb	    阳性<br />
 乙型肝炎病毒e抗原         HBeAg	    阴性<br />
@@ -1972,9 +2028,9 @@ svn update --revision N //更新到版本N，-r
   
   <entry>
     <title type="html"><![CDATA[中国社会现状及未来发展]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/04/china-society/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/04/china-society/"/>
     <updated>2013-07-04T07:10:53+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/04/china-society</id>
+    <id>http://xixitalk.github.io/blog/2013/07/04/china-society</id>
     <content type="html"><![CDATA[<p><a href="http://cn.nytimes.com/china/20130703/cc03fangshaowei/">方绍伟：中国政治模式能走多远？</a></p>
 
 <p><a href="http://cn.nytimes.com/china/20130624/cc24lifan1/">李凡（上）：为什么现在的意识形态变得比较左</a><br />
@@ -1982,23 +2038,23 @@ svn update --revision N //更新到版本N，-r
 
 <!--more-->
 
-<script src="http://xixitalk.github.com/javascripts/base64.js" type="text/javascript"> </script>
+<script src="http://xixitalk.github.io/javascripts/base64.js" type="text/javascript"> </script>
 <p><span id="base64_block">RFFveExpRGt1SzNsbTczbWxML21zcnZtcUtIbHZJL29nNzNvdGJEbHBKcm92NXp2dko4OFFsSStEUXJrdTQ0eU1EQXk1Ym0wNWJ5QTVhZUw3N3lNNUxpdDVadTk1Nkd1NWE2ZTVZZTY1NDZ3NUxxRzVMaUE1TGlxNXBhdzU1cUU1cFMvNXJLNzVxaWg1YnlQNzd5TTZMK1o1YkN4NXBpdjVMaU41WkNNNUxxTzVMdWw1YjZBNTd1STZMcXI1TGlBNVlXYTVZaTI1NXFFNG9DYzZabVE1THU3NUxpQTVZV2E1WWkyNG9DZDVxaWg1YnlQNG9DVTRvQ1U1WnlvNUxpQTVZV2E1TGlUNXBTLzU1cUU1WW1ONW8rUTVMaUw3N3lNNVkrcTVZV0I2SzY0NXB5QTZhdVk2YUtHNWErODVMcTY1WnlvNUx1NzVMaWs1YkdLNTVxRTVwUy81cks3NXFpaDVieVA0NENDNUxpTjZLYUI1TDJPNUx5dzZMK1o1NmVONXBTLzVySzc1cWloNWJ5UDU1cUU1WWliNXBhdzU0bTU1b0NuNVpLTTU1U2Y1Wkc5NVlxYjQ0Q0M1Ynk2NUxxNjVwUy81cks3NTVxRTVwZTI1THVqNVkrdjZJTzk2TCtINVk2NzVMcUdMT0tBbk9XNHVPUzZ1dWFVditheXUrS0FuZVdQcitpRHZlUzhtdVM1b09TN3BlUzR1dVc0dU9TNmh1T0FndWVPc09XY3FPYVlyK0tBbk9TNGcrbSttZWF5dSthd3RPS0FuZU9BZ3VLQW5PYU9xT2loak9XNGd1V2N1dUtBbmVhWXIrV0ZtdWltZ2VtU3NlKzhqT0tBbk9tYWtPVzlvdVM0bHVpaXJlS0FuZWFZcitXRm11aW1nZVdSdmVPQWd1V0ZtdWFkZythdmxPVzdpZWEwZ2VhYnRPbUhqZWltZ2UrOGpPV091K2VKdWVhZGcrV01sdWFZcittZHFlaUhxdVczc2VlYWhPV1J2ZVM0amVXUHIraUR2ZVdIdXVlT3NPZWFoT1M2aSthRGhlT0FnZzBLRFFvOGNENDhMM0ErRFFveUxpRGt1THJrdTREa3VZam5qckRsbktqbm1vVG1oSS9vcjRibHZhTG1nSUhsajVqbHZwZm1yNVRvdm9QbHQ2WWdQRUpTUGcwSzU2Uys1THlhNXJDUjVMeVg1NXFFNW9TUDZLK0c1cStVNkw2RDViZW03N3lNNXJDUjVMeVg1NXFFNlp1RzVMMlQ2SzZ3NWIrRzVwaXY1cStiNXBlMjVMdWo0NENDNXErYjVwZTI1THVqNUxxNjVMcTY2WU85NXB5SjViZWw1TDJjNzd5TTVyS2g1THVBNUxtSTZMU3I1YStNNWJldTZMZWQ3N3lNNWJlbDVMcTY2WmkyNTdxbjVwaXY2YUtHNWErODZaaTI1N3FuNzd5TTVibXk2WU9vNXJLaDVweUo2WnFQNUw2LzVvbVQ1THE2NDRDQzVMaWM1cXluNVlXeDVMcW41TGk3NUxtSjU2QzA1THFuNkwyczVaNkw1cGl2NXJDUjVMeVg1cHlKNG9DYzZJZXE1NVN4NXJDUjVMaTc0b0NkNTVxRTZadUc1TDJUNks2dzViK0c3N3lNNWIyVDVZV3g1THFuNUxpNzVMbUo1WktNNkl1UDZJR1U1cWloNWJ5UDVZZTY1NDZ3NlpldTZhS1k1NXFFNXBlMjVZQ1o3N3lNNXJDUjVMeVg1bytRNVllNjViNkE2SWVxNTVTeDVyQ1I1TGk3Nkwyczc3eU01TGl0NVp1OTVyS2g1cHlKNkwrWjU2ZU42WnVHNUwyVDZLNnc1YitHNDRDQzVMaXQ1WnU5NXJDUjVMeVg1YSs1NG9DYzZJZXE1NVN4NXJDUjVMaTc0b0NkNUxpTjU2R3U1YTZhNzd5TTVhKzU1TGlONTZHdTVhNmE1NXFFNUxpYzZLVy81YkN4NUx5YTViNlg1WWU2NkwrWjVxQzM1N3VUNks2Njc3eWE1TGl0NVp1OTVwQ2U2SWVxNTVTeDVyQ1I1TGk3NUx5YTVwdTA1TG14NDRDQzVZV2E1WktNNXBTLzVicWM1TG1mNmFHNjVZcS82TCtaNXFDMzVhNmo1THlnNDRDQzVMaXQ1WnU5NXJLaDVweUo1WStONWErNTVZV2E3N3lNNWIyVDVZV2E1WktNNXBTLzVicWM1cFMvNTYyVzVwMis1NXFFNXBlMjVZQ1o3N3lNNUxpTjVMeWE1THFKNVkrVzVwUy81cks3NXAyRDVZaXA3N3lNNklDTTVwaXY1N3UwNXAyRDVMaSs1NG1NNlplNTVMcUw3N3lNNllDZzVvaVE1NXFFNTd1VDVwNmM1YkN4NXBpdjVwUy81NjJXNVkrSTU3U241YnlnNkxXMzVwMmw0NENDRFFvTkNqeHdQand2Y0Q0TkNqTXVJT1M0cmVXYnZlaTlyT1dlaStpRHZlV1FwdW1CditXRmplVzBxZWE2ZytTNGdPbUFsRDhnUEVKU1BnMEs1TGl0NVp1OTVyS2g1cHlKNVkrTjVhKzU1WVdhNzd5TTVyS2g1cHlKNktpQTZLNjY2SWVxNTVTeDc3eU02TCtZNXBpdjVwNkI1cDJENUxpNzVMbUo3N3lNNkwrWTVMaU41cGl2NWFpQjVwMkQ1TGk3NUxtSjQ0Q0M1TGl0NVp1OTVZK3E1cHlKNUxpazU2ZU41N3VUNXA2Yzc3eWE2TDJzNVo2TDVvaVE1WXFmNW9pVzZJQ0Y1YlNwNXJxRDQ0Q0M1TGl0NVp1OTU1cUU1WWU2NkxldjVZK3E2SU85NXBpdjViU3A1cnFENzd5TTU2Uys1THlhNUxpNzVMbUo1WnU5NWE2MjVyS2g1cHlKNW9pUTVZcWY2TDJzNVo2TDU1cUU1WVdJNUw2TDQ0Q0NEUW89</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[用base64进行关键词编码]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/07/03/base64-encode/"/>
+    <link href="http://xixitalk.github.io/blog/2013/07/03/base64-encode/"/>
     <updated>2013-07-03T06:01:04+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/07/03/base64-encode</id>
+    <id>http://xixitalk.github.io/blog/2013/07/03/base64-encode</id>
     <content type="html"><![CDATA[<p>用base64对关键词进行两次编码，浏览器客户端用javascript进行两次解码。对于支持javascript的浏览器来说透明，目的是防止关键词过滤。</p>
 
 <!--more-->
 
 <p>如(查看网页源代码)</p>
 
-<script src="http://xixitalk.github.com/javascripts/base64.js" type="text/javascript"> </script>
+<script src="http://xixitalk.github.io/javascripts/base64.js" type="text/javascript"> </script>
 <p><span id="base64_block">RFFwSFJsY2c1ckNSNUxpN0lPaUhxdWVVc1NEb2c2SHBsS2JtdHBzZzVyR2Y1ck85NXJDUklBMEs=</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
 
 <h3 id="base64blockrb">base64_block.rb</h3>
@@ -2020,9 +2076,9 @@ svn update --revision N //更新到版本N，-r
   
   <entry>
     <title type="html"><![CDATA[达尔文奖]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/27/death-for-sesame/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/27/death-for-sesame/"/>
     <updated>2013-06-27T18:59:21+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/27/death-for-sesame</id>
+    <id>http://xixitalk.github.io/blog/2013/06/27/death-for-sesame</id>
     <content type="html"><![CDATA[<p>新闻来源<a href="http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm">http://news.xinhuanet.com/legal/2013-06/27/c_124918715.htm</a></p>
 
 <p>女儿手机掉粪坑，下粪坑捞手机被毒倒，父母赶到也被毒倒。</p>
@@ -2038,9 +2094,9 @@ svn update --revision N //更新到版本N，-r
   
   <entry>
     <title type="html"><![CDATA[西奥克兰发生一起自杀溺亡]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/26/West-Auckland-drowning-not-suspicious/"/>
     <updated>2013-06-26T00:57:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/26/West-Auckland-drowning-not-suspicious</id>
+    <id>http://xixitalk.github.io/blog/2013/06/26/West-Auckland-drowning-not-suspicious</id>
     <content type="html"><![CDATA[<p>来源:<a href="http://www.3news.co.nz/West-Auckland-drowning-not-suspicious/tabid/423/articleID/302561/Default.aspx">West Auckland drowning not suspicious</a></p>
 
 <p>Police say the death of a man found in a stream bordering the west Auckland suburbs of Henderson and Massey was not suspicious.<br />
@@ -2075,9 +2131,9 @@ Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
   
   <entry>
     <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error/"/>
     <updated>2013-06-25T16:57:52+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error</id>
+    <id>http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error</id>
     <content type="html"><![CDATA[<p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -2097,89 +2153,6 @@ Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
 <p>参考：</p>
 
 <p><a href="http://www.wendangz.com/idc/linux/967.html">http://www.wendangz.com/idc/linux/967.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[穆斯林禁食猪肉常见问答]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/23/PORK-FORBIDDEN/"/>
-    <updated>2013-06-23T15:42:11+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/23/PORK-FORBIDDEN</id>
-    <content type="html"><![CDATA[<p>第一个信息来源 <a href="http://www.irf.net/index.php?option=com_content&amp;view=article&amp;id=394%3Apork-forbidden&amp;catid=71%3Amost-common-questions-asked-by-non-muslim&amp;Itemid=199">FAQs Most Common Questions asked by Non Muslims：PORK FORBIDDEN</a></p>
-
-<p>第二个信息来源 <a href="http://www.islamicvoice.com/february.99/zakir.htm">Questions Commonly Asked by Non-Muslims - VI : Why is Pork Forbidden?</a>,和第一个信息地址的内容大部分相同，比第一个信息更正式一些。</p>
-
-<p>说明：下面是穆斯林向非穆斯林说明他们不吃猪肉的几点原因。这里尊重宗教信仰自由，转载此处并无冒犯之意，原因说明本意以英文为准，翻译不准确的地方请留言。作者是<a href="http://www.irf.net/index.php?option=com_content&amp;view=article&amp;id=22&amp;Itemid=54">Dr. Zakir Naik</a>，他是<a href="http://www.irf.net/">Islamic Research Foundation</a>的President。</p>
-
-<p>PORK FORBIDDEN<br />
-禁食猪肉</p>
-
-<p>Question:
-Why is the eating of pork forbidden in Islam?<br />
-问：为什么穆斯林禁止食用猪肉？</p>
-
-<p>Answer:
-The fact that consumption of pork is prohibited in Islam is well-known. The following points explain various aspects of this prohibition:<br />
-答：大家都知道穆斯林禁食猪肉，下面将阐述这个习惯的几点原因。</p>
-
-<!--more-->
-
-<h3 id="pork-prohibited-in-the-quran">1. Pork prohibited in the Qur’an</h3>
-
-<h3 id="section">1. 《古兰经》里禁食猪肉</h3>
-<p>The Qur’an prohibits the consumption of pork in no less than four different places. It is prohibited in 2:173, 5:3, 6:145 and 16:115.</p>
-
-<p>“Forbidden to you (for food) are: dead meat, blood, the flesh of swine, and that on which hath been invoked the name of other than Allah.”</p>
-
-<p>[Al Qur’an 5:3]</p>
-
-<p>The above verses of the Glorious Qur’an are sufficient to satisfy a Muslim as to why pork is forbidden.</p>
-
-<h3 id="pork-prohibited-in-the-bible">2. Pork prohibited in the Bible</h3>
-
-<h3 id="section-1">2. 《圣经》里禁食猪肉</h3>
-<p>The Christian is likely to be convinced by his religious scriptures. The Bible prohibits the consumption of pork, in the Book of Leviticus:</p>
-
-<p>“And the swine, though he divide the hoof, and be cloven footed, yet he cheweth not the cud; he is unclean to you.”</p>
-
-<p>“Of their flesh shall ye not eat, and their carcase shall ye not touch, they are unclean to you.”</p>
-
-<p>[Book of Leviticus 11:7-8]</p>
-
-<p>Pork is also prohibited in the Bible in the Book of Deuteronomy:</p>
-
-<p>“And the swine, because it divideth the hoof, yet cheweth not the cud, it is unclean unto you. Ye shall not eat of their flesh, nor touch their dead carcase.”</p>
-
-<p>[Book of Deuteronomy 14:8]</p>
-
-<p>A similar prohibition is repeated in the Bible in the Book of Isaiah Chapter 65 Verses 2-5.</p>
-
-<h3 id="consumption-of-pork-causes-several-diseases">3. Consumption of pork causes several diseases</h3>
-
-<h3 id="section-2">3. 食用猪肉会造成几种疾病</h3>
-<p>The other non-Muslims and atheists will agree only if convinced through reason, logic and science. Eating of pork can cause no less than seventy different types of diseases. A person can have various helminths like roundworm, pinworm, hookworm, etc. One of the most dangerous is Taenia Solium, which is in lay man’s terminology called tapeworm. It harbours in the intestine and is very long. Its ova i.e. eggs, enter the blood stream and can reach almost all the organs of the body. If it enters the brain it can cause memory loss. If it enters the heart it can cause heart attack, if it enters the eye it can cause blindness, if it enters the liver it can cause liver damage. It can damage almost all the organs of the body.</p>
-
-<p>Another dangerous helminthes is Trichuris trichiura. A common misconception about pork is that if it is cooked well, these ova die. In a research project undertaken in America, it was found that out of twenty-four people suffering from Trichuris trichiura, twenty-two had cooked the pork very well. This indicates that the ova present in the pork do not die under normal cooking temperature.</p>
-
-<h3 id="pork-has-fat-building-material">4. Pork has fat building material</h3>
-
-<h3 id="section-3">4. 猪肉富含脂肪</h3>
-<p>Pork has very little muscle building material and contains excess of fat. This fat gets deposited in the vessels and can cause hypertension and heart attack. It is not surprising that over 50 million Americans suffer from hypertension.</p>
-
-<h3 id="pig-is-one-of-the-filthiest-animals-on-earth">5. Pig is one of the filthiest animals on earth</h3>
-
-<h3 id="section-4">5. 猪是地球上最污秽的动物之一</h3>
-<p>The pig is one of the filthiest animals on earth. It lives and thrives on muck, faeces and dirt. It is the best scavenger that I know that God has produced. In the villages they don’t have modern toilets and the villagers excrete in the open air. Very often excreta is cleared by pigs.</p>
-
-<p>Some may argue that in advanced countries like Australia, pigs are bred in very clean and hygienic conditions. Even in these hygienic conditions the pigs are kept together in sties. No matter how hard you try to keep them clean they are filthy by nature. They eat and enjoy their own as well as their neighbour’s excreta.</p>
-
-<h3 id="pig-is-the-most-shameless-animal">6. Pig is the most shameless animal</h3>
-
-<h3 id="section-5">6. 猪是最没有廉耻的动物</h3>
-<p>The pig is the most shameless animal on the face of the earth. It is the only animal that invites its friends to have sex with its mate. In America, most people consume pork. Many times after dance parties, they have swapping of wives; i.e. many say “you sleep with my wife and I will sleep with your wife”. If you eat pigs then you behave like pigs. We Indians look upon America to be very advanced and sophisticated. Whatever they do, we follow after a few years. According to an article in Island magazine, this practice of swapping wives has become common in the affluent circles of Mumbai.</p>
-
-<p>猪是地球上最没有廉耻的动物，它们是唯一一种会邀请朋友和自己配偶进行交媾的动物。在美国，大部分人食用猪肉。舞会之后，他们经常相互交换妻子。比如，很多人会这样说”你和我的妻子睡觉，我和你的妻子睡觉”。如果你食用猪肉，你的行为就会变成猪一样。我们印度人眼中认为美国很高级很厉害。如果他们做什么，我们也跟着效仿，不出几年，根据Island magazine的一篇文章，换妻就会在孟买的富人圈里很普遍。</p>
-
 ]]></content>
   </entry>
   

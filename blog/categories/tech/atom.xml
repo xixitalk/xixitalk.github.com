@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
-  <link href="http://xixitalk.github.com/blog/categories/tech/atom.xml" rel="self"/>
-  <link href="http://xixitalk.github.com/"/>
-  <updated>2014-04-04T10:23:56+08:00</updated>
-  <id>http://xixitalk.github.com/</id>
+  <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.io/"/>
+  <updated>2014-04-06T21:04:15+08:00</updated>
+  <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
     
@@ -14,10 +14,66 @@
 
   
   <entry>
+    <title type="html"><![CDATA[twitter-python BadStatusLine错误]]></title>
+    <link href="http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline/"/>
+    <updated>2014-04-07T04:20:25+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline</id>
+    <content type="html"><![CDATA[<p>事情是这样的：我用<a href="https://github.com/bear/python-twitter">twitter-python</a>在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡</p>
+
+<!--more-->
+
+<p>、、、
+Traceback (most recent call last):
+  File “hottweetdo.py”, line 184, in <module>
+    main()
+  File "hottweetdo.py", line 127, in main
+    status = api2.GetUserTimeline(since_id=since_id1,count=200)
+  File "/media/westdata/read/python-twitter-master/twitter/api.py", line 633, in GetUserTimeline
+    json = self._RequestUrl(url, 'GET', data=parameters)
+  File "/media/westdata/read/python-twitter-master/twitter/api.py", line 3383, in _RequestUrl
+    timeout=self._requests_timeout
+  File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 55, in get
+    return request('get', url, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 383, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 486, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/adapters.py", line 382, in send
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/user_timeline.json?count=200 (Caused by &lt;class 'httplib.BadStatusLine'&gt;: '')
+、、、</module></p>
+
+<p>我google之后， 看到很多类似的分析， 但是我都尝试了， 还是没有解决｡尝试罗列如下｡</p>
+
+<h3 id="bad-proxy-server">bad proxy server</h3>
+<p>有人说是bad proxy server,程序确实使用代理了， 代理是shadowsocks+polipo， 代理设置在环境变量HTTP_PROXY和HTTPS_PROXY｡我尝试了不同地区的代理， 甚至切换了不同卖家的代理， 依然出错｡</p>
+
+<h3 id="dns">DNS问题</h3>
+<p>尝试了不同的DNS server不起作用</p>
+
+<h3 id="httplib2-08-077">httplib2 0.8的问题， 使用0.7.7</h3>
+<p>不起作用</p>
+
+<h3 id="twitter-api">twitter API的问题</h3>
+<p>twitter-python的一个issue解答说是twitter API诡异的问题｡问题是我只能等待吗？</p>
+
+<h3 id="maxretries5">设置maxretries为5</h3>
+<p>不起作用</p>
+
+<h3 id="requestssession-keep-alivefalse">设置requests的session keep-alive为False</h3>
+<p>不起作用</p>
+
+<p>请python高手或者twitter api高手指点迷津，可以直接在下面留言，或者推上@我。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[python里用smtplib发邮件使用代理]]></title>
-    <link href="http://xixitalk.github.com/blog/2014/04/04/smtplib-with-proxy/"/>
+    <link href="http://xixitalk.github.io/blog/2014/04/04/smtplib-with-proxy/"/>
     <updated>2014-04-04T17:51:49+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2014/04/04/smtplib-with-proxy</id>
+    <id>http://xixitalk.github.io/blog/2014/04/04/smtplib-with-proxy</id>
     <content type="html"><![CDATA[<p>关键词：smtplib mail proxy</p>
 
 <p>树莓派上一个cron python程序直接用smtplib发送gmail邮件昨天出现问题了，错误是：socket.error: [Errno 97] Address family not supported by protocol，之前都是好好的，我用的smtp.gmail.com，端口是587。</p>
@@ -42,9 +98,9 @@ socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
   
   <entry>
     <title type="html"><![CDATA[搭建局域网跨路由网络]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/22/routing-cross/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/22/routing-cross/"/>
     <updated>2013-06-22T17:34:57+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/22/routing-cross</id>
+    <id>http://xixitalk.github.io/blog/2013/06/22/routing-cross</id>
     <content type="html"><![CDATA[<p>场景：两个路由器每个都组建一个局域网，每个局域网里的电脑想访问另一个局域网的电脑。</p>
 
 <!--more-->
@@ -56,9 +112,9 @@ socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
   
   <entry>
     <title type="html"><![CDATA[python从字符串用readlines读取操作]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/13/python-readlines-from-string/"/>
     <updated>2013-06-13T17:57:17+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/13/python-readlines-from-string</id>
+    <id>http://xixitalk.github.io/blog/2013/06/13/python-readlines-from-string</id>
     <content type="html"><![CDATA[<p>场景：用<a href="http://curl.haxx.se/">cURL</a>命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作</p>
 
 <!--more-->
@@ -99,9 +155,9 @@ import StringIO</p>
   
   <entry>
     <title type="html"><![CDATA[数字签名时的私钥加密公钥解密]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/07/digest-signature/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/07/digest-signature/"/>
     <updated>2013-06-07T23:33:05+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/07/digest-signature</id>
+    <id>http://xixitalk.github.io/blog/2013/06/07/digest-signature</id>
     <content type="html"><![CDATA[<p>疑问：数字签名时的<code>私钥加密 公钥解密</code>怎么理解？</p>
 
 <p>前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的<code>私钥加密 公钥解密</code>是怎么回事呢？</p>
@@ -143,36 +199,6 @@ import StringIO</p>
   <li>RFC2313 PKCS #1: RSA Encryption Version 1.5 <a href="http://tools.ietf.org/html/rfc2313">http://tools.ietf.org/html/rfc2313</a></li>
   <li>阮一峰：数字签名是什么？<a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html">http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html</a></li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[反对『中医』理由汇集]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/06/Anti-Traditional-Chinese-medicine/"/>
-    <updated>2013-06-06T17:59:58+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/06/Anti-Traditional-Chinese-medicine</id>
-    <content type="html"><![CDATA[<h3 id="section">中药制剂是大分子，容易造成肾衰</h3>
-<p>中药制剂是大分子，输液进入血液循环系统，造成肾衰。
-<a href="http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml">http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml</a></p>
-
-<h3 id="section-1">马兜铃酸造成肾衰</h3>
-<p>马兜铃酸造成肾衰，存在众多中药配方中</p>
-
-<h3 id="section-2">中药安神的机理是让人重金属中毒</h3>
-<p>中药安神的机理是让人硫化汞（包含在朱砂中）轻微中毒，让人萎靡、反应迟钝，达到安神镇静效果</p>
-
-<!--more-->
-
-<h3 id="section-3">掺加西药成分</h3>
-<p>有些中药有效成分实为西药，或者人工掺加西药成分提高表面效果。</p>
-
-<p>台湾药品食品检验局所出具的检查报告：《（民国）九十八年度調製劑中藥檢出西藥成分之分析》<a href="http://www.fda.gov.tw/tc/includes/GetFile.ashx?id=25&amp;chk=b4e40fbd-f8dd-4b56-9850-97d484aa0d67&amp;mid=141&amp;name=fdContent" title="九十八年度調製劑中藥檢出西藥成分之分析.pdf">报告下载</a>。报告中指出中药人工掺入次数最多的西药成分是：咖啡因。掺加咖啡因的结果就是吃了药后很快症状感觉好了很多，因为咖啡因可以兴奋神经。</p>
-
-<h3 id="section-4">历史上的废弃中医活动</h3>
-<p><a href="http://ja.wikipedia.org/wiki/%E6%BC%A2%E6%96%B9%E5%8C%BB%E5%AD%A6">汉方医学</a>为日本的传统医学，由中医学发展而来。日本明治维新时期被日本政府勒令取缔，全部由西医接管,后来实行”废医保药”，医术废除，保留部分药方。<br />
-民国初始，教育法没有把中医学列入教育内容，之后1929年通过了废除旧医法案，后因中医界人士强烈反对，实际并未推行。<br />
-新中国建国初，卫生部曾提议废除中医，没被中央采纳。文革时中医受政策性扶持，快速发展。1982年新宪法明确“发展现代医药和我国传统医药”，中医和西医并重发展。</p>
 
 ]]></content>
   </entry>

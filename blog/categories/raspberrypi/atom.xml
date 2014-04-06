@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
-  <link href="http://xixitalk.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
-  <link href="http://xixitalk.github.com/"/>
-  <updated>2014-04-04T10:23:56+08:00</updated>
-  <id>http://xixitalk.github.com/</id>
+  <link href="http://xixitalk.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.io/"/>
+  <updated>2014-04-06T21:04:15+08:00</updated>
+  <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error/"/>
     <updated>2013-06-25T16:57:52+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/25/nf_conntrack-error</id>
+    <id>http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error</id>
     <content type="html"><![CDATA[<p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
 
 <p><code>
@@ -41,9 +41,9 @@ sudo sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上安装Go lang并编译cow proxy]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/14/go-lang-for-raspberrypi/"/>
     <updated>2013-06-14T19:48:41+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/14/go-lang-for-raspberrypi</id>
+    <id>http://xixitalk.github.io/blog/2013/06/14/go-lang-for-raspberrypi</id>
     <content type="html"><![CDATA[<h3 id="go">安装go语言</h3>
 
 <p>选用非官方的二进制软件包，详细：<a href="http://dave.cheney.net/unofficial-arm-tarballs">http://dave.cheney.net/unofficial-arm-tarballs</a></p>
@@ -99,9 +99,9 @@ go get -u  github.com/cyfdecyf/cow
   
   <entry>
     <title type="html"><![CDATA[用浏览器发布博客到octopress]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi/"/>
+    <link href="http://xixitalk.github.io/blog/2013/06/01/octopress-post-from-raspberrypi/"/>
     <updated>2013-06-01T03:57:25+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/06/01/octopress-post-from-raspberrypi</id>
+    <id>http://xixitalk.github.io/blog/2013/06/01/octopress-post-from-raspberrypi</id>
     <content type="html"><![CDATA[<h3 id="section">目标</h3>
 <p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
 
@@ -151,9 +151,9 @@ go get -u  github.com/cyfdecyf/cow
   
   <entry>
     <title type="html"><![CDATA[用iptables将8222端口转向22（SSH）]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22/"/>
+    <link href="http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22/"/>
     <updated>2013-05-30T21:53:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
+    <id>http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22</id>
     <content type="html"><![CDATA[<p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
 
 <!--more-->
@@ -168,9 +168,9 @@ go get -u  github.com/cyfdecyf/cow
   
   <entry>
     <title type="html"><![CDATA[raspberry pi(树莓派）相关记录]]></title>
-    <link href="http://xixitalk.github.com/blog/2013/03/04/raspberry-pi/"/>
+    <link href="http://xixitalk.github.io/blog/2013/03/04/raspberry-pi/"/>
     <updated>2013-03-04T10:48:00+08:00</updated>
-    <id>http://xixitalk.github.com/blog/2013/03/04/raspberry-pi</id>
+    <id>http://xixitalk.github.io/blog/2013/03/04/raspberry-pi</id>
     <content type="html"><![CDATA[<p>搜索关键词：raspberry pi 树莓派 教程 XBMC shadowsocks</p>
 
 <p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>

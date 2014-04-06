@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>反对『中医』理由汇集 - xixitalk's snippet</title>
+  <title>twitter-python BadStatusLine错误 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="中药制剂是大分子，容易造成肾衰
-中药制剂是大分子，输液进入血液循环系统，造成肾衰。
-http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
-马兜铃酸造成肾衰，存在众多中药配方中 中药安神的机理是让人重金属中毒 &hellip;">
+  <meta name="description" content="事情是这样的：我用twitter-python在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡ 、、、
+Traceback (most recent call last): File “ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/06/06/Anti-Traditional-Chinese-medicine">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,7 +82,7 @@ http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
   
   <header>
     
-      <h1 class="entry-title">反对『中医』理由汇集</h1>
+      <h1 class="entry-title">twitter-python BadStatusLine错误</h1>
     
     
       <p class="meta">
@@ -100,7 +98,7 @@ http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
   
 
 
-<time datetime="2013-06-06T17:59:58+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2013</time>
+<time datetime="2014-04-07T04:20:25+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,28 +107,54 @@ http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
   </header>
 
 
-<div class="entry-content"><h3 id="section">中药制剂是大分子，容易造成肾衰</h3>
-<p>中药制剂是大分子，输液进入血液循环系统，造成肾衰。
-<a href="http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml">http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml</a></p>
-
-<h3 id="section-1">马兜铃酸造成肾衰</h3>
-<p>马兜铃酸造成肾衰，存在众多中药配方中</p>
-
-<h3 id="section-2">中药安神的机理是让人重金属中毒</h3>
-<p>中药安神的机理是让人硫化汞（包含在朱砂中）轻微中毒，让人萎靡、反应迟钝，达到安神镇静效果</p>
+<div class="entry-content"><p>事情是这样的：我用<a href="https://github.com/bear/python-twitter">twitter-python</a>在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡</p>
 
 <!--more-->
 
-<h3 id="section-3">掺加西药成分</h3>
-<p>有些中药有效成分实为西药，或者人工掺加西药成分提高表面效果。</p>
+<p>、、、
+Traceback (most recent call last):
+  File “hottweetdo.py”, line 184, in <module>
+    main()
+  File &#8220;hottweetdo.py&#8221;, line 127, in main
+    status = api2.GetUserTimeline(since_id=since_id1,count=200)
+  File &#8220;/media/westdata/read/python-twitter-master/twitter/api.py&#8221;, line 633, in GetUserTimeline
+    json = self._RequestUrl(url, &#8216;GET&#8217;, data=parameters)
+  File &#8220;/media/westdata/read/python-twitter-master/twitter/api.py&#8221;, line 3383, in _RequestUrl
+    timeout=self._requests_timeout
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/api.py&#8221;, line 55, in get
+    return request(&#8216;get&#8217;, url, **kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/api.py&#8221;, line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/sessions.py&#8221;, line 383, in request
+    resp = self.send(prep, **send_kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/sessions.py&#8221;, line 486, in send
+    r = adapter.send(request, **kwargs)
+  File &#8220;/usr/local/lib/python2.7/dist-packages/requests/adapters.py&#8221;, line 382, in send
+    raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host=&#8217;api.twitter.com&#8217;, port=443): Max retries exceeded with url: /1.1/statuses/user_timeline.json?count=200 (Caused by &lt;class &#8216;httplib.BadStatusLine&#8217;&gt;: &#8221;)
+、、、</module></p>
 
-<p>台湾药品食品检验局所出具的检查报告：《（民国）九十八年度調製劑中藥檢出西藥成分之分析》<a href="http://www.fda.gov.tw/tc/includes/GetFile.ashx?id=25&amp;chk=b4e40fbd-f8dd-4b56-9850-97d484aa0d67&amp;mid=141&amp;name=fdContent" title="九十八年度調製劑中藥檢出西藥成分之分析.pdf">报告下载</a>。报告中指出中药人工掺入次数最多的西药成分是：咖啡因。掺加咖啡因的结果就是吃了药后很快症状感觉好了很多，因为咖啡因可以兴奋神经。</p>
+<p>我google之后， 看到很多类似的分析， 但是我都尝试了， 还是没有解决｡尝试罗列如下｡</p>
 
-<h3 id="section-4">历史上的废弃中医活动</h3>
-<p><a href="http://ja.wikipedia.org/wiki/%E6%BC%A2%E6%96%B9%E5%8C%BB%E5%AD%A6">汉方医学</a>为日本的传统医学，由中医学发展而来。日本明治维新时期被日本政府勒令取缔，全部由西医接管,后来实行”废医保药”，医术废除，保留部分药方。<br />
-民国初始，教育法没有把中医学列入教育内容，之后1929年通过了废除旧医法案，后因中医界人士强烈反对，实际并未推行。<br />
-新中国建国初，卫生部曾提议废除中医，没被中央采纳。文革时中医受政策性扶持，快速发展。1982年新宪法明确“发展现代医药和我国传统医药”，中医和西医并重发展。</p>
+<h3 id="bad-proxy-server">bad proxy server</h3>
+<p>有人说是bad proxy server,程序确实使用代理了， 代理是shadowsocks+polipo， 代理设置在环境变量HTTP_PROXY和HTTPS_PROXY｡我尝试了不同地区的代理， 甚至切换了不同卖家的代理， 依然出错｡</p>
 
+<h3 id="dns">DNS问题</h3>
+<p>尝试了不同的DNS server不起作用</p>
+
+<h3 id="httplib2-08-077">httplib2 0.8的问题， 使用0.7.7</h3>
+<p>不起作用</p>
+
+<h3 id="twitter-api">twitter API的问题</h3>
+<p>twitter-python的一个issue解答说是twitter API诡异的问题｡问题是我只能等待吗？</p>
+
+<h3 id="maxretries5">设置maxretries为5</h3>
+<p>不起作用</p>
+
+<h3 id="requestssession-keep-alivefalse">设置requests的session keep-alive为False</h3>
+<p>不起作用</p>
+
+<p>请python高手或者twitter api高手指点迷津，可以直接在下面留言，或者推上@我。</p>
 </div>
 
 
@@ -153,12 +177,12 @@ http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
   
 
 
-<time datetime="2013-06-06T17:59:58+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2013</time>
+<time datetime="2014-04-07T04:20:25+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/life/'>life</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+    <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -170,7 +194,7 @@ http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:反对『中医』理由汇集 http://xixitalk.github.io/blog/2013/06/06/Anti-Traditional-Chinese-medicine/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:twitter-python BadStatusLine错误 http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -216,8 +240,8 @@ http://zhongyi.ifeng.com/news/pfmf/20101/33509.shtml 马兜铃酸造成肾衰
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/06/06/Anti-Traditional-Chinese-medicine/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/06/06/Anti-Traditional-Chinese-medicine/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline/';
         var disqus_script = 'embed.js';
       
     (function () {
