@@ -38,7 +38,7 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com',
 我google之后， 看到很多类似的分析， 但是我都尝试了， 还是没有解决｡尝试罗列如下｡
 
 ### bad proxy server
-有人说是bad proxy server,程序确实使用代理了， 代理是shadowsocks+polipo， 代理设置在环境变量HTTP_PROXY和HTTPS_PROXY｡我尝试了不同地区的代理， 甚至切换了不同卖家的代理， 依然出错｡
+[有人说是bad proxy server](https://stackoverflow.com/questions/18478013/python-requests-exceptions-connectionerror-max-retries-exceeded-witth-url),程序确实使用代理了，代理是shadowsocks+polipo， 代理设置在环境变量HTTP_PROXY和HTTPS_PROXY｡我尝试了不同地区的代理， 甚至切换了不同卖家的代理， 依然出错｡
 
 ### DNS问题
 尝试了不同的DNS server不起作用
@@ -47,10 +47,10 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com',
 不起作用
 
 ###  twitter API的问题
-twitter-python的一个issue解答说是twitter API诡异的问题｡问题是我只能等待吗？
+twitter-python的一个[issues解答](https://github.com/bear/python-twitter/issues/131)说是twitter API诡异的问题｡问题是我只能等待吗？
 
 ### 设置maxretries为5
-不起作用
+<https://stackoverflow.com/questions/15431044/can-i-set-max-retries-for-requests-request/15431343#15431343> 不起作用
 
 ### 设置requests的session keep-alive为False
 不起作用
