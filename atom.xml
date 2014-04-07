@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-04-06T21:24:14+08:00</updated>
+  <updated>2014-04-07T10:31:45+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -69,7 +69,7 @@
 <p>我google之后， 看到很多类似的分析， 但是我都尝试了， 还是没有解决｡尝试罗列如下｡</p>
 
 <h3 id="bad-proxy-server">bad proxy server</h3>
-<p>有人说是bad proxy server,程序确实使用代理了， 代理是shadowsocks+polipo， 代理设置在环境变量HTTP_PROXY和HTTPS_PROXY｡我尝试了不同地区的代理， 甚至切换了不同卖家的代理， 依然出错｡</p>
+<p><a href="https://stackoverflow.com/questions/18478013/python-requests-exceptions-connectionerror-max-retries-exceeded-witth-url">有人说是bad proxy server</a>,程序确实使用代理了，代理是shadowsocks+polipo， 代理设置在环境变量HTTP_PROXY和HTTPS_PROXY｡我尝试了不同地区的代理， 甚至切换了不同卖家的代理， 依然出错｡</p>
 
 <h3 id="dns">DNS问题</h3>
 <p>尝试了不同的DNS server不起作用</p>
@@ -78,10 +78,10 @@
 <p>不起作用</p>
 
 <h3 id="twitter-api">twitter API的问题</h3>
-<p>twitter-python的一个issue解答说是twitter API诡异的问题｡问题是我只能等待吗？</p>
+<p>twitter-python的一个<a href="https://github.com/bear/python-twitter/issues/131">issues解答</a>说是twitter API诡异的问题｡问题是我只能等待吗？</p>
 
 <h3 id="maxretries5">设置maxretries为5</h3>
-<p>不起作用</p>
+<p><a href="https://stackoverflow.com/questions/15431044/can-i-set-max-retries-for-requests-request/15431343#15431343">https://stackoverflow.com/questions/15431044/can-i-set-max-retries-for-requests-request/15431343#15431343</a> 不起作用</p>
 
 <h3 id="requestssession-keep-alivefalse">设置requests的session keep-alive为False</h3>
 <p>不起作用</p>
