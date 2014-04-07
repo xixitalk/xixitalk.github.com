@@ -8,6 +8,12 @@ categories: tech
 ---
 事情是这样的：我用[twitter-python](https://github.com/bear/python-twitter)在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡获得推友收藏列表和fo人的api返回都是正常的，就是REST的api出这种错误。
 
+## [2014-04-07更新]
+
+目前解决的办法：1、重新新建一个API，用新的consumer_key和access token；2、更换代理，换用tor+polipo，tor的IP变化比较频繁。
+
+问题原因：应该是twitter服务器认为API滥用了，当get提交给服务器后，twitter服务器只返回了ACK，接下来没有返回任何数据，所以httplib判断为BadStatusLine，因为没有数据，所以连status号都没有。
+
 <!--more-->
 
 ```
