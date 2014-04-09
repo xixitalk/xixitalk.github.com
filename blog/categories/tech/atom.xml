@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-04-07T23:09:19+08:00</updated>
+  <updated>2014-04-09T20:33:24+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -74,6 +74,13 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com',
 <p>目前解决的办法：1、重新新建一个API，用新的consumer_key和access token；2、更换代理，换用tor+polipo，tor的IP变化比较频繁。经过上面操作，错误暂时不再出现了。</p>
 
 <p>问题可能原因：应该是twitter服务器认为API滥用了，当get提交给服务器后，twitter服务器只返回了ACK，接下来没有返回任何数据，所以httplib判断为BadStatusLine，因为没有数据，所以连status号都没有。</p>
+
+<h2 id="section-1">[再次更新后记]</h2>
+<p>每天生成HTMLpush到github后自动发推又出现BadStatusLine了，所幸不是<code>GetHomeTimeline</code>。</p>
+
+<p><code>
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/update.json (Caused by &lt;class 'httplib.BadStatusLine'&gt;: '')
+</code></p>
 ]]></content>
   </entry>
   
