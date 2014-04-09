@@ -62,3 +62,10 @@ twitter-python的一个[issues解答](https://github.com/bear/python-twitter/iss
 目前解决的办法：1、重新新建一个API，用新的consumer_key和access token；2、更换代理，换用tor+polipo，tor的IP变化比较频繁。经过上面操作，错误暂时不再出现了。
 
 问题可能原因：应该是twitter服务器认为API滥用了，当get提交给服务器后，twitter服务器只返回了ACK，接下来没有返回任何数据，所以httplib判断为BadStatusLine，因为没有数据，所以连status号都没有。
+
+## [再次更新后记]
+每天生成HTMLpush到github后自动发推又出现BadStatusLine了，所幸不是`GetHomeTimeline`。
+
+```
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/update.json (Caused by <class 'httplib.BadStatusLine'>: '')
+```
