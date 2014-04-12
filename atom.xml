@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-04-09T20:33:24+08:00</updated>
+  <updated>2014-04-12T18:35:00+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[curl下载断点传续]]></title>
+    <link href="http://xixitalk.github.io/blog/2014/04/13/curl-continue/"/>
+    <updated>2014-04-13T01:22:17+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2014/04/13/curl-continue</id>
+    <content type="html"><![CDATA[<h3 id="curl">curl下载断点传续</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl -C offset -O http://google.com/p4.mp4 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>offset手动输入已经下载的字节数</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl -C - -O http://google.com/p4.mp4 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>-C -</code>可以自动识别offet续传</p>
+
+<!--more-->
+
+<h3 id="curl-1">curl使用代理</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl -x 192.168.1.106:8118  http://google.com/p4.mp4 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>-x</code> 后面跟HTTP代理的host和port</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl  --socks5-hostname 192.168.1.106:9050  http://google.com/p4.mp4
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>--socks5-hostname</code>后面跟socks5代理的host和port</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[twitter-python BadStatusLine错误]]></title>
@@ -2160,33 +2198,6 @@ Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
 
 <p>He was wearing a brown jumper, jeans and white New Balance sports shoes.<br />
 他身穿棕色卫衣，牛仔裤和白色New Balance运动鞋。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error/"/>
-    <updated>2013-06-25T16:57:52+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error</id>
-    <content type="html"><![CDATA[<p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"> raspbmc kernel: nf_conntrack: table full, dropping packet
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<p>先试试下面这种方法能不能解决问题，默认<code>nf_conntrack_max</code>是7xxx，树莓派的内存不大，暂时设置<code>20000</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo sysctl -w "net.netfilter.nf_conntrack_max=20000"
-</span><span class="line">sudo sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>参考：</p>
-
-<p><a href="http://www.wendangz.com/idc/linux/967.html">http://www.wendangz.com/idc/linux/967.html</a></p>
 ]]></content>
   </entry>
   
