@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-04-12T18:35:00+08:00</updated>
+  <updated>2014-06-21T00:26:09+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[免费申请S/MIME证书]]></title>
+    <link href="http://xixitalk.github.io/blog/2014/06/21/Free-SMIME-Certificate-Key/"/>
+    <updated>2014-06-21T08:05:11+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2014/06/21/Free-SMIME-Certificate-Key</id>
+    <content type="html"><![CDATA[<p>从这里可以申请到免费的S/MIME 邮件证书：[http://www.instantssl.com/ssl-certificate-products/free-email-certificate.html]</p>
+
+<p>提交生成之后会把证书发送到邮箱里，在邮箱里点击连接就会把证书安装到电脑系统中（包括windows和Mac OSX)。在电脑系统里的证书管理器里把证书（包含私钥）导出，windows是pfx格式，Mac OSX是p12格式，导出的证书要设置私钥保护密码，iOS的证书安装需要输入这个密码。把这个pfx或者p12格式的证书发邮件到iOS上，点击打开即提示安装，输入之前的保护密码就安装到iOS系统中了。</p>
+
+<!--more-->
+
+<p>在iOS-邮件、通讯录、日历-邮件帐户-高级 启用S/MIME，选择上面安装的证书。</p>
+
+<p>在电脑证书管理里导出证书（不包含私钥），windows是cer文件，把这个文件群发出来告诉朋友。别人给你发邮件就用这个证书进行加密。</p>
+
+<p>我的S/MIME证书[http://xixitalk.github.io/static/pub.cer],欢迎用S/MIME给我发邮件。</p>
+
+<p>其他参考：<br />
+Mac OSX导出证书到iOS参考[http://feinstruktur.com/blog/2011/12/12/using-smime-on-ios-devices.html]</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[curl下载断点传续]]></title>
@@ -2161,43 +2183,6 @@ svn update --revision N //更新到版本N，-r
 
 <p><a href="http://www.darwinawards.com/">达尔文奖</a>奖给那些“让自己愚蠢的基因不再自由地传播出去”，对人类的进化做出了贡献了的人们。维基百科：<a href="https://zh.wikipedia.org/wiki/%E8%BE%BE%E5%B0%94%E6%96%87%E5%A5%96">达尔文奖</a>。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[西奥克兰发生一起自杀溺亡]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/26/West-Auckland-drowning-not-suspicious/"/>
-    <updated>2013-06-26T00:57:00+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/26/West-Auckland-drowning-not-suspicious</id>
-    <content type="html"><![CDATA[<p>来源:<a href="http://www.3news.co.nz/West-Auckland-drowning-not-suspicious/tabid/423/articleID/302561/Default.aspx">West Auckland drowning not suspicious</a></p>
-
-<p>Police say the death of a man found in a stream bordering the west Auckland suburbs of Henderson and Massey was not suspicious.<br />
-据警方资料，在西奥克兰Henderson和Massey边界的河流里发现了一名死亡男子，自杀溺亡可能明显。</p>
-
-<!--more-->
-
-<p>Ranui resident Jimmy Wang Liyu, 78, drowned in the Huruhuru Stream on Friday.<br />
-Jimmy Wang Liyu是Ranui居民，78岁，周五在Huruhuru河中溺亡。</p>
-
-<p>Police say local residents were helpful in quickly reporting the incident, which allowed quick recovery of Mr Liyu’s body.<br />
-据警察说，他们根据当地居民的及时报告，很快找回了Liyu先生的尸体。</p>
-
-<p>Read More:<a href="http://www.3news.co.nz/Body-found-in-Auckland-stream/tabid/423/articleID/302335/Default.aspx">Body found in Auckland stream</a></p>
-
-<p>Police are asking for help to identify the man<br />
-警方正在向公众征求帮助用以识别该男子的身份</p>
-
-<p>The body of a man has been found in a stream which borders the suburbs of Henderson and Massey in west Auckland.<br />
-西奥克兰Henderson和Massey边界的河流里发现了一名死亡男子。</p>
-
-<p>Police were called to Huruhuru Stream, Henderson about 4pm today.<br />
-今天下午4点警方接到Henderson Huruhuru河流地区的报警。</p>
-
-<p>They are asking for help to identify the man who is described as Asian, approximately 60 years old and of medium build.<br />
-该名亚裔男子，60岁左右，中等身材。警方正在为了确认他身份征求公众的帮助。</p>
-
-<p>He was wearing a brown jumper, jeans and white New Balance sports shoes.<br />
-他身穿棕色卫衣，牛仔裤和白色New Balance运动鞋。</p>
 ]]></content>
   </entry>
   
