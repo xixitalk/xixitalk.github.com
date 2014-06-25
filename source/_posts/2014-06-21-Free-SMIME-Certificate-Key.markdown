@@ -12,10 +12,17 @@ categories: tech
 提交生成之后会把证书发送到邮箱里。
 
 ## 证书安装
-在邮箱里点击连接就会把证书安装到电脑系统中（包括windows和Mac OSX)。
+在邮箱里点击连接就会把证书安装到电脑系统中（包括windows和Mac OSX)。  
+证书认证关系如下：  
+* 第一级根证书USERTrust(UTN-USERFirst-Client Authentication and Email)，系统中默认都带了；
+* 第二级中级证书是COMODO Client Authentication and Secure Email CA;
+* 第三级才是刚刚申请的个人证书。  
+如果在证书管理器查看刚刚申请的个人证书显示不正常的话，说明系统中缺少第二级中级证书，从这里下载安装<http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt>
 
 ## 证书安装到iOS系统
-在电脑系统里打开证书管理器（windows系统是运行certmgr.msc），把证书（包含私钥）导出，windows是pfx格式，Mac OSX是p12格式，导出的证书要设置私钥保护密码，iOS的证书安装需要输入这个密码。把这个pfx或者p12格式的证书发邮件到iOS上，点击打开即提示安装，输入之前的保护密码就安装到iOS系统中了。
+在电脑系统里打开证书管理器（windows系统是运行certmgr.msc），把证书（包含私钥）导出，windows是pfx格式，Mac OSX是p12格式，导出的证书要设置私钥保护密码，iOS的证书安装需要输入这个密码。把这个pfx或者p12格式的证书发邮件到iOS上，点击打开即提示安装，输入之前的保护密码就安装到iOS系统中了。  
+同样，iOS系统中缺少第二级中级证书，从这里下载安装<http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt>
+
 
 <!--more-->
 
