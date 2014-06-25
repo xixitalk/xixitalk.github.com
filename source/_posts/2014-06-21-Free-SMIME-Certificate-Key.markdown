@@ -14,9 +14,10 @@ categories: tech
 ## 证书安装
 在邮箱里点击连接就会把证书安装到电脑系统中（包括windows和Mac OSX)。  
 证书认证关系如下：  
-*   第一级根证书USERTrust(UTN-USERFirst-Client Authentication and Email)，系统中默认都带了；
-*   第二级中级证书是COMODO Client Authentication and Secure Email CA;
-*   第三级才是刚刚申请的个人证书。  
+
++   第一级根证书USERTrust(UTN-USERFirst-Client Authentication and Email)，系统中默认都带了；
++   第二级中级证书是COMODO Client Authentication and Secure Email CA;
++   第三级才是刚刚申请的个人证书。  
 如果在证书管理器查看刚刚申请的个人证书显示不正常的话，说明系统中缺少第二级中级证书，从这里下载安装<http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt>。
 
 ## 证书安装到iOS系统
@@ -33,7 +34,7 @@ categories: tech
 在电脑证书管理里导出证书（不包含私钥），windows是cer文件，把这个文件群发出来告诉朋友。别人给你发邮件就用这个证书进行加密。
 
 ## 我的S/MIME证书
-我的S/MIME证书<http://xixitalk.github.io/static/pub.cer>,欢迎用S/MIME给我发邮件。
+我的S/MIME证书<http://xixitalk.github.io/static/pub.cer>,欢迎用S/MIME给我发邮件。你的系统也可能需要安装第二级COMODO的证书，从这里下载安装<http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt>。
 
 ## 其他参考
 Mac OSX导出证书到iOS参考<http://feinstruktur.com/blog/2011/12/12/using-smime-on-ios-devices.html>
