@@ -4,7 +4,7 @@
   <title><![CDATA[Category: life | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/life/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-06-25T12:34:20+08:00</updated>
+  <updated>2014-06-29T23:05:21+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[高度近视需要半年做眼底例行检查]]></title>
+    <link href="http://xixitalk.github.io/blog/2014/06/30/fundus-examination/"/>
+    <updated>2014-06-30T05:32:13+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2014/06/30/fundus-examination</id>
+    <content type="html"><![CDATA[<p><blockquote><p>感谢金葡萄老师 @goldengrape 的洗脑，高度近视每半年复查眼底。今天查出来双眼视网膜裂孔（只有一点点大，首诊的医生拿不准说疑似，主任看了才确认的），做了激光光凝术（听起来有点像魔法，笑~）。</p><footer><strong>如月中天(‏@gttnnn)</strong> <cite><a href='https://twitter.com/gttnnn/status/474409944809095168'>twitter.com/gttnnn/status/&hellip;</a></cite></footer></blockquote></p>
+
+<p>推上说高度近视（wiki上说大于600度）需要每半年做眼底例行检查，我自己也高度近视，所以周六去南京医科大学附属眼科医院做了眼底检查，发现视网膜有<strong>裂孔</strong>，预约了周一做<strong>视网膜激光光凝术</strong>。现在把过程流水帐记录下来，半年之后再检查可能用得上。</p>
+
+<!--more-->
+
+<h2 id="section">准备物特别提醒</h2>
+<p>医保卡要带上，最好带个<strong>kindle和耳机</strong>，kindle在候诊排队的时候可以看书，很多医院排队很凶残的，特别是周末。深入检查眼底需要滴<strong>散瞳</strong>眼药水，散瞳之后4-6小时内看近距离物体模糊,看手机屏幕重影，基本看不清，在室外眯着眼睛很难睁开，所以可以带个耳机听音乐。还有不要<strong>开车</strong>。更细心的可以戴个口罩，毕竟候诊时候有染上可传染的细菌病毒的风险。</p>
+
+<h2 id="section-1">就医</h2>
+<p>下面是在南京医科大学附属眼科医院的就医过程，不在南京的可以忽略。南京医科大学附属眼科医院在地铁<strong>上海站</strong>附近，从2号出口出来即到。挂号就诊拿药都在一个大厅里。先去挂号，挂号后把病历和挂号单交给护士站排队（人工排队，不要直接去科室），然后在护士站前面找个座位坐下，如果轮到你护士会用一个类似导游的小喇叭喊你的名字。护士喊你的名字后，你要询问她去几号的科室（科室标记不明显,我找了两圈）。去科室直接进科室，虽然前面有人正在看，你也要把病历放在医生的桌子上排队，先放先看，不要傻等。告诉医生做高度近视眼底检查，他会初步检查，再开检查单，你拿着检查单去挂号处缴费，缴费后先去测试眼压，然后去护士站滴散瞳眼药水，等待散瞳，大约10分钟，护士说可以了，你就再去医生那里。医生检查后如果没问题就可以直接回家，此时费用在100块钱以内，都可以走医保。如果医生告诉你视网膜有裂孔，会给你开<strong>眼底照相</strong>和<strong>视网膜激光光凝术</strong>的单子，拿着单子去缴费，缴费后去后面大楼一楼护士站，她会安排你先去做眼底照相，视网膜激光光凝术需要预约。眼底照相完成后会给你打印照片。做光凝术的时候，把病历和眼底照片带上。<br />
+PS：眼底检查很简单，可以到方便的医院做，没必非要去最好的眼科医院，我下次准备去鼓楼医院，南京医科大学附属眼科医院乱糟糟的，像菜市场一样（可能新大楼还在装修）。</p>
+
+<h2 id="section-2">视网膜激光光凝术</h2>
+<p>眼底照相（加照片）30￥多，视网膜激光光凝术费用是400￥。过程待补充。</p>
+
+<h2 id="section-3">平常注意</h2>
+<p>除了定时做眼底检查之外，平常还应该注意以下几点：</p>
+
+<ul>
+  <li>佩戴合适的眼镜</li>
+  <li>不要长时间对着电脑或者手机</li>
+  <li>避免剧烈撞击的活动</li>
+</ul>
+
+<h2 id="section-4">外部参考</h2>
+<p>1.<a href="http://www.kqeye.com/article/2164.html">高度近视 眼底检查很重要</a><br />
+2.<a href="http://cht.a-hospital.com/w/%E9%AB%98%E5%BA%A6%E8%BF%91%E8%A7%86">高度近视</a>  </p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[科学作为一种志业]]></title>
@@ -1321,221 +1358,6 @@ AED除颤通常一次即可，除颤后应立即进行胸部按压；如果电�
 <p><a href="http://www.nytimes.com/1993/09/02/obituaries/roy-raymond-47-began-victoria-s-secret.html">http://www.nytimes.com/1993/09/02/obituaries/roy-raymond-47-began-victoria-s-secret.html</a></p>
 
 <p><a href="http://wiki.answers.com/Q/Why_did_Roy_Raymond_committed_suicide">http://wiki.answers.com/Q/Why_did_Roy_Raymond_committed_suicide</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Vitamin Myth: Why We Think We Need Supplements]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/21/The-Vitamin-Myth/"/>
-    <updated>2013-07-21T21:10:46+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/21/The-Vitamin-Myth</id>
-    <content type="html"><![CDATA[<p>来源：<a href="http://www.theatlantic.com/health/archive/2013/07/the-vitamin-myth-why-we-think-we-need-supplements/277947/">The Vitamin Myth: Why We Think We Need Supplements</a> by <a href="http://www.theatlantic.com/paul-offit/">PAUL OFFIT</a></p>
-
-<p>中文翻译：<a href="http://ww3.sinaimg.cn/large/7c3fe21bjw1e6th1c1puxj20hsf4k4qs.jpg">维生素迷信：为什么我们认为我们需要补充维生素</a>  by @蕨代霜蛟</p>
-
-<p><strong>下面是我自己尝试的翻译，目前还只是翻译了一部分。</strong></p>
-
-<p>Nutrition experts contend that all we need is what’s typically found in a routine diet. Industry representatives, backed by a fascinating history, argue that foods don’t contain enough, and we need supplements. Fortunately, many excellent studies have now resolved the issue.</p>
-
-<p>营养学家主张我们所需的营养物质要来自常规食物。回顾这段迷人的历史，工业化代表们认为食物包含的营养并不够人体所需，我们需要另外补充营养物质。幸运的是，现在许多杰出的研究表明已经解决了这个争论。</p>
-
-<h3 id="section">维生素迷信：为什么我们认为我们需要补充维生素</h3>
-
-<!--more-->
-
-<p>On October 10, 2011, researchers from the University of Minnesota found that women who took supplemental multivitamins died at rates higher than those who didn’t. Two days later, researchers from the Cleveland Clinic found that men who took vitamin E had an increased risk of prostate cancer. “It’s been a tough week for vitamins,” said Carrie Gann of ABC News.</p>
-
-<p>2011.10.10 明尼苏达大学的研究表明：服用多种维生素的女性死亡几率高于不服用的女性。两天后，Cleveland诊所研究表明：男人服用维生素E会增加获得前列腺癌的风险。ABC News的Carrie Gann说“这真是维生素备受打击的一周”。</p>
-
-<p>These findings weren’t new. Seven previous studies had already shown that vitamins increased the risk of cancer and heart disease and shortened lives. Still, in 2012, more than half of all Americans took some form of vitamin supplements. What few people realize, however, is that their fascination with vitamins can be traced back to one man. A man who was so spectacularly right that he won two Nobel Prizes and so spectacularly wrong that he was arguably the world’s greatest quack.</p>
-
-<p>这些发现并不新奇。早前的七个研究已经显示：维生素会增加获得癌症和心脏疾病的风险，缩短寿命。尽管如此，2012年美国仍有超过一半人服用某种形式的维生素。不过很少有人知道他们对维生素的迷恋可以追溯到一个人。这个人无比的正确：他赢得了两次诺贝尔奖。而又无比的错误：他可能是世界上最大的冒牌医生。</p>
-
-<blockquote>
-  <p>When Albert Einstein was asked what he thought of Pauling’s work, he shrugged his shoulders. “It was too complicated for me.”</p>
-</blockquote>
-
-<blockquote>
-  <p>当艾尔伯特·爱因斯坦被问到他怎么看待Pauling的研究的时候，他耸耸肩说，“这对我来说太复杂了”。</p>
-</blockquote>
-
-<p>In 1931, Linus Pauling published a paper in the Journal of the American Chemical Society titled “The Nature of the Chemical Bond.” Before publication, chemists knew of two types of chemical bonds: ionic, where one atom gives up an electron to another; and covalent, where atoms share electrons. Pauling argued that it wasn’t that simple – electron sharing was somewhere between ionic and covalent. Pauling’s idea revolutionized the field, marrying quantum physics with chemistry. His concept was so revolutionary in fact that when the journal editor received the manuscript, he couldn’t find anyone qualified to review it. When Albert Einstein was asked what he thought of Pauling’s work, he shrugged his shoulders. “It was too complicated for me,” he said.</p>
-
-<p>1931年，Linus Pauling在美国化学学会期刊上发表了一篇题目为《化学键的本质》的论文。在发表之前，化学家们认为共有两种化学键：一个原子的电子被另一个原子抢走的离子键和原子间共享电子的共价键。Pauling辩称事情没这么简单：电子共享也存在离子键和共价键之间。Pauling的观点革命了这个领域，他把量子物理和化学结合了起来。他的观念如此的具有革命性，以至于期刊编辑收到论文手稿后找不到有资格审阅的人。当艾尔伯特·爱因斯坦被问到他怎么看待Pauling的研究的时候，他耸耸肩说，“这对我来说太复杂了”。</p>
-
-<p>For this single paper, Pauling received the Langmuir Prize as the most outstanding young chemist in the United States, became the youngest person elected to the National Academy of Sciences, was made a full professor at Caltech, and won the Nobel Prize in Chemistry. He was 30 years old.</p>
-
-<p>凭借单单这一篇论文，Pauling作为美国最杰出青年化学家赢得了朗米尔奖（Langmuir Prize）。入选美国国家科学院，成为其最年轻的成员，被加州理工学院授予终身教授职位，赢得了诺贝尔化学奖。那年他才30岁。</p>
-
-<p>In 1949, Pauling published a paper in Science titled “Sickle Cell Anemia, a Molecular Disease.” At the time, scientists knew that hemoglobin (the protein in blood that transports oxygen) crystallized in the veins of people with sickle-cell anemia, causing joint pain, blood clots, and death. But they didn’t know why. Pauling was the first to show that sickle hemoglobin had a slightly different electrical charge – a quality that dramatically affected how the hemoglobin reacted with oxygen. His finding gave birth to the field of molecular biology.</p>
-
-<p>1949年，Pauling在《科学》上发表了一篇题为《镰状细胞贫血是一种分子特征的疾病》的论文。当时，科学家知道血红蛋白（血液中一种传输氧气的蛋白）在患镰状细胞贫血人的静脉里结晶引起疼痛、血栓和死亡，但是大家都不知道为什么。Pauling第一次揭示了镰状性血红蛋白有轻微了电荷差别，这种特性显著影响了血红蛋白和氧气的相互作用。他的发现开创了分子生物学这一新领域。</p>
-
-<p>In 1951, Pauling published a paper in the Proceedings of the National Academy of Sciences titled “The Structure of Proteins.” Scientists knew that proteins were composed of a series of amino acids. Pauling proposed that proteins also had a secondary structure determined by how they folded upon themselves. He called one configuration the alpha helix – later used by James Watson and Francis Crick to explain the structure of DNA.</p>
-
-<p>1951年，Pauling在《美国国家科学院院刊》上发表了一篇题目为《蛋白质的结构》的论文。当时科学家们知道蛋白质由氨基酸序列组成。Pauling提出蛋白质还有二级结构，这种结构取别于蛋白质自我折叠的方式。他将其中一种结构称为α螺旋。这种看法后来被James Watson和Francis Crick借用解释DNA结构。</p>
-
-<blockquote>
-  <p>At least 15 studies have now shown that vitamin C doesn’t treat the common cold.</p>
-</blockquote>
-
-<blockquote>
-  <p>至少有15个研究表明维生素C并不能治愈普通感冒。</p>
-</blockquote>
-
-<p>In 1961, Pauling collected blood from gorillas, chimpanzees, and monkeys at the San Diego Zoo. He wanted to see whether mutations in hemoglobin could be used as a kind of evolutionary clock. Pauling showed that humans had diverged from gorillas about 11 million years ago, much earlier than scientists had suspected. A colleague later remarked, “At one stroke he united the fields of paleontology, evolutionary biology, and molecular biology.”</p>
-
-<p>1961年，Pauling从圣地亚哥动物园的大猩猩、黑猩猩和猴子身上采集血液。他想看看血红蛋白的演化是否可以被用于生物演化的时钟。Pauling展示了人类从一千一百万年前就和大猩猩分道扬镳，比当时科学家猜想的要早的多。稍后他的一个同事评论说，“他一下子把古生物学、演化生物学和化学生物学领域结合起来了”。</p>
-
-<p>Pauling’s accomplishments weren’t limited to science. Beginning in the 1950s – and for the next forty years – he was the world’s most recognized peace activist. Pauling opposed the internment of Japanese Americans during World War II, declined Robert Oppenheimer’s offer to work on the Manhattan Project, stood up to Senator Joseph McCarthy by refusing a loyalty oath, opposed nuclear proliferation, publicly debated nuclear-arms hawks like Edward Teller, forced the government to admit that nuclear explosions could damage human genes, convinced other Nobel Prize winners to oppose the Vietnam War, and wrote the best-selling book No More War! Pauling’s efforts led to the Nuclear Test Ban Treaty. In 1962, he won the Nobel Peace Prize – the first person ever to win two unshared Nobel Prizes.</p>
-
-<p>Pauling的成就并不局限于科学领域。从20时间50年代开始，并这接下来的40年里，他是世界上最受认可的和平活动家。二战期间，他反对集中拘役日裔美国人，拒绝了罗伯特·奥本海默为曼哈顿计划的工作邀请，反对约瑟夫·麦卡锡的忠诚宣誓，反对核扩散，公开和支持核武装的鹰派辩论–比如爱德华·泰勒，迫使政府承认核爆炸会破坏人类基因，说服其他诺贝尔获得者反对向越南发动的战争，写了一本名为《对战争说不！（No More War）》的畅销书，Pauling的努力促使了签订《禁止核试验条约》。1962年，他赢得诺贝尔和平奖，他是赢得两个非分享诺贝尔奖的第一人。</p>
-
-<p>In addition to his election to the National Academy of Sciences, two Nobel Prizes, the National Medal of Science, and the Medal for Merit (which was awarded by the president of the United States), Pauling received honorary degrees from Cambridge University, the University of London, and the University of Paris. In 1961, he appeared on the cover of Time magazine’s Men of the Year issue, hailed as one of the greatest scientists who had ever lived.</p>
-
-<p>除了当选美国国家科学院院士、两次诺贝尔奖、美国国家科学奖章和由美国总统颁发的国家功勋奖章外，Pauling还获得了剑桥大学、伦敦大学和巴黎大学的荣誉博士学位。1961年，他作为1960年度风云人物登上《时代》杂志的封面，被认为是有史以来最伟大的科学家。</p>
-
-<p><em>译注：1960年度《时代》杂志风云人物是“美国科学家们”，不是一个人，Pauling是其中之一。</em></p>
-
-<p>Then all the rigor, hard work, and hard thinking that had made Linus Pauling a legend disappeared. In the words of a colleague, his “fall was as great as any classic tragedy.”</p>
-
-<p>随后，将Linus Pauling塑造成一个传奇的严谨、勤于工作和深入思考的品质从他身上消失了。用他一个同事的话说“他坠落的像一部伟大的经典悲剧”。</p>
-
-<blockquote>
-  <p>“He wrote that if I followed his recommendation of taking 3,000 milligrams of vitamin C, I would live not only 25 years longer, but probably more.”</p>
-</blockquote>
-
-<blockquote>
-  <p>“他信中写到：如果我按照他的嘱咐(每天)服用3000毫克的维生素C，我不仅会再活25年，甚至可能更长。”</p>
-</blockquote>
-
-<p>The turning point came in March 1966, when Pauling was 65 years old. He had just received the Carl Neuberg Medal. “During a talk in New York City,” recalled Pauling, “I mentioned how much pleasure I took in reading about the discoveries made by scientists in their various investigations of the nature of the world, and stated that I hoped I could live another twenty-five years in order to continue to have this pleasure. On my return to California I received a letter from a biochemist, Irwin Stone, who had been at the talk. He wrote that if I followed his recommendation of taking 3,000 milligrams of vitamin C, I would live not only 25 years longer, but probably more.” Stone, who referred to himself as Dr. Stone, had spent two years studying chemistry in college. Later, he received an honorary degree from the Los Angeles College of Chiropractic and a “PhD” from Donsbach University, a non-accredited correspondence school in Southern California.</p>
-
-<p>1966年3月是个转折点，当时Pauling 65岁了，刚获得Carl Neuberg奖。“那是在纽约的一次谈话”，Pauling回忆说，“我当时说，当我读到科学家们从自然世界的调查获得各式各样的发现的时候，我很愉悦。我还说我希望我还能活25年继续体验这种愉悦。当我回到加利福尼亚，我收到一封叫Irwin Stone的来信。他是个生物化学家，他当时也在谈话现场。他信中写到：如果我按照他的嘱咐(每天)服用3000毫克的维生素C，我不仅会再活25年，甚至可能更长。”Stone，他自称自己是Stone博士，大学时候学了两年化学，后来从洛杉矶按摩学院获得了一个荣誉博士学位，从Donsbach大学获得了一个“博士”学位，Donsbach大学是南加州一个非公认具有同等学术能力的学校。</p>
-
-<p><em>译注：Donsbach大学由未取得执照的按摩师Kurt Donsbach注册，大学校址就是他家客厅</em></p>
-
-<p>Pauling followed Stone’s advice. “I began to feel livelier and healthier,” he said. “In particular, the severe colds I had suffered several times a year all my life no longer occurred. After a few years, I increased my intake of vitamin C to ten times, then twenty times, and then three hundred times the RDA: now 18,000 milligrams per day.”</p>
-
-<p>Pauling采纳了医生斯通的建议。“我开始感觉更有活力也更健康”，他说，“之前我每年总要得几次的重感冒再也没有出现了。几年后，我每天服用维生素C的剂量增加到了人体每日摄取推荐量（RDA）的10倍，之后是20倍，现在是300倍：18000毫克”。</p>
-
-<p>From that day forward, people would remember Linus Pauling for one thing: vitamin C.</p>
-
-<p>从那天开始，人们因为一个东西记住了Linus Pauling：维生素C。</p>
-
-<p>In 1970, Pauling published Vitamin C and the Common Cold, urging the public to take 3,000 milligrams of vitamin C every day (about 50 times the recommended daily allowance). Pauling believed that the common cold would soon be a historical footnote. “It will take decades to eradicate the common cold completely,” he wrote, “but it can, I believe, be controlled entirely in the United States and some other countries within a few years. I look forward to witnessing this step toward a better world.” Pauling’s book became an instant best seller. Paperback versions were printed in 1971 and 1973, and an expanded edition titled Vitamin C, the Common Cold and the Flu, published three years later, promised to ward off a predicted swine flu pandemic. Sales of vitamin C doubled, tripled, and quadrupled. Drugstores couldn’t keep up with demand. By the mid-1970s, 50 million Americans were following Pauling’s advice. Vitamin manufacturers called it “the Linus Pauling effect.”</p>
-
-<p>1970年Pauling出版了新书《维生素C和感冒》，鼓励公众每日服用3000毫克维生素C（大约是每日摄入推荐量的50倍）。Pauling相信感冒将很快成为历史。“将在几十年内完全消灭感冒”，他书中写道，“但是我相信在美国和其他一些国家仅需几年时间感冒就会被整个控制住。我期望亲眼目睹这种社会进步”。Pauling的书瞬时大卖。平装本在1971年和1973年再次印刷。以名字为《维生素C 感冒和流感》的升级版在三年后出版，这部书许诺能阻挡猪流感在全国的蔓延。维生素C在药店里卖断了货，销量攀升到两倍、三倍和四倍。在20世纪70年代中期，5千万美国人采纳了Pauling的建议服用维生素。维生素制造商把它称为“Linus Pauling效应”。</p>
-
-<p>Scientists weren’t as enthusiastic. On December 14, 1942, about thirty years before Pauling published his first book, Donald Cowan, Harold Diehl, and Abe Baker, from the University of Minnesota, published a paper in the Journal of the American Medical Association titled “Vitamins for the Prevention of Colds.” The authors concluded, “Under the conditions of this controlled study, in which 980 colds were treated . . . there is no indication that vitamin C alone, an antihistamine alone, or vitamin C plus an antihistamine have any important effect on the duration or severity of infections of the upper respiratory tract.”</p>
-
-<p>科学家并没有狂热。在Pauling出版他第一本书的30年前，1942年12月14日，来自明尼苏达州立大学的Donald Cowan, Harold Diehl和Abe Baker在美国医学会期刊上发表了一篇题目为《维生素对于预防感冒的疗效》的论文。论文作者结论说，“在可控研究条件下，在980例被治愈的感冒中. . .没有迹象表明单独维生素C、单独抗组织胺或者维生素C配合抗组织胺对持续强烈的呼吸道疾病有明显的疗效”。</p>
-
-<blockquote>
-  <p>When he occasionally appeared before the media with obvious cold symptoms, he said he was suffering from allergies.</p>
-</blockquote>
-
-<blockquote>
-  <p>当他偶尔出现感冒症状时，他说这是过敏造成的（不是感冒）。</p>
-</blockquote>
-
-<p>Other studies followed. After Pauling’s pronouncement, researchers at the University of Maryland gave 3,000 milligrams of vitamin C every day for three weeks to eleven volunteers and a sugar pill (placebo) to ten others. Then they infected volunteers with a common cold virus. All developed cold symptoms of similar duration. At the University of Toronto, researchers administered vitamin C or placebo to 3,500 volunteers. Again, vitamin C didn’t prevent colds, even in those receiving as much as 2,000 milligrams a day. In 2002, researchers in the Netherlands administered multivitamins or placebo to more than 600 volunteers. Again, no difference. At least 15 studies have now shown that vitamin C doesn’t treat the common cold. As a consequence, neither the FDA, the American Academy of Pediatrics, the American Medical Association, the American Dietetic Association, the Center for Human Nutrition at the Johns Hopkins Bloomberg School of Public Health, nor the Department of Health and Human Services recommend supplemental vitamin C for the prevention or treatment of colds.</p>
-
-<p>随后还有其他的研究。在Pauling宣称维生素C能预防感冒治后，马里兰州立大学做了如下研究。三周时间内，11名志愿者每日服用3000毫克维生素C，另外10名每日服用安慰剂（糖片），三周后让他们感染感冒病毒，结果所有人都有感冒症状，持续的时间也相似。多伦多大学的研究者们让3500名志愿者服用维生素C或者安慰剂，这次维生素C依然没有预防感冒，其中有一部分人每日服用高达2000毫克维生素C。2002年，荷兰的研究者让超过600名志愿者服用多种维生素或者安慰剂，结果依然没有什么不同。到目前为止至少15个研究报告显示维生素C并不能治愈感冒。结论就是，不论是美国食品及药物管理局、美国儿科学会、美国医学会、美国营养学会、布隆博格公共卫生学院的人类营养研究中心，还是美国卫生及公共服务部都没有建议服用维生素C来预防或者治疗感冒。</p>
-
-<p>Although study after study showed that he was wrong, Pauling refused to believe it, continuing to promote vitamin C in speeches, popular articles, and books. When he occasionally appeared before the media with obvious cold symptoms, he said he was suffering from allergies.</p>
-
-<p>虽然一个接一个研究显示Pauling错了， 但是他拒绝承认， 继续在演讲、文章和书中推销维生素C｡当他偶尔出现感冒症状时，他说这是过敏造成的（不是感冒）。</p>
-
-<p>Then Linus Pauling upped the ante. He claimed that vitamin C not only prevented colds; it cured cancer.</p>
-
-<p>Linus Pauling提高了赌注。他宣称维生素C不仅能预防感冒，还能治愈癌症。</p>
-
-<p>In 1971, Pauling received a letter from Ewan Cameron, a Scottish surgeon from a tiny hospital outside Glasgow. Cameron wrote that cancer patients who were treated with ten grams of vitamin C every day had fared better than those who weren’t. Pauling was ecstatic. He decided to publish Cameron’s findings in the Proceedings of the National Academy of Sciences (PNAS). Pauling assumed that as a member of the academy he could publish a paper in PNAS whenever he wanted; only three papers submitted by academy members had been rejected in more than half a century. Pauling’s paper was rejected anyway, further tarnishing his reputation among scientists. Later, the paper was published in Oncology, a journal for cancer specialists. When researchers evaluated the data, the flaw became obvious: the cancer victims Cameron had treated with vitamin C were healthier at the start of therapy, so their outcomes were better. After that, scientists no longer took Pauling’s claims about vitamins seriously.</p>
-
-<p>1971年，Pauling收到一个叫Ewan Cameron苏格兰外科医生的来信，该医生就职于格拉斯哥市郊外的一个小医院。Cameron信中写道:每日服用10克维生素C的癌症病人比不服用的癌症病人治疗情况要好。Pauling欣喜若狂，他决定将Cameron的发现发表在《美国国家科学院院刊》上。Pauling设想是这样的：他是美国国家科学院院士，只要他想就可以在《美国国家科学院院刊》上发表论文。在过去半个多世纪里，只有三篇院士提交的论文被驳回。无论如何随后Pauling的论文被驳回，他在科学家们中的声望也受损了。随后论文发表在一个癌症肿瘤学期刊。研究者评估论文的数据，论文的漏洞明显：那些服用维生素C的癌症患者从最开始治疗时健康情况就比较好，他们的结果更好是自然而然的。从那以后，科学家们对Pauling的维生素主张就不再当回事了。</p>
-
-<blockquote>
-  <p>In 1971, he declared that vitamin C would cause a 10 percent decrease in deaths from cancer.</p>
-</blockquote>
-
-<blockquote>
-  <p>1971年，他声称维生素C将减少10%的癌症死亡。</p>
-</blockquote>
-
-<p>But Linus Pauling still had clout with the media. In 1971, he declared that vitamin C would cause a 10 percent decrease in deaths from cancer. In 1977, he went even further. “My present estimate is that a decrease of 75 percent can be achieved with vitamin C alone,” he wrote, “and a further decrease by use of other nutritional supplements.” With cancer in their rearview mirror, Pauling predicted, Americans would live longer, healthier lives. “Life expectancy will be 100 to 110 years,” he said, “and in the course of time, the maximum age might be 150 years.”</p>
-
-<p>但是Linus Pauling仍然继续通过媒体宣传。1971年他声称维生素C将减少10%的癌症死亡。1977年他更进一步，“我现在的估计是：单维生素C就将减少75%的癌症死亡”，他还写道，“服用其他维生素将进一步减少癌症死亡”。Pauling预测：癌症将成为过去，美国人将活得更长寿更健康。“生命将延长到100到110岁”，他还说，“经过一段时间之后，寿命最长将达到150岁”。</p>
-
-<p>Cancer victims now had reason for hope. Wanting to participate in the Pauling miracle, they urged their doctors to give them massive doses of vitamin C. “For about seven or eight years, we were getting a lot of requests from our families to use high-dose vitamin C,” recalls John Maris, chief of oncology and director of the Center for Childhood Cancer Research at the Children’s Hospital of Philadelphia. “We struggled with that. They would say, ‘Doctor, do you have a Nobel Prize?’ “</p>
-
-<p>癌症患者看到了希望，他们想参与见证Pauling的“奇迹”。他们强烈要求医生给他们大剂量的维生素C。费城儿童医院幼儿癌症研究中心主管兼肿瘤科主任John Maris回忆说：“大约有七到八年时间里，很多患者家属要求我们给予患者大剂量的维生素C。我们一争辩，他们就会说‘医生，你得过诺贝尔奖吗？’”。</p>
-
-<p><em>译注：our families怀疑是their families。此处明显是患者家属，应该是their</em></p>
-
-<p>Blindsided, cancer researchers decided to test Pauling’s theory. Charles Moertel, of the Mayo Clinic, evaluated 150 cancer victims: half received ten grams of vitamin C a day and half didn’t. The vitamin C-treated group showed no difference in symptoms or mortality. Moertel concluded, “We were unable to show a therapeutic benefit of high-dose vitamin C.” Pauling was outraged. He wrote an angry letter to the New England Journal of Medicine, which had published the study, claiming that Moertel had missed the point. Of course vitamin C hadn’t worked: Moertel had treated patients who had already received chemotherapy. Pauling claimed that vitamin C worked only if cancer victims had received no prior chemotherapy.</p>
-
-<p>癌症研究者决定来验证Pauling的理论。梅奥诊所的查理莫泰评估150名癌症患者，一半患者每日服用10克维生素C，另一半不服用。服用维生素C那组患者和不服用相比，从症状和死亡率都没有什么区别。莫泰下结论说，“我们找不到服用高剂量维生素C的治疗效果”。Pauling很气愤，写信给发表该论文的《新英格兰医学杂志》，批评莫泰理解错误，之所以维生素C没有治疗效果是因为莫泰治疗的病人已经进行了化疗。Pauling声称只有癌症患者没有做过化疗，服用维生素C才有治疗效果。</p>
-
-<p>Bullied, Moertel performed a second study; the results were the same. Moertel concluded, “Among patients with measurable disease, none had objective improvement. It can be concluded that high-dose vitamin C therapy is not effective against advanced malignant disease regardless of whether the patient had received any prior chemotherapy.” For most doctors, this was the end of it. But not for Linus Pauling. He was simply not to be contradicted. Cameron observed, “I have never seen him so upset. He regards the whole affair as a personal attack on his integrity.” Pauling thought Moertel’s study was a case of “fraud and deliberate misrepresentation.” He consulted lawyers about suing Moertel, but they talked him out of it.</p>
-
-<p>莫泰进行第二个研究，结果是一样的。莫泰下结论说：“在病情可测量的患者身上未见客观改善。可以下这样的结论：高剂量的维生素C疗法对晚期恶性疾病并无疗效，不管患者有没有接受过化疗”。对大多数医生来说，争论已经到此为止了。Cameron说，“我从没看到过他这么心烦意乱”，Pauling认为莫泰的研究是“骗子和有预谋的歪曲”。他向律师咨询起诉莫泰，不过被律师劝住了。</p>
-
-<p>Subsequent studies have consistently shown that vitamin C doesn’t treat cancer.</p>
-
-<p>后续的研究一致地表明维生素C不能治愈癌症。</p>
-
-<blockquote>
-  <p>“The thing to do with [these reports] is just ride them out … We see no impact on our business.”</p>
-</blockquote>
-
-<p>Pauling wasn’t finished. Next, he claimed that vitamin C, when taken with massive doses of vitamin A (25,000 international units) and vitamin E (400 to 1,600 IU), as well as selenium (a basic element) and beta-carotene (a precursor to vitamin A), could do more than just prevent colds and treat cancer; they could treat virtually every disease known to man. Pauling claimed that vitamins and supplements could cure heart disease, mental illness, pneumonia, hepatitis, polio, tuberculosis, measles, mumps, chickenpox, meningitis, shingles, fever blisters, cold sores, canker sores, warts, aging, allergies, asthma, arthritis, diabetes, retinal detachment, strokes, ulcers, shock, typhoid fever, tetanus, dysentery, whooping cough, leprosy, hay fever, burns, fractures, wounds, heat prostration, altitude sickness, radiation poisoning, glaucoma, kidney failure, influenza, bladder ailments, stress, rabies, and snakebites. When the AIDS virus entered the United States in the 1970s, Pauling claimed vitamins could treat that, too.</p>
-
-<p>On April 6, 1992, the cover of Time – rimmed with colorful pills and capsule – declared: “The Real Power of Vitamins: New research shows they may help fight cancer, heart disease, and the ravages of aging.” The article, written by Anastasia Toufexis, echoed Pauling’s ill-founded, disproved notions about the wonders of megavitamins. “More and more scientists are starting to suspect that traditional medical views of vitamins and minerals have been too limited,” wrote Toufexis. “Vitamins – often in doses much higher than those usually recommended – may protect against a host of ills ranging from birth defects and cataracts to heart disease and cancer. Even more provocative are glimmerings that vitamins can stave off the normal ravages of aging.” Toufexis enthused that the “pharmaceutical giant Hoffman-La Roche is so enamored with beta-carotene that it plans to open a Freeport, Texas, plant next year that will churn out 350 tons of the nutrient annually, or enough to supply a daily 6 milligram capsule to virtually every American adult.”</p>
-
-<blockquote>
-  <p>Pauling believed that vitamins and supplements had one property that made them cure-alls, a property that continues to be hawked on everything from ketchup to pomegranate juice and that rivals words like natural and organic for sales impact: antioxidant.</p>
-</blockquote>
-
-<p>The National Nutritional Foods Association (NNFA), a lobbying group for vitamin manufacturers, couldn’t believe its good luck, calling the Time article “a watershed event for the industry.” As part of an effort to get the FDA off their backs, the NNFA distributed multiple copies of the magazine to every member of Congress. Speaking at an NNFA trade show later in 1992, Toufexis said, “In fifteen years at Time I have written many health covers. But I have never seen anything like the response to the vitamin cover. It whipped off the sales racks, and we were inundated with requests for copies. There are no more copies. ‘Vitamins’ is the number-one-selling issue so far this year.”</p>
-
-<p>Although studies had failed to support him, Pauling believed that vitamins and supplements had one property that made them cure-alls, a property that continues to be hawked on everything from ketchup to pomegranate juice and that rivals words like natural and organic for sales impact: antioxidant.</p>
-
-<p>Antioxidation vs. oxidation has been billed as a contest between good and evil. The battle takes place in cellular organelles called mitochondria, where the body converts food to energy, a process that requires oxygen and so is called oxidation. One consequence of oxidation is the generation of electron scavengers called free radicals (evil). Free radicals can damage DNA, cell membranes, and the lining of arteries; not surprisingly, they’ve been linked to aging, cancer, and heart disease. To neutralize free radicals, the body makes its own antioxidants (good). Antioxidants can also be found in fruits and vegetables – specifically, selenium, beta-carotene, and vitamins A, C, and E. Studies have shown that people who eat more fruits and vegetables have a lower incidence of cancer and heart disease and live longer. The logic is obvious: if fruits and vegetables contain antioxidants – and people who eat lots of fruits and vegetables are healthier – then people who take supplemental antioxidants should also be healthier.</p>
-
-<p>In fact, they’re less healthy.</p>
-
-<p>In 1994, the National Cancer Institute, in collaboration with Finland’s National Public Health Institute, studied 29,000 Finnish men, all long-term smokers more than fifty years old. This group was chosen because they were at high risk for cancer and heart disease. Subjects were given vitamin E, beta-carotene, both, or neither. The results were clear: those taking vitamins and supplements were more likely to die from lung cancer or heart disease than those who didn’t take them – the opposite of what researchers had anticipated.</p>
-
-<p>In 1996, investigators from the Fred Hutchinson Cancer Research Center, in Seattle, studied 18,000 people who, because they had been exposed to asbestos, were at increased risk of lung cancer. Again, subjects received vitamin A, beta-carotene, both, or neither. Investigators ended the study abruptly when they realized that those who took vitamins and supplements were dying from cancer and heart disease at rates 28 and 17 percent higher, respectively, than those who didn’t.</p>
-
-<p>In 2004, researchers from the University of Copenhagen reviewed fourteen randomized trials involving more than 170,000 people who took vitamins A, C, E, and beta-carotene to see whether antioxidants could prevent intestinal cancers. Again, antioxidants didn’t live up to the hype. The authors concluded, “We could not find evidence that antioxidant supplements can prevent gastrointestinal cancers; on the contrary, they seem to increase overall mortality.” When these same researchers evaluated the seven best studies, they found that death rates were 6 percent higher in those taking vitamins.</p>
-
-<p>In 2005, researchers from Johns Hopkins School of Medicine evaluated nineteen studies involving more than 136,000people and found an increased risk of death associated with supplemental vitamin E. Dr. Benjamin Caballero, director of the Center for Human Nutrition at the Johns Hopkins Bloomberg School of Public Health, said, “This reaffirms what others have said. The evidence for supplementing with any vitamin, particularly vitamin E, is just not there. This idea that people have that [vitamins] will not hurt them may not be that simple.” That same year, a study published in the Journal of theAmerican Medical Association evaluated more than 9,000 people who took high-dose vitamin E to prevent cancer; those who took vitamin E were more likely to develop heart failure than those who didn’t.</p>
-
-<p>In 2007, researchers from the National Cancer Institute examined 11,000 men who did or didn’t take multivitamins. Those who took multivitamins were twice as likely to die from advanced prostate cancer.</p>
-
-<p>2007年，美国国家癌症研究所（National Cancer Institute）抽查了1万1千名服用和不服用多种维生素的男子。针对晚期前列腺癌，那些服用多种维生素人群的死亡几率是不服用人群的两倍。</p>
-
-<p>In 2008, a review of all existing studies involving more than 230,000 people who did or did not receive supplemental antioxidants found that vitamins increased the risk of cancer and heart disease.</p>
-
-<p>2008年，一份对现存所有研究的分析报告指出：维生素会增加患得癌症和心脏疾病的风险。这些研究涉及23万服用或者不服用附加抗氧化剂的人员。</p>
-
-<p>On October 10, 2011, researchers from the University of Minnesota evaluated 39,000 older women and found that those who took supplemental multivitamins, magnesium, zinc, copper, and iron died at rates higher than those who didn’t. They concluded, “Based on existing evidence, we see little justification for the general and widespread use of dietary supplements.”</p>
-
-<p>2011.10.10，明尼苏达州立大学评估了3万9千名老年妇女的研究发现：服用多种维生素、镁锌铜铁的人死亡几率比不服用的人高。他们下结论说，“基于现存的研究证据，我们找不到普遍广泛服用饮食补充剂的正当理由”。</p>
-
-<p>Two days later, on October 12, researchers from the Cleveland Clinic published the results of a study of 36,000 men who took vitamin E, selenium, both, or neither. They found that those receiving vitamin E had a 17 percent greater risk of prostate cancer. In response to the study, Steven Nissen, chairman of cardiology at the Cleveland Clinic, said, “The concept of multivitamins was sold to Americans by an eager nutraceutical industry to generate profits. There was never any scientific data supporting their usage.” On October 25, a headline in the Wall Street Journal asked, “Is This the End of Popping Vitamins?” Studies haven’t hurt sales. In 2010, the vitamin industry grossed $28 billion, up 4.4 percent from the year before. “The thing to do with [these reports] is just ride them out,” said Joseph Fortunato, chief executive of General Nutrition Centers. “We see no impact on our business.”</p>
-
-<p>How could this be? Given that free radicals clearly damage cells – and given that people who eat diets rich in substances that neutralize free radicals are healthier – why did studies of supplemental antioxidants show they were harmful? The most likely explanation is that free radicals aren’t as evil as advertised. Although it’s clear that free radicals can damage DNA and disrupt cell membranes, that’s not always a bad thing. People need free radicals to kill bacteria and eliminate new cancer cells. But when people take large doses of antioxidants, the balance between free radical production and destruction might tip too much in one direction, causing an unnatural state in which the immune system is less able to kill harmful invaders. Researchers have called this “the antioxidant paradox.” Whatever the reason, the data are clear: high doses of vitamins and supplements increase the risk of heart disease and cancer; for this reason, not a single national or international organization responsible for the public’s health recommends them.</p>
-
-<p>In May 1980, during an interview at Oregon State University, Linus Pauling was asked, “Does vitamin C have any side effects on long-term use of, let’s say, gram quantities?” Pauling’s answer was quick and decisive. “No,” he replied.</p>
-
-<p>1980年5月，在一次接受俄勒冈州立大学的采访中，Linus Pauling被问到：“长期服用维生素C是否有副作用？比如以克为单位”。Linus Pauling回答说“没有”，他回答的又快又坚决。</p>
-
-<p>Seven months later, his wife was dead of stomach cancer. In 1994, Linus Pauling died of prostate cancer.</p>
-
-<p>七个月后，他的妻子死于胃癌。1994年，Linus Pauling死于前列腺癌。</p>
 ]]></content>
   </entry>
   

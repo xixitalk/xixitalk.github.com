@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-06-25T12:34:20+08:00</updated>
+  <updated>2014-06-29T23:05:21+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -198,7 +198,7 @@ socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
 
 <!--more-->
 
-<p><a href='http://www.flickr.com/photos/xixitalk/9108420474/'><img src='http://farm6.static.flickr.com/5544/9108420474_421bdc9dc4_b.jpg' title='跨路由器访问设置'/></a></p>
+<p>Liquid error: FlickRaw::OAuthClient::FailedResponse</p>
 
 ]]></content>
   </entry>
