@@ -57,7 +57,7 @@ function sprintf() {
 
 var d = new Date();
 d.setTime(d.getTime()+d.getTimezoneOffset()*60000+480*60000)
-if(d.getHours()<6)
+if(d.getHours()<11)
 {
    d.setTime(d.getTime()-24*3600*1000)
 }
