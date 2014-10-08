@@ -1,0 +1,77 @@
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>AES Encrypt and Decrypt</title>
+
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<script type='text/javascript' src='/static/aes.js'></script>
+<script type='text/javascript' src='/static/base64.js'></script>
+<script type='text/javascript' src='/static/sha3.js'></script>
+
+</head><body>
+<form>
+<table border="1">
+<tr><td></td><td>AES Encrypt</td></tr>
+<tr><td>content</td><td><textarea name="content1" id="content1" rows="8" cols="100"></textarea></td></tr>
+<tr><td>key</td><td><input type="text" name="key1" id="key1" size="85" /></td></tr>
+<tr><td></td><td><input type="button" value="AES Encrypt" onclick="return AESencrypt();"/></td></tr>
+</table>
+</form>
+
+Real Encrypt Key(Base64,2000 times SHA-512):<span id="aeskey">null</span>
+
+<form>
+<table border="1">
+<tr><td></td><td>AES Decrypt</td></tr>
+<tr><td>content</td><td><textarea name="content2" id="content2" rows="8" cols="100"></textarea></td></tr>
+<tr><td>key</td><td><input type="text" name="key2" id="key2" size="85" /></td></tr>
+<tr><td></td><td><input type="button" value="AES Decrypt" onclick="return AESdecrypt();"/></td></tr>
+</table>
+</form>
+
+<script type=text/javascript>
+function KeyMix(key) {
+  var key64 = Base64.encode(key);
+  var hash512 = key64;
+  var x=1;
+  for(;x<=2000;x++)
+  {
+    hash512 = CryptoJS.SHA3(hash512, { outputLength: 512 });
+  }
+  return hash512.toString();
+}
+function AESencrypt() {
+  var content = document.getElementById("content1").value;
+  var key1 = document.getElementById("key1").value;
+  if(content.length==0 || key1.length==0)
+  {
+    alert("content or key is Null!");
+    return;
+  }
+  key1 = KeyMix(key1);
+
+  document.getElementById("aeskey").innerHTML= key1;
+  
+  var encrypted = CryptoJS.AES.encrypt(content, key1);
+
+  document.getElementById("content2").innerHTML= encrypted;
+}
+function AESdecrypt() {
+  var encrypted = document.getElementById("content2").value;
+  var key2 = document.getElementById("key2").value;
+  if(encrypted.length==0 || key2.length==0)
+  {
+    alert("content or key is Null!");
+    return;
+  }
+  key2 = KeyMix(key2);
+  var content = CryptoJS.AES.decrypt(encrypted, key2).toString(CryptoJS.enc.Utf8);
+  
+  document.getElementById("aeskey").innerHTML= key2;
+  document.getElementById("content1").innerHTML= content;
+}
+</script>
+
+</body></html>
