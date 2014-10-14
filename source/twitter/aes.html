@@ -11,6 +11,13 @@
 <script type='text/javascript' src='/static/sha3.js'></script>
 
 </head><body>
+<p>
+1.开放源代码(Open Source)：HTML和JavaScript都能从浏览器里查看源代码；<br>
+2.安全：github.io上只能存放静态网页，这样就不会保存用户数据；<br>
+3.安全：HTML和Javascript都在用户浏览器里执行，加密解密不产生网络数据，这样不会被中间人截获；<br>
+4.健壮：用户输入的key经过Base64编码后经过SHA-512循环2000次产生的Hash值作为AES加密解密的key,暴力破解难度大大增加；<br>
+5.健壮：用户输入的key经过Base64编码，所以可以使用UNICODE字符作为用户key，包括中文和空格。
+</p>
 <form>
 <table border="1">
 <tr><td></td><td>AES Encrypt</td></tr>
