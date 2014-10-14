@@ -1,0 +1,35 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>AES Encrypt and Decrypt</title>
+
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+
+<script src="/static/md5.js"></script>
+
+</head><body>
+
+<form>
+<table border="1">
+<tr><td></td><td>MD5 Hash</td></tr>
+<tr><td>content</td><td><input type="text" name="content3" id="content3" size="50"></td></tr>
+<tr><td>Hash</td><td><input type="text" name="md5hash" id="md5hash" size="85" /></td></tr>
+<tr><td></td><td><input type="button" value="MD5 Hash" onclick="return MD5Hash();"/></td></tr>
+</table>
+</form>
+
+<script type=text/javascript>
+function MD5Hash() {
+  md5_src = document.getElementById("content3").value;
+  if(md5_src.length==0)
+  {
+    alert("content is Null!");
+    return;
+  }
+  hash=CryptoJS.MD5();
+  document.getElementById("md5hash").value= hash;
+}
+</script>
+
+</body></html>
