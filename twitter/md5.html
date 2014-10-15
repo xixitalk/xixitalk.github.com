@@ -27,7 +27,7 @@ function MD5Hash() {
     alert("content is Null!");
     return;
   }
-  hash=CryptoJS.MD5();
+  hash=CryptoJS.MD5(CryptoJS.enc.Latin1.parse(md5_src)).toString();
   document.getElementById("md5hash").value= hash;
 }
 </script>
