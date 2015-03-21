@@ -63,8 +63,8 @@ if(d.getHours()<6)
 }
 var fulldate = sprintf('%04d-%02d-%02d',d.getFullYear(),d.getMonth()+1,d.getDate());
 var gourl=sprintf('/twitter/%d/%s.html',d.getFullYear(),fulldate);
-document.write('北京时间小时数值:'+d.getHours());
-document.write('<BR>');
+//document.write('北京时间小时数值:'+d.getHours());
+//document.write('<BR>');
 //document.write(d.toString()+'<BR>');
 document.write('<a href="'+gourl+'">'+gourl+'</a>');
 
