@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-04-23T12:57:51+08:00</updated>
+  <updated>2016-04-23T13:54:42+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,7 +18,7 @@
     <link href="http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi/"/>
     <updated>2016-04-23T07:16:41+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi</id>
-    <content type="html"><![CDATA[<p>Install owncloud 9.0.2 on RaspberryPi
+    <content type="html"><![CDATA[<p>Install owncloud 9.0.2 on RaspberryPi<br />
 在树莓派上安装owncloud 9.0.2</p>
 
 <!--more-->
@@ -27,16 +27,19 @@
 
 <p>我用的硬件是树莓派3，系统是<code>raspbian JESSIE LITE</code>，下载地址<a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a>，我是新系统全新安装<code>owncloud</code>，仅供参考。</p>
 
-<p>首先配置系统扩展到整个SD卡，配置后重启系统才生效。
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">sudo raspi-config 
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-更新<code>apt</code>软件仓库，升级系统到最新，可以修改<code>/etc/apt/source.list</code>使用aliyun的源。
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p>首先配置系统扩展到整个SD卡，配置后重启系统才生效。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo raspi-config 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>更新<code>apt</code>软件仓库，升级系统到最新，可以修改<code>/etc/apt/source.list</code>使用aliyun的源。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">sudo apt-get update
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get update
 </span><span class="line">sudo apt-get dist-upgrade
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt; </p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h3 id="owncloud">owncloud官方安装文档</h3>
 
@@ -46,29 +49,37 @@
 
 <h4 id="apache2-phpmariadb">第一步：安装apache2 php和mariadb数据库</h4>
 
-<p>安装<code>owncloud</code>所需要的<code>apache</code> <code>php</code> 和<code>mariadb</code>数据库软件，安装过程会提示配置<code>mariadb</code>数据库的<code>root</code>账号密码，牢记这个密码。
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">sudo apt-get install apache2 mariadb-server libapache2-mod-php5 php5-gd php5-json php5-mysql php5-curl php5-intl php5-mcrypt php5-imagick
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-#### 第二步：下载owncloud软件包</p>
+<p>安装<code>owncloud</code>所需要的<code>apache</code> <code>php</code> 和<code>mariadb</code>数据库软件，安装过程会提示配置<code>mariadb</code>数据库的<code>root</code>账号密码，牢记这个密码。</p>
 
-<p>下载<code>owncloud</code>软件包，并解压，即发现<code>owncloud</code>目录。
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install apache2 mariadb-server libapache2-mod-php5 php5-gd php5-json php5-mysql php5-curl php5-intl php5-mcrypt php5-imagick
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="owncloud-1">第二步：下载owncloud软件包</h4>
+
+<p>下载<code>owncloud</code>软件包，并解压，即发现<code>owncloud</code>目录。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">wget https://download.owncloud.org/community/owncloud-9.0.1.tar.bz2
+</pre></td><td class="code"><pre><code class=""><span class="line">wget https://download.owncloud.org/community/owncloud-9.0.1.tar.bz2
 </span><span class="line">tar -xjf owncloud-9.0.1.tar.bz2
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-### 第三步：为owncloud配置apache2</p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>拷贝<code>owncloud</code>代码到<code>apache2</code>的网站根目录
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">cp -r owncloud /var/www
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-为<code>apache2</code>添加<code>owncloud.conf</code>配置文件
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">sudo vi /etc/apache2/sites-available/owncloud.conf
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<h3 id="owncloudapache2">第三步：为owncloud配置apache2</h3>
+
+<p>拷贝<code>owncloud</code>代码到<code>apache2</code>的网站根目录</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cp -r owncloud /var/www
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>为<code>apache2</code>添加<code>owncloud.conf</code>配置文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo vi /etc/apache2/sites-available/owncloud.conf
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -82,7 +93,7 @@
 <span class="line-number">12</span>
 <span class="line-number">13</span>
 <span class="line-number">14</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">Alias /owncloud "/var/www/owncloud/"
+</pre></td><td class="code"><pre><code class=""><span class="line">Alias /owncloud "/var/www/owncloud/"
 </span><span class="line">
 </span><span class="line">&lt;Directory /var/www/owncloud/&gt;
 </span><span class="line">  Options +FollowSymlinks
@@ -96,82 +107,103 @@
 </span><span class="line"> SetEnv HTTP_HOME /var/www/owncloud
 </span><span class="line">
 </span><span class="line">&lt;/Directory&gt;
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-将<code>sites-enabled</code>里<code>owncloud.conf</code>软连接到<code>sites-available</code>的<code>owncloud.conf</code>
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled/owncloud.conf
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-打开<code>apache2</code>里<code>owncloud</code>所需的模块
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>将<code>sites-enabled</code>里<code>owncloud.conf</code>软连接到<code>sites-available</code>的<code>owncloud.conf</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled/owncloud.conf
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>打开<code>apache2</code>里<code>owncloud</code>所需的模块</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">a2enmod rewrite
+</pre></td><td class="code"><pre><code class=""><span class="line">a2enmod rewrite
 </span><span class="line">a2enmod headers
 </span><span class="line">a2enmod env
 </span><span class="line">a2enmod dir
 </span><span class="line">a2enmod mime
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-重启<code>apache2</code>服务
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">service apache2 restart
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-#### 第四步：用occ安装owncloud剩余部分</p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>重启<code>apache2</code>服务</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service apache2 restart
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="occowncloud">第四步：用occ安装owncloud剩余部分</h4>
 
 <p>这一部分可以参考官方文档<a href="https://doc.owncloud.org/server/9.0/admin_manual/installation/command_line_installation.html">https://doc.owncloud.org/server/9.0/admin_manual/installation/command_line_installation.html</a></p>
 
-<p>改变<code>/var/www/owncloud</code>目录的用户属性
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">sudo chown -R www-data:www-data /var/www/owncloud/
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-用<code>occ</code>安装<code>owncloud</code>，<code>database-pass</code>即为数据库的<code>root</code>用户密码，<code>admin</code>和<code>password</code>是<code>owncloud</code>的用户帐号和密码，牢记。
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">$ cd /var/www/owncloud/
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<p>改变<code>/var/www/owncloud</code>目录的用户属性</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo chown -R www-data:www-data /var/www/owncloud/
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用<code>occ</code>安装<code>owncloud</code>，<code>database-pass</code>即为数据库的<code>root</code>用户密码，<code>admin</code>和<code>password</code>是<code>owncloud</code>的用户帐号和密码，牢记。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ cd /var/www/owncloud/
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">$ sudo -u www-data php occ  maintenance:install --database
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo -u www-data php occ  maintenance:install --database
 </span><span class="line">"mysql" --database-name "owncloud"  --database-user "root" --database-pass
 </span><span class="line">"password" --admin-user "admin" --admin-pass "password"
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-会提示以下信息
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>会提示以下信息</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">ownCloud is not installed - only a limited number of commands are available
+</pre></td><td class="code"><pre><code class=""><span class="line">ownCloud is not installed - only a limited number of commands are available
 </span><span class="line">ownCloud was successfully installed
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-添加IP或者域名到<code>config.php</code>的可信域<code>trusted_domains</code>。
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">sudo vi /var/www/owncloud/config/config.php
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-类似下面格式
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>添加IP或者域名到<code>config.php</code>的可信域<code>trusted_domains</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo vi /var/www/owncloud/config/config.php
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>类似下面格式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">  'trusted_domains' =&gt;
+</pre></td><td class="code"><pre><code class=""><span class="line">  'trusted_domains' =&gt;
 </span><span class="line">  array (
 </span><span class="line">    0 =&gt; 'localhost',
 </span><span class="line">    1 =&gt; '192.168.1.104',
 </span><span class="line">    2 =&gt; '192.168.1.106',
 </span><span class="line">  ),
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt; 
-#### 第五步：浏览器打开owncloud</p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>用浏览器访问owncloud的地址，Enjoy owncloud!
-&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">http://RaspberryPi-IP/owncloud
-</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;
-### TODO</p>
+<h4 id="owncloud-2">第五步：浏览器打开owncloud</h4>
+
+<p>用浏览器访问owncloud的地址，Enjoy owncloud!</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">http://RaspberryPi-IP/owncloud
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="todo">TODO</h3>
 
 <ol>
   <li>没有配置SSL</li>
   <li>安全的配置目录权限</li>
 </ol>
+
 ]]></content>
   </entry>
   
