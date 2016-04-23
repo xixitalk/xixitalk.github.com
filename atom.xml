@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2014-06-30T20:55:03+08:00</updated>
+  <updated>2016-04-23T10:18:47+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi/"/>
+    <updated>2016-04-23T07:16:41+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi</id>
+    <content type="html"><![CDATA[<!--more-->
+
+<p>test</p>
+
+<p>中文恢复</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[高度近视眼底例行检查]]></title>
@@ -2194,37 +2207,6 @@ svn update --revision N //更新到版本N，-r
 
 <script src="http://xixitalk.github.io/javascripts/base64.js" type="text/javascript"> </script>
 <p><span id="base64_block">RFFveExpRGt1SzNsbTczbWxML21zcnZtcUtIbHZJL29nNzNvdGJEbHBKcm92NXp2dko4OFFsSStEUXJrdTQ0eU1EQXk1Ym0wNWJ5QTVhZUw3N3lNNUxpdDVadTk1Nkd1NWE2ZTVZZTY1NDZ3NUxxRzVMaUE1TGlxNXBhdzU1cUU1cFMvNXJLNzVxaWg1YnlQNzd5TTZMK1o1YkN4NXBpdjVMaU41WkNNNUxxTzVMdWw1YjZBNTd1STZMcXI1TGlBNVlXYTVZaTI1NXFFNG9DYzZabVE1THU3NUxpQTVZV2E1WWkyNG9DZDVxaWg1YnlQNG9DVTRvQ1U1WnlvNUxpQTVZV2E1TGlUNXBTLzU1cUU1WW1ONW8rUTVMaUw3N3lNNVkrcTVZV0I2SzY0NXB5QTZhdVk2YUtHNWErODVMcTY1WnlvNUx1NzVMaWs1YkdLNTVxRTVwUy81cks3NXFpaDVieVA0NENDNUxpTjZLYUI1TDJPNUx5dzZMK1o1NmVONXBTLzVySzc1cWloNWJ5UDU1cUU1WWliNXBhdzU0bTU1b0NuNVpLTTU1U2Y1Wkc5NVlxYjQ0Q0M1Ynk2NUxxNjVwUy81cks3NTVxRTVwZTI1THVqNVkrdjZJTzk2TCtINVk2NzVMcUdMT0tBbk9XNHVPUzZ1dWFVditheXUrS0FuZVdQcitpRHZlUzhtdVM1b09TN3BlUzR1dVc0dU9TNmh1T0FndWVPc09XY3FPYVlyK0tBbk9TNGcrbSttZWF5dSthd3RPS0FuZU9BZ3VLQW5PYU9xT2loak9XNGd1V2N1dUtBbmVhWXIrV0ZtdWltZ2VtU3NlKzhqT0tBbk9tYWtPVzlvdVM0bHVpaXJlS0FuZWFZcitXRm11aW1nZVdSdmVPQWd1V0ZtdWFkZythdmxPVzdpZWEwZ2VhYnRPbUhqZWltZ2UrOGpPV091K2VKdWVhZGcrV01sdWFZcittZHFlaUhxdVczc2VlYWhPV1J2ZVM0amVXUHIraUR2ZVdIdXVlT3NPZWFoT1M2aSthRGhlT0FnZzBLRFFvOGNENDhMM0ErRFFveUxpRGt1THJrdTREa3VZam5qckRsbktqbm1vVG1oSS9vcjRibHZhTG1nSUhsajVqbHZwZm1yNVRvdm9QbHQ2WWdQRUpTUGcwSzU2Uys1THlhNXJDUjVMeVg1NXFFNW9TUDZLK0c1cStVNkw2RDViZW03N3lNNXJDUjVMeVg1NXFFNlp1RzVMMlQ2SzZ3NWIrRzVwaXY1cStiNXBlMjVMdWo0NENDNXErYjVwZTI1THVqNUxxNjVMcTY2WU85NXB5SjViZWw1TDJjNzd5TTVyS2g1THVBNUxtSTZMU3I1YStNNWJldTZMZWQ3N3lNNWJlbDVMcTY2WmkyNTdxbjVwaXY2YUtHNWErODZaaTI1N3FuNzd5TTVibXk2WU9vNXJLaDVweUo2WnFQNUw2LzVvbVQ1THE2NDRDQzVMaWM1cXluNVlXeDVMcW41TGk3NUxtSjU2QzA1THFuNkwyczVaNkw1cGl2NXJDUjVMeVg1cHlKNG9DYzZJZXE1NVN4NXJDUjVMaTc0b0NkNTVxRTZadUc1TDJUNks2dzViK0c3N3lNNWIyVDVZV3g1THFuNUxpNzVMbUo1WktNNkl1UDZJR1U1cWloNWJ5UDVZZTY1NDZ3NlpldTZhS1k1NXFFNXBlMjVZQ1o3N3lNNXJDUjVMeVg1bytRNVllNjViNkE2SWVxNTVTeDVyQ1I1TGk3Nkwyczc3eU01TGl0NVp1OTVyS2g1cHlKNkwrWjU2ZU42WnVHNUwyVDZLNnc1YitHNDRDQzVMaXQ1WnU5NXJDUjVMeVg1YSs1NG9DYzZJZXE1NVN4NXJDUjVMaTc0b0NkNUxpTjU2R3U1YTZhNzd5TTVhKzU1TGlONTZHdTVhNmE1NXFFNUxpYzZLVy81YkN4NUx5YTViNlg1WWU2NkwrWjVxQzM1N3VUNks2Njc3eWE1TGl0NVp1OTVwQ2U2SWVxNTVTeDVyQ1I1TGk3NUx5YTVwdTA1TG14NDRDQzVZV2E1WktNNXBTLzVicWM1TG1mNmFHNjVZcS82TCtaNXFDMzVhNmo1THlnNDRDQzVMaXQ1WnU5NXJLaDVweUo1WStONWErNTVZV2E3N3lNNWIyVDVZV2E1WktNNXBTLzVicWM1cFMvNTYyVzVwMis1NXFFNXBlMjVZQ1o3N3lNNUxpTjVMeWE1THFKNVkrVzVwUy81cks3NXAyRDVZaXA3N3lNNklDTTVwaXY1N3UwNXAyRDVMaSs1NG1NNlplNTVMcUw3N3lNNllDZzVvaVE1NXFFNTd1VDVwNmM1YkN4NXBpdjVwUy81NjJXNVkrSTU3U241YnlnNkxXMzVwMmw0NENDRFFvTkNqeHdQand2Y0Q0TkNqTXVJT1M0cmVXYnZlaTlyT1dlaStpRHZlV1FwdW1CditXRmplVzBxZWE2ZytTNGdPbUFsRDhnUEVKU1BnMEs1TGl0NVp1OTVyS2g1cHlKNVkrTjVhKzU1WVdhNzd5TTVyS2g1cHlKNktpQTZLNjY2SWVxNTVTeDc3eU02TCtZNXBpdjVwNkI1cDJENUxpNzVMbUo3N3lNNkwrWTVMaU41cGl2NWFpQjVwMkQ1TGk3NUxtSjQ0Q0M1TGl0NVp1OTVZK3E1cHlKNUxpazU2ZU41N3VUNXA2Yzc3eWE2TDJzNVo2TDVvaVE1WXFmNW9pVzZJQ0Y1YlNwNXJxRDQ0Q0M1TGl0NVp1OTU1cUU1WWU2NkxldjVZK3E2SU85NXBpdjViU3A1cnFENzd5TTU2Uys1THlhNUxpNzVMbUo1WnU5NWE2MjVyS2g1cHlKNW9pUTVZcWY2TDJzNVo2TDU1cUU1WVdJNUw2TDQ0Q0NEUW89</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[用base64进行关键词编码]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/03/base64-encode/"/>
-    <updated>2013-07-03T06:01:04+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/03/base64-encode</id>
-    <content type="html"><![CDATA[<p>用base64对关键词进行两次编码，浏览器客户端用javascript进行两次解码。对于支持javascript的浏览器来说透明，目的是防止关键词过滤。</p>
-
-<!--more-->
-
-<p>如(查看网页源代码)</p>
-
-<script src="http://xixitalk.github.io/javascripts/base64.js" type="text/javascript"> </script>
-<p><span id="base64_block">RFFwSFJsY2c1ckNSNUxpN0lPaUhxdWVVc1NEb2c2SHBsS2JtdHBzZzVyR2Y1ck85NXJDUklBMEs=</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
-
-<h3 id="base64blockrb">base64_block.rb</h3>
-<p>把<a href="https://gist.github.com/xixitalk/5927023">https://gist.github.com/xixitalk/5927023</a>代码保存为base64_block.rb，放到<code>octopress\plugins</code>目录。</p>
-
-<h3 id="base64js">base64.js</h3>
-<p>把<a href="https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js">https://github.com/xixitalk/xixitalk.github.com/blob/source/source/javascripts/base64.js</a>保存为base64.js，放到<code>octopress\source\javascripts</code>目录。</p>
-
-<h3 id="base64block">使用base64_block使用</h3>
-<p>使用<code>base64_block</code>和<code>endbase64_block</code>包含需要编码的段落。详细参看<code>base64_block.rb</code>文件前部的注释说明。注意：一篇文章里只能有一个<code>base64_block</code>块。</p>
-
-<pre><code>{% base64_block %}
-这些信息会被编码
-{% endbase64_block %}
-</code></pre>
-
 ]]></content>
   </entry>
   
