@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>树莓派nf_conntrack错误 - xixitalk's snippet</title>
+  <title>Category: owncloud - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且Dnsmasq也经常退出，在/var/log/syslog和/var/log/messages出现大量的nf_conntrack错误。 1 raspbmc kernel: nf_conntrack: table full, &hellip;">
+  <meta name="description" content="Category: owncloud">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error">
+  <link rel="canonical" href="http://xixitalk.github.ioblog/categories/owncloud">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,110 +77,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">树莓派nf_conntrack错误</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-25T16:57:52+08:00" pubdate data-updated="true">Jun 25<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: owncloud</h1>
     
   </header>
-
-
-<div class="entry-content"><p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"> raspbmc kernel: nf_conntrack: table full, dropping packet
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<!--more-->
-
-<p>先试试下面这种方法能不能解决问题，默认<code>nf_conntrack_max</code>是7xxx，树莓派的内存不大，暂时设置<code>20000</code></p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo sysctl -w "net.netfilter.nf_conntrack_max=20000"
-</span><span class="line">sudo sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>参考：</p>
-
-<p><a href="http://www.wendangz.com/idc/linux/967.html">http://www.wendangz.com/idc/linux/967.html</a></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2016</h2>
 
-
-<time datetime="2013-06-25T16:57:52+08:00" pubdate data-updated="true">Jun 25<span>th</span>, 2013</time>
-      
-
-<span class="categories">
+<article>
   
-    <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>
-  
-</span>
+<h1><a href="/blog/2016/04/23/Install-owncloud-on-raspberrypi/">Install owncloud 9.0.2 on RaspberryPi</a></h1>
+<time datetime="2016-04-23T07:16:41+08:00" pubdate><span class='month'>Apr</span> <span class='day'>23</span> <span class='year'>2016</span></time>
 
-
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-  
-   share to: <a href="http://twitter.com/home?status=Blog:树莓派nf_conntrack错误 http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error/" target="_blank"><img src="/images/tweet.png" /></a>
-  
-
-</div>
-
-    
-
-
-
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/owncloud/'>owncloud</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a></span>
 </footer>
+
+
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -209,10 +135,7 @@
       var disqus_shortname = 'gitblog';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

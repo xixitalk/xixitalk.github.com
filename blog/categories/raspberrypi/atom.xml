@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-04-23T10:38:50+08:00</updated>
+  <updated>2016-04-23T12:57:51+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,141 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Install owncloud 9.0.2 on RaspberryPi]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi/"/>
+    <updated>2016-04-23T07:16:41+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi</id>
+    <content type="html"><![CDATA[<p>Install owncloud 9.0.2 on RaspberryPi
+在树莓派上安装owncloud 9.0.2</p>
+
+<!--more-->
+
+<h3 id="section">系统环境</h3>
+
+<p>我用的硬件是树莓派3，系统是<code>raspbian JESSIE LITE</code>，下载地址<a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a>，我是新系统全新安装<code>owncloud</code>，仅供参考。</p>
+
+<p>首先配置系统扩展到整个SD卡，配置后重启系统才生效。
+<code>
+sudo raspi-config 
+</code>
+更新<code>apt</code>软件仓库，升级系统到最新，可以修改<code>/etc/apt/source.list</code>使用aliyun的源。
+<code>
+sudo apt-get update
+sudo apt-get dist-upgrade
+</code> </p>
+
+<h3 id="owncloud">owncloud官方安装文档</h3>
+
+<p>这里是<code>owncloud 9.0</code>版本的官方安装文档,供参阅：<a href="https://doc.owncloud.org/server/9.0/admin_manual/installation/source_installation.html">https://doc.owncloud.org/server/9.0/admin_manual/installation/source_installation.html</a></p>
+
+<h3 id="section-1">安装过程</h3>
+
+<h4 id="apache2-phpmariadb">第一步：安装apache2 php和mariadb数据库</h4>
+
+<p>安装<code>owncloud</code>所需要的<code>apache</code> <code>php</code> 和<code>mariadb</code>数据库软件，安装过程会提示配置<code>mariadb</code>数据库的<code>root</code>账号密码，牢记这个密码。
+<code>
+sudo apt-get install apache2 mariadb-server libapache2-mod-php5 php5-gd php5-json php5-mysql php5-curl php5-intl php5-mcrypt php5-imagick
+</code>
+#### 第二步：下载owncloud软件包</p>
+
+<p>下载<code>owncloud</code>软件包，并解压，即发现<code>owncloud</code>目录。
+<code>
+wget https://download.owncloud.org/community/owncloud-9.0.1.tar.bz2
+tar -xjf owncloud-9.0.1.tar.bz2
+</code>
+### 第三步：为owncloud配置apache2</p>
+
+<p>拷贝<code>owncloud</code>代码到<code>apache2</code>的网站根目录
+<code>
+cp -r owncloud /var/www
+</code>
+为<code>apache2</code>添加<code>owncloud.conf</code>配置文件
+<code>
+sudo vi /etc/apache2/sites-available/owncloud.conf
+</code>
+```
+Alias /owncloud “/var/www/owncloud/”</p>
+
+<p>&lt;Directory /var/www/owncloud/&gt;
+  Options +FollowSymlinks
+  AllowOverride All</p>
+
+<ifmodule mod_dav.c="">
+  Dav off
+ </ifmodule>
+
+<p>SetEnv HOME /var/www/owncloud
+ SetEnv HTTP_HOME /var/www/owncloud</p>
+
+<p>&lt;/Directory&gt;
+<code>
+将`sites-enabled`里`owncloud.conf`软连接到`sites-available`的`owncloud.conf`
+</code>
+ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled/owncloud.conf
+<code>
+打开`apache2`里`owncloud`所需的模块
+</code>
+a2enmod rewrite
+a2enmod headers
+a2enmod env
+a2enmod dir
+a2enmod mime
+<code>
+重启`apache2`服务
+</code>
+service apache2 restart
+```
+#### 第四步：用occ安装owncloud剩余部分</p>
+
+<p>这一部分可以参考官方文档<a href="https://doc.owncloud.org/server/9.0/admin_manual/installation/command_line_installation.html">https://doc.owncloud.org/server/9.0/admin_manual/installation/command_line_installation.html</a></p>
+
+<p>改变<code>/var/www/owncloud</code>目录的用户属性
+<code>
+sudo chown -R www-data:www-data /var/www/owncloud/
+</code>
+用<code>occ</code>安装<code>owncloud</code>，<code>database-pass</code>即为数据库的<code>root</code>用户密码，<code>admin</code>和<code>password</code>是<code>owncloud</code>的用户帐号和密码，牢记。
+<code>
+$ cd /var/www/owncloud/
+</code>
+<code>
+$ sudo -u www-data php occ  maintenance:install --database
+"mysql" --database-name "owncloud"  --database-user "root" --database-pass
+"password" --admin-user "admin" --admin-pass "password"
+</code>
+会提示以下信息
+<code>
+ownCloud is not installed - only a limited number of commands are available
+ownCloud was successfully installed
+</code>
+添加IP或者域名到<code>config.php</code>的可信域<code>trusted_domains</code>。
+<code>
+sudo vi /var/www/owncloud/config/config.php
+</code>
+类似下面格式
+<code>
+  'trusted_domains' =&gt;
+  array (
+    0 =&gt; 'localhost',
+    1 =&gt; '192.168.1.104',
+    2 =&gt; '192.168.1.106',
+  ),
+</code> 
+#### 第五步：浏览器打开owncloud</p>
+
+<p>用浏览器访问owncloud的地址，Enjoy owncloud!
+<code>
+http://RaspberryPi-IP/owncloud
+</code>
+### TODO</p>
+
+<ol>
+  <li>没有配置SSL</li>
+  <li>安全的配置目录权限</li>
+</ol>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
@@ -162,58 +297,6 @@ go get -u  github.com/cyfdecyf/cow
 
 <pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[raspberry pi(树莓派）相关记录]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/03/04/raspberry-pi/"/>
-    <updated>2013-03-04T10:48:00+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/03/04/raspberry-pi</id>
-    <content type="html"><![CDATA[<p>搜索关键词：raspberry pi 树莓派 教程 XBMC shadowsocks</p>
-
-<p>上周用一件旧东西和推友交换了个<a href="http://www.raspberrypi.org/">raspberry pi</a>(树莓派），虽然内存是256M的(最新版的树莓派升级到512M)，但想来够用了。设想是：代理服务器+<a href="http://xbmc.org/">XBMC</a>视频播放+挂载3.5寸移动硬盘+网站服务器。</p>
-
-<!--more-->
-
-<h3 id="section">入门教程</h3>
-<p>国内可以从ICKey买树莓派，这个售卖页面的“<a href="http://www.ickey.cn/raspberrypi.php">使用说明</a>”做入门教程不错，工具也都有现成的下载。</p>
-
-<h3 id="section-1">配件</h3>
-<p>电源只要满足700mA/5V都可以，但最好配置&gt;1.5A/5V的电源适配器，特别如果要挂载移动硬盘<br />
-USB的键盘鼠标，如果是PS/2接口的，需要一个转接器转化成USB<br />
-一根HDMI线<br />
-一张至少4G/class4的SD卡，注意<a href="http://elinux.org/RPi_SD_cards">有些SD卡不兼容</a><br />
-一根microUSB线做电源线  </p>
-
-<h3 id="section-2">树莓派版本选择</h3>
-<p>官方推荐<a href="http://www.raspbian.org/">raspbian</a>系统，这个系统默认启动进入字符终端模式，可以用apt-get安装<a href="http://xbmc.org/">XBMC</a>应用，但是有些不稳定，没有其他三个<a href="http://xbmc.org/">XBMC</a>专门版本稳定，其次首次运行<a href="http://xbmc.org/">XBMC</a>起来要几十秒。<br />
-<a href="http://www.raspbmc.com/download/">raspbmc</a>、<a href="http://xbian.org/">xbian</a>、<a href="http://openelec.tv/get-openelec/download/viewcategory/10-raspberry-pi-builds">OpenELEC</a>三个都是<a href="http://xbmc.org/">XBMC</a>专用版本。<br />
-如果你的树莓派用来做服务器的话，推荐使用raspbian系统，raspbian有几乎和debian一样多的软件包，如lighttpd、mysql、php、apache等，正常开机不启动<a href="http://xbmc.org/">XBMC</a>，节省资源。<br />
-如果你有用<a href="http://xbmc.org/">XBMC</a>播放视频需求的话，推荐使用<a href="http://www.raspbmc.com/download/">raspbmc</a>，本身就是为<a href="http://xbmc.org/">XBMC</a>优化，其次可以用apt-get安装软件，比如lighttpd、nodejs、polipo。<a href="http://xbmc.org/">XBMC</a>空闲不播放时占用10%+的CPU资源，树莓派用HDMI连接到电视，要看视频打开电视就是XBMC界面。 </p>
-
-<h3 id="section-3">代理服务器</h3>
-<p>代理服务器的原理<a href="/blog/2013/03/02/raspberry-pi-proxy/">点击这里</a><br />
-我选择的版本是<a href="http://www.raspbmc.com/download/">raspbmc</a>，安装了polipo、nodejs版的shadowsocks和<a href="https://github.com/cyfdecyf/cow">cow</a>。<br />
-使用<a href="https://github.com/cyfdecyf/cow">cow</a>搭建一个http代理，cow可以设置上级代理是shadowsocks的socks5代理，cow可以自动判断网站是直接连接还是通过socks5代理。polipo主要是做代理备份，当cow工作不正常时才临时使用。  </p>
-
-<h3 id="xbmc">XBMC视频播放</h3>
-<p>raspbmc本身就是个<a href="http://xbmc.org/">XBMC</a>优化版本，支持播放windows网络共享里的视频。<br />
-安卓手机可以安装个XBMC remote应用来控制树莓派上的XBMC<br />
-可以配置NFS，这样iPad上的xbmc可以远程播放树莓派连接的移动电源里的视频。iPad上的xbmc也可以通过sabma连接，但是总是连接超时，所以我改用NFS来连接。</p>
-
-<h3 id="section-4">挂载3.5寸移动硬盘</h3>
-<p>因为3.5寸移动硬盘已经外接供电，这样不需要树莓派的USB供电，USB只是作为普通的数据端口。<br />
-测试<a href="http://www.raspbian.org/">raspbian</a>和<a href="http://www.raspbmc.com/download/">raspbmc</a>都可以正常挂接。驱动要安装ntfs-3g，然后通过mount挂载，具体步骤可以参考这里<a href="http://www.ficklelife.com/index.php?id=2">raspbmc Automount an NTFS USB HDD</a>。<br />
-最新版的<a href="http://www.raspbmc.com/download/">raspbmc</a>连mount都不用，插入移动硬盘后系统自动挂载，挂载在/media/[磁盘名]，磁盘名和移动硬盘挂接windows下的盘符卷标一样的。windows上可以将网络共享映射为本地磁盘，这样下载和使用都像本地磁盘没什么区别。</p>
-
-<p>警告：2.5寸的移动硬盘需要USB供电我没有尝试过。</p>
-
-<h3 id="section-5">网站服务器</h3>
-<p>lighttpd用于搭建一个简单的web server，这样可以使用pac文件。<br />
-raspbmc本身带了ftp、samba、SSH服务，并且默认是打开的，可以在<a href="http://xbmc.org/">XBMC</a>界面：程序-raspbmc settings里打开关闭。<br />
-samba服务默认将/home/pi和/media两个目录共享，windows可以通过网上邻居访问读写,windows上可以将连接在树莓派的移动硬盘映射为一个盘符，用迅雷下载视频文件，然后在树莓派上的xbmc直接播放。  </p>
 
 ]]></content>
   </entry>
