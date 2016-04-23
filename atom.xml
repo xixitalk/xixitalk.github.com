@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-04-23T10:18:47+08:00</updated>
+  <updated>2016-04-23T10:38:50+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,11 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[]]></title>
+    <title type="html"><![CDATA[Install owncloud 9.0.2 on RaspberryPi]]></title>
     <link href="http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi/"/>
     <updated>2016-04-23T07:16:41+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi</id>
-    <content type="html"><![CDATA[<!--more-->
+    <content type="html"><![CDATA[<p>在树莓派上安装owncloud 9.0.2</p>
+
+<!--more-->
 
 <p>test</p>
 
