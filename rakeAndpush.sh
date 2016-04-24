@@ -46,6 +46,7 @@ fi
 
 echo "git add source/_posts/*.markdown"
 git add source/_posts/*.markdown
+git add source/twitter/
 
 echo "git commit -m $newpostname"
 git commit -m  "$newpostname"
@@ -59,3 +60,7 @@ if [ $rakeret -ne 0 ]; then
 fi
 
 md5sum  source/_posts/* > ._posts.md5
+
+exit 9
+
+
