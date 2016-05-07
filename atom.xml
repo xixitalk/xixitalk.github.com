@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-04-24T10:45:51+08:00</updated>
+  <updated>2016-05-07T20:45:39+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在树莓派上安装SigmaVPN]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/05/08/Install-SigmaVPN-on-Raspbian/"/>
+    <updated>2016-05-08T04:27:44+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/05/08/Install-SigmaVPN-on-Raspbian</id>
+    <content type="html"><![CDATA[<p>Install SigmaVPN on Raspbian<br />
+在树莓派上安装SigmaVPN</p>
+
+<!--more-->
+
+<h2 id="sigmavpn">获取SigmaVPN代码</h2>
+
+<p>从github获取代码</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">git clone https://github.com/neilalexander/sigmavpn.git
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="libsodium">安装libsodium</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install libsodium-dev
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="sigmavpn-1">编译SigmaVPN</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$cd sigmavpn
+</span><span class="line">$make
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>显示以下编译信息，编译完成，没有想到编译如此简单顺利。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cc -I/usr/local/include -O2 -fPIC -Wall -Wextra -c naclkeypair.c -o naclkeypair.o
+</span><span class="line">cc -I/usr/local/include -O2 -fPIC -Wall -Wextra -c pack.c -o pack.o
+</span><span class="line">cc -I/usr/local/include -O2 -fPIC -Wall -Wextra -c tai.c -o tai.o
+</span><span class="line">cc -o naclkeypair naclkeypair.o -L/usr/local/lib -lsodium -ldl -pthread
+</span><span class="line">cc -o sigmavpn main.o modules.o dep/ini.o -L/usr/local/lib -lsodium -ldl -pthread
+</span><span class="line">cc -I/usr/local/include -I/usr/local/include proto/proto_raw.c -o proto/proto_raw.o -O2 -fPIC -Wall -Wextra -shared -L/usr/local/lib -lsodium
+</span><span class="line">cc -I/usr/local/include -I/usr/local/include proto/proto_nacl0.c pack.o -o proto/proto_nacl0.o -O2 -fPIC -Wall -Wextra -shared -L/usr/local/lib -lsodium
+</span><span class="line">cc -I/usr/local/include -I/usr/local/include proto/proto_nacltai.c pack.o tai.o -o proto/proto_nacltai.o -O2 -fPIC -Wall -Wextra -shared -L/usr/local/lib -lsodium
+</span><span class="line">cc -I/usr/local/include intf/intf_tuntap.c -o intf/intf_tuntap.o -O2 -fPIC -Wall -Wextra -shared
+</span><span class="line">cc -I/usr/local/include intf/intf_udp.c -o intf/intf_udp.o -O2 -fPIC -Wall -Wextra -shared
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Install owncloud 9.0.2 on RaspberryPi]]></title>
@@ -2371,23 +2430,6 @@ svn update --revision N //更新到版本N，-r
 <p>如果五项全是阴，表示未携带乙肝病毒，但是未有乙肝疫苗抗体，需要注射乙肝疫苗抗体。<br />
 其他“小三阳”和“大三阳”自行搜索吧。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[中国社会现状及未来发展]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/04/china-society/"/>
-    <updated>2013-07-04T07:10:53+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/04/china-society</id>
-    <content type="html"><![CDATA[<p><a href="http://cn.nytimes.com/china/20130703/cc03fangshaowei/">方绍伟：中国政治模式能走多远？</a></p>
-
-<p><a href="http://cn.nytimes.com/china/20130624/cc24lifan1/">李凡（上）：为什么现在的意识形态变得比较左</a><br />
-<a href="http://cn.nytimes.com/china/20130625/cc25lifan2/">李凡（下）：中国转型能否避免崩溃一途?</a></p>
-
-<!--more-->
-
-<script src="http://xixitalk.github.io/javascripts/base64.js" type="text/javascript"> </script>
-<p><span id="base64_block">RFFveExpRGt1SzNsbTczbWxML21zcnZtcUtIbHZJL29nNzNvdGJEbHBKcm92NXp2dko4OFFsSStEUXJrdTQ0eU1EQXk1Ym0wNWJ5QTVhZUw3N3lNNUxpdDVadTk1Nkd1NWE2ZTVZZTY1NDZ3NUxxRzVMaUE1TGlxNXBhdzU1cUU1cFMvNXJLNzVxaWg1YnlQNzd5TTZMK1o1YkN4NXBpdjVMaU41WkNNNUxxTzVMdWw1YjZBNTd1STZMcXI1TGlBNVlXYTVZaTI1NXFFNG9DYzZabVE1THU3NUxpQTVZV2E1WWkyNG9DZDVxaWg1YnlQNG9DVTRvQ1U1WnlvNUxpQTVZV2E1TGlUNXBTLzU1cUU1WW1ONW8rUTVMaUw3N3lNNVkrcTVZV0I2SzY0NXB5QTZhdVk2YUtHNWErODVMcTY1WnlvNUx1NzVMaWs1YkdLNTVxRTVwUy81cks3NXFpaDVieVA0NENDNUxpTjZLYUI1TDJPNUx5dzZMK1o1NmVONXBTLzVySzc1cWloNWJ5UDU1cUU1WWliNXBhdzU0bTU1b0NuNVpLTTU1U2Y1Wkc5NVlxYjQ0Q0M1Ynk2NUxxNjVwUy81cks3NTVxRTVwZTI1THVqNVkrdjZJTzk2TCtINVk2NzVMcUdMT0tBbk9XNHVPUzZ1dWFVditheXUrS0FuZVdQcitpRHZlUzhtdVM1b09TN3BlUzR1dVc0dU9TNmh1T0FndWVPc09XY3FPYVlyK0tBbk9TNGcrbSttZWF5dSthd3RPS0FuZU9BZ3VLQW5PYU9xT2loak9XNGd1V2N1dUtBbmVhWXIrV0ZtdWltZ2VtU3NlKzhqT0tBbk9tYWtPVzlvdVM0bHVpaXJlS0FuZWFZcitXRm11aW1nZVdSdmVPQWd1V0ZtdWFkZythdmxPVzdpZWEwZ2VhYnRPbUhqZWltZ2UrOGpPV091K2VKdWVhZGcrV01sdWFZcittZHFlaUhxdVczc2VlYWhPV1J2ZVM0amVXUHIraUR2ZVdIdXVlT3NPZWFoT1M2aSthRGhlT0FnZzBLRFFvOGNENDhMM0ErRFFveUxpRGt1THJrdTREa3VZam5qckRsbktqbm1vVG1oSS9vcjRibHZhTG1nSUhsajVqbHZwZm1yNVRvdm9QbHQ2WWdQRUpTUGcwSzU2Uys1THlhNXJDUjVMeVg1NXFFNW9TUDZLK0c1cStVNkw2RDViZW03N3lNNXJDUjVMeVg1NXFFNlp1RzVMMlQ2SzZ3NWIrRzVwaXY1cStiNXBlMjVMdWo0NENDNXErYjVwZTI1THVqNUxxNjVMcTY2WU85NXB5SjViZWw1TDJjNzd5TTVyS2g1THVBNUxtSTZMU3I1YStNNWJldTZMZWQ3N3lNNWJlbDVMcTY2WmkyNTdxbjVwaXY2YUtHNWErODZaaTI1N3FuNzd5TTVibXk2WU9vNXJLaDVweUo2WnFQNUw2LzVvbVQ1THE2NDRDQzVMaWM1cXluNVlXeDVMcW41TGk3NUxtSjU2QzA1THFuNkwyczVaNkw1cGl2NXJDUjVMeVg1cHlKNG9DYzZJZXE1NVN4NXJDUjVMaTc0b0NkNTVxRTZadUc1TDJUNks2dzViK0c3N3lNNWIyVDVZV3g1THFuNUxpNzVMbUo1WktNNkl1UDZJR1U1cWloNWJ5UDVZZTY1NDZ3NlpldTZhS1k1NXFFNXBlMjVZQ1o3N3lNNXJDUjVMeVg1bytRNVllNjViNkE2SWVxNTVTeDVyQ1I1TGk3Nkwyczc3eU01TGl0NVp1OTVyS2g1cHlKNkwrWjU2ZU42WnVHNUwyVDZLNnc1YitHNDRDQzVMaXQ1WnU5NXJDUjVMeVg1YSs1NG9DYzZJZXE1NVN4NXJDUjVMaTc0b0NkNUxpTjU2R3U1YTZhNzd5TTVhKzU1TGlONTZHdTVhNmE1NXFFNUxpYzZLVy81YkN4NUx5YTViNlg1WWU2NkwrWjVxQzM1N3VUNks2Njc3eWE1TGl0NVp1OTVwQ2U2SWVxNTVTeDVyQ1I1TGk3NUx5YTVwdTA1TG14NDRDQzVZV2E1WktNNXBTLzVicWM1TG1mNmFHNjVZcS82TCtaNXFDMzVhNmo1THlnNDRDQzVMaXQ1WnU5NXJLaDVweUo1WStONWErNTVZV2E3N3lNNWIyVDVZV2E1WktNNXBTLzVicWM1cFMvNTYyVzVwMis1NXFFNXBlMjVZQ1o3N3lNNUxpTjVMeWE1THFKNVkrVzVwUy81cks3NXAyRDVZaXA3N3lNNklDTTVwaXY1N3UwNXAyRDVMaSs1NG1NNlplNTVMcUw3N3lNNllDZzVvaVE1NXFFNTd1VDVwNmM1YkN4NXBpdjVwUy81NjJXNVkrSTU3U241YnlnNkxXMzVwMmw0NENDRFFvTkNqeHdQand2Y0Q0TkNqTXVJT1M0cmVXYnZlaTlyT1dlaStpRHZlV1FwdW1CditXRmplVzBxZWE2ZytTNGdPbUFsRDhnUEVKU1BnMEs1TGl0NVp1OTVyS2g1cHlKNVkrTjVhKzU1WVdhNzd5TTVyS2g1cHlKNktpQTZLNjY2SWVxNTVTeDc3eU02TCtZNXBpdjVwNkI1cDJENUxpNzVMbUo3N3lNNkwrWTVMaU41cGl2NWFpQjVwMkQ1TGk3NUxtSjQ0Q0M1TGl0NVp1OTVZK3E1cHlKNUxpazU2ZU41N3VUNXA2Yzc3eWE2TDJzNVo2TDVvaVE1WXFmNW9pVzZJQ0Y1YlNwNXJxRDQ0Q0M1TGl0NVp1OTU1cUU1WWU2NkxldjVZK3E2SU85NXBpdjViU3A1cnFENzd5TTU2Uys1THlhNUxpNzVMbUo1WnU5NWE2MjVyS2g1cHlKNW9pUTVZcWY2TDJzNVo2TDU1cUU1WVdJNUw2TDQ0Q0NEUW89</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: raspbian | xixitalk's snippet]]></title>
+  <link href="http://xixitalk.github.io/blog/categories/raspbian/atom.xml" rel="self"/>
+  <link href="http://xixitalk.github.io/"/>
+  <updated>2016-05-07T20:45:39+08:00</updated>
+  <id>http://xixitalk.github.io/</id>
+  <author>
+    <name><![CDATA[xixitalk]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在树莓派上安装SigmaVPN]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/05/08/Install-SigmaVPN-on-Raspbian/"/>
+    <updated>2016-05-08T04:27:44+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/05/08/Install-SigmaVPN-on-Raspbian</id>
+    <content type="html"><![CDATA[<p>Install SigmaVPN on Raspbian<br />
+在树莓派上安装SigmaVPN</p>
+
+<!--more-->
+
+<h2 id="sigmavpn">获取SigmaVPN代码</h2>
+
+<p>从github获取代码</p>
+
+<p><code>
+git clone https://github.com/neilalexander/sigmavpn.git
+</code></p>
+
+<h2 id="libsodium">安装libsodium</h2>
+
+<p><code>
+sudo apt-get install libsodium-dev
+</code></p>
+
+<h2 id="sigmavpn-1">编译SigmaVPN</h2>
+
+<p><code>
+$cd sigmavpn
+$make
+</code></p>
+
+<p>显示以下编译信息，编译完成，没有想到编译如此简单顺利。</p>
+
+<p><code>
+cc -I/usr/local/include -O2 -fPIC -Wall -Wextra -c naclkeypair.c -o naclkeypair.o
+cc -I/usr/local/include -O2 -fPIC -Wall -Wextra -c pack.c -o pack.o
+cc -I/usr/local/include -O2 -fPIC -Wall -Wextra -c tai.c -o tai.o
+cc -o naclkeypair naclkeypair.o -L/usr/local/lib -lsodium -ldl -pthread
+cc -o sigmavpn main.o modules.o dep/ini.o -L/usr/local/lib -lsodium -ldl -pthread
+cc -I/usr/local/include -I/usr/local/include proto/proto_raw.c -o proto/proto_raw.o -O2 -fPIC -Wall -Wextra -shared -L/usr/local/lib -lsodium
+cc -I/usr/local/include -I/usr/local/include proto/proto_nacl0.c pack.o -o proto/proto_nacl0.o -O2 -fPIC -Wall -Wextra -shared -L/usr/local/lib -lsodium
+cc -I/usr/local/include -I/usr/local/include proto/proto_nacltai.c pack.o tai.o -o proto/proto_nacltai.o -O2 -fPIC -Wall -Wextra -shared -L/usr/local/lib -lsodium
+cc -I/usr/local/include intf/intf_tuntap.c -o intf/intf_tuntap.o -O2 -fPIC -Wall -Wextra -shared
+cc -I/usr/local/include intf/intf_udp.c -o intf/intf_udp.o -O2 -fPIC -Wall -Wextra -shared
+</code></p>
+
+]]></content>
+  </entry>
+  
+</feed>
