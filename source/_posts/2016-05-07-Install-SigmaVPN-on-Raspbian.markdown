@@ -47,3 +47,85 @@ cc -I/usr/local/include intf/intf_tuntap.c -o intf/intf_tuntap.o -O2 -fPIC -Wall
 cc -I/usr/local/include intf/intf_udp.c -o intf/intf_udp.o -O2 -fPIC -Wall -Wextra -shared
 ```
 
+## sigmavpn执行环境
+
+sigmavpn不安装，把需要的可执行程序提取出来。sigmavpn支持模块化，需要`proto`和`intf`里的几个`.o`文件。
+
+```
+mkdir -p ~/tools/sigmavpn
+cp naclkeypair  ~/tools/sigmavpn/
+cp sigmavpn     ~/tools/sigmavpn/
+cp ./proto/*.o  ~/tools/sigmavpn/
+cp ./intf/*.o   ~/tools/sigmavpn/
+```
+
+## SigmaVPN配置
+
+我参考的是clowwindy的配置 <https://gist.github.com/clowwindy/57d44b69741992d3eaa3>
+
+### 生成proto_publickey和proto_privatekey
+
+运行`naclkeypair`生成proto_publickey和proto_privatekey。
+
+```
+cd ~/tools/sigmavpn/
+./naclkeypair
+```
+
+### 创建vpn.conf
+
+其中192.168.1.104是树莓派的IP，如果是VPS则换成VPS的公网IP。proto_publickey和proto_privatekey替换成上面的生成的值。
+
+```
+[mysigmavpn]
+proto = nacltai
+proto_publickey = ce499073fc29bda865d0e0a4a4cf82428252409734de4691242804e45fa67e3d
+proto_privatekey = 76db698a3ef69b0e1158a4cb238ee72a1cc5d30ed1c6fadeaa4c62549e02d95d
+local = tuntap
+local_interface = tunnel
+local_tunmode = 1
+peer = udp
+peer_localaddr = 192.168.1.104
+peer_localport = 5678
+peer_remotefloat = 1
+```
+
+### 创建tunnel网口和配置iptables
+
+```
+sudo ip tuntap add dev tunnel mode tun
+sudo ifconfig tunnel 10.8.0.1/24
+sudo ifconfig tunnel mtu 1440
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -i eth0 -o tunnel -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i tunnel -o eth0 -j ACCEPT
+sudo iptables -t mangle -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400
+```
+
+### 启动sigmavpn
+
+```
+./sigmavpn -c vpn.conf -m . &
+```
+
+-m指定模块`.o`所在的目录。
+
+## 配置android上sigmavpn客户端
+
+在市场安装sigmavpn客户端。
+
+### TUNNEL配置
+
+Remote Address : vpn.conf里的peer_localaddr  
+Remote Port : vpn.conf里的peer_localport  
+Remote Public Key: vpn.conf里的proto_publickey  
+
+选中Use TAI64 nonce
+
+### NETWORK配置
+
+Tunnel Address Prefix：10.8.0.2/24  
+
+配置完成后，点击STATUS页的CONNECT按钮，看看状态栏是不是有VPN的小钥匙了。
+
