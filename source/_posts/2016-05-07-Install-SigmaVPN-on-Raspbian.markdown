@@ -11,6 +11,8 @@ Install SigmaVPN on Raspbian
 
 <!--more-->
 
+# 以下配置还有一些问题待解决
+
 ## 获取SigmaVPN代码
 
 从github获取代码
@@ -20,6 +22,8 @@ git clone https://github.com/neilalexander/sigmavpn.git
 ```
 
 ## 安装libsodium
+
+SigmaVPN依赖libsodium，安装libsodium
 
 ```
 sudo apt-get install libsodium-dev
@@ -128,4 +132,5 @@ Remote Public Key: vpn.conf里的proto_publickey
 Tunnel Address Prefix：10.8.0.2/24  
 
 配置完成后，点击STATUS页的CONNECT按钮，看看状态栏是不是有VPN的小钥匙了。
+
 
