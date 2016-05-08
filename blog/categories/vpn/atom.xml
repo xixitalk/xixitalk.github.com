@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vpn | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/vpn/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-05-08T11:27:24+08:00</updated>
+  <updated>2016-05-08T22:29:45+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -24,6 +24,8 @@
 <!--more-->
 
 <h1 id="section">以下配置还有一些问题待解决</h1>
+
+<p>sigmaVPN这样正常吗：手机通过LTE连接家里树莓派上服务器，连接正常，上网也正常，但在外网查IP是LTE的IP，不是家里宽带的IP，正常吗？</p>
 
 <h2 id="sigmavpn">获取SigmaVPN代码</h2>
 
