@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-05-08T10:47:13+08:00</updated>
+  <updated>2016-05-08T11:27:24+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -23,6 +23,8 @@
 
 <!--more-->
 
+<h1 id="section">以下配置还有一些问题待解决</h1>
+
 <h2 id="sigmavpn">获取SigmaVPN代码</h2>
 
 <p>从github获取代码</p>
@@ -32,6 +34,8 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="libsodium">安装libsodium</h2>
+
+<p>SigmaVPN依赖libsodium，安装libsodium</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install libsodium-dev
