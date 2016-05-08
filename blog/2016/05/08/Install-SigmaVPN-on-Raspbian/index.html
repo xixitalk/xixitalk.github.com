@@ -160,6 +160,110 @@ sudo &hellip;">
 </span><span class="line">cc -I/usr/local/include intf/intf_udp.c -o intf/intf_udp.o -O2 -fPIC -Wall -Wextra -shared
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h2 id="sigmavpn-2">sigmavpn执行环境</h2>
+
+<p>sigmavpn不安装，把需要的可执行程序提取出来。sigmavpn支持模块化，需要<code>proto</code>和<code>intf</code>里的几个<code>.o</code>文件。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mkdir -p ~/tools/sigmavpn
+</span><span class="line">cp naclkeypair  ~/tools/sigmavpn/
+</span><span class="line">cp sigmavpn     ~/tools/sigmavpn/
+</span><span class="line">cp ./proto/*.o  ~/tools/sigmavpn/
+</span><span class="line">cp ./intf/*.o   ~/tools/sigmavpn/
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="sigmavpn-3">SigmaVPN配置</h2>
+
+<p>我参考的是clowwindy的配置 <a href="https://gist.github.com/clowwindy/57d44b69741992d3eaa3">https://gist.github.com/clowwindy/57d44b69741992d3eaa3</a></p>
+
+<h3 id="protopublickeyprotoprivatekey">生成proto_publickey和proto_privatekey</h3>
+
+<p>运行<code>naclkeypair</code>生成proto_publickey和proto_privatekey。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd ~/tools/sigmavpn/
+</span><span class="line">./naclkeypair
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="vpnconf">创建vpn.conf</h3>
+
+<p>其中192.168.1.104是树莓派的IP，如果是VPS则换成VPS的公网IP。proto_publickey和proto_privatekey替换成上面的生成的值。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[mysigmavpn]
+</span><span class="line">proto = nacltai
+</span><span class="line">proto_publickey = ce499073fc29bda865d0e0a4a4cf82428252409734de4691242804e45fa67e3d
+</span><span class="line">proto_privatekey = 76db698a3ef69b0e1158a4cb238ee72a1cc5d30ed1c6fadeaa4c62549e02d95d
+</span><span class="line">local = tuntap
+</span><span class="line">local_interface = tunnel
+</span><span class="line">local_tunmode = 1
+</span><span class="line">peer = udp
+</span><span class="line">peer_localaddr = 192.168.1.104
+</span><span class="line">peer_localport = 5678
+</span><span class="line">peer_remotefloat = 1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="tunneliptables">创建tunnel网口和配置iptables</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo ip tuntap add dev tunnel mode tun
+</span><span class="line">sudo ifconfig tunnel 10.8.0.1/24
+</span><span class="line">sudo ifconfig tunnel mtu 1440
+</span><span class="line">sudo echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</span><span class="line">sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+</span><span class="line">sudo iptables -A FORWARD -i eth0 -o tunnel -m state --state RELATED,ESTABLISHED -j ACCEPT
+</span><span class="line">sudo iptables -A FORWARD -i tunnel -o eth0 -j ACCEPT
+</span><span class="line">sudo iptables -t mangle -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="sigmavpn-4">启动sigmavpn</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">./sigmavpn -c vpn.conf -m . &amp;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>-m指定模块<code>.o</code>所在的目录。</p>
+
+<h2 id="androidsigmavpn">配置android上sigmavpn客户端</h2>
+
+<p>在市场安装sigmavpn客户端。</p>
+
+<h3 id="tunnel">TUNNEL配置</h3>
+
+<p>Remote Address : vpn.conf里的peer_localaddr<br />
+Remote Port : vpn.conf里的peer_localport<br />
+Remote Public Key: vpn.conf里的proto_publickey  </p>
+
+<p>选中Use TAI64 nonce</p>
+
+<h3 id="network">NETWORK配置</h3>
+
+<p>Tunnel Address Prefix：10.8.0.2/24  </p>
+
+<p>配置完成后，点击STATUS页的CONNECT按钮，看看状态栏是不是有VPN的小钥匙了。</p>
+
 </div>
 
 

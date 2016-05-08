@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspbian | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/raspbian/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-05-07T20:45:39+08:00</updated>
+  <updated>2016-05-08T10:47:13+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -58,6 +58,88 @@ cc -I/usr/local/include -I/usr/local/include proto/proto_nacltai.c pack.o tai.o 
 cc -I/usr/local/include intf/intf_tuntap.c -o intf/intf_tuntap.o -O2 -fPIC -Wall -Wextra -shared
 cc -I/usr/local/include intf/intf_udp.c -o intf/intf_udp.o -O2 -fPIC -Wall -Wextra -shared
 </code></p>
+
+<h2 id="sigmavpn-2">sigmavpn执行环境</h2>
+
+<p>sigmavpn不安装，把需要的可执行程序提取出来。sigmavpn支持模块化，需要<code>proto</code>和<code>intf</code>里的几个<code>.o</code>文件。</p>
+
+<p><code>
+mkdir -p ~/tools/sigmavpn
+cp naclkeypair  ~/tools/sigmavpn/
+cp sigmavpn     ~/tools/sigmavpn/
+cp ./proto/*.o  ~/tools/sigmavpn/
+cp ./intf/*.o   ~/tools/sigmavpn/
+</code></p>
+
+<h2 id="sigmavpn-3">SigmaVPN配置</h2>
+
+<p>我参考的是clowwindy的配置 <a href="https://gist.github.com/clowwindy/57d44b69741992d3eaa3">https://gist.github.com/clowwindy/57d44b69741992d3eaa3</a></p>
+
+<h3 id="protopublickeyprotoprivatekey">生成proto_publickey和proto_privatekey</h3>
+
+<p>运行<code>naclkeypair</code>生成proto_publickey和proto_privatekey。</p>
+
+<p><code>
+cd ~/tools/sigmavpn/
+./naclkeypair
+</code></p>
+
+<h3 id="vpnconf">创建vpn.conf</h3>
+
+<p>其中192.168.1.104是树莓派的IP，如果是VPS则换成VPS的公网IP。proto_publickey和proto_privatekey替换成上面的生成的值。</p>
+
+<p><code>
+[mysigmavpn]
+proto = nacltai
+proto_publickey = ce499073fc29bda865d0e0a4a4cf82428252409734de4691242804e45fa67e3d
+proto_privatekey = 76db698a3ef69b0e1158a4cb238ee72a1cc5d30ed1c6fadeaa4c62549e02d95d
+local = tuntap
+local_interface = tunnel
+local_tunmode = 1
+peer = udp
+peer_localaddr = 192.168.1.104
+peer_localport = 5678
+peer_remotefloat = 1
+</code></p>
+
+<h3 id="tunneliptables">创建tunnel网口和配置iptables</h3>
+
+<p><code>
+sudo ip tuntap add dev tunnel mode tun
+sudo ifconfig tunnel 10.8.0.1/24
+sudo ifconfig tunnel mtu 1440
+sudo echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -i eth0 -o tunnel -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i tunnel -o eth0 -j ACCEPT
+sudo iptables -t mangle -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400
+</code></p>
+
+<h3 id="sigmavpn-4">启动sigmavpn</h3>
+
+<p><code>
+./sigmavpn -c vpn.conf -m . &amp;
+</code></p>
+
+<p>-m指定模块<code>.o</code>所在的目录。</p>
+
+<h2 id="androidsigmavpn">配置android上sigmavpn客户端</h2>
+
+<p>在市场安装sigmavpn客户端。</p>
+
+<h3 id="tunnel">TUNNEL配置</h3>
+
+<p>Remote Address : vpn.conf里的peer_localaddr<br />
+Remote Port : vpn.conf里的peer_localport<br />
+Remote Public Key: vpn.conf里的proto_publickey  </p>
+
+<p>选中Use TAI64 nonce</p>
+
+<h3 id="network">NETWORK配置</h3>
+
+<p>Tunnel Address Prefix：10.8.0.2/24  </p>
+
+<p>配置完成后，点击STATUS页的CONNECT按钮，看看状态栏是不是有VPN的小钥匙了。</p>
 
 ]]></content>
   </entry>
