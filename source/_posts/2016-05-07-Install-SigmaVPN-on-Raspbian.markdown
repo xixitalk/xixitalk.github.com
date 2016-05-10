@@ -13,7 +13,8 @@ Install SigmaVPN on Raspbian
 
 # 以下配置还有一些问题待解决
 
-sigmaVPN这样正常吗：手机通过LTE连接家里树莓派上服务器，连接正常，上网也正常，但在外网查IP是LTE的IP，不是家里宽带的IP，正常吗？
+# 从SigmaVPN连接服务器，提示数据解密FAIL，问题原因未知。
+
 
 ## 获取SigmaVPN代码
 
