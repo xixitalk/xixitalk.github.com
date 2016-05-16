@@ -11,9 +11,7 @@ Install SigmaVPN on Raspbian
 
 <!--more-->
 
-# 以下配置还有一些问题待解决
-
-# 从SigmaVPN连接服务器，提示数据解密FAIL，问题原因未知。
+# 以下配置还有一些问题待解决：从Android SigmaVPN连接服务器，提示数据解密FAIL，问题原因未知，我觉得是sigmaVPN软件的BUG。最后我架了一个Shadowsocks服务器，android手机上用影梭全局访问，在外面可以访问家里全部局域网资源。
 
 
 ## 获取SigmaVPN代码
@@ -69,6 +67,8 @@ cp ./intf/*.o   ~/tools/sigmavpn/
 ## SigmaVPN配置
 
 我参考的是clowwindy的配置 <https://gist.github.com/clowwindy/57d44b69741992d3eaa3>
+
+还有这个[Workiis: SigmaVPN Android Setup](http://workiis.blogspot.com/2015/03/sigmavpn-android-setup.html)
 
 ### 生成proto_publickey和proto_privatekey
 
