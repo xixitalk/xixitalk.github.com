@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-05-16T12:49:12+08:00</updated>
+  <updated>2016-06-12T17:09:51+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nexus 6P上用flashfire升级系统]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/06/12/flashfire-nexus-6p/"/>
+    <updated>2016-06-12T18:53:35+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/06/12/flashfire-nexus-6p</id>
+    <content type="html"><![CDATA[<p>Nexus 6P上用flashfire升级系统</p>
+
+<p>问题：Nexus原生系统root后怎么升级到最新系统？</p>
+
+<!--more-->
+
+<p>适用场景：nexus原生系统只是root，安装了supperSU，其他系统文件没有修改，安装Xposed的情况我没有尝试过。</p>
+
+<p>我的Nexus 6P本来系统是没有root的，每个月都通过OTA升级到最新系统，但是后来实在忍受不了国产应用间的相互唤醒了，root了系统，recovery换成了TWRP 3.0，使用了冰箱(icebox)把几个国产的应用冷冻起来了。其他系统文件没有修改。六月份系统推送了6月安全补丁MTC19V，一直在系统通知栏提示，甚是碍眼。搜索了一下发现可以使用flashfire更新系统。</p>
+
+<p>参考教程 <a href="http://bbs.mgyun.com/thread-50136-1-1.html">华为 Nexus 6p 教你nexus手机root后怎么更新，就像ota一样，转自国外大神chainfire</a> </p>
+
+<p>于是从google Play上下载了最新版本的flashfire，用方法2升级了系统。</p>
+
+<h2 id="flashfireota">方法1：flashfire直接OTA升级</h2>
+
+<p>按照flashfire的说明，系统下载完OTA升级包不要在<code>设置</code>里重启系统升级，打开flashfire会自动探测到OTA，直接一路确定升级。但是我尝试升级MTC19V没有成功，尝试了两次，系统重启进flashfire升级后系统版本号还是MTC19T，不是MTC19V。</p>
+
+<h2 id="flashfire">方法2：flashfire刷整个新系统</h2>
+
+<ol>
+  <li>先把冰箱里冷冻的所有应用全部解冻。</li>
+  <li>从<a href="https://developers.google.com/android/nexus/images">https://developers.google.com/android/nexus/images</a>下载最新的MTC19V版本，有900多M，扩展名以tgz结尾：angler-mtc19v-factory-5c289974.tgz。</li>
+  <li>把angler-mtc19v-factory-5c289974.tgz拷贝到手机里。</li>
+  <li>打开flashfire，点击+，点击<code>Flash firmware package</code>，选择手机里angler-mtc19v-factory-5c289974.tgz。</li>
+  <li>flashfire会分析tgz包，手动选择刷入Boot、system、vendor和cache分区，<strong>recovery和data不选择</strong>，切记。recovery就是twrp，data是用户安装的应用，不刷data是保留用户安装的应用。</li>
+  <li>添加之后，flashfire会在EverRoot里自动添加刷入SuperSU，系统更新完成自动root。</li>
+  <li>点击flash，系统自动关机重启进入flashfire刷入系统。</li>
+</ol>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在树莓派上安装SigmaVPN]]></title>
@@ -2518,27 +2555,6 @@ svn update --revision N //更新到版本N，-r
 <p>总是会有报道说她对男人进行诓骗，并且是招来连续杀戮的罪魁祸首。她在戏剧的巡回演出结束之后在冲绳开了一家【安纳塔汉岛咖啡店】，但因为哪怕在冲绳总是有如此一般的报道上报，她感觉难以在那里继续生活下去，便仍旧搬到了原来的地方生活。</p>
 
 <p>在东京做了一段时间脱衣舞舞女（这个单词我翻译的时候还没看懂是什么呢）之后，又回到了冲绳，34岁的她获得了新的婚姻。和新的丈夫一起，开了一个贩卖章鱼烧和沙冰的小店，生意倒还不错，终于宁静平和的生活再次来到了她的身上。和子在四十多岁的时候，丈夫去世，她自己也在49岁的时候因为脑瘤离开了人世，结束了她波澜的一生。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[乙肝五项指标]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/05/Second-liver-5-indexes/"/>
-    <updated>2013-07-05T23:41:59+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/05/Second-liver-5-indexes</id>
-    <content type="html"><![CDATA[<p>乙型肝炎病毒表面抗原      HBsAg	    阴性<br />
-乙型肝炎病毒表面抗体      HBsAb	    阳性<br />
-乙型肝炎病毒e抗原         HBeAg	    阴性<br />
-乙型肝炎病毒e抗体         HBeAb	    阴性<br />
-乙型肝炎病毒核心抗体      HBcAb	    阴性  </p>
-
-<p>最好的结果是阴、阳、阴、阴、阴，表示未携带乙肝病毒，并且有乙肝疫苗抗体。</p>
-
-<!--more-->
-
-<p>如果五项全是阴，表示未携带乙肝病毒，但是未有乙肝疫苗抗体，需要注射乙肝疫苗抗体。<br />
-其他“小三阳”和“大三阳”自行搜索吧。</p>
 
 ]]></content>
   </entry>
