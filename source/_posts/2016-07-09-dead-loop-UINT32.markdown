@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "UINT32引起的死循环"
-date: 2016-0709-12 10:02:35
+date: 2016-07-09 10:02:35
 comments: true
 mathjax: false
 categories: tech bugfix
