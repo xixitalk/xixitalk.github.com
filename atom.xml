@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-09T13:53:49+08:00</updated>
+  <updated>2016-07-09T15:01:10+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[函数栈破坏检查]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/09/func-stack-check/"/>
+    <updated>2016-07-09T22:49:35+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/09/func-stack-check</id>
+    <content type="html"><![CDATA[<p>函数栈破坏检查 平台 ARM linux，编译器GCC</p>
+
+<!--more-->
+
+<p>产品部分音频功能是台湾某家公司提供的，开源了部分代码，实现一个功能发现偶现程序段错误，根据coredump显示死的函数是一个类似printf的打印函数，而这个打印函数基本可以肯定是没有问题的，并且出现了多次。程序这样跑飞的一个原因就是函数栈遭到破坏，函数执行完弹栈返回函数调用的下条指令时候出错了。所以写了一个函数栈检查函数。代码如下：</p>
+
+<script src="https://gist.github.com/xixitalk/633303a13cd3711b4efc94881e1cc0da.js"></script>
+
+<p>问题很快定位，问题原因是其中一个函数接收消息的时候，recv函数输入的bufffer大小比buffer实际大小大，而这个buffer恰好是局部变量（栈空间），从而recv的时候把栈破坏了。</p>
+
+<p>特别提醒：如果定位的testFunc函数里局部变量过大，可能需要调整STACK_FIND_SIZE大小。定位平台是ARM linux，编译是GCC，其他平台和编译器以此类推。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[malloc封装检查越界]]></title>
@@ -2377,28 +2396,6 @@ svn update --revision N //更新到版本N，-r
 
 <pre><code>svn log [PATH]  //查看修改提交的commit log
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[最近一些有趣的网页]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/09/funny-site/"/>
-    <updated>2013-07-09T06:51:46+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/09/funny-site</id>
-    <content type="html"><![CDATA[<h3 id="section">宇宙囧片王：天机•富春山居图</h3>
-<p><a href="http://pulolesu.proresu.com/dream/kuso/switch1.html">宇宙囧片王：天机•富春山居图（上）</a><br />
-<a href="http://pulolesu.proresu.com/dream/kuso/switch2.html">宇宙囧片王：天机•富春山居图（中）</a><br />
-<a href="http://pulolesu.proresu.com/dream/kuso/switch3.html">宇宙囧片王：天机•富春山居图（下）</a></p>
-
-<!--more-->
-
-<h3 id="ma">少年Ma的奇幻历史漂流之旅</h3>
-<p>马伯庸的新博文《<a href="http://blog.sina.com.cn/s/blog_561ee4750101cdr3.html">少年Ma的奇幻历史漂流之旅</a>》讲述一个村级的博物馆竟然有大批清、明、元、唐、隋、晋、东汉、西周、商、夏、尧舜、炎帝、黄帝各个时代的珍品，去过北京故宫和台湾故宫的人们，不能不去齐名的河北衡水市某村级<strike>冀宝斋</strike>博物馆。</p>
-
-<h3 id="section-1">看个美女贴调节一下</h3>
-<p>水木社区<a href="http://www.newsmth.net/bbstcon.php?board=DSLR&amp;gid=808516395">这哥们的摄影水平怎么样？</a></p>
-
-<p><img src="http://att.newsmth.net/att.php?p.179.808516395.2462602.jpg" alt="imgs" /></p>
 ]]></content>
   </entry>
   
