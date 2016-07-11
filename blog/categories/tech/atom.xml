@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-10T17:36:03+08:00</updated>
+  <updated>2016-07-11T18:55:27+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我的AStyle配置选项]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/12/my-AStyle-config/"/>
+    <updated>2016-07-12T02:35:57+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/12/my-AStyle-config</id>
+    <content type="html"><![CDATA[<p>我的AStyle代码格式工具的选项：AStyle.exe -A1 -C -S -K -Y -f -t -p -U -o -n main.c</p>
+
+<p>在<code>notepad++</code>里添加：<code>运行(R)--运行(R)</code> 选择AStyle.exe，选项输入<code>-A1 -C -S -K -Y -f -t -p -U -o -n "$(FULL_CURRENT_PATH)"</code>，然后点击<code>保存</code>据保存在运行菜单里了。每次使用从<code>运行(R)</code>点击即可。</p>
+
+<!--more-->
+
+<p>简略选项：<code>-A1 -C -S -K -Y -f -t -p -U -o -n</code>
+对应长选项如下：</p>
+
+<ol>
+  <li>–style=bsd</li>
+  <li>–indent-classes</li>
+  <li>–indent-switches</li>
+  <li>–indent-cases</li>
+  <li>–indent-col1-comments</li>
+  <li>–break-blocks</li>
+  <li>–indent=tab</li>
+  <li>–pad-oper</li>
+  <li>–unpad-paren</li>
+  <li>–keep-one-line-statements</li>
+  <li>–suffix=none</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UINT32引起的死循环]]></title>
@@ -183,33 +214,6 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com',
 <p><code>
 requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.twitter.com', port=443): Max retries exceeded with url: /1.1/statuses/update.json (Caused by &lt;class 'httplib.BadStatusLine'&gt;: '')
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[python里用smtplib发邮件使用代理]]></title>
-    <link href="http://xixitalk.github.io/blog/2014/04/04/smtplib-with-proxy/"/>
-    <updated>2014-04-04T17:51:49+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2014/04/04/smtplib-with-proxy</id>
-    <content type="html"><![CDATA[<p>关键词：smtplib mail proxy</p>
-
-<p>树莓派上一个cron python程序直接用smtplib发送gmail邮件昨天出现问题了，错误是：socket.error: [Errno 97] Address family not supported by protocol，之前都是好好的，我用的smtp.gmail.com，端口是587。</p>
-
-<p>我搜索了一圈，觉得原因是国家防火墙搞得鬼，如果smtplib添加代理就可以避免这种情况。搜索了很多方法都觉得不好使，突然想到以前为google app engine的appcfg.py使用SocksiPy添加代理的方法，并且SocksiPy现在被包含在httplib2的库里了，这样就更方便了。</p>
-
-<!--more-->
-
-<p>在使用smtplib操作文件前部添加：</p>
-
-<pre><code>from httplib2 import socks
-import socket
-socket.socket = socks.socksocket
-socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
-</code></pre>
-
-<p>经测试邮件发送正常，待后续观察。</p>
-
-<p>socks支持SOCKS4、SOCKS5和HTTP代理，上述代码自行替换之。</p>
 ]]></content>
   </entry>
   
