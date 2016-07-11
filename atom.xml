@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-11T19:37:36+08:00</updated>
+  <updated>2016-07-11T21:32:43+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux内存占用分布分析]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/12/linux-mem-used/"/>
+    <updated>2016-07-12T05:07:20+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/12/linux-mem-used</id>
+    <content type="html"><![CDATA[<h2 id="section">1. 内存占用</h2>
+
+<p>linux内存占用分两部分：一部分是不可见的，内核代码段数据段的本身的占用空间，对于PC 上几个G的内存来说可能很小可以忽略不计，但是只有几十M内存的嵌入式环境来说就不能忽略了。另一部分就是linux系统可见的内存，<code>free</code>命令里的<code>total</code>或者<code>cat /proc/meminfo</code>里看到的<code>MemTotal</code>。</p>
+
+<!--more-->
+
+<h3 id="section-1">1.1 内核代码段数据段</h3>
+<p>通过内核对应带调试信息文件vmlinux或者System.map文件，能查到如下符号：<code>_stext</code> <code>_etext</code>  <code>__bss_start</code>  <code>__bss_stop</code> <code>_end</code>。   <code>__bss_stop</code> <code>_end</code>值是一样的。<code>_etext</code> 减<code>_stext</code>就是代码段大小，  <code>__bss_stop</code>减<code>__bss_start</code> 就是数据段大小。代码段和数据段之前的空间是<code>Init</code>段，内核初始化只运行一次的代码放在这个段，内核初始化后会重新覆盖利用这块空间。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">_stext                     C0008160
+</span><span class="line">_etext                     C051B958   代码段大小：0x5137F8 
+</span><span class="line">__bss_start                C05872E4
+</span><span class="line">__bss_stop                 C060EBF0   数据段大小：0x8790C 
+</span><span class="line">_end                       C060EBF0 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="linux">1.2 linux系统管理内存</h3>
+
+<p>linux系统可见的内存，<code>free</code>命令里的<code>total</code>或者<code>cat /proc/meminfo</code>里看到的<code>MemTotal</code>。内存管理太复杂了，完整拼接出来<code>total</code>或者<code>MemTotal</code>几乎不可能，但可以有几个重要的部分。</p>
+
+<h4 id="section-2">1.2.1 空闲内存</h4>
+
+<p>空闲内存：meminfo(cat /proc/meminfo)里的<code>MemFree</code> + <code>Buffers</code> + <code>Cached</code> + <code>SwapCached</code></p>
+
+<h4 id="section-3">1.2.2 内核内存占用</h4>
+
+<p>内核内存占用：meminfo(cat /proc/meminfo)里的<code>Slab</code> + <code>KernelStack</code> + <code>PageTables</code></p>
+
+<h4 id="section-4">1.2.3 应用内存占用</h4>
+
+<p>应用内存有两个视图，一个是虚拟内存视图，一个物理内存（RSS）视图。
+比如查看进程编号为1的Init进程内存占用</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$cat /pric/1/statm
+</span><span class="line">537 18 11 7 0 75 0
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>537是虚拟内存的page数，18是物理内存page数，每个page是4K Bytes。</p>
+
+<p>用下面的脚本可以把系统所有应用的虚拟内存和物理内存统计出来，应用间的内存比较分析是有意义的或者同一个应用不同版本间的比较是有意义的。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#/bin/bash
+</span><span class="line">RSS=0
+</span><span class="line">VM=0
+</span><span class="line">for PROC in `ls /proc/|grep "^[0-9]"`
+</span><span class="line">do
+</span><span class="line">  if [ -f /proc/$PROC/statm ]; then
+</span><span class="line">      TEP1=`cat /proc/$PROC/statm | awk '{print ($1)}'`
+</span><span class="line">      TEP2=`cat /proc/$PROC/statm | awk '{print ($2)}'`
+</span><span class="line">      echo $PROC $TEP1 $TEP2
+</span><span class="line">      RSS=`expr $RSS + $TEP2`
+</span><span class="line">      VM=`expr $VM + $TEP1`
+</span><span class="line">  fi
+</span><span class="line">done
+</span><span class="line">RSS=`expr $RSS \* 4`
+</span><span class="line">VM=`expr $VM \* 4`
+</span><span class="line">
+</span><span class="line">echo "APP total" $RSS"KB", $VM"KB",
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-5">2. 参考资料</h2>
+
+<p>http://blog.yufeng.info/archives/2456</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的AStyle配置选项]]></title>
@@ -2391,26 +2486,6 @@ ProxyCommand corkscrew 127.0.0.1 8118 %h %p
 IdentityFile /home/pi/.ssh/id_rsa
 </code></pre>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[《美丽新世界》]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/11/Brave-New-World/"/>
-    <updated>2013-07-11T23:49:04+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/11/Brave-New-World</id>
-    <content type="html"><![CDATA[<p><a href="http://www.ruanyifeng.com/blog/2011/03/brave_new_world.html">阮一峰《美丽新世界》读后感》</a></p>
-
-<p><a href="http://www.guokr.com/blog/310237/">金色葡萄《如何拒绝进入美丽新世界》</a></p>
-
-<p><a href="http://www.zhihu.com/question/19986748">知乎《如何评价阿道司 · 赫胥黎《美丽新世界》？它和《1984》对现实的影响有何异同？最重要的，书中的世界会有到来的一天吗？》</a></p>
-
-<!--more-->
-
-<script src="http://xixitalk.github.io/javascripts/base64.js" type="text/javascript"> </script>
-<p><span id="base64_block">RFFybHBhWGxxSUhsc0pUbm1vVGpnSW94T1RnMDQ0Q0w1WktNNkxXcjZJT2w2YnVPNTVxRTQ0Q0s1NzZPNUxpOTVwYXc1TGlXNTVXTTQ0Q0w1cGl2NWErNTVweXE1cDJsNTZTKzVMeWE1NXFFNUxpazU2ZU42YUtFNktlQjQ0Q0M0NENLTVRrNE5PT0FpK2FZcitXdnVlV0ZzZVM2cCtTNHUrUzVpZWFlZ2VhZGcrZWt2dVM4bXVhY3F1YWRwZWVhaE9hUGorZTdtTys4ak9lT3NPV2NxT1dGdU9XZWkrZWFoT2VrdnVTOG11ZXh1K1dlaSthWXIrYWNuZW15bk8rOGpPUzdqdW1BaittY3N1ZWFoT1Mvb2VhQnIrYWRwZWVjaSthY25lbXluT2VhaE9tN2tlYWFsK2VVbXVpSHMrV2twK1drcCtpMmhlV0h1dVM2aHVTNXB1UzRyZWVhaE9taWhPaW9nT09BZ3VpTGoraUJsT1dTak9TNHJlV2J2ZWVhaE9pL2tlUzdvK1dPaHVXUHN1UzRpdVdTak9TNXB1UzRyZVdsa2VXUWlPZWFoT1M2aStTN3R1UzVuK1craU9Xa211KzhqT1M0cmVXYnZlZU9zT1djcU9XK2lPV2ttdWFXdWVtZG91UzVuK21EdmVpRHZlYUp2dVdJc09XOXNlV3RrT09BZ3VpQWpPT0FpdWUranVTNHZlYVdzT1M0bHVlVmpPT0FpK2FZcitXdnVlYXNwK2Ewc3VlK2p1V2J2ZWF3a2VTNHUrV2J2ZVd1dHVhY3F1YWRwZWVhaE9hUGorZTdtTys4ak9hS2dPYWNyK21kcWVhV3NPKzhqT1Mvb2VhQnIrZUlodWVDdU8rOGpPV29zZVM1a09pSHMrYXR1K09BZ2cwS1BIQStQQzl3UGcwSzVMaXQ1WnU5NTQ2dzVaeW81NXFFNTZTKzVMeWE1WVcyNWE2ZTVwaXY1TGlrNklDRjU1cUU1WStnNVlxZzQ0Q0M1TGlLNWJHQzVidTY1NjJSNkwrYjZLR001cGF3NlplNzVhNmg1cCtsNzd5TTVadSs1TG1tNWE2aDVwK2w3N3lNNTcyUjU3dWM1YTZoNXArbDc3eU02S2lBNks2NjVwV1A1b1NmNksrTjZMK0g1cnVrNzd5TTVvbVQ1WWU3NWJ5QzZLNnU3N3lNNW91bTVvaXE1TGlLNks2Lzc3eU01cHEwNVlxYjVvdUc2TCtCNzd5TTVydWw1NVNvNVlxejVwUzU3N3lNNXBxMDVZcWI1N3UwNTZpejc3eU01YTZhNTRLNTU1dVI1bzZuNzd5TTZMK1o1cTJqNXBpdjQ0Q0tNVGs0Tk9PQWkrbUhqT2FQaitlN21PZWFoT1M0aytXSXR1ZTduK2F5dSthZXR1YWVoT09BZ3VpQWpPUzRpK1d4Z3Vhd2tlUzhsK1drcCttRHFPV0lodWVEcmVpaHQrV0ZxK1dOcHVhdXRlV3RrT1dGdStlVW4rYVluK1c2cCsrOGpPaXZyZWlvZ09TNHUrV0txT21ZaWVXSnN1KzhqT1M0amVpd2lPYVV2K2F5dStXU2pPYWRnK1dJcWUrOGpPYXlvZWFjaWVtQWllUzR2dWFkZytXUGlPYUFqdWFndCsrOGpPbWpuK1dUZ2VpTnIrV1RnZVd1aWVXRnFPV05zZWFjdXVXUGlPYUFqdWFndCsrOGpPZU9yK1dpZytheG9lYWZrK2lIdE9lWmpPV1BpT2FBanVhZ3QrKzhqT21UdXVXa3FlZWJsdVdjc09tQWllZW5nT1dvc2VTNWtPKzhqT2VEcmVpaHQrZVV0ZVd0a09TNnArV1RnZSs4ak9hdG8rYURzK09BaXVXb3NlUzVrT2lIcythdHUrT0FpK2l2dE9lYWhPbUNvK2FndCsrOG11UzZ1dWV4dSthY2llV0hvT2kva2VhWG9PbVprT2VhaE9hMmlPbUJvK1dvc2VTNWtPZWFoT2Fzc3VhY20rT0FnZzBLUEhBK1BDOXdQZzBLNUxpTDZaMmk1cHlKNUxpcTVyeXI1NVM3NWErNTVhV2w1YWlCNWJDVTU1cUU0NENLTVRrNE5PT0FpK1dTak9pMXEraURwZW03anVlYWhPT0FpdWUranVTNHZlYVdzT1M0bHVlVmpPT0FpK2kvbStpaGpPV3Z1ZWF2bE8rOGpPZTdrK2l1dXVpdnRPaTFxK2lEcGVtN2p1V3Z1ZWFjcXVhZHBlZWFoT21paE9pb2dPaTJoZWkvaCtTNmh1V2xwZVdvZ2VXd2xPKzhqT21DbythWXIrV2JvT1M0dXVTN2x1ZXJtZVdjcU9hc3ArYTBzdWUranVhMHN1YXdrZVM0dStXSXR1VzZwdVdidmVXdXR1ZWFoT2lua3VXNnB1YWRwZWl2dE9lYWhPKzhqT2VybWVXY3FPV0ZzZVM2cCtTNHUrUzVpZWFlZ2VhZGcrV2J2ZVd1dHVhZHBlaXZ0T1dscGVXb2dlV3dsT1M0Z09lQ3VlUzVuK1M0amVpK2srUzZqdWkxcStpRHBlbTdqdU9BZ2cwSw==</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
-
-<p><img src="http://ww2.sinaimg.cn/large/5ff29ca4jw1dft3aqb0pkj.jpg" alt="image" /></p>
 ]]></content>
   </entry>
   
