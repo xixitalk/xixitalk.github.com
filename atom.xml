@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-11T18:55:27+08:00</updated>
+  <updated>2016-07-11T19:37:36+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -20,26 +20,36 @@
     <id>http://xixitalk.github.io/blog/2016/07/12/my-AStyle-config</id>
     <content type="html"><![CDATA[<p>我的AStyle代码格式工具的选项：AStyle.exe -A1 -C -S -K -Y -f -t -p -U -o -n main.c</p>
 
-<p>在<code>notepad++</code>里添加：<code>运行(R)--运行(R)</code> 选择AStyle.exe，选项输入<code>-A1 -C -S -K -Y -f -t -p -U -o -n "$(FULL_CURRENT_PATH)"</code>，然后点击<code>保存</code>据保存在运行菜单里了。每次使用从<code>运行(R)</code>点击即可。</p>
+<p>在<code>notepad++</code>里添加：<code>运行(R)--运行(R)</code> 选择AStyle.exe，选项输入<code>-A1 -C -S -K -Y -f -t -p -U -o -n "$(FULL_CURRENT_PATH)"</code>，然后点击<code>保存</code>，这样就保存在运行菜单里了。每次使用从<code>运行(R)</code>点击即可。</p>
 
 <!--more-->
 
 <p>简略选项：<code>-A1 -C -S -K -Y -f -t -p -U -o -n</code>
 对应长选项如下：</p>
 
-<ol>
-  <li>–style=bsd</li>
-  <li>–indent-classes</li>
-  <li>–indent-switches</li>
-  <li>–indent-cases</li>
-  <li>–indent-col1-comments</li>
-  <li>–break-blocks</li>
-  <li>–indent=tab</li>
-  <li>–pad-oper</li>
-  <li>–unpad-paren</li>
-  <li>–keep-one-line-statements</li>
-  <li>–suffix=none</li>
-</ol>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">--style=bsd
+</span><span class="line">--indent-classes
+</span><span class="line">--indent-switches
+</span><span class="line">--indent-cases
+</span><span class="line">--indent-col1-comments
+</span><span class="line">--break-blocks
+</span><span class="line">--indent=tab
+</span><span class="line">--pad-oper
+</span><span class="line">--unpad-paren
+</span><span class="line">--keep-one-line-statements
+</span><span class="line">--suffix=none
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 ]]></content>
   </entry>
