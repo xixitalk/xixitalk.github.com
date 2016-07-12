@@ -84,29 +84,19 @@ $ cat a.out.maps
 00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out
 00010000-00011000 rw-p 00000000 b3:02 317712     /home/pi/test/pmap/a.out
 01171000-01192000 rw-p 00000000 00:00 0          [heap]
-b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
-.13.so
-b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
-.13.so
-b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
-.13.so
-b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
-.13.so
+b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
+b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
+b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
+b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
 b6f63000-b6f66000 rw-p 00000000 00:00 0
-b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
-bcofi_rpi.so
-b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
-bcofi_rpi.so
-b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
-bcofi_rpi.so
-b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
-3.so
+b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
+b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
+b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
+b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
 b6f9e000-b6fa2000 rw-p 00000000 00:00 0
 b6fa2000-b6fa3000 r-xp 00000000 00:00 0          [sigpage]
-b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
-3.so
-b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
-3.so
+b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
+b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
 bec99000-becba000 rw-p 00000000 00:00 0          [stack]
 ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
 ```
@@ -151,7 +141,7 @@ libc库数据段
 ```
 b6f63000-b6f66000 rw-p 00000000 00:00 0
 b6f9e000-b6fa2000 rw-p 00000000 00:00 0
-未知
+未知，权限rw-p应该共享库相关的数据区
 ```
 
 ```
