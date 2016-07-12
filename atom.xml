@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-11T21:32:43+08:00</updated>
+  <updated>2016-07-12T11:15:57+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,252 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux应用内存占用分析]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/12/app-mem-used-on-linux/"/>
+    <updated>2016-07-12T18:50:20+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/12/app-mem-used-on-linux</id>
+    <content type="html"><![CDATA[<p>假设一个应用的pid是PID，则<code>cat /proc/PID/maps</code>显示这个应用的内存占用。</p>
+
+<!--more-->
+
+<h3 id="maps">maps格式</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">address           perms offset  dev   inode   pathname
+</span><span class="line">00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ol>
+  <li><strong>address</strong> - This is the starting and ending address of the region in the process’s address space</li>
+  <li><strong>permissions</strong> - This describes how pages in the region can be accessed. There are four different permissions: read, write, execute, and shared. If read/write/execute are disabled, a ‘-‘ will appear instead of the ‘r’/’w’/’x’. If a region is not shared, it is private, so a ‘p’ will appear instead of an ‘s’. If the process attempts to access memory in a way that is not permitted, a segmentation fault is generated. Permissions can be changed using the <code>mprotect</code> system call.</li>
+  <li><strong>offset</strong> - If the region was mapped from a file (using mmap), this is the offset in the file where the mapping begins. If the memory was not mapped from a file, it’s just 0.</li>
+  <li><strong>device</strong> - If the region was mapped from a file, this is the major and minor device number (in hex) where the file lives.</li>
+  <li><strong>inode</strong> - If the region was mapped from a file, this is the file number.</li>
+  <li><strong>pathname</strong> - If the region was mapped from a file, this is the name of the file. This field is blank for anonymous mapped regions. There are also special regions with names like [heap], [stack], or [vdso]. [vdso] stands for virtual dynamic shared object. It’s used by system calls to switch to kernel mode. Here’s a good article about it.</li>
+</ol>
+
+<h3 id="section">实例分析</h3>
+
+<p>写一个简单的实例main.c，funcA地址在代码段，s_buf在数据段，buf是局部变量，在栈空间，pheap是malloc申请的，是heap空间。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;stdio.h&gt;
+</span><span class="line">#include &lt;stdlib.h&gt;
+</span><span class="line">#include &lt;unistd.h&gt;
+</span><span class="line">
+</span><span class="line">static char s_buf[1024];
+</span><span class="line">void funcA(void)
+</span><span class="line">{
+</span><span class="line">  printf("funcA address:%08x\n",funcA);
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">int main(int argc,char *argv[])
+</span><span class="line">{
+</span><span class="line">  int i = 0;
+</span><span class="line">  char buf[1024] = {0};
+</span><span class="line">  char *pheap = malloc(2048);
+</span><span class="line">
+</span><span class="line">  for(i=0;i&lt;1000;i++)
+</span><span class="line">  {
+</span><span class="line">    funcA();
+</span><span class="line">    printf("buf address:%08x\n",buf);
+</span><span class="line">    printf("s_buf address:%08x\n",s_buf);
+</span><span class="line">    printf("pheap address:%08x\n",pheap);
+</span><span class="line">    sleep(10);
+</span><span class="line">  }
+</span><span class="line">  free(pheap);
+</span><span class="line">  return 0;
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>编译运行</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$gcc main.c
+</span><span class="line">$./a.out
+</span><span class="line">funcA address:000084a0
+</span><span class="line">buf address:becb9318
+</span><span class="line">s_buf address:000107ac
+</span><span class="line">pheap address:01171008
+</span><span class="line">funcA address:000084a0
+</span><span class="line">buf address:becb9318
+</span><span class="line">s_buf address:000107ac
+</span><span class="line">pheap address:01171008
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>在另一个窗口</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ ps aux | grep out
+</span><span class="line">pi       27725  0.0  0.2   1676   424 pts/0    S+   10:43   0:00 ./a.out
+</span><span class="line">$ cat /proc/27725/maps &gt; a.out.maps
+</span><span class="line">$ cat a.out.maps
+</span><span class="line">00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out
+</span><span class="line">00010000-00011000 rw-p 00000000 b3:02 317712     /home/pi/test/pmap/a.out
+</span><span class="line">01171000-01192000 rw-p 00000000 00:00 0          [heap]
+</span><span class="line">b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f63000-b6f66000 rw-p 00000000 00:00 0
+</span><span class="line">b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
+</span><span class="line">bcofi_rpi.so
+</span><span class="line">b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
+</span><span class="line">bcofi_rpi.so
+</span><span class="line">b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
+</span><span class="line">bcofi_rpi.so
+</span><span class="line">b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
+</span><span class="line">3.so
+</span><span class="line">b6f9e000-b6fa2000 rw-p 00000000 00:00 0
+</span><span class="line">b6fa2000-b6fa3000 r-xp 00000000 00:00 0          [sigpage]
+</span><span class="line">b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
+</span><span class="line">3.so
+</span><span class="line">b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
+</span><span class="line">3.so
+</span><span class="line">bec99000-becba000 rw-p 00000000 00:00 0          [stack]
+</span><span class="line">ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>a.out.maps内容分析如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out  代码段，funcA在这个区间
+</span><span class="line">00010000-00011000 rw-p 00000000 b3:02 317712     /home/pi/test/pmap/a.out  数据段，s_buf在这个区间
+</span><span class="line">01171000-01192000 rw-p 00000000 00:00 0          [heap]堆空间，pheap在这个区间
+</span><span class="line">b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2
+</span><span class="line">.13.so
+</span><span class="line">b6f63000-b6f66000 rw-p 00000000 00:00 0
+</span><span class="line">b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
+</span><span class="line">bcofi_rpi.so
+</span><span class="line">b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
+</span><span class="line">bcofi_rpi.so
+</span><span class="line">b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/li
+</span><span class="line">bcofi_rpi.so
+</span><span class="line">b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
+</span><span class="line">3.so
+</span><span class="line">b6f9e000-b6fa2000 rw-p 00000000 00:00 0
+</span><span class="line">b6fa2000-b6fa3000 r-xp 00000000 00:00 0          [sigpage]
+</span><span class="line">b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
+</span><span class="line">3.so
+</span><span class="line">b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.1
+</span><span class="line">3.so
+</span><span class="line">bec99000-becba000 rw-p 00000000 00:00 0          [stack]栈空间，局部变量buf在这个区间
+</span><span class="line">ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>待完善…</p>
+
+<h3 id="section-1">参考资料</h3>
+
+<p><a href="http://stackoverflow.com/questions/1401359/understanding-linux-proc-id-maps">http://stackoverflow.com/questions/1401359/understanding-linux-proc-id-maps</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux内存占用分布分析]]></title>
@@ -2448,44 +2694,6 @@ case advises him out of two evils to choose the least. WHEREFORE,
 security being the true design and end of government, it unanswerably
 follows that whatever FORM thereof appears most likely to ensure it to us,
 with the least expence and greatest benefit, is preferable to all others.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[git ssh使用代理]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy/"/>
-    <updated>2013-07-12T16:23:33+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy</id>
-    <content type="html"><![CDATA[<p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
-
-<p>树莓派上有<code>socks5</code>代理和<code>http</code>代理，下面配置<code>git ssh</code>通过代理进行<code>git</code>操作。</p>
-
-<!--more-->
-
-<h3 id="git-sshsocks5">git ssh通过socks5代理</h3>
-<p><a href="http://chunyemen.org/archives/813">在Mac OSX上通过SSH代理实现github访问</a></p>
-
-<h3 id="git-sshhttp">git ssh通过http代理</h3>
-<p><a href="http://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></p>
-
-<h3 id="section">我的配置</h3>
-<p>通过<code>socks5</code>代理配置比较繁琐，配置后<code>git push</code>成功了一次，但是后面还是一直提示失败，找不到原因。后来改用<code>http</code>代理，代理成功。我的详细配置如下。</p>
-
-<h4 id="corkscrew">安装corkscrew</h4>
-<p>如果系统里没有安装<code>corkscrew</code>，进行安装。</p>
-
-<pre><code>sudo apt-get install corkscrew
-</code></pre>
-
-<h4 id="sshconfig">配置ssh的.config</h4>
-<p>配置<code>~/.ssh/config</code>,如果<code>config</code>没有创建一个。我的<code>http</code>代理是<code>127.0.0.1:8118</code>，用户名是<code>pi</code>。</p>
-
-<pre><code>Host github.com
-User git
-ProxyCommand corkscrew 127.0.0.1 8118 %h %p
-IdentityFile /home/pi/.ssh/id_rsa
-</code></pre>
-
 ]]></content>
   </entry>
   
