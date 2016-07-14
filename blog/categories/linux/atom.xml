@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-14T11:15:08+08:00</updated>
+  <updated>2016-07-14T11:33:28+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -37,8 +37,9 @@ for (type = 0; type &lt; MIGRATE_TYPES; type++) {
 			}
 </code></p>
 
-<p>mmzone.h里看出MIGRATE_TYPES为4。<strong>0是UNMOVABLE区，1是RECLAIMABLE可回收区，2是可MOVABLE区，3是PCPTYPES或者RESERVE保留区</strong>。
-<code>
+<p>mmzone.h里看出MIGRATE_TYPES为4。<strong>0是UNMOVABLE区，1是RECLAIMABLE可回收区，2是可MOVABLE区，3是PCPTYPES或者RESERVE保留区</strong>。</p>
+
+<p><code>
 enum {
 	MIGRATE_UNMOVABLE,
 	MIGRATE_RECLAIMABLE,
