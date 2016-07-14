@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-14T11:33:28+08:00</updated>
+  <updated>2016-07-14T15:42:05+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -26,7 +26,21 @@
 
 <p><img src="http://7bv9id.com1.z0.glb.clouddn.com/contig_page_data.png" alt="enter image description here" /></p>
 
-<p>free_area里order是0到10，对应4K到4M。free_list[n]是双向链表，只有next的next指向同样的节点才是表示链表为空。（双向链表，很明显如果只有两个节点，next和prev都是另一个节点）。</p>
+<p><code>watermark</code>是3840 4800 5760对应 watermark[min] watermark[low] watermark[high]，这里是page数，一个page 4K，所以<code>watermark</code>对应<code>min_free_kbytes</code>是3840*4K是15360（15M），符合配置<code>echo 15360 &gt; /proc/sys/vm/min_free_kbytes</code>。其他计算如下。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"> watermark[min] = min_free_kbytes换算为page单位即可
+</span><span class="line"> watermark[low] = watermark[min] * 5 / 4
+</span><span class="line"> watermark[high] = watermark[min] * 3 / 2
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>在系统空闲内存低于 watermark[low]时，开始启动内核线程kswapd进行内存回收，直到该zone的空闲内存数量达到watermark[high]后停止回收。如果上层申请内存的速度太快，导致空闲内存降至watermark[min]后，内核就会进行direct reclaim（直接回收），即直接在应用程序的进程上下文中进行回收，再用回收上来的空闲页满足内存申请，因此实际会阻塞应用程序，带来一定的响应延迟，而且可能会触发系统OOM。这是因为watermark[min]以下的内存属于系统的自留内存，用以满足特殊使用，所以不会给用户态的普通申请来用。</p>
+
+<p>free_area里order是0到10，对应4K到4M。free_list[n]是双向链表，只有next的next指向同样的节点才是表示链表为空。（双向链表，很明显如果只有两个节点，next和prev都是另一个节点）。和<code>cat /proc/pagetypeinfo</code>信息一致。</p>
+
+<p><code>contig_page_data</code>里的<code>vm_stat</code>对应mmzone.h里<code>zone_stat_item</code>枚举。另外本身有一个内核全局变量<code>vm_stat</code>，值和<code>contig_page_data</code>的这个<code>vm_stat</code>一样的。这个参数可以对照着<code>/proc/meminfo</code>一起看。</p>
 
 <p>page_alloc.c  show_free_areas()</p>
 
@@ -97,8 +111,6 @@
 </span><span class="line">	MIGRATE_TYPES
 </span><span class="line">};
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><code>contig_page_data</code>里的<code>vm_stat</code>对应mmzone.h里<code>zone_stat_item</code>枚举。另外本身有一个内核全局变量<code>vm_stat</code>，值和<code>contig_page_data</code>的这个<code>vm_stat</code>一样的。这个参数可以对照着<code>/proc/meminfo</code>一起看。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -188,6 +200,9 @@
 </span><span class="line">	NR_VM_ZONE_STAT_ITEMS };
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h4 id="section">参考文章</h4>
+
+<p><a href="http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl">http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl</a></p>
 ]]></content>
   </entry>
   
