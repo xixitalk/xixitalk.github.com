@@ -15,7 +15,19 @@ categories: linux
 
 ![enter image description here](http://7bv9id.com1.z0.glb.clouddn.com/contig_page_data.png)
 
-free_area里order是0到10，对应4K到4M。free_list[n]是双向链表，只有next的next指向同样的节点才是表示链表为空。（双向链表，很明显如果只有两个节点，next和prev都是另一个节点）。
+`watermark`是3840 4800 5760对应 watermark[min] watermark[low] watermark[high]，这里是page数，一个page 4K，所以`watermark`对应`min_free_kbytes`是3840*4K是15360（15M），符合配置`echo 15360 > /proc/sys/vm/min_free_kbytes`。其他计算如下。
+
+```
+ watermark[min] = min_free_kbytes换算为page单位即可
+ watermark[low] = watermark[min] * 5 / 4
+ watermark[high] = watermark[min] * 3 / 2
+```
+
+在系统空闲内存低于 watermark[low]时，开始启动内核线程kswapd进行内存回收，直到该zone的空闲内存数量达到watermark[high]后停止回收。如果上层申请内存的速度太快，导致空闲内存降至watermark[min]后，内核就会进行direct reclaim（直接回收），即直接在应用程序的进程上下文中进行回收，再用回收上来的空闲页满足内存申请，因此实际会阻塞应用程序，带来一定的响应延迟，而且可能会触发系统OOM。这是因为watermark[min]以下的内存属于系统的自留内存，用以满足特殊使用，所以不会给用户态的普通申请来用。
+
+free_area里order是0到10，对应4K到4M。free_list[n]是双向链表，只有next的next指向同样的节点才是表示链表为空。（双向链表，很明显如果只有两个节点，next和prev都是另一个节点）。和`cat /proc/pagetypeinfo`信息一致。
+
+`contig_page_data`里的`vm_stat`对应mmzone.h里`zone_stat_item`枚举。另外本身有一个内核全局变量`vm_stat`，值和`contig_page_data`的这个`vm_stat`一样的。这个参数可以对照着`/proc/meminfo`一起看。
 
 page_alloc.c  show_free_areas()
 
@@ -57,8 +69,6 @@ enum {
 	MIGRATE_TYPES
 };
 ```
-
-`contig_page_data`里的`vm_stat`对应mmzone.h里`zone_stat_item`枚举。另外本身有一个内核全局变量`vm_stat`，值和`contig_page_data`的这个`vm_stat`一样的。这个参数可以对照着`/proc/meminfo`一起看。
 
 ```
 enum zone_stat_item {
@@ -106,3 +116,6 @@ enum zone_stat_item {
 	NR_VM_ZONE_STAT_ITEMS };
 ```
 
+#### 参考文章
+
+<http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl>
