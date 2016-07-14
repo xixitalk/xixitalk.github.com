@@ -5,14 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>curl下载断点传续 - xixitalk's snippet</title>
+  <title>linux kernel全局变量contig_page_data含义 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="curl下载断点传续 1
-curl -C offset -O http://google.com/p4.mp4 offset手动输入已经下载的字节数 1
-curl -C - -O http://google.com/p4.mp4 -C -可以自动识别offet续传 curl使用代理 1
-curl &hellip;">
+  <meta name="description" content="contig_page_data是内核内存管理一个很重要的变量。 page_alloc.c show_free_areas() 1
+2
+3
+4
+for (type = 0; type &lt; MIGRATE_TYPES; type++) { if (!list_empty(&amp;area-& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +22,7 @@ curl &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2014/04/13/curl-continue">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,7 +85,7 @@ curl &hellip;">
   
   <header>
     
-      <h1 class="entry-title">curl下载断点传续</h1>
+      <h1 class="entry-title">linux kernel全局变量contig_page_data含义</h1>
     
     
       <p class="meta">
@@ -100,7 +101,7 @@ curl &hellip;">
   
 
 
-<time datetime="2014-04-13T01:22:17+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
+<time datetime="2016-07-13T17:03:20+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,36 +110,80 @@ curl &hellip;">
   </header>
 
 
-<div class="entry-content"><h3 id="curl">curl下载断点传续</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl -C offset -O http://google.com/p4.mp4 
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>offset手动输入已经下载的字节数</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl -C - -O http://google.com/p4.mp4 
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><code>-C -</code>可以自动识别offet续传</p>
+<div class="entry-content"><p><code>contig_page_data</code>是内核内存管理一个很重要的变量。</p>
 
 <!--more-->
 
-<h3 id="curl-1">curl使用代理</h3>
+<p>page_alloc.c  show_free_areas()</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl -x 192.168.1.106:8118  http://google.com/p4.mp4 
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">for (type = 0; type &lt; MIGRATE_TYPES; type++) {
+</span><span class="line">				if (!list_empty(&amp;area-&gt;free_list[type]))
+</span><span class="line">					types[order] |= 1 &lt;&lt; type;
+</span><span class="line">			}
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><code>-x</code> 后面跟HTTP代理的host和port</p>
+<p>mmzone.h里看出MIGRATE_TYPES为4。<strong>0是UNMOVABLE区，1是RECLAIMABLE可回收区，2是可MOVABLE区，3是PCPTYPES或者RESERVE保留区</strong>。
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">enum {
+</span><span class="line">	MIGRATE_UNMOVABLE,
+</span><span class="line">	MIGRATE_RECLAIMABLE,
+</span><span class="line">	MIGRATE_MOVABLE,
+</span><span class="line">	MIGRATE_PCPTYPES,	/* the number of types on the pcp lists */
+</span><span class="line">	MIGRATE_RESERVE = MIGRATE_PCPTYPES,
+</span><span class="line">#ifdef CONFIG_CMA
+</span><span class="line">	/*
+</span><span class="line">	 * MIGRATE_CMA migration type is designed to mimic the way
+</span><span class="line">	 * ZONE_MOVABLE works.  Only movable pages can be allocated
+</span><span class="line">	 * from MIGRATE_CMA pageblocks and page allocator never
+</span><span class="line">	 * implicitly change migration type of MIGRATE_CMA pageblock.
+</span><span class="line">	 *
+</span><span class="line">	 * The way to use it is to change migratetype of a range of
+</span><span class="line">	 * pageblocks to MIGRATE_CMA which can be done by
+</span><span class="line">	 * __free_pageblock_cma() function.  What is important though
+</span><span class="line">	 * is that a range of pageblocks must be aligned to
+</span><span class="line">	 * MAX_ORDER_NR_PAGES should biggest page be bigger then
+</span><span class="line">	 * a single pageblock.
+</span><span class="line">	 */
+</span><span class="line">	MIGRATE_CMA,
+</span><span class="line">#endif
+</span><span class="line">#ifdef CONFIG_MEMORY_ISOLATION
+</span><span class="line">	MIGRATE_ISOLATE,	/* can't allocate from here */
+</span><span class="line">#endif
+</span><span class="line">	MIGRATE_TYPES
+</span><span class="line">};
+</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl  --socks5-hostname 192.168.1.106:9050  http://google.com/p4.mp4
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><code>--socks5-hostname</code>后面跟socks5代理的host和port</p>
-
+<p>待完善</p>
 </div>
 
 
@@ -161,12 +206,12 @@ curl &hellip;">
   
 
 
-<time datetime="2014-04-13T01:22:17+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
+<time datetime="2016-07-13T17:03:20+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/tech/'>tech</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -178,7 +223,7 @@ curl &hellip;">
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:curl下载断点传续 http://xixitalk.github.io/blog/2014/04/13/curl-continue/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:linux kernel全局变量contig_page_data含义 http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -224,8 +269,8 @@ curl &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2014/04/13/curl-continue/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2014/04/13/curl-continue/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/';
         var disqus_script = 'embed.js';
       
     (function () {

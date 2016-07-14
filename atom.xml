@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-12T19:12:27+08:00</updated>
+  <updated>2016-07-14T08:50:36+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux kernel全局变量contig_page_data含义]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/"/>
+    <updated>2016-07-13T17:03:20+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data</id>
+    <content type="html"><![CDATA[<p><code>contig_page_data</code>是内核内存管理一个很重要的变量。</p>
+
+<!--more-->
+
+<p>page_alloc.c  show_free_areas()</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">for (type = 0; type &lt; MIGRATE_TYPES; type++) {
+</span><span class="line">				if (!list_empty(&amp;area-&gt;free_list[type]))
+</span><span class="line">					types[order] |= 1 &lt;&lt; type;
+</span><span class="line">			}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>mmzone.h里看出MIGRATE_TYPES为4。<strong>0是UNMOVABLE区，1是RECLAIMABLE可回收区，2是可MOVABLE区，3是PCPTYPES或者RESERVE保留区</strong>。
+&lt;div class=&#8217;bogus-wrapper&#8217;&gt;<notextile><figure class="code">&lt;div class=&#8221;highlight&#8221;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#8221;gutter&#8221;&gt;&lt;pre class=&#8221;line-numbers&#8221;&gt;<span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;<code class=""><span class="line">enum {
+</span><span class="line">	MIGRATE_UNMOVABLE,
+</span><span class="line">	MIGRATE_RECLAIMABLE,
+</span><span class="line">	MIGRATE_MOVABLE,
+</span><span class="line">	MIGRATE_PCPTYPES,	/* the number of types on the pcp lists */
+</span><span class="line">	MIGRATE_RESERVE = MIGRATE_PCPTYPES,
+</span><span class="line">#ifdef CONFIG_CMA
+</span><span class="line">	/*
+</span><span class="line">	 * MIGRATE_CMA migration type is designed to mimic the way
+</span><span class="line">	 * ZONE_MOVABLE works.  Only movable pages can be allocated
+</span><span class="line">	 * from MIGRATE_CMA pageblocks and page allocator never
+</span><span class="line">	 * implicitly change migration type of MIGRATE_CMA pageblock.
+</span><span class="line">	 *
+</span><span class="line">	 * The way to use it is to change migratetype of a range of
+</span><span class="line">	 * pageblocks to MIGRATE_CMA which can be done by
+</span><span class="line">	 * __free_pageblock_cma() function.  What is important though
+</span><span class="line">	 * is that a range of pageblocks must be aligned to
+</span><span class="line">	 * MAX_ORDER_NR_PAGES should biggest page be bigger then
+</span><span class="line">	 * a single pageblock.
+</span><span class="line">	 */
+</span><span class="line">	MIGRATE_CMA,
+</span><span class="line">#endif
+</span><span class="line">#ifdef CONFIG_MEMORY_ISOLATION
+</span><span class="line">	MIGRATE_ISOLATE,	/* can't allocate from here */
+</span><span class="line">#endif
+</span><span class="line">	MIGRATE_TYPES
+</span><span class="line">};
+</span></code>&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</figure></notextile>&lt;/div&gt;</p>
+
+<p>待完善</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux应用内存占用maps分析]]></title>
@@ -2669,41 +2751,6 @@ AED除颤通常一次即可，除颤后应立即进行胸部按压；如果电�
 <p>Seven months later, his wife was dead of stomach cancer. In 1994, Linus Pauling died of prostate cancer.</p>
 
 <p>七个月后，他的妻子死于胃癌。1994年，Linus Pauling死于前列腺癌。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[托马斯·潘恩《常识》第一章]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/07/18/Common-Sense-chapter-1/"/>
-    <updated>2013-07-18T01:36:51+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/07/18/Common-Sense-chapter-1</id>
-    <content type="html"><![CDATA[<h3 id="of-the-origin-and-design-of-government-in-generalwith-concise-remarks-on-the-english-constitution">OF THE ORIGIN AND DESIGN OF GOVERNMENT IN GENERAL,WITH CONCISE REMARKS ON THE ENGLISH CONSTITUTION</h3>
-
-<h3 id="section">常规的政府起源和设计，兼简评英国制度</h3>
-
-<!--more-->
-
-<p>SOME writers have so confounded society with government, as to leave little or no distinction between them; whereas they are not only different,but have different origins. Society is produced by our wants, and government by wickedness; the former promotes our happiness POSITIVELY by uniting our affections, the latter NEGATIVELY by restraining our vices. The one encourages intercourse, the other creates distinctions. The first is a patron, the last a punisher.</p>
-
-<p><strong>一些</strong> 写小册子（发表政治见解）的人混淆社会和政府的区别，认为二者区别很小或者没有区别。二者不仅不同，连起源都不同。社会起源于人的需求，而政府起源于人的邪恶。</p>
-
-<p>writers：当时美洲流行写小册子发表政治见解。这里的writers就是当时写小册子的那些人。本书也是当时的一个小册子。</p>
-
-<p>Society in every state is a blessing, but government even in its best state is
-but a necessary evil; in its worst state an intolerable one; for when we
-suffer, or are exposed to the same miseries BY A GOVERNMENT, which
-we might expect in a country WITHOUT GOVERNMENT, our calamity is
-heightened by reflecting that we furnish the means by which we suffer.
-Government, like dress, is the badge of lost innocence; the palaces of kings
-are built on the ruins of the bowers of paradise. For were the impulses of
-conscience clear, uniform, and irresistibly obeyed, man would need no
-other lawgiver; but that not being the case, he finds it necessary to
-surrender up a part of his property to furnish means for the protection of the
-rest; and this he is induced to do by the same prudence which in every other
-case advises him out of two evils to choose the least. WHEREFORE,
-security being the true design and end of government, it unanswerably
-follows that whatever FORM thereof appears most likely to ensure it to us,
-with the least expence and greatest benefit, is preferable to all others.</p>
 ]]></content>
   </entry>
   
