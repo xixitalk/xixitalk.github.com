@@ -27,6 +27,7 @@ for (type = 0; type < MIGRATE_TYPES; type++) {
 ```
 
 mmzone.h里看出MIGRATE_TYPES为4。**0是UNMOVABLE区，1是RECLAIMABLE可回收区，2是可MOVABLE区，3是PCPTYPES或者RESERVE保留区**。
+
 ```
 enum {
 	MIGRATE_UNMOVABLE,
