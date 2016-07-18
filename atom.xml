@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-18T08:48:04+08:00</updated>
+  <updated>2016-07-18T09:05:15+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[pthread退出时自动回收资源]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/18/pthread-autoclean-when-exiting/"/>
+    <updated>2016-07-18T16:49:16+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/18/pthread-autoclean-when-exiting</id>
+    <content type="html"><![CDATA[<p>pthread线程创建后默认属性是joinable，线程函数执行完资源不会自动回收线程资源，需要主进程<code>pthread_join</code>进行回收，否则就会造成不必要的内存占用，频繁创建退出线程可能会造成系统内存耗尽。除了<code>pthread_join</code>用这种办法更好些。</p>
+
+<!--more-->
+
+<p>线程函数加上<code>pthread_detach(pthread_self())</code>的话，线程状态改变成<code>unjoinable</code>，这样线程函数尾部直接 pthread_exit线程就会自动退出。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">static void  thread_fn( void *args)
+</span><span class="line">{
+</span><span class="line">	pthread_detach(pthread_self());
+</span><span class="line">
+</span><span class="line">	while(flag)
+</span><span class="line">	{
+</span><span class="line">		/*do something*/
+</span><span class="line">	}
+</span><span class="line">
+</span><span class="line">	pthread_exit(NULL);
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">参考文章</h2>
+
+<p><a href="http://blog.csdn.net/trinea/article/details/5191165">http://blog.csdn.net/trinea/article/details/5191165</a></p>
+
+<p><a href="http://www.lxway.net/499814656.html">http://www.lxway.net/499814656.html</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核kmalloc和vmalloc的区别]]></title>
@@ -2653,33 +2697,6 @@ AED除颤通常一次即可，除颤后应立即进行胸部按压；如果电�
   <li>《2010年美国心脏协会 CPR与ECC准则提要》 <a href="http://www.heart.org/idc/groups/heart-public/@wcm/@ecc/documents/downloadable/ucm_317347.pdf">http://www.heart.org/idc/groups/heart-public/@wcm/@ecc/documents/downloadable/ucm_317347.pdf</a>  </li>
   <li>《2010年美国心脏协会 CPR + AED/ Witness VF》<a href="http://www.mhchcm.edu.tw/003_folder/cpr%20+%20aed%20%E6%95%8F%E6%83%A0%E7%AC%AC%E4%B8%89%E5%A0%82.pdf">http://www.mhchcm.edu.tw/003_folder/cpr%20+%20aed%20%E6%95%8F%E6%83%A0%E7%AC%AC%E4%B8%89%E5%A0%82.pdf</a></li>
 </ul>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[维多利亚的秘密的创始人的秘密]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/11/01/Roy-Raymond/"/>
-    <updated>2013-11-01T01:24:19+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/11/01/Roy-Raymond</id>
-    <content type="html"><![CDATA[<blockquote><p>http://www.slate.com/articles/business/when_big_businesses_were_small … 维多利亚的秘密背后的悲剧：1977年，斯坦福的MBA想给太太买内衣，但是在店里觉得尴尬无比，于是就开了自己的内衣店。1982年1百万卖掉。 1993年他跳下金门大桥</p><footer><strong>柯冰(‏@laojiang2010)</strong> <cite><a href="https://twitter.com/laojiang2010/status/395660825291022336">twitter.com/laojiang2010/status/&hellip;</a></cite></footer></blockquote>
-
-<!--more-->
-
-<p>Roy Raymond毕业于斯坦福商学院，因为想给妻子买一件内衣而当时的内衣店都很让男士尴尬，所以在1977年自己开了一家内衣零售店：维多利亚的秘密。五年后，维多利亚的秘密已经有六家分店，42页的产品目录，年毛收入6百万。这年Roy Raymond以一百万美元价格把维多利亚的秘密卖给了The Limited公司的Leslie Wexner。到90年代早期，维多利亚的秘密已经成为美国最大的内衣零售店，价值10亿美元。2009年，维多利亚的秘密估值达到了50亿美元。与此同时，卖出维多利亚的秘密的Raymond在1984年开了一家面向儿童的零售商店，1986年破产。1993年8月26号，Raymond从金门大桥上跳下自杀而死，时年46岁。残酷的事实令人唏嘘不已。</p>
-
-<p>外部参考：</p>
-
-<p><a href="http://www.slate.com/articles/business/when_big_businesses_were_small/2013/10/victoria_s_secret_founding_roy_raymond_had_a_great_idea_but_les_wexner_was.html">http://www.slate.com/articles/business/when_big_businesses_were_small/2013/10/victoria_s_secret_founding_roy_raymond_had_a_great_idea_but_les_wexner_was.html</a></p>
-
-<p><a href="http://en.wikipedia.org/wiki/Roy_Raymond_(businessman)">http://en.wikipedia.org/wiki/Roy_Raymond_(businessman)</a></p>
-
-<p><a href="http://web.archive.org/web/20020327050446/http://www.mbajungle.com/magazine.cfm?INC=inc_article.cfm&amp;artid=1303&amp;template=1&amp;date=Feb2001">http://web.archive.org/web/20020327050446/http://www.mbajungle.com/magazine.cfm?INC=inc_article.cfm&amp;artid=1303&amp;template=1&amp;date=Feb2001</a></p>
-
-<p><a href="http://www.limitedbrands.com/our_company/about_us/timeline.aspx">http://www.limitedbrands.com/our_company/about_us/timeline.aspx</a></p>
-
-<p><a href="http://www.nytimes.com/1993/09/02/obituaries/roy-raymond-47-began-victoria-s-secret.html">http://www.nytimes.com/1993/09/02/obituaries/roy-raymond-47-began-victoria-s-secret.html</a></p>
-
-<p><a href="http://wiki.answers.com/Q/Why_did_Roy_Raymond_committed_suicide">http://wiki.answers.com/Q/Why_did_Roy_Raymond_committed_suicide</a></p>
 ]]></content>
   </entry>
   

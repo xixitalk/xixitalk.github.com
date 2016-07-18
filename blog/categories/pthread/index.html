@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>python从字符串用readlines读取操作 - xixitalk's snippet</title>
+  <title>Category: pthread - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="场景：用cURL命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作 用cURL命令POST文件 1
-curl --form "fileupload=@filename.txt" http://example.com/resource.cgi 服务器端解析 1 &hellip;">
+  <meta name="description" content="Category: pthread">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ curl --form "fileupload=@filename.txt" http://example.com/resource.cgi 服务器
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/06/13/python-readlines-from-string">
+  <link rel="canonical" href="http://xixitalk.github.ioblog/categories/pthread">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,138 +77,36 @@ curl --form "fileupload=@filename.txt" http://example.com/resource.cgi 服务器
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">python从字符串用readlines读取操作</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-13T17:57:17+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: pthread</h1>
     
   </header>
-
-
-<div class="entry-content"><p>场景：用<a href="http://curl.haxx.se/">cURL</a>命令POST了一个文本文件到web服务器，想在服务器端对这个文件进行readlines操作</p>
-
-<!--more-->
-
-<h3 id="curlpost">用cURL命令POST文件</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl --form "fileupload=@filename.txt" http://example.com/resource.cgi
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section">服务器端解析</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import StringIO
-</span><span class="line">
-</span><span class="line">class Markdown():
-</span><span class="line">   def get(self):
-</span><span class="line">       pass
-</span><span class="line">
-</span><span class="line">   def post(self):
-</span><span class="line">       filecontent = ...
-</span><span class="line">       bufStr = StringIO.StringIO(filecontent)
-</span><span class="line">	for oneline in bufStr.readlines():
-</span><span class="line">		oneline = oneline.replace('\n','')
-</span><span class="line">		print oneline
-</span><span class="line">
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>参考：</p>
-
-<p>What is the cURL command-line syntax to do a POST request? <a href="http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request">http://superuser.com/questions/149329/what-is-the-curl-command-line-syntax-to-do-a-post-request</a></p>
-
-<p>Python readline() from a string? <a href="http://stackoverflow.com/questions/7472839/python-readline-from-a-string">http://stackoverflow.com/questions/7472839/python-readline-from-a-string</a></p>
-
-<p>Using cURL to automate HTTP jobs <a href="http://curl.haxx.se/docs/httpscripting.html">http://curl.haxx.se/docs/httpscripting.html</a></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2016</h2>
 
-
-<time datetime="2013-06-13T17:57:17+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
-      
-
-<span class="categories">
+<article>
   
-    <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
-  
-</span>
+<h1><a href="/blog/2016/07/18/pthread-autoclean-when-exiting/">pthread退出时自动回收资源</a></h1>
+<time datetime="2016-07-18T16:49:16+08:00" pubdate><span class='month'>Jul</span> <span class='day'>18</span> <span class='year'>2016</span></time>
 
-
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-  
-   share to: <a href="http://twitter.com/home?status=Blog:python从字符串用readlines读取操作 http://xixitalk.github.io/blog/2013/06/13/python-readlines-from-string/" target="_blank"><img src="/images/tweet.png" /></a>
-  
-
-</div>
-
-    
-
-
-
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/pthread/'>pthread</a></span>
 </footer>
+
+
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -238,10 +135,7 @@ curl --form "fileupload=@filename.txt" http://example.com/resource.cgi 服务器
       var disqus_shortname = 'gitblog';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/06/13/python-readlines-from-string/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/06/13/python-readlines-from-string/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
