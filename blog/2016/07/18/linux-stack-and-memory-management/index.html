@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>支持twitter的AppEngine-OAuth-Library - xixitalk's snippet</title>
+  <title>linux栈和内存管理 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="自己在GAE上写了个浏览twitter的web页面，虽然丑陋但是自我感觉良好，使用的是v1.0的API，这两天twitter停用了v1.0的API，换用v1.1，调试了一下没有调试好，还是直接用别人造好的轮子吧。 AppEngine-OAuth-Library https://github.com &hellip;">
+  <meta name="description" content="先记录，待细看 http://blog.csdn.net/daniel_ice/article/details/8146003 http://gityuan.com/2015/10/30/kernel-memory/ http://www.2ndmoon.net/weblog/?p=509 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/06/14/AppEngine-OAuth-Library">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">支持twitter的AppEngine-OAuth-Library</h1>
+      <h1 class="entry-title">linux栈和内存管理</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2013-06-14T17:13:55+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+<time datetime="2016-07-18T17:11:52+08:00" pubdate data-updated="true">Jul 18<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,13 +106,18 @@
   </header>
 
 
-<div class="entry-content"><p>自己在GAE上写了个浏览twitter的web页面，虽然丑陋但是自我感觉良好，使用的是v1.0的API，这两天twitter停用了v1.0的API，换用v1.1，调试了一下没有调试好，还是直接用别人造好的轮子吧。</p>
-
-<p>AppEngine-OAuth-Library <a href="https://github.com/mikeknapp/AppEngine-OAuth-Library">https://github.com/mikeknapp/AppEngine-OAuth-Library</a></p>
+<div class="entry-content"><p>先记录，待细看</p>
 
 <!--more-->
 
-<p>或者直接使用OAuth还简单一些，另一个<a href="https://developers.google.com/appengine/docs/python/oauth/">https://developers.google.com/appengine/docs/python/oauth/</a></p>
+<p><a href="http://blog.csdn.net/daniel_ice/article/details/8146003">http://blog.csdn.net/daniel_ice/article/details/8146003</a></p>
+
+<p><a href="http://gityuan.com/2015/10/30/kernel-memory/">http://gityuan.com/2015/10/30/kernel-memory/</a></p>
+
+<p><a href="http://www.2ndmoon.net/weblog/?p=509">http://www.2ndmoon.net/weblog/?p=509</a></p>
+
+<p><a href="http://www.cnblogs.com/tolimit/p/4610974.html">http://www.cnblogs.com/tolimit/p/4610974.html</a></p>
+
 </div>
 
 
@@ -135,12 +140,12 @@
   
 
 
-<time datetime="2013-06-14T17:13:55+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+<time datetime="2016-07-18T17:11:52+08:00" pubdate data-updated="true">Jul 18<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/twitter/'>twitter</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -152,7 +157,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:支持twitter的AppEngine-OAuth-Library http://xixitalk.github.io/blog/2013/06/14/AppEngine-OAuth-Library/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:linux栈和内存管理 http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -198,8 +203,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/06/14/AppEngine-OAuth-Library/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/06/14/AppEngine-OAuth-Library/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/';
         var disqus_script = 'embed.js';
       
     (function () {

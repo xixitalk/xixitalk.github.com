@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-18T09:05:15+08:00</updated>
+  <updated>2016-07-18T09:23:35+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux栈和内存管理]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/"/>
+    <updated>2016-07-18T17:11:52+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management</id>
+    <content type="html"><![CDATA[<p>先记录，待细看</p>
+
+<!--more-->
+
+<p><a href="http://blog.csdn.net/daniel_ice/article/details/8146003">http://blog.csdn.net/daniel_ice/article/details/8146003</a></p>
+
+<p><a href="http://gityuan.com/2015/10/30/kernel-memory/">http://gityuan.com/2015/10/30/kernel-memory/</a></p>
+
+<p><a href="http://www.2ndmoon.net/weblog/?p=509">http://www.2ndmoon.net/weblog/?p=509</a></p>
+
+<p><a href="http://www.cnblogs.com/tolimit/p/4610974.html">http://www.cnblogs.com/tolimit/p/4610974.html</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[pthread退出时自动回收资源]]></title>
@@ -377,80 +397,6 @@ ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
 <p><a href="http://stackoverflow.com/questions/16524895/proc-pid-maps-shows-pages-with-no-rwx-permissions-on-x86-64-linux">http://stackoverflow.com/questions/16524895/proc-pid-maps-shows-pages-with-no-rwx-permissions-on-x86-64-linux</a></p>
 
 <p><a href="https://yq.aliyun.com/articles/54405">https://yq.aliyun.com/articles/54405</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux内存占用分布分析]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/12/linux-mem-used/"/>
-    <updated>2016-07-12T05:07:20+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/12/linux-mem-used</id>
-    <content type="html"><![CDATA[<h2 id="section">1. 内存占用</h2>
-
-<p>linux内存占用分两部分：一部分是不可见的，内核代码段数据段的本身的占用空间，对于PC 上几个G的内存来说可能很小可以忽略不计，但是只有几十M内存的嵌入式环境来说就不能忽略了。另一部分就是linux系统可见的内存，<code>free</code>命令里的<code>total</code>或者<code>cat /proc/meminfo</code>里看到的<code>MemTotal</code>。</p>
-
-<!--more-->
-
-<h3 id="section-1">1.1 内核代码段数据段</h3>
-<p>通过内核对应带调试信息文件vmlinux或者System.map文件，能查到如下符号：<code>_stext</code> <code>_etext</code>  <code>__bss_start</code>  <code>__bss_stop</code> <code>_end</code>。   <code>__bss_stop</code> <code>_end</code>值是一样的。<code>_etext</code> 减<code>_stext</code>就是代码段大小，  <code>__bss_stop</code>减<code>__bss_start</code> 就是数据段大小。代码段和数据段之前的空间是<code>Init</code>段，内核初始化只运行一次的代码放在这个段，内核初始化后会重新覆盖利用这块空间。</p>
-
-<p><code>
-_stext                     C0008160
-_etext                     C051B958   代码段大小：0x5137F8 
-__bss_start                C05872E4
-__bss_stop                 C060EBF0   数据段大小：0x8790C 
-_end                       C060EBF0 
-</code></p>
-
-<h3 id="linux">1.2 linux系统管理内存</h3>
-
-<p>linux系统可见的内存，<code>free</code>命令里的<code>total</code>或者<code>cat /proc/meminfo</code>里看到的<code>MemTotal</code>。内存管理太复杂了，完整拼接出来<code>total</code>或者<code>MemTotal</code>几乎不可能，但可以有几个重要的部分。</p>
-
-<h4 id="section-2">1.2.1 空闲内存</h4>
-
-<p>空闲内存：meminfo(cat /proc/meminfo)里的<code>MemFree</code> + <code>Buffers</code> + <code>Cached</code> + <code>SwapCached</code></p>
-
-<h4 id="section-3">1.2.2 内核内存占用</h4>
-
-<p>内核内存占用：meminfo(cat /proc/meminfo)里的<code>Slab</code> + <code>KernelStack</code> + <code>PageTables</code></p>
-
-<h4 id="section-4">1.2.3 应用内存占用</h4>
-
-<p>应用内存有两个视图，一个是虚拟内存视图，一个物理内存（RSS）视图。
-比如查看进程编号为1的Init进程内存占用</p>
-
-<p><code>
-$cat /pric/1/statm
-537 18 11 7 0 75 0
-</code></p>
-
-<p>537是虚拟内存的page数，18是物理内存page数，每个page是4K Bytes。</p>
-
-<p>用下面的脚本可以把系统所有应用的虚拟内存和物理内存统计出来，应用间的内存比较分析是有意义的或者同一个应用不同版本间的比较是有意义的。</p>
-
-<p>```
-#/bin/bash
-RSS=0
-VM=0
-for PROC in <code>ls /proc/|grep "^[0-9]"</code>
-do
-  if [ -f /proc/$PROC/statm ]; then
-      TEP1=<code>cat /proc/$PROC/statm | awk '{print ($1)}'</code>
-      TEP2=<code>cat /proc/$PROC/statm | awk '{print ($2)}'</code>
-      echo $PROC $TEP1 $TEP2
-      RSS=<code>expr $RSS + $TEP2</code>
-      VM=<code>expr $VM + $TEP1</code>
-  fi
-done
-RSS=<code>expr $RSS \* 4</code>
-VM=<code>expr $VM \* 4</code></p>
-
-<p>echo “APP total” $RSS”KB”, $VM”KB”,
-```</p>
-
-<h2 id="section-5">2. 参考资料</h2>
-
-<p>http://blog.yufeng.info/archives/2456</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-18T09:05:15+08:00</updated>
+  <updated>2016-07-18T09:23:35+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux栈和内存管理]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/"/>
+    <updated>2016-07-18T17:11:52+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management</id>
+    <content type="html"><![CDATA[<p>先记录，待细看</p>
+
+<!--more-->
+
+<p><a href="http://blog.csdn.net/daniel_ice/article/details/8146003">http://blog.csdn.net/daniel_ice/article/details/8146003</a></p>
+
+<p><a href="http://gityuan.com/2015/10/30/kernel-memory/">http://gityuan.com/2015/10/30/kernel-memory/</a></p>
+
+<p><a href="http://www.2ndmoon.net/weblog/?p=509">http://www.2ndmoon.net/weblog/?p=509</a></p>
+
+<p><a href="http://www.cnblogs.com/tolimit/p/4610974.html">http://www.cnblogs.com/tolimit/p/4610974.html</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[pthread退出时自动回收资源]]></title>
@@ -2627,76 +2647,6 @@ who holds the fibers of his very life. </p>
 <p>可是事情不会如此。不论现在在表面上看起来﹐胜利的是哪一群人﹐在我们面前的﹐不是夏天锦簇的花丛﹐而首先是冷暗苛酷的寒冻冬夜。当一切都荡然无存﹐丧失自己权利的不仅是皇帝﹐无产阶级也不会例外。到了长夜逐渐露白之时﹐在今天看来拥有花朵灿烂的春天的人﹐尚有几个仍然存活？到了那个时候﹐诸君的内在生命又已变成何种面貌？恨怨还是已转为庸俗？对世界或者自己的职业一种麻木的接受？或者第三种可能(这绝对不是最少见的)：有此道秉赋的人﹐走上了神秘主义的遁世之途﹐甚至(这种情况更寻常﹐也更可厌)为了跟从流行﹐而强迫自己走上这条路？不论一个人沦入这三种情况中的哪一种﹐我都会认定他没有资格做他现在做的事﹐没有资格去面对真相下的世界﹑日常现实生活中的世界。客观而平实地来说﹐在这种人的内心最深处﹐并没有要他们取政治为志业的使命感和召唤﹐虽然他们自以为有。他们其实应该去培育个人与个人之间一种单纯﹑直接的博爱。至于其它﹐他们应该踏实地去进行他们日常的工作。</p>
 
 <p>[§69　政治作为一件工作的真义]　政治﹐是一种并施热情和判断力﹐去出劲而缓慢地穿透硬木板的工作。说来不错﹐一切历史经验也证明了﹐若非再接再厉地追求在这世界上不可能的事﹐可能的事也无法达成。但要作到这一点﹐一个人必须是一个领袖﹐同时除了是领袖之外﹐更必须是平常意义下所谓的英雄。即使这两者都称不上的人﹐也仍然必须强迫自己的心肠坚韧﹐使自己能泰然面对一切希望的破灭；这一点﹐在此刻就必须作到──不然的话﹐连在今天有可能的事﹐他都没有机会去完成。谁有自信﹐能够面对这个从本身观点来看﹐愚蠢﹑庸俗到了不值得自己献身的地步的世界﹐而仍屹立不溃﹐谁能面对这个局面而说：「即使如此﹐没关系！」(dennoch)﹐谁才有以政治为志业的“使命与召唤”。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[心脏骤停急救]]></title>
-    <link href="http://xixitalk.github.io/blog/2014/02/07/CPR-AED/"/>
-    <updated>2014-02-07T19:11:10+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2014/02/07/CPR-AED</id>
-    <content type="html"><![CDATA[<h2 id="section">1. 概述</h2>
-<p>心脏骤停急救分五个步骤，其中前三个在医护人员到达之前非医护人员可以做的：电话求救、CPR、电击除颤</p>
-
-<p><img src="http://crashingpatient.com/wp-content/images/acls/new%20chain.jpg" alt="五个步骤" title="心脏骤停急救五个步骤" /></p>
-
-<p>CPR：Cardiopulmonary resuscitation (CPR) 心肺复苏术<br />
-AED：Automated External Defibrillator 自动外置式心脏除颤仪<br />
-VF：Ventricular Fibrillation 心室纤维性颤动</p>
-
-<!--more-->
-
-<h2 id="section-1">2. 实施过程</h2>
-<p><img src="http://www.surefirecpr.com/wp-content/uploads/2011/01/Los-Angeles-BLS-CPR-Algorhtym.jpeg" alt="急救过程" title="急救过程" /></p>
-
-<h3 id="section-2">2.1 第一部分 呼救</h3>
-
-<h4 id="section-3">检查病人反应</h4>
-<p>要点：手拍病人左肩，在左耳呼叫病人，无反应再换右侧。<br />
-解释说明：两侧呼叫防止病人单侧耳聋听不到，拍肩部而不是头部是防止病人有颈椎疾病等造成加重病情。<br />
-检查结果：如果病人无呼吸或者呼吸不正常、无脉搏、无反应，则启动紧急求救流程。  </p>
-
-<h4 id="section-4">拨打120或者911进行呼叫</h4>
-<p>如果现场有其他人可以请人拨打120或者911进行紧急呼叫。如果只有你一个人先进行CPR两分钟后再进行电话呼叫。<br />
-电话呼叫要点：说清楚地点、病人性别、大概年龄、联系方式、简单情况：如无脉搏无呼吸。  </p>
-
-<h3 id="cpr">2.2 第二部分 CPR心肺复苏术</h3>
-<p>心肺复苏术包括胸部按压和人工呼吸</p>
-
-<h4 id="section-5">胸部按压</h4>
-<p>按压位置：病人两乳头连线中心，位于胸骨之上<br />
-手法：双手交叉相扣；接触胸骨的掌根使力，手指翘起不用力；手臂保持直立用上半身重量进行按压。<br />
-解释说明：不要按压病人肋骨防止造成肋骨骨折<br />
-要点：按压频率至少100次/分钟，胸腔下压4-5厘米<br />
-<img src="http://xixitalkgithubio.qiniudn.com/cpr1.jpg" alt="图" title="按压位置" />
-<img src="http://xixitalkgithubio.qiniudn.com/cpr2.jpg" alt="图" title="按压手法" />
-<img src="http://xixitalkgithubio.qiniudn.com/cpr3.jpg" alt="图" title="按压姿势" /></p>
-
-<h4 id="section-6">人工呼吸</h4>
-<p>保持气管畅通方法：病人仰头抬颏<br />
-方法：嘴对嘴注意要完全封闭病人的嘴，吹气时捏紧病人鼻子，吹气持续1秒钟看到病人胸部明显起伏为宜。<br />
-提示：有的AED里有人工呼吸面罩，这样可以避免直接病人可以有效防止感染<br />
-<img src="http://xixitalkgithubio.qiniudn.com/cpr4.jpg" alt="图" title="仰头抬颌" /><br />
-<img src="http://fe867b.medialib.glogster.com/media/c0/c002518e7e45d01352966fe823e718310a9d9c4efc685e47f726d8d169617fca/cpr-steps-picture.gif" alt="图" title="人工呼吸" /></p>
-
-<h4 id="section-7">胸部按压和人工呼吸交替进行</h4>
-<p>30次胸部按压后进行2次人工呼吸，然后循环操作。</p>
-
-<h3 id="aed">2.3 第三部分 自动心室除颤AED设备</h3>
-<p>心脏骤停最多的原因是心室颤动（VF），有些公共场所有AED设备，标志如下（有些国家是绿色的），拆开AED设备按图例和语音提示操作。小于8岁或者小于25kg的小孩不建议用AED设备。AED能有效的将VF病人除颤，但并不一定能使病人恢复心律，AED除颤后还要配合胸部按压和人工呼吸操作。<br />
-电极位置：右胸正前一个，另一个贴左胸侧下（电极上有图示）<br />
-要点：2分钟用AED做一次除颤，除颤时停止胸部按压和人工呼吸，不要肉体接触病人，防止除颤时被电击。<br />
-AED除颤通常一次即可，除颤后应立即进行胸部按压；如果电击除颤多次，第3次后要等37秒后才能进行胸部按压。
-<img src="http://cedarhome.org/wp-content/uploads/2012/04/aed.jpg" alt="图" title="AED标志" />
-<img src="http://www.aedstoday.com/assets/images/DefibTech_Lifeline_AED_1.jpg" alt="图" title="AED设备" />
-<img src="http://xixitalkgithubio.qiniudn.com/cpr5.jpg" alt="图" title="电极位置" /></p>
-
-<h2 id="section-8">3. 更多资料</h2>
-
-<ul>
-  <li>《2010年美国心脏协会 CPR与ECC准则提要》 <a href="http://www.heart.org/idc/groups/heart-public/@wcm/@ecc/documents/downloadable/ucm_317347.pdf">http://www.heart.org/idc/groups/heart-public/@wcm/@ecc/documents/downloadable/ucm_317347.pdf</a>  </li>
-  <li>《2010年美国心脏协会 CPR + AED/ Witness VF》<a href="http://www.mhchcm.edu.tw/003_folder/cpr%20+%20aed%20%E6%95%8F%E6%83%A0%E7%AC%AC%E4%B8%89%E5%A0%82.pdf">http://www.mhchcm.edu.tw/003_folder/cpr%20+%20aed%20%E6%95%8F%E6%83%A0%E7%AC%AC%E4%B8%89%E5%A0%82.pdf</a></li>
-</ul>
 ]]></content>
   </entry>
   
