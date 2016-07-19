@@ -32,3 +32,6 @@ kmalloc内存分配方式都是物理连续的，能保证较低的平均访问�
 # 引用文章
 
 <http://www.ahlinux.com/start/kernel/18604.html>
+
+<http://blog.csdn.net/bullbat/article/details/7181396>
+
