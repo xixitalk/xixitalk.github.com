@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-19T18:31:29+08:00</updated>
+  <updated>2016-07-19T19:33:42+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -1165,6 +1165,12 @@
   <li>点击flash，系统自动关机重启进入flashfire刷入系统。</li>
   <li>flashfire更新之后系统自动重启，可以从设置里看到版本号已经是MTC19V了。</li>
 </ol>
+
+<p>更新：7月份升级MTC19X的时候截了几张图。</p>
+
+<p><img src="http://xixitalkgithubio.qiniudn.com/partition_mini.jpg" alt="enter image description here" /></p>
+
+<p><img src="http://xixitalkgithubio.qiniudn.com/flash_mini.jpg" alt="enter image description here" /></p>
 
 ]]></content>
   </entry>
