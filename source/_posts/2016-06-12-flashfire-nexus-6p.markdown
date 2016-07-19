@@ -37,3 +37,10 @@ Nexus 6P上用flashfire升级系统
 7.  点击flash，系统自动关机重启进入flashfire刷入系统。
 8.  flashfire更新之后系统自动重启，可以从设置里看到版本号已经是MTC19V了。
 
+
+更新：7月份升级MTC19X的时候截了几张图。
+
+![enter image description here](http://xixitalkgithubio.qiniudn.com/partition_mini.jpg)
+
+![enter image description here](http://xixitalkgithubio.qiniudn.com/flash_mini.jpg)
+
