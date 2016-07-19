@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kernel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/kernel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-19T14:17:08+08:00</updated>
+  <updated>2016-07-19T18:31:29+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -148,7 +148,7 @@ found:
 void *kmalloc(size_t size, gfp_t flags)
 </code></p>
 
-<p>kmalloc是内核中最常用的一种内存分配方式，它通过调用kmem_cache_alloc函 数来实现。kmalloc一次最多能申请的内存大小由include/linux/Kmalloc_size.h的 内容来决定，在默认的2.6.18内核版本中，kmalloc一 次最多能申请大小为131702B也就是128KB字 节的连续物理内存。测试结果表明，如果试图用kmalloc函数分配大于128KB的内存，编译不能通过。</p>
+<p>kmalloc是内核中最常用的一种内存分配方式，<strong>连续的物理内存</strong>。如果size是常量，调用<code>kmem_cache_alloc_trace</code>分配，否则调用<code>__kmalloc</code>分配。size如果是常量且大于4M，直接返回0（内核版本3.4.5）；如果size是0，返回地址是<code>((void *)16)</code>。</p>
 
 <h4 id="vmalloc">vmalloc</h4>
 
@@ -156,9 +156,76 @@ void *kmalloc(size_t size, gfp_t flags)
 void *vmalloc(unsigned long size)
 </code></p>
 
-<p>kmalloc内存分配方式都是物理连续的，能保证较低的平均访问时间。但是在某些场合中，对内存区的请求不是很频繁，较高的内存访问时间也 可以接受，这是就可以分配一段线性连续，物理不连续的地址，带来的好处是一次可以分配较大块的内存。图3-1表 示的是vmalloc分配的内存使用的地址范围。vmalloc对 一次能分配的内存大小没有明确限制。出于性能考虑，应谨慎使用vmalloc函数。在测试过程中， 最大能一次分配1GB的空间。</p>
+<p>kmalloc内存分配方式都是物理连续的，能保证较低的平均访问时间。但是在某些场合中，对内存区的请求不是很频繁，较高的内存访问时间也 可以接受，这是就可以分配一段<strong>线性连续，物理不连续</strong>的地址，带来的好处是一次可以分配较大块的内存。vmalloc对 一次能分配的内存大小没有明确限制。</p>
 
-<p>先记录，再结合代码验证。待完善</p>
+<h5 id="kmalloc-1">kmalloc预处理后的代码</h5>
+
+<p>```
+static inline <strong>attribute</strong>((always_inline)) <strong>attribute</strong>((always_inline)) void *kmalloc(size_t size, gfp_t flags)
+{
+ struct kmem_cache *cachep;
+ void *ret;</p>
+
+<p>if (__builtin_constant_p(size)) {
+  int i = 0;</p>
+
+<p>if (!size)
+   return ((void *)16);</p>
+
+<h1 id="includelinuxkmallocsizesh-1">1 “include/linux/kmalloc_sizes.h” 1</h1>
+<p>if (size &lt;= 32) goto found; else i++;
+ if (size &lt;= 64) goto found; else i++;
+ if (size &lt;= 128) goto found; else i++;
+ if (size &lt;= 192) goto found; else i++;
+ if (size &lt;= 256) goto found; else i++;
+ if (size &lt;= 512) goto found; else i++;
+ if (size &lt;= 1024) goto found; else i++;
+ if (size &lt;= 2048) goto found; else i++;
+ if (size &lt;= 4096) goto found; else i++;
+ if (size &lt;= 8192) goto found; else i++;
+ if (size &lt;= 16384) goto found; else i++;
+ if (size &lt;= 32768) goto found; else i++;
+ if (size &lt;= 65536) goto found; else i++;
+ if (size &lt;= 131072) goto found; else i++;
+ if (size &lt;= 262144) goto found; else i++;
+ if (size &lt;= 524288) goto found; else i++;
+ if (size &lt;= 1048576) goto found; else i++;
+ if (size &lt;= 2097152) goto found; else i++;
+ if (size &lt;= 4194304) goto found; else i++;
+# 145 “include/linux/slab_def.h” 2</p>
+
+<p>return ((void *)0);
+found:
+   cachep = malloc_sizes[i].cs_cachep;</p>
+
+<p>ret = kmem_cache_alloc_trace(size, cachep, flags);</p>
+
+<p>return ret;
+ }
+ return __kmalloc(size, flags);
+}</p>
+
+<p>void *__kmalloc(size_t size, gfp_t flags)
+{
+ return __do_kmalloc(size, flags, ((void *)0));
+}</p>
+
+<p>static inline <strong>attribute</strong>((always_inline)) <strong>attribute</strong>((always_inline)) void *__do_kmalloc(size_t size, gfp_t flags, void *caller)
+{
+ struct kmem_cache *cachep;
+ void *ret;</p>
+
+<p>cachep = __find_general_cachep(size, flags);
+ if (__builtin_expect(!!(((unsigned long)(cachep) &lt;= (unsigned long)((void *)16))), 0))
+  return cachep;
+ ret = __cache_alloc(cachep, flags, caller);</p>
+
+<p>trace_kmalloc((unsigned long) caller, ret,
+        size, cachep-&gt;buffer_size, flags);</p>
+
+<p>return ret;
+}
+```</p>
 
 <h1 id="section">引用文章</h1>
 

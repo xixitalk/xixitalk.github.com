@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="kmalloc 和 vmalloc的区别 kmalloc 1
-void *kmalloc(size_t size, gfp_t flags) kmalloc是内核中最常用的一种内存分配方式，它通过调用kmem_cache_alloc函 数来实现。 &hellip;">
+void *kmalloc(size_t size, gfp_t flags) kmalloc是内核中最常用的一种内存分配方式，连续的物理内存。如果size是常量，调用kmem_cache_alloc_trace分配， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -117,7 +117,7 @@ void *kmalloc(size_t size, gfp_t flags) kmalloc是内核中最常用的一种内
 </pre></td><td class="code"><pre><code class=""><span class="line">void *kmalloc(size_t size, gfp_t flags)
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>kmalloc是内核中最常用的一种内存分配方式，它通过调用kmem_cache_alloc函 数来实现。kmalloc一次最多能申请的内存大小由include/linux/Kmalloc_size.h的 内容来决定，在默认的2.6.18内核版本中，kmalloc一 次最多能申请大小为131702B也就是128KB字 节的连续物理内存。测试结果表明，如果试图用kmalloc函数分配大于128KB的内存，编译不能通过。</p>
+<p>kmalloc是内核中最常用的一种内存分配方式，<strong>连续的物理内存</strong>。如果size是常量，调用<code>kmem_cache_alloc_trace</code>分配，否则调用<code>__kmalloc</code>分配。size如果是常量且大于4M，直接返回0（内核版本3.4.5）；如果size是0，返回地址是<code>((void *)16)</code>。</p>
 
 <h4 id="vmalloc">vmalloc</h4>
 
@@ -125,9 +125,139 @@ void *kmalloc(size_t size, gfp_t flags) kmalloc是内核中最常用的一种内
 </pre></td><td class="code"><pre><code class=""><span class="line">void *vmalloc(unsigned long size)
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>kmalloc内存分配方式都是物理连续的，能保证较低的平均访问时间。但是在某些场合中，对内存区的请求不是很频繁，较高的内存访问时间也 可以接受，这是就可以分配一段线性连续，物理不连续的地址，带来的好处是一次可以分配较大块的内存。图3-1表 示的是vmalloc分配的内存使用的地址范围。vmalloc对 一次能分配的内存大小没有明确限制。出于性能考虑，应谨慎使用vmalloc函数。在测试过程中， 最大能一次分配1GB的空间。</p>
+<p>kmalloc内存分配方式都是物理连续的，能保证较低的平均访问时间。但是在某些场合中，对内存区的请求不是很频繁，较高的内存访问时间也 可以接受，这是就可以分配一段<strong>线性连续，物理不连续</strong>的地址，带来的好处是一次可以分配较大块的内存。vmalloc对 一次能分配的内存大小没有明确限制。</p>
 
-<p>先记录，再结合代码验证。待完善</p>
+<h5 id="kmalloc-1">kmalloc预处理后的代码</h5>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">static inline __attribute__((always_inline)) __attribute__((always_inline)) void *kmalloc(size_t size, gfp_t flags)
+</span><span class="line">{
+</span><span class="line"> struct kmem_cache *cachep;
+</span><span class="line"> void *ret;
+</span><span class="line">
+</span><span class="line"> if (__builtin_constant_p(size)) {
+</span><span class="line">  int i = 0;
+</span><span class="line">
+</span><span class="line">  if (!size)
+</span><span class="line">   return ((void *)16);
+</span><span class="line">
+</span><span class="line"># 1 "include/linux/kmalloc_sizes.h" 1
+</span><span class="line"> if (size &lt;= 32) goto found; else i++;
+</span><span class="line"> if (size &lt;= 64) goto found; else i++;
+</span><span class="line"> if (size &lt;= 128) goto found; else i++;
+</span><span class="line"> if (size &lt;= 192) goto found; else i++;
+</span><span class="line"> if (size &lt;= 256) goto found; else i++;
+</span><span class="line"> if (size &lt;= 512) goto found; else i++;
+</span><span class="line"> if (size &lt;= 1024) goto found; else i++;
+</span><span class="line"> if (size &lt;= 2048) goto found; else i++;
+</span><span class="line"> if (size &lt;= 4096) goto found; else i++;
+</span><span class="line"> if (size &lt;= 8192) goto found; else i++;
+</span><span class="line"> if (size &lt;= 16384) goto found; else i++;
+</span><span class="line"> if (size &lt;= 32768) goto found; else i++;
+</span><span class="line"> if (size &lt;= 65536) goto found; else i++;
+</span><span class="line"> if (size &lt;= 131072) goto found; else i++;
+</span><span class="line"> if (size &lt;= 262144) goto found; else i++;
+</span><span class="line"> if (size &lt;= 524288) goto found; else i++;
+</span><span class="line"> if (size &lt;= 1048576) goto found; else i++;
+</span><span class="line"> if (size &lt;= 2097152) goto found; else i++;
+</span><span class="line"> if (size &lt;= 4194304) goto found; else i++;
+</span><span class="line"># 145 "include/linux/slab_def.h" 2
+</span><span class="line">
+</span><span class="line">  return ((void *)0);
+</span><span class="line">found:
+</span><span class="line">   cachep = malloc_sizes[i].cs_cachep;
+</span><span class="line">
+</span><span class="line">  ret = kmem_cache_alloc_trace(size, cachep, flags);
+</span><span class="line">
+</span><span class="line">  return ret;
+</span><span class="line"> }
+</span><span class="line"> return __kmalloc(size, flags);
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">void *__kmalloc(size_t size, gfp_t flags)
+</span><span class="line">{
+</span><span class="line"> return __do_kmalloc(size, flags, ((void *)0));
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">static inline __attribute__((always_inline)) __attribute__((always_inline)) void *__do_kmalloc(size_t size, gfp_t flags, void *caller)
+</span><span class="line">{
+</span><span class="line"> struct kmem_cache *cachep;
+</span><span class="line"> void *ret;
+</span><span class="line"> 
+</span><span class="line"> cachep = __find_general_cachep(size, flags);
+</span><span class="line"> if (__builtin_expect(!!(((unsigned long)(cachep) &lt;= (unsigned long)((void *)16))), 0))
+</span><span class="line">  return cachep;
+</span><span class="line"> ret = __cache_alloc(cachep, flags, caller);
+</span><span class="line">
+</span><span class="line"> trace_kmalloc((unsigned long) caller, ret,
+</span><span class="line">        size, cachep-&gt;buffer_size, flags);
+</span><span class="line">
+</span><span class="line"> return ret;
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h1 id="section">引用文章</h1>
 
