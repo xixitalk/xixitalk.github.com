@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "linux内核编译预处理编译"
+title: "linux内核代码预处理后便于阅读"
 date: 2016-07-19 13:39:01
 comments: true
 mathjax: false
 categories: linux kernel
 ---
 
-linux 内核庞大而复杂。你有没有遇到内核代码阅读的时候因为宏定义或者inline层次太深而不知道到底代码是什么样子的。内核编译预处理将这个难题来解决。
+linux 内核庞大而复杂。内核代码阅读的时候，有没有遇到因为宏定义或者inline层次太深而不知道到底代码是什么样子。代码预处理可以解决这个难题。
 
 <!--more-->
 
