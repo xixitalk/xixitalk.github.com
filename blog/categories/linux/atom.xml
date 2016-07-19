@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-19T19:33:42+08:00</updated>
+  <updated>2016-07-19T20:51:09+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[linux内核编译预处理编译]]></title>
+    <title type="html"><![CDATA[linux内核代码预处理后便于阅读]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/"/>
     <updated>2016-07-19T21:39:01+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel</id>
-    <content type="html"><![CDATA[<p>linux 内核庞大而复杂。你有没有遇到内核代码阅读的时候因为宏定义或者inline层次太深而不知道到底代码是什么样子的。内核编译预处理将这个难题来解决。</p>
+    <content type="html"><![CDATA[<p>linux 内核庞大而复杂。内核代码阅读的时候，有没有遇到因为宏定义或者inline层次太深而不知道到底代码是什么样子。代码预处理可以解决这个难题。</p>
 
 <!--more-->
 
