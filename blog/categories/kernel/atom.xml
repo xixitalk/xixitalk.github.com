@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kernel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/kernel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-18T09:23:35+08:00</updated>
+  <updated>2016-07-19T14:17:08+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux内核编译预处理编译]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/"/>
+    <updated>2016-07-19T21:39:01+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel</id>
+    <content type="html"><![CDATA[<p>linux 内核庞大而复杂。你有没有遇到内核代码阅读的时候因为宏定义或者inline层次太深而不知道到底代码是什么样子的。内核编译预处理将这个难题来解决。</p>
+
+<!--more-->
+
+<p>平台：linux 3.4.5 ARM，PC linux上类似，更简单些。</p>
+
+<h4 id="v1">加V=1重新编译内核</h4>
+
+<p><code>make</code>内核增加<code>V=1</code>选项，会详细打印编译过程，<code>-B</code>是要求重新编译内核所有模块。</p>
+
+<p><code>
+cd linux-3.4.5 &amp;&amp; make ARCH=arm defconfig &amp;&amp; make ARCH=arm CROSS_COMPILE=arm-buildroot-linux-uclibcgnueabi- EXTRAVERSION=- -B V=1 uImage
+</code></p>
+
+<p>编译内核并保存编译log到文件，搜索你要预编译的文件，如<code>mm/slab.c</code>，会找到如下编译命令：</p>
+
+<p><code>
+arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -c -o mm/.tmp_slab.o mm/slab.c
+</code></p>
+
+<h4 id="section">编译预处理指定文件</h4>
+
+<p>把编译命令修改成预处理命令：<code>-c -o mm/.tmp_slab.o</code>修改成<code>-E -o mm/slab.E mm/slab.c</code>，在内核目录<code>linux-3.4.5</code>直接执行。如果是交叉编译链，可能需要把<code>arm-buildroot-linux-uclibcgnueabi-gcc</code>所在路径加入到环境变量<code>PATH</code>里。</p>
+
+<p><code>
+arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -E -o mm/slab.E mm/slab.c
+</code></p>
+
+<p>执行完命令，在内核的<code>mm</code>目录就能看到<code>slab.c</code>的预处理后文件<code>slab.E</code>文件了。看一下<code>kmalloc</code>函数代码，是不是清晰很多了。</p>
+
+<p><code>slab_def.h</code>里的原始<code>kmalloc</code></p>
+
+<p>```
+static __always_inline void *kmalloc(size_t size, gfp_t flags)
+{
+	struct kmem_cache *cachep;
+	void *ret;</p>
+
+<pre><code>if (__builtin_constant_p(size)) {
+	int i = 0;
+
+	if (!size)
+		return ZERO_SIZE_PTR;
+</code></pre>
+
+<h1 id="define-cachex-">define CACHE(x) \</h1>
+<pre><code>	if (size &lt;= x) \
+		goto found; \
+	else \
+		i++; #include &lt;linux/kmalloc_sizes.h&gt; #undef CACHE
+	return NULL; found: #ifdef CONFIG_ZONE_DMA
+	if (flags &amp; GFP_DMA)
+		cachep = malloc_sizes[i].cs_dmacachep;
+	else #endif
+		cachep = malloc_sizes[i].cs_cachep;
+
+	ret = kmem_cache_alloc_trace(size, cachep, flags);
+
+	return ret;
+}
+return __kmalloc(size, flags); } ```
+</code></pre>
+
+<p>预处理后的<code>kmalloc</code>,流程是不是清晰多了。</p>
+
+<p>```
+static inline <strong>attribute</strong>((always_inline)) <strong>attribute</strong>((always_inline)) void *kmalloc(size_t size, gfp_t flags)
+{
+ struct kmem_cache *cachep;
+ void *ret;</p>
+
+<p>if (__builtin_constant_p(size)) {
+  int i = 0;</p>
+
+<p>if (!size)
+   return ((void *)16);</p>
+
+<h1 id="includelinuxkmallocsizesh-1">1 “include/linux/kmalloc_sizes.h” 1</h1>
+
+<p>if (size &lt;= 32) goto found; else i++;
+ if (size &lt;= 64) goto found; else i++;
+ if (size &lt;= 128) goto found; else i++;
+ if (size &lt;= 192) goto found; else i++;
+ if (size &lt;= 256) goto found; else i++;
+ if (size &lt;= 512) goto found; else i++;
+ if (size &lt;= 1024) goto found; else i++;
+ if (size &lt;= 2048) goto found; else i++;
+ if (size &lt;= 4096) goto found; else i++;
+ if (size &lt;= 8192) goto found; else i++;
+ if (size &lt;= 16384) goto found; else i++;
+ if (size &lt;= 32768) goto found; else i++;
+ if (size &lt;= 65536) goto found; else i++;
+ if (size &lt;= 131072) goto found; else i++;
+ if (size &lt;= 262144) goto found; else i++;
+ if (size &lt;= 524288) goto found; else i++;
+ if (size &lt;= 1048576) goto found; else i++;
+ if (size &lt;= 2097152) goto found; else i++;
+ if (size &lt;= 4194304) goto found; else i++;
+# 145 “include/linux/slab_def.h” 2</p>
+
+<p>return ((void *)0);
+found:
+   cachep = malloc_sizes[i].cs_cachep;</p>
+
+<p>ret = kmem_cache_alloc_trace(size, cachep, flags);</p>
+
+<p>return ret;
+ }
+ return __kmalloc(size, flags);
+}
+```</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核kmalloc和vmalloc的区别]]></title>
@@ -43,6 +163,9 @@ void *vmalloc(unsigned long size)
 <h1 id="section">引用文章</h1>
 
 <p><a href="http://www.ahlinux.com/start/kernel/18604.html">http://www.ahlinux.com/start/kernel/18604.html</a></p>
+
+<p><a href="http://blog.csdn.net/bullbat/article/details/7181396">http://blog.csdn.net/bullbat/article/details/7181396</a></p>
+
 ]]></content>
   </entry>
   

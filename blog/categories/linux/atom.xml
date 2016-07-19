@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-18T09:23:35+08:00</updated>
+  <updated>2016-07-19T14:17:08+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux内核编译预处理编译]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/"/>
+    <updated>2016-07-19T21:39:01+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel</id>
+    <content type="html"><![CDATA[<p>linux 内核庞大而复杂。你有没有遇到内核代码阅读的时候因为宏定义或者inline层次太深而不知道到底代码是什么样子的。内核编译预处理将这个难题来解决。</p>
+
+<!--more-->
+
+<p>平台：linux 3.4.5 ARM，PC linux上类似，更简单些。</p>
+
+<h4 id="v1">加V=1重新编译内核</h4>
+
+<p><code>make</code>内核增加<code>V=1</code>选项，会详细打印编译过程，<code>-B</code>是要求重新编译内核所有模块。</p>
+
+<p><code>
+cd linux-3.4.5 &amp;&amp; make ARCH=arm defconfig &amp;&amp; make ARCH=arm CROSS_COMPILE=arm-buildroot-linux-uclibcgnueabi- EXTRAVERSION=- -B V=1 uImage
+</code></p>
+
+<p>编译内核并保存编译log到文件，搜索你要预编译的文件，如<code>mm/slab.c</code>，会找到如下编译命令：</p>
+
+<p><code>
+arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -c -o mm/.tmp_slab.o mm/slab.c
+</code></p>
+
+<h4 id="section">编译预处理指定文件</h4>
+
+<p>把编译命令修改成预处理命令：<code>-c -o mm/.tmp_slab.o</code>修改成<code>-E -o mm/slab.E mm/slab.c</code>，在内核目录<code>linux-3.4.5</code>直接执行。如果是交叉编译链，可能需要把<code>arm-buildroot-linux-uclibcgnueabi-gcc</code>所在路径加入到环境变量<code>PATH</code>里。</p>
+
+<p><code>
+arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -E -o mm/slab.E mm/slab.c
+</code></p>
+
+<p>执行完命令，在内核的<code>mm</code>目录就能看到<code>slab.c</code>的预处理后文件<code>slab.E</code>文件了。看一下<code>kmalloc</code>函数代码，是不是清晰很多了。</p>
+
+<p><code>slab_def.h</code>里的原始<code>kmalloc</code></p>
+
+<p>```
+static __always_inline void *kmalloc(size_t size, gfp_t flags)
+{
+	struct kmem_cache *cachep;
+	void *ret;</p>
+
+<pre><code>if (__builtin_constant_p(size)) {
+	int i = 0;
+
+	if (!size)
+		return ZERO_SIZE_PTR;
+</code></pre>
+
+<h1 id="define-cachex-">define CACHE(x) \</h1>
+<pre><code>	if (size &lt;= x) \
+		goto found; \
+	else \
+		i++; #include &lt;linux/kmalloc_sizes.h&gt; #undef CACHE
+	return NULL; found: #ifdef CONFIG_ZONE_DMA
+	if (flags &amp; GFP_DMA)
+		cachep = malloc_sizes[i].cs_dmacachep;
+	else #endif
+		cachep = malloc_sizes[i].cs_cachep;
+
+	ret = kmem_cache_alloc_trace(size, cachep, flags);
+
+	return ret;
+}
+return __kmalloc(size, flags); } ```
+</code></pre>
+
+<p>预处理后的<code>kmalloc</code>,流程是不是清晰多了。</p>
+
+<p>```
+static inline <strong>attribute</strong>((always_inline)) <strong>attribute</strong>((always_inline)) void *kmalloc(size_t size, gfp_t flags)
+{
+ struct kmem_cache *cachep;
+ void *ret;</p>
+
+<p>if (__builtin_constant_p(size)) {
+  int i = 0;</p>
+
+<p>if (!size)
+   return ((void *)16);</p>
+
+<h1 id="includelinuxkmallocsizesh-1">1 “include/linux/kmalloc_sizes.h” 1</h1>
+
+<p>if (size &lt;= 32) goto found; else i++;
+ if (size &lt;= 64) goto found; else i++;
+ if (size &lt;= 128) goto found; else i++;
+ if (size &lt;= 192) goto found; else i++;
+ if (size &lt;= 256) goto found; else i++;
+ if (size &lt;= 512) goto found; else i++;
+ if (size &lt;= 1024) goto found; else i++;
+ if (size &lt;= 2048) goto found; else i++;
+ if (size &lt;= 4096) goto found; else i++;
+ if (size &lt;= 8192) goto found; else i++;
+ if (size &lt;= 16384) goto found; else i++;
+ if (size &lt;= 32768) goto found; else i++;
+ if (size &lt;= 65536) goto found; else i++;
+ if (size &lt;= 131072) goto found; else i++;
+ if (size &lt;= 262144) goto found; else i++;
+ if (size &lt;= 524288) goto found; else i++;
+ if (size &lt;= 1048576) goto found; else i++;
+ if (size &lt;= 2097152) goto found; else i++;
+ if (size &lt;= 4194304) goto found; else i++;
+# 145 “include/linux/slab_def.h” 2</p>
+
+<p>return ((void *)0);
+found:
+   cachep = malloc_sizes[i].cs_cachep;</p>
+
+<p>ret = kmem_cache_alloc_trace(size, cachep, flags);</p>
+
+<p>return ret;
+ }
+ return __kmalloc(size, flags);
+}
+```</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux栈和内存管理]]></title>
@@ -96,6 +216,9 @@ void *vmalloc(unsigned long size)
 <h1 id="section">引用文章</h1>
 
 <p><a href="http://www.ahlinux.com/start/kernel/18604.html">http://www.ahlinux.com/start/kernel/18604.html</a></p>
+
+<p><a href="http://blog.csdn.net/bullbat/article/details/7181396">http://blog.csdn.net/bullbat/article/details/7181396</a></p>
+
 ]]></content>
   </entry>
   
@@ -216,187 +339,6 @@ enum zone_stat_item {
 <h4 id="section">参考文章</h4>
 
 <p><a href="http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl">http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux应用内存占用maps分析]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/12/app-mem-used-on-linux/"/>
-    <updated>2016-07-12T18:50:20+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/12/app-mem-used-on-linux</id>
-    <content type="html"><![CDATA[<p>假设一个应用的pid是PID，则<code>cat /proc/PID/maps</code>显示这个应用的内存占用。</p>
-
-<!--more-->
-
-<h3 id="maps">maps格式</h3>
-
-<p><code>
-address           perms offset  dev   inode   pathname
-00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out
-</code></p>
-
-<ol>
-  <li><strong>address</strong> - This is the starting and ending address of the region in the process’s address space。说明：都是虚拟地址，并不代码真实的物理地址。</li>
-  <li><strong>permissions</strong> - This describes how pages in the region can be accessed. There are four different permissions: read, write, execute, and shared. If read/write/execute are disabled, a ‘-‘ will appear instead of the ‘r’/’w’/’x’. If a region is not shared, it is private, so a ‘p’ will appear instead of an ‘s’. If the process attempts to access memory in a way that is not permitted, a segmentation fault is generated. Permissions can be changed using the <code>mprotect</code> system call.</li>
-  <li><strong>offset</strong> - If the region was mapped from a file (using mmap), this is the offset in the file where the mapping begins. If the memory was not mapped from a file, it’s just 0.</li>
-  <li><strong>device</strong> - If the region was mapped from a file, this is the major and minor device number (in hex) where the file lives.</li>
-  <li><strong>inode</strong> - If the region was mapped from a file, this is the file number.</li>
-  <li><strong>pathname</strong> - If the region was mapped from a file, this is the name of the file. This field is blank for anonymous mapped regions. There are also special regions with names like [heap], [stack], or [vdso]. [vdso] stands for virtual dynamic shared object. It’s used by system calls to switch to kernel mode. Here’s a good article about it.</li>
-</ol>
-
-<h3 id="section">实例分析</h3>
-
-<p>写一个简单的实例main.c，funcA地址在代码段，s_buf在数据段，buf是局部变量，在栈空间，pheap是malloc申请的，是heap空间。</p>
-
-<p>```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h /></stdlib.h></stdio.h></p>
-
-<p>static char s_buf[1024];
-void funcA(void)
-{
-  printf(“funcA address:%08x\n”,funcA);
-}</p>
-
-<p>int main(int argc,char *argv[])
-{
-  int i = 0;
-  char buf[1024] = {0};
-  char *pheap = malloc(2048);</p>
-
-<p>for(i=0;i&lt;1000;i++)
-  {
-    funcA();
-    printf(“buf address:%08x\n”,buf);
-    printf(“s_buf address:%08x\n”,s_buf);
-    printf(“pheap address:%08x\n”,pheap);
-    sleep(10);
-  }
-  free(pheap);
-  return 0;
-}
-```</p>
-
-<p>编译运行</p>
-
-<p><code>
-$gcc main.c
-$./a.out
-funcA address:000084a0
-buf address:becb9318
-s_buf address:000107ac
-pheap address:01171008
-funcA address:000084a0
-buf address:becb9318
-s_buf address:000107ac
-pheap address:01171008
-</code></p>
-
-<p>在另一个窗口</p>
-
-<p><code>
-$ ps aux | grep out
-pi       27725  0.0  0.2   1676   424 pts/0    S+   10:43   0:00 ./a.out
-$ cat /proc/27725/maps &gt; a.out.maps
-$ cat a.out.maps
-00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out
-00010000-00011000 rw-p 00000000 b3:02 317712     /home/pi/test/pmap/a.out
-01171000-01192000 rw-p 00000000 00:00 0          [heap]
-b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-b6f63000-b6f66000 rw-p 00000000 00:00 0
-b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-b6f9e000-b6fa2000 rw-p 00000000 00:00 0
-b6fa2000-b6fa3000 r-xp 00000000 00:00 0          [sigpage]
-b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-bec99000-becba000 rw-p 00000000 00:00 0          [stack]
-ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
-</code></p>
-
-<p>a.out.maps内容分析如下</p>
-
-<p><code>
-00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out  
-代码段，funcA在这个区间,权限是r-xp，有读、执行权限，p是private
-</code></p>
-
-<p><code>
-00010000-00011000 rw-p 00000000 b3:02 317712     /home/pi/test/pmap/a.out  
-数据段，s_buf在这个区间,权限是rw-p，有读写，p是private
-</code></p>
-
-<p><code>
-01171000-01192000 rw-p 00000000 00:00 0          [heap]
-堆空间，pheap在这个区间，权限是rw-p，有读写，p是private
-</code></p>
-
-<p><code>
-b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-libc库代码段
-</code></p>
-
-<p><code>
-b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-libc库内存防止越界空间，权限是---p，没有rwx权限，用户访问就触发段错误
-</code></p>
-
-<p><code>
-b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-libc库只读内存区。如果const变量，则在代码段；如果是全局变量则在数据段，还不知道这个区域内容。
-</code></p>
-
-<p><code>
-b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-libc库数据段
-</code></p>
-
-<p><code>
-b6f63000-b6f66000 rw-p 00000000 00:00 0
-b6f9e000-b6fa2000 rw-p 00000000 00:00 0
-未知，权限rw-p应该共享库相关的数据区
-</code></p>
-
-<p><code>
-b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-同libc分析
-</code></p>
-
-<p><code>
-b6fa2000-b6fa3000 r-xp 00000000 00:00 0          [sigpage]
-和信号相关的一个page，ARM架构独有好像
-</code></p>
-
-<p><code>
-bec99000-becba000 rw-p 00000000 00:00 0          [stack]
-栈空间，局部变量buf在这个区间
-</code></p>
-
-<p><code>
-ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
-中断向量
-</code></p>
-
-<p>待完善…</p>
-
-<h3 id="section-1">参考资料</h3>
-
-<p><a href="http://stackoverflow.com/questions/1401359/understanding-linux-proc-id-maps">http://stackoverflow.com/questions/1401359/understanding-linux-proc-id-maps</a></p>
-
-<p><a href="http://stackoverflow.com/questions/16524895/proc-pid-maps-shows-pages-with-no-rwx-permissions-on-x86-64-linux">http://stackoverflow.com/questions/16524895/proc-pid-maps-shows-pages-with-no-rwx-permissions-on-x86-64-linux</a></p>
-
-<p><a href="https://yq.aliyun.com/articles/54405">https://yq.aliyun.com/articles/54405</a></p>
 ]]></content>
   </entry>
   

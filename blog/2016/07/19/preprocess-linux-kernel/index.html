@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>linux kernel全局变量contig_page_data含义 - xixitalk's snippet</title>
+  <title>linux内核编译预处理编译 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="contig_page_data是内核内存管理一个很重要的变量。 平台：uClinux 内核版本号：linux-3.4.12 watermark是3840 4800 5760对应 watermark[min] watermark[low] watermark[high]，这里是page数， &hellip;">
+  <meta name="description" content="linux 内核庞大而复杂。你有没有遇到内核代码阅读的时候因为宏定义或者inline层次太深而不知道到底代码是什么样子的。内核编译预处理将这个难题来解决。 平台：linux 3.4.5 ARM，PC linux上类似，更简单些。 加V=1重新编译内核 make内核增加V=1选项，会详细打印编译过程 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">linux kernel全局变量contig_page_data含义</h1>
+      <h1 class="entry-title">linux内核编译预处理编译</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2016-07-13T17:03:20+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2016</time>
+<time datetime="2016-07-19T21:39:01+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,43 +106,37 @@
   </header>
 
 
-<div class="entry-content"><p><code>contig_page_data</code>是内核内存管理一个很重要的变量。</p>
+<div class="entry-content"><p>linux 内核庞大而复杂。你有没有遇到内核代码阅读的时候因为宏定义或者inline层次太深而不知道到底代码是什么样子的。内核编译预处理将这个难题来解决。</p>
 
 <!--more-->
 
-<p>平台：uClinux 内核版本号：linux-3.4.12</p>
+<p>平台：linux 3.4.5 ARM，PC linux上类似，更简单些。</p>
 
-<p><img src="http://7bv9id.com1.z0.glb.clouddn.com/contig_page_data.png" alt="enter image description here" /></p>
+<h4 id="v1">加V=1重新编译内核</h4>
 
-<p><code>watermark</code>是3840 4800 5760对应 watermark[min] watermark[low] watermark[high]，这里是page数，一个page 4K，所以<code>watermark</code>对应<code>min_free_kbytes</code>是3840*4K是15360（15M），符合配置<code>echo 15360 &gt; /proc/sys/vm/min_free_kbytes</code>。其他计算如下。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"> watermark[min] = min_free_kbytes换算为page单位即可
-</span><span class="line"> watermark[low] = watermark[min] * 5 / 4
-</span><span class="line"> watermark[high] = watermark[min] * 3 / 2
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在系统空闲内存低于 watermark[low]时，开始启动内核线程kswapd进行内存回收，直到该zone的空闲内存数量达到watermark[high]后停止回收。如果上层申请内存的速度太快，导致空闲内存降至watermark[min]后，内核就会进行direct reclaim（直接回收），即直接在应用程序的进程上下文中进行回收，再用回收上来的空闲页满足内存申请，因此实际会阻塞应用程序，带来一定的响应延迟，而且可能会触发系统OOM。这是因为watermark[min]以下的内存属于系统的自留内存，用以满足特殊使用，所以不会给用户态的普通申请来用。</p>
-
-<p>free_area里order是0到10，对应4K到4M。free_list[n]是双向链表，只有next的next指向同样的节点才是表示链表为空。（双向链表，很明显如果只有两个节点，next和prev都是另一个节点）。和<code>cat /proc/pagetypeinfo</code>信息一致。</p>
-
-<p><code>contig_page_data</code>里的<code>vm_stat</code>对应mmzone.h里<code>zone_stat_item</code>枚举。另外本身有一个内核全局变量<code>vm_stat</code>，值和<code>contig_page_data</code>的这个<code>vm_stat</code>一样的。这个参数可以对照着<code>/proc/meminfo</code>一起看。</p>
-
-<p>page_alloc.c  show_free_areas()</p>
+<p><code>make</code>内核增加<code>V=1</code>选项，会详细打印编译过程，<code>-B</code>是要求重新编译内核所有模块。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">for (type = 0; type &lt; MIGRATE_TYPES; type++) {
-</span><span class="line">				if (!list_empty(&amp;area-&gt;free_list[type]))
-</span><span class="line">					types[order] |= 1 &lt;&lt; type;
-</span><span class="line">			}
+</pre></td><td class="code"><pre><code class=""><span class="line">cd linux-3.4.5 &amp;&amp; make ARCH=arm defconfig &amp;&amp; make ARCH=arm CROSS_COMPILE=arm-buildroot-linux-uclibcgnueabi- EXTRAVERSION=- -B V=1 uImage
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>mmzone.h里看出MIGRATE_TYPES为4。<strong>0是UNMOVABLE区，1是RECLAIMABLE可回收区，2是可MOVABLE区，3是PCPTYPES或者RESERVE保留区</strong>。</p>
+<p>编译内核并保存编译log到文件，搜索你要预编译的文件，如<code>mm/slab.c</code>，会找到如下编译命令：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -c -o mm/.tmp_slab.o mm/slab.c
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="section">编译预处理指定文件</h4>
+
+<p>把编译命令修改成预处理命令：<code>-c -o mm/.tmp_slab.o</code>修改成<code>-E -o mm/slab.E mm/slab.c</code>，在内核目录<code>linux-3.4.5</code>直接执行。如果是交叉编译链，可能需要把<code>arm-buildroot-linux-uclibcgnueabi-gcc</code>所在路径加入到环境变量<code>PATH</code>里。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -E -o mm/slab.E mm/slab.c
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>执行完命令，在内核的<code>mm</code>目录就能看到<code>slab.c</code>的预处理后文件<code>slab.E</code>文件了。看一下<code>kmalloc</code>函数代码，是不是清晰很多了。</p>
+
+<p><code>slab_def.h</code>里的原始<code>kmalloc</code></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -171,34 +165,48 @@
 <span class="line-number">25</span>
 <span class="line-number">26</span>
 <span class="line-number">27</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enum {
-</span><span class="line">	MIGRATE_UNMOVABLE,
-</span><span class="line">	MIGRATE_RECLAIMABLE,
-</span><span class="line">	MIGRATE_MOVABLE,
-</span><span class="line">	MIGRATE_PCPTYPES,	/* the number of types on the pcp lists */
-</span><span class="line">	MIGRATE_RESERVE = MIGRATE_PCPTYPES,
-</span><span class="line">#ifdef CONFIG_CMA
-</span><span class="line">	/*
-</span><span class="line">	 * MIGRATE_CMA migration type is designed to mimic the way
-</span><span class="line">	 * ZONE_MOVABLE works.  Only movable pages can be allocated
-</span><span class="line">	 * from MIGRATE_CMA pageblocks and page allocator never
-</span><span class="line">	 * implicitly change migration type of MIGRATE_CMA pageblock.
-</span><span class="line">	 *
-</span><span class="line">	 * The way to use it is to change migratetype of a range of
-</span><span class="line">	 * pageblocks to MIGRATE_CMA which can be done by
-</span><span class="line">	 * __free_pageblock_cma() function.  What is important though
-</span><span class="line">	 * is that a range of pageblocks must be aligned to
-</span><span class="line">	 * MAX_ORDER_NR_PAGES should biggest page be bigger then
-</span><span class="line">	 * a single pageblock.
-</span><span class="line">	 */
-</span><span class="line">	MIGRATE_CMA,
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">static __always_inline void *kmalloc(size_t size, gfp_t flags)
+</span><span class="line">{
+</span><span class="line">	struct kmem_cache *cachep;
+</span><span class="line">	void *ret;
+</span><span class="line">
+</span><span class="line">	if (__builtin_constant_p(size)) {
+</span><span class="line">		int i = 0;
+</span><span class="line">
+</span><span class="line">		if (!size)
+</span><span class="line">			return ZERO_SIZE_PTR;
+</span><span class="line">
+</span><span class="line">#define CACHE(x) \
+</span><span class="line">		if (size &lt;= x) \
+</span><span class="line">			goto found; \
+</span><span class="line">		else \
+</span><span class="line">			i++;
+</span><span class="line">#include &lt;linux/kmalloc_sizes.h&gt;
+</span><span class="line">#undef CACHE
+</span><span class="line">		return NULL;
+</span><span class="line">found:
+</span><span class="line">#ifdef CONFIG_ZONE_DMA
+</span><span class="line">		if (flags &amp; GFP_DMA)
+</span><span class="line">			cachep = malloc_sizes[i].cs_dmacachep;
+</span><span class="line">		else
 </span><span class="line">#endif
-</span><span class="line">#ifdef CONFIG_MEMORY_ISOLATION
-</span><span class="line">	MIGRATE_ISOLATE,	/* can't allocate from here */
-</span><span class="line">#endif
-</span><span class="line">	MIGRATE_TYPES
-</span><span class="line">};
+</span><span class="line">			cachep = malloc_sizes[i].cs_cachep;
+</span><span class="line">
+</span><span class="line">		ret = kmem_cache_alloc_trace(size, cachep, flags);
+</span><span class="line">
+</span><span class="line">		return ret;
+</span><span class="line">	}
+</span><span class="line">	return __kmalloc(size, flags);
+</span><span class="line">}
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>预处理后的<code>kmalloc</code>,流程是不是清晰多了。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -243,54 +251,53 @@
 <span class="line-number">41</span>
 <span class="line-number">42</span>
 <span class="line-number">43</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enum zone_stat_item {
-</span><span class="line">	/* First 128 byte cacheline (assuming 64 bit words) */
-</span><span class="line">	NR_FREE_PAGES,
-</span><span class="line">	NR_ALLOC_BATCH,
-</span><span class="line">	NR_LRU_BASE,
-</span><span class="line">	NR_INACTIVE_ANON = NR_LRU_BASE, /* must match order of LRU_[IN]ACTIVE */
-</span><span class="line">	NR_ACTIVE_ANON,		/*  "     "     "   "       "         */
-</span><span class="line">	NR_INACTIVE_FILE,	/*  "     "     "   "       "         */
-</span><span class="line">	NR_ACTIVE_FILE,		/*  "     "     "   "       "         */
-</span><span class="line">	NR_UNEVICTABLE,		/*  "     "     "   "       "         */
-</span><span class="line">	NR_MLOCK,		/* mlock()ed pages found and moved off LRU */
-</span><span class="line">	NR_ANON_PAGES,	/* Mapped anonymous pages */
-</span><span class="line">	NR_FILE_MAPPED,	/* pagecache pages mapped into pagetables.
-</span><span class="line">			   only modified from process context */
-</span><span class="line">	NR_FILE_PAGES,
-</span><span class="line">	NR_FILE_DIRTY,
-</span><span class="line">	NR_WRITEBACK,
-</span><span class="line">	NR_SLAB_RECLAIMABLE,
-</span><span class="line">	NR_SLAB_UNRECLAIMABLE,
-</span><span class="line">	NR_PAGETABLE,		/* used for pagetables */
-</span><span class="line">	NR_KERNEL_STACK,
-</span><span class="line">	/* Second 128 byte cacheline */
-</span><span class="line">	NR_UNSTABLE_NFS,	/* NFS unstable pages */
-</span><span class="line">	NR_BOUNCE,
-</span><span class="line">	NR_VMSCAN_WRITE,
-</span><span class="line">	NR_VMSCAN_IMMEDIATE,	/* Prioritise for reclaim when writeback ends */
-</span><span class="line">	NR_WRITEBACK_TEMP,	/* Writeback using temporary buffers */
-</span><span class="line">	NR_ISOLATED_ANON,	/* Temporary isolated pages from anon lru */
-</span><span class="line">	NR_ISOLATED_FILE,	/* Temporary isolated pages from file lru */
-</span><span class="line">	NR_SHMEM,		/* shmem pages (included tmpfs/GEM pages) */
-</span><span class="line">	NR_DIRTIED,		/* page dirtyings since bootup */
-</span><span class="line">	NR_WRITTEN,		/* page writings since bootup */
-</span><span class="line">#ifdef CONFIG_NUMA
-</span><span class="line">	NUMA_HIT,		/* allocated in intended node */
-</span><span class="line">	NUMA_MISS,		/* allocated in non intended node */
-</span><span class="line">	NUMA_FOREIGN,		/* was intended here, hit elsewhere */
-</span><span class="line">	NUMA_INTERLEAVE_HIT,	/* interleaver preferred this zone */
-</span><span class="line">	NUMA_LOCAL,		/* allocation from local node */
-</span><span class="line">	NUMA_OTHER,		/* allocation from other node */
-</span><span class="line">#endif
-</span><span class="line">	NR_ANON_TRANSPARENT_HUGEPAGES,
-</span><span class="line">	NR_FREE_CMA_PAGES,
-</span><span class="line">	NR_VM_ZONE_STAT_ITEMS };
+<span class="line-number">44</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">static inline __attribute__((always_inline)) __attribute__((always_inline)) void *kmalloc(size_t size, gfp_t flags)
+</span><span class="line">{
+</span><span class="line"> struct kmem_cache *cachep;
+</span><span class="line"> void *ret;
+</span><span class="line">
+</span><span class="line"> if (__builtin_constant_p(size)) {
+</span><span class="line">  int i = 0;
+</span><span class="line">
+</span><span class="line">  if (!size)
+</span><span class="line">   return ((void *)16);
+</span><span class="line">
+</span><span class="line"># 1 "include/linux/kmalloc_sizes.h" 1
+</span><span class="line">
+</span><span class="line"> if (size &lt;= 32) goto found; else i++;
+</span><span class="line"> if (size &lt;= 64) goto found; else i++;
+</span><span class="line"> if (size &lt;= 128) goto found; else i++;
+</span><span class="line"> if (size &lt;= 192) goto found; else i++;
+</span><span class="line"> if (size &lt;= 256) goto found; else i++;
+</span><span class="line"> if (size &lt;= 512) goto found; else i++;
+</span><span class="line"> if (size &lt;= 1024) goto found; else i++;
+</span><span class="line"> if (size &lt;= 2048) goto found; else i++;
+</span><span class="line"> if (size &lt;= 4096) goto found; else i++;
+</span><span class="line"> if (size &lt;= 8192) goto found; else i++;
+</span><span class="line"> if (size &lt;= 16384) goto found; else i++;
+</span><span class="line"> if (size &lt;= 32768) goto found; else i++;
+</span><span class="line"> if (size &lt;= 65536) goto found; else i++;
+</span><span class="line"> if (size &lt;= 131072) goto found; else i++;
+</span><span class="line"> if (size &lt;= 262144) goto found; else i++;
+</span><span class="line"> if (size &lt;= 524288) goto found; else i++;
+</span><span class="line"> if (size &lt;= 1048576) goto found; else i++;
+</span><span class="line"> if (size &lt;= 2097152) goto found; else i++;
+</span><span class="line"> if (size &lt;= 4194304) goto found; else i++;
+</span><span class="line"># 145 "include/linux/slab_def.h" 2
+</span><span class="line">
+</span><span class="line">  return ((void *)0);
+</span><span class="line">found:
+</span><span class="line">   cachep = malloc_sizes[i].cs_cachep;
+</span><span class="line">
+</span><span class="line">  ret = kmem_cache_alloc_trace(size, cachep, flags);
+</span><span class="line">
+</span><span class="line">  return ret;
+</span><span class="line"> }
+</span><span class="line"> return __kmalloc(size, flags);
+</span><span class="line">}
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h4 id="section">参考文章</h4>
-
-<p><a href="http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl">http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl</a></p>
 </div>
 
 
@@ -313,12 +320,12 @@
   
 
 
-<time datetime="2016-07-13T17:03:20+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2016</time>
+<time datetime="2016-07-19T21:39:01+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/kernel/'>kernel</a>, <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -330,7 +337,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:linux kernel全局变量contig_page_data含义 http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:linux内核编译预处理编译 http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -376,8 +383,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/';
         var disqus_script = 'embed.js';
       
     (function () {
