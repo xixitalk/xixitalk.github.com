@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kernel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/kernel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-19T20:51:09+08:00</updated>
+  <updated>2016-07-20T21:37:04+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux内核代码瘦身]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip/"/>
+    <updated>2016-07-21T05:07:23+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip</id>
+    <content type="html"><![CDATA[<p>linux内核代码瘦身，原理：把不参与编译的代码删除，这样用Source Insight工具阅读代码的时候就轻简了很多。</p>
+
+<p>例子数据：原本一个嵌入式linux内核代码1万7千个C文件，精简之后只有1222个C文件，删除了1万6千个C文件。</p>
+
+<!--more-->
+
+<h4 id="section">第一步 清理临时文件</h4>
+
+<p>内核编译clean，把内核编译的临时文件都清除。</p>
+
+<h4 id="c">第二步 保存所有C文件路径</h4>
+
+<p><code>
+cd linux-3.4.5
+find ./ -name "*.c" | tee allsrc.txt
+</code></p>
+
+<h4 id="section-1">第三步 编译内核</h4>
+
+<p>无需多讲，编译内核。</p>
+
+<h4 id="strippy">第四步 用strip.py清除不参与编译的代码</h4>
+
+<p>部分代码使用了include C代码，所以用<code>ignorefilelist</code>自定义文件过滤。<code>scripts</code>是工具目录，<code>./drivers/usb/gadget/</code>里inlucde C代码太多了，所以这两个目录直接目录过滤，添加到<code>ignorepathlist</code>自定义目录过滤里。</p>
+
+<p>```
+import sys
+import os</p>
+
+<p>ignorefilelist=[‘fsr-2level.c’,’fsr-3level.c’,’percpu-km.c’,’percpu-vm.c’,’nf_conntrack_h323_types.c’]
+ignorepathlist=[’./scripts/’,’./drivers/usb/gadget/’]</p>
+
+<p>f = open(‘allsrc.txt’,’r’)  </p>
+
+<p>for line in f.readlines():
+	cfilename=line.strip(‘\n’)
+	objfilename=cfilename.replace(“.c”,”.o”)
+	asmfilename=cfilename.replace(“.c”,”.s”)
+	exefilename=cfilename.replace(“.c”,””)</p>
+
+<pre><code>cfile=cfilename.split('/')[-1]
+#print cfile
+
+flag=False
+for item in ignorepathlist:
+	if cfilename.find(item)!=-1:
+		#print cfilename
+		flag=True
+		break
+if flag:
+	continue
+
+if cfile in ignorefilelist:
+	#print cfile,cfilename
+	continue
+
+if  os.path.exists(objfilename):
+	continue
+if os.path.exists(asmfilename):
+	#print asmfilename
+	continue
+if os.path.exists(exefilename):
+	#print exefilename
+	continue
+
+if os.path.exists(cfilename):
+	print objfilename,"NOT USING and rm ",cfilename
+	os.remove(cfilename)
+	pass
+</code></pre>
+
+<p>f.close()
+```</p>
+
+<p>保存代码为<code>strip.py</code>，保存在内核目录。</p>
+
+<p><code>
+cd linux-3.4.5
+python strip.py
+</code></p>
+
+<h3 id="section-2">第五步 重新编译内核</h3>
+
+<p>重新编译内核。</p>
+
+<p>如果编译成功，清理临时文件后保存代码用于阅读；<br />
+如果编译失败，恢复缺失的文件，修改strip.py，接着编译，直到内核重新编译通过，清理临时文件后保存代码用于阅读。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核代码预处理后便于阅读]]></title>

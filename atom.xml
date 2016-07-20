@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-19T20:51:09+08:00</updated>
+  <updated>2016-07-20T21:37:04+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,147 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[linux内核代码瘦身]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip/"/>
+    <updated>2016-07-21T05:07:23+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip</id>
+    <content type="html"><![CDATA[<p>linux内核代码瘦身，原理：把不参与编译的代码删除，这样用Source Insight工具阅读代码的时候就轻简了很多。</p>
+
+<p>例子数据：原本一个嵌入式linux内核代码1万7千个C文件，精简之后只有1222个C文件，删除了1万6千个C文件。</p>
+
+<!--more-->
+
+<h4 id="section">第一步 清理临时文件</h4>
+
+<p>内核编译clean，把内核编译的临时文件都清除。</p>
+
+<h4 id="c">第二步 保存所有C文件路径</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd linux-3.4.5
+</span><span class="line">find ./ -name "*.c" | tee allsrc.txt
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="section-1">第三步 编译内核</h4>
+
+<p>无需多讲，编译内核。</p>
+
+<h4 id="strippy">第四步 用strip.py清除不参与编译的代码</h4>
+
+<p>部分代码使用了include C代码，所以用<code>ignorefilelist</code>自定义文件过滤。<code>scripts</code>是工具目录，<code>./drivers/usb/gadget/</code>里inlucde C代码太多了，所以这两个目录直接目录过滤，添加到<code>ignorepathlist</code>自定义目录过滤里。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">import sys
+</span><span class="line">import os
+</span><span class="line">
+</span><span class="line">ignorefilelist=['fsr-2level.c','fsr-3level.c','percpu-km.c','percpu-vm.c','nf_conntrack_h323_types.c']
+</span><span class="line">ignorepathlist=['./scripts/','./drivers/usb/gadget/']
+</span><span class="line">
+</span><span class="line">f = open('allsrc.txt','r')  
+</span><span class="line">
+</span><span class="line">for line in f.readlines():
+</span><span class="line">	cfilename=line.strip('\n')
+</span><span class="line">	objfilename=cfilename.replace(".c",".o")
+</span><span class="line">	asmfilename=cfilename.replace(".c",".s")
+</span><span class="line">	exefilename=cfilename.replace(".c","")
+</span><span class="line">
+</span><span class="line">	cfile=cfilename.split('/')[-1]
+</span><span class="line">	#print cfile
+</span><span class="line">	
+</span><span class="line">	flag=False
+</span><span class="line">	for item in ignorepathlist:
+</span><span class="line">		if cfilename.find(item)!=-1:
+</span><span class="line">			#print cfilename
+</span><span class="line">			flag=True
+</span><span class="line">			break
+</span><span class="line">	if flag:
+</span><span class="line">		continue
+</span><span class="line">	
+</span><span class="line">	if cfile in ignorefilelist:
+</span><span class="line">		#print cfile,cfilename
+</span><span class="line">		continue
+</span><span class="line">	
+</span><span class="line">	if  os.path.exists(objfilename):
+</span><span class="line">		continue
+</span><span class="line">	if os.path.exists(asmfilename):
+</span><span class="line">		#print asmfilename
+</span><span class="line">		continue
+</span><span class="line">	if os.path.exists(exefilename):
+</span><span class="line">		#print exefilename
+</span><span class="line">		continue
+</span><span class="line">	
+</span><span class="line">	if os.path.exists(cfilename):
+</span><span class="line">		print objfilename,"NOT USING and rm ",cfilename
+</span><span class="line">		os.remove(cfilename)
+</span><span class="line">		pass
+</span><span class="line">
+</span><span class="line">f.close()
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>保存代码为<code>strip.py</code>，保存在内核目录。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd linux-3.4.5
+</span><span class="line">python strip.py
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-2">第五步 重新编译内核</h3>
+
+<p>重新编译内核。</p>
+
+<p>如果编译成功，清理临时文件后保存代码用于阅读；<br />
+如果编译失败，恢复缺失的文件，修改strip.py，接着编译，直到内核重新编译通过，清理临时文件后保存代码用于阅读。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核代码预处理后便于阅读]]></title>
@@ -1772,994 +1913,6 @@ socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,"192.168.1.106",1081)
 <p>经测试邮件发送正常，待后续观察。</p>
 
 <p>socks支持SOCKS4、SOCKS5和HTTP代理，上述代码自行替换之。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[科学作为一种志业]]></title>
-    <link href="http://xixitalk.github.io/blog/2014/03/26/Science-as-a-Vocation/"/>
-    <updated>2014-03-26T18:08:49+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2014/03/26/Science-as-a-Vocation</id>
-    <content type="html"><![CDATA[<p>中文：<a href="http://blog.sciencenet.cn/blog-449420-610439.html">http://blog.sciencenet.cn/blog-449420-610439.html</a><br />
-英文：<a href="http://anthropos-lab.net/wp/wp-content/uploads/2011/12/Weber-Science-as-a-Vocation.pdf">http://anthropos-lab.net/wp/wp-content/uploads/2011/12/Weber-Science-as-a-Vocation.pdf</a></p>
-
-<p>【原题】Science as a Vocation 
-【译题】科学作为一种志业
-【作者】马克思.韦伯（Max Weber）
-【译注】翻译自作者于1918 年慕尼黑大学一次演讲的英译稿。</p>
-
-<!--more-->
-
-<h2 id="section">中文</h2>
-
-<p>你们希望我谈一下“科学作为一种志业”。 现在，我愿意跟随我们政治经济学家的学究式习惯 —— 总始自外部条件。在此情形中，我们以一个问题开始：从物质意义的术语上说，科学作为一种志业的条件为何？今天这个问题的意味，从实践和本质上来说：一名在大学生活中下决心将自己专职性的奉献给科学的研究生的前景是什么（What are the prospects of a graduate student who is resolved to dedicate himself professionally to science in university life）？为理解德国的奇特条件，通过比较来处理以及认识外部条件，这是可取的。从这个角度说，美国代表了和德国最剧烈的对比，所以我们应当聚焦于那个国家。</p>
-
-<p>所有人都知道，在德国，那些专致于科学的年轻人的职业一般始于讲师（Privatdozent）职位。缘由于一本书以及通常在大学教员前有一个相当正式的测验，在和各个专家谈话并受到他们认同后，他获得了常驻资格。然后，除了他学生的课费外，他给出一个不会收到任何报酬的讲课过程。在他大学任教资格（venia legendi）内，是由他来决定要讲课的主题是什么。</p>
-
-<p>在美国的学术职业通常以非常不同的方式作为开始，就是说，通过叫做“助理”这样的雇佣。这和德国伟大的自然科学研究所和医学系是类似的，这里通常只有一小部分的助理试图作为讲师来任职他们自己，而且通常是在他们职业的晚期。</p>
-
-<p>事实上，这种对比意味说，在德国学术人的职业通常都基于富有这个先决条件。因为对没有资金让一个年轻学者专注学术职业来说，他极度有危险。他必须能够经在“不知晓是否他会有机会移入到一个为维持而有很好报酬职位的条件”下历经至少一些年份。</p>
-
-<p>在美国，那里存在官僚系统，年轻的学术人从非常早开始就有了报酬。要肯定的是，他的薪水是适度的；通常很难和半熟练工人的薪水一样多。而且他以一个看起来安全的职位开始，因为他领一份固定工资。虽然作为一种规则，就像德国助教那样可能会注意到他 ，而且如果他没达到期望，他肯定经常要面对这个。</p>
-
-<p>这些期望诸如，在美国的年轻学术人必须吸引大量的学生。这不会在一个德国讲师（docent）中发生；一旦有了他就不能开除他。肯定的是，他不能由任何“权利要求（claims）”。但他有可以理解的主张就是，在若干年的工作后他有了一种道德权利来期待一些报酬。他同样期待 —— 而且这通常非常重要 —— 当其他讲师（Privatdozenten）可能犹豫的问题出现时，需要对他有某种尊重。</p>
-
-<p>是否应当在原则上授予（habilitate）所有有资格的学者，或是否应当考虑注册（enrollments）并因此给现存职员对教育的垄断 —— 那是一个尴尬的两难。这和学术职业的双重角度有关，我们现在就来讨论。一般，一个决定倾向于另一个替换（one decides in favor of the second alternative）。但这增加了增加了这样的危险性，各个正教授（无论他是多么的认真负责）都倾向于他自己的徒弟。如果我可以讲述我的个人态度，那我就必须说我追随这样的原则，就是我举荐的一个学者必须让他自己在其它大学的另外某人处合法化和授予资质。但结果是我最好徒弟中的一个在另外大学被拒掉了，因为那里没人相信这是理由。</p>
-
-<p>在德国和美国之间的进一步区别就是，在德国的讲师（Privatdozent）通常比他所愿更少一些教授课程。由于他正式的权利，他可以在他领域中给出任何课程 。但这样做会被认为是不合宜的缺乏对老讲师（docents） 的关心。作为一种规则，正教授给出“大”课，并且讲师（docent）将其自己限制到二级课程中。这些安排的优势在于，在他的年轻时期，学术人得以自由的作科学工作，虽然对这种教授机会限制是不自觉的。</p>
-
-<p>在美国，安排在原则上是不同的。恰恰是在他的早期职业年岁中，助教绝对负担过重，因为给他支付了薪水。在德国的一个系，比方说，正教授关于歌德（Goethe）会给出三小时课程而且那就足够了，与此同时年轻助教就是幸运的，如果除开德语训练外，他十二个星期的教授小时包括（比如说）Uhland 作业。官方规定课程，以及在这个中的助教正如德国的研究所助理一样独立。</p>
-
-<p>就后者我们可以清晰的观察到，在科学广阔领域中的德国大学是美国系统发展的方向（Of late we can observe distinctly that the German universities in the broad fields of science develop in the direction of the American system）。（译注：美国在上世纪初大量向德国的大学学习治理经验，故似作此译）。医学或自然科学大型研究所是“国家资本（state capitalist）”公司，若无非常大量资金是不能管理的。这里我们遭遇到和“无论何时资本公司进入运作所发现”的相同条件：“工人和他生产手段的分离（separation of the worker from his means of production）”。工人，就是助教，依赖于国家对其安排的实现（the implements that the state puts at his disposal）；因此他就像工厂中雇员依赖于管理一样依赖于研究所的头。因为，主观且以好的信仰，主管相信这个研究所是“他的”，而且他管理着其事物。因此就像任何“准无产阶级（quasi-proletarian）”的存在，助理职位常是不稳定的，就像美国大学中的助教位置那样不稳定。</p>
-
-<p>以非常重要角度来看，德国的大学生活正在美国化，就像一般的德国生活那样。我确信，这种发展将会吞这样的学科，其中的公匠私人拥有工具；本质上藏书，对我自己领域的一个大扩展仍是这种情形。这种发展完全相应于“过去和现在的技工所充分经历的是什么（what happened to the artisan of the past and it is now fully under way）”。</p>
-
-<p>就像所有资本主义和同期官僚化公司那样，所有这些中都有不容置疑的优势。但统摄这些事务的那种“精神”却和德国大学的历史气氛有所不同。介于主要是这些大型资本主义的、大学企业和通常旧风格的正教授之间有一个外在和内含上异常宽阔海湾。这种对比就内部态度而言同样成立，这件事我不会在这里继续下去。内在的就像外在的一样，旧大学的宪法变为了虚构。所留下的东西和本质上在增加的东西是特别针对大学职业的这样一个因素： 问题是，是否还仍旧是一位助教的这样一位讲师（Privatdozent）会成功的移入正教授的职位，甚至成为一个研究所的头。那只是一种冒险。肯定的，机会不会单独统治，但是它通常作出一个高度统治。我还不知道世界上有任何职业，其中机会扮演了如此的一个角色。我可能更加会这么说，因为我个人由于某种仅仅是意外（accidents）而在我早期岁月中我被任命为一个学科中的一位正教授，该学科中我的这一代人毫无疑问要成就要比我更大。而且实际上，在这种经理的基础上我设想说，我有一种锐利的眼光来理解许多人的命运，这些人意外的在相反方向上塑造而且他们在这种选择设备中尽管他们的能力没有达到他们在应对的职位。</p>
-
-<p>冒险而非扮演如此重要角色的能力这种事实并不是单一的，甚至主要是由于《人性，太人性（human, all too human）》的因素，其自然地发生在学术选择过程中，就像在任何其它选择中一样。因为“如此多的庸才却在大学中扮演毫无置疑的显著角色（so many mediocrities undoubtedly play an eminent role at the universities）”这样的事实而持有教员成员的个人自卑那是不公正的。庸才的优势主要是由于人之间协作的定律，特别是若干人之间协作更如此，而且在这种情形中，是被推荐教员的协作和教育部分教员之间的协作。</p>
-
-<p>相应的就是宗教选举中的事件，其可以追溯许多世纪而且它是最重要的“和学术选举有相同性质的一次选举”的可控例子。被说成是“受宠的（favorite）”红衣主教只有很罕见的机会胜出。其规则相当于二号红衣主教或三号红衣主教胜出。这对美国总统也是相同的。一等以及最杰出的人获得习俗的任命只是种例外。大多是二号或常常是三号人物得到任命然后竞取选举。美国人对这些分类已经形成了技术社会化关系（technical sociological terms），而且通过研究这些例子去探寻通过一种集体的选举定律非常有趣，不过我们不会在这里做。这些定律对德国大学的大学体仍旧成立，而且对经常弄出的错误不必惊讶，倒是正确任命数（在所有中所占的比例）相当值得考虑。只有就像在一些国家中的国会或就像在德国的君主（两者都以同样方式工作）如此远， 或就像现在德国中的革命力量的支持者，由于政治原因而干涉学术选举；可以确定的是，平常的庸才会有所有他们自己的机会。</p>
-
-<p>没有大学教师喜欢被提醒讨论任命，因为它们很少会令人愉快。而且我仍会说就我所知的许多案例而言，毫无例外，允许纯客观原因成为关键是有好意愿的。</p>
-
-<p>必须清楚的另外事情就是：学术命运是如此大的一个“冒险”之决定不单单是因为意志集体构造中选择的不充分。感到学术召唤的每个年轻人需要清晰的意识到，他面前的任务有双重方面。他必须取得作为一位学者的资格，还要取得作为一位教师的资格。而这两者不完全一致。一个人可以成为一位杰出学者，而与此同时可能是一位糟糕的教师。愿我提醒你们像Helmholtz 或Ranke 这些人的教育；他们不是罕见的万分之一例外。</p>
-
-<p>现在，诸如德国大学特别是小型大学这样的事情，已经忙于最可笑的为了入学的竞争。大学城里的房东通过一次节庆来祝贺第一千名学生的到来，而且他们将通过火把队列来喜爱庆贺第两千个。对费用的兴趣 —— 需要公开承认这一点 —— 通过在“吸引人群”的临近领域中的任命而受影响。且不论这个，登记的学生数是一种量化测试，其是通过数量而可能得到把控，与此同时学术资格却无法衡量，且恰恰是大胆的创新者常常是争论性的 —— 那只是天生的。几乎因此每个人都受到不可计量祝福和大型招生价值之建议的影响。说讲师（docent）是一位糟糕的教师通常就是宣判学术死刑，即便他是世界上最重要的学者。而且他是否是一位好的或糟糕的教师这个问题是由伴有“学生谦逊地尊敬他”的注册来回答的。</p>
-
-<p>事实是，是否学生聚集到一位教师是由大措施决定的，要比相信的可能性更大，通过纯粹的外部事件：性情甚至他的声音的变化。在相当广泛经历和冷静反思后，我对吸引人群的课程有一种深刻的不信任，虽然它们可能不可避免。民主只应当在恰当的地方使用。科学训练（就像我们和德国大学传统相一致的去保有对它实践）是一种智力贵族政治事务，而且我们不应当对自己隐瞒这一点。要肯定的是，以这样一种方式来呈现科学问题，从而稚气但从善如流的头脑可以理解它们，而且—— 对我们而言就是单独决定 —— 他们可以思考独立的这些科学问题，这在所有中可能是最困难的教育法。但这个任务是否能实现不是由招生数字决定的。而且 —— 回到我们的主题 —— 特别的这种艺术是一种个人天赋，且一点也没有和学者的科学资质相一致。</p>
-
-<p>和法国对比，德国没有科学中“不朽的”共同体。　根据德国的传统，大学应当公正的对待研究和教导这两者的需求。这两者是否一起都在一个人的能力中是绝对机遇（absolute chance）这么一件事。因此学术生活是一种大胆的冒险。如果年轻学者询问我关于资格（habilitation）的建议，鼓励他的责任很难会出现。如果他是犹太人，当然会说放弃一切希望（lasciate ogni speranza）。但必须问问其他每个人：你道德上完全相信你可以忍受看到庸复庸才、年复一年、爬到你前面而没有苦（embittered）、没有忧伤么？自然地，总是收到这样的回答：“当然了，我活着只为了我的‘召唤’”。然而，我发现只有一小部分人可以忍受这种情形而不带忧伤。</p>
-
-<p>关于学术人志业的外部条件我相信必须要说许多。但我实际上相信你们愿意听的是其它一些东西，就是说，对科学的内在召唤。在我们的时代（译注：似指19世纪下页），和作为一种职业的科学组织像对比，内在情形是所有以“科学已进入之前未知的一个专业化阶段”事实为条件中最先的，而且这将永远会这样。不仅仅外在的而且内在的，个人只有当他是一个严肃的专家时，才可以对在科学领域中达到某些真正的完美获得清晰意识。</p>
-
-<p>所有临近领域的重叠工作，诸如我们偶尔承担的和社会学家必须要反反复复承担的，伴有辞退的负担会意识到最好给专家提供“基于其上他不会就这么容易撞到他自己的专业化观点”的有用问题。某人自己的工作肯定无可避免的仍旧高度不完善。仅仅通过严格的专业化，科学工作者才可以有充分意识，因为在他生命中一旦就再也不会有说，他取得了某些将要忍受的东西。一个实际的限定和好的技能在今天总是一个专业成就。而且无论谁缺乏施加眼罩的能力（the capacity to put on blinders），这样说吧，而且出现“他灵魂的命运依赖于他是否在这份手稿里头他的段落中作出了正确猜测”的观念就会和科学保持距离（may as well stay away from science）。他将永不会有，人所说的科学的“个人体验”。 没有这种被每个门外汉所嘲笑的奇特陶醉，没有这种激情，那么“在进入比生命和一千更多等待的科学之前你必须通过年度一千” —— 依据是否你成功的作出了猜测；没有这个，你就没有了科学的召唤而且你要去做点其它事情。没有什么东西值得让人成为人，除非他可以带着热烈的忠诚去追寻它。</p>
-
-<p>然而事实却是，没有任何这样的热情（虽然它可能真挚而深刻）可以迫使一个问题产生出科学结果。肯定的说，热情是决定性的“灵感”之先决条件。 现如今在年轻人的圈子里有一种广泛传播的主张说，科学已经变成计算中的一个问题、变为实验室中的焊接或统计归档系统就像“在一个工厂中”那样，这种计算只涉及冷酷的智力而并不涉及一个人的“内心和灵魂”。 首先，一个人肯定会说这样的评论缺乏关于“一间工厂或是一间实验室中所发生的事（what goes on in a factory or in a laboratory）”的清晰。两者中都有某些观念在某些人的脑袋中出现，而且如果要实现任何值得的东西，它还需要是一个正确的观念。而且这样的直觉是不能强迫的。这和冷酷的计算没有任何关系。肯定的，计算也是一种不可或缺的先决条件。比方说，没有社会学家（即便在他上了年岁）在他脑中做数以万计相当琐碎的、而且可能一次要数月的计算时会把他自己想的太好。如果希望描绘点什么，甚至最终结果常常实际上是小的，就不可能免责的试图将这整个任务转移到机械帮助中去。但如果在他头脑中没有 “关于在他计算期间他计算的方向，以及关于承担意外的单独结果”的这种“观念”发生，那么即便这种小结果都不会衍生出来。</p>
-
-<p>一般而言这样一种“观念”仅仅在非常辛苦工作的土壤上才会有所准备，但肯定的是并不总是这种情形。科学的来说，一位业余爱好者对科学的观念较之一位专家对之的观念可能有非常相同甚或一个更大的承担 。我们许多非常好的猜想和洞察是正是由于业余爱好者。业余爱好者和专家的不同，就像 Helmholtz 说到 Robert Mayer 那样，仅仅在于他缺乏一种牢固而可靠的工作过程。因此他在其承担中通常不处于控制、评估或探索观念的职位。这种观念不是对工作的一种代替；而工作，反过来说，也不能代替或迫使一个观念发生，正如热情所为一样。两者，热情和工作，首先是它们的联合，可以引发观念。</p>
-
-<p>观念展现给我们是当它们令我们高兴时，而不是它（Ideas occur to us when they please, not when it pleases us）。最好的观念实际上是以我这里描述的方式发生在某人头脑中：当在沙发上抽雪茄时；或赫姆霍兹用科学规矩自我陈述（Helmholtz states of himself with scientific exactitude）：当散布于缓慢上升的街道；或一种类似方式。无论如何，观念是在我们未作期待之下来临的；而不是当我们在自己的桌子上沉思和搜寻。还有，如果我们在自己的桌子上对答案有过伴随激情奉献的沉思和搜寻，那么观念肯定不会出现在头脑中。</p>
-
-<p>虽然这可能是的，科学工作者必须对他进入全部科学工作要考虑的交易风险：是一个“观念”出现还是它出现？他可能是一位杰出的工人但仍永不会有任何他自己的有价值的观念。相信只有在科学中才如此而且那些事情比如在一个商业办公室 和一间实验室是不同的，那会是一个严重错误。没有“商业想象力”，就是说没有观念或理念直觉的一个商人或一个大工业家，在他整个生命中将会是“最多保有一个职员或一个技术官员”的一个人。他在组织中永远不会真正的创造。在科学领域中的灵感就像学术自负的幻想，较之“在由当代企业家在实践生活中掌控问题的领域中之作为”绝不会扮演任何更重要角色（Inspiration in the field of science by no means plays any greater role, as academic conceit fancies, than it does in the field of mastering problems of practical life by a modern entrepreneur）。另一方面，这也常常被误解，灵感在科学中扮演的一个角色一点也不比它在艺术领域中的角色少。认为说一个数学家通过伴有一把尺（计算机器或其它机械手段）坐在他的桌子前而获得任何科学上有价值的结果，是孩童般的主张。维尔斯特拉斯（Weierstrass）的数学想象力面向手段和结果自然和一位艺术家想象力的那些是相当不同的，而且在质上有基本性差异。但心理过程没有不同。两者都痴狂（是在柏拉图mania 的意义上）而有灵感。</p>
-
-<p>现在，我们是否有科学灵感依赖于遮蔽我们的命运，而且此外有赖于“天赋”。 最后但并非不重要的，因为这种不容置疑的真理，一种非常可以理解的态度变作流行的，特别是在年轻人中间，而且将这些年轻人服务于“其今天的狂热信徒在所有街角和在所有期刊上都占据了一大块地方”的偶像。这些偶像就是“个性（personality）”和“私人体验（personal experience）”。两者是有内在联系的，主张流行说后者构成了前者而且隶属于它。人们痛打他们自己试图“体验”生命——因为那样对意识到其等级和身份的某种个性是适合的。而且如果我们没有再“体验”生命中成功，我们必须至少装作有这种慈悲的礼物。以前我们把这称为“体验”，以朴素的德语说“感动”；而且我相信之后我们关于“个性是什么和它指的是什么”会有一个更充分的观念。</p>
-
-<p>女士们先生们。在科学领域中，只有独自奉献手边工作的人才有“个性”。 而且这不仅仅对科学领域成立；我们知道没有伟大的艺术家曾经作了任何“用于他的工作而且仅是他的工作”的事。就所关注的他的艺术而言，即便以歌德级别的一个个性，自由的试图将他的生命打造成一种艺术工作（take the liberty of trying to make his ‘life’ into a work of art）也是有害的。而且即便有人怀疑这一点，他也必须要是一个歌德级别的人，从而允许他自己有如此自由。每个人都会承认至少这么多：即便是像歌德这样一千年才出现一次的大人物，这种自由不是没有代价的（this liberty did not go unpaid for.）。在政治里的事并非不同，不过我们今天不会讨论。然而在科学领域，那些“使自己成为（他应当致力于的）主题导演”的人站到舞台上并通过体验使自己合法化，问到：我怎样才能证明我是某种比仅仅一个“专家”要不同的人，而我如何才可以用没其他人曾说过的形式或内容来说某些事呢？ ——这样的一个人没有“个性”。 今天这种行为是一种群众现象，而且其总形成一种琐碎的印象且贬低因此所关注的人。对这取而代之，对该任务的一种内在奉献，而且那将会单独的把科学家提升到“他服务的那个主题”的高度和尊严（Instead of this, an inner devotion to the task, and that alone, should lift the scientist to the height and dignity of the subject he pretends to serve）。而在这中和艺术家没有区别。</p>
-
-<p>在为科学工作和艺术共享的这些预先条件的对比中，科学有一种在本质上和艺术工作相区别的命运。科学工作被链到发展过程（Scientific work is chained to the course of progress）；与此同时在艺术王国中没有相同意义上的发展。一个时期的艺术工作会产生出新技术手段，这是不真实的，或者比方说，较之缺乏关于方式和定律之所有知识的一种艺术工作而言，透视定律在艺术上有代表更高。其是真实 “成就” 的一种艺术工作永不会被超越；永远不会过时。每个个人可能在欣赏艺术工作的个人体验中有所不同，但人永远不会能说这样的一种工作“被其也是成就的另一种工作所超越 ”。</p>
-
-<p>在科学中，我们每个人都知道他的成就（accomplished）会在10年，20年或50年内过期。那就是科学所受到的命运；当和大体上同样成立的其它文化气候比较时，科学工作所致力于其中的是一种相当具体的意义，那正是科学工作的特定意义。每一个科学“成就”都会提出新“问题”；它要求被“超越”和过期。无论谁希望服务于科学都需要使自己听从这个事实。科学工作肯定因为“它们的艺术品质，或者它们作为训练的一种手段仍旧重要”而能作为“喜悦”持续下去。虽然它们从科学上说会被超越 —— 因为那是我们共同的命运，且还有，我们共同的目标。若无“其他人会进一步发展我们所拥有的（others will advance further than we have）”希望我们就不能工作。原则上，这个发展是无限的。且我们以这个想起询问科学的意义。因为，毕竟“某种服从这样一种定律的东西自身是可感知并充满意义的”并不是自明的。为何一个人会参与到做某些实际上“从不会出现，而且到底也永不会出现”的事？</p>
-
-<p>一个人这样做，首先是因为纯实践，在这个单词更宽泛的意义上，因为技术的目的：为了能够将我们的实践活动方向确定到科学体验为我们的处理所设下的期望值。很好。然而这仅仅对业者有意义。学术人朝向他职业的态度是什么呢 ？—— 就是说，他是否完全在寻求这样的一种个人意见？他主张说，他从事“为了科学而科学（science for science’s sake）”，而且不仅仅因为通过探索科学而带来“商业或技术成功而且可有更好的供养，着装，灿烂和统治”的其它。但允许自己整合进这个无限运作的专业化组织中的他，希望在这些注定要过时的产物中之的成就是重要的，他做了什么呢？（But what does he who allows himself to be integrated into this specialized organization, running on ad infinitum, hope to accomplish that is significant in these productions that are always destined to be outdated）？这个问题需要一些综合考虑。</p>
-
-<p>科学进步是一部分，是我们历经数千年的智能进步的最重要部分，如今却常以这样一种极端负面方式来评价。让我们首先澄清，科学和面向科学性的技术所创造的这种知性论者的合理化在事实上为何（what this intellectualist rationalization, created by science and by scientifically oriented technology, means practically）。</p>
-
-<p>是不是意味说，例如，我们今天每个人坐在这会堂中的人，较之一个美洲印第安人或霍屯督人所有而言 我们存在其下的关于生活条件的知识更大呢？很难说。除非他是一位物理学家，否则乘坐有轨电车的一个人不会有关于“这两电车怎样突然移动起来”的观念。而且他也不需要知道。他满足于他他可以“期望”这有轨电车的行为，而且他依照这个预期指导其表现；但是他关于“是什么产生了这样一辆车以至于它可以移动”什么都不知道。未开化人无比的更多的知道更多他的工具。当我们今天花钱时，我打赌，即便政治经济学同事在此会堂中，他们中几乎每个人在面对这样的问题时都会持有不同回答：一个人可以用钱来买一些东西是怎么发生的 —— 更多一些还是更少一些？未开化人知道他要做什么以便获得他每天的食物，而且他知道在他的寻求中何种体系有用。不断增加的理智化和合理化却没有，提示某人生活其下的一种增加且综合的知识条件。</p>
-
-<p>指的是另外一些，就是说，如果某人愿意就可以在任何时候学习的那种知识或信念。因此，它指原则上不存在进入扮演的任何神秘而不可计算的力量，而是说一个人可以在原则上通过计算掌握所有事情。这意味着世界不再令人着迷。一个人不再需要求助魔法手段以便掌控或祈求精神，就像未开化人所为，为他们而言这样的神秘力量是存在的。技术手段和计算来执行该服务。尤其是这个是智能化的意味。</p>
-
-<p>今天，这种觉醒进步，持续有千年的存在于西方文化中，而且总体上，科学属于作为一个链接和驱动力量的这种“进步”，它们有任何超越纯实践和技术的意义么？你们会发现这个问题以最有原则的形式出现在托尔斯泰（Leo Tolstoi）的著作中。他以一种特殊的方式提出了这个问题。他所有的沉思都围绕这样的问题：是否死亡是一种有意义的现象（whether or not death is a meaningful phenomenon）。而他的答案就是：对开化人来说死亡没有意义（for civilized man death has no meaning）。所以没有是因为开化人的个体生命，依照“它自己的迫近手段永远不会到一个终点”而放入一个无限“进步”中（It has none because the individual life of civilized man, placed into an infinite ‘progress,’ according to its own imminent meaning should never come to an end）；是由于在某人进步的征程中，前头总存在一个更进一步的步子。而且没有将逝去的人会站在位于无穷之中的巅峰。Abraham 或过去某人死于“生命老了并饱足了（old and satiated with life）”是因为他位于生命的有机体循环中；因为他的生命，以它的意义和他的黄昏的语来说就是，生命需要给他提供什么（because his life, in terms of its meaning and on the eve of his days, had given to him what life had to offer）；因为对他来说没有他可能希望去解的迷；而且因此他的生命“足够了”（he could have had ‘enough’ of life）。与此同时开化人，通过观念、知识和问题而置于持续丰富的文化之中 ，可能会“厌倦生命（tired of life）”但不会“对生命饱足（satiated with life）”。开化人只是抓住了“精神所孕育的永远最新”的生命孕育的最微小部分，而且他所理解的那些总是一些暂时的而非决定性的东西，而且因此死亡的出现对他来说是没有意义的。而且因为死亡是没有意义的，开化生命就像这样是无意义的；通过其特定的“进步性”它给死亡以无意义的印记（And because death is meaningless, civilized life as such is meaningless; by its very ‘progressiveness’ it gives death the imprint of meaninglessness）。遍及托尔斯泰晚期的小说，你会遇见作为他艺术基调的这种思维。</p>
-
-<p>一个人应当采取怎样的立场？“进步”是诸如这样超越技术的一种辨识方式么？从而服务它是一种有意义的志业？必须提出这个问题。但这不再仅仅是科学对人的召唤这样一个问题，因此不再只是这样的问题，科学作为一种志业对其信徒的奉献意味着什么（what science as a vocation means to its devoted disciples）。提出这个问题就是在人类的整个生活中寻求科学职业（ask for the vocation of science within the total life of humanity）。科学的价值是什么？</p>
-
-<p>对比过去和现在的差异是巨大的。你们会在柏拉图《理想国》的第七部分开始处回忆起精彩绝伦的图景：那些脸部被束缚面向前面石墙的洞穴人。在他们前面存在着他们看不到的光源。他们所关注的只是光投射到墙上的影像，而且他们寻求彻底了解其相互关系。最终他们中的一个人成功的挣脱他的枷锁，回转身，看到了太阳。眼花缭乱，他摸索着并吃惊于他之所见。其他人说他在胡言乱语。但渐渐的他学会注视阳光，而且后来他的目标是下到洞穴人那并将他们带向光明。他是一位哲学家；然而太阳就是科学真理，其不是基于假象和影子而是基于真理单独来掌握。</p>
-
-<p>好吧，谁今天还用这样一种方式来看待科学？今天年轻人感到的恰是相反东西：科学的智力构造组成人造抽象的一个虚构王国 ，其以他们干瘦的手去寻求理解永远没赶上的真实生命之血和气 。但在生命的这里，对柏拉图来说就是“洞穴墙上的影子”游戏，真诚的实际就是律动；而且剩下的是生命的派生物，无生命的鬼魂，而且没有其它了。这个改变是怎么出现的？</p>
-
-<p>柏拉图在理想国中的激情热忱肯定要通过（以最近的分析）“头一次清晰的意识到的观念，所有科学知识的最伟大工具之一（for the first time the concept, one of the great tools of all scientific knowledge, had been consciously discovered）”的事实来解释。苏格拉底在举止（bearing）中发现了它。他不是世上唯一发现它的人。在印度发现非常类似于亚里士多德逻辑的一种逻辑的开初。但我们没有在任何其它地方发现“概念重要性（the significance of the concept）”这种意识。第一次，在希腊出现了一种敏捷的手段，通过其一个人就可以用逻辑方式令某人结果不能不承认要么就是他什么都不知道要么这而不是其它任何东西就是真理，永恒真理永不会像盲人所为的那样消失。那是降临在苏格拉底门徒上的巨大体验。而且从这看起来就跟着说，如果仅仅找到美或善的正确概念，或比方说，勇气的，灵魂的 ——或随便什么——那么同样可以理解它的真实本体。反过来，这看起来为了解和教授如何在生活中正确的去举动开启了道路，尤其是如何作为国家的一个公民而举动；这个问题对希腊人而言是所有事，其思考是充满了政治的。而且由于这些原因一个人参与到科学中。</p>
-
-<p>科学工作的第二个伟大工具，理性实验，使其有了“文艺复兴时期发现希腊精神 “这方面的外貌。这种实验是可靠控制经历的一种手段。没有它，今日的经验主义科学（empirical science）就是不可能的。早前有过实验，比方说在印度，作出生理实验是服务于苦行瑜伽技术；在希腊遗迹中，作出数学实验是为了战争技术的目的；在中世纪是为了采矿。但将实验提升到研究的一种原理的是文艺复兴之成就。他们是艺术中伟大的发明家，实验的先驱。达芬奇（Leonardo）和他的喜好以及，尤其是，十六世纪在音乐中用他们实验性钢琴的实验家是典型。从这些循环起实验（特别是通过伽利略）进入了科学，实验通过培根进入了理论；而后来被大陆大学的各种精确训练所接管，首先是意大利的那些大学的，然后是尼德兰的那些大学的。</p>
-
-<p>科学对这些站立在现代门栏上的人意味着什么呢？对达芬奇和音乐发明家的艺术实验类型来说，科学意味着到真正艺术的道路，而且那对他们意味到真正自然的道路。艺术将要被提升到一门科学的等级，而这意味着同时尤其是要提升艺术家到导演的等级，社会性及关于他生活的意义。这是（比如说）达芬奇素描书籍所基于的那种雄心而今天呢？“科学作为到自然的道路”在年轻人听起来像是亵渎的话。今天年轻人宣扬相反的：从科学的知性主义（intellectualism）中救赎 ，从而返回一个人自己的天性并于是返回一般的天性。科学作为到艺术的一种道路？这里甚至不需要批评。</p>
-
-<p>但在经历精确科学提升的时期，某人期待多得多的东西。如果你们回忆起Swammerdam 的陈述：“我在解剖一只跳蚤中给你带来了上帝天意的证据（Here I bring you the proof of God’s providence in the anatomy of a louse）”，你们就会知道科学工作者（直接受到新教徒和新教徒的影响）认为他的任务为何：显示到上帝的道路。人们不再在用其概念和推论的哲学家中发现这条道路。那时包括Spener的所有虔信派神学家都知道，上帝不能沿着中世纪寻找他的那条道路去寻找。上帝是隐藏的，他的道路不是我们的道路，他的思想不是我们的思想。然而在精确科学中，这里可以具体的理解他的工作，希望临到他为世界预备的痕迹。而今天呢？谁 —— 除了在自然科学中有所发现的特定大的儿童外 —— 还相信天文学，生物学或化学的发现可以教给我们任何关于这个世界的事呢？如果存在任何这样的“意义”，沿着哪条路才可以临到其痕迹呢？如果这些自然科学在这条道路中导出了任何东西，他们就倾向于作出这样的信念，存在作为宇宙的“意义”这样一种东西消失于其特有的根（there is such a thing as the ‘meaning’ of the universe die out at its very roots）。</p>
-
-<p>那么最后，科学作为到“上帝”的一种方式？科学，这种特定的无宗教力量？没人在他内心最深处会怀疑今天科学是无宗教的 ，即便他自己不对自己承认这一点。对理性主义及知性主义科学的救赎是生活在神圣联盟（union with the divine）中的基本假定。这，或某种意义上类似的东西，是在德国青年人中听到的一个基本口号 ，其感觉被调校到宗教信仰或渴求宗教体验。他们渴求的不仅仅是宗教体验而且是类似的体验。唯一奇怪的事情就是不跟随的方法：非理性的范围（知性主义尚未触及的唯一范围）现在被提升进意识且放在其透镜下。因为实践上这是罗曼蒂克的非理性主义所导向的现代知性论者形成之处。这种从知性主义中解放出来的方法很可能会对那些以其为目标的人带来恰恰相反的东西。</p>
-
-<p>当尼采（Nietzsche）毁灭性的批评那些“发明了幸福的新人”时，我可能要完全撇开天真的乐观主义其中的科学 ——就是说，仰赖于科学的那种掌控生命的技术 —— 已经作为到幸福的方式而出名了。谁相信这个呢？—— 除了大学椅子上或编辑办公室中的少数大儿童。让我们继续我们的论证。</p>
-
-<p>在这些内部预先假设之下，现在毕竟那些以前的说明“到真正本体的道路，到真正艺术的道路，到真正自然的道路，到真正上帝的道路，到真正快乐的道路”已经消散了，那么科学作为一种志业的意义是什么呢？托尔斯泰用以下字句给出了最简单的答案：“科学是没有意义的是因为它不对我们的问题给出答案，对我们唯一重要的问题就是：我们要做什么以及我们应该怎样去生活 ”。科学不对此给出一种答案是无可争议的。唯一剩下的问题就是，于其中科学给出 no 回答的意义，且无论科学是否可能对那种将这个问题调正确的人而言有一些用处。</p>
-
-<p>今天通常将科学说成“免于假想（free from presuppositions）”。有这样的一个东西么？这依赖于一个人从哪方面理解了。逻辑和方法所规范的所有科学工作之假想是有用的；我们在世界中定位的一般基础是存在的；而且，至少就我们的特定问题来说，这些假想是科学的最少不确定方面。科学深化了假想，这是由在“值得知道”的意义上是重要的科学工作所产生的。寓于其中，明显包含了所有我们的问题。就这种假想而言，它不能为科学手段所证明。仅可通过求助于其根本手段使其得到解释，我们必须据我们面向生命的终极位置来拒接或接受依。</p>
-
-<p>还有，科学工作和其假想之间的关系性质依据它们的结构而有广泛差异。自然科学，比如说，物理学、化学和天文学，当了解宇宙事件的终极定律时作为自明的假想是有价值的， 只要科学可以构建它们。所以这是案例，不仅是因为以这样的知识某人可以获得技术结果而且是由于其自身的原因，如果对这类知识的索求将成为一种“志业（vocation）”。然而这种假想毫无疑问可以证明。而且不那么可以得到证明说这些科学所描述的世界之存在是值得的，就是说有任何“意义”，或生活在这样一个世界中有意义。科学并不寻求对这类问题有所回答。</p>
-
-<p>考虑现代医学，一种其得到高度科学发展的实践技术。医学公司的一般“假想” 在“医学科学有诸如维持生命以及诸如最大可能度的消除痛苦这样的任务”断言中得到了平凡描述。然而这是有疑问的。他的意思是，即便病人祈求我们解除他的生命，即便对他“维持他无价值的生命之成本增长难以忍受”的亲属而言他的生命是无价值的，医学人保存重病病人的生命、从痛苦中施予救赎。可能涉及一个贫穷的精神病人，他的亲属，无论承认与否，希望而且肯定希望他的死亡。然而医学的假想以及刑法典都阻止医师放弃其治疗努力。无论生命是否值得活以及什么时候 ——这个问题不是由医学来回答的。自然科学给了我们对这个问题关于我们必须做什么的一个回答，如果我们希冀从技术上掌控生命。留下的相当枝节，或为其目的而假设，我们是否应当而且确实希冀从技术上掌控生命以及是否它这么做最终有意义。</p>
-
-<p>考虑一种学科诸如美学。艺术工作的这种事实是为了美。它寻求找出在什么样的条件下这个事实存在，但不会提出这样的问题 —— 是否艺术王国可能是恶魔宏伟的一个王国，这个世界的一个王国，而且因此在其核心和上帝是敌对的，在其内心最深处和贵族精神中和人类的手足之情相敌对。因此，美学并不会问——是否应当存在艺术工作（whether there should be works of art）。</p>
-
-<p>考虑法理（jurisprudence）。依据“部分义务为逻辑所强制部分为给定纲要的传统所佑”的法学思维规则而确立起什么是有效的（It establishes what is valid according to the rules of juristic thought, which is partly bound by logically compelling and partly by conventionally given schemata）。当某种法律规则和某种解释方法作为捆绑而得到识别时法律思维成立（Juridical thought holds when certain legal rules and certain methods of interpretations are recognized as binding）。是否应当存在法律以及是否应当确立恰恰这些规则 ——这类问题法理并不会回答。唯一会陈述的是：如果希冀这些结果，依据我们法律思维规范，这种法律规则是获取它的适当手段。</p>
-
-<p>考虑历史和文化科学。它们教授我们如何从它们的起源去理解并解释政治、艺术、文学和社会现象。但关于“是否这些存在的文化现象有其价值和有价值（whether the existence of these cultural phenomena have been and are worth while）”的问题，它们没有给我们答案。而且它们不会回答进一步的问题，是否值得努力需要去知道它们。他们假想说，通过开化人团体的这种过程而在领受中有一种兴趣 。但他们不能“科学的”证明这是案例；而且他们通过毫无疑问有无言的证明来假想这种兴趣。实际上完全不是自明的。</p>
-
-<p>最后，让我们考虑我所接近的学科：社会学，历史学、经济学、政治科学，以及让解释这些科学成为其任务的那些文化哲学类型。就是说，而且我同意，政治处于讲室之外。它不属于那儿在学生的一边。比方说，如果在我以前于柏林的Dietrich Schafer 学院的讲室中，和平主义学生包围他的桌子并发出骚动，我就会对之感到“就和我对远离我的遥远骚动的遗憾一样多” 的遗憾。然而，既非政治属于讲师那部分的讲室，亦非当讲师科学性的关注政治时，它尤其不属于那里。</p>
-
-<p>采取一种实际政治观点是一回事，分析政治结构党的地位是另一回事。当在一个政治会议中谈论民主时，一个人不会隐瞒自己的个人观点；实际上，对明确结果和采取一种姿态来说是一个人注定的责任。一个人在这样一个会议中使用的字句没有科学分析意义，但意味着拉票选举和竞取对方。他们不是犁头来松软冥想思维的沙土；他们是反对敌人的剑：这样的字句是武器。然而，以这种方式在一次演讲或一个讲室中使用单词会是愤慨的。比方说如果“民主”被得到讨论，一个人考虑它的各种形式，以它们功能的方式去分析它们，决定在一种形式成所拥有的生活条件在和其它形式比较时会有怎么样的结果（determines what results for the conditions of life the one form has as compared with the other）。然后就遇到政治秩序的的民主形式及非民主形式，并尽力达到“学生可能在这里找到，用他终极理想的话来说，他可以采取一种立场（where the student may find the point from which, in terms of his ultimate ideals, he can take a stand）”的一种位置。但真正的教师会清晰意识到加诸在学生位置上的任何政治位置，无论是表达出来的或是提示出来的。实事求是的来说，在学生上加诸一种政治位置最不公平方式。</p>
-
-<p>为何我们应当放弃这么做？我提前陈述说某些高度受到尊敬的同时有“不可能通过自我约束来执行”的主张，而且即便可能，它都会是一个躲避说明自我的怪念头。现在一个人不能科学性的指明一位学术教师的职责是什么。仅可以要求教师说他有智力完整性来看出“陈述事实、决定数学或逻辑关系或内在的文化结构之结构”是一回事，与此同时 “回答关于文化和其个体内容价值的问题，回答一个人在文化群体政治组织中应当如何行动的问题”是另一回事。这些是相当异质的问题。如果他进一步问，为何他不应当在讲室中应对两种问题类型，回答就是：因为预言者和煽动者都不属于学术平台（because the prophet and the demagogue do not belong on the academic platform）。</p>
-
-<p>就预言者和煽动者而言，要说的是：“出去到街上走你的路并公开对世界说”就是说，在可能有评论的地方讲话。在讲室中我们站着面对我们的听众，而且其还必须保持安静。我认为探索“出于他们职业的理由学生必须参加一堂教师的课程与此同时没有人会以批评来反对他”的气氛是不负责任的。教师的责任是要他的知识和科学经验来服务学生而非将他自己的政治观点强加在他们头上。肯定可能的是说，个体教师在消除他的个人情感上不会完全成功。他然后就在他自己的良心论坛暴露于最尖锐的批评。而这种缺陷不能证明任何事；其它错误也是可能的，比方说对事实的错误陈述，然而面对搜寻真理的责任他们什么都没证明。我同样以科学的特定兴趣拒绝这个。我已经准备好来自我们历史学家的著作的证明说，无论何时关于科学的一个人引入他个人价值判断，对这种事实的一整个理解就终止了（whenever the man of science introduces his personal value judgment, a full understanding of the facts ceases）。不过这超越了今晚的主题，而且需要长篇大论。</p>
-
-<p>我仅要问：一个“在一方面是共济会（Freemason）的一个成员，另一方面又处在以教会或国家形式或宗教历史的一个过程中”虔诚的天主教徒当如何被带去评价这些类似主题？这根本就不知道。而且学术教师仍旧必须欲求且必须要求他自己，用他自己的知识和方法去服务于这个人和那个人。现在你们会正确的说，虔诚的天主教徒从不会接受“引起基督教的有效因素”的观点其中一个教师免于给他呈现的教条预想。肯定的！然而这种不同在于下面：科学“免于假想”（在宗教盟约的意义上）它并不知道“神迹”和“启示”。 如果它知道，科学就会不忠实于它自己的“假想”。 信者知道神迹和启示这两者。而 “免于假想” 的科学较之承认“如果（一个经验解释需要消除偶然的因素）过程可以没有那些超自然干预而得到解释，那么该过程必须以科学试图去做的方式而得到解释” 而言对他的期望不多也不少。而信者可以不背叛他的信仰就这样做。</p>
-
-<p>但科学的贡献就对并不去关心了解诸如真相这样（或仅对实践事务有关的）的一个人完全没有意义么？然而可能科学很可能贡献了一点东西。</p>
-
-<p>一位有用的教师之首要任务是教授他的学生去认识“不方便的”真相 ——我指的真相是就他们党的主张而言的不方便。而且就每个党的主张存在极端不方便的真相，因为我自己的主张不比其他人来得少。我相信较之仅仅一个智力任务而言教师实现更多的东西，如果他迫使其听众自身习惯于这种真相的存在。我将如此不谦虚甚至采用“道德成就” 这样的表达，虽然这可能听起来对某些应当做而不说的事情过于浮夸。</p>
-
-<p>到目前为止为了避免强加上一个私人观点我仅讲述了实践原因。但这些不是唯一的原因。“合科学地”为实践及有兴趣立场而辩护是不可能 —— 除了在“对一个固定给出及预设结果的方式”讨论中 —— 所基于原因的位置要深刻得多了。</p>
-
-<p>“科学的（Scientific）”辩护原则上是没有意义的，这是因为世界上的各种价值氛围之立场互为矛盾。老 Mill （我在其它方面不会赞许其哲学），当他说“如果某人从纯粹经验出发而开始，这个人达到多神教（If one proceeds from pure experience, one arrives at polytheism）”时处于这个正确之处。这在简洁陈述中是肤浅的而且听上去似是而非，然而其中仍旧存在真相。如果我们今天再次意识到的任何东西其所以可被圣神化不仅虽然它那不存在的美，更是因为迄今它是不美的（If anything, we realize again today that something can be sacred not only in spite of its not being beautiful, but rather because and in so far as it is not beautiful）。你们可以在以赛亚书的五十三章和诗篇的二十一章中找到这个记录。而且，自从尼采起，我们意识到某些东西可以是美的，不仅虽然其中它不好的方面，更是在那个特定方面中（not only in spite of the aspect in which it is not good, but rather in that very aspect.）。你们可以在波德莱尔（Baudelaire）对他诗卷的命名《恶之花（Fleurs du mal）》中发现之前就有表述。观察到某些东西可能是真的虽然它不美且不圣神不善良，这很平常。实际上它在那些方面可能精确为真。但所有这些仅是“各种秩序和价值的神参与其中的”奋斗的最基本案例。我不知道一个人怎么可能期望决定法国和德国文化的“合科学地”价值 ；就这里同样的，不同的神在现在而且在所有将来会来临的时间中互相斗争。</p>
-
-<p>我们的生活就像“当他们的世界尚未对其神和鬼感到幻灭时的”古人之所为，我们仅仅是在一种不同意义上生活。就像希腊人有时祭祀阿佛洛狄特神（Aphrodite）有时候是阿波罗（Apollo）神，而且总之，就像人人向他城市的神祭祀，我们今天仍是这样，仅仅人的举止不在有吸引力并且剥夺了其神秘性但内在却真实可塑（only the bearing of man has been disenchanted and denuded of its mystical but inwardly genuine plasticity）。命运，而且肯定不是“科学”掌控着这些神和它们的斗阵。一个人可以仅仅理解为了这种或那种秩序的神性为何，或更好的，寓于这种活那种秩序中的神性为何。然而随着这种理解，达到其极限的这种事对可以在一个讲室中由一位教授对它讨论来说是如此遥远。然而大而重要的问题是寓于其中，当然，离有所结论远得很。但是强迫了除了大学教席以外的人，在这件事上有他们自己的话。</p>
-
-<p>什么样的人会试图让自己“合科学地拒绝”在山上布道的伦理？比如说，这个句子“抵制不邪恶（resist no evil）”或不要反抗（turning the other cheek）的图景？而且以世俗观点来看它还是清楚的，就是这是不庄重引导的一种布道；一个人不得不在“这种伦理所授予的宗教尊严和其有时的宣扬相当之不同的主要引导的尊严”之间做出选择；“抵抗邪恶 —— 以免你要为一种压倒性邪恶共同负责。 ” 根据我们的终极观点，一方是撒旦另一方是上帝，而个人需要决定谁是其上帝谁是撒旦。而且其所及遍布生活中所有命令。</p>
-
-<p>宏伟的理性主义是对生命的一种伦理和方法性引导，自每一种宗教预言流出的这种理性主义为了“要紧的一件事”已经废黜了这种多神论 。面对外在现实和内在生命，，基督教认为必须作出这些比较和相关判断，这我们从历史中都能知道。今天日常例行生活挑战了宗教。许多旧神从它们的墓穴中升腾上来；它们不再迷人因此采取了非人的力量。它们努力获取统摄我们生活的力量，且还有它们再次开始其永久的互相斗争。对现代人类这是什么样的艰难啊，而且特别是对年轻一代来说，就是符合工作日的存在。无所不在的追求“经验”就源自于这个弱点；因为这种弱点不能支持我们重大时刻的坚定严肃性。</p>
-
-<p>当我们的眼睛盲了一千年以后（被据称或大概排它的面向基督教理论的宏大道德品味所蒙蔽），我们的文明注定了我们要再次更清晰的意识到这些斗争。</p>
-
-<p>但这些导向遥远的问题足够了。我们那些处于错误中的年轻人对所有这些的反应是通过说。“是的，但我们恰巧进入讲课是为了体验某些不仅仅只是对事实的分析和描述”。 错误是他们在专业中寻找某种不同于在他们面前所表现的东西。他们在渴求一个指挥者而非一位老师。但我们是被放置在单独作为教师的讲台上。而且这些是两种不同的事情，就像一个人很容易看出。请允许我再次将你们带到美国，这是因为在那里一个人常常可以在它们最大型和源初形状中观察到这样的事情。</p>
-
-<p>美国男孩学的比德国男孩无法形容要少许多。虽然一种不可相信数量的考试，他的学校生涯并把他变成绝对的考试动物（就像在德国）。由于在美国，其官僚机构，将考试文凭假设作为到办公室俸禄的一张入场券，仅仅只是在其开始。年轻的美国人并不因为传统或官厅而尊敬任何事任何人 —— 除非那是因为的个体人的个人成就。这就是美国人所说的“民主”。 这是民主的意义，然而可能实际上是对其意图的歪曲，这种意图就是这里所关乎的事情。美国人就他所面对的教师概念是：他为了我爸爸的钱出售给我他的知识和方法，就好像蔬菜水果商卖给我妈妈的卷心菜。而且那就是全部了。肯定的是，如果这位老师碰巧是位足球教练，那么，在这个领域中，他就是一位领导者。但如果他不是这个（或在运动的一个不同领域中某种类似的东西），那么他只是一位教师没有更多了。而且没有年轻的美国人会对这位教师卖给他的是一种世界观（Weltanschauung）或者一种行为准则（a code of conduct）而思索一下。现在，当以种风格明确表述时，我们应当拒绝这个。但问题是，这种感觉中是否没有一粒盐（whether there is not a grain of salt contained in this feeling），我已经有意用带某种夸张的极端来陈述了。</p>
-
-<p>同学们！你们来到我们的讲课并且从我们这里要求领导力素质，而且你们没能提前意识到，一百位教授中至少有九十九位没有这种东西而且肯定不会在生活的重要问题上宣称自己是一位足球大师，或甚至在引导的事情上是“领导者”。 请，不依赖于一个人是否有领导力素质而考虑他的价值。而且在任何情况下，使得一个人成为一位杰出学者和学术教师的素质不是使得他成为在实践生活中给出方向的一个领导者的素质（更具体的说，是政治）。如果一位教师也是掌握这种素质那纯粹是偶然，而且如果讲台上的每位教师感到他自己面对学生“教师应当宣称这种素质”的希求时，其是一种危险情形。如果任意让每位学术教师自己扮演成讲室中的一位领导者会更加危险。因为那些最频繁将他们自己想成领导者的人常常最没有作为领导者的资格。但和是否他们是领导者没有关系，讲台局面就证明他们自己是领导者简单的没提供可能性。感觉召唤要作为年轻人顾问并享有他们信任的教授可以证明他自己是和他们有个人关系的一个人。而且如果他觉得召唤去介入世界观的斗争和党的主张，他可以在外头这么做，在市场上，在新闻界，在会议上，在协会中，无论哪里他愿意的地方。但毕竟，在听众和可能的反对者不得不安静的地方去展示某人采取一种姿态时的勇气有点过于方便。</p>
-
-<p>最后，你们会提出这个问题：“如果是这样子，那么科学实际上对个人‘生活’的积极贡献又是什么呢？”于是我们又回到科学作为一种“志业”的问题上去了。</p>
-
-<p>当然，首先科学通过计算外在对象以及人的活动而对控制生命的技术有所贡献。好吧，你们会说，毕竟，不过就是美国男孩的蔬菜商。我完全同意。</p>
-
-<p>第二，科学可以提供一些蔬菜商不能提供的东西：思维方法，用于思维的工具和训练。可能你们会说：好吧，那不是蔬菜，但那不过就是为了生产蔬菜的方法而已。很好，让我们今天不去管它。然而幸运的是，科学对这个的贡献并没达到其极限。我们能够帮助你们到第三种目标：获得清晰性。当然，预设是我们自己拥有清晰性。就这种情形而言，我们可以对你们弄清楚以下事：</p>
-
-<p>实践上，当你们关注一个价值问题时可以采取这种或那种位置  —— 为简洁起见，请想一下社会现象作为例子。如果你们采用诸如这般的一种立场，那么，根据科学体验，你们不得不使用诸如此类的一种方式从而在实践上实现你们的确信。现在，这些方式可能是那些诸如你们相信你们应当拒绝的方式。然后你们仅仅必须在结局和无可避免的方法之中进行选择。结局会证明方法的合法么？或者不会么？教师可以以这种选择的必要性面对你们。他不能做更多了，只要他希望仍旧是一位教师而非煽动者。当然，他同样可以告诉你们说如何你们希望诸如此类的结局，那么你们必须考虑讨价还价的“其依据所有体验将会出现的”附属结果。再一次我们发现自己就像之前一样处于相同局面。这些仍旧是同样会对技术人员浮现出来的问题，他们在许多例子中必须依据两权相害取其轻（the lesser evil or of the relatively best）的原理作出决策 。对他唯一的事情（主要的事情）通常就是放弃，就是说，结局。但就对我们而言的真实“终极”问题，这不是例子。随着这个，以长久的持续，我们来到最终服务就是，作为这样的科学可以给予目标以清晰度，而且与此同时我们就来到了科学的限制。</p>
-
-<p>除此外我们可以而且应当陈述：用它意义的术语来说，诸如此类的带有内在一致性以及因此完整性的一种实践立场可以从这种或那种终极的思想（weltanschauliche）位置中导出。可能只可以从一个这样的基本位置导出，或可能从若干个，但是它不可以从这些或那些其它位置导出。象征性的说，当你们决定依附这个位置时你们要服务这个神且冒犯那个神。而且如果你们记得对自己的信仰，你们将肯定会得出特定的最终结论说主观是有意义的。这许多（在原则上至少）可以被完成。哲学（作为一种特别的训练）以及对其它学科中原理的本质性哲学讨论试图达到此。因此，如果我们在追求中胜任（我们必须在这里预设）我们就可以迫使个体，或至少我们可以帮助他们，给他自己一个“他自己引导终极意义”的账户。这对我表现出并非如此琐碎的一件事情，即便是某人自己的私人生活。还有，我有兴趣讲一下继承了“他代表了服务于‘道德’力量”的一位教师；他履行了带来自我澄清和一种责任感的职责。而且我相信他愈发能够实现这个，他就愈发能够良心上避免将私人欲望加诸其上或将他自己的立场建议给听众。</p>
-
-<p>我这里提出的这种命题，总是采取和一个基本事实相分离的一种角度，就是只要生命仍是内在的而且用自己的术语来解释，那么它仅仅只知道这些神之间不断的斗争。或者直接说，面向生命的终极可能性态度是矛盾的，而且因此它们的斗争永不会带来一个最终结论。因此有必要做出一个决择。“无论在这样的条件下对某些人是‘职业’的科学是一种价值，而且无论科学自身客观地是有价值的‘职业’”，再一次对对在这个讲室中没有什么可以说的东西进行价值判断。肯定科学的价值是为了在那里进行教授的一个前提假设。我个人用我自己肯定的特定回答，而且我还这么做恰恰是来自（就像年轻人今天的所为）“将知性主义作为世界的恶魔来憎恨”的观点，或通常仅仅想象它在做。在那种情形中这个字句对这些年轻人是成立的：“记住，魔鬼是老的；变老去理解他（Mind you, the devil is old; grow old to understand him）”。这并不是指出生证意义上的年龄。它是指，如果一个人希望和这个魔鬼和解，这个人就必须不在他面前打架就像今天许多所做的。首先，一个人为了意识到他的力量和他的限制必须看出魔鬼到终点的道路。</p>
-
-<p>今天的科学是以服务于互相关联事实的自我澄清和知识而专门训练组织起来的一个“职业”。 它不是优雅先知和预言家分配稀少价值和启示的礼物，也没有参与到贤人和哲学家关于宇宙意义的沉思中。这个（肯定）就是我们历史布局无可避免的条件。只要我们仍要对自己保有真相，我们不能逃避它。而且如果托尔斯泰的问题对你们重现：既然科学不可以，那谁来回答 “我们该做什么以及我们应该怎样安排自己的生活（What shall we do, and, how shall we arrange our lives）”这个问题呢？或者用今晚这里的字词来说：“我们应当拜祭哪一方的战神？或者我们可以拜祭完全不同的神么，这个神是谁？（’Which of the warring gods should we serve? Or should we serve perhaps an entirely different god, and who is he?）”。如果没有这样的人或者如果他的信息不再被相信，那么你们肯定不会通过“让数千教授（作为国家有特权的雇员）试图在他们的讲室中作为接管他角色的小先知”迫使他出现在这个大地上。他们所有将达到的会显示他们不清楚事件的决策状态：我们如此多的更年轻一代人所向往的先知简单的不存在。但在其强有力重要性中的这种知识从未对他们至关重要。一个真实而严肃的“音乐”人的内在兴趣从来不会通过“对他和其他人通过给他们空想的预言仿制品遮掩基本事实——他注定要活在一个无神和无先知的时代（by veiling to him and to others the fundamental fact that he is destined to live in a godless and prophetless time by giving him the ersatz of armchair prophecy）”而来对待。他宗教器官的完整性（这在我看来）肯定反抗这个。</p>
-
-<p>现在你们会倾向于说：一个人采用何种立场去面对“神学”的事实性存在？让我们不要退缩和逃避回答。肯定的是，“神学”和“教条”不是普遍存在的，但就基督教而言它们不能单独存在。当然（回溯时间），它们同样存在于高度发展的伊斯兰教，摩尼教（Manicheanism）、诺斯替教（Gnosticism）、俄耳甫斯主义（Orphism）、拜火教（Parsism），佛教（Buddhism），印度教（Hindu sects），道教（Taoism），奥义书（Upanishads），当然还有犹太教（Judaism）。肯定的是它们的系统性发展差异巨大。西方基督教 ——在和犹太人的神学财产对比中 ——已经将神学更有系统的扩展与精致化或努力这么做，这并非意外。在西方神学的发展到目前为止有最巨大的历史重要性。这是希腊精神的产物，而且西方的所有神学都源于它，就像（明显的）所有东方神学源于印度思想。所有神学都对拥有超验价值表现出一种智性合理化。没有科学绝对免于预设，而且没有科学可以对那些拒绝这些假设的人证明其本质价值。然而每一种神学，为了它的工作且因此为了它存在的理由都加上了一点点具体预设。它们的手段和范围不同。每一种神学，包括比如说印度教神学，假设这个世界必须有一种意义，而且问题是如何解释这种意义从而在理智上是可以想象的。</p>
-
-<p>这和康德的认识论是一致的。他的出发点假设是：“科学真理存在而且有效”，然后问道：“在何种思想假设下真理是可能的而且是有意义的（Under which presuppositions of thought is truth possible and meaningful ）？”现代美学家（实际上或明显的，比如G. v. Lukacs）从“存在艺术工作（works of art exist）”假设开始，然后问：“它们的存在怎样具有意义和可能（How is their existence meaningful and possible）？”</p>
-
-<p>然而作为一种规则，神学，并不满意于这种（特别是宗教性的和哲学性的）假设。它们有规则的从进一步的假设“特定‘启示’是和拯救相关的事实”开始下去从而使得一种有意义的生活引导成为可能。因此，这些启示必须要相信。还有，神学假设特定的主观状态和动作具有圣神品质，就是说，它们组成了生活的一种方式，或者至少是初阶的一种东西，就是虔诚的意义。然后神学问题就是：这些“对以一种世界观来充满意义的作出解释必须简单的去接受”预设如何可能？就神学而言，像这样的这些预设是超越“科学”的限制的。在通常意义下它们不能呈现“知识（knowledge）”，而是呈现出“所有（possession）”无论谁没“拥有”信仰或其它至善的状态，就不能让神学作为他们的替代，任何其它科学尤其少。相反，在每一种“积极”的神学中，虔诚达到了奥古斯丁的话所指：所以我不相信是因为它的荒谬（credo non quod, sed quia absurdum est）。</p>
-
-<p>严肃艺术大师之成就的能力 ——智力牺牲（intellectual sacrifice）——是积极而严肃的人之决定性特征。这正是通过“虽然（或者更加是结果）神学（将其公之于众）但“科学”的价值-范围和“至善”范围之间的张力是不可逾越的”事实来显示的。合理的说，仅仅信徒才为先知提供“智力牺牲”，为教堂提供信者。从来就还没有通过需要“一些现代知性去装备他们伴有‘这么说，保护真正古董的’的灵魂 (some modern intellectuals to furnish their souls with, so to speak, guaranteed genuine antiques)”的方式而出现的一种新预言（而且我谨慎的在这里重复这个冒犯了一些人的图景）。这么做时，他们碰巧记起宗教就属于这些古物之间，而且在所有东西中宗教是他们所没拥有的。然而通过代替的方式，他们以伴有小神圣图景的国内教堂对整个世界去敷衍文饰，或者通过他们归因于神秘圣洁之尊严的所有种类物理经验去产生他们在书市中叫卖的那种代用品。这简直就是骗子或自欺欺人。然而，如果在最近几年期间的一些安静的聚集起来的年轻人团体对他们的人群解释一种宗教、宇宙的或神秘的关系，那就没有欺骗而是某种非常真实而诚恳的东西，虽然偶尔可能这样的解释依赖于对自身的错误理解。确实是真的说，真诚手足之情的每一个动作可能和“对一种超个人领域贡献了某种不朽的东西”的意识相互联系，在我看来“纯粹的人和公共关系之尊严是否通过这些宗教解释而得到了提高（whether the dignity of purely human and communal relations is enhanced by these religious interpretations）”颇为可疑。不过那不再是我们的主题。</p>
-
-<p>我们时代的命运是通过“合理化和智能化”来刻画的，总之是通过“世界的觉醒（disenchantment of the world）”。准确的说，终极和最庄严价值已经从公众生活中褪去进入到神秘生活的先验王国或进入到直接而个人关系的友爱中。我们最伟大的艺术是亲密的而非不朽的这不是意外，今天只有在最小和亲密的圈子中才会“在个体人类情形中、在极微弱中、相应预言元气而脉动的某种东西，在以前的时代会类似一把大火那样席卷大的团体而将它们焊接到一起”也不是意外。如果我们试图在艺术中迫使而且“发明”一种不朽风格，这种悲惨的怪物就会像过去二十年中许多历史遗迹一样产生。如果某人试图从知性上对不带一种新而真诚预言的新宗教进行分析解释，那么在一种内在意义上，某种类似的东许会出现，不过带着更糟的影响。而且学术预言，最终，将只会创造狂热的教派而永远不会有一个诚挚的共同体。</p>
-
-<p>对不能像一个人那样去承受时代命运的人，必须说：他宁可坦率而简单的安静返回。老教堂的手臂对他宽广而仁慈的敞开着。毕竟，它们没有让他很为难。他需要以这种或那种方式带来他的“智力牺牲” —— 那是不可避免的。如果他真的可以这么做，我们不能指责他。因为为了一种无条件宗教奉献所作的这样一种智力牺牲，伦理上较之回避智力完整性的直白责任是相当不一样的事情，如果一个人缺乏勇气去澄清自己的终极观点它就会到来而且通过无力的相对判断帮助了这种责任。在我看来，这样的宗教回归比学术预言站得更高，这种预言并没有清晰的意识到，在这个世界的讲室中除了智力诚实外没有其它的德性（in the lecture-rooms of the university no other virtue holds but plain intellectual integrity）。虽然诚实迫使我们说，就今天期盼新先知和救世主的许多人而言，情形仍旧是一样的  回想包含在以色列神谕中被放逐时期的美丽的以东夜巡人之歌（Edomite watchman’s song）：</p>
-
-<blockquote>
-  <p>他叫我离开西珥，看守人，什么样的夜？夜巡人说，黎明来了，夜晚也来了：如果你询问，问候你：返回、来临。</p>
-</blockquote>
-
-<p>被这样说的人们需要询问而且期盼超过两千年，而且当我们意识到其命运时我们动摇了。从这我们希望吸取教训就是没有什么可以单独通过怀念和期盼而获得，并且我们应当有不同的行动。我们应当在人的关系中同时在我们的职业中着手工作并满足“日常之需”。 然而如果每个人都发现并服从掌握他特定生命的魔鬼，这只是简单而直白的。</p>
-
-<p>(完)</p>
-
-<h2 id="section-1">英文</h2>
-
-<p>Science as a Vocation<br />
-by Max Weber</p>
-
-<p>Published as “Wissenschaft als Beruf,” Gesammlte Aufsaetze zur Wissenschaftslehre(Tubingen, 1922), pp. 
-524-55. Originally a speech at Munich University, 1918, published in 1919 by Duncker &amp; Humblodt, 
-Munich. </p>
-
-<p>From H.H. Gerth and C. Wright Mills (Translated and edited), From Max Weber: Essays in Sociology, pp. 
-129-156, New York: Oxford University Press, 1946. </p>
-
-<p>You wish me to speak about ‘Science as a Vocation.’ Now, we political economists have a pedantic custom, 
-which I should like to follow, of always beginning withthe external conditions. In this case, we begin with 
-the question: What are the conditions of science as a vocation in the material sense of the term? Today this 
-question means, practically and essentially: What are the prospects of a graduate student who is resolved to 
-dedicate himself professionally to science in university life? In order to understand the peculiarity of German 
-conditions it is expedient to proceed by comparison and to realize the conditions abroad. In this respect, the 
-United States stands in the sharpest contrast withGermany, so we shall focus upon that country. </p>
-
-<p>Everybody knows that in Germany the career of the young man who is dedicated to science normally begins 
-with the position of Privatdozent. After having conversed with and received the consent of the respective 
-specialists, he takes up residence on the basis of a book and, usually, a rather formal examination before the 
-faculty of the university. Then he gives a course of lectures without receiving any salary other than the 
-lecture fees of his students. It is up to him to determine, within his venia legendi, the topics upon which he 
-lectures. </p>
-
-<p>In the United States the academic career usually beginsin quite a different manner, namely, by employment 
-as an ‘assistant.’ This is similar to the great institutes of the natural science and medical faculties in Germany, 
-where usually only a fraction of the assistants try to habilitate themselves as Privatdozentenand often only 
-later in their career. </p>
-
-<p>Practically, this contrast means that the career of the academic man in Germany is generally based upon 
-plutocratic prerequisites. For it is extremely hazardousfor a young scholar without funds to expose himself 
-to the conditions of the academic career. He must be able to endure this condition for at least a number of 
-years without knowing whether he will have the opportunity to move into a position which pays well enough 
-for maintenance. </p>
-
-<p>In the United States, where the bureaucratic system exists, the young academic man is paid from the very 
-beginning. To be sure, his salary is modest; usually it is hardly as much as the wages of a semi-skilled 
-laborer. Yet he begins with a seemingly secure position,for he draws a fixed salary. As a rule, however, 
-notice may be given to him just as with German assistants, and frequently he definitely has to face this 
-should he not come up to expectations. </p>
-
-<p>These expectations are such that the young academic in America must draw large crowds of students. This 
-cannot happen to a German docent; once one has him, one cannot get rid of him. To be sure, he cannot raise 
-any ‘claims.’ But he has the understandable notion that after years of work he has a sort of moral right to 
-expect some consideration. He also expects–and this is often quite important–that one have some regard for 
-him when the question of the possible habilitation of other Privatdozenten comes up. </p>
-
-<p>Whether, in principle, one should habilitate every scholar who is qualified or whether one should consider 
-enrollments, and hence give the existing staff a monopoly to teach–that is an awkward dilemma. It is 
-associated with the dual aspect of the academic profession, which we shall discuss presently. In general, one 
-decides in favor of the second alternative. But this increases the danger that the respective full professor, 
-however conscientious he is, will prefer his own disciples. If I may speak of my personal attitude, I must say 
-I have followed the principle that a scholar promotedby me must legitimize and habilitate himself with 
-somebody else at another university. But the result has beenthat one of my best disciples has been turned 
-down at another university because nobody there believed this to be the reason. </p>
-
-<p>A further difference between Germany and the United States is that in Germany the Privatdozentgenerally 
-teaches fewer courses than he wishes. According to his formal right, he can give any course in his field. But 
-to do so would be considered an improper lack of consideration for the older docents. As a rule, the full 
-professor gives the ‘big’ courses and the docent confines himself to secondary ones. The advantage of these 
-arrangements is that during his youth the academic man is free to do scientific work, although this restriction 
-of the opportunity to teach is somewhat involuntary. </p>
-
-<p>In America, the arrangement is different in principle. Precisely during the early years of his career the 
-assistant is absolutely overburdened just because he is paid. In a department of German, for instance, the full 
-professor will give a three-hour course on Goethe and that is enough, whereas the young assistant is happy if, 
-besides the drill in the German language, his twelveweekly teaching hours include assignments of, say, 
-Uhland. The officials prescribe the curriculum, and in this the assistant isjust as dependent as the institute 
-assistant in Germany. </p>
-
-<p>Of late we can observe distinctly that the German universities in the broad fields of science develop in the 
-direction of the American system. The large institutes of medicine or natural science are ‘state capitalist’ 
-enterprises, which cannot be managed without very considerable funds. Here we encounter the same 
-condition that is found wherever capitalist enterprise comes into operation: the ‘separation of the worker from 
-his means of production.’ The worker, that is, the assistant, is dependent upon the implements that the state 
-puts at his disposal; hence he is just as dependent upon the head of the institute as is the employee in a 
-factory upon the management. For, subjectively and in good faith, the director believes that this institute is 
-‘his,’ and he manages its affairs. Thus the assistant’s position is often as precarious as is that of any ‘quasi-proletarian’ existence and just as precarious as the position of the assistant in the American university. </p>
-
-<p>In very important respects German university life is being Americanized, as is German life in general. This 
-development, I am convinced, will engulf those disciplines in which the craftsman personally owns the tools, 
-essentially the library, as is still the case to a large extent in my own field. This development corresponds 
-entirely to what happened to the artisan of the past and it is now fully under way. </p>
-
-<p>As with all capitalist and at the same time bureaucratized enterprises, there are indubitable advantages in all 
-this. But the ‘spirit’ that rules in these affairs is different from the historical atmosphere of the German 
-university. An extraordinarily wide gulf, externally and internally, exists betweenthe chief of these large, 
-capitalist, university enterprises and the usual full professor of the old style. This contrast also holds for the 
-inner attitude, a matter that I shall not go into here. Inwardly as well as externally, the old university 
-constitution has become fictitious. What has remained and what has been essentially increased is a factor 
-peculiar to the university career: the question whether or not such a Privatdozent, and still more an assistant, 
-will ever succeed in moving into the position of a full professor or even become the head of an institute. That 
-is simply a hazard. Certainly, chance does not rule alone, but it rules to an unusually high degree. I know of 
-hardly any career on earth where chance plays such a role. I may say so all the more since I personally owe it 
-to some mere accidents that during my very early years I was appointed to a full professorship in a discipline 
-in which men of my generation undoubtedly had achieved more that I had. And, indeed, I fancy, on the basis 
-of this experience, that I have a sharp eye for the undeserved fate of the many whom accident has cast in the 
-opposite direction and who within this selective apparatus in spite of all their ability do not attain the 
-positions that are due them. </p>
-
-<p>The fact that hazard rather than ability plays so large a role is not alone or even predominantly owing to the 
-‘human, all too human’ factors, which naturally occur in the process of academic selection as in any other 
-selection. It would be unfair to hold the personal inferiority of faculty members or educational ministries 
-responsible for the fact that so many mediocrities undoubtedly play an eminent role at the universities. The 
-predominance of mediocrity is rather due to the lawsof human co-operation, especially of the co-operation 
-of several bodies, and, in this case, co-operation of the faculties who recommend and of the ministries of 
-education. </p>
-
-<p>A counterpart are the events at the papal elections, which can be traced over many centuries and which are 
-the most important controllable examples of a selection of the same nature as the academic selection. The 
-cardinal who is said to be the ‘favorite’ only rarely has a chance to win out. The rule is rather that the Number 
-Two cardinal or the Number Three wins out. The same holds for the President of the United States. Only 
-exceptionally does the first-rate and most prominent man get the nomination of the convention. Mostly the 
-Number Two and often the Number Three men are nominated and later run for election. The Americans have 
-already formed technical sociological terms for these categories, and it would be quite interesting to enquire 
-into the laws of selection by a collective will by studying these examples, but we shall not do so here. Yet 
-these laws also hold for the collegiate bodies of German universities, and one must not be surprised at the 
-frequent mistakes that are made, but rather at the numberof correct appointments, the proportion of which, in 
-spite of all, is very considerable. Only where parliaments, as in some countries, or monarchs, as in Germany 
-thus far (both work out in the same way), or revolutionary power-holders, as in Germany now, intervene for 
-political reasons in academic selections, can one be certainthat convenient mediocrities or strainers will have 
-the opportunities all to themselves. </p>
-
-<p>No university teacher likes to be reminded of discussions of appointments, for they are seldom agreeable. 
-And yet I may say that in the numerous cases known to me there was, without exception, the good will to 
-allow purely objective reasons to be decisive. </p>
-
-<p>One must be clear about another thing: that the decision over academic fates is so largely a ‘hazard’ is not 
-merely because of the insufficiency of the selection by the collective formation of will. Every young man 
-who feels called to scholarship has to realize clearly that the task before him has a double aspect. He must 
-qualify not only as a scholar but also as a teacher. And the two do not at all coincide. One can be a 
-preeminent scholar and at the same time an abominably poor teacher. May I remind you of the teaching of 
-men like Helmholtz or Ranke; and they are not by any chance rare exceptions. </p>
-
-<p>Now, matters are such that German universities, especially the small universities, are engaged in a most 
-ridiculous competition for enrollments. The landlords of rooming houses in university cities celebrate the 
-advent of the thousandth student by a festival, and they would love to celebrate Number Two Thousand by a 
-torchlight procession. The interest in fees–and one shouldopenly admit it–is affected by appointments in the 
-neighboring fields that ‘draw crowds.’ And quite apart from this, the number of students enrolled is a test of 
-qualification, which may be grasped in terms of numbers, whereas the qualification for scholarship is 
-imponderable and, precisely with audacious innovators, often debatable–that is only natural. Almost 
-everybody thus is affected by the suggestion of the immeasurable blessing and value of large enrollments. To 
-say of a docent that he is a poor teacher is usually to pronounce an academic sentence of death, even if he is 
-the foremost scholar in the world. And the question whether he is a good or a poor teacher is answered by the 
-enrollments with which the students condescendingly honor him. </p>
-
-<p>It is a fact that whether or not the students flock to a teacher is determined in large measure, larger than one 
-would believe possible, by purely external things: temperament and even the inflection of his voice. After 
-rather extensive experience and sober reflection, I havea deep distrust of courses that draw crowds, however 
-unavoidable they may be. Democracy should be used only where it is in place. Scientific training, as we are 
-held to practice it in accordance with the tradition of German universities, is the affair of an intellectual 
-aristocracy, and we should not hide this from ourselves.To be sure, it is true that to present scientific 
-problems in such a manner that an untutored but receptive mind can understand them and–what for us is 
-alone decisive–can come to think about them independently is perhaps the most difficult pedagogical task of 
-all. But whether this task is or is not realized is not decided by enrollment figures. And–to return to our 
-theme–this very art is a personal gift and by no means coincides with the scientific qualifications of the 
-scholar. </p>
-
-<p>In contrast to France, Germany has no corporate body of ‘immortals’ in science. According to German 
-tradition, the universities shall do justice to the demandsboth of research and of instruction. Whether the 
-abilities for both are found together in a man is a matterof absolute chance. Hence academic life is a mad 
-hazard. If the young scholar asks for my advice with regard to habilitation, the responsibility of encouraging 
-him can hardly be borne. If he is a Jew, of course one says lasciate ogni speranza. But one must ask every 
-other man: Do you in all conscience believe that you can stand seeing mediocrity after mediocrity, year after 
-year, climb beyond you, without becoming embittered and without coming to grief? Naturally, one always 
-receives the answer: ‘Of course, I live only for my “calling.” ‘ Yet, I have found that only a few men could 
-endure this situation without coming to grief. </p>
-
-<p>This much I deem necessary to say about the external conditions of the academic man’s vocation. But I 
-believe that actually you wish to hear of something else, namely, of the inward calling for science. In our 
-time, the internal situation, in contrast to the organization of science as a vocation, is first of all conditioned 
-by the facts that science has entered a phase of specialization previously unknown and that this will forever 
-remain the case. Not only externally, but inwardly, matters stand at a point where the individual can acquire 
-the sure consciousness of achieving something truly perfect in the field of science only in case he is a strict 
-specialist. </p>
-
-<p>All work that overlaps neighboring fields, such as we occasionally undertake and which the sociologists must 
-necessarily undertake again and again, is burdened with the resigned realization that at best one provides the 
-specialist with useful questions upon which he would not so easily hit from his own specialized point of 
-view. One’s own work must inevitably remain highly imperfect. Only by strict specialization can the 
-scientific worker become fully conscious, for once and perhaps never again in his lifetime, that he has 
-achieved something that will endure. A really definitive and good accomplishment is today always a 
-specialized accomplishment. And whoever lacks the capacity to put on blinders, so to speak, and to come up 
-to the idea that the fate of his soul depends upon whether or not he makes the correct conjecture at this 
-passage of this manuscript may as well stay away from science. He will never have what one may call the 
-‘personal experience’ of science. Without this strange intoxication, ridiculed by every outsider; without this 
-passion, this ‘thousands of years must pass before you enter into life and thousands more wait in silence’–according to whether or not you succeed in making this conjecture; without this, you have no calling for 
-science and you should do something else. For nothing is worthy of man as man unless he can pursue it with 
-passionate devotion. </p>
-
-<p>Yet it is a fact that no amount of such enthusiasm, however sincere and profound it may be, can compel a 
-problem to yield scientific results. Certainly enthusiasm isa prerequisite of the ‘inspiration’ which is decisive. 
-Nowadays in circles of youth there is a widespread notion that science has become a problem in calculation, 
-fabricated in laboratories or statistical filing systems just as ‘in a factory,’ a calculation involving only the 
-cool intellect and not one’s ‘heart and soul.’ First of all one must say that such comments lack all clarity about 
-what goes on in a factory or in a laboratory. In both some idea has to occur to someone’s mind, and it has to 
-be a correct idea, if one is to accomplish anything worthwhile. And such intuition cannot be forced. It has 
-nothing to do with any cold calculation. Certainly calculation is also an indispensable prerequisite. No 
-sociologist, for instance, should think himself too good, even in his old age, to make tens of thousands of 
-quite trivial computations in his head and perhaps for months at a time. One cannot with impunity try to 
-transfer this task entirely to mechanical assistants if one wishes to figure something, even though the final 
-result is often small indeed. But if no ‘idea’ occurs to his mind about the direction of his computations and, 
-during his computations, about the bearing of the emergent single results, then even this small result will not 
-be yielded. </p>
-
-<p>Normally such an ‘idea’ is prepared only on the soil ofvery hard work, but certainly this is not always the 
-case. Scientifically, a dilettante’s idea may have the verysame or even a greater bearing for science than that 
-of a specialist. Many of our very best hypotheses and insights are due precisely to dilettantes. The dilettante 
-differs from the expert, as Helmholtz has said of Robert Mayer, only in that he lacks a firm and reliable work 
-procedure. Consequently he is usually not in the position to control, to estimate, or to exploit the idea in its 
-bearings. The idea is not a substitute for work; and work, in turn, cannot substitute for or compel an idea, just 
-as little as enthusiasm can. Both, enthusiasm and work, and above all both of them jointly, can entice the 
-idea. </p>
-
-<p>Ideas occur to us when they please, not when it pleases us. The best ideas do indeed occur to one’s mind in 
-the way in which Ihering describes it: when smoking a cigar on the sofa; or as Helmholtz states of himself 
-with scientific exactitude: when taking a walk on a slowly ascending street; or in a similar way. In any case, 
-ideas come when we do not expect them, and not when we are brooding and searching at our desks. Yet 
-ideas would certainly not come to mind had we not brooded at our desks and searched for answers with 
-passionate devotion. </p>
-
-<p>However this may be, the scientific worker has to take into his bargain the risk that enters into all scientific 
-work: Does an ‘idea’ occur or does it not? He may bean excellent worker and yet never have had any 
-valuable idea of his own. It is a grave error to believethat this is so only in science, and that things for 
-instance in a business office are different from a laboratory. A merchant or a big industrialist without 
-‘business imagination,’ that is, without ideas or ideal intuitions, will for all his life remain a man who would 
-better have remained a clerk or a technical official. He will never be truly creative in organization. 
-Inspiration in the field of science by no means plays any greater role, as academic conceit fancies, than it 
-does in the field of mastering problems of practical life by a modern entrepreneur. On the other hand, and 
-this also is often misconstrued, inspiration plays no less a role in science than it does inthe realm of art. It is 
-a childish notion to think that a mathematician attains any scientifically valuable results by sitting at his desk 
-with a ruler, calculating machines or other mechanical means. The mathematical imagination of a 
-Weierstrass is naturally quite differently oriented in meaning and result than is the imagination of an artist, 
-and differs basically in quality. But the psychological processes do not differ. Both are frenzy (in the sense of 
-Plato’s ‘mania’) and ‘inspiration.’ </p>
-
-<p>Now, whether we have scientific inspiration depends upon destinies that are hidden from us, and besides 
-upon ‘gifts.’ Last but not least, because of this indubitable truth, a very understandable attitude has become 
-popular, especially among youth, and has put them in the service of idols whose cult today occupies a broad 
-place on all street corners and in all periodicals. These idols are ‘personality’ and ‘personal experience.’ Both 
-are intimately connected, the notion prevails that the latter constitutes the former and belongs to it. People 
-belabor themselves in trying to ‘experience’ life–for that befits a personality, conscious of its rank and 
-station. And if we do not succeed in ‘experiencing’ life, we must at least pretend to have this gift of grace. 
-Formerly we called this ‘experience,’ in plain German, ‘sensation’; and I believe that we then had a more 
-adequate idea of what personality is and what it signifies. </p>
-
-<p>Ladies and gentlemen. In the field of science only he who is devoted solely to the work at hand has 
-‘personality.’ And this holds not only for the field of science; we know of no great artist who has ever done 
-anything but serve his work and only his work. As far as his art is concerned, even with a personality of 
-Goethe’s rank, it has been detrimental to take the liberty of trying to make his ‘life’ into a work of art. And 
-even if one doubts this, one has to be a Goethe in order to dare permit oneself such liberty. Everybody will 
-admit at least this much: that even with a man like Goethe, who appears once in a thousand years, this liberty 
-did not go unpaid for. In politics matters are not different, but we shall not discuss that today. In the field of 
-science, however, the man who makes himself the impresario of the subject to which he should be devoted, 
-and steps upon the stage and seeks to legitimate himself through ‘experience,’ asking: How can I prove that I 
-am something other than a mere ‘specialist’ and how can I manage to say something in form or in content that 
-nobody else has ever said ?–such a man is no ‘personality.’ Today such conduct is a crowd phenomenon, and 
-it always makes a petty impression and debases the one who is thus concerned. Instead of this, an inner 
-devotion to the task, and that alone, should lift the scientist to the height and dignity of the subject he 
-pretends to serve. And in this it is not different with the artist. </p>
-
-<p>In contrast with these preconditions which scientific work shares with art, science has a fate that profoundly 
-distinguishes it from artistic work. Scientific work is chained to the course of progress; whereas in the realm 
-of art there is no progress in the same sense. It is not true that the work of art of a period that has worked out 
-new technical means, or, for instance, the laws of perspective, stands therefore artistically higher than a work 
-of art devoid of all knowledge of those means and laws–if its form does justice to the material, that is, if its 
-object has been chosen and formed so that it could beartistically mastered without applying those conditions 
-and means. A work of art which is genuine ‘fulfilment’ is never surpassed; it will never be antiquated. 
-Individuals may differ in appreciating the personal significance of works of art, but no one will ever be able 
-to say of such a work that it is ‘outstripped by another work which is also ‘fulfilment.’ </p>
-
-<p>In science, each of us knows that what he has accomplished will be antiquated in ten, twenty, fifty years. 
-That is the fate to which science is subjected; it is the very meaning of scientific work, to which it is devoted 
-in a quite specific sense, as compared with other spheres of culture for which in general the same holds. 
-Every scientific ‘fulfilment’ raises new ‘questions’; it asks to be ‘surpassed’ and outdated. Whoever wishes to 
-serve science has to resign himself to this fact. Scientific works certainly can last as ‘gratifications’ because of 
-their artistic quality, or they may remain important as a means of training. Yet they will be surpassed 
-scientifically–let that be repeated–for it is our common fate and, more, our common goal. We cannot work 
-without hoping that others will advance further than we have. In principle, this progress goes on ad infinitum. 
-And with this we come to inquire into the meaning ofscience. For, after all, it is not self-evident that 
-something subordinate to such a law is sensible and meaningful in itself. Why does one engage in doing 
-something that in reality never comes, and never can come, to an end? </p>
-
-<p>One does it, first, for purely practical, in the broader sense of the word, for technical, purposes: in order to be 
-able to orient our practical activities to the expectations that scientific experience places at our disposal. 
-Good. Yet this has meaning only to practitioners. Whatis the attitude of the academic man towards his 
-vocation–that is, if he is at all in quest of such a personal attitude? He maintains that he engages in ‘science 
-for science’s sake’ and not merely because others, by exploiting science, bring about commercial or technical 
-success and can better feed, dress, illuminate, and govern. But what does he who allows himself to be 
-integrated into this specialized organization, running on ad infinitum, hope to accomplish that is significant 
-in these productions that are always destined to be outdated? This question requires a few general 
-considerations. </p>
-
-<p>Scientific progress is a fraction, the most important fraction, of the process of intellectualization which we 
-have been undergoing for thousands of years and which nowadays is usually judged in such an extremely 
-negative way. Let us first clarify what this intellectualist rationalization, created by science and by 
-scientifically oriented technology, means practically. </p>
-
-<p>Does it mean that we, today, for instance, everyone sitting in this hall, have a greater knowledge of the 
-conditions of life under which we exist than has an American Indian or a Hottentot? Hardly. Unless he is a 
-physicist, one who rides on the streetcar has no idea how the car happened to get into motion. And he does 
-not need to know. He is satisfied that he may ‘count’ on the behavior of the streetcar, and he orients his 
-conduct according to this expectation; but he knows nothingabout what it takes to produce such a car so that 
-it can move. The savage knows incomparably more about his tools. When we spend money today I bet that 
-even if there are colleagues of political economy here in the hall, almost every one of them will hold a 
-different answer in readiness to the question: How does it happen that one can buy something for money–sometimes more and sometimes less ? The savage knows what he does in order to get his daily food and 
-which institutions serve him in this pursuit. The increasing intellectualization and rationalization do not, 
-therefore, indicate an increased and general knowledge of the conditions under which one lives. </p>
-
-<p>It means something else, namely, the knowledge or belief that if one but wished one could learn it at any 
-time. Hence, it means that principally there are no mysterious incalculable forces that come into play, but 
-rather that one can, in principle, master all things by calculation. This means thatthe world is disenchanted. 
-One need no longer have recourse to magical means in order to master or implore the spirits, as did the 
-savage, for whom such mysterious powers existed. Technical means and calculations perform the service. 
-This above all is what intellectualization means. </p>
-
-<p>Now, this process of disenchantment, which has continued to exist in Occidental culture for millennia, and, 
-in general, this ‘progress,’ to which science belongs as a link and motive force, do they have any meanings 
-that go beyond the purely practical and technical? You will find this question raised in the most principled 
-form in the works of Leo Tolstoi. He came to raise the question in a peculiar way. All his broodings 
-increasingly revolved around the problem of whether ornot death is a meaningful phenomenon. And his 
-answer was: for civilized man death has no meaning. It has none because the individual life of civilized man, 
-placed into an infinite ‘progress,’ according to its own imminent meaning should never come to an end; for 
-there is always a further step ahead of one who stands in the march of progress. And no man who comes to 
-die stands upon the peak which lies in infinity. Abraham,or some peasant of the past, died ‘old and satiated 
-with life’ because he stood in the organic cycle of life; because his life, in terms of its meaning and on the eve 
-of his days, had given to him what life had to offer;because for him there remained no puzzles he might wish 
-to solve; and therefore he could have had ‘enough’ of life. Whereas civilized man, placed in the midst of the 
-continuous enrichment of culture by ideas, knowledge, and problems, may become ‘tired of life’ but not 
-‘satiated with life.’ He catches only the most minute part of what the life of the spirit brings forth ever anew, 
-and what he seizes is always something provisional and not definitive, and therefore death for him is a 
-meaningless occurrence. And because death is meaningless, civilized life as such is meaningless; by its very 
-‘progressiveness’ it gives death the imprint of meaninglessness. Throughout his late novels one meets with 
-this thought as the keynote of the Tolstoyan art. </p>
-
-<p>What stand should one take? Has ‘progress’ as such a recognizable meaning that goes beyond the technical, 
-so that to serve it is a meaningful vocation? The question must be raised. But this is no longer merely the 
-question of man’s calling for science, hence, the problemof what science as a vocation means to its devoted 
-disciples. To raise this question is to ask for the vocation of science within the total life of humanity. What is 
-the value of science? </p>
-
-<p>Here the contrast between the past and the present istremendous. You will recall the wonderful image at the 
-beginning of the seventh book of Plato’s Republic: those enchained cavemen whose faces are turned toward 
-the stone wall before them. Behind them lies the source of the light which they cannot see. They are 
-concerned only with the shadowy imagesthat this light throws upon the wall, and they seek to fathom their 
-interrelations. Finally one of them succeeds in shattering his fetters, turns around, and sees the sun. Blinded, 
-he gropes about and stammers of what he saw. The otherssay he is raving. But gradually he learns to behold 
-the light, and then his task is to descend to the cavemen and to lead them to the light. He is the philosopher; 
-the sun, however, is the truth of science, which alone seizes not upon illusions and shadows but upon the true 
-being. </p>
-
-<p>Well, who today views science in such a manner ? Today youth feels rather the reverse: the intellectual 
-constructions of science constitute an unreal realm of artificial abstractions, which with their bony hands 
-seek to grasp the blood-and-the-sap of true life without ever catching up with it. But here in life, in what for 
-Plato was the play of shadows on the walls of the cave, genuine reality is pulsating; and the rest are 
-derivatives of life, lifeless ghosts, and nothing else. How did this change come about? </p>
-
-<p>Plato’s passionate enthusiasm in The Republic must, in the last analysis, be explained by the fact that for the 
-first time the concept, one of the great tools of all scientific knowledge, had been consciously discovered. 
-Socrates had discovered it in its bearing. He was not the only man in the world to discover it. In India one 
-finds the beginnings of a logic that is quite similar tothat of Aristotle’s. But nowhere else do we find this 
-realization of the significance of the concept. In Greece, for the first time, appeared a handy means by which 
-one could put the logical screws upon somebody so that he could not come out without admitting either that 
-he knew nothing or that this and nothing else was truth, the eternal truth that never would vanish as the 
-doings of the blind men vanish. That was the tremendous experience which dawned upon the disciples of 
-Socrates. And from this it seemed to follow that if one only found the right concept of the beautiful, the 
-good, or, for instance, of bravery, of the soul–or whatever–that then one could also grasp its true being. And 
-this, in turn, seemed to open the way for knowing and for teaching how to act rightly in life and, above all, 
-how to act as a citizen of the state; for this question was everything to the Hellenic man, whose thinking was 
-political throughout. And for these reasons one engaged in science. </p>
-
-<p>The second great tool of scientific work, the rational experiment, made its appearance at the side of this 
-discovery of the Hellenic spirit during the Renaissance period. The experiment is a means of reliably 
-controlling experience. Without it, present-day empirical science would be impossible. There were 
-experiments earlier; for instance, in India physiologicalexperiments were made in the service of ascetic yoga 
-technique; in Hellenic antiquity, mathematical experiments were made for purposes of war technology; and 
-in the Middle Ages, for purposes of mining. But to raise the experiment to a principle of research was the 
-achievement of the Renaissance. They were the great innovators in art, who were the pioneers of experiment. 
-Leonardo and his like and, above all, the sixteenth-century experimenters in music with their experimental 
-pianos were characteristic. From these circles the experiment entered science, especially through Galileo, and 
-it entered theory through Bacon; and then it was taken over by the various exact disciplines of the continental 
-universities, first of all those of Italy and then those of the Netherlands. </p>
-
-<p>What did science mean to these men who stood at the threshold of modern times? To artistic experimenters 
-of the type of Leonardo and the musical innovators, science meant the path to true art, and that meant for 
-them the path to true nature. Art was to be raised to the rank of a science, and this meant at the same time and 
-above all to raise the artist to the rank of the doctor, socially and with reference to the meaning of his life. 
-This is the ambition on which, for instance, Leonardo’s sketch book was based. And today ? ‘Science as the 
-way to nature’ would sound like blasphemy to youth.Today, youth proclaims the opposite: redemption from 
-the intellectualism of science in order to return to one’s own nature and therewith to nature in general. 
-Science as a way to art? Here no criticism is even needed. </p>
-
-<p>But during the period of the rise of the exact sciences one expected a great deal more. If you recall 
-Swammerdam’s statement, ‘Here I bring you the proof of God’s providence in the anatomy of a louse,’ you 
-will see what the scientific worker, influenced (indirectly) by Protestantism and Puritanism, conceived to be 
-his task: to show the path to God. People no longer found this path among the philosophers, with their 
-concepts and deductions. All pietist theology of the time, above all Spener, knew that God was not to be 
-found along the road by which the Middle Ages had sought him. God is hidden, His ways are not our ways, 
-His thoughts are not our thoughts. In the exact sciences, however, where one could physically grasp His 
-works, one hoped to come upon the traces of what He planned for the world. And today? Who–aside from 
-certain big children who are indeed found in the natural sciences–still believes that the findings of 
-astronomy, biology, physics, or chemistry could teach us anything about the meaning of the world? If there is 
-any such ‘meaning,’ along what road could one comeupon its tracks? If these natural sciences lead to 
-anything in this way, they are apt to make the belief that there is such a thing as the ‘meaning’ of the universe 
-die out at its very roots. </p>
-
-<p>And finally, science as a way ‘to God’? Science, thisspecifically irreligious power? That science today is 
-irreligious no one will doubt in his innermost being, even if he will not admit it to himself. Redemption from 
-the rationalism and intellectualism of science is the fundamental presupposition of living in union with the 
-divine. This, or something similar in meaning, isone of the fundamental watchwords one hears among 
-German youth, whose feelings are attuned to religion or who crave religious experiences. They crave not 
-only religious experience but experience as such. The only thing that is strange is the method that is now 
-followed: the spheres of the irrational, the only spheres that intellectualism has not yet touched, are now 
-raised into consciousness and put under its lens. For in practice this is where the modern intellectualist form 
-of romantic irrationalism leads. This method of emancipation from intellectualism may well bring about the 
-very opposite of what those who take to it conceive as its goal. </p>
-
-<p>After Nietzsche’s devastating criticism of those ‘lastmen’ who ‘invented happiness,’ I may leave aside 
-altogether the naive optimism in which science–that is, the technique of mastering life which rests upon 
-science–has been celebrated as the way to happiness. Who believes in this?–aside from a few big children in 
-university chairs or editorial offices. Let us resume our argument. </p>
-
-<p>Under these internal presuppositions, what is the meaning of science as a vocation, now after all these former 
-illusions, the ‘way to true being,’ the ‘way to true art,’ the ‘way to true nature,’ the ‘way to true God,’ the ‘way 
-to true happiness,’ have been dispelled? Tolstoi has given the simplest answer, with the words: ‘Science is 
-meaningless because it gives no answer to our question, the only question important for us: “What shall we 
-do and how shall we live?” ‘ That science does not give an answer to this is indisputable. The only question 
-that remains is the sense in which science gives ‘no’ answer, and whether or not science might yet be of some 
-use to the one who puts the question correctly. </p>
-
-<p>Today one usually speaks of science as ‘free from presuppositions.’ Is there such a thing? It depends upon 
-what one understands thereby. All scientific work presupposes that the rules of logic and method are valid; 
-these are the general foundations of our orientation in the world; and, at least for our special question, these 
-presuppositions are the least problematic aspect of science. Science further presupposes that what is yielded 
-by scientific work is important in the sense that it is ‘worth being known.’ In this, obviously, are contained all 
-our problems. For this presupposition cannot be proved by scientific means. It can only be interpreted with 
-reference to its ultimate meaning, which we must reject or accept according to our ultimate position towards 
-life. </p>
-
-<p>Furthermore, the nature of the relationship of scientific work and its presuppositions varies widely according 
-to their structure. The natural sciences, for instance, physics, chemistry, and astronomy, presuppose as self-evident that it is worth while to know the ultimate laws of cosmic events as far as science can construe them. 
-This is the case not only because with such knowledge one canattain technical results but for its own sake, if 
-the quest for such knowledge is to be a ‘vocation.’ Yet this presupposition can byno means be proved. And 
-still less can it be proved that the existence of the world which these sciences describe is worth while, that it 
-has any ‘meaning,’ or that it makes sense to live in such a world. Science does not ask for the answers to such 
-questions. </p>
-
-<p>Consider modern medicine, a practical technology which is highly developed scientifically. The general 
-‘presupposition’ of the medical enterprise is stated trivially in the assertion that medical science has the task 
-of maintaining life as such and of diminishing sufferingas such to the greatest possible degree. Yet this is 
-problematical. By his means the medical man preserves the life of the mortally ill man, even if the patient 
-implores us to relieve him of life, even if his relatives, to whom his life is worthless and to whom the costs of 
-maintaining his worthless life grow unbearable, grant his redemption from suffering. Perhaps a poor lunatic 
-is involved, whose relatives, whether they admit it ornot, wish and must wish for his death. Yet the 
-presuppositions of medicine, and the penal code, prevent the physician from relinquishing his therapeutic 
-efforts. Whether life is worth while living and when–this question is not asked by medicine. Natural science 
-gives us an answer to the question of what we must do if we wish to master life technically. It leaves quite 
-aside, or assumes for its purposes, whether we should and do wish to master life technically and whether it 
-ultimately makes sense to do so. </p>
-
-<p>Consider a discipline such as aesthetics. The fact that there are works of art is given for aesthetics. It seeks to 
-find out under what conditions this fact exists, but it does not raise the question whether or not the realm of 
-art is perhaps a realm of diabolical grandeur, a realm of this world, and therefore, in its core, hostile to God 
-and, in its innermost and aristocratic spirit, hostile to the brotherhood of man. Hence, aesthetics does not ask 
-whether there should be works of art. 
-Consider jurisprudence. It establishes what is valid according to the rules of juristic thought, which is partly 
-bound by logically compelling and partly by conventionally given schemata. Juridical thought holds when 
-certain legal rules and certain methods of interpretations are recognized as binding. Whether there should be 
-law and whether one should establish just these rules–such questions jurisprudence does not answer. It can 
-only state: If one wishes this result, according to the norms of our legal thought, this legal rule is the 
-appropriate means of attaining it. </p>
-
-<p>Consider the historical and cultural sciences. They teach us how to understand and interpret political, artistic, 
-literary, and social phenomena in terms of their origins. But they give us no answer to the question, whether 
-the existence of these cultural phenomena have been and are worth while. And they do not answer the further 
-question, whether it is worth the effort required to know them. They presuppose that there is an interest in 
-partaking, through this procedure, of the community of’civilized men.’ But they cannot prove ‘scientifically’ 
-that this is the case; and that they presuppose this interest by no means proves that it goes without saying. In 
-fact it is not at all self-evident. </p>
-
-<p>Finally, let us consider the disciplines close to me: sociology, history, economics, political science, and those 
-types of cultural philosophy that make it their task’ to interpret these sciences. It is said, and I agree, that 
-politics is out of place in the lecture-room. It does not belong there on the part of the students. If, for 
-instance, in the lecture-room of my former colleague Dietrich Schafer in Berlin, pacifist students were to 
-surround his desk and make an uproar, I should deplore it just as much as I should deplore the uproar which 
-anti-pacifist students are said to have made against Professor Forster, whose views in many ways are as 
-remote as could be from mine. Neither does politics, however, belong in the lecture-room on the part of the 
-docents, and when the docent is scientifically concerned with politics, it belongs there least of all. 
-To take a practical political stand is one thing, and to analyze political structures and party positions is 
-another. When speaking in a political meeting about democracy, one does not hide one’s personal standpoint; 
-indeed, to come out clearly and take a stand is one’s damned duty. The words one uses in such a meeting are 
-not means of scientific analysis but means of canvassing votes and winning over others. They are not 
-plowshares to loosen the soil of contemplative thought; they are swords against the enemies: such words are 
-weapons. It would be an outrage, however, to use words in this fashion in a lecture or in the lecture-room. If, 
-for instance, ‘democracy’ is under discussion, one considers its various forms, analyzes them in the way they 
-function, determines what results for the conditions of life the one form has as compared with the other. Then 
-one confronts the forms of democracy with non-democratic forms of political order and endeavors to come to 
-a position where the student may find the point from which, in terms of his ultimate ideals, he can take a 
-stand. But the true teacher will beware of imposing from the platform any political position upon the student, 
-whether it is expressed or suggested. ‘To let the facts speak for themselves’ is the most unfair way of putting 
-over a political position to the student. </p>
-
-<p>Why should we abstain from doing this? I state in advance that some highly esteemed colleagues are of the 
-opinion that it is not possible to carry through this self-restraint and that, even if it were possible, it would be 
-a whim to avoid declaring oneself. Now one cannot demonstrate scientifically what the duty of an academic 
-teacher is. One can only demand of the teacher that he have the intellectual integrity to see that it is one thing 
-to state facts, to determine mathematical or logical relations or the internal structure of cultural values, while 
-it is another thing to answer questions of the value of culture and its individual contents and the question of 
-how one should act in the cultural community and inpolitical associations. These are quite heterogeneous 
-problems. If he asks further why he should not deal with both types of problems in the lecture-room, the 
-answer is: because the prophet and the demagoguedo not belong on the academic platform. </p>
-
-<p>To the prophet and the demagogue, it is said: ‘Go your ways out into the streets and speak openly to the 
-world,’ that is, speak where criticism is possible. In the lecture-room we stand opposite our audience, and it 
-has to remain silent. I deem it irresponsible to exploit the circumstance that for the sake of their career the 
-students have to attend a teacher’s course while there is nobody present to oppose him with criticism. The 
-task of the teacher is to serve the students with his knowledge and scientific experience and not to imprint 
-upon them his personal political views. It is certainly possible that the individual teacher will not entirely 
-succeed in eliminating his personal sympathies. He is then exposed to the sharpestcriticism in the forum of 
-his own conscience. And this deficiency does not prove anything; other errors are also possible, for instance, 
-erroneous statements of fact, and yet they prove nothing against the duty of searching for the truth. I also 
-reject this in the very interest of science. I am ready to prove from the works of our historians that whenever 
-the man of science introduces his personal value judgment, a full understanding of the facts ceases. But this 
-goes beyond tonight’s topic and would require lengthy elucidation. </p>
-
-<p>I ask only: How should a devout Catholic, on the one hand,and a Freemason, on the other, in a course on the 
-forms of church and state or on religious history ever be brought to evaluate these subjects alike? This is out 
-of the question. And yet the academic teacher must desire and must demand of himself to serve the one as 
-well as the other by his knowledge and methods. Now you will rightly say that the devout Catholic will never 
-accept the view of the factors operative in bringing aboutChristianity which a teacher who is free of his 
-dogmatic presuppositions presents to him. Certainly! The difference, however, lies in the following: Science 
-‘free from presuppositions,’ in the sense of a rejection ofreligious bonds, does not know of the ‘miracle’ and 
-the ‘revelation.’ If it did, science would be unfaithful to its own ‘presuppositions.’ The believer knows both, 
-miracle and revelation. And science ‘free from presuppositions’ expects from him no less–and no more–than 
-acknowledgment that if the process can be explained without those supernatural interventions, which an 
-empirical explanation has to eliminate as causal factors, the process has to be explained the way science 
-attempts to do. And the believer can do this without being disloyal to his faith. </p>
-
-<p>But has the contribution of science no meaning at all for a man who does not care to know facts as such and 
-to whom only the practical standpoint matters? Perhaps science nevertheless contributes something. 
-The primary task of a useful teacher is to teach his students to recognize ‘inconvenient’ facts–I mean facts 
-that are inconvenient for their party opinions. And for every party opinion there are facts that are extremely 
-inconvenient, for my own opinion no less than for others. I believe the teacher accomplishes more than a 
-mere intellectual task if he compels his audience to accustom itself to the existence of such facts. I would be 
-so immodest as even to apply the expression ‘moral achievement,’ though perhaps this may sound too 
-grandiose for something that should go without saying. </p>
-
-<p>Thus far I have spoken only of practical reasons for avoiding the imposition of a personal point of view. But 
-these are not the only reasons. The impossibility of ‘scientifically’ pleading for practical and interested 
-stands–except in discussing the means for a firmly given and presupposed end–rests upon reasons that lie far 
-deeper. </p>
-
-<p>‘Scientific’ pleading is meaningless in principle because the various value spheres of the world stand in 
-irreconcilable conflict with each other. The elder Mill, whose philosophy I will not praise otherwise, was on 
-this point right when he said: If one proceeds from pure experience, one arrives at polytheism. This is 
-shallow in formulation and sounds paradoxical, and yet there is truth in it. If anything, we realize again today 
-that something can be sacred not only in spite of its not being beautiful, but rather because and in so far as it 
-is not beautiful. You will find this documented in the fifty-third chapter of the book of Isaiah and in the 
-twenty-first Psalm. And, since Nietzsche, we realize that something can be beautiful, not only in spite of the 
-aspect in which it is not good, but rather in that very aspect. You will find this expressed earlier in the Fleurs 
-du mal, as Baudelaire named his volume of poems. It is commonplace to observe that something may be true 
-although it is not beautiful and not holy and not good. Indeed it may be true in precisely those aspects. But all 
-these are only the most elementary cases of the struggle that the gods of the various orders and values are 
-engaged in. I do not know how one might wish to decide ‘scientifically’ the value of French and German 
-culture; for here, too, different gods struggle with one another, now and for all times to come. </p>
-
-<p>We live as did the ancients when their world was not yet disenchanted of its gods and demons, only we live 
-in a different sense. As Hellenic man at times sacrificed to Aphrodite and at other times to Apollo, and, 
-above all, as everybody sacrificed to the gods of his city, so do we still nowadays, only the bearing of man 
-has been disenchanted and denuded of its mystical but inwardly genuine plasticity. Fate, and certainly not 
-‘science,’ holds sway over these gods and their struggles. One can only understand what the godhead is for 
-the one order or for the other, or better, what godheadis in the one or in the other order. With this 
-understanding, however, the matter has reached its limit so far as it can be discussed in a lecture-room and by 
-a professor. Yet the great and vital problem that is contained therein is, of course, very far from being 
-concluded. But forces other than university chairs have their say in this matter. </p>
-
-<p>What man will take upon himself the attempt to ‘refute scientifically’ the ethic of the Sermon on the Mount? 
-For instance, the sentence, ‘resist no evil,’ or the image of turning the other cheek? And yet it is clear, in 
-mundane perspective, that this is an ethic of undignified conduct; one has to choose between the religious 
-dignity which this ethic confers and the dignity of manly conduct which preaches something quite different; 
-‘resist evil–lest you be co-responsible for an overpowering evil.’ According to our ultimate standpoint, the 
-one is the devil and the other the God, and the individualhas to decide which is God for him and which is the 
-devil. And so it goes throughout all the orders of life. </p>
-
-<p>The grandiose rationalism of an ethical and methodical conduct of life which flows from every religious 
-prophecy has dethroned this polytheism in favor of the ‘one thing that is needful.’ Faced with the realities of 
-outer and inner life, Christianity has deemed it necessary to make those compromises and relative judgments, 
-which we all know from its history. Today the routinesof everyday life challenge religion. Many old gods 
-ascend from their graves; they are disenchanted and hence take the form of impersonal forces. They strive to 
-gain power over our lives and again they resume their eternal struggle with one another. What is hard for 
-modern man, and especially for the younger generation,is to measure up to workaday existence. The 
-ubiquitous chase for ‘experience’ stems from this weakness;for it is weakness not to be able to countenance 
-the stern seriousness of our fateful times. </p>
-
-<p>Our civilization destines us to realize more clearly these struggles again, after our eyes have been blinded for 
-a thousand years–blinded by the allegedly or presumably exclusive orientation towards the grandiose moral 
-fervor of Christian ethics. </p>
-
-<p>But enough of these questions which lead far away. Those of our youth are in error who react to all this by 
-saying, ‘Yes, but we happen to come to lectures in order to experience something more than mere analyses 
-and statements of fact.’ The error is that they seekin the professor something different from what stands 
-before them. They crave a leader and not a teacher. But we are placed upon the platform solely as teachers. 
-And these are two different things, as one can readily see. Permit me to take you once more to America, 
-because there one can often observe such matters in their most massive and original shape. </p>
-
-<p>The American boy learns unspeakably less than the German boy. In spite of an incredible number of 
-examinations, his school life has not had the significance of turning him into an absolute creature of 
-examinations, such as the German. For in America, bureaucracy, which presupposes the examination 
-diploma as a ticket of admission to the realm of office prebends, is only in its beginnings. The young 
-American has no respect for anything or anybody, for tradition or for public office–unless it is for the 
-personal achievement of individual men. This is what the American calls ‘democracy.’ This is the meaning of 
-democracy, however distorted its intent may in reality be, and this intent is what matters here. The 
-American’s conception of the teacher who faces him is: he sells me his knowledge and his methods for my 
-father’s money, just as the greengrocer sells my mother cabbage. And that is all. To be sure, if the teacher 
-happens to be a football coach, then, in this field, he is a leader. But if he is not this (or something similar in 
-a different field of sports), he is simply a teacher and nothing more. And no youngAmerican would think of 
-having the teacher sell him a Weltanschauung or a code of conduct. Now, when formulated in this manner, 
-we should reject this. But the question is whether there isnot a grain of salt contained in this feeling, which I 
-have deliberately stated in extreme with some exaggeration. </p>
-
-<p>Fellow students! You come to our lectures and demandfrom us the qualities of leadership, and you fail to 
-realize in advance that of a hundred professors at leastninety-nine do not and must not claim to be football 
-masters in the vital problems of life, or even to be ‘leaders’ in matters of conduct. Please, consider that a 
-man’s value does not depend on whether or not he has leadership qualities. And in any case, the qualities that 
-make a man an excellent scholar and academic teacher are not the qualities that make him a leader to give 
-directions in practical life or, more specifically, in politics. It is pure accident if a teacher also possesses this 
-quality, and it is a critical situation if every teacheron the platform feels himself confronted with the 
-students’ expectation that the teacher should claim this quality. It is still more critical if it is left to every 
-academic teacher to set himself up as a leader in the lecture-room. For those who most frequently think of 
-themselves as leaders often qualify least as leaders. But irrespective of whether they are or are not, the 
-platform situation simply offers no possibility of proving themselves to be leaders. The professor who feels 
-called upon to act as a counselor of youth and enjoys their trust may prove himself a man in personal human 
-relations with them. And if he feels called upon to intervene in the struggles of world views and party 
-opinions, he may do so outside, in the market place, in the press, in meetings, in associations, wherever he 
-wishes. But after all, it is somewhat too convenient to demonstrate one’s courage in taking a stand where the 
-audience and possible opponents are condemned to silence. </p>
-
-<p>Finally, you will put the question: ‘If this is so, whatthen does science actually and positively contribute to 
-practical and personal “life” ?’ Therewith we are back again at the problem of science as a ‘vocation.’ </p>
-
-<p>First, of course, science contributes to the technology of controlling life by calculating external objects as 
-well as man’s activities. Well, you will say, that, after all, amounts to no more than the greengrocer of the 
-American boy. I fully agree. </p>
-
-<p>Second, science can contribute something that the greengrocer cannot: methods of thinking, the tools and the 
-training for thought. Perhaps you will say: well, that is no vegetable, but it amounts to no more than the 
-means for procuring vegetables. Well and good, let us leave it at that for today. </p>
-
-<p>Fortunately, however, the contribution of science does not reach its limit with this. We are in a position to 
-help you to a third objective: to gain clarity. Of course, it is presupposed that we ourselves possess clarity. As 
-far as this is the case, we can make clear to you the following: </p>
-
-<p>In practice, you can take this or that position when concerned with a problem of value–for simplicity’s sake, 
-please think of social phenomena as examples. If you take such and such a stand, then, according to scientific 
-experience, you have to use such and such a means inorder to carry out your conviction practically. Now, 
-these means are perhaps such that you believe you must reject them. Then you simply must choose between 
-the end and the inevitable means. Does the end ‘justify’the means? Or does it not? The teacher can confront 
-you with the necessity of this choice. He cannot do more, so long as he wishes to remain a teacher and not to 
-become a demagogue. He can, of course, also tell you that if you want such and such an end, then you must 
-take into the bargain the subsidiary consequences which according to all experience will occur. Again we 
-find ourselves in the same situation as before. These are still problems that can also emerge for the 
-technician, who in numerous instances has to make decisions according to the principle of the lesser evil or 
-of the relatively best. Only to him one thing, the main thing, is usually given, namely, the end. But as soon as 
-truly ‘ultimate’ problems are at stake for us this is not the case. With this, at long last, we come to the final 
-service that science as such can render to the aim of clarity, and at the same time we come to the limits of 
-science. </p>
-
-<p>Besides we can and we should state: In terms of its meaning, such and such a practical stand can be derived 
-with inner consistency, and hence integrity, from this or that ultimate weltanschauliche position. Perhaps it 
-can only be derived from one such fundamental position, or maybe from several, but it cannot be derived 
-from these or those other positions. Figuratively speaking, you serve this god and you offend the other god 
-when you decide to adhere to this position. And if you remain faithful to yourself, you will necessarily come 
-to certain final conclusions that subjectively makesense. This much, in principle at least, can be 
-accomplished. Philosophy, as a special discipline, and the essentially philosophical discussions of principles 
-in the other sciences attempt to achieve this. Thus, if we are competent in our pursuit (which must be 
-presupposed here) we can force the individual, or at leastwe can help him, to give himself an account of the 
-ultimate meaning of his own conduct. This appears to meas not so trifling a thing to do, even for one’s own 
-personal life. Again, I am tempted to say of a teacher who succeeds in this: he stands in the service of ‘moral’ 
-forces; he fulfils the duty of bringing about self-clarification and a sense of responsibility. And I believe he 
-will be the more able to accomplish this, the more conscientiously he avoids the desire personally to impose 
-upon or suggest to his audience his own stand. </p>
-
-<p>This proposition, which I present here, always takes its point of departure from the one fundamental fact, that 
-so long as life remains immanent and is interpreted inits own terms, it knows only of an unceasing struggle 
-of these gods with one another. Or speaking directly, the ultimately possible attitudes toward life are 
-irreconcilable, and hence their struggle can never be brought to a final conclusion. Thus it is necessary to 
-make a decisive choice. Whether, under such conditions, science is a worth while ‘vocation’ for somebody, 
-and whether science itself has an objectively valuable ‘vocation’ are again value judgments about which 
-nothing can be said in the lecture-room. To affirm the value of science is a presupposition for teaching there. 
-I personally by my very work answer in the affirmative, and I also do so from precisely the standpoint that 
-hates intellectualism as the worst devil, as youth does today, or usually only fancies it does. In that case the 
-word holds for these youths: ‘Mind you, the devil is old; grow old to understand him.’ This does not mean 
-age in the sense of the birth certificate. It means that if one wishes to settle with this devil, one must not take 
-to flight before him as so many like to do nowadays. First of all, one has to see the devil’s ways to the end in 
-order to realize his power and his limitations. </p>
-
-<p>Science today is a ‘vocation’ organized in special disciplines in the service of self-clarification and 
-knowledge of interrelated facts. It is not the gift ofgrace of seers and prophets dispensing sacred values and 
-revelations, nor does it partake of the contemplation of sages and philosophers about the meaning of the 
-universe. This, to be sure, is the inescapable condition ofour historical situation. We cannot evade it so long 
-as we remain true to ourselves. And if Tolstoi’s question recurs to you: as science does not, who is to answer 
-the question: ‘What shall we do, and, how shall we arrange our lives?’ or, in the words used here tonight: 
-‘Which of the warring gods should we serve? Or should we serve perhaps an entirely different god, and who 
-is he?’ then one can say that only a prophet or a savior can give the answers. If there is no such man, or if his 
-message is no longer believed in, then you will certainlynot compel him to appear on this earth by having 
-thousands of professors, as privileged hirelings of the state, attempt as petty prophets in their lecture-rooms 
-to take over his role. All they will accomplish is to show that they are unaware of the decisive state of affairs: 
-the prophet for whom so many of our younger generation yearn simply does not exist. But this knowledge in 
-its forceful significance has never become vital for them. The inward interest of a truly religiously ‘musical’ 
-man can never be served by veiling to him and to others the fundamental fact that he is destined to live in a 
-godless and prophetless time by giving him the ersatz of armchair prophecy. The integrity of his religious 
-organ, it seems to me, must rebel against this. </p>
-
-<p>Now you will be inclined to say: Which stand does one take towards the factual existence of ‘theology’ and 
-its claims to be a ‘science’? Let us not flinch and evade the answer. To be sure, ‘theology’ and ‘dogmas’ do not 
-exist universally, but neither do they exist for Christianity alone. Rather (going backward in time), they exist 
-in highly developed form also in Islam, in Manicheanism, in Gnosticism, in Orphism, in Parsism, in 
-Buddhism, in the Hindu sects, in Taoism, and in the Upanishads, and, of course, in Judaism. To be sure their 
-systematic development varies greatly. It is no accident that Occidental Christianity –in contrast to the 
-theological possessions of Jewry–has expanded and elaborated theology more systematically, or strives to do 
-so. In the Occident the development oftheology has had by far the greatest historical significance. This is the 
-product of the Hellenic spirit, and all theology of the West goes back to it, as (obviously) all theology of the 
-East goes back to Indian thought. All theology represents an intellectual rationalization of the possession of 
-sacred values. No science is absolutely free from presuppositions, and no science can prove its fundamental 
-value to the man who rejects these presuppositions. Every theology, however, adds a few specific 
-presuppositions for its work and thus for the justification of its existence. Their meaning and scope vary. 
-Every theology, including for instance Hinduist theology, presupposes that the world must have a meaning, 
-and the question is how to interpret this meaning so that it is intellectually conceivable. </p>
-
-<p>It is the same as with Kant’s epistemology. He took for his point of departure the presupposition: ‘Scientific 
-truth exists and it is valid,’ and then asked: ‘Under which presuppositions of thought is truth possible and 
-meaningful?’ The modern aestheticians (actually or expressly, as for instance, G. v. Lukacs) proceed from the 
-presupposition that ‘works of art exist,’ and then ask: ‘How is their existence meaningful and possible?’ </p>
-
-<p>As a rule, theologies, however, do not content themselves with this (essentially religious and philosophical) 
-presupposition. They regularly proceed from the further presupposition that certain ‘revelations’ are facts 
-relevant for salvation and as such make possible a meaningful conduct of life. Hence, these revelations must 
-be believed in. Moreover, theologies presuppose that certain subjective states and acts possess the quality of 
-holiness, that is, they constitute a way of life, or at least elements of one, that is religiously meaningful. Then 
-the question of theology is: How can these presuppositions, which must simply be accepted be meaningfully 
-interpreted in a view of the universe? For theology, these presuppositions as such lie beyond the limits of 
-‘science.’ They do not represent ‘knowledge,’ in the usual sense, but rather a ‘possession.’ Whoever does not 
-‘possess’ faith, or the other holy states, cannot have theology as a substitute for them, least of all any other 
-science. On the contrary, in every ‘positive’ theology, the devout reaches the point where the Augustinian 
-sentence holds: credo non quod, sed quia absurdum est. </p>
-
-<p>The capacity for the accomplishment of religious virtuosos–the ‘intellectual sacrifice’–is the decisive 
-characteristic of the positively religious man. That this is so is shown by the fact that in spite (or rather in 
-consequence) of theology (which unveils it) the tension between the value-spheres of ‘science’ and the sphere 
-of ‘the holy’ is unbridgeable. Legitimately, only the disciple offers the ‘intellectual sacrifice’ to the prophet, 
-the believer to the church. Never as yet has a new prophecy emerged (and I repeat here deliberately this 
-image which has offended some) by way of the need of some modern intellectuals to furnish their souls with, 
-so to speak, guaranteed genuine antiques. In doing so, they happen to remember that religion has belonged 
-among such antiques, and of all things religion is what they do not possess. By way of substitute, however, 
-they play at decorating a sort of domestic chapel withsmall sacred images from all over the world, or they 
-produce surrogates through all sorts of psychic experiences to which they ascribe the dignity of mystic 
-holiness, which they peddle in the book market. This is plain humbug or self-deception. It is, however, no 
-humbug but rather something very sincere and genuine if some of the youth groups who during recent years 
-have quietly grown together give their human community the interpretation of a religious, cosmic, or 
-mystical relation, although occasionally perhaps such interpretation rests on misunderstanding of self. True 
-as it is that every act of genuine brotherliness may be linked with the awareness that it contributes something 
-imperishable to a super-personal realm, it seems tome dubious whether the dignity of purely human and 
-communal relations is enhanced by these religious interpretations. But that is no longer our theme. </p>
-
-<p>The fate of our times is characterized by rationalization and intellectualization and, above all, by the 
-‘disenchantment of the world.’ Precisely the ultimate and most sublime values have retreated from public life 
-either into the transcendental realm of mystic life orinto the brotherliness of direct and personal human 
-relations. It is not accidental that our greatest art isintimate and not monumental, nor is it accidental that 
-today only within the smallest and intimate circles,in personal human situations, in pianissimo, that 
-something is pulsating that corresponds to the prophetic pneuma, which in former times swept through the 
-great communities like a firebrand, welding them together. If we attempt to force and to ‘invent’ a 
-monumental style in art, such miserable monstrosities are produced as the many monuments of the last 
-twenty years. If one tries intellectually to construe new religions without a new and genuine prophecy, then, 
-in an inner sense, something similar will result, but with still worse effects. And academic prophecy, finally, 
-will create only fanatical sects but never a genuine community. </p>
-
-<p>To the person who cannot bear the fate of the times like a man, one must say: may he rather return silently, 
-without the usual publicity build-up of renegades, but simply and plainly. The arms of the old churches are 
-opened widely and compassionately for him. After all, they do not make it hard for him. One way or another 
-he has to bring his ‘intellectual sacrifice’–that is inevitable. If he can really do it, we shall not rebuke him. 
-For such an intellectual sacrifice in favor of an unconditional religious devotion is ethically quite a different 
-matter than the evasion of the plain duty of intellectual integrity, which sets in if one lacks the courage to 
-clarify one’s own ultimate standpoint and rather facilitates this duty by feeble relative judgments. In my eyes, 
-such religious return stands higher than the academicprophecy, which does not clearly realize that in the 
-lecture-rooms of the university no other virtue holds but plain intellectual integrity. Integrity, however, 
-compels us to state that for the many who today tarry for new prophets and saviors, the situation is the same 
-as resounds in the beautiful Edomite watchman’s song of the period of exile that has been included among 
-Isaiah’s oracles: </p>
-
-<blockquote>
-  <p>He calleth to me out of Seir, Watchman, what of the night? The watchman said, The morning cometh, and also the night: if ye will enquire, enquire ye: return, come. </p>
-</blockquote>
-
-<p>The people to whom this was said has enquired and tarried for more than two millennia, and we are shaken 
-when we realize its fate. From this we want to draw the lesson that nothing is gained by yearning and 
-tarrying alone, and we shall act differently. We shall set to work and meet the ‘demands of the day,’ in human 
-relations as well as in our vocation. This, however, is plain and simple, if each finds and obeys the demon 
-who holds the fibers of his very life. </p>
-
 ]]></content>
   </entry>
   
