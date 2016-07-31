@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>C库线程安全函数 - xixitalk's snippet</title>
+  <meta name="author" content="xixitalk">
+
+  
+  <meta name="description" content="C库线程安全函数和不安全函数 http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0492c/Chdiedfe.html 线程安全函数 Functions Description calloc(),free(),malloc &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xixitalk's snippet" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32324744-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xixitalk's snippet</a></h1>
+  
+    <h2>Post Longer Than 140 Characters Tweets</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xixitalk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/">Categories</a></li>
+  <li><a href="/wishlist/">My wishlist</a></li>
+  <li><a href="/about/">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">C库线程安全函数</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-07-31T16:28:21+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>C库线程安全函数和不安全函数</p>
+
+<!--more-->
+
+<p><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0492c/Chdiedfe.html">http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0492c/Chdiedfe.html</a></p>
+
+<p>线程安全函数</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Functions</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>calloc(),free(),malloc(),realloc()</td>
+      <td>The heap functions are thread-safe if the <em>mutex</em>* functions are implemented.A single heap is shared between all threads, and mutexes are used to avoid data corruption when there is concurrent access. Each heap implementation is responsible for doing its own locking. If you supply your own allocator, it must also do its own locking. This enables it to do fine-grained locking if required, rather than protecting the entire heap with a single mutex (coarse-grained locking).</td>
+    </tr>
+    <tr>
+      <td>alloca()</td>
+      <td>alloca() is thread-safe because it allocates memory on the stack.</td>
+    </tr>
+    <tr>
+      <td>abort(),raise(),signal(),fenv.h</td>
+      <td>The ARM signal handling functions and floating-point exception traps are thread-safe.The settings for signal handlers and floating-point traps are global across the entire process and are protected by locks. Data corruption does not occur if multiple threads call signal() or an fenv.h function at the same time. However, be aware that the effects of the call act on all threads and not only on the calling thread.</td>
+    </tr>
+    <tr>
+      <td>clearerr(), fclose(),feof(),ferror(), fflush(),fgetc(),fgetpos(), fgets(),fopen(),fputc(), fputs(),fread(),freopen(), fseek(),fsetpos(),ftell(), fwrite(),getc(),getchar(), gets(),perror(),putc(), putchar(),puts(),rewind(), setbuf(),setvbuf(),tmpfile(), tmpnam(),ungetc()</td>
+      <td>The stdio library is thread-safe if the <em>mutex</em>* functions are implemented.Each individual stream is protected by a lock, so two threads can each open their own stdio stream and use it, without interfering with one another.If two threads both want to read or write the same stream, locking at the fgetc() and fputc() level prevents data corruption, but it is possible that the individual characters output by each thread might be interleaved in a confusing way. <strong>Note</strong> tmpnam() also contains a static buffer but this is only used if the argument is NULL. To ensure that your use of tmpnam() is thread-safe, supply your own buffer space.</td>
+    </tr>
+    <tr>
+      <td>fprintf(), printf(),vfprintf(), vprintf(), fscanf(),scanf()</td>
+      <td>When using these functions:the standard C printf() and scanf() functions use stdio so they are thread-safe. the standard C printf() function is susceptible to changes in the locale settings if called in a multithreaded program.</td>
+    </tr>
+    <tr>
+      <td>clock()</td>
+      <td>clock() contains static data that is written once at program startup and then only ever read. Therefore, clock() is thread-safe provided no extra threads are already running at the time that the library is initialized.</td>
+    </tr>
+    <tr>
+      <td>errno</td>
+      <td>errno is thread-safe.Each thread has its own errno stored in a __user_perthread_libspace block. This means that each thread can call errno-setting functions independently and then check errno afterwards without interference from other threads.</td>
+    </tr>
+    <tr>
+      <td>atexit()</td>
+      <td>The list of exit functions maintained by atexit() is process-global and protected by a lock.In the worst case, if more than one thread calls atexit(), the order that exit functions are called cannot be guaranteed.</td>
+    </tr>
+    <tr>
+      <td>abs(), acos(), asin(),atan(),atan2(), atof(),atol(), atoi(),bsearch(),ceil(), cos(),cosh(),difftime(), div(),exp(),fabs(), floor(),fmod(),frexp(), labs(),ldexp(),ldiv(), log(),log10(),memchr(), memcmp(),memcpy(),memmove(), memset(),mktime(),modf(), pow(),qsort(),sin(), sinh(),sqrt(),strcat(), strchr(),strcmp(),strcpy(), strcspn(),strlcat(),strlcpy(), strlen(),strncat(),strncmp(), strncpy(),strpbrk(),strrchr(), strspn(),strstr(),strxfrm(), tan(), tanh()</td>
+      <td>These functions are inherently thread-safe.</td>
+    </tr>
+    <tr>
+      <td>longjmp(), setjmp()</td>
+      <td>Although setjmp() and longjmp() keep data in <em>_user_libspace, they call the __alloca</em>* functions, that are thread-safe.</td>
+    </tr>
+    <tr>
+      <td>remove(), rename(), time()</td>
+      <td>These functions use interrupts that communicate with the ARM debugging environments. Typically, you have to reimplement these for a real-world application.</td>
+    </tr>
+    <tr>
+      <td>snprintf(), sprintf(),vsnprintf(),vsprintf(), sscanf(),isalnum(),isalpha(), iscntrl(),isdigit(),isgraph(), islower(),isprint(),ispunct(), isspace(),isupper(),isxdigit(), tolower(),toupper(),strcoll(), strtod(),strtol(),strtoul(), strftime()</td>
+      <td>When using these functions, the string-based functions read the locale settings. Typically, they are thread-safe. However, if you change locale in mid-session, you must ensure that these functions are not affected.The string-based functions, such as sprintf() and sscanf(), do not depend on the stdio library.</td>
+    </tr>
+    <tr>
+      <td>stdin, stdout, stderr</td>
+      <td>These functions are thread-safe.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>线程不安全函数</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-07-31T16:28:21+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/libc/'>libc</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:C库线程安全函数 http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (1)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (3)</a></li><li><a href='/blog/categories/libc'>libc (1)</a></li><li><a href='/blog/categories/life'>life (13)</a></li><li><a href='/blog/categories/linux'>linux (11)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (7)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (5)</a></li><li><a href='/blog/categories/pthread'>pthread (1)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (7)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (4)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (10)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - xixitalk -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gitblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
