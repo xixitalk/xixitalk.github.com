@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pthread | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/pthread/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-07-31T08:50:01+08:00</updated>
+  <updated>2016-08-01T19:21:39+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[pthread和errno]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/08/02/pthread-errno/"/>
+    <updated>2016-08-02T03:10:02+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/02/pthread-errno</id>
+    <content type="html"><![CDATA[<p>pthread和errno：pthread函数在出错的时候不会设置errno，而是直接返回错误值。</p>
+
+<!--more-->
+
+<blockquote>
+  <p><strong>pthread_create() won’t ever set errno</strong>.  pthread function returns zero
+on success, and an error code on error.  So the value you are seeing
+in errno is either the result of an error in some previous other
+system call, or errno is just starting out at EINTR and never getting
+changed (this has happened to me).</p>
+</blockquote>
+
+<p>```
+ #define handle_error_en(en, msg) \
+               do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)</p>
+
+<p>s = pthread_create(&amp;tinfo[tnum].thread_id, &amp;attr,
+                      &amp;thread_start, &amp;tinfo[tnum]);
+if (s != 0)
+    handle_error_en(s, “pthread_create”);
+```</p>
+
+<h4 id="section">参考资料</h4>
+
+<p><a href="http://man7.org/linux/man-pages/man3/pthread_create.3.html">http://man7.org/linux/man-pages/man3/pthread_create.3.html</a><br />
+<a href="https://sourceware.org/ml/libc-alpha/2000-10/msg00153.html">https://sourceware.org/ml/libc-alpha/2000-10/msg00153.html</a><br />
+<a href="http://www.oschina.net/question/234345_40365">http://www.oschina.net/question/234345_40365</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[pthread退出时自动回收资源]]></title>

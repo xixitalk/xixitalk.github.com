@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: ssh - xixitalk's snippet</title>
+  <title>pthread和errno - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: ssh">
+  <meta name="description" content="pthread和errno：pthread函数在出错的时候不会设置errno，而是直接返回错误值。 pthread_create() won’t ever set errno. pthread function returns zero
+on success, and an error code &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.ioblog/categories/ssh">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/02/pthread-errno">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,50 +78,125 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: ssh</h1>
+    
+      <h1 class="entry-title">pthread和errno</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-02T03:10:02+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>pthread和errno：pthread函数在出错的时候不会设置errno，而是直接返回错误值。</p>
 
-  
-  <h2>2013</h2>
+<!--more-->
 
-<article>
-  
-<h1><a href="/blog/2013/07/12/git-ssh-proxy/">git ssh使用代理</a></h1>
-<time datetime="2013-07-12T16:23:33+08:00" pubdate><span class='month'>Jul</span> <span class='day'>12</span> <span class='year'>2013</span></time>
+<blockquote>
+  <p><strong>pthread_create() won’t ever set errno</strong>.  pthread function returns zero
+on success, and an error code on error.  So the value you are seeing
+in errno is either the result of an error in some previous other
+system call, or errno is just starting out at EINTR and never getting
+changed (this has happened to me).</p>
+</blockquote>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/ssh/'>ssh</a></span>
-</footer>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"> #define handle_error_en(en, msg) \
+</span><span class="line">               do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
+</span><span class="line">
+</span><span class="line">s = pthread_create(&amp;tinfo[tnum].thread_id, &amp;attr,
+</span><span class="line">                      &amp;thread_start, &amp;tinfo[tnum]);
+</span><span class="line">if (s != 0)
+</span><span class="line">    handle_error_en(s, "pthread_create");
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h4 id="section">参考资料</h4>
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/06/10/web-ssh-client/">推荐一个web ssh client</a></h1>
-<time datetime="2013-06-10T07:00:34+08:00" pubdate><span class='month'>Jun</span> <span class='day'>10</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ssh/'>ssh</a></span>
-</footer>
-
-
-</article>
+<p><a href="http://man7.org/linux/man-pages/man3/pthread_create.3.html">http://man7.org/linux/man-pages/man3/pthread_create.3.html</a><br />
+<a href="https://sourceware.org/ml/libc-alpha/2000-10/msg00153.html">https://sourceware.org/ml/libc-alpha/2000-10/msg00153.html</a><br />
+<a href="http://www.oschina.net/question/234345_40365">http://www.oschina.net/question/234345_40365</a></p>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-02T03:10:02+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/pthread/'>pthread</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:pthread和errno http://xixitalk.github.io/blog/2016/08/02/pthread-errno/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -149,7 +225,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/02/pthread-errno/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/02/pthread-errno/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
