@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-02T08:28:43+08:00</updated>
+  <updated>2016-08-02T09:55:44+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,7 +18,7 @@
     <link href="http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/"/>
     <updated>2016-08-02T16:18:55+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D</id>
-    <content type="html"><![CDATA[<p>fwrite()写文件竟然多了个了0x0D字符，buffer里检查了也确实没有0x0D，一搜索竟然是如果fopen不是二进制打开，fwrite()遇到0x0A额外写一个0x0D。</p>
+    <content type="html"><![CDATA[<p>fwrite()写文件竟然多了个了0x0D字符，buffer里检查了也确实没有0x0D，一搜索竟然是如果fopen不是二进制打开，fwrite()遇到0x0A额外写一个0x0D。0D 0A是windows平台的换行符，很明显这是只有在windows平台才有的奇特现象。</p>
 
 <!--more-->
 
