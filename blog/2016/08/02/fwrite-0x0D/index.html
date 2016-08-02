@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>《美丽新世界》 - xixitalk's snippet</title>
+  <title>fwrite()多了个了0x0D字符 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="阮一峰《美丽新世界》读后感》 金色葡萄《如何拒绝进入美丽新世界》 知乎《如何评价阿道司 · 赫胥黎《美丽新世界》？它和《1984》对现实的影响有何异同？最重要的，书中的世界会有到来的一天吗？》 &hellip;">
+  <meta name="description" content="fwrite()写文件竟然多了个了0x0D字符，buffer里检查了也确实没有0x0D，一搜索竟然是如果fopen不是二进制打开，fwrite()遇到0x0A额外写一个0x0D。 解决办法是fopen的flag加个b。 1
+fopen("sample.bin", "w+"); 修改成： 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/07/11/Brave-New-World">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">《美丽新世界》</h1>
+      <h1 class="entry-title">fwrite()多了个了0x0D字符</h1>
     
     
       <p class="meta">
@@ -97,7 +98,7 @@
   
 
 
-<time datetime="2013-07-11T23:49:04+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2013</time>
+<time datetime="2016-08-02T16:18:55+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,18 +107,29 @@
   </header>
 
 
-<div class="entry-content"><p><a href="http://www.ruanyifeng.com/blog/2011/03/brave_new_world.html">阮一峰《美丽新世界》读后感》</a></p>
-
-<p><a href="http://www.guokr.com/blog/310237/">金色葡萄《如何拒绝进入美丽新世界》</a></p>
-
-<p><a href="http://www.zhihu.com/question/19986748">知乎《如何评价阿道司 · 赫胥黎《美丽新世界》？它和《1984》对现实的影响有何异同？最重要的，书中的世界会有到来的一天吗？》</a></p>
+<div class="entry-content"><p>fwrite()写文件竟然多了个了0x0D字符，buffer里检查了也确实没有0x0D，一搜索竟然是如果fopen不是二进制打开，fwrite()遇到0x0A额外写一个0x0D。</p>
 
 <!--more-->
 
-<script src="/javascripts/base64.js" type="text/javascript"> </script>
-<p><span id="base64_block">RFFybHBhWGxxSUhsc0pUbm1vVGpnSW94T1RnMDQ0Q0w1WktNNkxXcjZJT2w2YnVPNTVxRTQ0Q0s1NzZPNUxpOTVwYXc1TGlXNTVXTTQ0Q0w1cGl2NWErNTVweXE1cDJsNTZTKzVMeWE1NXFFNUxpazU2ZU42YUtFNktlQjQ0Q0M0NENLTVRrNE5PT0FpK2FZcitXdnVlV0ZzZVM2cCtTNHUrUzVpZWFlZ2VhZGcrZWt2dVM4bXVhY3F1YWRwZWVhaE9hUGorZTdtTys4ak9lT3NPV2NxT1dGdU9XZWkrZWFoT2VrdnVTOG11ZXh1K1dlaSthWXIrYWNuZW15bk8rOGpPUzdqdW1BaittY3N1ZWFoT1Mvb2VhQnIrYWRwZWVjaSthY25lbXluT2VhaE9tN2tlYWFsK2VVbXVpSHMrV2twK1drcCtpMmhlV0h1dVM2aHVTNXB1UzRyZWVhaE9taWhPaW9nT09BZ3VpTGoraUJsT1dTak9TNHJlV2J2ZWVhaE9pL2tlUzdvK1dPaHVXUHN1UzRpdVdTak9TNXB1UzRyZVdsa2VXUWlPZWFoT1M2aStTN3R1UzVuK1craU9Xa211KzhqT1M0cmVXYnZlZU9zT1djcU9XK2lPV2ttdWFXdWVtZG91UzVuK21EdmVpRHZlYUp2dVdJc09XOXNlV3RrT09BZ3VpQWpPT0FpdWUranVTNHZlYVdzT1M0bHVlVmpPT0FpK2FZcitXdnVlYXNwK2Ewc3VlK2p1V2J2ZWF3a2VTNHUrV2J2ZVd1dHVhY3F1YWRwZWVhaE9hUGorZTdtTys4ak9hS2dPYWNyK21kcWVhV3NPKzhqT1Mvb2VhQnIrZUlodWVDdU8rOGpPV29zZVM1a09pSHMrYXR1K09BZ2cwS1BIQStQQzl3UGcwSzVMaXQ1WnU5NTQ2dzVaeW81NXFFNTZTKzVMeWE1WVcyNWE2ZTVwaXY1TGlrNklDRjU1cUU1WStnNVlxZzQ0Q0M1TGlLNWJHQzVidTY1NjJSNkwrYjZLR001cGF3NlplNzVhNmg1cCtsNzd5TTVadSs1TG1tNWE2aDVwK2w3N3lNNTcyUjU3dWM1YTZoNXArbDc3eU02S2lBNks2NjVwV1A1b1NmNksrTjZMK0g1cnVrNzd5TTVvbVQ1WWU3NWJ5QzZLNnU3N3lNNW91bTVvaXE1TGlLNks2Lzc3eU01cHEwNVlxYjVvdUc2TCtCNzd5TTVydWw1NVNvNVlxejVwUzU3N3lNNXBxMDVZcWI1N3UwNTZpejc3eU01YTZhNTRLNTU1dVI1bzZuNzd5TTZMK1o1cTJqNXBpdjQ0Q0tNVGs0Tk9PQWkrbUhqT2FQaitlN21PZWFoT1M0aytXSXR1ZTduK2F5dSthZXR1YWVoT09BZ3VpQWpPUzRpK1d4Z3Vhd2tlUzhsK1drcCttRHFPV0lodWVEcmVpaHQrV0ZxK1dOcHVhdXRlV3RrT1dGdStlVW4rYVluK1c2cCsrOGpPaXZyZWlvZ09TNHUrV0txT21ZaWVXSnN1KzhqT1M0amVpd2lPYVV2K2F5dStXU2pPYWRnK1dJcWUrOGpPYXlvZWFjaWVtQWllUzR2dWFkZytXUGlPYUFqdWFndCsrOGpPbWpuK1dUZ2VpTnIrV1RnZVd1aWVXRnFPV05zZWFjdXVXUGlPYUFqdWFndCsrOGpPZU9yK1dpZytheG9lYWZrK2lIdE9lWmpPV1BpT2FBanVhZ3QrKzhqT21UdXVXa3FlZWJsdVdjc09tQWllZW5nT1dvc2VTNWtPKzhqT2VEcmVpaHQrZVV0ZVd0a09TNnArV1RnZSs4ak9hdG8rYURzK09BaXVXb3NlUzVrT2lIcythdHUrT0FpK2l2dE9lYWhPbUNvK2FndCsrOG11UzZ1dWV4dSthY2llV0hvT2kva2VhWG9PbVprT2VhaE9hMmlPbUJvK1dvc2VTNWtPZWFoT2Fzc3VhY20rT0FnZzBLUEhBK1BDOXdQZzBLNUxpTDZaMmk1cHlKNUxpcTVyeXI1NVM3NWErNTVhV2w1YWlCNWJDVTU1cUU0NENLTVRrNE5PT0FpK1dTak9pMXEraURwZW03anVlYWhPT0FpdWUranVTNHZlYVdzT1M0bHVlVmpPT0FpK2kvbStpaGpPV3Z1ZWF2bE8rOGpPZTdrK2l1dXVpdnRPaTFxK2lEcGVtN2p1V3Z1ZWFjcXVhZHBlZWFoT21paE9pb2dPaTJoZWkvaCtTNmh1V2xwZVdvZ2VXd2xPKzhqT21DbythWXIrV2JvT1M0dXVTN2x1ZXJtZVdjcU9hc3ArYTBzdWUranVhMHN1YXdrZVM0dStXSXR1VzZwdVdidmVXdXR1ZWFoT2lua3VXNnB1YWRwZWl2dE9lYWhPKzhqT2VybWVXY3FPV0ZzZVM2cCtTNHUrUzVpZWFlZ2VhZGcrV2J2ZVd1dHVhZHBlaXZ0T1dscGVXb2dlV3dsT1M0Z09lQ3VlUzVuK1M0amVpK2srUzZqdWkxcStpRHBlbTdqdU9BZ2cwSw==</span> <script type="text/javascript"> var line_name = 'base64_block';var content = document.getElementById(line_name).innerHTML;document.getElementById(line_name).innerHTML=Base64.decode(Base64.decode(content));</script></p>
+<p>解决办法是fopen的flag加个<code>b</code>。</p>
 
-<p><img src="http://ww2.sinaimg.cn/large/5ff29ca4jw1dft3aqb0pkj.jpg" alt="image" /></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">fopen("sample.bin", "w+");
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改成：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">fopen("sample.bin", "wb+");
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>另外想起来几年前我遇到过，也解决过，但是忘记了。这次随手记录下来。</p>
+
+<h4 id="section">参考文章</h4>
+
+<p><a href="http://blog.csdn.net/njuitjf/article/details/5821716">http://blog.csdn.net/njuitjf/article/details/5821716</a><br />
+<a href="http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file">http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file</a></p>
+
 </div>
 
 
@@ -140,12 +152,12 @@
   
 
 
-<time datetime="2013-07-11T23:49:04+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2013</time>
+<time datetime="2016-08-02T16:18:55+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/book/'>book</a>
+    <a class='category' href='/blog/categories/libc/'>libc</a>
   
 </span>
 
@@ -157,7 +169,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:《美丽新世界》 http://xixitalk.github.io/blog/2013/07/11/Brave-New-World/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:fwrite()多了个了0x0D字符 http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -203,8 +215,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/07/11/Brave-New-World/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/07/11/Brave-New-World/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/';
         var disqus_script = 'embed.js';
       
     (function () {
