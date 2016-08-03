@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pthread | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/pthread/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-02T09:55:44+08:00</updated>
+  <updated>2016-08-03T03:25:34+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[pthread和errno]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/08/02/pthread-errno/"/>
-    <updated>2016-08-02T03:10:02+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/08/02/pthread-errno</id>
+    <link href="http://xixitalk.github.io/blog/2016/08/01/pthread-errno/"/>
+    <updated>2016-08-01T19:10:02+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/01/pthread-errno</id>
     <content type="html"><![CDATA[<p>pthread和errno：pthread函数在出错的时候不会设置errno，而是直接返回错误值。</p>
 
 <!--more-->
@@ -52,7 +52,7 @@ if (s != 0)
   <entry>
     <title type="html"><![CDATA[pthread退出时自动回收资源]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/18/pthread-autoclean-when-exiting/"/>
-    <updated>2016-07-18T16:49:16+08:00</updated>
+    <updated>2016-07-18T08:49:16+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/18/pthread-autoclean-when-exiting</id>
     <content type="html"><![CDATA[<p>pthread线程创建后默认属性是joinable，线程函数执行完资源不会自动回收线程资源，需要主进程<code>pthread_join</code>进行回收，否则就会造成不必要的内存占用，频繁创建退出线程可能会造成系统内存耗尽。除了<code>pthread_join</code>用这种办法更好些。</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: math | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-02T09:55:44+08:00</updated>
+  <updated>2016-08-03T03:25:34+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[用mathjax显示数学公式]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/09/mathjax-math-formula/"/>
-    <updated>2013-06-09T07:32:24+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/09/mathjax-math-formula</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/08/mathjax-math-formula/"/>
+    <updated>2013-06-08T23:32:24+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/08/mathjax-math-formula</id>
     <content type="html"><![CDATA[<p>具体可以参看这篇博客<a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/</a></p>
 
 <p>几点特殊说明如下：<br />

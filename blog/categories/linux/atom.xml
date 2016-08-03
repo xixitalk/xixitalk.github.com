@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-02T09:55:44+08:00</updated>
+  <updated>2016-08-03T03:25:34+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[linux内核代码瘦身]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip/"/>
-    <updated>2016-07-21T05:07:23+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip</id>
+    <link href="http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip/"/>
+    <updated>2016-07-20T21:07:23+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip</id>
     <content type="html"><![CDATA[<p>linux内核代码瘦身，原理：把不参与编译的代码删除，这样用Source Insight工具阅读代码的时候就轻简了很多。</p>
 
 <p>例子数据：原本一个嵌入式linux内核代码1万7千个C文件，精简之后只有1222个C文件，删除了1万6千个C文件。</p>
@@ -112,7 +112,7 @@ python strip.py
   <entry>
     <title type="html"><![CDATA[linux内核代码预处理后便于阅读]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/"/>
-    <updated>2016-07-19T21:39:01+08:00</updated>
+    <updated>2016-07-19T13:39:01+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel</id>
     <content type="html"><![CDATA[<p>linux 内核庞大而复杂。内核代码阅读的时候，有没有遇到因为宏定义或者inline层次太深而不知道到底代码是什么样子。代码预处理可以解决这个难题。</p>
 
@@ -232,7 +232,7 @@ found:
   <entry>
     <title type="html"><![CDATA[linux栈和内存管理]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/"/>
-    <updated>2016-07-18T17:11:52+08:00</updated>
+    <updated>2016-07-18T09:11:52+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management</id>
     <content type="html"><![CDATA[<p>先记录，待细看</p>
 
@@ -252,7 +252,7 @@ found:
   <entry>
     <title type="html"><![CDATA[pthread退出时自动回收资源]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/18/pthread-autoclean-when-exiting/"/>
-    <updated>2016-07-18T16:49:16+08:00</updated>
+    <updated>2016-07-18T08:49:16+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/18/pthread-autoclean-when-exiting</id>
     <content type="html"><![CDATA[<p>pthread线程创建后默认属性是joinable，线程函数执行完资源不会自动回收线程资源，需要主进程<code>pthread_join</code>进行回收，否则就会造成不必要的内存占用，频繁创建退出线程可能会造成系统内存耗尽。除了<code>pthread_join</code>用这种办法更好些。</p>
 
@@ -285,7 +285,7 @@ pthread_exit(NULL); } ```
   <entry>
     <title type="html"><![CDATA[linux内核kmalloc和vmalloc的区别]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/18/kmalloc-vs-vmalloc/"/>
-    <updated>2016-07-18T16:41:56+08:00</updated>
+    <updated>2016-07-18T08:41:56+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/18/kmalloc-vs-vmalloc</id>
     <content type="html"><![CDATA[<p>kmalloc 和 vmalloc的区别</p>
 

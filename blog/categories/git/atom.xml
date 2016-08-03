@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-02T09:55:44+08:00</updated>
+  <updated>2016-08-03T03:25:34+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[git ssh使用代理]]></title>
     <link href="http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy/"/>
-    <updated>2013-07-12T16:23:33+08:00</updated>
+    <updated>2013-07-12T08:23:33+00:00</updated>
     <id>http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy</id>
     <content type="html"><![CDATA[<p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
 
@@ -54,7 +54,7 @@ IdentityFile /home/pi/.ssh/id_rsa
   <entry>
     <title type="html"><![CDATA[git manual]]></title>
     <link href="http://xixitalk.github.io/blog/2012/11/24/git-manual/"/>
-    <updated>2012-11-24T21:54:00+08:00</updated>
+    <updated>2012-11-24T21:54:00+00:00</updated>
     <id>http://xixitalk.github.io/blog/2012/11/24/git-manual</id>
     <content type="html"><![CDATA[<h2 id="section">初始化目录</h2>
 
@@ -172,7 +172,7 @@ $ git config --global user.email johndoe@example.com
   <entry>
     <title type="html"><![CDATA[octopress命令备忘录]]></title>
     <link href="http://xixitalk.github.io/blog/2012/11/23/octopress-command-note/"/>
-    <updated>2012-11-23T23:07:00+08:00</updated>
+    <updated>2012-11-23T23:07:00+00:00</updated>
     <id>http://xixitalk.github.io/blog/2012/11/23/octopress-command-note</id>
     <content type="html"><![CDATA[<h2 id="section">创建新文章</h2>
 
@@ -240,7 +240,7 @@ git pull origin source
   <entry>
     <title type="html"><![CDATA[flask_twip在heroku上搭建教程]]></title>
     <link href="http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku/"/>
-    <updated>2012-11-23T21:01:00+08:00</updated>
+    <updated>2012-11-23T21:01:00+00:00</updated>
     <id>http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
 
