@@ -17,6 +17,7 @@ pthread和errno：pthread函数在出错的时候不会设置errno，而是直�
 > system call, or errno is just starting out at EINTR and never getting
 > changed (this has happened to me).
 
+
 ```
  #define handle_error_en(en, msg) \
                do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
