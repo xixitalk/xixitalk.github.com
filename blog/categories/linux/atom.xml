@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-03T03:25:34+00:00</updated>
+  <updated>2016-08-03T10:46:35+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[jemalloc add2line ligsigsegv]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv/"/>
+    <updated>2016-08-03T18:38:22+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv</id>
+    <content type="html"><![CDATA[<p>一些定位工具还需要研究</p>
+
+<!--more-->
+
+<p><a href="http://www.cnblogs.com/djinmusic/archive/2013/02/04/2891753.html">http://www.cnblogs.com/djinmusic/archive/2013/02/04/2891753.html</a></p>
+
+<p><a href="http://blog.codingnow.com/2014/01/out_of_range_bug.html">http://blog.codingnow.com/2014/01/out_of_range_bug.html</a></p>
+
+<p><a href="http://blog.csdn.net/olidrop/article/details/7295908">http://blog.csdn.net/olidrop/article/details/7295908</a></p>
+
+<p><a href="https://www.gnu.org/software/libsigsegv/">https://www.gnu.org/software/libsigsegv/</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核代码瘦身]]></title>
@@ -278,109 +298,6 @@ pthread_exit(NULL); } ```
 <p><a href="http://blog.csdn.net/trinea/article/details/5191165">http://blog.csdn.net/trinea/article/details/5191165</a></p>
 
 <p><a href="http://www.lxway.net/499814656.html">http://www.lxway.net/499814656.html</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux内核kmalloc和vmalloc的区别]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/18/kmalloc-vs-vmalloc/"/>
-    <updated>2016-07-18T08:41:56+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/18/kmalloc-vs-vmalloc</id>
-    <content type="html"><![CDATA[<p>kmalloc 和 vmalloc的区别</p>
-
-<!--more-->
-
-<h4 id="kmalloc">kmalloc</h4>
-
-<p><code>
-void *kmalloc(size_t size, gfp_t flags)
-</code></p>
-
-<p>kmalloc是内核中最常用的一种内存分配方式，<strong>连续的物理内存</strong>。如果size是常量，调用<code>kmem_cache_alloc_trace</code>分配，否则调用<code>__kmalloc</code>分配。size如果是常量且大于4M，直接返回0（内核版本3.4.5）；如果size是0，返回地址是<code>((void *)16)</code>。</p>
-
-<h4 id="vmalloc">vmalloc</h4>
-
-<p><code>
-void *vmalloc(unsigned long size)
-</code></p>
-
-<p>kmalloc内存分配方式都是物理连续的，能保证较低的平均访问时间。但是在某些场合中，对内存区的请求不是很频繁，较高的内存访问时间也 可以接受，这是就可以分配一段<strong>线性连续，物理不连续</strong>的地址，带来的好处是一次可以分配较大块的内存。vmalloc对 一次能分配的内存大小没有明确限制。</p>
-
-<h5 id="kmalloc-1">kmalloc预处理后的代码</h5>
-
-<p>```
-static inline <strong>attribute</strong>((always_inline)) <strong>attribute</strong>((always_inline)) void *kmalloc(size_t size, gfp_t flags)
-{
- struct kmem_cache *cachep;
- void *ret;</p>
-
-<p>if (__builtin_constant_p(size)) {
-  int i = 0;</p>
-
-<p>if (!size)
-   return ((void *)16);</p>
-
-<h1 id="includelinuxkmallocsizesh-1">1 “include/linux/kmalloc_sizes.h” 1</h1>
-<p>if (size &lt;= 32) goto found; else i++;
- if (size &lt;= 64) goto found; else i++;
- if (size &lt;= 128) goto found; else i++;
- if (size &lt;= 192) goto found; else i++;
- if (size &lt;= 256) goto found; else i++;
- if (size &lt;= 512) goto found; else i++;
- if (size &lt;= 1024) goto found; else i++;
- if (size &lt;= 2048) goto found; else i++;
- if (size &lt;= 4096) goto found; else i++;
- if (size &lt;= 8192) goto found; else i++;
- if (size &lt;= 16384) goto found; else i++;
- if (size &lt;= 32768) goto found; else i++;
- if (size &lt;= 65536) goto found; else i++;
- if (size &lt;= 131072) goto found; else i++;
- if (size &lt;= 262144) goto found; else i++;
- if (size &lt;= 524288) goto found; else i++;
- if (size &lt;= 1048576) goto found; else i++;
- if (size &lt;= 2097152) goto found; else i++;
- if (size &lt;= 4194304) goto found; else i++;
-# 145 “include/linux/slab_def.h” 2</p>
-
-<p>return ((void *)0);
-found:
-   cachep = malloc_sizes[i].cs_cachep;</p>
-
-<p>ret = kmem_cache_alloc_trace(size, cachep, flags);</p>
-
-<p>return ret;
- }
- return __kmalloc(size, flags);
-}</p>
-
-<p>void *__kmalloc(size_t size, gfp_t flags)
-{
- return __do_kmalloc(size, flags, ((void *)0));
-}</p>
-
-<p>static inline <strong>attribute</strong>((always_inline)) <strong>attribute</strong>((always_inline)) void *__do_kmalloc(size_t size, gfp_t flags, void *caller)
-{
- struct kmem_cache *cachep;
- void *ret;</p>
-
-<p>cachep = __find_general_cachep(size, flags);
- if (__builtin_expect(!!(((unsigned long)(cachep) &lt;= (unsigned long)((void *)16))), 0))
-  return cachep;
- ret = __cache_alloc(cachep, flags, caller);</p>
-
-<p>trace_kmalloc((unsigned long) caller, ret,
-        size, cachep-&gt;buffer_size, flags);</p>
-
-<p>return ret;
-}
-```</p>
-
-<h1 id="section">引用文章</h1>
-
-<p><a href="http://www.ahlinux.com/start/kernel/18604.html">http://www.ahlinux.com/start/kernel/18604.html</a></p>
-
-<p><a href="http://blog.csdn.net/bullbat/article/details/7181396">http://blog.csdn.net/bullbat/article/details/7181396</a></p>
 
 ]]></content>
   </entry>

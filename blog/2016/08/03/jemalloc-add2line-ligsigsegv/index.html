@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>为flask_twip添加图片代理 - xixitalk's snippet</title>
+  <title>jemalloc add2line ligsigsegv - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="为flask_twip添加图片代理
-为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。
-demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2
-在文件twip.py里增加import &hellip;">
+  <meta name="description" content="一些定位工具还需要研究 http://www.cnblogs.com/djinmusic/archive/2013/02/04/2891753.html http://blog.codingnow.com/2014/01/out_of_range_bug.html http://blog.csdn &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/02/17/flask-twip-proxy">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,7 +81,7 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2
   
   <header>
     
-      <h1 class="entry-title">为flask_twip添加图片代理</h1>
+      <h1 class="entry-title">jemalloc add2line ligsigsegv</h1>
     
     
       <p class="meta">
@@ -100,7 +97,7 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2
   
 
 
-<time datetime="2013-02-17T11:31:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2013</time>
+<time datetime="2016-08-03T18:38:22+00:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,35 +106,17 @@ demo参见https://xinhuanet.herokuapp.com/twip/getimg 1、import urllib2
   </header>
 
 
-<div class="entry-content"><h2 id="flasktwip">为flask_twip添加图片代理</h2>
-<p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br />
-demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuanet.herokuapp.com/twip/getimg</a></p>
+<div class="entry-content"><p>一些定位工具还需要研究</p>
 
 <!--more-->
 
-<h3 id="import-urllib2">1、import urllib2</h3>
-<p>在文件twip.py里增加import urllib2</p>
+<p><a href="http://www.cnblogs.com/djinmusic/archive/2013/02/04/2891753.html">http://www.cnblogs.com/djinmusic/archive/2013/02/04/2891753.html</a></p>
 
-<pre><code>import urllib2
-</code></pre>
+<p><a href="http://blog.codingnow.com/2014/01/out_of_range_bug.html">http://blog.codingnow.com/2014/01/out_of_range_bug.html</a></p>
 
-<h3 id="twipgetimg">2、增加/twip/getimg路径映射</h3>
-<p>在twip.py文件的函数getMapper里增加/twip/getimg路径映射</p>
+<p><a href="http://blog.csdn.net/olidrop/article/details/7295908">http://blog.csdn.net/olidrop/article/details/7295908</a></p>
 
-<pre><code>('/getimg/',self.getimg),
-</code></pre>
-
-<h3 id="getimg">3、增加getimg函数</h3>
-<p>在文件twip.py里twip类增加getimg函数，代码参见<a href="https://gist.github.com/xixitalk/4969986">https://gist.github.com/xixitalk/4969986</a>  </p>
-
-<script src="https://gist.github.com/xixitalk/4969986.js"></script>
-
-<h3 id="httpsyourappherokuappcomtwipgetimg">4、浏览器访问https://YOURAPP.herokuapp.com/twip/getimg</h3>
-<p>访问https://YOURAPP.herokuapp.com/twip/getimg，输入图片地址或者网页地址即可。</p>
-
-<h3 id="section">5、客户端使用</h3>
-<p>如果客户端获取图片的时候把不能访问的图片地址（以BLOCKEDIMGURL为例）以参数imgurl形式传给https://YOURAPP.herokuapp.com/twip/getimg就可以直接在客户端查看图片了。
-	https://YOURAPP.herokuapp.com/twip/getimg?imgurl=BLOCKEDIMGURL</p>
+<p><a href="https://www.gnu.org/software/libsigsegv/">https://www.gnu.org/software/libsigsegv/</a></p>
 
 </div>
 
@@ -161,12 +140,12 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
   
 
 
-<time datetime="2013-02-17T11:31:00+00:00" pubdate data-updated="true">Feb 17<span>th</span>, 2013</time>
+<time datetime="2016-08-03T18:38:22+00:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/flask-twip/'>flask_twip</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -178,7 +157,7 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:为flask_twip添加图片代理 http://xixitalk.github.io/blog/2013/02/17/flask-twip-proxy/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:jemalloc add2line ligsigsegv http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -224,8 +203,8 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/02/17/flask-twip-proxy/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/02/17/flask-twip-proxy/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv/';
         var disqus_script = 'embed.js';
       
     (function () {
