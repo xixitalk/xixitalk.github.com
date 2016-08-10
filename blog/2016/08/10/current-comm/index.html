@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>搭建带代理的奶瓶腿 - xixitalk's snippet</title>
+  <title>在内核里获取当前任务名 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。 下载奶瓶腿代码 &hellip;">
+  <meta name="description" content="遇到一个问题，在一个内核模块里使用current-&gt;comm保存当前任务名，编译报错:dereferencing pointer to incomplete type。 经过搜索发现，除了要包含current.h外，还要包含sched.h。原因是struct &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/10/current-comm">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">搭建带代理的奶瓶腿</h1>
+      <h1 class="entry-title">在内核里获取当前任务名</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2013-06-15T21:39:29+00:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
+<time datetime="2016-08-10T08:33:02+00:00" pubdate data-updated="true">Aug 10<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,44 +106,31 @@
   </header>
 
 
-<div class="entry-content"><p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
+<div class="entry-content"><p>遇到一个问题，在一个内核模块里使用current-&gt;comm保存当前任务名，编译报错:<code>dereferencing pointer to incomplete type</code>。</p>
 
 <!--more-->
 
-<h3 id="section">下载奶瓶腿代码</h3>
+<p>经过搜索发现，除了要包含<code>current.h</code>外，还要包含<code>sched.h</code>。原因是<code>struct task_struct</code>在<code>sched.h</code>里定义。<code>comm</code>是数组字符串，长度是<code>TASK_COMM_LEN</code>，一般是16个字节，记得保证足够的空间，防止内存越界。</p>
 
-<p>把奶瓶腿的代码放在apache的浏览的根目录：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">git clone git@github.com:netputer/netputweets.git
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以将目录netputweets修改为t。</p>
-
-<h3 id="section-1">安装好奶瓶腿所要的环境</h3>
-
-<p>apache、php5+、cURL、URL Rewrite等，这部分略过。</p>
-
-<h3 id="section-2">添加代理</h3>
-
-<p>假设代理是：HTTP 192.168.1.106:8118,其他格式代理相应修改。<br />
-修改img.php、class.upload.php、twitter.php、handler.php文件里在所有执行<code>curl_exec</code>函数前添加：</p>
+<p>用法实例如下：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;linux/sched.h&gt;
+</span><span class="line">#include &lt;asm/current.h&gt;
+</span><span class="line">
+</span><span class="line">static char g_cfg_app_name[TASK_COMM_LEN*2] = { 0 };
+</span><span class="line">
+</span><span class="line">strncpy(g_cfg_app_name,current-&gt;comm,TASK_COMM_LEN);
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><code>setup.php</code>文件里的<code>curl_exec</code>前不要修改。</p>
+<h4 id="section">参考文章</h4>
 
-<h3 id="section-3">安装奶瓶腿</h3>
-
-<p>浏览器里访问http://xxxxx.org/t/setup.php，进行奶瓶腿安装。安装后正常进行twitter帐号关联。</p>
-
-<p><img src="https://pbs.twimg.com/media/BMzloh6CMAEonlF.png:large" alt="netputweets" /></p>
-
-<h3 id="base64">推文两次base64编码防止敏感词过滤</h3>
-
-<p>推文进行base64两次编码，客户端浏览器进行base64两次解码，这样可以防止敏感词过滤。缺点是按照base64的特点两次编码推文字节会变成原来的<script type="math/tex"> \frac{16}{9} </script>。</p>
+<p><a href="http://www.xuebuyuan.com/1814455.html">http://www.xuebuyuan.com/1814455.html</a></p>
 
 </div>
 
@@ -167,12 +154,12 @@
   
 
 
-<time datetime="2013-06-15T21:39:29+00:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
+<time datetime="2016-08-10T08:33:02+00:00" pubdate data-updated="true">Aug 10<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/proxy/'>proxy</a>, <a class='category' href='/blog/categories/twitter/'>twitter</a>
+    <a class='category' href='/blog/categories/kernel/'>kernel</a>, <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -184,15 +171,13 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:搭建带代理的奶瓶腿 http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:在内核里获取当前任务名 http://xixitalk.github.io/blog/2016/08/10/current-comm/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
 
     
 
-
-    <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 
 </footer>
@@ -232,8 +217,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/10/current-comm/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/10/current-comm/';
         var disqus_script = 'embed.js';
       
     (function () {

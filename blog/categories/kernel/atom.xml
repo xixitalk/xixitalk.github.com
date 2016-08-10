@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kernel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/kernel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-03T10:46:35+00:00</updated>
+  <updated>2016-08-10T00:45:28+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在内核里获取当前任务名]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/08/10/current-comm/"/>
+    <updated>2016-08-10T08:33:02+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/10/current-comm</id>
+    <content type="html"><![CDATA[<p>遇到一个问题，在一个内核模块里使用current-&gt;comm保存当前任务名，编译报错:<code>dereferencing pointer to incomplete type</code>。</p>
+
+<!--more-->
+
+<p>经过搜索发现，除了要包含<code>current.h</code>外，还要包含<code>sched.h</code>。原因是<code>struct task_struct</code>在<code>sched.h</code>里定义。<code>comm</code>是数组字符串，长度是<code>TASK_COMM_LEN</code>，一般是16个字节，记得保证足够的空间，防止内存越界。</p>
+
+<p>用法实例如下：</p>
+
+<p>```
+#include &lt;linux/sched.h&gt;
+#include &lt;asm/current.h&gt;</p>
+
+<p>static char g_cfg_app_name[TASK_COMM_LEN*2] = { 0 };</p>
+
+<p>strncpy(g_cfg_app_name,current-&gt;comm,TASK_COMM_LEN);
+```</p>
+
+<h4 id="section">参考文章</h4>
+
+<p><a href="http://www.xuebuyuan.com/1814455.html">http://www.xuebuyuan.com/1814455.html</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux内核代码瘦身]]></title>
