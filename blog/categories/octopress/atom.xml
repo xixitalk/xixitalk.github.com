@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-18T01:39:16+00:00</updated>
+  <updated>2016-08-18T11:41:21+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[中国时区：CCT]]></title>
     <link href="http://xixitalk.github.io/blog/2013/07/06/china-coast-time/"/>
-    <updated>2013-07-06T08:17:55+00:00</updated>
+    <updated>2013-07-06T16:17:55+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/07/06/china-coast-time</id>
     <content type="html"><![CDATA[<p>octopress的<code>rake generate</code>的时候，如果时间在晚上22：00到24：00左右，发现生成的博客HTML文件日期会是第二天的日期。Google之后有人说要加<code>TZ=CCT</code>来设定时区。</p>
 
@@ -36,9 +36,9 @@
   
   <entry>
     <title type="html"><![CDATA[octopress加快rake generate速度]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/19/Octopress-Rake-gen_deploy/"/>
-    <updated>2013-06-19T21:35:54+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/19/Octopress-Rake-gen_deploy</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/20/Octopress-Rake-gen_deploy/"/>
+    <updated>2013-06-20T05:35:54+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/20/Octopress-Rake-gen_deploy</id>
     <content type="html"><![CDATA[<p>octopress随着文件越来越多，<code>rake generate</code>越来越慢。这样可以加快速度。</p>
 
 <!--more-->
@@ -66,9 +66,9 @@ rake gen_deploy
   
   <entry>
     <title type="html"><![CDATA[从已经存在的octopress新建环境]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/19/clone-from-exist-octopress/"/>
-    <updated>2013-06-19T18:45:41+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/19/clone-from-exist-octopress</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/20/clone-from-exist-octopress/"/>
+    <updated>2013-06-20T02:45:41+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/20/clone-from-exist-octopress</id>
     <content type="html"><![CDATA[<p>场景需求：为已经存在的octopress博客在另一个目录或者主机新建一个octopress发布环境</p>
 
 <h3 id="sourcemaster">获得source和master分支代码</h3>
@@ -95,7 +95,7 @@ bundle install
   <entry>
     <title type="html"><![CDATA[octopress里插入flickr的图片]]></title>
     <link href="http://xixitalk.github.io/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress/"/>
-    <updated>2013-06-19T10:17:24+00:00</updated>
+    <updated>2013-06-19T18:17:24+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/06/19/Insert-a-Image-From-Flickr-in-Octopress</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com">flickr</a>更新之后，免费1T空间，同时可以上传质量很好的图片。<a href="http://www.instagram.com">instagram</a>的图片质量太差了。</p>
 
@@ -158,9 +158,9 @@ FlickRaw.proxy = "http://192.168.1.106:8118/"
   
   <entry>
     <title type="html"><![CDATA[用mathjax显示数学公式]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/08/mathjax-math-formula/"/>
-    <updated>2013-06-08T23:32:24+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/08/mathjax-math-formula</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/09/mathjax-math-formula/"/>
+    <updated>2013-06-09T07:32:24+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/09/mathjax-math-formula</id>
     <content type="html"><![CDATA[<p>具体可以参看这篇博客<a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/</a></p>
 
 <p>几点特殊说明如下：<br />

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ssh | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/ssh/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-18T01:39:16+00:00</updated>
+  <updated>2016-08-18T11:41:21+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[git ssh使用代理]]></title>
     <link href="http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy/"/>
-    <updated>2013-07-12T08:23:33+00:00</updated>
+    <updated>2013-07-12T16:23:33+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy</id>
     <content type="html"><![CDATA[<p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
 
@@ -53,9 +53,9 @@ IdentityFile /home/pi/.ssh/id_rsa
   
   <entry>
     <title type="html"><![CDATA[推荐一个web ssh client]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/09/web-ssh-client/"/>
-    <updated>2013-06-09T23:00:34+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/09/web-ssh-client</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/10/web-ssh-client/"/>
+    <updated>2013-06-10T07:00:34+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/10/web-ssh-client</id>
     <content type="html"><![CDATA[<p>推荐一个免费的web ssh client <a href="https://www.sshd.org/server/quick-connect.html">https://www.sshd.org/server/quick-connect.html</a>，免费稳定可靠，值得推荐。</p>
 
 <!--more-->

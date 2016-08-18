@@ -4,7 +4,7 @@
   <title><![CDATA[Category: flask_twip | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/flask-twip/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-18T01:39:16+00:00</updated>
+  <updated>2016-08-18T11:41:21+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[为flask_twip添加图片代理]]></title>
     <link href="http://xixitalk.github.io/blog/2013/02/17/flask-twip-proxy/"/>
-    <updated>2013-02-17T11:31:00+00:00</updated>
+    <updated>2013-02-17T11:31:00+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/02/17/flask-twip-proxy</id>
     <content type="html"><![CDATA[<h2 id="flasktwip">为flask_twip添加图片代理</h2>
 <p>为flask_twip添加图片代理,理论上网页也可以，但网页只抓取第一层。<br />
@@ -54,7 +54,7 @@ demo参见<a href="https://xinhuanet.herokuapp.com/twip/getimg">https://xinhuane
   <entry>
     <title type="html"><![CDATA[flask_twip在heroku上搭建教程]]></title>
     <link href="http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku/"/>
-    <updated>2012-11-23T21:01:00+00:00</updated>
+    <updated>2012-11-23T21:01:00+08:00</updated>
     <id>http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
 

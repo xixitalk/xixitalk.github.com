@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
+<time datetime="2016-08-18T16:49:42+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -151,7 +151,7 @@
 
 <p>对比发现死机现场里的<code>kobject_uevent_env</code>函数里的<code>uevent_sock</code>变量里<code>sk_sndbuf</code>和<code>sk_rcvbuf</code>都是163840（160K）。而<code>netlink_broadcast_deliver</code>里sock是8b8（2232）。很明显netlink接收socket里的sock比内核驱动的sock接收buf差距太大了。</p>
 
-<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
+<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，<code>sk_rcvbuf</code>和<code>sk_sndbuf</code>初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
 
 <blockquote>
   <p>sk-&gt;sk_rcvbuf		=	sysctl_rmem_default;
@@ -240,7 +240,7 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
   
 
 
-<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
+<time datetime="2016-08-18T16:49:42+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
       
 
 <span class="categories">

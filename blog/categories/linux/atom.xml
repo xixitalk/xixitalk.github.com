@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-18T01:39:16+00:00</updated>
+  <updated>2016-08-18T11:41:21+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[netlink遇到ENOBUFS错误]]></title>
     <link href="http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/"/>
-    <updated>2016-08-18T08:49:42+00:00</updated>
+    <updated>2016-08-18T16:49:42+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS</id>
     <content type="html"><![CDATA[<p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
 
@@ -49,7 +49,7 @@ return -1; } ```
 
 <p>对比发现死机现场里的<code>kobject_uevent_env</code>函数里的<code>uevent_sock</code>变量里<code>sk_sndbuf</code>和<code>sk_rcvbuf</code>都是163840（160K）。而<code>netlink_broadcast_deliver</code>里sock是8b8（2232）。很明显netlink接收socket里的sock比内核驱动的sock接收buf差距太大了。</p>
 
-<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
+<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，<code>sk_rcvbuf</code>和<code>sk_sndbuf</code>初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
 
 <blockquote>
   <p>sk-&gt;sk_rcvbuf		=	sysctl_rmem_default;
@@ -100,7 +100,7 @@ setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));   ```
   <entry>
     <title type="html"><![CDATA[在内核里获取当前任务名]]></title>
     <link href="http://xixitalk.github.io/blog/2016/08/10/current-comm/"/>
-    <updated>2016-08-10T08:33:02+00:00</updated>
+    <updated>2016-08-10T16:33:02+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/08/10/current-comm</id>
     <content type="html"><![CDATA[<p>遇到一个问题，在一个内核模块里使用current-&gt;comm保存当前任务名，编译报错:<code>dereferencing pointer to incomplete type</code>。</p>
 
@@ -128,9 +128,9 @@ setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));   ```
   
   <entry>
     <title type="html"><![CDATA[jemalloc add2line ligsigsegv]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv/"/>
-    <updated>2016-08-03T18:38:22+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv</id>
+    <link href="http://xixitalk.github.io/blog/2016/08/04/jemalloc-add2line-ligsigsegv/"/>
+    <updated>2016-08-04T02:38:22+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/04/jemalloc-add2line-ligsigsegv</id>
     <content type="html"><![CDATA[<p>一些定位工具还需要研究</p>
 
 <!--more-->
@@ -148,9 +148,9 @@ setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));   ```
   
   <entry>
     <title type="html"><![CDATA[linux内核代码瘦身]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip/"/>
-    <updated>2016-07-20T21:07:23+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip</id>
+    <link href="http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip/"/>
+    <updated>2016-07-21T05:07:23+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip</id>
     <content type="html"><![CDATA[<p>linux内核代码瘦身，原理：把不参与编译的代码删除，这样用Source Insight工具阅读代码的时候就轻简了很多。</p>
 
 <p>例子数据：原本一个嵌入式linux内核代码1万7千个C文件，精简之后只有1222个C文件，删除了1万6千个C文件。</p>
@@ -245,7 +245,7 @@ python strip.py
   <entry>
     <title type="html"><![CDATA[linux内核代码预处理后便于阅读]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/"/>
-    <updated>2016-07-19T13:39:01+00:00</updated>
+    <updated>2016-07-19T21:39:01+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel</id>
     <content type="html"><![CDATA[<p>linux 内核庞大而复杂。内核代码阅读的时候，有没有遇到因为宏定义或者inline层次太深而不知道到底代码是什么样子。代码预处理可以解决这个难题。</p>
 
