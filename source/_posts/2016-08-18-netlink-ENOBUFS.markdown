@@ -37,7 +37,7 @@ static int netlink_broadcast_deliver(struct sock *sk, struct sk_buff *skb)
 
 对比发现死机现场里的`kobject_uevent_env`函数里的`uevent_sock`变量里`sk_sndbuf`和`sk_rcvbuf`都是163840（160K）。而`netlink_broadcast_deliver`里sock是8b8（2232）。很明显netlink接收socket里的sock比内核驱动的sock接收buf差距太大了。
 
-内核sock.c里`sock_init_data`函数里进行sock初始化，初始化成`sysctl_rmem_default`。`sysctl_rmem_default`是个全局变量，导出的panic现场看值就是163840。
+内核sock.c里`sock_init_data`函数里进行sock初始化，`sk_rcvbuf`和`sk_sndbuf`初始化成`sysctl_rmem_default`。`sysctl_rmem_default`是个全局变量，导出的panic现场看值就是163840。
 
 > sk->sk_rcvbuf		=	sysctl_rmem_default;
 > sk->sk_sndbuf		=	sysctl_wmem_default;
@@ -79,5 +79,4 @@ C库的`setsockopt`函数会通过系统调用进入到内核`sock.c`文件里�
 解决办法：删除应用代码里的`setsockopt`语句,这样`sk_rcvbuf`默认就是160K，或者用`setsockopt`设置合适的大小。
 
 通过Google发现，网络上好多netlink实例都用了`setsockopt`设置了1024的buffer大小。应用这个代码应该是从网上抄来的。
-
 
