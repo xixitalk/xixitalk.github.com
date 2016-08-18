@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-10T00:45:28+00:00</updated>
+  <updated>2016-08-18T01:39:16+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[netlink遇到ENOBUFS错误]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/"/>
+    <updated>2016-08-18T08:49:42+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS</id>
+    <content type="html"><![CDATA[<p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
+
+<!--more-->
+
+<p>经过内核代码分析，<code>af_netlink.c</code>里<code>netlink_broadcast_deliver</code>函数返回-1才会触发<code>ENOBUFS</code>流程。加<code>printk</code>和<code>panic</code>复现问题(因为嵌入式开发环境抓panic死机现场分析和串口log都太方便了)。</p>
+
+<p>```
+static int netlink_broadcast_deliver(struct sock *sk, struct sk_buff *skb)
+{
+	struct netlink_sock *nlk = nlk_sk(sk);</p>
+
+<pre><code>if (atomic_read(&amp;sk-&gt;sk_rmem_alloc) &lt;= sk-&gt;sk_rcvbuf &amp;&amp;
+    !test_bit(0, &amp;nlk-&gt;state)) {
+	skb_set_owner_r(skb, sk);
+	__netlink_sendskb(sk, skb);
+	return atomic_read(&amp;sk-&gt;sk_rmem_alloc) &gt; (sk-&gt;sk_rcvbuf &gt;&gt; 1);
+}
+printk("[testcode]netlink sk_rmem_alloc:%x sk_rcvbuf:%x \n",atomic_read(&amp;sk-&gt;sk_rmem_alloc),sk-&gt;sk_rcvbuf);
+panic("[testcode]netlink broadcast panic\n");
+return -1; } ```
+</code></pre>
+
+<p>抓取的串口log如下显示<code>sk_rcvbuf</code>确实小于<code>sk_rmem_alloc</code>了，没有空间了。</p>
+
+<blockquote>
+  <p>[   18.618473] [testcode]netlink sk_rmem_alloc:b00 sk_rcvbuf:8b8  [<br />
+18.623727] Kernel panic - not syncing: [testcode]netlink broadcast panic</p>
+</blockquote>
+
+<p>对比发现死机现场里的<code>kobject_uevent_env</code>函数里的<code>uevent_sock</code>变量里<code>sk_sndbuf</code>和<code>sk_rcvbuf</code>都是163840（160K）。而<code>netlink_broadcast_deliver</code>里sock是8b8（2232）。很明显netlink接收socket里的sock比内核驱动的sock接收buf差距太大了。</p>
+
+<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
+
+<blockquote>
+  <p>sk-&gt;sk_rcvbuf		=	sysctl_rmem_default;
+sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
+</blockquote>
+
+<p>看应用netlink的接收，果然用<code>setsockopt</code>修改了<code>RCVBUF</code>。</p>
+
+<p>```
+    const int buffersize = 1024;<br />
+    int ret;  </p>
+
+<pre><code>struct sockaddr_nl snl;  
+bzero(&amp;snl, sizeof(struct sockaddr_nl));  
+snl.nl_family = AF_NETLINK;  
+snl.nl_pid = getpid();  
+snl.nl_groups = 1;  
+
+int s = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);  
+if (s == -1)   
+{  
+    perror("socket");  
+    return -1;  
+}  
+setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));   ```
+</code></pre>
+
+<p>C库的<code>setsockopt</code>函数会通过系统调用进入到内核<code>sock.c</code>文件里的<code>sock_setsockopt</code>函数。<code>SOCK_MIN_RCVBUF</code>就是2232。很明显应用<code>setsockopt</code>的<code>buffersize</code>是1024，乘以2还小于<code>SOCK_MIN_RCVBUF</code>，所以<code>sk_rcvbuf</code>就变成<code>SOCK_MIN_RCVBUF</code>。</p>
+
+<p><code>
+	case SO_RCVBUF:
+	    if (val &gt; sysctl_rmem_max)
+			val = sysctl_rmem_max;
+		if ((val * 2) &lt; SOCK_MIN_RCVBUF)
+			sk-&gt;sk_rcvbuf = SOCK_MIN_RCVBUF;
+		else
+			sk-&gt;sk_rcvbuf = val * 2;
+		break;
+</code></p>
+
+<p>解决办法：删除应用代码里的<code>setsockopt</code>语句,这样<code>sk_rcvbuf</code>默认就是160K，或者用<code>setsockopt</code>设置合适的大小。</p>
+
+<p>通过Google发现，网络上好多netlink实例都用了<code>setsockopt</code>设置了1024的buffer大小。应用这个代码应该是从网上抄来的。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在内核里获取当前任务名]]></title>
@@ -274,26 +358,6 @@ found:
  return __kmalloc(size, flags);
 }
 ```</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux栈和内存管理]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/"/>
-    <updated>2016-07-18T09:11:52+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management</id>
-    <content type="html"><![CDATA[<p>先记录，待细看</p>
-
-<!--more-->
-
-<p><a href="http://blog.csdn.net/daniel_ice/article/details/8146003">http://blog.csdn.net/daniel_ice/article/details/8146003</a></p>
-
-<p><a href="http://gityuan.com/2015/10/30/kernel-memory/">http://gityuan.com/2015/10/30/kernel-memory/</a></p>
-
-<p><a href="http://www.2ndmoon.net/weblog/?p=509">http://www.2ndmoon.net/weblog/?p=509</a></p>
-
-<p><a href="http://www.cnblogs.com/tolimit/p/4610974.html">http://www.cnblogs.com/tolimit/p/4610974.html</a></p>
 
 ]]></content>
   </entry>

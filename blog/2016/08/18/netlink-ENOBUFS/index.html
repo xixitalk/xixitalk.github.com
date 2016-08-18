@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>fwrite()多了个了0x0D字符 - xixitalk's snippet</title>
+  <title>netlink遇到ENOBUFS错误 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="fwrite()写文件竟然多了个了0x0D字符，buffer里检查了也确实没有0x0D，一搜索竟然是如果fopen不是二进制打开，fwrite()遇到0x0A额外写一个0x0D。0D 0A是windows平台的换行符，很明显这是只有在windows平台才有的奇特现象。 &hellip;">
+  <meta name="description" content="一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：No buffer space available 经过内核代码分析，af_netlink.c里netlink_broadcast_deliver函数返回- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">fwrite()多了个了0x0D字符</h1>
+      <h1 class="entry-title">netlink遇到ENOBUFS错误</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2016-08-02T08:18:55+00:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2016</time>
+<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,28 +106,117 @@
   </header>
 
 
-<div class="entry-content"><p>fwrite()写文件竟然多了个了0x0D字符，buffer里检查了也确实没有0x0D，一搜索竟然是如果fopen不是二进制打开，fwrite()遇到0x0A额外写一个0x0D。0D 0A是windows平台的换行符，很明显这是只有在windows平台才有的奇特现象。</p>
+<div class="entry-content"><p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
 
 <!--more-->
 
-<p>解决办法是fopen的flag加个<code>b</code>。</p>
+<p>经过内核代码分析，<code>af_netlink.c</code>里<code>netlink_broadcast_deliver</code>函数返回-1才会触发<code>ENOBUFS</code>流程。加<code>printk</code>和<code>panic</code>复现问题(因为嵌入式开发环境抓panic死机现场分析和串口log都太方便了)。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">fopen("sample.bin", "w+");
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">static int netlink_broadcast_deliver(struct sock *sk, struct sk_buff *skb)
+</span><span class="line">{
+</span><span class="line">	struct netlink_sock *nlk = nlk_sk(sk);
+</span><span class="line">
+</span><span class="line">	if (atomic_read(&amp;sk-&gt;sk_rmem_alloc) &lt;= sk-&gt;sk_rcvbuf &amp;&amp;
+</span><span class="line">	    !test_bit(0, &amp;nlk-&gt;state)) {
+</span><span class="line">		skb_set_owner_r(skb, sk);
+</span><span class="line">		__netlink_sendskb(sk, skb);
+</span><span class="line">		return atomic_read(&amp;sk-&gt;sk_rmem_alloc) &gt; (sk-&gt;sk_rcvbuf &gt;&gt; 1);
+</span><span class="line">	}
+</span><span class="line">	printk("[testcode]netlink sk_rmem_alloc:%x sk_rcvbuf:%x \n",atomic_read(&amp;sk-&gt;sk_rmem_alloc),sk-&gt;sk_rcvbuf);
+</span><span class="line">	panic("[testcode]netlink broadcast panic\n");
+</span><span class="line">	return -1;
+</span><span class="line">}
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>修改成：</p>
+<p>抓取的串口log如下显示<code>sk_rcvbuf</code>确实小于<code>sk_rmem_alloc</code>了，没有空间了。</p>
+
+<blockquote>
+  <p>[   18.618473] [testcode]netlink sk_rmem_alloc:b00 sk_rcvbuf:8b8  [<br />
+18.623727] Kernel panic - not syncing: [testcode]netlink broadcast panic</p>
+</blockquote>
+
+<p>对比发现死机现场里的<code>kobject_uevent_env</code>函数里的<code>uevent_sock</code>变量里<code>sk_sndbuf</code>和<code>sk_rcvbuf</code>都是163840（160K）。而<code>netlink_broadcast_deliver</code>里sock是8b8（2232）。很明显netlink接收socket里的sock比内核驱动的sock接收buf差距太大了。</p>
+
+<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
+
+<blockquote>
+  <p>sk-&gt;sk_rcvbuf		=	sysctl_rmem_default;
+sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
+</blockquote>
+
+<p>看应用netlink的接收，果然用<code>setsockopt</code>修改了<code>RCVBUF</code>。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">fopen("sample.bin", "wb+");
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">const int buffersize = 1024;  
+</span><span class="line">int ret;  
+</span><span class="line">
+</span><span class="line">struct sockaddr_nl snl;  
+</span><span class="line">bzero(&amp;snl, sizeof(struct sockaddr_nl));  
+</span><span class="line">snl.nl_family = AF_NETLINK;  
+</span><span class="line">snl.nl_pid = getpid();  
+</span><span class="line">snl.nl_groups = 1;  
+</span><span class="line">
+</span><span class="line">int s = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);  
+</span><span class="line">if (s == -1)   
+</span><span class="line">{  
+</span><span class="line">    perror("socket");  
+</span><span class="line">    return -1;  
+</span><span class="line">}  
+</span><span class="line">setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));  
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>另外想起来几年前我遇到过，也解决过，但是忘记了。这次随手记录下来。</p>
+<p>C库的<code>setsockopt</code>函数会通过系统调用进入到内核<code>sock.c</code>文件里的<code>sock_setsockopt</code>函数。<code>SOCK_MIN_RCVBUF</code>就是2232。很明显应用<code>setsockopt</code>的<code>buffersize</code>是1024，乘以2还小于<code>SOCK_MIN_RCVBUF</code>，所以<code>sk_rcvbuf</code>就变成<code>SOCK_MIN_RCVBUF</code>。</p>
 
-<h4 id="section">参考文章</h4>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">case SO_RCVBUF:
+</span><span class="line">    if (val &gt; sysctl_rmem_max)
+</span><span class="line">		val = sysctl_rmem_max;
+</span><span class="line">	if ((val * 2) &lt; SOCK_MIN_RCVBUF)
+</span><span class="line">		sk-&gt;sk_rcvbuf = SOCK_MIN_RCVBUF;
+</span><span class="line">	else
+</span><span class="line">		sk-&gt;sk_rcvbuf = val * 2;
+</span><span class="line">	break;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><a href="http://blog.csdn.net/njuitjf/article/details/5821716">http://blog.csdn.net/njuitjf/article/details/5821716</a><br />
-<a href="http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file">http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file</a></p>
+<p>解决办法：删除应用代码里的<code>setsockopt</code>语句,这样<code>sk_rcvbuf</code>默认就是160K，或者用<code>setsockopt</code>设置合适的大小。</p>
+
+<p>通过Google发现，网络上好多netlink实例都用了<code>setsockopt</code>设置了1024的buffer大小。应用这个代码应该是从网上抄来的。</p>
 
 </div>
 
@@ -151,12 +240,12 @@
   
 
 
-<time datetime="2016-08-02T08:18:55+00:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2016</time>
+<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/libc/'>libc</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -168,7 +257,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:fwrite()多了个了0x0D字符 http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:netlink遇到ENOBUFS错误 http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -214,8 +303,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/';
         var disqus_script = 'embed.js';
       
     (function () {
