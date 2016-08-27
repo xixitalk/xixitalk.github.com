@@ -5,6 +5,9 @@ background-color:pink;
 height:300px; 
 width:300px; 
 } 
+a:link {
+text-decoration: none;
+}
 img   {
 width:48px; 
 height:48px; 
