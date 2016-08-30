@@ -4,7 +4,7 @@
   <title><![CDATA[Category: owncloud | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/owncloud/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-18T11:41:21+08:00</updated>
+  <updated>2016-08-30T11:14:18+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Install owncloud 9.0.2 on RaspberryPi]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi/"/>
-    <updated>2016-04-23T07:16:41+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi</id>
+    <link href="http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi/"/>
+    <updated>2016-04-22T23:16:41+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi</id>
     <content type="html"><![CDATA[<p>Install owncloud 9.0.2 on RaspberryPi<br />
 在树莓派上安装owncloud 9.0.2</p>
 

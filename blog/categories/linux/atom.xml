@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-18T11:41:21+08:00</updated>
+  <updated>2016-08-30T11:14:18+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,9 +14,73 @@
 
   
   <entry>
+    <title type="html"><![CDATA[产品中多个不明可执行程序dvrHelper]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/08/30/virus-dvrHelper/"/>
+    <updated>2016-08-30T16:48:47+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/30/virus-dvrHelper</id>
+    <content type="html"><![CDATA[<p>一个数据类产品，测试报告描述：上传下载加浏览器看视频，一个小时内必死机。</p>
+
+<p>死机现场初步分析：系统内存耗尽死机，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。</p>
+
+<!--more-->
+
+<p>有人去分析内存问题，我来分析三个奇怪的进程。</p>
+
+<p>这三个进程父进程是Init，执行的命令是<code>dvrHelper</code>，开始我怀疑版本自带的程序，查看了版本编译后的文件系统，没有这个文件，在整个版本代码里搜索这个字符串，没有找到任何踪迹。这时候有人告诉我版本的根文件系统里多了<code>dvrHelper</code>文件，重烧版本是没有这个文件的。手动运行这个文件，提示</p>
+
+<p><code>
+listening tun0
+</code></p>
+
+<p>运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到<code>https://www.virustotal.com</code>在线扫描，55个杀毒软件，有2个提示异常。</p>
+
+<p>```
+SHA256:	c483618671766847fc75ea79fdc201df2e4a93f501dc98ec9c6f283fb1d4336c
+File name:	dvrHelper
+Detection ratio:	2 / 55
+Analysis date:	2016-08-29 08:51:11 UTC ( 22 hours, 56 minutes ago )</p>
+
+<p>AVG	Linux/Fgt.CA	20160829
+ESET-NOD32	a variant of Linux/Gafgyt.SE	20160829
+```</p>
+
+<p>这时候基本确认，<code>dvrHelper</code>文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过<code>adb push</code>，一个就是<code>telnet</code>。先禁用了<code>adb</code>功能，发现问题还是出现了。<strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。现在问题聚焦在<code>telnetd</code>服务上。</p>
+
+<p><code>telnet</code>是一个远程协议，<code>telnetd</code>是一个实现<code>telnet协议</code>的服务程序。</p>
+
+<p>PC上用<code>wireshark</code>抓包，没有抓到PC上应用程序登录<code>telnetd</code>的证据。后来突然想到<code>pppoe</code>功能可能会分配一个公网IP，<code>ifconfig</code>一看，果然电信分配了一个公网IP。用手机登录这个公网IP的<code>telnet</code>，也果然登录到这个产品里了。这样就怀疑产品是通过公网IP登录产品的<code>telnetd</code>服务，把木马上传到产品里了。</p>
+
+<p>同时在内核<code>fs/open.c</code>里加代码，如果打开<code>dvrHelper</code>文件就panic死机。死机显示在通过busybox执行<code>cp /bin/echo dvrHelper</code>，顺着父进程一直往上找，找到了<code>telnetd</code>进程。这样也再次排除了<code>adb</code>的嫌疑。</p>
+
+<p><code>
+long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
+{
+        if(strstr(filename,"dvrHelper"))
+            panic("[testcode] dvrHelper found\n");
+}
+</code>    </p>
+
+<p>这时候祭出了<code>tcpdump</code>工具，在产品内部运行<code>tcpdump</code>，只抓取公网网口的23端口数据包。</p>
+
+<p><code>
+tcpdump -i ppp port 23
+</code></p>
+
+<p><strong>十几分钟的时间，就抓到了来自台湾 泰国 巴西 印度的<code>telnet</code>登录，再一会根目录就多了<code>dvrHelper</code>文件。</strong></p>
+
+<p>修改意见：
+1、发货版本禁用<code>telnetd</code>服务
+2、开发版本用<code>iptables</code>设置禁止<code>ppp</code>网口的23端口访问，不用admin：admin这样简单的账号密码</p>
+
+<p>PS：因特网真是太危险了</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[netlink遇到ENOBUFS错误]]></title>
     <link href="http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/"/>
-    <updated>2016-08-18T16:49:42+08:00</updated>
+    <updated>2016-08-18T08:49:42+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS</id>
     <content type="html"><![CDATA[<p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
 
@@ -100,7 +164,7 @@ setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));   ```
   <entry>
     <title type="html"><![CDATA[在内核里获取当前任务名]]></title>
     <link href="http://xixitalk.github.io/blog/2016/08/10/current-comm/"/>
-    <updated>2016-08-10T16:33:02+08:00</updated>
+    <updated>2016-08-10T08:33:02+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/08/10/current-comm</id>
     <content type="html"><![CDATA[<p>遇到一个问题，在一个内核模块里使用current-&gt;comm保存当前任务名，编译报错:<code>dereferencing pointer to incomplete type</code>。</p>
 
@@ -128,9 +192,9 @@ setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));   ```
   
   <entry>
     <title type="html"><![CDATA[jemalloc add2line ligsigsegv]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/08/04/jemalloc-add2line-ligsigsegv/"/>
-    <updated>2016-08-04T02:38:22+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/08/04/jemalloc-add2line-ligsigsegv</id>
+    <link href="http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv/"/>
+    <updated>2016-08-03T18:38:22+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/08/03/jemalloc-add2line-ligsigsegv</id>
     <content type="html"><![CDATA[<p>一些定位工具还需要研究</p>
 
 <!--more-->
@@ -148,9 +212,9 @@ setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));   ```
   
   <entry>
     <title type="html"><![CDATA[linux内核代码瘦身]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip/"/>
-    <updated>2016-07-21T05:07:23+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/21/linux-kernel-source-strip</id>
+    <link href="http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip/"/>
+    <updated>2016-07-20T21:07:23+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip</id>
     <content type="html"><![CDATA[<p>linux内核代码瘦身，原理：把不参与编译的代码删除，这样用Source Insight工具阅读代码的时候就轻简了很多。</p>
 
 <p>例子数据：原本一个嵌入式linux内核代码1万7千个C文件，精简之后只有1222个C文件，删除了1万6千个C文件。</p>
@@ -238,126 +302,6 @@ python strip.py
 
 <p>如果编译成功，清理临时文件后保存代码用于阅读；<br />
 如果编译失败，恢复缺失的文件，修改strip.py，接着编译，直到内核重新编译通过，清理临时文件后保存代码用于阅读。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux内核代码预处理后便于阅读]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel/"/>
-    <updated>2016-07-19T21:39:01+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/19/preprocess-linux-kernel</id>
-    <content type="html"><![CDATA[<p>linux 内核庞大而复杂。内核代码阅读的时候，有没有遇到因为宏定义或者inline层次太深而不知道到底代码是什么样子。代码预处理可以解决这个难题。</p>
-
-<!--more-->
-
-<p>平台：linux 3.4.5 ARM，PC linux上类似，更简单些。</p>
-
-<h4 id="v1">加V=1重新编译内核</h4>
-
-<p><code>make</code>内核增加<code>V=1</code>选项，会详细打印编译过程，<code>-B</code>是要求重新编译内核所有模块。</p>
-
-<p><code>
-cd linux-3.4.5 &amp;&amp; make ARCH=arm defconfig &amp;&amp; make ARCH=arm CROSS_COMPILE=arm-buildroot-linux-uclibcgnueabi- EXTRAVERSION=- -B V=1 uImage
-</code></p>
-
-<p>编译内核并保存编译log到文件，搜索你要预编译的文件，如<code>mm/slab.c</code>，会找到如下编译命令：</p>
-
-<p><code>
-arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -c -o mm/.tmp_slab.o mm/slab.c
-</code></p>
-
-<h4 id="section">编译预处理指定文件</h4>
-
-<p>把编译命令修改成预处理命令：<code>-c -o mm/.tmp_slab.o</code>修改成<code>-E -o mm/slab.E mm/slab.c</code>，在内核目录<code>linux-3.4.5</code>直接执行。如果是交叉编译链，可能需要把<code>arm-buildroot-linux-uclibcgnueabi-gcc</code>所在路径加入到环境变量<code>PATH</code>里。</p>
-
-<p><code>
-arm-buildroot-linux-uclibcgnueabi-gcc -Wp,-MD,mm/.slab.o.d  -nostdinc -isystem /home/test/build/gcc-4.9.8/build_arm/staging_dir/usr/bin/../lib/gcc/arm-buildroot-linux-uclibcgnueabi/4.9.8/include -I/home/test/linux/kernels/linux-3.4.5/arch/arm/include -Iarch/arm/include/generated -Iinclude  -include /home/test/linux/kernels/linux-3.4.5/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-zx297510/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -marm -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -g -fno-inline-functions-called-once -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(slab)"  -D"KBUILD_MODNAME=KBUILD_STR(slab)" -E -o mm/slab.E mm/slab.c
-</code></p>
-
-<p>执行完命令，在内核的<code>mm</code>目录就能看到<code>slab.c</code>的预处理后文件<code>slab.E</code>文件了。看一下<code>kmalloc</code>函数代码，是不是清晰很多了。</p>
-
-<p><code>slab_def.h</code>里的原始<code>kmalloc</code></p>
-
-<p>```
-static __always_inline void *kmalloc(size_t size, gfp_t flags)
-{
-	struct kmem_cache *cachep;
-	void *ret;</p>
-
-<pre><code>if (__builtin_constant_p(size)) {
-	int i = 0;
-
-	if (!size)
-		return ZERO_SIZE_PTR;
-</code></pre>
-
-<h1 id="define-cachex-">define CACHE(x) \</h1>
-<pre><code>	if (size &lt;= x) \
-		goto found; \
-	else \
-		i++; #include &lt;linux/kmalloc_sizes.h&gt; #undef CACHE
-	return NULL; found: #ifdef CONFIG_ZONE_DMA
-	if (flags &amp; GFP_DMA)
-		cachep = malloc_sizes[i].cs_dmacachep;
-	else #endif
-		cachep = malloc_sizes[i].cs_cachep;
-
-	ret = kmem_cache_alloc_trace(size, cachep, flags);
-
-	return ret;
-}
-return __kmalloc(size, flags); } ```
-</code></pre>
-
-<p>预处理后的<code>kmalloc</code>,流程是不是清晰多了。</p>
-
-<p>```
-static inline <strong>attribute</strong>((always_inline)) <strong>attribute</strong>((always_inline)) void *kmalloc(size_t size, gfp_t flags)
-{
- struct kmem_cache *cachep;
- void *ret;</p>
-
-<p>if (__builtin_constant_p(size)) {
-  int i = 0;</p>
-
-<p>if (!size)
-   return ((void *)16);</p>
-
-<h1 id="includelinuxkmallocsizesh-1">1 “include/linux/kmalloc_sizes.h” 1</h1>
-
-<p>if (size &lt;= 32) goto found; else i++;
- if (size &lt;= 64) goto found; else i++;
- if (size &lt;= 128) goto found; else i++;
- if (size &lt;= 192) goto found; else i++;
- if (size &lt;= 256) goto found; else i++;
- if (size &lt;= 512) goto found; else i++;
- if (size &lt;= 1024) goto found; else i++;
- if (size &lt;= 2048) goto found; else i++;
- if (size &lt;= 4096) goto found; else i++;
- if (size &lt;= 8192) goto found; else i++;
- if (size &lt;= 16384) goto found; else i++;
- if (size &lt;= 32768) goto found; else i++;
- if (size &lt;= 65536) goto found; else i++;
- if (size &lt;= 131072) goto found; else i++;
- if (size &lt;= 262144) goto found; else i++;
- if (size &lt;= 524288) goto found; else i++;
- if (size &lt;= 1048576) goto found; else i++;
- if (size &lt;= 2097152) goto found; else i++;
- if (size &lt;= 4194304) goto found; else i++;
-# 145 “include/linux/slab_def.h” 2</p>
-
-<p>return ((void *)0);
-found:
-   cachep = malloc_sizes[i].cs_cachep;</p>
-
-<p>ret = kmem_cache_alloc_trace(size, cachep, flags);</p>
-
-<p>return ret;
- }
- return __kmalloc(size, flags);
-}
-```</p>
 
 ]]></content>
   </entry>
