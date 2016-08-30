@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="一个数据类产品，测试报告描述：上传下载加浏览器看视频，一个小时内必死机。 死机现场初步分析：系统内存耗尽死机，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。 有人去分析内存问题，我来分析三个奇怪的进程。 这三个进程父进程是Init， &hellip;">
+  <meta name="description" content="一个数据类产品，测试报告描述：FTP上传下载加浏览器看视频，一个小时内必死机。 死机现场初步分析：死机直接原因是系统内存耗尽，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。 有人去分析内存问题，我来分析三个奇怪的进程。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,9 +106,9 @@
   </header>
 
 
-<div class="entry-content"><p>一个数据类产品，测试报告描述：上传下载加浏览器看视频，一个小时内必死机。</p>
+<div class="entry-content"><p>一个数据类产品，测试报告描述：FTP上传下载加浏览器看视频，一个小时内必死机。</p>
 
-<p>死机现场初步分析：系统内存耗尽死机，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。</p>
+<p>死机现场初步分析：死机直接原因是系统内存耗尽，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。</p>
 
 <!--more-->
 
@@ -120,7 +120,7 @@
 </pre></td><td class="code"><pre><code class=""><span class="line">listening tun0
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到<code>https://www.virustotal.com</code>在线扫描，55个杀毒软件，有2个提示异常。</p>
+<p>运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到<code>https://www.virustotal.com</code>在线扫描，55个杀毒软件，有2个提示异常。通常<code>VPN</code>会使用<code>tun0</code>和<code>tup0</code>这样虚拟网口，这应该是一个网络包监控/分析/过滤程序。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -138,7 +138,21 @@
 </span><span class="line">ESET-NOD32	a variant of Linux/Gafgyt.SE	20160829
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>这时候基本确认，<code>dvrHelper</code>文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过<code>adb push</code>，一个就是<code>telnet</code>。先禁用了<code>adb</code>功能，发现问题还是出现了。<strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。现在问题聚焦在<code>telnetd</code>服务上。</p>
+<p>通过<code>file</code>命令查看文件属性，说是ARM格式的ELF文件。反汇编没有任何调试信息，汇编上看不出功能。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ file dvrHelper
+</span><span class="line">dvrHelper: ELF 32-bit LSB executable, ARM, version 1 (SYSV), statically linked, stripped
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这时候基本确认，<code>dvrHelper</code>文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过<code>adb push</code>，一个就是<code>telnet</code>。</p>
+
+<p>先禁用了<code>adb</code>功能，发现问题还是出现了。</p>
+
+<p><strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。</p>
+
+<p>现在问题聚焦在<code>telnetd</code>服务上。</p>
 
 <p><code>telnet</code>是一个远程协议，<code>telnetd</code>是一个实现<code>telnet协议</code>的服务程序。</p>
 
@@ -158,17 +172,53 @@
 </span><span class="line">}
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>这时候祭出了<code>tcpdump</code>工具，在产品内部运行<code>tcpdump</code>，只抓取公网网口的23端口数据包。</p>
+<p><code>tenetd</code>是包含在<code>busybox</code>工具包里，在<code>telnetd.c</code>里增加代码，用<code>getpeername</code>获取登录客户的IP是<code>0.0.0.0</code>，不知道为什么。按说<code>accept</code>后调用<code>getpeername</code>没有问题啊。我对网络不熟，如果有人知道请赐教。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">tcpdump -i ppp port 23
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">struct sockaddr_in sa;
+</span><span class="line">int len = sizeof(sa);
+</span><span class="line">FILE *fp;
+</span><span class="line">
+</span><span class="line">/*something*/
+</span><span class="line">fd = accept(master_fd, NULL, NULL);
+</span><span class="line">if (fd &lt; 0)
+</span><span class="line">	goto again;
+</span><span class="line">close_on_exec_on(fd);
+</span><span class="line">
+</span><span class="line">if(!getpeername(fd, (struct sockaddr *)&amp;sa, &amp;len))
+</span><span class="line">{
+</span><span class="line">  fp = fopen("/cache/login.log","ab+");
+</span><span class="line">  fprintf(fp,"[testcode] accept  from %s \n", inet_ntoa(sa.sin_addr));
+</span><span class="line">  fclose(fp);
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这时候只好祭出了<code>tcpdump</code>工具，在产品内部运行<code>tcpdump</code>，只抓取公网网口的23端口数据包。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">tcpdump -i ppp0 port 23
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><strong>十几分钟的时间，就抓到了来自台湾 泰国 巴西 印度的<code>telnet</code>登录，再一会根目录就多了<code>dvrHelper</code>文件。</strong></p>
 
 <p>修改意见：
 1、发货版本禁用<code>telnetd</code>服务
-2、开发版本用<code>iptables</code>设置禁止<code>ppp</code>网口的23端口访问，不用admin：admin这样简单的账号密码</p>
+2、开发版本用<code>iptables</code>设置禁止<code>ppp0</code>网口的23端口访问，不用admin：admin这样简单的账号密码，<code>telnetd</code>可以不用默认23端口，换成4589这样端口号</p>
 
 <p>PS：因特网真是太危险了</p>
 

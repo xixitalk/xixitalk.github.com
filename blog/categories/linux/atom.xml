@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-30T11:14:18+00:00</updated>
+  <updated>2016-08-30T12:19:05+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,9 +18,9 @@
     <link href="http://xixitalk.github.io/blog/2016/08/30/virus-dvrHelper/"/>
     <updated>2016-08-30T16:48:47+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/08/30/virus-dvrHelper</id>
-    <content type="html"><![CDATA[<p>一个数据类产品，测试报告描述：上传下载加浏览器看视频，一个小时内必死机。</p>
+    <content type="html"><![CDATA[<p>一个数据类产品，测试报告描述：FTP上传下载加浏览器看视频，一个小时内必死机。</p>
 
-<p>死机现场初步分析：系统内存耗尽死机，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。</p>
+<p>死机现场初步分析：死机直接原因是系统内存耗尽，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。</p>
 
 <!--more-->
 
@@ -32,7 +32,7 @@
 listening tun0
 </code></p>
 
-<p>运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到<code>https://www.virustotal.com</code>在线扫描，55个杀毒软件，有2个提示异常。</p>
+<p>运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到<code>https://www.virustotal.com</code>在线扫描，55个杀毒软件，有2个提示异常。通常<code>VPN</code>会使用<code>tun0</code>和<code>tup0</code>这样虚拟网口，这应该是一个网络包监控/分析/过滤程序。</p>
 
 <p>```
 SHA256:	c483618671766847fc75ea79fdc201df2e4a93f501dc98ec9c6f283fb1d4336c
@@ -44,7 +44,20 @@ Analysis date:	2016-08-29 08:51:11 UTC ( 22 hours, 56 minutes ago )</p>
 ESET-NOD32	a variant of Linux/Gafgyt.SE	20160829
 ```</p>
 
-<p>这时候基本确认，<code>dvrHelper</code>文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过<code>adb push</code>，一个就是<code>telnet</code>。先禁用了<code>adb</code>功能，发现问题还是出现了。<strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。现在问题聚焦在<code>telnetd</code>服务上。</p>
+<p>通过<code>file</code>命令查看文件属性，说是ARM格式的ELF文件。反汇编没有任何调试信息，汇编上看不出功能。</p>
+
+<p><code>
+$ file dvrHelper
+dvrHelper: ELF 32-bit LSB executable, ARM, version 1 (SYSV), statically linked, stripped
+</code></p>
+
+<p>这时候基本确认，<code>dvrHelper</code>文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过<code>adb push</code>，一个就是<code>telnet</code>。</p>
+
+<p>先禁用了<code>adb</code>功能，发现问题还是出现了。</p>
+
+<p><strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。</p>
+
+<p>现在问题聚焦在<code>telnetd</code>服务上。</p>
 
 <p><code>telnet</code>是一个远程协议，<code>telnetd</code>是一个实现<code>telnet协议</code>的服务程序。</p>
 
@@ -60,17 +73,38 @@ long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
 }
 </code>    </p>
 
-<p>这时候祭出了<code>tcpdump</code>工具，在产品内部运行<code>tcpdump</code>，只抓取公网网口的23端口数据包。</p>
+<p><code>tenetd</code>是包含在<code>busybox</code>工具包里，在<code>telnetd.c</code>里增加代码，用<code>getpeername</code>获取登录客户的IP是<code>0.0.0.0</code>，不知道为什么。按说<code>accept</code>后调用<code>getpeername</code>没有问题啊。我对网络不熟，如果有人知道请赐教。</p>
+
+<p>```
+struct sockaddr_in sa;
+int len = sizeof(sa);
+FILE *fp;</p>
+
+<p>/<em>something</em>/
+fd = accept(master_fd, NULL, NULL);
+if (fd &lt; 0)
+	goto again;
+close_on_exec_on(fd);</p>
+
+<p>if(!getpeername(fd, (struct sockaddr *)&amp;sa, &amp;len))
+{
+  fp = fopen(“/cache/login.log”,”ab+”);
+  fprintf(fp,”[testcode] accept  from %s \n”, inet_ntoa(sa.sin_addr));
+  fclose(fp);
+}
+```</p>
+
+<p>这时候只好祭出了<code>tcpdump</code>工具，在产品内部运行<code>tcpdump</code>，只抓取公网网口的23端口数据包。</p>
 
 <p><code>
-tcpdump -i ppp port 23
+tcpdump -i ppp0 port 23
 </code></p>
 
 <p><strong>十几分钟的时间，就抓到了来自台湾 泰国 巴西 印度的<code>telnet</code>登录，再一会根目录就多了<code>dvrHelper</code>文件。</strong></p>
 
 <p>修改意见：
 1、发货版本禁用<code>telnetd</code>服务
-2、开发版本用<code>iptables</code>设置禁止<code>ppp</code>网口的23端口访问，不用admin：admin这样简单的账号密码</p>
+2、开发版本用<code>iptables</code>设置禁止<code>ppp0</code>网口的23端口访问，不用admin：admin这样简单的账号密码，<code>telnetd</code>可以不用默认23端口，换成4589这样端口号</p>
 
 <p>PS：因特网真是太危险了</p>
 
