@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-30T12:19:05+00:00</updated>
+  <updated>2016-08-30T14:46:50+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -60,9 +60,8 @@
 
 <p>这时候基本确认，<code>dvrHelper</code>文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过<code>adb push</code>，一个就是<code>telnet</code>。</p>
 
-<p>先禁用了<code>adb</code>功能，发现问题还是出现了。</p>
-
-<p><strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。</p>
+<p>先禁用了<code>adb</code>功能，发现问题还是出现了。<br />
+<strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。</p>
 
 <p>现在问题聚焦在<code>telnetd</code>服务上。</p>
 
@@ -128,9 +127,9 @@
 
 <p><strong>十几分钟的时间，就抓到了来自台湾 泰国 巴西 印度的<code>telnet</code>登录，再一会根目录就多了<code>dvrHelper</code>文件。</strong></p>
 
-<p>修改意见：
-1、发货版本禁用<code>telnetd</code>服务
-2、开发版本用<code>iptables</code>设置禁止<code>ppp0</code>网口的23端口访问，不用admin：admin这样简单的账号密码，<code>telnetd</code>可以不用默认23端口，换成4589这样端口号</p>
+<p>修改意见：<br />
+1. 发货版本禁用<code>telnetd</code>服务
+2. 开发版本用<code>iptables</code>设置禁止<code>ppp0</code>网口的23端口访问，不用admin：admin这样简单的账号密码，<code>telnetd</code>可以不用默认23端口，换成4589这样端口号</p>
 
 <p>PS：因特网真是太危险了</p>
 
