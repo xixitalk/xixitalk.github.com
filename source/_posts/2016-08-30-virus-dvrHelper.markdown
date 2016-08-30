@@ -42,8 +42,7 @@ dvrHelper: ELF 32-bit LSB executable, ARM, version 1 (SYSV), statically linked, 
 
 这时候基本确认，`dvrHelper`文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过`adb push`，一个就是`telnet`。
 
-先禁用了`adb`功能，发现问题还是出现了。
-
+先禁用了`adb`功能，发现问题还是出现了。  
 **同时禁用`adb`和`telnetd`，问题不出现了**。
 
 现在问题聚焦在`telnetd`服务上。
@@ -91,9 +90,9 @@ tcpdump -i ppp0 port 23
 
 **十几分钟的时间，就抓到了来自台湾 泰国 巴西 印度的`telnet`登录，再一会根目录就多了`dvrHelper`文件。**
 
-修改意见：
-1、发货版本禁用`telnetd`服务
-2、开发版本用`iptables`设置禁止`ppp0`网口的23端口访问，不用admin：admin这样简单的账号密码，`telnetd`可以不用默认23端口，换成4589这样端口号
+修改意见：  
+1. 发货版本禁用`telnetd`服务
+2. 开发版本用`iptables`设置禁止`ppp0`网口的23端口访问，不用admin：admin这样简单的账号密码，`telnetd`可以不用默认23端口，换成4589这样端口号
 
 PS：因特网真是太危险了
 
