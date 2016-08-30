@@ -7,9 +7,9 @@ mathjax: false
 categories: linux
 ---
 
-一个数据类产品，测试报告描述：上传下载加浏览器看视频，一个小时内必死机。
+一个数据类产品，测试报告描述：FTP上传下载加浏览器看视频，一个小时内必死机。
 
-死机现场初步分析：系统内存耗尽死机，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。
+死机现场初步分析：死机直接原因是系统内存耗尽，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。
 
 <!--more-->
 
@@ -21,7 +21,7 @@ categories: linux
 listening tun0
 ```
 
-运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到`https://www.virustotal.com`在线扫描，55个杀毒软件，有2个提示异常。
+运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到`https://www.virustotal.com`在线扫描，55个杀毒软件，有2个提示异常。通常`VPN`会使用`tun0`和`tup0`这样虚拟网口，这应该是一个网络包监控/分析/过滤程序。
 
 ```
 SHA256:	c483618671766847fc75ea79fdc201df2e4a93f501dc98ec9c6f283fb1d4336c
@@ -33,7 +33,20 @@ AVG	Linux/Fgt.CA	20160829
 ESET-NOD32	a variant of Linux/Gafgyt.SE	20160829
 ```
 
-这时候基本确认，`dvrHelper`文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过`adb push`，一个就是`telnet`。先禁用了`adb`功能，发现问题还是出现了。**同时禁用`adb`和`telnetd`，问题不出现了**。现在问题聚焦在`telnetd`服务上。
+通过`file`命令查看文件属性，说是ARM格式的ELF文件。反汇编没有任何调试信息，汇编上看不出功能。
+
+```
+$ file dvrHelper
+dvrHelper: ELF 32-bit LSB executable, ARM, version 1 (SYSV), statically linked, stripped
+```
+
+这时候基本确认，`dvrHelper`文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过`adb push`，一个就是`telnet`。
+
+先禁用了`adb`功能，发现问题还是出现了。
+
+**同时禁用`adb`和`telnetd`，问题不出现了**。
+
+现在问题聚焦在`telnetd`服务上。
 
 `telnet`是一个远程协议，`telnetd`是一个实现`telnet协议`的服务程序。
 
@@ -49,17 +62,38 @@ long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
 }
 ```    
 
-这时候祭出了`tcpdump`工具，在产品内部运行`tcpdump`，只抓取公网网口的23端口数据包。
+`tenetd`是包含在`busybox`工具包里，在`telnetd.c`里增加代码，用`getpeername`获取登录客户的IP是`0.0.0.0`，不知道为什么。按说`accept`后调用`getpeername`没有问题啊。我对网络不熟，如果有人知道请赐教。
 
 ```
-tcpdump -i ppp port 23
+struct sockaddr_in sa;
+int len = sizeof(sa);
+FILE *fp;
+
+/*something*/
+fd = accept(master_fd, NULL, NULL);
+if (fd < 0)
+	goto again;
+close_on_exec_on(fd);
+
+if(!getpeername(fd, (struct sockaddr *)&sa, &len))
+{
+  fp = fopen("/cache/login.log","ab+");
+  fprintf(fp,"[testcode] accept  from %s \n", inet_ntoa(sa.sin_addr));
+  fclose(fp);
+}
+```
+
+这时候只好祭出了`tcpdump`工具，在产品内部运行`tcpdump`，只抓取公网网口的23端口数据包。
+
+```
+tcpdump -i ppp0 port 23
 ```
 
 **十几分钟的时间，就抓到了来自台湾 泰国 巴西 印度的`telnet`登录，再一会根目录就多了`dvrHelper`文件。**
 
 修改意见：
 1、发货版本禁用`telnetd`服务
-2、开发版本用`iptables`设置禁止`ppp`网口的23端口访问，不用admin：admin这样简单的账号密码
+2、开发版本用`iptables`设置禁止`ppp0`网口的23端口访问，不用admin：admin这样简单的账号密码，`telnetd`可以不用默认23端口，换成4589这样端口号
 
 PS：因特网真是太危险了
 
