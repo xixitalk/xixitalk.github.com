@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-08-30T14:46:50+00:00</updated>
+  <updated>2016-09-15T00:19:54+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[造了一个轮子：sleep命令]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command/"/>
+    <updated>2016-09-15T08:03:35+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command</id>
+    <content type="html"><![CDATA[<p>我们一个嵌入式平台，系统是uClinux，不支持动态库，库形式都是静态库。linux命令用的是busybox，任何一个命令都是一个busybox，都要耗费512K内存，一个sleep命令也是这样。客户两个程序都用sleep做等待循环，内存出现不够了，又不愿意修改sh脚本。所以系统平台决定重新实现了一个sleep命令。</p>
+
+<!--more-->
+
+<script src="https://gist.github.com/xixitalk/354a2628bbd21214be5340b0cac0ac52.js"></script>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[产品中多个不明可执行程序dvrHelper]]></title>
@@ -1717,53 +1731,6 @@ changed (this has happened to me).</p>
 </pre></td><td class="code"><pre><code class=""><span class="line">DeleteSemaphore(ptxSem);
 </span><span class="line">ptxSem = CreateSemaphore(SEM_INIT_NUM);
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nexus 6P上用flashfire升级系统]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/06/12/flashfire-nexus-6p/"/>
-    <updated>2016-06-12T10:53:35+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/06/12/flashfire-nexus-6p</id>
-    <content type="html"><![CDATA[<p>Nexus 6P上用flashfire升级系统</p>
-
-<p>问题：Nexus原生系统root后怎么升级到最新系统？</p>
-
-<!--more-->
-
-<p>适用场景：nexus原生系统只是root，安装了superSU，其他系统文件没有修改，安装Xposed的情况我没有尝试过。</p>
-
-<p>我的Nexus 6P本来系统是没有root的，每个月都通过OTA升级到最新系统，但是后来实在忍受不了国产应用间的相互唤醒了，root了系统，recovery换成了TWRP 3.0，使用了冰箱(icebox)把几个国产的应用冷冻起来了。其他系统文件没有修改。六月份系统推送了6月安全补丁MTC19V，一直在系统通知栏提示，甚是碍眼。搜索了一下发现可以使用flashfire更新系统。</p>
-
-<p>参考教程 <a href="http://bbs.mgyun.com/thread-50136-1-1.html">华为 Nexus 6p 教你nexus手机root后怎么更新，就像ota一样，转自国外大神chainfire</a> </p>
-
-<p>于是从google Play上下载了最新版本的flashfire，用方法2升级了系统。</p>
-
-<h2 id="flashfireota">方法1：flashfire直接OTA升级</h2>
-
-<p>按照flashfire的说明，系统下载完OTA升级包不要在<code>设置</code>里重启系统升级，打开flashfire会自动探测到OTA，直接一路确定升级。但是我尝试升级MTC19V没有成功，尝试了两次，系统重启进flashfire升级后系统版本号还是MTC19T，不是MTC19V。</p>
-
-<h2 id="flashfire">方法2：flashfire刷整个新系统</h2>
-
-<p>方法2的理论是android系统在system分区，系统运行时候是只读的，用户产生的数据和配置都在data分区，OTA补丁是打到system分区的，所以升级新系统升级system分区而不覆盖data分区就达到了升级补丁还不破坏用户数据作用。</p>
-
-<ol>
-  <li>先把冰箱里冷冻的所有应用全部解冻。</li>
-  <li>从<a href="https://developers.google.com/android/nexus/images">https://developers.google.com/android/nexus/images</a>下载最新的MTC19V版本，有900多M，扩展名以tgz结尾：angler-mtc19v-factory-5c289974.tgz。</li>
-  <li>把angler-mtc19v-factory-5c289974.tgz拷贝到手机里。</li>
-  <li>打开flashfire，点击+，点击<code>Flash firmware package</code>，选择手机里angler-mtc19v-factory-5c289974.tgz。</li>
-  <li>flashfire会分析tgz包，手动选择刷入Boot、system、vendor和cache分区，<strong>recovery和data不选择</strong>，切记。recovery就是twrp，data是用户安装的应用，不刷data是保留用户安装的应用。</li>
-  <li>添加之后，flashfire会在EverRoot里自动添加刷入SuperSU，系统更新完成自动root。</li>
-  <li>点击flash，系统自动关机重启进入flashfire刷入系统。</li>
-  <li>flashfire更新之后系统自动重启，可以从设置里看到版本号已经是MTC19V了。</li>
-</ol>
-
-<p>更新：7月份升级MTC19X的时候截了几张图。</p>
-
-<p><img src="http://xixitalkgithubio.qiniudn.com/partition_mini.jpg" alt="enter image description here" /></p>
-
-<p><img src="http://xixitalkgithubio.qiniudn.com/flash_mini.jpg" alt="enter image description here" /></p>
-
 ]]></content>
   </entry>
   

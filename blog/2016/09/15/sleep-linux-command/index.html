@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: golang - xixitalk's snippet</title>
+  <title>造了一个轮子：sleep命令 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: golang">
+  <meta name="description" content="我们一个嵌入式平台，系统是uClinux，不支持动态库，库形式都是静态库。linux命令用的是busybox，任何一个命令都是一个busybox，都要耗费512K内存，一个sleep命令也是这样。客户两个程序都用sleep做等待循环，内存出现不够了，又不愿意修改sh脚本。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.ioblog/categories/golang">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,36 +77,97 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: golang</h1>
+    
+      <h1 class="entry-title">造了一个轮子：sleep命令</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-09-15T08:03:35+00:00" pubdate data-updated="true">Sep 15<span>th</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>我们一个嵌入式平台，系统是uClinux，不支持动态库，库形式都是静态库。linux命令用的是busybox，任何一个命令都是一个busybox，都要耗费512K内存，一个sleep命令也是这样。客户两个程序都用sleep做等待循环，内存出现不够了，又不愿意修改sh脚本。所以系统平台决定重新实现了一个sleep命令。</p>
 
-  
-  <h2>2013</h2>
+<!--more-->
 
-<article>
-  
-<h1><a href="/blog/2013/06/14/go-lang-for-raspberrypi/">Raspberry Pi上安装Go lang并编译cow proxy</a></h1>
-<time datetime="2013-06-14T11:48:41+00:00" pubdate><span class='month'>Jun</span> <span class='day'>14</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/cowproxy/'>cowproxy</a>, <a class='category' href='/blog/categories/golang/'>golang</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a></span>
-</footer>
-
-
-</article>
+<script src="https://gist.github.com/xixitalk/354a2628bbd21214be5340b0cac0ac52.js"></script>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-09-15T08:03:35+00:00" pubdate data-updated="true">Sep 15<span>th</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:造了一个轮子：sleep命令 http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -135,7 +196,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
