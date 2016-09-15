@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-15T01:04:34+00:00</updated>
+  <updated>2016-09-15T23:15:00+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,9 +18,61 @@
     <link href="http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command/"/>
     <updated>2016-09-15T08:03:35+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command</id>
-    <content type="html"><![CDATA[<p>我们一个嵌入式平台，系统是uClinux，不支持动态库，库形式都是静态库。linux命令用的是busybox，任何一个命令都是一个busybox，都要耗费512K内存，一个sleep命令也是这样。客户两个sh程序都用sleep做等待循环，其他程序执行出现内存不够了，但是客户又不愿意修改sh脚本。所以重新实现了一个sleep命令，替换busybox里的sleep命令，静态编译出来只有10K，运行时候16K内存就足够了，这样节省了1M内存，测试发现问题解决了。和标准linux sleep命令唯一不同的是：没有实现浮点数支持。版本里实际上用的时候，连<code>s</code> <code>m</code> <code>h</code> <code>d</code>都不会使用，所以不想实现的太复杂了。</p>
+    <content type="html"><![CDATA[<p>我们一个嵌入式平台，系统是<code>uClinux</code>，不支持动态库，只能用静态库，每个程序都包含了所有调用的函数代码，包括C库的。客户一个产品压力测试时偶现系统内存不够，期望当天我们能协助他们解决，内存优化有很多方向，不好入手啊。</p>
 
 <!--more-->
+
+<p>通过分析内存不够的现场，系统内存还有一些，但是碎片化了，物理连续的256K的内存块都没有了。同时发现客户有两个常驻的sh进程，两个sh程序都用<code>sleep</code>做等待循环。<code>linux</code>命令用的是<code>busybox</code>，任何一个命令都是运行<code>busybox</code>。运行一个<code>busybox</code>要耗费512K内存，<code>sleep</code>命令也是这样。</p>
+
+<p>两个<code>sleep</code>本身就占用1M，把sh脚本分拆，在代码里<code>sleep</code>，就会去掉这个内存占用，是个可以优化出一点内存的方法。但是经过沟通客户不愿意修改sh脚本，从项目考虑我也理解。后来<strong>我脑洞大开了一下，觉得<code>sleep</code>命令最后就是简单调用<code>sleep</code>函数，为何不重新实现一个，不用<code>busybox</code>的那个呢。重新实现了一个sleep命令，替换busybox里的sleep命令，这样就能减少<code>sleep</code>的内存占用了</strong>。</p>
+
+<p>于是写了一个最简单的只有20行的<code>sleep</code>命令，不支持<code>s</code> <code>m</code> <code>h</code> <code>d</code> 参数，不支持浮点数，静态编译出来只有10K，加上默认4K栈空间，运行时候16K内存就足够了，这样就能节省出这1M内存，经过客户测试发现问题解决了。好啊，中秋节不用加班了。（备注：南京受台风影响，中秋节下了一整天雨，这篇博客就是中秋节写的。）</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;stdio.h&gt;
+</span><span class="line">#include &lt;stdlib.h&gt;
+</span><span class="line">#include &lt;unistd.h&gt;
+</span><span class="line">
+</span><span class="line">int main(int argc, char *argv[])
+</span><span class="line">{
+</span><span class="line">    unsigned long int timelen = 0;
+</span><span class="line">    int i = 0;
+</span><span class="line">
+</span><span class="line">    if(1 == argc)
+</span><span class="line">        return -1;
+</span><span class="line">
+</span><span class="line">    for(i = 1; i &lt; argc; i++)
+</span><span class="line">        timelen += strtoul(argv[i], NULL, 10);
+</span><span class="line">
+</span><span class="line">    if(timelen &gt; 0)
+</span><span class="line">        sleep(timelen);
+</span><span class="line">
+</span><span class="line">    return 0;
+</span><span class="line">}
+</span><span class="line">
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>后来想想还是实现一个功能比较全的吧，代码如下。和标准linux sleep命令功能唯一不同的是：没有实现浮点数支持。</p>
 
 <script src="https://gist.github.com/xixitalk/354a2628bbd21214be5340b0cac0ac52.js"></script>
 
