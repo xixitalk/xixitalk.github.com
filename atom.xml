@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-15T00:19:54+00:00</updated>
+  <updated>2016-09-15T01:04:34+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,7 +18,7 @@
     <link href="http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command/"/>
     <updated>2016-09-15T08:03:35+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/09/15/sleep-linux-command</id>
-    <content type="html"><![CDATA[<p>我们一个嵌入式平台，系统是uClinux，不支持动态库，库形式都是静态库。linux命令用的是busybox，任何一个命令都是一个busybox，都要耗费512K内存，一个sleep命令也是这样。客户两个程序都用sleep做等待循环，内存出现不够了，又不愿意修改sh脚本。所以系统平台决定重新实现了一个sleep命令。</p>
+    <content type="html"><![CDATA[<p>我们一个嵌入式平台，系统是uClinux，不支持动态库，库形式都是静态库。linux命令用的是busybox，任何一个命令都是一个busybox，都要耗费512K内存，一个sleep命令也是这样。客户两个sh程序都用sleep做等待循环，其他程序执行出现内存不够了，但是客户又不愿意修改sh脚本。所以重新实现了一个sleep命令，替换busybox里的sleep命令，静态编译出来只有10K，运行时候16K内存就足够了，这样节省了1M内存，测试发现问题解决了。和标准linux sleep命令唯一不同的是：没有实现浮点数支持。版本里实际上用的时候，连<code>s</code> <code>m</code> <code>h</code> <code>d</code>都不会使用，所以不想实现的太复杂了。</p>
 
 <!--more-->
 
