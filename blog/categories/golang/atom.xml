@@ -4,7 +4,7 @@
   <title><![CDATA[Category: golang | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/golang/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-15T23:15:00+00:00</updated>
+  <updated>2016-09-17T12:23:50+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[raspbian go语言编译器安装配置]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install/"/>
+    <updated>2016-09-17T19:42:13+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install</id>
+    <content type="html"><![CDATA[<p>关键词：树莓派 go语言编译器安装 raspbian golang install</p>
+
+<!--more-->
+
+<p>目前树莓派raspbian系统上go语言编译器版本还是1.3.3，太旧了，很多go语言写的软件都编译不成功。go语言从1.6版本官方直接提供ARM版本二进制文件，树莓派上直接可以使用。</p>
+
+<h2 id="go">go编译器下载</h2>
+
+<p>golang语言官方下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
+
+<p>目前（2016.09.17）最新版是1.7.1，选择其中的ARM版本。</p>
+
+<p><code>
+go1.7.1.linux-armv6l.tar.gz	Archive	Linux	ARMv6	66MB
+</code></p>
+
+<p>下载后在树莓派上用tar解压，比如解压路径为：<code>/home/pi/go/go1.7</code>里，<code>/home/pi/go/go1.7/go/bin/go</code>为编译器go命令。</p>
+
+<p><code>
+ $ file /home/pi/go/go1.7/go/bin/go
+/home/pi/go/go1.7/go/bin/go: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, not stripped
+</code></p>
+
+<p><strong>编译器不用安装到系统里了，直接使用即可，后续版本更新直接替换即可</strong>。</p>
+
+<h2 id="go-1">go编译环境配置</h2>
+
+<p>配置go编译器环境，<code>GOROOT</code>是go编译器安装目录，<code>GOPATH</code>是代码工程所在目录。重新设置<code>PATH</code>，把下载的编译器命令加到系统原来PATH之前，替换系统旧的go编译器。最好把系统代理配置上，不然从<code>github.com</code>下载代码会失败。</p>
+
+<p><code>
+export GOROOT=/home/pi/go/go1.7/go
+export GOPATH=/home/pi/go/prjects
+export PATH=/home/pi/go/go1.7/go/bin:$PATH
+export http_proxy=http://192.168.1.106:8118
+export https_proxy=http://192.168.1.106:8118
+</code></p>
+
+<h2 id="section">编译一个软件试试</h2>
+
+<p>从<code>github.com</code>自动下载代码编译一个工程试试，比如<code>gdns-go</code></p>
+
+<p><code>
+go get github.com/ayanamist/gdns-go
+</code></p>
+
+<p>看看<code>/home/pi/go/prjects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。<code>gdns-go</code>是一个基于<a href="https://developers.google.com/speed/public-dns/docs/dns-over-https">Google DNS over HTTPS API</a>的DNS客户端程序，支持<a href="https://github.com/shadowsocks">shadowsocks</a>。</p>
+
+<p>我的<code>config.json</code>配置如下。</p>
+
+<p><code>
+{
+  "listen": "192.168.1.104:53",
+  "proxy": "ss://aes-128-cfb:x123456x@17.x.x.x:15879",
+  "mapping": {
+    "taobao.com": "223.5.5.5"
+  }
+}
+</code></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上安装Go lang并编译cow proxy]]></title>

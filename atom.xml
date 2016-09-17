@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-15T23:15:00+00:00</updated>
+  <updated>2016-09-17T12:23:50+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[raspbian go语言编译器安装配置]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install/"/>
+    <updated>2016-09-17T19:42:13+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install</id>
+    <content type="html"><![CDATA[<p>关键词：树莓派 go语言编译器安装 raspbian golang install</p>
+
+<!--more-->
+
+<p>目前树莓派raspbian系统上go语言编译器版本还是1.3.3，太旧了，很多go语言写的软件都编译不成功。go语言从1.6版本官方直接提供ARM版本二进制文件，树莓派上直接可以使用。</p>
+
+<h2 id="go">go编译器下载</h2>
+
+<p>golang语言官方下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
+
+<p>目前（2016.09.17）最新版是1.7.1，选择其中的ARM版本。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">go1.7.1.linux-armv6l.tar.gz	Archive	Linux	ARMv6	66MB
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>下载后在树莓派上用tar解压，比如解压路径为：<code>/home/pi/go/go1.7</code>里，<code>/home/pi/go/go1.7/go/bin/go</code>为编译器go命令。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"> $ file /home/pi/go/go1.7/go/bin/go
+</span><span class="line">/home/pi/go/go1.7/go/bin/go: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, not stripped
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>编译器不用安装到系统里了，直接使用即可，后续版本更新直接替换即可</strong>。</p>
+
+<h2 id="go-1">go编译环境配置</h2>
+
+<p>配置go编译器环境，<code>GOROOT</code>是go编译器安装目录，<code>GOPATH</code>是代码工程所在目录。重新设置<code>PATH</code>，把下载的编译器命令加到系统原来PATH之前，替换系统旧的go编译器。最好把系统代理配置上，不然从<code>github.com</code>下载代码会失败。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">export GOROOT=/home/pi/go/go1.7/go
+</span><span class="line">export GOPATH=/home/pi/go/prjects
+</span><span class="line">export PATH=/home/pi/go/go1.7/go/bin:$PATH
+</span><span class="line">export http_proxy=http://192.168.1.106:8118
+</span><span class="line">export https_proxy=http://192.168.1.106:8118
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">编译一个软件试试</h2>
+
+<p>从<code>github.com</code>自动下载代码编译一个工程试试，比如<code>gdns-go</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">go get github.com/ayanamist/gdns-go
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>看看<code>/home/pi/go/prjects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。<code>gdns-go</code>是一个基于<a href="https://developers.google.com/speed/public-dns/docs/dns-over-https">Google DNS over HTTPS API</a>的DNS客户端程序，支持<a href="https://github.com/shadowsocks">shadowsocks</a>。</p>
+
+<p>我的<code>config.json</code>配置如下。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">{
+</span><span class="line">  "listen": "192.168.1.104:53",
+</span><span class="line">  "proxy": "ss://aes-128-cfb:x123456x@17.x.x.x:15879",
+</span><span class="line">  "mapping": {
+</span><span class="line">    "taobao.com": "223.5.5.5"
+</span><span class="line">  }
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[造了一个轮子：sleep命令]]></title>
@@ -1758,31 +1836,6 @@ changed (this has happened to me).</p>
 
 <p>很快就定位某个函数使用缓存越界了。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[UINT32引起的死循环]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32/"/>
-    <updated>2016-07-09T10:02:35+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32</id>
-    <content type="html"><![CDATA[<p>UINT32 引起的死循环</p>
-
-<!--more-->
-
-<p>上周出差定位一个死循环。一个函数进行一个信号量的初始化，每次进行一次业务都要调用这个函数初始化，这个函数作用是保障初始化后信号量初始化值为<code>SEM_INIT_NUM</code>，但因为<code>UINT32</code>的关系出现死循环了。代码如下：</p>
-
-<script src="https://gist.github.com/xixitalk/5c176a78a8743465061ef15ab5f9a248.js"></script>
-
-<p>出现问题的时候，<code>semCount</code>为4，而宏<code>SEM_INIT_NUM</code>为3，造成<code>Count = SEM_INIT_NUM - semCount</code>为<code>-1</code>了，但因为<code>Count</code>是<code>UINT32</code>，从而变成<code>0xFFFFFFFF</code>，一个极大值，造成for循环执行长时间不退出。修改方法是将<code>Count</code>的<code>UINT32</code>改成<code>SINT32</code>。这是一个非常低级的代码错误。</p>
-
-<p>其实更简单的是删除信号量，重新创建信号量，这样代码会容易读的多。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">DeleteSemaphore(ptxSem);
-</span><span class="line">ptxSem = CreateSemaphore(SEM_INIT_NUM);
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
   </entry>
   

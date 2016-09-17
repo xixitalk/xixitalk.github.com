@@ -4,7 +4,7 @@
   <title><![CDATA[Category: flashfire | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/flashfire/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-15T23:15:00+00:00</updated>
+  <updated>2016-09-17T12:23:50+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -34,7 +34,7 @@
 
 <h2 id="flashfireota">方法1：flashfire直接OTA升级</h2>
 
-<p>按照flashfire的说明，系统下载完OTA升级包不要在<code>设置</code>里重启系统升级，打开flashfire会自动探测到OTA，直接一路确定升级。但是我尝试升级MTC19V没有成功，尝试了两次，系统重启进flashfire升级后系统版本号还是MTC19T，不是MTC19V。</p>
+<p>按照flashfire的说明，系统下载完OTA升级包不要在<code>设置</code>里重启系统升级，打开flashfire会自动探测到OTA，直接一路确定升级。但是我尝试升级MTC19V没有成功，尝试了两次，系统重启进flashfire升级后系统版本号还是MTC19T，不是MTC19V。<strong>不推荐</strong>。</p>
 
 <h2 id="flashfire">方法2：flashfire刷整个新系统</h2>
 
@@ -51,12 +51,17 @@
   <li>flashfire更新之后系统自动重启，可以从设置里看到版本号已经是MTC19V了。</li>
 </ol>
 
-<p>更新：7月份升级MTC19X的时候截了几张图。</p>
+<h3 id="mtc19x">更新：7月份升级MTC19X的时候截了几张图。</h3>
 
 <p><img src="http://xixitalkgithubio.qiniudn.com/partition_mini.jpg" alt="enter image description here" /></p>
 
 <p><img src="http://xixitalkgithubio.qiniudn.com/flash_mini.jpg" alt="enter image description here" /></p>
 
+<h3 id="section">2016.09.13  更新</h3>
+
+<p>用flashfire从android 6.0.1（MTC20L） 升级到android 7.0.0（NRD90U）了,选择<code>Boot</code> <code>System</code> <code>Vendor</code> <code>Cache</code>和<code>Modem Fireware</code>五个分区。这里<code>Modem Fireware</code>也升级一下，毕竟是大版本升级。</p>
+
+<p>升级后一切正常，flashfire真是神器啊。</p>
 ]]></content>
   </entry>
   
