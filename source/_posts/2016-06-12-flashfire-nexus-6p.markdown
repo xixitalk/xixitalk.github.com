@@ -22,7 +22,7 @@ Nexus 6P上用flashfire升级系统
 
 ## 方法1：flashfire直接OTA升级
 
-按照flashfire的说明，系统下载完OTA升级包不要在`设置`里重启系统升级，打开flashfire会自动探测到OTA，直接一路确定升级。但是我尝试升级MTC19V没有成功，尝试了两次，系统重启进flashfire升级后系统版本号还是MTC19T，不是MTC19V。
+按照flashfire的说明，系统下载完OTA升级包不要在`设置`里重启系统升级，打开flashfire会自动探测到OTA，直接一路确定升级。但是我尝试升级MTC19V没有成功，尝试了两次，系统重启进flashfire升级后系统版本号还是MTC19T，不是MTC19V。**不推荐**。
 
 ## 方法2：flashfire刷整个新系统
 
@@ -38,9 +38,15 @@ Nexus 6P上用flashfire升级系统
 8.  flashfire更新之后系统自动重启，可以从设置里看到版本号已经是MTC19V了。
 
 
-更新：7月份升级MTC19X的时候截了几张图。
+### 更新：7月份升级MTC19X的时候截了几张图。
 
 ![enter image description here](http://xixitalkgithubio.qiniudn.com/partition_mini.jpg)
 
 ![enter image description here](http://xixitalkgithubio.qiniudn.com/flash_mini.jpg)
 
+
+###  2016.09.13  更新
+
+用flashfire从android 6.0.1（MTC20L） 升级到android 7.0.0（NRD90U）了,选择`Boot` `System` `Vendor` `Cache`和`Modem Fireware`五个分区。这里`Modem Fireware`也升级一下，毕竟是大版本升级。
+
+升级后一切正常，flashfire真是神器啊。
