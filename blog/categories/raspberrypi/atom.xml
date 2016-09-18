@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-18T02:23:35+00:00</updated>
+  <updated>2016-09-18T03:28:42+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -65,7 +65,7 @@ go get github.com/ayanamist/gdns-go
 
 <p>看看<code>/home/pi/go/prjects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。<code>gdns-go</code>是一个基于<a href="https://developers.google.com/speed/public-dns/docs/dns-over-https">Google DNS over HTTPS API</a>的DNS客户端程序，支持<a href="https://github.com/shadowsocks">shadowsocks</a>。</p>
 
-<p>我的<code>config.json</code>配置如下，然后执行<code>sudo ./gdns-go 2&gt;&amp;1 &gt; /dev/null &amp;</code>后台运行即可(53端口需要root权限账号运行)。我已经用<code>gdns-go</code>取代<code>dnsmasq</code> + <code>DNSCrypt</code>。</p>
+<p>我的<code>config.json</code>配置如下，然后执行<code>sudo ./gdns-go &gt; /dev/null 2&gt;&amp;1 &amp;</code>后台运行即可(53端口需要root权限账号运行)。我已经用<code>gdns-go</code>取代<code>dnsmasq</code> + <code>DNSCrypt</code>。</p>
 
 <p><code>
 {
