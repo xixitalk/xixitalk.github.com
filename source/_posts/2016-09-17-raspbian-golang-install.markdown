@@ -54,7 +54,7 @@ go get github.com/ayanamist/gdns-go
 
 看看`/home/pi/go/prjects`目录是不是有`bin` `pkg` `src`三个目录，`bin`目录就有编译好的`gdns-go`程序了。`gdns-go`是一个基于[Google DNS over HTTPS API](https://developers.google.com/speed/public-dns/docs/dns-over-https)的DNS客户端程序，支持[shadowsocks](https://github.com/shadowsocks)。
 
-我的`config.json`配置如下，然后执行`sudo ./gdns-go 2>&1 > /dev/null &`后台运行即可(53端口需要root权限账号运行)。我已经用`gdns-go`取代`dnsmasq` + `DNSCrypt`。
+我的`config.json`配置如下，然后执行`sudo ./gdns-go > /dev/null 2>&1 &`后台运行即可(53端口需要root权限账号运行)。我已经用`gdns-go`取代`dnsmasq` + `DNSCrypt`。
 
 ```
 {
