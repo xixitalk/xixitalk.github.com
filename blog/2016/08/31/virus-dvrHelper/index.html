@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>产品中多个不明可执行程序dvrHelper - xixitalk's snippet</title>
+  <meta name="author" content="xixitalk">
+
+  
+  <meta name="description" content="一个数据类产品，测试报告描述：FTP上传下载加浏览器看视频，一个小时内必死机。 死机现场初步分析：死机直接原因是系统内存耗尽，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。 有人去分析内存问题，我来分析三个奇怪的进程。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/31/virus-dvrHelper">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xixitalk's snippet" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32324744-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xixitalk's snippet</a></h1>
+  
+    <h2>Post Longer Than 140 Characters Tweets</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xixitalk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/">Categories</a></li>
+  <li><a href="/wishlist/">My wishlist</a></li>
+  <li><a href="/about/">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">产品中多个不明可执行程序dvrHelper</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-31T00:48:47+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>一个数据类产品，测试报告描述：FTP上传下载加浏览器看视频，一个小时内必死机。</p>
+
+<p>死机现场初步分析：死机直接原因是系统内存耗尽，但是发现进程里多了三个奇怪的进程，进程名都像是随机字符串，两个死机现场都有，并且进程名还随机的不一样。</p>
+
+<!--more-->
+
+<p>有人去分析内存问题，我来分析三个奇怪的进程。</p>
+
+<p>这三个进程父进程是Init，执行的命令是<code>dvrHelper</code>，开始我怀疑版本自带的程序，查看了版本编译后的文件系统，没有这个文件，在整个版本代码里搜索这个字符串，没有找到任何踪迹。这时候有人告诉我版本的根文件系统里多了<code>dvrHelper</code>文件，重烧版本是没有这个文件的。手动运行这个文件，提示</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">listening tun0
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>运行结束后，进程列表里就多了三个奇怪的进程。父进程是Init，这是linux守护进程惯用的机制。我把dvrHelper上传到<code>https://www.virustotal.com</code>在线扫描，55个杀毒软件，有2个提示异常。通常<code>VPN</code>会使用<code>tun0</code>和<code>tup0</code>这样虚拟网口，这应该是一个网络包监控/分析/过滤程序。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">SHA256:	c483618671766847fc75ea79fdc201df2e4a93f501dc98ec9c6f283fb1d4336c
+</span><span class="line">File name:	dvrHelper
+</span><span class="line">Detection ratio:	2 / 55
+</span><span class="line">Analysis date:	2016-08-29 08:51:11 UTC ( 22 hours, 56 minutes ago )
+</span><span class="line">
+</span><span class="line">AVG	Linux/Fgt.CA	20160829
+</span><span class="line">ESET-NOD32	a variant of Linux/Gafgyt.SE	20160829
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>通过<code>file</code>命令查看文件属性，说是ARM格式的ELF文件。反汇编没有任何调试信息，汇编上看不出功能。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ file dvrHelper
+</span><span class="line">dvrHelper: ELF 32-bit LSB executable, ARM, version 1 (SYSV), statically linked, stripped
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这时候基本确认，<code>dvrHelper</code>文件是个木马程序了。引入这个木马的路径分析只有两个，一个通过<code>adb push</code>，一个就是<code>telnet</code>。</p>
+
+<p>先禁用了<code>adb</code>功能，发现问题还是出现了。<br />
+<strong>同时禁用<code>adb</code>和<code>telnetd</code>，问题不出现了</strong>。</p>
+
+<p>现在问题聚焦在<code>telnetd</code>服务上。</p>
+
+<p><code>telnet</code>是一个远程协议，<code>telnetd</code>是一个实现<code>telnet协议</code>的服务程序。</p>
+
+<p>PC上用<code>wireshark</code>抓包，没有抓到PC上应用程序登录<code>telnetd</code>的证据。后来突然想到<code>pppoe</code>功能可能会分配一个公网IP，<code>ifconfig</code>一看，果然电信分配了一个公网IP。用手机登录这个公网IP的<code>telnet</code>，也果然登录到这个产品里了。这样就怀疑产品是通过公网IP登录产品的<code>telnetd</code>服务，把木马上传到产品里了。</p>
+
+<p>同时在内核<code>fs/open.c</code>里加代码，如果打开<code>dvrHelper</code>文件就panic死机。死机显示在通过busybox执行<code>cp /bin/echo dvrHelper</code>，顺着父进程一直往上找，找到了<code>telnetd</code>进程。这样也再次排除了<code>adb</code>的嫌疑。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
+</span><span class="line">{
+</span><span class="line">        if(strstr(filename,"dvrHelper"))
+</span><span class="line">            panic("[testcode] dvrHelper found\n");
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>tenetd</code>是包含在<code>busybox</code>工具包里，在<code>telnetd.c</code>里增加代码，用<code>getpeername</code>获取登录客户的IP是<code>0.0.0.0</code>，不知道为什么。按说<code>accept</code>后调用<code>getpeername</code>没有问题啊。我对网络不熟，如果有人知道请赐教。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">struct sockaddr_in sa;
+</span><span class="line">int len = sizeof(sa);
+</span><span class="line">FILE *fp;
+</span><span class="line">
+</span><span class="line">/*something*/
+</span><span class="line">fd = accept(master_fd, NULL, NULL);
+</span><span class="line">if (fd &lt; 0)
+</span><span class="line">	goto again;
+</span><span class="line">close_on_exec_on(fd);
+</span><span class="line">
+</span><span class="line">if(!getpeername(fd, (struct sockaddr *)&amp;sa, &amp;len))
+</span><span class="line">{
+</span><span class="line">  fp = fopen("/cache/login.log","ab+");
+</span><span class="line">  fprintf(fp,"[testcode] accept  from %s \n", inet_ntoa(sa.sin_addr));
+</span><span class="line">  fclose(fp);
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这时候只好祭出了<code>tcpdump</code>工具，在产品内部运行<code>tcpdump</code>，只抓取公网网口的23端口数据包。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">tcpdump -i ppp0 port 23
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>十几分钟的时间，就抓到了来自台湾 泰国 巴西 印度的<code>telnet</code>登录，再一会根目录就多了<code>dvrHelper</code>文件。</strong></p>
+
+<p>修改意见：<br />
+1. 发货版本禁用<code>telnetd</code>服务
+2. 开发版本用<code>iptables</code>设置禁止<code>ppp0</code>网口的23端口访问，不用admin：admin这样简单的账号密码，<code>telnetd</code>可以不用默认23端口，换成4589这样端口号</p>
+
+<p>PS：因特网真是太危险了</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-31T00:48:47+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:产品中多个不明可执行程序dvrHelper http://xixitalk.github.io/blog/2016/08/31/virus-dvrHelper/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (13)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (7)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (5)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (4)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (10)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - xixitalk -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gitblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/31/virus-dvrHelper/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/31/virus-dvrHelper/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

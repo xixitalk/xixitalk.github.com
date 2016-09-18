@@ -4,7 +4,7 @@
   <title><![CDATA[Category: twitter | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/twitter/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-18T03:28:42+00:00</updated>
+  <updated>2016-09-18T16:49:58+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[搭建带代理的奶瓶腿]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy/"/>
-    <updated>2013-06-15T21:39:29+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/16/netputweets-proxy/"/>
+    <updated>2013-06-16T05:39:29+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/16/netputweets-proxy</id>
     <content type="html"><![CDATA[<p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
 
 <!--more-->
@@ -63,7 +63,7 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
   <entry>
     <title type="html"><![CDATA[支持twitter的AppEngine-OAuth-Library]]></title>
     <link href="http://xixitalk.github.io/blog/2013/06/14/AppEngine-OAuth-Library/"/>
-    <updated>2013-06-14T09:13:55+00:00</updated>
+    <updated>2013-06-14T17:13:55+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/06/14/AppEngine-OAuth-Library</id>
     <content type="html"><![CDATA[<p>自己在GAE上写了个浏览twitter的web页面，虽然丑陋但是自我感觉良好，使用的是v1.0的API，这两天twitter停用了v1.0的API，换用v1.1，调试了一下没有调试好，还是直接用别人造好的轮子吧。</p>
 
@@ -77,9 +77,9 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
   
   <entry>
     <title type="html"><![CDATA[分享到twitter的方法]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/10/share-to-twitter/"/>
-    <updated>2013-06-10T22:41:26+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/10/share-to-twitter</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/11/share-to-twitter/"/>
+    <updated>2013-06-11T06:41:26+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/11/share-to-twitter</id>
     <content type="html"><![CDATA[<p>分享到twitter的方法：</p>
 
 <!--more-->
@@ -109,7 +109,7 @@ http://twitter.com/home?status=Blog:%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AAweb%20ss
   <entry>
     <title type="html"><![CDATA[flask_twip在heroku上搭建教程]]></title>
     <link href="http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku/"/>
-    <updated>2012-11-23T21:01:00+00:00</updated>
+    <updated>2012-11-23T21:01:00+08:00</updated>
     <id>http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
 

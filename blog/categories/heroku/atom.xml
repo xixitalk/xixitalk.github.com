@@ -4,7 +4,7 @@
   <title><![CDATA[Category: heroku | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-18T03:28:42+00:00</updated>
+  <updated>2016-09-18T16:49:58+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[flask_twip在heroku上搭建教程]]></title>
     <link href="http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku/"/>
-    <updated>2012-11-23T21:01:00+00:00</updated>
+    <updated>2012-11-23T21:01:00+08:00</updated>
     <id>http://xixitalk.github.io/blog/2012/11/23/flask-twip-on-heroku</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
 

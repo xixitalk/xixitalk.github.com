@@ -4,7 +4,7 @@
   <title><![CDATA[Category: proxy | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/proxy/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-18T03:28:42+00:00</updated>
+  <updated>2016-09-18T16:49:58+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[git ssh使用代理]]></title>
     <link href="http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy/"/>
-    <updated>2013-07-12T08:23:33+00:00</updated>
+    <updated>2013-07-12T16:23:33+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/07/12/git-ssh-proxy</id>
     <content type="html"><![CDATA[<p>昨天在树莓派上发现通过<code>ssh</code>方式向<code>github.com</code>的代码仓库<code>git push</code>代码一直提示连接<code>github.com</code>的22端口失败。而<code>HTTP</code>和<code>HTTPS</code>访问<code>github.com</code>正常，怀疑<code>github.com</code>的22端口被墙了。使用<code>ssh</code>方式的特点是可以不用输入密码，方便在shell里进行自动操作，而<code>https</code>需要输入密码。</p>
 
@@ -24,38 +24,77 @@
 
 <!--more-->
 
+<h2 id="section">2016-09-18更新</h2>
+
+<p><strong>git直接支持http代理和socks5代理</strong>,别用其他方法了。</p>
+
+<p>配置git socks5代理</p>
+
+<p><code>
+git config --global http.proxy 'socks5://127.0.0.1:1081' 
+git config --global https.proxy 'socks5://127.0.0.1:1081' 
+</code></p>
+
+<p>或者配置git http代理</p>
+
+<p><code>
+git config --global https.proxy 'http://127.0.0.1:8080'
+git config --global https.proxy 'https://127.0.0.1:8080'
+</code></p>
+
+<p><code>git config --global</code>会保存在<code>.gitconfig</code>文件里，可以用cat检查代理配置，或者用<code>git config --global -l</code>检查也可以。</p>
+
+<p><code>
+$cat ~/.gitconfig
+[http]
+        proxy = socks5://127.0.0.1:1081
+[https]
+        proxy = socks5://127.0.0.1:1081
+</code></p>
+
+<p>取消代理配置</p>
+
+<p><code>
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+</code></p>
+
+<h2 id="section-1">2016-09-18更新结束，下面不用看了</h2>
+
 <h3 id="git-sshsocks5">git ssh通过socks5代理</h3>
 <p><a href="http://chunyemen.org/archives/813">在Mac OSX上通过SSH代理实现github访问</a></p>
 
 <h3 id="git-sshhttp">git ssh通过http代理</h3>
 <p><a href="http://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></p>
 
-<h3 id="section">我的配置</h3>
+<h3 id="section-2">我的配置</h3>
 <p>通过<code>socks5</code>代理配置比较繁琐，配置后<code>git push</code>成功了一次，但是后面还是一直提示失败，找不到原因。后来改用<code>http</code>代理，代理成功。我的详细配置如下。</p>
 
 <h4 id="corkscrew">安装corkscrew</h4>
 <p>如果系统里没有安装<code>corkscrew</code>，进行安装。</p>
 
-<pre><code>sudo apt-get install corkscrew
-</code></pre>
+<p><code>
+sudo apt-get install corkscrew
+</code></p>
 
 <h4 id="sshconfig">配置ssh的.config</h4>
 <p>配置<code>~/.ssh/config</code>,如果<code>config</code>没有创建一个。我的<code>http</code>代理是<code>127.0.0.1:8118</code>，用户名是<code>pi</code>。</p>
 
-<pre><code>Host github.com
+<p><code>
+Host github.com
 User git
 ProxyCommand corkscrew 127.0.0.1 8118 %h %p
 IdentityFile /home/pi/.ssh/id_rsa
-</code></pre>
+</code></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[搭建带代理的奶瓶腿]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy/"/>
-    <updated>2013-06-15T21:39:29+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/15/netputweets-proxy</id>
+    <link href="http://xixitalk.github.io/blog/2013/06/16/netputweets-proxy/"/>
+    <updated>2013-06-16T05:39:29+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/06/16/netputweets-proxy</id>
     <content type="html"><![CDATA[<p>今天证实了一个猜想：因为奶瓶腿连接twitter API是通过cURL模块，而cURL本身支持proxy，所以在国内可以搭建奶瓶腿，只要加上代理就可以正常使用。代理可以是shadowsocks转换的socks代理，也可以是再通过polipo进一步转化的HTTP代理。</p>
 
 <!--more-->
@@ -101,7 +140,7 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
   <entry>
     <title type="html"><![CDATA[stunnel原理]]></title>
     <link href="http://xixitalk.github.io/blog/2013/04/08/stunnel-principle/"/>
-    <updated>2013-04-08T16:31:00+00:00</updated>
+    <updated>2013-04-08T16:31:00+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/04/08/stunnel-principle</id>
     <content type="html"><![CDATA[<p>搜索关键词：stunnel proxy socks5 HTTP HTTPS 代理</p>
 
@@ -122,7 +161,7 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
   <entry>
     <title type="html"><![CDATA[android上支持HTTP proxy代理的浏览器]]></title>
     <link href="http://xixitalk.github.io/blog/2013/03/11/android-broswer-with-http-proxy/"/>
-    <updated>2013-03-11T17:07:00+00:00</updated>
+    <updated>2013-03-11T17:07:00+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/03/11/android-broswer-with-http-proxy</id>
     <content type="html"><![CDATA[<p>之前一篇文章讲了在树莓派上搭建HTTP proxy的<a href="/blog/2013/03/02/raspberry-pi-proxy/">原理</a>，这样就获得一个HTTP proxy，android上的<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>和<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>都支持HTTP proxy，可以在设置里进行配置。但是从<a href="https://play.google.com/store/apps/details?id=org.mariotaku.twidere">twidere</a>或者<a href="https://play.google.com/store/apps/details?id=com.twitter.android">twitter</a>打开网页又打不开了。这次推荐三个支持HTTP proxy的浏览器。  </p>
 
@@ -151,7 +190,7 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
   <entry>
     <title type="html"><![CDATA[利用Raspberry Pi加shadowsocks搭建代理服务]]></title>
     <link href="http://xixitalk.github.io/blog/2013/03/02/raspberry-pi-proxy/"/>
-    <updated>2013-03-02T12:31:00+00:00</updated>
+    <updated>2013-03-02T12:31:00+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/03/02/raspberry-pi-proxy</id>
     <content type="html"><![CDATA[<p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
 

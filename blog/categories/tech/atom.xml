@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-18T03:28:42+00:00</updated>
+  <updated>2016-09-18T16:49:58+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[我的AStyle配置选项]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config/"/>
-    <updated>2016-07-11T18:35:57+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config</id>
+    <link href="http://xixitalk.github.io/blog/2016/07/12/my-AStyle-config/"/>
+    <updated>2016-07-12T02:35:57+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/07/12/my-AStyle-config</id>
     <content type="html"><![CDATA[<p>我的AStyle代码格式工具的选项：AStyle.exe -A1 -C -S -K -Y -f -t -p -U -o -n main.c</p>
 
 <p>在<code>notepad++</code>里添加：<code>运行(R)--运行(R)</code> 选择AStyle.exe，选项输入<code>-A1 -C -S -K -Y -f -t -p -U -o -n "$(FULL_CURRENT_PATH)"</code>，然后点击<code>保存</code>，这样就保存在运行菜单里了。每次使用从<code>运行(R)</code>点击即可。</p>
@@ -47,7 +47,7 @@
   <entry>
     <title type="html"><![CDATA[UINT32引起的死循环]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32/"/>
-    <updated>2016-07-09T10:02:35+00:00</updated>
+    <updated>2016-07-09T18:02:35+08:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32</id>
     <content type="html"><![CDATA[<p>UINT32 引起的死循环</p>
 
@@ -71,7 +71,7 @@ ptxSem = CreateSemaphore(SEM_INIT_NUM);
   <entry>
     <title type="html"><![CDATA[免费申请S/MIME证书]]></title>
     <link href="http://xixitalk.github.io/blog/2014/06/21/Free-SMIME-Certificate-Key/"/>
-    <updated>2014-06-21T00:05:11+00:00</updated>
+    <updated>2014-06-21T08:05:11+08:00</updated>
     <id>http://xixitalk.github.io/blog/2014/06/21/Free-SMIME-Certificate-Key</id>
     <content type="html"><![CDATA[<h2 id="section">申请证书</h2>
 <p>从这里可以申请到免费的S/MIME 邮件证书：<a href="http://www.instantssl.com/ssl-certificate-products/free-email-certificate.html">http://www.instantssl.com/ssl-certificate-products/free-email-certificate.html</a>，
@@ -110,9 +110,9 @@ ptxSem = CreateSemaphore(SEM_INIT_NUM);
   
   <entry>
     <title type="html"><![CDATA[curl下载断点传续]]></title>
-    <link href="http://xixitalk.github.io/blog/2014/04/12/curl-continue/"/>
-    <updated>2014-04-12T17:22:17+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2014/04/12/curl-continue</id>
+    <link href="http://xixitalk.github.io/blog/2014/04/13/curl-continue/"/>
+    <updated>2014-04-13T01:22:17+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2014/04/13/curl-continue</id>
     <content type="html"><![CDATA[<h3 id="curl">curl下载断点传续</h3>
 
 <p><code>
@@ -148,9 +148,9 @@ curl  --socks5-hostname 192.168.1.106:9050  http://google.com/p4.mp4
   
   <entry>
     <title type="html"><![CDATA[twitter-python BadStatusLine错误]]></title>
-    <link href="http://xixitalk.github.io/blog/2014/04/06/twitter-python-badstatusline/"/>
-    <updated>2014-04-06T20:20:25+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2014/04/06/twitter-python-badstatusline</id>
+    <link href="http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline/"/>
+    <updated>2014-04-07T04:20:25+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2014/04/07/twitter-python-badstatusline</id>
     <content type="html"><![CDATA[<p>事情是这样的：我用<a href="https://github.com/bear/python-twitter">twitter-python</a>在本地运行， 抓取一个推号的homeline， 抓取后sleep两分钟再抓取， 不停的循环｡从昨天早上开始， 程序出现如下错误， 且每次都是这个错误｡获得推友收藏列表和fo人的api返回都是正常的，就是REST的api出这种错误。</p>
 
 <!--more-->

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: golang | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/golang/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-18T03:28:42+00:00</updated>
+  <updated>2016-09-18T16:49:58+08:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[树莓派go语言编译器安装配置]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install/"/>
-    <updated>2016-09-17T19:42:13+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install</id>
+    <link href="http://xixitalk.github.io/blog/2016/09/18/raspbian-golang-install/"/>
+    <updated>2016-09-18T03:42:13+08:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/09/18/raspbian-golang-install</id>
     <content type="html"><![CDATA[<p>关键词：树莓派 go语言编译器安装 raspbian golang install</p>
 
 <!--more-->
@@ -83,7 +83,7 @@ go get github.com/ayanamist/gdns-go
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上安装Go lang并编译cow proxy]]></title>
     <link href="http://xixitalk.github.io/blog/2013/06/14/go-lang-for-raspberrypi/"/>
-    <updated>2013-06-14T11:48:41+00:00</updated>
+    <updated>2013-06-14T19:48:41+08:00</updated>
     <id>http://xixitalk.github.io/blog/2013/06/14/go-lang-for-raspberrypi</id>
     <content type="html"><![CDATA[<h3 id="go">安装go语言</h3>
 

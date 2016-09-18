@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2013-07-12T08:23:33+00:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
+<time datetime="2013-07-12T16:23:33+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -112,29 +112,78 @@
 
 <!--more-->
 
+<h2 id="section">2016-09-18更新</h2>
+
+<p><strong>git直接支持http代理和socks5代理</strong>,别用其他方法了。</p>
+
+<p>配置git socks5代理</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">git config --global http.proxy 'socks5://127.0.0.1:1081' 
+</span><span class="line">git config --global https.proxy 'socks5://127.0.0.1:1081' 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>或者配置git http代理</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">git config --global https.proxy 'http://127.0.0.1:8080'
+</span><span class="line">git config --global https.proxy 'https://127.0.0.1:8080'
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>git config --global</code>会保存在<code>.gitconfig</code>文件里，可以用cat检查代理配置，或者用<code>git config --global -l</code>检查也可以。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$cat ~/.gitconfig
+</span><span class="line">[http]
+</span><span class="line">        proxy = socks5://127.0.0.1:1081
+</span><span class="line">[https]
+</span><span class="line">        proxy = socks5://127.0.0.1:1081
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>取消代理配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">git config --global --unset http.proxy
+</span><span class="line">git config --global --unset https.proxy
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-1">2016-09-18更新结束，下面不用看了</h2>
+
 <h3 id="git-sshsocks5">git ssh通过socks5代理</h3>
 <p><a href="http://chunyemen.org/archives/813">在Mac OSX上通过SSH代理实现github访问</a></p>
 
 <h3 id="git-sshhttp">git ssh通过http代理</h3>
 <p><a href="http://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></p>
 
-<h3 id="section">我的配置</h3>
+<h3 id="section-2">我的配置</h3>
 <p>通过<code>socks5</code>代理配置比较繁琐，配置后<code>git push</code>成功了一次，但是后面还是一直提示失败，找不到原因。后来改用<code>http</code>代理，代理成功。我的详细配置如下。</p>
 
 <h4 id="corkscrew">安装corkscrew</h4>
 <p>如果系统里没有安装<code>corkscrew</code>，进行安装。</p>
 
-<pre><code>sudo apt-get install corkscrew
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install corkscrew
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h4 id="sshconfig">配置ssh的.config</h4>
 <p>配置<code>~/.ssh/config</code>,如果<code>config</code>没有创建一个。我的<code>http</code>代理是<code>127.0.0.1:8118</code>，用户名是<code>pi</code>。</p>
 
-<pre><code>Host github.com
-User git
-ProxyCommand corkscrew 127.0.0.1 8118 %h %p
-IdentityFile /home/pi/.ssh/id_rsa
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">Host github.com
+</span><span class="line">User git
+</span><span class="line">ProxyCommand corkscrew 127.0.0.1 8118 %h %p
+</span><span class="line">IdentityFile /home/pi/.ssh/id_rsa
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
 
@@ -158,7 +207,7 @@ IdentityFile /home/pi/.ssh/id_rsa
   
 
 
-<time datetime="2013-07-12T08:23:33+00:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
+<time datetime="2013-07-12T16:23:33+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
       
 
 <span class="categories">
