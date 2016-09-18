@@ -11,4 +11,4 @@ footer: true
 
 [xixitalk@github](http://github.com/xixitalk)
 
-Google Talk/jabber: xixi@draugr.de (Only instant msg,NO mail)
+

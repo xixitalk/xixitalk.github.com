@@ -29,7 +29,7 @@ if [ -z $newpostname ]; then
 fi
 
 write_log "rake generate"
-rake generate > /dev/null 2>&1
+rake generate 
 rakeret=$?
 if [ $rakeret -ne 0 ]; then
     write_log "rake generate error"${rakeret}
@@ -37,7 +37,7 @@ if [ $rakeret -ne 0 ]; then
 fi
 
 write_log "rake deoploy"
-rake deploy > /dev/null 2>&1
+rake deploy
 rakeret=$?
 if [ $rakeret -ne 0 ]; then
     write_log "rake deploy error"${rakeret}
@@ -52,7 +52,7 @@ echo "git commit -m $newpostname"
 git commit -m  "$newpostname"
 
 write_log "git push origin source"
-git push origin source > /dev/null 2>&1
+git push origin source 
 rakeret=$?
 if [ $rakeret -ne 0 ]; then
     write_log "rake push error"${rakeret}
