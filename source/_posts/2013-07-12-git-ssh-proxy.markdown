@@ -12,6 +12,43 @@ categories: git ssh proxy
 
 <!--more-->
 
+## 2016-09-18更新
+
+**git直接支持http代理和socks5代理**,别用其他方法了。
+
+配置git socks5代理
+
+```
+git config --global http.proxy 'socks5://127.0.0.1:1081' 
+git config --global https.proxy 'socks5://127.0.0.1:1081' 
+```
+
+或者配置git http代理
+
+```
+git config --global https.proxy 'http://127.0.0.1:8080'
+git config --global https.proxy 'https://127.0.0.1:8080'
+```
+
+`git config --global`会保存在`.gitconfig`文件里，可以用cat检查代理配置，或者用`git config --global -l`检查也可以。
+
+```
+$cat ~/.gitconfig
+[http]
+        proxy = socks5://127.0.0.1:1081
+[https]
+        proxy = socks5://127.0.0.1:1081
+```
+
+取消代理配置
+
+```
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+## 2016-09-18更新结束，下面不用看了
+
 ### git ssh通过socks5代理
 [在Mac OSX上通过SSH代理实现github访问](http://chunyemen.org/archives/813)
 
@@ -24,17 +61,17 @@ categories: git ssh proxy
 #### 安装corkscrew
 如果系统里没有安装`corkscrew`，进行安装。
 
-~~~
+```
 sudo apt-get install corkscrew
-~~~
+```
 
 #### 配置ssh的.config
 配置`~/.ssh/config`,如果`config`没有创建一个。我的`http`代理是`127.0.0.1:8118`，用户名是`pi`。
 
-~~~
+```
 Host github.com
 User git
 ProxyCommand corkscrew 127.0.0.1 8118 %h %p
 IdentityFile /home/pi/.ssh/id_rsa
-~~~
+```
 
