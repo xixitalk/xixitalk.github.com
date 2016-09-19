@@ -112,9 +112,9 @@
 
 <!--more-->
 
-<h2 id="section">2016-09-18更新</h2>
+<p>代理分两个部分，一个是ssh协议的的代理，一个是git协议的代理。</p>
 
-<p><strong>git直接支持http代理和socks5代理</strong>,别用其他方法了。</p>
+<h2 id="git">第一部分 配置git协议的代理</h2>
 
 <p>配置git socks5代理</p>
 
@@ -154,7 +154,7 @@
 </span><span class="line">git config --global --unset https.proxy
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-1">2016-09-18更新结束，下面不用看了</h2>
+<h2 id="ssh">第二部分 配置ssh的代理</h2>
 
 <h3 id="git-sshsocks5">git ssh通过socks5代理</h3>
 <p><a href="http://chunyemen.org/archives/813">在Mac OSX上通过SSH代理实现github访问</a></p>
@@ -162,7 +162,7 @@
 <h3 id="git-sshhttp">git ssh通过http代理</h3>
 <p><a href="http://blog.yxwang.me/2010/05/git-through-https-proxy/">利用 HTTPS 代理访问 GitHub</a></p>
 
-<h3 id="section-2">我的配置</h3>
+<h3 id="section">我的配置</h3>
 <p>通过<code>socks5</code>代理配置比较繁琐，配置后<code>git push</code>成功了一次，但是后面还是一直提示失败，找不到原因。后来改用<code>http</code>代理，代理成功。我的详细配置如下。</p>
 
 <h4 id="corkscrew">安装corkscrew</h4>
