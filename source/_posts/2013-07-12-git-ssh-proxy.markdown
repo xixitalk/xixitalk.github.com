@@ -12,9 +12,9 @@ categories: git ssh proxy
 
 <!--more-->
 
-## 2016-09-18更新
+代理分两个部分，一个是ssh协议的的代理，一个是git协议的代理。
 
-**git直接支持http代理和socks5代理**,别用其他方法了。
+## 第一部分 配置git协议的代理
 
 配置git socks5代理
 
@@ -47,7 +47,7 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
-## 2016-09-18更新结束，下面不用看了
+## 第二部分 配置ssh的代理
 
 ### git ssh通过socks5代理
 [在Mac OSX上通过SSH代理实现github访问](http://chunyemen.org/archives/813)
