@@ -4,7 +4,7 @@
   <title><![CDATA[Category: golang | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/golang/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-20T11:20:30+00:00</updated>
+  <updated>2016-09-20T12:08:16+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -49,7 +49,7 @@ go1.7.1.linux-armv6l.tar.gz	Archive	Linux	ARMv6	66MB
 
 <p><code>
 export GOROOT=/home/pi/go/go1.7/go
-export GOPATH=/home/pi/go/prjects
+export GOPATH=/home/pi/go/projects
 export PATH=/home/pi/go/go1.7/go/bin:$PATH
 export http_proxy=http://192.168.1.106:8118
 export https_proxy=http://192.168.1.106:8118
@@ -63,7 +63,7 @@ export https_proxy=http://192.168.1.106:8118
 go get github.com/ayanamist/gdns-go
 </code></p>
 
-<p>看看<code>/home/pi/go/prjects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。</p>
+<p>看看<code>/home/pi/go/projects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。</p>
 
 <h2 id="gdns-go">gdns-go推荐说明</h2>
 

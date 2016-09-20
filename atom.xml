@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-20T11:20:30+00:00</updated>
+  <updated>2016-09-20T12:08:16+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -54,7 +54,7 @@
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">export GOROOT=/home/pi/go/go1.7/go
-</span><span class="line">export GOPATH=/home/pi/go/prjects
+</span><span class="line">export GOPATH=/home/pi/go/projects
 </span><span class="line">export PATH=/home/pi/go/go1.7/go/bin:$PATH
 </span><span class="line">export http_proxy=http://192.168.1.106:8118
 </span><span class="line">export https_proxy=http://192.168.1.106:8118
@@ -68,7 +68,7 @@
 </pre></td><td class="code"><pre><code class=""><span class="line">go get github.com/ayanamist/gdns-go
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>看看<code>/home/pi/go/prjects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。</p>
+<p>看看<code>/home/pi/go/projects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。</p>
 
 <h2 id="gdns-go">gdns-go推荐说明</h2>
 
