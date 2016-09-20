@@ -38,7 +38,7 @@ go1.7.1.linux-armv6l.tar.gz	Archive	Linux	ARMv6	66MB
 
 ```
 export GOROOT=/home/pi/go/go1.7/go
-export GOPATH=/home/pi/go/prjects
+export GOPATH=/home/pi/go/projects
 export PATH=/home/pi/go/go1.7/go/bin:$PATH
 export http_proxy=http://192.168.1.106:8118
 export https_proxy=http://192.168.1.106:8118
@@ -52,7 +52,7 @@ export https_proxy=http://192.168.1.106:8118
 go get github.com/ayanamist/gdns-go
 ```
 
-看看`/home/pi/go/prjects`目录是不是有`bin` `pkg` `src`三个目录，`bin`目录就有编译好的`gdns-go`程序了。
+看看`/home/pi/go/projects`目录是不是有`bin` `pkg` `src`三个目录，`bin`目录就有编译好的`gdns-go`程序了。
 
 ## gdns-go推荐说明
 
