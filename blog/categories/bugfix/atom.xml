@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bugfix | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/bugfix/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-19T23:46:30+08:00</updated>
+  <updated>2016-09-20T09:46:53+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[函数栈破坏检查]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/09/func-stack-check/"/>
-    <updated>2016-07-09T22:49:35+08:00</updated>
+    <updated>2016-07-09T14:49:35+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/09/func-stack-check</id>
     <content type="html"><![CDATA[<p>函数栈破坏检查 平台 ARM linux，编译器GCC</p>
 
@@ -52,7 +52,7 @@ funcA()
   <entry>
     <title type="html"><![CDATA[malloc封装检查越界]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/09/malloc-wrap/"/>
-    <updated>2016-07-09T21:32:35+08:00</updated>
+    <updated>2016-07-09T13:32:35+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/09/malloc-wrap</id>
     <content type="html"><![CDATA[<p>malloc封装检查越界</p>
 
@@ -78,7 +78,7 @@ funcA()
   <entry>
     <title type="html"><![CDATA[UINT32引起的死循环]]></title>
     <link href="http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32/"/>
-    <updated>2016-07-09T18:02:35+08:00</updated>
+    <updated>2016-07-09T10:02:35+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32</id>
     <content type="html"><![CDATA[<p>UINT32 引起的死循环</p>
 

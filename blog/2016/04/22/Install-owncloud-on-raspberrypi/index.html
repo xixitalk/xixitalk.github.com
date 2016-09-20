@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Install owncloud 9.0.2 on RaspberryPi - xixitalk's snippet</title>
+  <meta name="author" content="xixitalk">
+
+  
+  <meta name="description" content="Install owncloud 9.0.2 on RaspberryPi
+在树莓派上安装owncloud 9.0.2 系统环境 我用的硬件是树莓派3，系统是raspbian JESSIE LITE，下载地址https://www.raspberrypi.org/downloads/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xixitalk's snippet" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32324744-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xixitalk's snippet</a></h1>
+  
+    <h2>Post Longer Than 140 Characters Tweets</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xixitalk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/">Categories</a></li>
+  <li><a href="/wishlist/">My wishlist</a></li>
+  <li><a href="/about/">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Install owncloud 9.0.2 on RaspberryPi</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-22T23:16:41+00:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Install owncloud 9.0.2 on RaspberryPi<br />
+在树莓派上安装owncloud 9.0.2</p>
+
+<!--more-->
+
+<h1 id="section">系统环境</h1>
+
+<p>我用的硬件是树莓派3，系统是<code>raspbian JESSIE LITE</code>，下载地址<a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a>，我是新系统全新安装<code>owncloud</code>，仅供参考。</p>
+
+<p>首先配置系统扩展到整个SD卡，配置后重启系统才生效。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo raspi-config 
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>更新<code>apt</code>软件仓库，升级系统到最新，可以修改<code>/etc/apt/source.list</code>使用aliyun的源。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get update
+</span><span class="line">sudo apt-get dist-upgrade
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h1 id="owncloud">owncloud官方安装文档</h1>
+
+<p>这里是<code>owncloud 9.0</code>版本的官方安装文档,供参阅：<a href="https://doc.owncloud.org/server/9.0/admin_manual/installation/source_installation.html">https://doc.owncloud.org/server/9.0/admin_manual/installation/source_installation.html</a></p>
+
+<h1 id="section-1">安装过程</h1>
+
+<h2 id="apache2-phpmariadb">第一步：安装apache2 php和mariadb数据库</h2>
+
+<p>安装<code>owncloud</code>所需要的<code>apache</code> <code>php</code> 和<code>mariadb</code>数据库软件，安装过程会提示配置<code>mariadb</code>数据库的<code>root</code>账号密码，牢记这个密码。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install apache2 mariadb-server libapache2-mod-php5 php5-gd php5-json php5-mysql php5-curl php5-intl php5-mcrypt php5-imagick
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="owncloud-1">第二步：下载owncloud软件包</h2>
+
+<p>下载<code>owncloud</code>软件包，并解压，即发现<code>owncloud</code>目录。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">wget https://download.owncloud.org/community/owncloud-9.0.1.tar.bz2
+</span><span class="line">tar -xjf owncloud-9.0.1.tar.bz2
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="owncloudapache2">第三步：为owncloud配置apache2</h2>
+
+<p>拷贝<code>owncloud</code>代码到<code>apache2</code>的网站根目录</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo cp -r owncloud /var/www
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>为<code>apache2</code>添加<code>owncloud.conf</code>配置文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo vi /etc/apache2/sites-available/owncloud.conf
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">Alias /owncloud "/var/www/owncloud/"
+</span><span class="line">
+</span><span class="line">&lt;Directory /var/www/owncloud/&gt;
+</span><span class="line">  Options +FollowSymlinks
+</span><span class="line">  AllowOverride All
+</span><span class="line">
+</span><span class="line"> &lt;IfModule mod_dav.c&gt;
+</span><span class="line">  Dav off
+</span><span class="line"> &lt;/IfModule&gt;
+</span><span class="line">
+</span><span class="line"> SetEnv HOME /var/www/owncloud
+</span><span class="line"> SetEnv HTTP_HOME /var/www/owncloud
+</span><span class="line">
+</span><span class="line">&lt;/Directory&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>将<code>sites-enabled</code>里<code>owncloud.conf</code>软连接到<code>sites-available</code>的<code>owncloud.conf</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled/owncloud.conf
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>打开<code>apache2</code>里<code>owncloud</code>所需的模块</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo a2enmod rewrite
+</span><span class="line">sudo a2enmod headers
+</span><span class="line">sudo a2enmod env
+</span><span class="line">sudo a2enmod dir
+</span><span class="line">sudo a2enmod mime
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>重启<code>apache2</code>服务</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo service apache2 restart
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="occowncloud">第四步：用occ安装owncloud剩余部分</h2>
+
+<p>这一部分可以参考官方文档<a href="https://doc.owncloud.org/server/9.0/admin_manual/installation/command_line_installation.html">https://doc.owncloud.org/server/9.0/admin_manual/installation/command_line_installation.html</a></p>
+
+<p>改变<code>/var/www/owncloud</code>目录的用户属性</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo chown -R www-data:www-data /var/www/owncloud/
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用<code>occ</code>安装<code>owncloud</code>，<code>database-pass</code>即为数据库的<code>root</code>用户密码，<code>admin</code>和<code>password</code>是<code>owncloud</code>的用户帐号和密码，牢记。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ cd /var/www/owncloud/
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo -u www-data php occ  maintenance:install --database
+</span><span class="line">"mysql" --database-name "owncloud"  --database-user "root" --database-pass
+</span><span class="line">"password" --admin-user "admin" --admin-pass "password"
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>会提示以下信息</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ownCloud is not installed - only a limited number of commands are available
+</span><span class="line">ownCloud was successfully installed
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>添加IP或者域名到<code>config.php</code>的可信域<code>trusted_domains</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo vi /var/www/owncloud/config/config.php
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>类似下面格式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">  'trusted_domains' =&gt;
+</span><span class="line">  array (
+</span><span class="line">    0 =&gt; 'localhost',
+</span><span class="line">    1 =&gt; '192.168.1.104',
+</span><span class="line">    2 =&gt; '192.168.1.106',
+</span><span class="line">  ),
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="owncloud-2">第五步：浏览器打开owncloud</h2>
+
+<p>用浏览器访问owncloud的地址，Enjoy owncloud!</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">http://RaspberryPi-IP/owncloud
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h1 id="todo">TODO</h1>
+
+<ol>
+  <li>没有配置SSL</li>
+  <li>安全的配置目录权限</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-22T23:16:41+00:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/owncloud/'>owncloud</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:Install owncloud 9.0.2 on RaspberryPi http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (13)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (1)</a></li><li><a href='/blog/categories/octopress'>octopress (7)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (5)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (4)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (1)</a></li><li><a href='/blog/categories/tech'>tech (10)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - xixitalk -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gitblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

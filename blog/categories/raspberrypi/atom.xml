@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-19T23:46:30+08:00</updated>
+  <updated>2016-09-20T09:46:53+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[树莓派go语言编译器安装配置]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/09/18/raspbian-golang-install/"/>
-    <updated>2016-09-18T03:42:13+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/09/18/raspbian-golang-install</id>
+    <link href="http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install/"/>
+    <updated>2016-09-17T19:42:13+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/09/17/raspbian-golang-install</id>
     <content type="html"><![CDATA[<p>关键词：树莓派 go语言编译器安装 raspbian golang install</p>
 
 <!--more-->
@@ -82,9 +82,9 @@ go get github.com/ayanamist/gdns-go
   
   <entry>
     <title type="html"><![CDATA[Install owncloud 9.0.2 on RaspberryPi]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi/"/>
-    <updated>2016-04-23T07:16:41+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/04/23/Install-owncloud-on-raspberrypi</id>
+    <link href="http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi/"/>
+    <updated>2016-04-22T23:16:41+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/04/22/Install-owncloud-on-raspberrypi</id>
     <content type="html"><![CDATA[<p>Install owncloud 9.0.2 on RaspberryPi<br />
 在树莓派上安装owncloud 9.0.2</p>
 
@@ -250,7 +250,7 @@ http://RaspberryPi-IP/owncloud
   <entry>
     <title type="html"><![CDATA[树莓派nf_conntrack错误]]></title>
     <link href="http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error/"/>
-    <updated>2013-06-25T16:57:52+08:00</updated>
+    <updated>2013-06-25T08:57:52+00:00</updated>
     <id>http://xixitalk.github.io/blog/2013/06/25/nf_conntrack-error</id>
     <content type="html"><![CDATA[<p>最近我的树莓派出现大量的重启，特别是看电影+下bt的时候，并且<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a>也经常退出，在<code>/var/log/syslog</code>和<code>/var/log/messages</code>出现大量的nf_conntrack错误。</p>
 
@@ -276,7 +276,7 @@ sudo sysctl -w "net.netfilter.nf_conntrack_tcp_timeout_established=600"
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上安装Go lang并编译cow proxy]]></title>
     <link href="http://xixitalk.github.io/blog/2013/06/14/go-lang-for-raspberrypi/"/>
-    <updated>2013-06-14T19:48:41+08:00</updated>
+    <updated>2013-06-14T11:48:41+00:00</updated>
     <id>http://xixitalk.github.io/blog/2013/06/14/go-lang-for-raspberrypi</id>
     <content type="html"><![CDATA[<h3 id="go">安装go语言</h3>
 
@@ -333,9 +333,9 @@ go get -u  github.com/cyfdecyf/cow
   
   <entry>
     <title type="html"><![CDATA[用浏览器发布博客到octopress]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/01/octopress-post-from-raspberrypi/"/>
-    <updated>2013-06-01T03:57:25+08:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/01/octopress-post-from-raspberrypi</id>
+    <link href="http://xixitalk.github.io/blog/2013/05/31/octopress-post-from-raspberrypi/"/>
+    <updated>2013-05-31T19:57:25+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2013/05/31/octopress-post-from-raspberrypi</id>
     <content type="html"><![CDATA[<h3 id="section">目标</h3>
 <p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
 
