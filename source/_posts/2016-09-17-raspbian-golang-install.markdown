@@ -46,15 +46,21 @@ export https_proxy=http://192.168.1.106:8118
 
 ## 编译一个软件试试
 
-从`github.com`自动下载代码编译一个工程试试，比如`gdns-go`
+从`github.com`自动下载代码编译一个工程试试，比如[gdns-go](http://github.com/ayanamist/gdns-go)
 
 ```
 go get github.com/ayanamist/gdns-go
 ```
 
-看看`/home/pi/go/prjects`目录是不是有`bin` `pkg` `src`三个目录，`bin`目录就有编译好的`gdns-go`程序了。`gdns-go`是一个基于[Google DNS over HTTPS API](https://developers.google.com/speed/public-dns/docs/dns-over-https)的DNS客户端程序，支持[shadowsocks](https://github.com/shadowsocks)。
+看看`/home/pi/go/prjects`目录是不是有`bin` `pkg` `src`三个目录，`bin`目录就有编译好的`gdns-go`程序了。
 
-我的`config.json`配置如下，然后执行`sudo ./gdns-go > /dev/null 2>&1 &`后台运行即可(53端口需要root权限账号运行)。我已经用`gdns-go`取代`dnsmasq` + `DNSCrypt`。
+## gdns-go推荐说明
+
+搜索关键词：gdns-go DNS dnsmasq  DNSCrypt DNS污染
+
+`gdns-go`是一个基于[Google DNS over HTTPS API](https://developers.google.com/speed/public-dns/docs/dns-over-https)的DNS服务器程序，因为Google的API接口被墙，所以支持通过[shadowsocks](https://github.com/shadowsocks)连接和socks5代理连接，带`Cache`缓存，解析速度有保障。是一个比较完美的解决DNS污染的DNS服务器。go语言实现，方便windows、linux环境和各种ARM+linux路由器设备树莓派编译运行。
+
+`config.json`例子配置如下，然后执行`sudo ./gdns-go > /dev/null 2>&1 &`后台运行即可(53端口需要root权限账号运行)。我已经用`gdns-go`取代`dnsmasq` + `DNSCrypt`。
 
 ```
 {
