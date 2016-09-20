@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberrypi | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-20T09:46:53+00:00</updated>
+  <updated>2016-09-20T11:20:30+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -57,15 +57,21 @@ export https_proxy=http://192.168.1.106:8118
 
 <h2 id="section">编译一个软件试试</h2>
 
-<p>从<code>github.com</code>自动下载代码编译一个工程试试，比如<code>gdns-go</code></p>
+<p>从<code>github.com</code>自动下载代码编译一个工程试试，比如<a href="http://github.com/ayanamist/gdns-go">gdns-go</a></p>
 
 <p><code>
 go get github.com/ayanamist/gdns-go
 </code></p>
 
-<p>看看<code>/home/pi/go/prjects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。<code>gdns-go</code>是一个基于<a href="https://developers.google.com/speed/public-dns/docs/dns-over-https">Google DNS over HTTPS API</a>的DNS客户端程序，支持<a href="https://github.com/shadowsocks">shadowsocks</a>。</p>
+<p>看看<code>/home/pi/go/prjects</code>目录是不是有<code>bin</code> <code>pkg</code> <code>src</code>三个目录，<code>bin</code>目录就有编译好的<code>gdns-go</code>程序了。</p>
 
-<p>我的<code>config.json</code>配置如下，然后执行<code>sudo ./gdns-go &gt; /dev/null 2&gt;&amp;1 &amp;</code>后台运行即可(53端口需要root权限账号运行)。我已经用<code>gdns-go</code>取代<code>dnsmasq</code> + <code>DNSCrypt</code>。</p>
+<h2 id="gdns-go">gdns-go推荐说明</h2>
+
+<p>搜索关键词：gdns-go DNS dnsmasq  DNSCrypt DNS污染</p>
+
+<p><code>gdns-go</code>是一个基于<a href="https://developers.google.com/speed/public-dns/docs/dns-over-https">Google DNS over HTTPS API</a>的DNS服务器程序，因为Google的API接口被墙，所以支持通过<a href="https://github.com/shadowsocks">shadowsocks</a>连接和socks5代理连接，带<code>Cache</code>缓存，解析速度有保障。是一个比较完美的解决DNS污染的DNS服务器。go语言实现，方便windows、linux环境和各种ARM+linux路由器设备树莓派编译运行。</p>
+
+<p><code>config.json</code>例子配置如下，然后执行<code>sudo ./gdns-go &gt; /dev/null 2&gt;&amp;1 &amp;</code>后台运行即可(53端口需要root权限账号运行)。我已经用<code>gdns-go</code>取代<code>dnsmasq</code> + <code>DNSCrypt</code>。</p>
 
 <p><code>
 {
