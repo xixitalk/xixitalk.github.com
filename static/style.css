@@ -5,10 +5,7 @@ background-color:pink;
 height:300px; 
 width:300px; 
 } 
-img   {
-width:48px; 
-height:48px; 
-} 
+img { max-width: 100%;}
 img.left{ 
 float:left; 
 }; 
