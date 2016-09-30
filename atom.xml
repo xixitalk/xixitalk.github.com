@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-20T12:08:16+00:00</updated>
+  <updated>2016-09-30T01:18:37+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[柏林警方在难民中心枪杀了一名父亲，因为他企图攻击性侵他女儿的嫌疑犯]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/09/30/Berlin-Police-shoot-dead-father-at-refugee-centre-as-he-attacks-man-he-accused-of-abusing-daughter/"/>
+    <updated>2016-09-30T09:10:49+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/09/30/Berlin-Police-shoot-dead-father-at-refugee-centre-as-he-attacks-man-he-accused-of-abusing-daughter</id>
+    <content type="html"><![CDATA[<h1 id="berlin-police-shoot-dead-father-at-refugee-centre-as-he-attacks-man-he-accused-of-abusing-daughter">Berlin Police shoot dead father at refugee centre as he attacks man he accused of abusing daughter</h1>
+
+<h1 id="section">柏林警方在难民中心枪杀了一名女孩的父亲，因为他企图攻击性侵他女儿的嫌疑犯</h1>
+
+<!--more-->
+
+<p>Police said that 29-year-old was shot attempting to attack alleged abuser with a knife.</p>
+
+<p>警方声称29岁的死者被枪击原因是他企图用刀攻击嫌疑犯。</p>
+
+<p>By Tom Porter
+September 28, 2016 12:54 BST</p>
+
+<p><a href="http://www.ibtimes.co.uk/berlin-police-shoot-dead-father-refugee-centre-he-attacks-man-he-accused-abusing-daughter-1583767">http://www.ibtimes.co.uk/berlin-police-shoot-dead-father-refugee-centre-he-attacks-man-he-accused-abusing-daughter-1583767</a></p>
+
+<p><img src="https://d.ibtimes.co.uk/en/full/1459826/berlin-police.jpg?w=736" alt="topic" /></p>
+
+<p>Berlin police said the man suspected of shooting dead a 31-year-old British man is on the loose (Getty)</p>
+
+<p>Berlin police shot dead a father at a refugee home as he attempted to attack a man he accused of sexually abusing his daughter.</p>
+
+<p>柏林警方枪杀了一名父亲，他企图攻击性侵他女儿的嫌疑犯。</p>
+
+<p>Police arrested a 27-year-old man at a refugee centre in the Moabit area of the city on Tuesday evening accused of sexually abusing an 8-year-old girl.</p>
+
+<p>星期二的晚上，在柏林Moabit街区的难民营，警方以性侵8岁小女孩的罪名拘捕了一名27岁男子。</p>
+
+<p>The girl’s 29-year-old father reportedly charged at the handcuffed suspect with a knife as he was being arrested and put in a police car, and officers shot him, DPA reported. The father died hours later at a hospital.</p>
+
+<p>在这名戴着手铐嫌疑犯正被塞进警车的时候，女孩29岁的父亲持小刀企图攻击嫌疑犯，随后警方对他开枪。据DPA报道，几个小时后这名父亲在一家医院死亡。</p>
+
+<p>Witnesses said the father shouted “You will not survive this” as he charged at the alleged abuser.</p>
+
+<p>目击者声称这名父亲在攻击嫌疑犯的时候大喊“你去死吧”。</p>
+
+<p>An investigation into the shooting will be carried out by Berlin’s homicide division.</p>
+
+<p>柏林警方凶杀专案组将会对本次枪击进行一系列调查。</p>
+
+<p>Neither the names of the man arrested nor the man killed have been released by police. Unconfirmed reports claim the alleged abuser is Pakistani.</p>
+
+<p>警方没有公开嫌疑犯和这名被杀男子的名字。未经证实报告声称这名性侵嫌疑犯是巴基斯坦人。</p>
+
+<p>In July, a member of the left wing Die Linke party told German parliament that there has been 128 allegations of children being sexually abused at refugee centres in the country in the first quarter of 2016.</p>
+
+<p>七月，一名左翼党派成员告诉德国议会：2016年第一季度，难民营里已经发生了128起儿童被性侵害事件。</p>
+
+<p>A four-year-old child was allegedly raped by an Afghan man at a refugee centre in Hamburg in March, a court in Kiel recently heard.</p>
+
+<p>基尔(Kiel)法院最近审理了一个案子：据说一个四岁的孩子在汉堡(Hamburg)难民营被一个阿富汗男人强奸，事件发生在三月份。</p>
+
+<p>In 2015, more than a million refugees and immigrants entered Germany, many fleeing war and poverty in the Middle East and Africa.</p>
+
+<p>在2015年，有超过1百万中东和非洲因为战争或者贫穷的难民和移民者进入德国。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派go语言编译器安装配置]]></title>
@@ -1814,34 +1877,6 @@ changed (this has happened to me).</p>
 <p>问题很快定位，问题原因是其中一个函数接收消息的时候，recv函数输入可接收数据size比buffer实际size大，大小都是宏值，不容易发觉，这个buffer恰好是局部变量（栈空间），从而recv长消息的时候把栈破坏了。</p>
 
 <p>特别提醒：如果定位的testFunc函数里局部变量过大，可能需要调整STACK_FIND_SIZE大小。定位平台是ARM linux，编译是GCC，其他平台和编译器以此类推。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[malloc封装检查越界]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/09/malloc-wrap/"/>
-    <updated>2016-07-09T13:32:35+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/09/malloc-wrap</id>
-    <content type="html"><![CDATA[<p>malloc封装检查越界</p>
-
-<!--more-->
-
-<p>上周出差，出现一例死机现场在libc的malloc函数里，分析malloc管理内存被擦写了，想来应该是用户使用malloc越界了。但是问题难复现，程序运行大于6小时出现，共抓取了3个现场，死机位置类似，可以定位某个线程的while循环。所以现场封装了一个malloc函数用于检测内存是否越界。代码如下</p>
-
-<script src="https://gist.github.com/xixitalk/d9364ee670f09f0365fd45466a773ba4.js"></script>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-</span><span class="line">|  size | BEGIN_MAGIC |      USER      BUFFER      | END_MAGIC |
-</span><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>每次内存申请多申请12个字节，前4个字节保存用户真实size，第4-8个字节保存魔术字，最后4个字节也保存魔术字，起始地址+8是用户可见的空间。</p>
-
-<p>很快就定位某个函数使用缓存越界了。</p>
-
 ]]></content>
   </entry>
   
