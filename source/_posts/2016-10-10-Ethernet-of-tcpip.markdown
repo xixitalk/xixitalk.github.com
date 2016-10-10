@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "TCP/IP之以太网帧"
@@ -6,6 +5,7 @@ date: 2016-10-10 10:15:46
 comments: true
 mathjax: false
 categories: tech network
+styles: [data-table]
 ---
 
 ### Ethernet II(以太网V2帧)
@@ -36,7 +36,6 @@ categories: tech network
 |0x8848 | 多协议标签交换（组播）（MPLS, Multi-Protocol Label Switching multicast）|
 {: border="1"}
 
-More Read
 
-<http://technow.blog.51cto.com/746816/320773>
+More Read  <http://technow.blog.51cto.com/746816/320773>
 
