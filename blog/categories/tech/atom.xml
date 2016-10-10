@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-10T03:31:12+00:00</updated>
+  <updated>2016-10-10T06:38:01+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>6字节</th>
@@ -43,22 +43,58 @@
   </tbody>
 </table>
 
-<p>类型：08 00 是IP包，08 06 是ARP包<br />
-数据：最常见的是IP包<br />
-FCS：Frame check sequence帧校验序列  </p>
+<p><strong>类型</strong>：  08 00 是IP包，08 06 是ARP包<br />
+<strong>数据</strong>：  最常见的是IP包<br />
+<strong>FCS</strong>：   Frame check sequence帧校验序列  </p>
 
-<p>更多常见类型：<br />
-0x0800 网际协议（IP）<br />
-0x0806 地址解析协议（ARP ： Address Resolution Protocol）<br />
-0x0808 帧中继 ARP （Frame Relay ARP） [RFC1701]<br />
-0x814C 简单网络管理协议（SNMP：Simple Network Management Protocol）<br />
-0x86DD 网际协议v6 （IPv6，Internet Protocol version 6）<br />
-0x880B 点对点协议（PPP：Point-to-Point Protocol）<br />
-0x8847 多协议标签交换（单播）（MPLS：Multi-Protocol Label Switching unicast）<br />
-0x8848 多协议标签交换（组播）（MPLS, Multi-Protocol Label Switching multicast）  </p>
+<p>更多常见类型：  </p>
 
-<p>More Read<br />
-<a href="http://technow.blog.51cto.com/746816/320773">http://technow.blog.51cto.com/746816/320773</a></p>
+<table border="1">
+  <thead>
+    <tr>
+      <th>类型值</th>
+      <th>解释</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0x0800</td>
+      <td>网际协议（IP）</td>
+    </tr>
+    <tr>
+      <td>0x0806</td>
+      <td>地址解析协议（ARP ： Address Resolution Protocol）</td>
+    </tr>
+    <tr>
+      <td>0x0808</td>
+      <td>帧中继 ARP （Frame Relay ARP） [RFC1701]</td>
+    </tr>
+    <tr>
+      <td>0x814C</td>
+      <td>简单网络管理协议（SNMP：Simple Network Management Protocol）</td>
+    </tr>
+    <tr>
+      <td>0x86DD</td>
+      <td>网际协议v6 （IPv6，Internet Protocol version 6）</td>
+    </tr>
+    <tr>
+      <td>0x880B</td>
+      <td>点对点协议（PPP：Point-to-Point Protocol）</td>
+    </tr>
+    <tr>
+      <td>0x8847</td>
+      <td>多协议标签交换（单播）（MPLS：Multi-Protocol Label Switching unicast）</td>
+    </tr>
+    <tr>
+      <td>0x8848</td>
+      <td>多协议标签交换（组播）（MPLS, Multi-Protocol Label Switching multicast）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>More Read</p>
+
+<p><a href="http://technow.blog.51cto.com/746816/320773">http://technow.blog.51cto.com/746816/320773</a></p>
 
 ]]></content>
   </entry>
