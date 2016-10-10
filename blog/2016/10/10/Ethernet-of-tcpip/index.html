@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: funny - xixitalk's snippet</title>
+  <title>TCP/IP之以太网帧 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: funny">
+  <meta name="description" content="Ethernet II(以太网V2帧) 6字节 6字节 2字节 46-1500字节 4字节 目标MAC地址 源MAC地址 类型 数据 FCS 类型：08 00 是IP包，08 06 是ARP包
+数据：最常见的是IP包
+FCS：Frame check sequence帧校验序列 更多常见类型： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.ioblog/categories/funny">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,36 +79,132 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: funny</h1>
+    
+      <h1 class="entry-title">TCP/IP之以太网帧</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-10T10:15:46+00:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><h3 id="ethernet-iiv2">Ethernet II(以太网V2帧)</h3>
+
+<!--more-->
+
+<table>
+  <thead>
+    <tr>
+      <th>6字节</th>
+      <th>6字节</th>
+      <th>2字节</th>
+      <th>46-1500字节</th>
+      <th>4字节</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>目标MAC地址</td>
+      <td>源MAC地址</td>
+      <td>类型</td>
+      <td>数据</td>
+      <td>FCS</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>类型：08 00 是IP包，08 06 是ARP包
+数据：最常见的是IP包
+FCS：Frame check sequence帧校验序列</p>
+
+<p>更多常见类型：
+0x0800	网际协议（IP）
+0x0806	地址解析协议（ARP ： Address Resolution Protocol）
+0x0808	帧中继 ARP （Frame Relay ARP） [RFC1701]
+0x814C	简单网络管理协议（SNMP：Simple Network Management Protocol）
+0x86DD	网际协议v6 （IPv6，Internet Protocol version 6）
+0x880B	点对点协议（PPP：Point-to-Point Protocol）
+0x8847	多协议标签交换（单播）（MPLS：Multi-Protocol Label Switching unicast）
+0x8848	多协议标签交换（组播）（MPLS, Multi-Protocol Label Switching multicast）</p>
+
+<p>More Read
+<a href="http://technow.blog.51cto.com/746816/320773">http://technow.blog.51cto.com/746816/320773</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <div id="blog-archives" class="category">
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
 
 
 
   
-  <h2>2013</h2>
 
-<article>
+
+<time datetime="2016-10-10T10:15:46+00:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
+      
+
+<span class="categories">
   
-<h1><a href="/blog/2013/01/16/security-audit-finds-dev-outsourced-his-job-to-china/">Security audit finds dev OUTSOURCED his JOB to China</a></h1>
-<time datetime="2013-01-16T14:38:00+00:00" pubdate><span class='month'>Jan</span> <span class='day'>16</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/funny/'>funny</a></span>
-</footer>
+    <a class='category' href='/blog/categories/network/'>network</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
 
 
-</article>
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:TCP/IP之以太网帧 http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip/" target="_blank"><img src="/images/tweet.png" /></a>
+  
 
 </div>
 
-  
+    
+
+
+
+</footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -135,7 +233,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

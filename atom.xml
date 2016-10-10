@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-10T01:38:26+00:00</updated>
+  <updated>2016-10-10T02:31:21+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TCP/IP之以太网帧]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip/"/>
+    <updated>2016-10-10T10:15:46+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip</id>
+    <content type="html"><![CDATA[<h3 id="ethernet-iiv2">Ethernet II(以太网V2帧)</h3>
+
+<!--more-->
+
+<table>
+  <thead>
+    <tr>
+      <th>6字节</th>
+      <th>6字节</th>
+      <th>2字节</th>
+      <th>46-1500字节</th>
+      <th>4字节</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>目标MAC地址</td>
+      <td>源MAC地址</td>
+      <td>类型</td>
+      <td>数据</td>
+      <td>FCS</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>类型：08 00 是IP包，08 06 是ARP包
+数据：最常见的是IP包
+FCS：Frame check sequence帧校验序列</p>
+
+<p>更多常见类型：
+0x0800	网际协议（IP）
+0x0806	地址解析协议（ARP ： Address Resolution Protocol）
+0x0808	帧中继 ARP （Frame Relay ARP） [RFC1701]
+0x814C	简单网络管理协议（SNMP：Simple Network Management Protocol）
+0x86DD	网际协议v6 （IPv6，Internet Protocol version 6）
+0x880B	点对点协议（PPP：Point-to-Point Protocol）
+0x8847	多协议标签交换（单播）（MPLS：Multi-Protocol Label Switching unicast）
+0x8848	多协议标签交换（组播）（MPLS, Multi-Protocol Label Switching multicast）</p>
+
+<p>More Read
+<a href="http://technow.blog.51cto.com/746816/320773">http://technow.blog.51cto.com/746816/320773</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[DNS在HTTP网络交互流程中的位置]]></title>
@@ -1815,47 +1864,6 @@ changed (this has happened to me).</p>
 <h2 id="section-5">2. 参考资料</h2>
 
 <p>http://blog.yufeng.info/archives/2456</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的AStyle配置选项]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config/"/>
-    <updated>2016-07-11T18:35:57+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config</id>
-    <content type="html"><![CDATA[<p>我的AStyle代码格式工具的选项：AStyle.exe -A1 -C -S -K -Y -f -s4 -p -U -o -n main.c</p>
-
-<p>在<code>notepad++</code>里添加：<code>运行(R)--运行(R)</code> 选择AStyle.exe，选项输入<code>-A1 -C -S -K -Y -f -s4 -p -U -o -n "$(FULL_CURRENT_PATH)"</code>，然后点击<code>保存</code>，这样就保存在运行菜单里了。每次使用从<code>运行(R)</code>点击即可。</p>
-
-<!--more-->
-
-<p>简略选项：<code>-A1 -C -S -K -Y -f -s4 -p -U -o -n</code>
-对应长选项如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">--style=bsd
-</span><span class="line">--indent-classes
-</span><span class="line">--indent-switches
-</span><span class="line">--indent-cases
-</span><span class="line">--indent-col1-comments
-</span><span class="line">--break-blocks
-</span><span class="line">--indent=spaces=4
-</span><span class="line">--pad-oper
-</span><span class="line">--unpad-paren
-</span><span class="line">--keep-one-line-statements
-</span><span class="line">--suffix=none
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
 ]]></content>
   </entry>
   
