@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>netlink遇到ENOBUFS错误 - xixitalk's snippet</title>
+  <title>DNS协议学习笔记之DNS查询 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：No buffer space available 经过内核代码分析，af_netlink.c里netlink_broadcast_deliver函数返回- &hellip;">
+  <meta name="description" content="DNS协议学习笔记之DNS查询 DNS查询报文 16位标识 16位标志 16位问题数 16资源记录数 16位授权资源记录数 16位额外资源记录数 整个DNS包头12个字节。 16位标志详解 1位QR 4位opcode 1位AA 1位TC 1位RD 1位RA 3位清0 4位RCode QR： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,9 +18,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/10/10/dns-protocol">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
@@ -82,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">netlink遇到ENOBUFS错误</h1>
+      <h1 class="entry-title">DNS协议学习笔记之DNS查询</h1>
     
     
       <p class="meta">
@@ -98,7 +100,7 @@
   
 
 
-<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
+<time datetime="2016-10-10T19:00:54+00:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,59 +109,91 @@
   </header>
 
 
-<div class="entry-content"><p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
+<div class="entry-content"><!--more-->
 
-<!--more-->
+<h2 id="dnsdns">DNS协议学习笔记之DNS查询</h2>
 
-<p>经过内核代码分析，<code>af_netlink.c</code>里<code>netlink_broadcast_deliver</code>函数返回-1才会触发<code>ENOBUFS</code>流程。加<code>printk</code>和<code>panic</code>复现问题(因为嵌入式开发环境抓panic死机现场分析和串口log都太方便了)。</p>
+<h3 id="dns">DNS查询报文</h3>
+
+<p><img src="http://s6.51cto.com/wyfs02/M02/4D/A8/wKiom1RW2KaCvqHrAABEwMOH0AE633.jpg" alt="DNSrequest" /></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>16位标识</td>
+      <td>16位标志</td>
+    </tr>
+    <tr>
+      <td>16位问题数</td>
+      <td>16资源记录数</td>
+    </tr>
+    <tr>
+      <td>16位授权资源记录数</td>
+      <td>16位额外资源记录数</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>整个DNS包头12个字节。  </p>
+
+<h4 id="section">16位标志详解</h4>
+
+<p><img src="http://images.cnblogs.com/cnblogs_com/topdog/201111/201111152147003785.jpg" alt="DNSrequest2" /></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>1位QR</td>
+      <td>4位opcode</td>
+      <td>1位AA</td>
+      <td>1位TC</td>
+      <td>1位RD</td>
+      <td>1位RA</td>
+      <td>3位清0</td>
+      <td>4位RCode</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>QR：0表示查询报文，1表示响应报文<br />
+Opcode：通常值为0(标准查询)，其他值为1(反向查询)和2(服务器状态请求)。<br />
+AA：表示授权回答(authoritative answer).<br />
+TC：表示可截断的(truncated)<br />
+RD：表示期望递归<br />
+RA：表示可用递归，随后3bit必须为0<br />
+RCode：返回码，通常为0(没有差错)和3(名字差错)  </p>
+
+<h4 id="section-1">查询问题结构</h4>
+
+<p><img src="http://www.iprotocolsec.com/wp-content/uploads/2012/01/question_format.jpg" alt="" /></p>
+
+<p>QNAME结构：<strong>域名字符串按照<code>.</code>分割，按照字符长度+字符依次排列，00结尾</strong>。</p>
+
+<p>比如www.google.com.hk，转为QNAME的16进制格式：</p>
+
+<p><strong>03</strong> 77 77 77 <strong>06</strong> 67 6f 6f 67 6c 65 <strong>03</strong> 63 6f 6d <strong>02</strong> 68 6b 00</p>
+
+<p>解读：03个字符（www），06个字符（google），03个字符（com），02个字符（cn），结尾是00</p>
+
+<p>QType：长度16位，表示查询类型。取值大概如下：<br />
+QClass:长度为16位，表示分类。</p>
+
+<h4 id="dns-1">典型的一个DNS查询包</h4>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">static int netlink_broadcast_deliver(struct sock *sk, struct sk_buff *skb)
-</span><span class="line">{
-</span><span class="line">	struct netlink_sock *nlk = nlk_sk(sk);
-</span><span class="line">
-</span><span class="line">	if (atomic_read(&amp;sk-&gt;sk_rmem_alloc) &lt;= sk-&gt;sk_rcvbuf &amp;&amp;
-</span><span class="line">	    !test_bit(0, &amp;nlk-&gt;state)) {
-</span><span class="line">		skb_set_owner_r(skb, sk);
-</span><span class="line">		__netlink_sendskb(sk, skb);
-</span><span class="line">		return atomic_read(&amp;sk-&gt;sk_rmem_alloc) &gt; (sk-&gt;sk_rcvbuf &gt;&gt; 1);
-</span><span class="line">	}
-</span><span class="line">	printk("[testcode]netlink sk_rmem_alloc:%x sk_rcvbuf:%x \n",atomic_read(&amp;sk-&gt;sk_rmem_alloc),sk-&gt;sk_rcvbuf);
-</span><span class="line">	panic("[testcode]netlink broadcast panic\n");
-</span><span class="line">	return -1;
-</span><span class="line">}
+</pre></td><td class="code"><pre><code class=""><span class="line">(前面是以太网包头+IP包头+UDP包头)    6d 54 01 00 00 01
+</span><span class="line">00 00 00 00 00 00 03 77    77 77 06 67 6f 6f 67 6c 
+</span><span class="line">65 03 63 6f 6d 02 68 6b    00 00 01 00 01
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>抓取的串口log如下显示<code>sk_rcvbuf</code>确实小于<code>sk_rmem_alloc</code>了，没有空间了。</p>
-
-<blockquote>
-  <p>[   18.618473] [testcode]netlink sk_rmem_alloc:b00 sk_rcvbuf:8b8  [<br />
-18.623727] Kernel panic - not syncing: [testcode]netlink broadcast panic</p>
-</blockquote>
-
-<p>对比发现死机现场里的<code>kobject_uevent_env</code>函数里的<code>uevent_sock</code>变量里<code>sk_sndbuf</code>和<code>sk_rcvbuf</code>都是163840（160K）。而<code>netlink_broadcast_deliver</code>里sock是8b8（2232）。很明显netlink接收socket里的sock比内核驱动的sock接收buf差距太大了。</p>
-
-<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，<code>sk_rcvbuf</code>和<code>sk_sndbuf</code>初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
-
-<blockquote>
-  <p>sk-&gt;sk_rcvbuf		=	sysctl_rmem_default;
-sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
-</blockquote>
-
-<p>看应用netlink的接收，果然用<code>setsockopt</code>修改了<code>RCVBUF</code>。</p>
+<p><code>6d 54</code>是标识，每次查询变化，DNS回应本次查询会用相同的标识<br />
+<code>01 00</code>是标志，表示RD期望递归为1<br />
+<code>00 01</code>是问题数，一个问题查询；其他三个查询记录数都是0<br />
+接下来是QName<br />
+倒数第二个<code>00 01</code>是QType，值是1<br />
+最后一个<code>00 01</code>是QClass，值是是1  </p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -177,25 +211,37 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
 <span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">const int buffersize = 1024;  
-</span><span class="line">int ret;  
-</span><span class="line">
-</span><span class="line">struct sockaddr_nl snl;  
-</span><span class="line">bzero(&amp;snl, sizeof(struct sockaddr_nl));  
-</span><span class="line">snl.nl_family = AF_NETLINK;  
-</span><span class="line">snl.nl_pid = getpid();  
-</span><span class="line">snl.nl_groups = 1;  
-</span><span class="line">
-</span><span class="line">int s = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);  
-</span><span class="line">if (s == -1)   
-</span><span class="line">{  
-</span><span class="line">    perror("socket");  
-</span><span class="line">    return -1;  
-</span><span class="line">}  
-</span><span class="line">setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));  
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">enum QueryType //查询的资源记录类型。 
+</span><span class="line">{ 
+</span><span class="line">A=0x01, //指定计算机 IP 地址。 
+</span><span class="line">NS=0x02, //指定用于命名区域的 DNS 名称服务器。 
+</span><span class="line">MD=0x03, //指定邮件接收站（此类型已经过时了，使用MX代替） 
+</span><span class="line">MF=0x04, //指定邮件中转站（此类型已经过时了，使用MX代替） 
+</span><span class="line">CNAME=0x05, //指定用于别名的规范名称。 
+</span><span class="line">SOA=0x06, //指定用于 DNS 区域的“起始授权机构”。 
+</span><span class="line">MB=0x07, //指定邮箱域名。 
+</span><span class="line">MG=0x08, //指定邮件组成员。 
+</span><span class="line">MR=0x09, //指定邮件重命名域名。 
+</span><span class="line">NULL=0x0A, //指定空的资源记录 
+</span><span class="line">WKS=0x0B, //描述已知服务。 
+</span><span class="line">PTR=0x0C, //如果查询是 IP 地址，则指定计算机名；否则指定指向其它信息的指针。 
+</span><span class="line">HINFO=0x0D, //指定计算机 CPU 以及操作系统类型。 
+</span><span class="line">MINFO=0x0E, //指定邮箱或邮件列表信息。 
+</span><span class="line">MX=0x0F, //指定邮件交换器。 
+</span><span class="line">TXT=0x10, //指定文本信息。 
+</span><span class="line">UINFO=0x64, //指定用户信息。 
+</span><span class="line">UID=0x65, //指定用户标识符。 
+</span><span class="line">GID=0x66, //指定组名的组标识符。 
+</span><span class="line">ANY=0xFF //指定所有数据类型。 
+</span><span class="line">};
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>C库的<code>setsockopt</code>函数会通过系统调用进入到内核<code>sock.c</code>文件里的<code>sock_setsockopt</code>函数。<code>SOCK_MIN_RCVBUF</code>就是2232。很明显应用<code>setsockopt</code>的<code>buffersize</code>是1024，乘以2还小于<code>SOCK_MIN_RCVBUF</code>，所以<code>sk_rcvbuf</code>就变成<code>SOCK_MIN_RCVBUF</code>。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -205,19 +251,25 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
 <span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">case SO_RCVBUF:
-</span><span class="line">    if (val &gt; sysctl_rmem_max)
-</span><span class="line">		val = sysctl_rmem_max;
-</span><span class="line">	if ((val * 2) &lt; SOCK_MIN_RCVBUF)
-</span><span class="line">		sk-&gt;sk_rcvbuf = SOCK_MIN_RCVBUF;
-</span><span class="line">	else
-</span><span class="line">		sk-&gt;sk_rcvbuf = val * 2;
-</span><span class="line">	break;
+</pre></td><td class="code"><pre><code class=""><span class="line">enum QueryClass //指定信息的协议组。 
+</span><span class="line">{ 
+</span><span class="line">IN=0x01, //指定 Internet 类别。 
+</span><span class="line">CSNET=0x02, //指定 CSNET 类别。（已过时） 
+</span><span class="line">CHAOS=0x03, //指定 Chaos 类别。 
+</span><span class="line">HESIOD=0x04,//指定 MIT Athena Hesiod 类别。 
+</span><span class="line">ANY=0xFF //指定任何以前列出的通配符。 
+</span><span class="line">};
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>解决办法：删除应用代码里的<code>setsockopt</code>语句,这样<code>sk_rcvbuf</code>默认就是160K，或者用<code>setsockopt</code>设置合适的大小。</p>
+<h3 id="section-2">学习资料</h3>
 
-<p>通过Google发现，网络上好多netlink实例都用了<code>setsockopt</code>设置了1024的buffer大小。应用这个代码应该是从网上抄来的。</p>
+<p><a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a></p>
+
+<p><a href="http://www.zytrax.com/books/dns/ch15/">Chapter 15 DNS Messages</a></p>
+
+<p><a href="http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/">使用Wireshark学习DNS协议及DNS欺骗原理</a></p>
+
+<p><a href="http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html">DIY一个DNS查询器：了解DNS协议</a></p>
 
 </div>
 
@@ -241,12 +293,12 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
   
 
 
-<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
+<time datetime="2016-10-10T19:00:54+00:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/network/'>network</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -258,7 +310,7 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:netlink遇到ENOBUFS错误 http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:DNS协议学习笔记之DNS查询 http://xixitalk.github.io/blog/2016/10/10/dns-protocol/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -304,8 +356,8 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/10/10/dns-protocol/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/10/10/dns-protocol/';
         var disqus_script = 'embed.js';
       
     (function () {

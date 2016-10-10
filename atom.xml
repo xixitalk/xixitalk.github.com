@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-10T10:21:02+00:00</updated>
+  <updated>2016-10-10T12:33:55+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,176 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DNS协议学习笔记之DNS查询]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/10/dns-protocol/"/>
+    <updated>2016-10-10T19:00:54+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/10/dns-protocol</id>
+    <content type="html"><![CDATA[<!--more-->
+
+<h2 id="dnsdns">DNS协议学习笔记之DNS查询</h2>
+
+<h3 id="dns">DNS查询报文</h3>
+
+<p><img src="http://s6.51cto.com/wyfs02/M02/4D/A8/wKiom1RW2KaCvqHrAABEwMOH0AE633.jpg" alt="DNSrequest" /></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>16位标识</td>
+      <td>16位标志</td>
+    </tr>
+    <tr>
+      <td>16位问题数</td>
+      <td>16资源记录数</td>
+    </tr>
+    <tr>
+      <td>16位授权资源记录数</td>
+      <td>16位额外资源记录数</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>整个DNS包头12个字节。  </p>
+
+<h4 id="section">16位标志详解</h4>
+
+<p><img src="http://images.cnblogs.com/cnblogs_com/topdog/201111/201111152147003785.jpg" alt="DNSrequest2" /></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>1位QR</td>
+      <td>4位opcode</td>
+      <td>1位AA</td>
+      <td>1位TC</td>
+      <td>1位RD</td>
+      <td>1位RA</td>
+      <td>3位清0</td>
+      <td>4位RCode</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>QR：0表示查询报文，1表示响应报文<br />
+Opcode：通常值为0(标准查询)，其他值为1(反向查询)和2(服务器状态请求)。<br />
+AA：表示授权回答(authoritative answer).<br />
+TC：表示可截断的(truncated)<br />
+RD：表示期望递归<br />
+RA：表示可用递归，随后3bit必须为0<br />
+RCode：返回码，通常为0(没有差错)和3(名字差错)  </p>
+
+<h4 id="section-1">查询问题结构</h4>
+
+<p><img src="http://www.iprotocolsec.com/wp-content/uploads/2012/01/question_format.jpg" alt="" /></p>
+
+<p>QNAME结构：<strong>域名字符串按照<code>.</code>分割，按照字符长度+字符依次排列，00结尾</strong>。</p>
+
+<p>比如www.google.com.hk，转为QNAME的16进制格式：</p>
+
+<p><strong>03</strong> 77 77 77 <strong>06</strong> 67 6f 6f 67 6c 65 <strong>03</strong> 63 6f 6d <strong>02</strong> 68 6b 00</p>
+
+<p>解读：03个字符（www），06个字符（google），03个字符（com），02个字符（cn），结尾是00</p>
+
+<p>QType：长度16位，表示查询类型。取值大概如下：<br />
+QClass:长度为16位，表示分类。</p>
+
+<h4 id="dns-1">典型的一个DNS查询包</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">(前面是以太网包头+IP包头+UDP包头)    6d 54 01 00 00 01
+</span><span class="line">00 00 00 00 00 00 03 77    77 77 06 67 6f 6f 67 6c 
+</span><span class="line">65 03 63 6f 6d 02 68 6b    00 00 01 00 01
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>6d 54</code>是标识，每次查询变化，DNS回应本次查询会用相同的标识<br />
+<code>01 00</code>是标志，表示RD期望递归为1<br />
+<code>00 01</code>是问题数，一个问题查询；其他三个查询记录数都是0<br />
+接下来是QName<br />
+倒数第二个<code>00 01</code>是QType，值是1<br />
+最后一个<code>00 01</code>是QClass，值是是1  </p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">enum QueryType //查询的资源记录类型。 
+</span><span class="line">{ 
+</span><span class="line">A=0x01, //指定计算机 IP 地址。 
+</span><span class="line">NS=0x02, //指定用于命名区域的 DNS 名称服务器。 
+</span><span class="line">MD=0x03, //指定邮件接收站（此类型已经过时了，使用MX代替） 
+</span><span class="line">MF=0x04, //指定邮件中转站（此类型已经过时了，使用MX代替） 
+</span><span class="line">CNAME=0x05, //指定用于别名的规范名称。 
+</span><span class="line">SOA=0x06, //指定用于 DNS 区域的“起始授权机构”。 
+</span><span class="line">MB=0x07, //指定邮箱域名。 
+</span><span class="line">MG=0x08, //指定邮件组成员。 
+</span><span class="line">MR=0x09, //指定邮件重命名域名。 
+</span><span class="line">NULL=0x0A, //指定空的资源记录 
+</span><span class="line">WKS=0x0B, //描述已知服务。 
+</span><span class="line">PTR=0x0C, //如果查询是 IP 地址，则指定计算机名；否则指定指向其它信息的指针。 
+</span><span class="line">HINFO=0x0D, //指定计算机 CPU 以及操作系统类型。 
+</span><span class="line">MINFO=0x0E, //指定邮箱或邮件列表信息。 
+</span><span class="line">MX=0x0F, //指定邮件交换器。 
+</span><span class="line">TXT=0x10, //指定文本信息。 
+</span><span class="line">UINFO=0x64, //指定用户信息。 
+</span><span class="line">UID=0x65, //指定用户标识符。 
+</span><span class="line">GID=0x66, //指定组名的组标识符。 
+</span><span class="line">ANY=0xFF //指定所有数据类型。 
+</span><span class="line">};
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">enum QueryClass //指定信息的协议组。 
+</span><span class="line">{ 
+</span><span class="line">IN=0x01, //指定 Internet 类别。 
+</span><span class="line">CSNET=0x02, //指定 CSNET 类别。（已过时） 
+</span><span class="line">CHAOS=0x03, //指定 Chaos 类别。 
+</span><span class="line">HESIOD=0x04,//指定 MIT Athena Hesiod 类别。 
+</span><span class="line">ANY=0xFF //指定任何以前列出的通配符。 
+</span><span class="line">};
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-2">学习资料</h3>
+
+<p><a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a></p>
+
+<p><a href="http://www.zytrax.com/books/dns/ch15/">Chapter 15 DNS Messages</a></p>
+
+<p><a href="http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/">使用Wireshark学习DNS协议及DNS欺骗原理</a></p>
+
+<p><a href="http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html">DIY一个DNS查询器：了解DNS协议</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TCP/IP之IP包头部]]></title>
@@ -1640,262 +1810,6 @@ changed (this has happened to me).</p>
 <h4 id="section">参考文章</h4>
 
 <p><a href="http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl">http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux应用内存占用maps分析]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/12/app-mem-used-on-linux/"/>
-    <updated>2016-07-12T10:50:20+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/12/app-mem-used-on-linux</id>
-    <content type="html"><![CDATA[<p>假设一个应用的pid是PID，则<code>cat /proc/PID/maps</code>显示这个应用的内存占用。</p>
-
-<!--more-->
-
-<h3 id="maps">maps格式</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">address           perms offset  dev   inode   pathname
-</span><span class="line">00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<ol>
-  <li><strong>address</strong> - This is the starting and ending address of the region in the process’s address space。说明：都是虚拟地址，并不代码真实的物理地址。</li>
-  <li><strong>permissions</strong> - This describes how pages in the region can be accessed. There are four different permissions: read, write, execute, and shared. If read/write/execute are disabled, a ‘-‘ will appear instead of the ‘r’/’w’/’x’. If a region is not shared, it is private, so a ‘p’ will appear instead of an ‘s’. If the process attempts to access memory in a way that is not permitted, a segmentation fault is generated. Permissions can be changed using the <code>mprotect</code> system call.</li>
-  <li><strong>offset</strong> - If the region was mapped from a file (using mmap), this is the offset in the file where the mapping begins. If the memory was not mapped from a file, it’s just 0.</li>
-  <li><strong>device</strong> - If the region was mapped from a file, this is the major and minor device number (in hex) where the file lives.</li>
-  <li><strong>inode</strong> - If the region was mapped from a file, this is the file number.</li>
-  <li><strong>pathname</strong> - If the region was mapped from a file, this is the name of the file. This field is blank for anonymous mapped regions. There are also special regions with names like [heap], [stack], or [vdso]. [vdso] stands for virtual dynamic shared object. It’s used by system calls to switch to kernel mode. Here’s a good article about it.</li>
-</ol>
-
-<h3 id="section">实例分析</h3>
-
-<p>写一个简单的实例main.c，funcA地址在代码段，s_buf在数据段，buf是局部变量，在栈空间，pheap是malloc申请的，是heap空间。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#include &lt;stdio.h&gt;
-</span><span class="line">#include &lt;stdlib.h&gt;
-</span><span class="line">#include &lt;unistd.h&gt;
-</span><span class="line">
-</span><span class="line">static char s_buf[1024];
-</span><span class="line">void funcA(void)
-</span><span class="line">{
-</span><span class="line">  printf("funcA address:%08x\n",funcA);
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">int main(int argc,char *argv[])
-</span><span class="line">{
-</span><span class="line">  int i = 0;
-</span><span class="line">  char buf[1024] = {0};
-</span><span class="line">  char *pheap = malloc(2048);
-</span><span class="line">
-</span><span class="line">  for(i=0;i&lt;1000;i++)
-</span><span class="line">  {
-</span><span class="line">    funcA();
-</span><span class="line">    printf("buf address:%08x\n",buf);
-</span><span class="line">    printf("s_buf address:%08x\n",s_buf);
-</span><span class="line">    printf("pheap address:%08x\n",pheap);
-</span><span class="line">    sleep(10);
-</span><span class="line">  }
-</span><span class="line">  free(pheap);
-</span><span class="line">  return 0;
-</span><span class="line">}
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>编译运行</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$gcc main.c
-</span><span class="line">$./a.out
-</span><span class="line">funcA address:000084a0
-</span><span class="line">buf address:becb9318
-</span><span class="line">s_buf address:000107ac
-</span><span class="line">pheap address:01171008
-</span><span class="line">funcA address:000084a0
-</span><span class="line">buf address:becb9318
-</span><span class="line">s_buf address:000107ac
-</span><span class="line">pheap address:01171008
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在另一个窗口</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ ps aux | grep out
-</span><span class="line">pi       27725  0.0  0.2   1676   424 pts/0    S+   10:43   0:00 ./a.out
-</span><span class="line">$ cat /proc/27725/maps &gt; a.out.maps
-</span><span class="line">$ cat a.out.maps
-</span><span class="line">00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out
-</span><span class="line">00010000-00011000 rw-p 00000000 b3:02 317712     /home/pi/test/pmap/a.out
-</span><span class="line">01171000-01192000 rw-p 00000000 00:00 0          [heap]
-</span><span class="line">b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">b6f63000-b6f66000 rw-p 00000000 00:00 0
-</span><span class="line">b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-</span><span class="line">b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-</span><span class="line">b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-</span><span class="line">b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-</span><span class="line">b6f9e000-b6fa2000 rw-p 00000000 00:00 0
-</span><span class="line">b6fa2000-b6fa3000 r-xp 00000000 00:00 0          [sigpage]
-</span><span class="line">b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-</span><span class="line">b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-</span><span class="line">bec99000-becba000 rw-p 00000000 00:00 0          [stack]
-</span><span class="line">ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>a.out.maps内容分析如下</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">00008000-00009000 r-xp 00000000 b3:02 317712     /home/pi/test/pmap/a.out  
-</span><span class="line">代码段，funcA在这个区间,权限是r-xp，有读、执行权限，p是private
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">00010000-00011000 rw-p 00000000 b3:02 317712     /home/pi/test/pmap/a.out  
-</span><span class="line">数据段，s_buf在这个区间,权限是rw-p，有读写，p是private
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">01171000-01192000 rw-p 00000000 00:00 0          [heap]
-</span><span class="line">堆空间，pheap在这个区间，权限是rw-p，有读写，p是private
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">b6e36000-b6f59000 r-xp 00000000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">libc库代码段
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">b6f59000-b6f60000 ---p 00123000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">libc库内存防止越界空间，权限是---p，没有rwx权限，用户访问就触发段错误
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">b6f60000-b6f62000 r--p 00122000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">libc库只读内存区。如果const变量，则在代码段；如果是全局变量则在数据段，还不知道这个区域内容。
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">b6f62000-b6f63000 rw-p 00124000 b3:02 1925       /lib/arm-linux-gnueabihf/libc-2.13.so
-</span><span class="line">libc库数据段
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">b6f63000-b6f66000 rw-p 00000000 00:00 0
-</span><span class="line">b6f9e000-b6fa2000 rw-p 00000000 00:00 0
-</span><span class="line">未知，权限rw-p应该共享库相关的数据区
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">b6f74000-b6f76000 r-xp 00000000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-</span><span class="line">b6f76000-b6f7d000 ---p 00002000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-</span><span class="line">b6f7d000-b6f7e000 rw-p 00001000 b3:02 27194      /usr/lib/arm-linux-gnueabihf/libcofi_rpi.so
-</span><span class="line">b6f7e000-b6f9b000 r-xp 00000000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-</span><span class="line">b6fa3000-b6fa4000 r--p 0001d000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-</span><span class="line">b6fa4000-b6fa5000 rw-p 0001e000 b3:02 1919       /lib/arm-linux-gnueabihf/ld-2.13.so
-</span><span class="line">同libc分析
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">b6fa2000-b6fa3000 r-xp 00000000 00:00 0          [sigpage]
-</span><span class="line">和信号相关的一个page，ARM架构独有好像
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">bec99000-becba000 rw-p 00000000 00:00 0          [stack]
-</span><span class="line">栈空间，局部变量buf在这个区间
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
-</span><span class="line">中断向量
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>待完善…</p>
-
-<h3 id="section-1">参考资料</h3>
-
-<p><a href="http://stackoverflow.com/questions/1401359/understanding-linux-proc-id-maps">http://stackoverflow.com/questions/1401359/understanding-linux-proc-id-maps</a></p>
-
-<p><a href="http://stackoverflow.com/questions/16524895/proc-pid-maps-shows-pages-with-no-rwx-permissions-on-x86-64-linux">http://stackoverflow.com/questions/16524895/proc-pid-maps-shows-pages-with-no-rwx-permissions-on-x86-64-linux</a></p>
-
-<p><a href="https://yq.aliyun.com/articles/54405">https://yq.aliyun.com/articles/54405</a></p>
 ]]></content>
   </entry>
   

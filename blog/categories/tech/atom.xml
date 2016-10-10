@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-10T10:21:02+00:00</updated>
+  <updated>2016-10-10T12:33:55+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,145 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DNS协议学习笔记之DNS查询]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/10/dns-protocol/"/>
+    <updated>2016-10-10T19:00:54+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/10/dns-protocol</id>
+    <content type="html"><![CDATA[<!--more-->
+
+<h2 id="dnsdns">DNS协议学习笔记之DNS查询</h2>
+
+<h3 id="dns">DNS查询报文</h3>
+
+<p><img src="http://s6.51cto.com/wyfs02/M02/4D/A8/wKiom1RW2KaCvqHrAABEwMOH0AE633.jpg" alt="DNSrequest" /></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>16位标识</td>
+      <td>16位标志</td>
+    </tr>
+    <tr>
+      <td>16位问题数</td>
+      <td>16资源记录数</td>
+    </tr>
+    <tr>
+      <td>16位授权资源记录数</td>
+      <td>16位额外资源记录数</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>整个DNS包头12个字节。  </p>
+
+<h4 id="section">16位标志详解</h4>
+
+<p><img src="http://images.cnblogs.com/cnblogs_com/topdog/201111/201111152147003785.jpg" alt="DNSrequest2" /></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>1位QR</td>
+      <td>4位opcode</td>
+      <td>1位AA</td>
+      <td>1位TC</td>
+      <td>1位RD</td>
+      <td>1位RA</td>
+      <td>3位清0</td>
+      <td>4位RCode</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>QR：0表示查询报文，1表示响应报文<br />
+Opcode：通常值为0(标准查询)，其他值为1(反向查询)和2(服务器状态请求)。<br />
+AA：表示授权回答(authoritative answer).<br />
+TC：表示可截断的(truncated)<br />
+RD：表示期望递归<br />
+RA：表示可用递归，随后3bit必须为0<br />
+RCode：返回码，通常为0(没有差错)和3(名字差错)  </p>
+
+<h4 id="section-1">查询问题结构</h4>
+
+<p><img src="http://www.iprotocolsec.com/wp-content/uploads/2012/01/question_format.jpg" alt="" /></p>
+
+<p>QNAME结构：<strong>域名字符串按照<code>.</code>分割，按照字符长度+字符依次排列，00结尾</strong>。</p>
+
+<p>比如www.google.com.hk，转为QNAME的16进制格式：</p>
+
+<p><strong>03</strong> 77 77 77 <strong>06</strong> 67 6f 6f 67 6c 65 <strong>03</strong> 63 6f 6d <strong>02</strong> 68 6b 00</p>
+
+<p>解读：03个字符（www），06个字符（google），03个字符（com），02个字符（cn），结尾是00</p>
+
+<p>QType：长度16位，表示查询类型。取值大概如下：<br />
+QClass:长度为16位，表示分类。</p>
+
+<h4 id="dns-1">典型的一个DNS查询包</h4>
+
+<p><code>
+(前面是以太网包头+IP包头+UDP包头)    6d 54 01 00 00 01
+00 00 00 00 00 00 03 77    77 77 06 67 6f 6f 67 6c 
+65 03 63 6f 6d 02 68 6b    00 00 01 00 01
+</code></p>
+
+<p><code>6d 54</code>是标识，每次查询变化，DNS回应本次查询会用相同的标识<br />
+<code>01 00</code>是标志，表示RD期望递归为1<br />
+<code>00 01</code>是问题数，一个问题查询；其他三个查询记录数都是0<br />
+接下来是QName<br />
+倒数第二个<code>00 01</code>是QType，值是1<br />
+最后一个<code>00 01</code>是QClass，值是是1  </p>
+
+<p><code>
+enum QueryType //查询的资源记录类型。 
+{ 
+A=0x01, //指定计算机 IP 地址。 
+NS=0x02, //指定用于命名区域的 DNS 名称服务器。 
+MD=0x03, //指定邮件接收站（此类型已经过时了，使用MX代替） 
+MF=0x04, //指定邮件中转站（此类型已经过时了，使用MX代替） 
+CNAME=0x05, //指定用于别名的规范名称。 
+SOA=0x06, //指定用于 DNS 区域的“起始授权机构”。 
+MB=0x07, //指定邮箱域名。 
+MG=0x08, //指定邮件组成员。 
+MR=0x09, //指定邮件重命名域名。 
+NULL=0x0A, //指定空的资源记录 
+WKS=0x0B, //描述已知服务。 
+PTR=0x0C, //如果查询是 IP 地址，则指定计算机名；否则指定指向其它信息的指针。 
+HINFO=0x0D, //指定计算机 CPU 以及操作系统类型。 
+MINFO=0x0E, //指定邮箱或邮件列表信息。 
+MX=0x0F, //指定邮件交换器。 
+TXT=0x10, //指定文本信息。 
+UINFO=0x64, //指定用户信息。 
+UID=0x65, //指定用户标识符。 
+GID=0x66, //指定组名的组标识符。 
+ANY=0xFF //指定所有数据类型。 
+};
+</code></p>
+
+<p><code>
+enum QueryClass //指定信息的协议组。 
+{ 
+IN=0x01, //指定 Internet 类别。 
+CSNET=0x02, //指定 CSNET 类别。（已过时） 
+CHAOS=0x03, //指定 Chaos 类别。 
+HESIOD=0x04,//指定 MIT Athena Hesiod 类别。 
+ANY=0xFF //指定任何以前列出的通配符。 
+};
+</code></p>
+
+<h3 id="section-2">学习资料</h3>
+
+<p><a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a></p>
+
+<p><a href="http://www.zytrax.com/books/dns/ch15/">Chapter 15 DNS Messages</a></p>
+
+<p><a href="http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/">使用Wireshark学习DNS协议及DNS欺骗原理</a></p>
+
+<p><a href="http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html">DIY一个DNS查询器：了解DNS协议</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TCP/IP之IP包头部]]></title>
@@ -241,30 +380,6 @@
 --suffix=none
 </code></p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[UINT32引起的死循环]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32/"/>
-    <updated>2016-07-09T10:02:35+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/09/dead-loop-UINT32</id>
-    <content type="html"><![CDATA[<p>UINT32 引起的死循环</p>
-
-<!--more-->
-
-<p>上周出差定位一个死循环。一个函数进行一个信号量的初始化，每次进行一次业务都要调用这个函数初始化，这个函数作用是保障初始化后信号量初始化值为<code>SEM_INIT_NUM</code>，但因为<code>UINT32</code>的关系出现死循环了。代码如下：</p>
-
-<script src="https://gist.github.com/xixitalk/5c176a78a8743465061ef15ab5f9a248.js"></script>
-
-<p>出现问题的时候，<code>semCount</code>为4，而宏<code>SEM_INIT_NUM</code>为3，造成<code>Count = SEM_INIT_NUM - semCount</code>为<code>-1</code>了，但因为<code>Count</code>是<code>UINT32</code>，从而变成<code>0xFFFFFFFF</code>，一个极大值，造成for循环执行长时间不退出。修改方法是将<code>Count</code>的<code>UINT32</code>改成<code>SINT32</code>。这是一个非常低级的代码错误。</p>
-
-<p>其实更简单的是删除信号量，重新创建信号量，这样代码会容易读的多。</p>
-
-<p><code>
-DeleteSemaphore(ptxSem);
-ptxSem = CreateSemaphore(SEM_INIT_NUM);
-</code></p>
 ]]></content>
   </entry>
   
