@@ -4,7 +4,7 @@
   <title><![CDATA[Category: network | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/network/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-10T07:36:21+00:00</updated>
+  <updated>2016-10-10T08:01:49+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<table border="1">
+<table>
   <thead>
     <tr>
       <th>6字节</th>
@@ -49,7 +49,7 @@
 
 <p>更多常见类型：  </p>
 
-<table border="1">
+<table>
   <thead>
     <tr>
       <th>类型值</th>
