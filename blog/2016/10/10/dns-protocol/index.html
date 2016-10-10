@@ -9,7 +9,21 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="DNS协议学习笔记之DNS查询 DNS查询报文 16位标识 16位标志 16位问题数 16资源记录数 16位授权资源记录数 16位额外资源记录数 整个DNS包头12个字节。 16位标志详解 1位QR 4位opcode 1位AA 1位TC 1位RD 1位RA 3位清0 4位RCode QR： &hellip;">
+  <meta name="description" content="DNS协议学习笔记之DNS查询 DNS主要分查询报文和答复报文。 1 DNS查询报文 1.1 整体结构 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
++---------------------+
+| Header |
++---------------------+
+| Question | &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,11 +125,43 @@
 
 <div class="entry-content"><!--more-->
 
-<h2 id="dnsdns">DNS协议学习笔记之DNS查询</h2>
+<h1 id="dnsdns">DNS协议学习笔记之DNS查询</h1>
 
-<h3 id="dns">DNS查询报文</h3>
+<p>DNS主要分查询报文和答复报文。</p>
+
+<h2 id="dns">1 DNS查询报文</h2>
+
+<h3 id="section">1.1 整体结构</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">+---------------------+
+</span><span class="line">|        Header       |
+</span><span class="line">+---------------------+
+</span><span class="line">|       Question      | the question for the name server
+</span><span class="line">+---------------------+
+</span><span class="line">|        Answer       | RRs answering the question
+</span><span class="line">+---------------------+
+</span><span class="line">|      Authority      | RRs pointing toward an authority
+</span><span class="line">+---------------------+
+</span><span class="line">|      Additional     | RRs holding additional information
+</span><span class="line">+---------------------+
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p><img src="http://s6.51cto.com/wyfs02/M02/4D/A8/wKiom1RW2KaCvqHrAABEwMOH0AE633.jpg" alt="DNSrequest" /></p>
+
+<h3 id="section-1">1.2 报文头</h3>
+
+<p><img src="http://xixitalkgithubio.qiniudn.com/dnsheader.jpg" alt="DNSrequest2" /></p>
 
 <table border="1">
   <tbody>
@@ -136,9 +182,7 @@
 
 <p>整个DNS包头12个字节。  </p>
 
-<h4 id="section">16位标志详解</h4>
-
-<p><img src="http://images.cnblogs.com/cnblogs_com/topdog/201111/201111152147003785.jpg" alt="DNSrequest2" /></p>
+<p><strong>16位标志详解</strong></p>
 
 <table border="1">
   <tbody>
@@ -163,9 +207,33 @@ RD：表示期望递归<br />
 RA：表示可用递归，随后3bit必须为0<br />
 RCode：返回码，通常为0(没有差错)和3(名字差错)  </p>
 
-<h4 id="section-1">查询问题结构</h4>
+<h3 id="question">1.3 查询问题(Question)结构</h3>
 
-<p><img src="http://www.iprotocolsec.com/wp-content/uploads/2012/01/question_format.jpg" alt="" /></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">
+</span><span class="line">                                    1  1  1  1  1  1
+</span><span class="line">      0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
+</span><span class="line">    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+</span><span class="line">    |                                               |
+</span><span class="line">    /                     QNAME                     /
+</span><span class="line">    /                                               /
+</span><span class="line">    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+</span><span class="line">    |                     QTYPE                     |
+</span><span class="line">    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+</span><span class="line">    |                     QCLASS                    |
+</span><span class="line">    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>QNAME结构：<strong>域名字符串按照<code>.</code>分割，按照字符长度+字符依次排列，00结尾</strong>。</p>
 
@@ -173,12 +241,14 @@ RCode：返回码，通常为0(没有差错)和3(名字差错)  </p>
 
 <p><strong>03</strong> 77 77 77 <strong>06</strong> 67 6f 6f 67 6c 65 <strong>03</strong> 63 6f 6d <strong>02</strong> 68 6b 00</p>
 
-<p>解读：03个字符（www），06个字符（google），03个字符（com），02个字符（cn），结尾是00</p>
+<p>解读：03个字符（www），06个字符（google），03个字符（com），02个字符（hk），结尾是00</p>
 
-<p>QType：长度16位，表示查询类型。取值大概如下：<br />
-QClass:长度为16位，表示分类。</p>
+<p>QType：长度16位，表示查询类型<br />
+QClass:长度为16位，表示分类</p>
 
-<h4 id="dns-1">典型的一个DNS查询包</h4>
+<h2 id="dns-1">一个典型的DNS查询包</h2>
+
+<p>下面是<code>wireshark</code>抓取的一个DNS查询包：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -263,13 +333,20 @@ QClass:长度为16位，表示分类。</p>
 
 <h3 id="section-2">学习资料</h3>
 
-<p><a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a></p>
-
-<p><a href="http://www.zytrax.com/books/dns/ch15/">Chapter 15 DNS Messages</a></p>
-
-<p><a href="http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/">使用Wireshark学习DNS协议及DNS欺骗原理</a></p>
-
-<p><a href="http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html">DIY一个DNS查询器：了解DNS协议</a></p>
+<ol>
+  <li>
+    <p><a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.zytrax.com/books/dns/ch15/">Chapter 15 DNS Messages</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/">使用Wireshark学习DNS协议及DNS欺骗原理</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html">DIY一个DNS查询器：了解DNS协议</a></p>
+  </li>
+</ol>
 
 </div>
 

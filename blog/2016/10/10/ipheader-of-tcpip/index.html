@@ -166,7 +166,7 @@
 
 <p>4位版本：4表示IPv4<br />
 4位首部长度：一般是5，标识首部20bytes<br />
-<strong>注释： <code>45</code>是典型的IP包特征</strong><br />
+<strong>注释： <code>08 00 45 00</code>是典型的IP包特征</strong>,08 00是以太网帧头中IP包类型标识<br />
 8位服务类型：<br />
 16位总长度：整个IP包长度（如果数据是UDP包，包含了UDP包的长度）<br />
 8位协议：<strong>0x11是UDP，0x06是TCP</strong><br />
