@@ -4,7 +4,7 @@
   <title><![CDATA[Category: network | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/network/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-10T09:09:30+00:00</updated>
+  <updated>2016-10-10T09:27:45+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://s5.sinaimg.cn/middle/65db998448e3b5536ca04&amp;690" alt="iphead" /></p>
+<p><img src="http://www.informit.com/content/images/chap3_0672323516/elementLinks/03table02.gif" alt="iphead" /></p>
 
 <table border="1">
   <tbody>
@@ -78,6 +78,9 @@
 16位总长度：整个IP包长度（如果数据是UDP包，包含了UDP包的长度）<br />
 8位协议：<strong>0x11是UDP，0x06是TCP</strong><br />
 8位TTL：0x80（128）</p>
+
+<p>READ MORE<br />
+<a href="http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3">http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3</a></p>
 
 ]]></content>
   </entry>
