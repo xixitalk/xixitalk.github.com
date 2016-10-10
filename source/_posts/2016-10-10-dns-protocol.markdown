@@ -10,12 +10,33 @@ styles: [data-table]
 
 <!--more-->
 
-## DNS协议学习笔记之DNS查询
+# DNS协议学习笔记之DNS查询
 
-### DNS查询报文
+DNS主要分查询报文和答复报文。
 
+## 1 DNS查询报文
+
+### 1.1 整体结构
+
+```
+    +---------------------+
+    |        Header       |
+    +---------------------+
+    |       Question      | the question for the name server
+    +---------------------+
+    |        Answer       | RRs answering the question
+    +---------------------+
+    |      Authority      | RRs pointing toward an authority
+    +---------------------+
+    |      Additional     | RRs holding additional information
+    +---------------------+
+```
+  
 ![DNSrequest](http://s6.51cto.com/wyfs02/M02/4D/A8/wKiom1RW2KaCvqHrAABEwMOH0AE633.jpg)
 
+### 1.2 报文头
+
+![DNSrequest2](http://xixitalkgithubio.qiniudn.com/dnsheader.jpg)
 
 |16位标识|16位标志|
 |16位问题数|16资源记录数|
@@ -24,9 +45,7 @@ styles: [data-table]
 
 整个DNS包头12个字节。  
 
-####  16位标志详解
-
-![DNSrequest2](http://images.cnblogs.com/cnblogs_com/topdog/201111/201111152147003785.jpg)
+**16位标志详解**
 
 |1位QR | 4位opcode| 1位AA| 1位TC| 1位RD| 1位RA| 3位清0 |4位RCode|
 {: border="1"}
@@ -39,9 +58,22 @@ RD：表示期望递归
 RA：表示可用递归，随后3bit必须为0  
 RCode：返回码，通常为0(没有差错)和3(名字差错)  
 
-#### 查询问题结构
+### 1.3 查询问题(Question)结构
 
-![](http://www.iprotocolsec.com/wp-content/uploads/2012/01/question_format.jpg)
+```
+
+                                    1  1  1  1  1  1
+      0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                                               |
+    /                     QNAME                     /
+    /                                               /
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                     QTYPE                     |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+    |                     QCLASS                    |
+    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+```
 
 QNAME结构：**域名字符串按照`.`分割，按照字符长度+字符依次排列，00结尾**。
 
@@ -49,12 +81,14 @@ QNAME结构：**域名字符串按照`.`分割，按照字符长度+字符依次
 
 **03** 77 77 77 **06** 67 6f 6f 67 6c 65 **03** 63 6f 6d **02** 68 6b 00
 
-解读：03个字符（www），06个字符（google），03个字符（com），02个字符（cn），结尾是00
+解读：03个字符（www），06个字符（google），03个字符（com），02个字符（hk），结尾是00
 
-QType：长度16位，表示查询类型。取值大概如下：  
-QClass:长度为16位，表示分类。
+QType：长度16位，表示查询类型  
+QClass:长度为16位，表示分类
 
-####  典型的一个DNS查询包
+##  一个典型的DNS查询包
+
+下面是`wireshark`抓取的一个DNS查询包：
 
 ```
 (前面是以太网包头+IP包头+UDP包头)    6d 54 01 00 00 01
@@ -109,12 +143,12 @@ ANY=0xFF //指定任何以前列出的通配符。
 
 ### 学习资料
 
-[rfc1035](https://www.ietf.org/rfc/rfc1035.txt)
+1.  [rfc1035](https://www.ietf.org/rfc/rfc1035.txt)
 
-[Chapter 15 DNS Messages](http://www.zytrax.com/books/dns/ch15/)
+1.  [Chapter 15 DNS Messages](http://www.zytrax.com/books/dns/ch15/)
 
-[使用Wireshark学习DNS协议及DNS欺骗原理](http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/)
+1.  [使用Wireshark学习DNS协议及DNS欺骗原理](http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/)
 
-[DIY一个DNS查询器：了解DNS协议](http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html)
+1.  [DIY一个DNS查询器：了解DNS协议](http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html)
 
 
