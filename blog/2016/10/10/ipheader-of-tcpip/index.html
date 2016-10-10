@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="TCP/IP之IP包头部 4位版本 4位首部长度 8位服务类型 16位总长度 16位标识 3位标志 13位片偏移   8位生存时间（TTL） 8位协议 16位首部校验和   32位源IP地址       32位目的IP地址       可选字段       不定长度数据       4位版本： &hellip;">
+  <meta name="description" content="TCP/IP之IP包头部 IP包头 4位版本 4位首部长度 8位服务类型 16位总长度 16位标识 3位标志 13位片偏移   8位生存时间（TTL） 8位协议 16位首部校验和   32位源IP地址       32位目的IP地址       可选字段       不定长度数据       &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -115,6 +115,8 @@
 
 <p><img src="http://www.informit.com/content/images/chap3_0672323516/elementLinks/03table02.gif" alt="iphead" /></p>
 
+<h3 id="ip">IP包头</h3>
+
 <table border="1">
   <tbody>
     <tr>
@@ -169,6 +171,24 @@
 16位总长度：整个IP包长度（如果数据是UDP包，包含了UDP包的长度）<br />
 8位协议：<strong>0x11是UDP，0x06是TCP</strong><br />
 8位TTL：0x80（128）</p>
+
+<h3 id="udp">UDP包头</h3>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>16位源端口</td>
+      <td>16位目的端口</td>
+    </tr>
+    <tr>
+      <td>16位长度</td>
+      <td>16位校验和</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>整个UDP包头8个字节。<br />
+16位长度：包括UDP头和数据包（比如上层DNS协议）</p>
 
 <p>READ MORE<br />
 <a href="http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3">http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3</a></p>
