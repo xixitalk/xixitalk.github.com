@@ -4,7 +4,7 @@
   <title><![CDATA[Category: network | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/network/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-09-30T22:17:13+00:00</updated>
+  <updated>2016-10-10T01:38:26+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DNS在HTTP网络交互流程中的位置]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/09/http-connection/"/>
+    <updated>2016-10-09T08:55:37+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/09/http-connection</id>
+    <content type="html"><![CDATA[<p>DNS在HTTP网络交互流程中的位置</p>
+
+<!--more-->
+
+<p>一个简单的HTTP请求流程（C语言版）</p>
+
+<ol>
+  <li>建立socket(socket())</li>
+  <li>由域名查询到IP(getaddrinfo()或者gethostbyname())</li>
+  <li>建立连接(connect())</li>
+  <li>按照HTTP协议要求发送数据(send())</li>
+  <li>监听socket等待接收数据(select())</li>
+  <li>监听到数据后接收数据(recv())</li>
+  <li>按照HTTP协议解析数据，再发生数据或者结束</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[算法：判断是否是中国IP？]]></title>
