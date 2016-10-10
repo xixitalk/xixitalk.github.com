@@ -13,7 +13,7 @@ TCP/IP之IP包头部
 <!--more-->
 
 
-![iphead](http://s5.sinaimg.cn/middle/65db998448e3b5536ca04&690)
+![iphead](http://www.informit.com/content/images/chap3_0672323516/elementLinks/03table02.gif)
 
 
 |4位版本|4位首部长度|8位服务类型|16位总长度|
@@ -34,5 +34,8 @@ TCP/IP之IP包头部
 8位协议：**0x11是UDP，0x06是TCP**  
 8位TTL：0x80（128）
 
+
+READ MORE  
+<http://www.informit.com/articles/article.aspx?p=28782&seqNum=3>
 
 
