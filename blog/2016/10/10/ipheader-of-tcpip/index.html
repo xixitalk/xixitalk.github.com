@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: base64 - xixitalk's snippet</title>
+  <title>TCP/IP之IP包头部 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="Category: base64">
+  <meta name="description" content="TCP/IP之IP包头部 4位版本 4位首部长度 8位服务类型 16位总长度 16位标识 3位标志 13位片偏移   8位生存时间（TTL） 8位协议 16位首部校验和   32位源IP地址       32位目的IP地址       可选字段       不定长度数据       4位版本： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,9 +18,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.ioblog/categories/base64">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
@@ -78,36 +80,152 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: base64</h1>
+    
+      <h1 class="entry-title">TCP/IP之IP包头部</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-10T17:03:51+00:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>TCP/IP之IP包头部</p>
 
-  
-  <h2>2013</h2>
+<!--more-->
 
-<article>
-  
-<h1><a href="/blog/2013/07/02/base64-encode/">用base64进行关键词编码</a></h1>
-<time datetime="2013-07-02T22:01:04+00:00" pubdate><span class='month'>Jul</span> <span class='day'>02</span> <span class='year'>2013</span></time>
+<p><img src="http://s5.sinaimg.cn/middle/65db998448e3b5536ca04&amp;690" alt="iphead" /></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/base64/'>base64</a></span>
-</footer>
+<table border="1">
+  <tbody>
+    <tr>
+      <td>4位版本</td>
+      <td>4位首部长度</td>
+      <td>8位服务类型</td>
+      <td>16位总长度</td>
+    </tr>
+    <tr>
+      <td>16位标识</td>
+      <td>3位标志</td>
+      <td>13位片偏移</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8位生存时间（TTL）</td>
+      <td>8位协议</td>
+      <td>16位首部校验和</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>32位源IP地址</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>32位目的IP地址</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>可选字段</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>不定长度数据</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
-
-</article>
+<p>4位版本：4表示IPv4<br />
+4位首部长度：一般是5，标识首部20bytes<br />
+<strong>注释： <code>45</code>是典型的IP包特征</strong><br />
+8位服务类型：<br />
+16位总长度：整个IP包长度（如果数据是UDP包，包含了UDP包的长度）<br />
+8位协议：<strong>0x11是UDP，0x06是TCP</strong><br />
+8位TTL：0x80（128）</p>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-10T17:03:51+00:00" pubdate data-updated="true">Oct 10<span>th</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/network/'>network</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:TCP/IP之IP包头部 http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -136,7 +254,10 @@
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

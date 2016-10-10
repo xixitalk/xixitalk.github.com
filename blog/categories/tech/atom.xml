@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-10T08:56:56+00:00</updated>
+  <updated>2016-10-10T09:09:30+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TCP/IP之IP包头部]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip/"/>
+    <updated>2016-10-10T17:03:51+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip</id>
+    <content type="html"><![CDATA[<p>TCP/IP之IP包头部</p>
+
+<!--more-->
+
+<p><img src="http://s5.sinaimg.cn/middle/65db998448e3b5536ca04&amp;690" alt="iphead" /></p>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>4位版本</td>
+      <td>4位首部长度</td>
+      <td>8位服务类型</td>
+      <td>16位总长度</td>
+    </tr>
+    <tr>
+      <td>16位标识</td>
+      <td>3位标志</td>
+      <td>13位片偏移</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8位生存时间（TTL）</td>
+      <td>8位协议</td>
+      <td>16位首部校验和</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>32位源IP地址</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>32位目的IP地址</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>可选字段</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>不定长度数据</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>4位版本：4表示IPv4<br />
+4位首部长度：一般是5，标识首部20bytes<br />
+<strong>注释： <code>45</code>是典型的IP包特征</strong><br />
+8位服务类型：<br />
+16位总长度：整个IP包长度（如果数据是UDP包，包含了UDP包的长度）<br />
+8位协议：<strong>0x11是UDP，0x06是TCP</strong><br />
+8位TTL：0x80（128）</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TCP/IP之以太网帧]]></title>
@@ -173,46 +242,6 @@
 DeleteSemaphore(ptxSem);
 ptxSem = CreateSemaphore(SEM_INIT_NUM);
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[免费申请S/MIME证书]]></title>
-    <link href="http://xixitalk.github.io/blog/2014/06/21/Free-SMIME-Certificate-Key/"/>
-    <updated>2014-06-21T00:05:11+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2014/06/21/Free-SMIME-Certificate-Key</id>
-    <content type="html"><![CDATA[<h2 id="section">申请证书</h2>
-<p>从这里可以申请到免费的S/MIME 邮件证书：<a href="http://www.instantssl.com/ssl-certificate-products/free-email-certificate.html">http://www.instantssl.com/ssl-certificate-products/free-email-certificate.html</a>，
-提交生成之后会把证书发送到邮箱里。</p>
-
-<h2 id="section-1">证书安装</h2>
-<p>在邮箱里点击连接就会把证书安装到电脑系统中（包括windows和Mac OSX)。<br />
-证书认证关系如下：  </p>
-
-<ul>
-  <li>第一级根证书USERTrust(UTN-USERFirst-Client Authentication and Email)，系统中默认都带了；</li>
-  <li>第二级中级证书是COMODO Client Authentication and Secure Email CA;</li>
-  <li>第三级才是刚刚申请的个人证书。<br />
-如果在证书管理器查看刚刚申请的个人证书显示不正常的话，说明系统中缺少第二级中级证书，从这里下载安装<a href="http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt">http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt</a>。</li>
-</ul>
-
-<h2 id="ios">证书安装到iOS系统</h2>
-<p>在电脑系统里打开证书管理器（windows系统是运行certmgr.msc），把证书（包含私钥）导出，windows是pfx格式，Mac OSX是p12格式，导出的证书要设置私钥保护密码，iOS的证书安装需要输入这个密码。把这个pfx或者p12格式的证书发邮件到iOS上，点击打开即提示安装，输入之前的保护密码就安装到iOS系统中了。<br />
-同样，iOS系统中缺少第二级中级证书，从这里下载安装<a href="http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt">http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt</a>。</p>
-
-<!--more-->
-
-<h2 id="ios-1">iOS里启用加密和签名</h2>
-<p>在iOS-邮件、通讯录、日历-邮件帐户-高级 启用S/MIME，选择上面安装的证书。iOS自带的mail程序发邮件即可自动进行加密和签名。</p>
-
-<h2 id="section-2">群发公钥证书</h2>
-<p>在电脑证书管理里导出证书（不包含私钥），windows是cer文件，把这个文件群发出来告诉朋友。别人给你发邮件就用这个证书进行加密。</p>
-
-<h2 id="smime">我的S/MIME证书</h2>
-<p>我的S/MIME证书<a href="http://xixitalk.github.io/static/pub.cer">http://xixitalk.github.io/static/pub.cer</a>,欢迎用S/MIME给我发邮件。你的系统也可能需要安装第二级COMODO的证书，从这里下载安装<a href="http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt">http://crt.comodoca.com/COMODOClientAuthenticationandSecureEmailCA.crt</a>。</p>
-
-<h2 id="section-3">其他参考</h2>
-<p>Mac OSX导出证书到iOS参考<a href="http://feinstruktur.com/blog/2011/12/12/using-smime-on-ios-devices.html">http://feinstruktur.com/blog/2011/12/12/using-smime-on-ios-devices.html</a></p>
 ]]></content>
   </entry>
   
