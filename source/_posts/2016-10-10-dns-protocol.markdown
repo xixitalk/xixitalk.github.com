@@ -8,13 +8,26 @@ categories: tech network
 styles: [data-table]
 ---
 
-DNS主要分查询报文和响应报文。
+DNS学习概要：  
+
+1.  DNS几个概念：A记录、AAAA记录、MX记录、CNAME记录、TEXT记录、URL转发、NS记录
+1.  DNS查询报文
+1.  DNS响应报文
+1.  Google DNS over HTTPS
 
 <!--more-->
 
-## 1 DNS查询报文
+##  1.  DNS几个概念
 
-### 1.1 整体结构
+DNS几个概念，参看这两篇文章：
+
+[常用域名记录解释：A记录、MX记录、CNAME记录、TXT记录、AAAA记录、NS记录](https://www.ezloo.com/2011/04/a_mx_cname_txt_aaaa_ns.html)
+
+[域名DNS解析相关概念 — A记录，MX记录，CNAME记录，url转发，ns记录](http://ju.outofmemory.cn/entry/187521)
+
+## 2. DNS查询报文
+
+### 2.1 整体结构
 
 ```
     +---------------------+
@@ -32,7 +45,7 @@ DNS主要分查询报文和响应报文。
   
 ![DNSrequest](http://s6.51cto.com/wyfs02/M02/4D/A8/wKiom1RW2KaCvqHrAABEwMOH0AE633.jpg)
 
-### 1.2 报文头
+### 2.2 报文头
 
 ![DNSrequest2](http://xixitalkgithubio.qiniudn.com/dnsheader.jpg)
 
@@ -56,7 +69,7 @@ RD：表示期望递归
 RA：表示可用递归，随后3bit必须为0  
 RCode：返回码，通常为0(没有差错)和3(出错，该域名不存在)  
 
-### 1.3 查询问题(Question)结构
+### 2.3 查询问题(Question)结构
 
 ```
 
@@ -84,7 +97,7 @@ QNAME结构：**域名字符串按照`.`分割，按照字符长度+字符依次
 QType：长度16位，表示查询类型  
 QClass:长度为16位，表示分类
 
-##  一个典型的DNS查询包
+##  2.4  一个典型的DNS查询包
 
 下面是`wireshark`抓取的一个DNS查询包：
 
@@ -100,7 +113,6 @@ QClass:长度为16位，表示分类
 接下来是QName，结构如上文说明  
 倒数第二个`00 01`是QType，值是1  
 最后一个`00 01`是QClass，值是是1  
-
 
 ```
 enum QueryType //查询的资源记录类型。 
@@ -148,5 +160,9 @@ ANY=0xFF //指定任何以前列出的通配符。
 1.  [使用Wireshark学习DNS协议及DNS欺骗原理](http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/)
 
 1.  [DIY一个DNS查询器：了解DNS协议](http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html)
+
+1.  [常用域名记录解释：A记录、MX记录、CNAME记录、TXT记录、AAAA记录、NS记录](https://www.ezloo.com/2011/04/a_mx_cname_txt_aaaa_ns.html)
+
+1.  [域名DNS解析相关概念 — A记录，MX记录，CNAME记录，url转发，ns记录](http://ju.outofmemory.cn/entry/187521)
 
 
