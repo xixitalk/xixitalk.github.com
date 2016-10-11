@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="DNS协议学习笔记之DNS查询 DNS主要分查询报文和答复报文。 1 DNS查询报文 1.1 整体结构 1
+  <meta name="description" content="DNS主要分查询报文和响应报文。 1 DNS查询报文 1.1 整体结构 1
 2
 3
 4
@@ -23,7 +23,7 @@
 +---------------------+
 | Header |
 +---------------------+
-| Question | &hellip;">
+| Question | the question for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -123,11 +123,9 @@
   </header>
 
 
-<div class="entry-content"><!--more-->
+<div class="entry-content"><p>DNS主要分查询报文和响应报文。</p>
 
-<h1 id="dnsdns">DNS协议学习笔记之DNS查询</h1>
-
-<p>DNS主要分查询报文和答复报文。</p>
+<!--more-->
 
 <h2 id="dns">1 DNS查询报文</h2>
 
@@ -188,7 +186,7 @@
   <tbody>
     <tr>
       <td>1位QR</td>
-      <td>4位opcode</td>
+      <td>4位Opcode</td>
       <td>1位AA</td>
       <td>1位TC</td>
       <td>1位RD</td>
@@ -205,7 +203,7 @@ AA：表示授权回答(authoritative answer).<br />
 TC：表示可截断的(truncated)<br />
 RD：表示期望递归<br />
 RA：表示可用递归，随后3bit必须为0<br />
-RCode：返回码，通常为0(没有差错)和3(名字差错)  </p>
+RCode：返回码，通常为0(没有差错)和3(出错，该域名不存在)  </p>
 
 <h3 id="question">1.3 查询问题(Question)结构</h3>
 
@@ -237,7 +235,7 @@ RCode：返回码，通常为0(没有差错)和3(名字差错)  </p>
 
 <p>QNAME结构：<strong>域名字符串按照<code>.</code>分割，按照字符长度+字符依次排列，00结尾</strong>。</p>
 
-<p>比如www.google.com.hk，转为QNAME的16进制格式：</p>
+<p>比如www.google.com.hk，在抓包里QNAME的视图如下：</p>
 
 <p><strong>03</strong> 77 77 77 <strong>06</strong> 67 6f 6f 67 6c 65 <strong>03</strong> 63 6f 6d <strong>02</strong> 68 6b 00</p>
 
@@ -253,7 +251,7 @@ QClass:长度为16位，表示分类</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">(前面是以太网包头+IP包头+UDP包头)    6d 54 01 00 00 01
+</pre></td><td class="code"><pre><code class=""><span class="line">(前面是以太网包头+IP包头+UDP包头)6d 54 01 00 00 01
 </span><span class="line">00 00 00 00 00 00 03 77    77 77 06 67 6f 6f 67 6c 
 </span><span class="line">65 03 63 6f 6d 02 68 6b    00 00 01 00 01
 </span></code></pre></td></tr></table></div></figure></notextile></div>
@@ -261,7 +259,7 @@ QClass:长度为16位，表示分类</p>
 <p><code>6d 54</code>是标识，每次查询变化，DNS回应本次查询会用相同的标识<br />
 <code>01 00</code>是标志，表示RD期望递归为1<br />
 <code>00 01</code>是问题数，一个问题查询；其他三个查询记录数都是0<br />
-接下来是QName<br />
+接下来是QName，结构如上文说明<br />
 倒数第二个<code>00 01</code>是QType，值是1<br />
 最后一个<code>00 01</code>是QClass，值是是1  </p>
 
