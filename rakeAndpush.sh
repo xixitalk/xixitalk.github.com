@@ -1,5 +1,7 @@
 #! /bin/sh
 
+export TZ='GMT'
+
 write_log()
 {
     now_time='['$(date +"%Y-%m-%d %H:%M:%S")']'
