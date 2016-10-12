@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-11T01:50:59+00:00</updated>
+  <updated>2016-10-12T03:47:10+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress里用表格]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/12/table-in-octopress/"/>
+    <updated>2016-10-12T10:53:20+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/12/table-in-octopress</id>
+    <content type="html"><![CDATA[<p>octopress里怎么样用表格？octopress默认的表格border是0，看起来不整齐。这样修改可以显示border。</p>
+
+<!--more-->
+
+<h2 id="octopresscss">步骤一 覆盖octopress默认的CSS</h2>
+
+<p>表格要显示border，需要这样修改。</p>
+
+<p>参考他人博文：<a href="http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/">为Octopress追加数据表格的CSS</a></p>
+
+<h2 id="markdown">步骤二 博文markdown格式</h2>
+
+<p>博文报头增加<code>styles</code>选项：</p>
+
+<p><code>
+layout: post
+title: "octopress里用表格"
+date: 2016-10-12 10:53:20
+comments: true
+categories: octopress
+styles: data-table
+</code></p>
+
+<p>表格markdown这样写，我的octopress用的是<code>Kramdown</code>，其他markdown语法类似。</p>
+
+<p><code>
+|类型值|解释|
+|----|----|
+|0x0800 | 网际协议（IP）|
+</code></p>
+
+<p>显示效果如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型值</th>
+      <th>解释</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0x0800</td>
+      <td>网际协议（IP）</td>
+    </tr>
+  </tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[中国时区：CCT]]></title>
@@ -153,45 +209,6 @@ FlickRaw.proxy = "http://192.168.1.106:8118/"
   <li>Insert a Image From Flickr in Octopress <a href="http://blog.ychuang.org/blog/2012/11/14/insert-a-image-from-flickr-in-octopress/">http://blog.ychuang.org/blog/2012/11/14/insert-a-image-from-flickr-in-octopress/</a></li>
   <li>Fetch images from Flickr to show in Octopress/Jekyll <a href="http://blog.pixarea.com/2012/07/fetch-images-from-flickr-to-show-in-octopress-slash-jekyll">http://blog.pixarea.com/2012/07/fetch-images-from-flickr-to-show-in-octopress-slash-jekyll</a></li>
 </ol>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[用mathjax显示数学公式]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/06/08/mathjax-math-formula/"/>
-    <updated>2013-06-08T23:32:24+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/06/08/mathjax-math-formula</id>
-    <content type="html"><![CDATA[<p>具体可以参看这篇博客<a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/</a></p>
-
-<p>几点特殊说明如下：<br />
-1、 <code>rdiscount</code> 要换成 <code>kramdown</code>，原因<code>rdiscount</code>会将公式的特殊字符转换成HTML的关键词sup、sub等。<br />
-2、 MathJax放在<code>source\_includes\custom\head.html</code>更合适，可以精简为下面,原因是kramdown不认inline单个$  </p>
-
-<!--more-->
-
-<p>```
-<!-- mathjax config similar to math.stackexchange -->  </p>
-
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-
-<p>```</p>
-
-<p>3、 要按照博客的说明，解决公式右键点击白屏的问题<br />
-4、 用头尾双$进行函数书写，公式上下都空格是单独居中，公式在行内没有空格则是inline</p>
-
-<p>如，单独居中的欧拉公式</p>
-
-<p><code>
-$$  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 $$
-</code></p>
-
-<script type="math/tex; mode=display">  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 </script>
-
-<p>行内的欧拉公式<script type="math/tex">  \mathrm{e}^{- \mathrm{i} \pi} + 1 = 0 </script>显示</p>
-
-<p>一元二次方式求根公式</p>
-
-<script type="math/tex; mode=display"> x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b} </script>
 ]]></content>
   </entry>
   

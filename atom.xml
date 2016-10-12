@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-11T01:50:59+00:00</updated>
+  <updated>2016-10-12T03:47:10+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress里用表格]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/12/table-in-octopress/"/>
+    <updated>2016-10-12T10:53:20+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/12/table-in-octopress</id>
+    <content type="html"><![CDATA[<p>octopress里怎么样用表格？octopress默认的表格border是0，看起来不整齐。这样修改可以显示border。</p>
+
+<!--more-->
+
+<h2 id="octopresscss">步骤一 覆盖octopress默认的CSS</h2>
+
+<p>表格要显示border，需要这样修改。</p>
+
+<p>参考他人博文：<a href="http://programus.github.io/blog/2012/03/07/add-table-data-css-for-octopress/">为Octopress追加数据表格的CSS</a></p>
+
+<h2 id="markdown">步骤二 博文markdown格式</h2>
+
+<p>博文报头增加<code>styles</code>选项：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">layout: post
+</span><span class="line">title: "octopress里用表格"
+</span><span class="line">date: 2016-10-12 10:53:20
+</span><span class="line">comments: true
+</span><span class="line">categories: octopress
+</span><span class="line">styles: data-table
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>表格markdown这样写，我的octopress用的是<code>Kramdown</code>，其他markdown语法类似。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">|类型值|解释|
+</span><span class="line">|----|----|
+</span><span class="line">|0x0800 | 网际协议（IP）|
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>显示效果如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型值</th>
+      <th>解释</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0x0800</td>
+      <td>网际协议（IP）</td>
+    </tr>
+  </tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[DNS协议学习笔记之DNS查询]]></title>
@@ -1699,199 +1762,6 @@ changed (this has happened to me).</p>
 
 <p><a href="http://blog.csdn.net/bullbat/article/details/7181396">http://blog.csdn.net/bullbat/article/details/7181396</a></p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux kernel全局变量contig_page_data含义]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data/"/>
-    <updated>2016-07-13T09:03:20+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/13/kernel-contig_page_data</id>
-    <content type="html"><![CDATA[<p><code>contig_page_data</code>是内核内存管理一个很重要的变量。</p>
-
-<!--more-->
-
-<p>平台：uClinux 内核版本号：linux-3.4.12</p>
-
-<p><img src="http://7bv9id.com1.z0.glb.clouddn.com/contig_page_data.png" alt="enter image description here" /></p>
-
-<p><code>watermark</code>是3840 4800 5760对应 watermark[min] watermark[low] watermark[high]，这里是page数，一个page 4K，所以<code>watermark</code>对应<code>min_free_kbytes</code>是3840*4K是15360（15M），符合配置<code>echo 15360 &gt; /proc/sys/vm/min_free_kbytes</code>。其他计算如下。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"> watermark[min] = min_free_kbytes换算为page单位即可
-</span><span class="line"> watermark[low] = watermark[min] * 5 / 4
-</span><span class="line"> watermark[high] = watermark[min] * 3 / 2
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在系统空闲内存低于 watermark[low]时，开始启动内核线程kswapd进行内存回收，直到该zone的空闲内存数量达到watermark[high]后停止回收。如果上层申请内存的速度太快，导致空闲内存降至watermark[min]后，内核就会进行direct reclaim（直接回收），即直接在应用程序的进程上下文中进行回收，再用回收上来的空闲页满足内存申请，因此实际会阻塞应用程序，带来一定的响应延迟，而且可能会触发系统OOM。这是因为watermark[min]以下的内存属于系统的自留内存，用以满足特殊使用，所以不会给用户态的普通申请来用。</p>
-
-<p>free_area里order是0到10，对应4K到4M。free_list[n]是双向链表，只有next的next指向同样的节点才是表示链表为空。（双向链表，很明显如果只有两个节点，next和prev都是另一个节点）。和<code>cat /proc/pagetypeinfo</code>信息一致。</p>
-
-<p><code>contig_page_data</code>里的<code>vm_stat</code>对应mmzone.h里<code>zone_stat_item</code>枚举。另外本身有一个内核全局变量<code>vm_stat</code>，值和<code>contig_page_data</code>的这个<code>vm_stat</code>一样的。这个参数可以对照着<code>/proc/meminfo</code>一起看。</p>
-
-<p>page_alloc.c  show_free_areas()</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">for (type = 0; type &lt; MIGRATE_TYPES; type++) {
-</span><span class="line">				if (!list_empty(&amp;area-&gt;free_list[type]))
-</span><span class="line">					types[order] |= 1 &lt;&lt; type;
-</span><span class="line">			}
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>mmzone.h里看出MIGRATE_TYPES为4。<strong>0是UNMOVABLE区，1是RECLAIMABLE可回收区，2是可MOVABLE区，3是PCPTYPES或者RESERVE保留区</strong>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enum {
-</span><span class="line">	MIGRATE_UNMOVABLE,
-</span><span class="line">	MIGRATE_RECLAIMABLE,
-</span><span class="line">	MIGRATE_MOVABLE,
-</span><span class="line">	MIGRATE_PCPTYPES,	/* the number of types on the pcp lists */
-</span><span class="line">	MIGRATE_RESERVE = MIGRATE_PCPTYPES,
-</span><span class="line">#ifdef CONFIG_CMA
-</span><span class="line">	/*
-</span><span class="line">	 * MIGRATE_CMA migration type is designed to mimic the way
-</span><span class="line">	 * ZONE_MOVABLE works.  Only movable pages can be allocated
-</span><span class="line">	 * from MIGRATE_CMA pageblocks and page allocator never
-</span><span class="line">	 * implicitly change migration type of MIGRATE_CMA pageblock.
-</span><span class="line">	 *
-</span><span class="line">	 * The way to use it is to change migratetype of a range of
-</span><span class="line">	 * pageblocks to MIGRATE_CMA which can be done by
-</span><span class="line">	 * __free_pageblock_cma() function.  What is important though
-</span><span class="line">	 * is that a range of pageblocks must be aligned to
-</span><span class="line">	 * MAX_ORDER_NR_PAGES should biggest page be bigger then
-</span><span class="line">	 * a single pageblock.
-</span><span class="line">	 */
-</span><span class="line">	MIGRATE_CMA,
-</span><span class="line">#endif
-</span><span class="line">#ifdef CONFIG_MEMORY_ISOLATION
-</span><span class="line">	MIGRATE_ISOLATE,	/* can't allocate from here */
-</span><span class="line">#endif
-</span><span class="line">	MIGRATE_TYPES
-</span><span class="line">};
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enum zone_stat_item {
-</span><span class="line">	/* First 128 byte cacheline (assuming 64 bit words) */
-</span><span class="line">	NR_FREE_PAGES,
-</span><span class="line">	NR_ALLOC_BATCH,
-</span><span class="line">	NR_LRU_BASE,
-</span><span class="line">	NR_INACTIVE_ANON = NR_LRU_BASE, /* must match order of LRU_[IN]ACTIVE */
-</span><span class="line">	NR_ACTIVE_ANON,		/*  "     "     "   "       "         */
-</span><span class="line">	NR_INACTIVE_FILE,	/*  "     "     "   "       "         */
-</span><span class="line">	NR_ACTIVE_FILE,		/*  "     "     "   "       "         */
-</span><span class="line">	NR_UNEVICTABLE,		/*  "     "     "   "       "         */
-</span><span class="line">	NR_MLOCK,		/* mlock()ed pages found and moved off LRU */
-</span><span class="line">	NR_ANON_PAGES,	/* Mapped anonymous pages */
-</span><span class="line">	NR_FILE_MAPPED,	/* pagecache pages mapped into pagetables.
-</span><span class="line">			   only modified from process context */
-</span><span class="line">	NR_FILE_PAGES,
-</span><span class="line">	NR_FILE_DIRTY,
-</span><span class="line">	NR_WRITEBACK,
-</span><span class="line">	NR_SLAB_RECLAIMABLE,
-</span><span class="line">	NR_SLAB_UNRECLAIMABLE,
-</span><span class="line">	NR_PAGETABLE,		/* used for pagetables */
-</span><span class="line">	NR_KERNEL_STACK,
-</span><span class="line">	/* Second 128 byte cacheline */
-</span><span class="line">	NR_UNSTABLE_NFS,	/* NFS unstable pages */
-</span><span class="line">	NR_BOUNCE,
-</span><span class="line">	NR_VMSCAN_WRITE,
-</span><span class="line">	NR_VMSCAN_IMMEDIATE,	/* Prioritise for reclaim when writeback ends */
-</span><span class="line">	NR_WRITEBACK_TEMP,	/* Writeback using temporary buffers */
-</span><span class="line">	NR_ISOLATED_ANON,	/* Temporary isolated pages from anon lru */
-</span><span class="line">	NR_ISOLATED_FILE,	/* Temporary isolated pages from file lru */
-</span><span class="line">	NR_SHMEM,		/* shmem pages (included tmpfs/GEM pages) */
-</span><span class="line">	NR_DIRTIED,		/* page dirtyings since bootup */
-</span><span class="line">	NR_WRITTEN,		/* page writings since bootup */
-</span><span class="line">#ifdef CONFIG_NUMA
-</span><span class="line">	NUMA_HIT,		/* allocated in intended node */
-</span><span class="line">	NUMA_MISS,		/* allocated in non intended node */
-</span><span class="line">	NUMA_FOREIGN,		/* was intended here, hit elsewhere */
-</span><span class="line">	NUMA_INTERLEAVE_HIT,	/* interleaver preferred this zone */
-</span><span class="line">	NUMA_LOCAL,		/* allocation from local node */
-</span><span class="line">	NUMA_OTHER,		/* allocation from other node */
-</span><span class="line">#endif
-</span><span class="line">	NR_ANON_TRANSPARENT_HUGEPAGES,
-</span><span class="line">	NR_FREE_CMA_PAGES,
-</span><span class="line">	NR_VM_ZONE_STAT_ITEMS };
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="section">参考文章</h4>
-
-<p><a href="http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl">http://kernel.taobao.org/index.php?title=Kernel_Documents/mm_sysctl</a></p>
 ]]></content>
   </entry>
   
