@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-12T03:47:10+00:00</updated>
+  <updated>2016-10-13T12:42:34+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,143 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[stunnel双向证书验证]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/"/>
+    <updated>2016-10-13T20:09:49+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication</id>
+    <content type="html"><![CDATA[<p>stunnel 双向证书验证，防止有人偷偷连接stunnel服务器。</p>
+
+<!--more-->
+
+<h2 id="section">第一步 生成证书</h2>
+
+<p>生成两个证书，一个服务端的<code>stunnel_s.pem</code>，一个客户端的<code>stunnel_c.pem</code>，有效期设置长一点1000天。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$openssl req -new -x509 -days 10000 -nodes -out stunnel_c.pem -keyout stunnel_c.pem
+</span><span class="line">$openssl req -new -x509 -days 10000 -nodes -out stunnel_s.pem -keyout stunnel_s.pem
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="stunnelconf">第二步 服务器端stunnel.conf</h2>
+
+<p>将证书拷贝到/etc/stunnel目录，设置权限400.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$sudo cp stunnel_s.pem /etc/stunnel/
+</span><span class="line">$sudo cp stunnel_c.pem /etc/stunnel/
+</span><span class="line">$sudo chmod 400 /etc/stunnel/*.pem
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>创建<code>stunnel.conf</code>文件，内容如下，拷贝到<code>/etc/stunnel/</code>目录。对外端口是8445，加密的是<a href="https://github.com/cyfdecyf/cow">cow</a>的7777端口,根据情况自行修改。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">;fips=no
+</span><span class="line">client = no
+</span><span class="line">sslVersion=all
+</span><span class="line">
+</span><span class="line">chroot = /var/lib/stunnel4/
+</span><span class="line">setuid = root
+</span><span class="line">setgid = root
+</span><span class="line">
+</span><span class="line">pid = /stunnel4.open.pid
+</span><span class="line">;output = /stunnel.open.log
+</span><span class="line">cert = /etc/stunnel/stunnel_s.pem
+</span><span class="line">key = /etc/stunnel/stunnel_s.pem
+</span><span class="line">
+</span><span class="line">[open]
+</span><span class="line">accept = 8445
+</span><span class="line">connect = 7777
+</span><span class="line">
+</span><span class="line">verify=2
+</span><span class="line">CAfile = /etc/stunnel/stunnel_c.pem
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>服务器端重启</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$sudo service  stunnel4  restart
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="stunnelconf-1">第三步 客户端stunnel.conf</h2>
+
+<p>我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统自行验证。</p>
+
+<p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，自行修改。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">fips=no
+</span><span class="line">client = yes
+</span><span class="line">sslVersion = all
+</span><span class="line">socket = l:TCP_NODELAY=1
+</span><span class="line">socket = r:TCP_NODELAY=1
+</span><span class="line">socket = l:SO_LINGER=1:1
+</span><span class="line">socket = r:SO_LINGER=1:1
+</span><span class="line">
+</span><span class="line">[fastssl]
+</span><span class="line">accept = 127.0.0.1:8084
+</span><span class="line">connect = stunnel_ip:8445
+</span><span class="line">
+</span><span class="line">verify = 2
+</span><span class="line">CAfile = stunnel_s.pem
+</span><span class="line">
+</span><span class="line">cert = stunnel_c.pem
+</span><span class="line">key = stunnel_c.pem
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="stunnel">stunnel安全说明</h2>
+
+<p>发现stunnel当服务器配置<code>verify = 2</code>时，如果客户端配置<code>verify = 0</code>，客户端并不检查服务器端的证书，就算<code>CAfile</code>配置错误的服务器证书还是可以正常连接。而服务器检查客户端的证书。</p>
+
+<p>所以，stunnel的防盗连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 2</code>，服务器端检查客户端证书不在列表则断开连接。</p>
+
+<h2 id="section-1">参考博客</h2>
+
+<ol>
+  <li><a href="http://www.hawu.me/operation/886">squid + stunnel » 跨越长城，科学上网！</a></li>
+  <li><a href="http://briteming.blogspot.com/2013/03/stunnel.html">Using stunnel With Bilateral Authentication</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress里用表格]]></title>
@@ -1595,172 +1732,6 @@ changed (this has happened to me).</p>
 <p><a href="http://blog.csdn.net/trinea/article/details/5191165">http://blog.csdn.net/trinea/article/details/5191165</a></p>
 
 <p><a href="http://www.lxway.net/499814656.html">http://www.lxway.net/499814656.html</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux内核kmalloc和vmalloc的区别]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/18/kmalloc-vs-vmalloc/"/>
-    <updated>2016-07-18T08:41:56+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/18/kmalloc-vs-vmalloc</id>
-    <content type="html"><![CDATA[<p>kmalloc 和 vmalloc的区别</p>
-
-<!--more-->
-
-<h4 id="kmalloc">kmalloc</h4>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">void *kmalloc(size_t size, gfp_t flags)
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>kmalloc是内核中最常用的一种内存分配方式，<strong>连续的物理内存</strong>。如果size是常量，调用<code>kmem_cache_alloc_trace</code>分配，否则调用<code>__kmalloc</code>分配。size如果是常量且大于4M，直接返回0（内核版本3.4.5）；如果size是0，返回地址是<code>((void *)16)</code>。</p>
-
-<h4 id="vmalloc">vmalloc</h4>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">void *vmalloc(unsigned long size)
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>kmalloc内存分配方式都是物理连续的，能保证较低的平均访问时间。但是在某些场合中，对内存区的请求不是很频繁，较高的内存访问时间也 可以接受，这是就可以分配一段<strong>线性连续，物理不连续</strong>的地址，带来的好处是一次可以分配较大块的内存。vmalloc对 一次能分配的内存大小没有明确限制。</p>
-
-<h5 id="kmalloc-1">kmalloc预处理后的代码</h5>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">static inline __attribute__((always_inline)) __attribute__((always_inline)) void *kmalloc(size_t size, gfp_t flags)
-</span><span class="line">{
-</span><span class="line"> struct kmem_cache *cachep;
-</span><span class="line"> void *ret;
-</span><span class="line">
-</span><span class="line"> if (__builtin_constant_p(size)) {
-</span><span class="line">  int i = 0;
-</span><span class="line">
-</span><span class="line">  if (!size)
-</span><span class="line">   return ((void *)16);
-</span><span class="line">
-</span><span class="line"># 1 "include/linux/kmalloc_sizes.h" 1
-</span><span class="line"> if (size &lt;= 32) goto found; else i++;
-</span><span class="line"> if (size &lt;= 64) goto found; else i++;
-</span><span class="line"> if (size &lt;= 128) goto found; else i++;
-</span><span class="line"> if (size &lt;= 192) goto found; else i++;
-</span><span class="line"> if (size &lt;= 256) goto found; else i++;
-</span><span class="line"> if (size &lt;= 512) goto found; else i++;
-</span><span class="line"> if (size &lt;= 1024) goto found; else i++;
-</span><span class="line"> if (size &lt;= 2048) goto found; else i++;
-</span><span class="line"> if (size &lt;= 4096) goto found; else i++;
-</span><span class="line"> if (size &lt;= 8192) goto found; else i++;
-</span><span class="line"> if (size &lt;= 16384) goto found; else i++;
-</span><span class="line"> if (size &lt;= 32768) goto found; else i++;
-</span><span class="line"> if (size &lt;= 65536) goto found; else i++;
-</span><span class="line"> if (size &lt;= 131072) goto found; else i++;
-</span><span class="line"> if (size &lt;= 262144) goto found; else i++;
-</span><span class="line"> if (size &lt;= 524288) goto found; else i++;
-</span><span class="line"> if (size &lt;= 1048576) goto found; else i++;
-</span><span class="line"> if (size &lt;= 2097152) goto found; else i++;
-</span><span class="line"> if (size &lt;= 4194304) goto found; else i++;
-</span><span class="line"># 145 "include/linux/slab_def.h" 2
-</span><span class="line">
-</span><span class="line">  return ((void *)0);
-</span><span class="line">found:
-</span><span class="line">   cachep = malloc_sizes[i].cs_cachep;
-</span><span class="line">
-</span><span class="line">  ret = kmem_cache_alloc_trace(size, cachep, flags);
-</span><span class="line">
-</span><span class="line">  return ret;
-</span><span class="line"> }
-</span><span class="line"> return __kmalloc(size, flags);
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">void *__kmalloc(size_t size, gfp_t flags)
-</span><span class="line">{
-</span><span class="line"> return __do_kmalloc(size, flags, ((void *)0));
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">static inline __attribute__((always_inline)) __attribute__((always_inline)) void *__do_kmalloc(size_t size, gfp_t flags, void *caller)
-</span><span class="line">{
-</span><span class="line"> struct kmem_cache *cachep;
-</span><span class="line"> void *ret;
-</span><span class="line"> 
-</span><span class="line"> cachep = __find_general_cachep(size, flags);
-</span><span class="line"> if (__builtin_expect(!!(((unsigned long)(cachep) &lt;= (unsigned long)((void *)16))), 0))
-</span><span class="line">  return cachep;
-</span><span class="line"> ret = __cache_alloc(cachep, flags, caller);
-</span><span class="line">
-</span><span class="line"> trace_kmalloc((unsigned long) caller, ret,
-</span><span class="line">        size, cachep-&gt;buffer_size, flags);
-</span><span class="line">
-</span><span class="line"> return ret;
-</span><span class="line">}
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h1 id="section">引用文章</h1>
-
-<p><a href="http://www.ahlinux.com/start/kernel/18604.html">http://www.ahlinux.com/start/kernel/18604.html</a></p>
-
-<p><a href="http://blog.csdn.net/bullbat/article/details/7181396">http://blog.csdn.net/bullbat/article/details/7181396</a></p>
 
 ]]></content>
   </entry>

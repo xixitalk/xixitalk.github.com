@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux内存占用分布分析 - xixitalk's snippet</title>
+  <title>stunnel双向证书验证 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="1. 内存占用 linux内存占用分两部分：一部分是不可见的，内核代码段数据段的本身的占用空间，对于PC 上几个G的内存来说可能很小可以忽略不计，但是只有几十M内存的嵌入式环境来说就不能忽略了。另一部分就是linux系统可见的内存，free命令里的total或者cat /proc/ &hellip;">
+  <meta name="description" content="stunnel 双向证书验证，防止有人偷偷连接stunnel服务器。 第一步 生成证书 生成两个证书，一个服务端的stunnel_s.pem，一个客户端的stunnel_c.pem，有效期设置长一点1000天。 1
+2
+$openssl req -new -x509 -days 10000 - &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/11/linux-mem-used">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   
@@ -82,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Linux内存占用分布分析</h1>
+      <h1 class="entry-title">stunnel双向证书验证</h1>
     
     
       <p class="meta">
@@ -98,7 +100,7 @@
   
 
 
-<time datetime="2016-07-11T21:07:20+00:00" pubdate data-updated="true">Jul 11<span>th</span>, 2016</time>
+<time datetime="2016-10-13T20:09:49+00:00" pubdate data-updated="true">Oct 13<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,53 +109,33 @@
   </header>
 
 
-<div class="entry-content"><h2 id="section">1. 内存占用</h2>
-
-<p>linux内存占用分两部分：一部分是不可见的，内核代码段数据段的本身的占用空间，对于PC 上几个G的内存来说可能很小可以忽略不计，但是只有几十M内存的嵌入式环境来说就不能忽略了。另一部分就是linux系统可见的内存，<code>free</code>命令里的<code>total</code>或者<code>cat /proc/meminfo</code>里看到的<code>MemTotal</code>。</p>
+<div class="entry-content"><p>stunnel 双向证书验证，防止有人偷偷连接stunnel服务器。</p>
 
 <!--more-->
 
-<h3 id="section-1">1.1 内核代码段数据段</h3>
-<p>通过内核对应带调试信息文件vmlinux或者System.map文件，能查到如下符号：<code>_stext</code> <code>_etext</code>  <code>__bss_start</code>  <code>__bss_stop</code> <code>_end</code>。   <code>__bss_stop</code> <code>_end</code>值是一样的。<code>_etext</code> 减<code>_stext</code>就是代码段大小，  <code>__bss_stop</code>减<code>__bss_start</code> 就是数据段大小。代码段和数据段之前的空间是<code>Init</code>段，内核初始化只运行一次的代码放在这个段，内核初始化后会重新覆盖利用这块空间。</p>
+<h2 id="section">第一步 生成证书</h2>
+
+<p>生成两个证书，一个服务端的<code>stunnel_s.pem</code>，一个客户端的<code>stunnel_c.pem</code>，有效期设置长一点1000天。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$openssl req -new -x509 -days 10000 -nodes -out stunnel_c.pem -keyout stunnel_c.pem
+</span><span class="line">$openssl req -new -x509 -days 10000 -nodes -out stunnel_s.pem -keyout stunnel_s.pem
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="stunnelconf">第二步 服务器端stunnel.conf</h2>
+
+<p>将证书拷贝到/etc/stunnel目录，设置权限400.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">_stext                     C0008160
-</span><span class="line">_etext                     C051B958   代码段大小：0x5137F8 
-</span><span class="line">__bss_start                C05872E4
-</span><span class="line">__bss_stop                 C060EBF0   数据段大小：0x8790C 
-</span><span class="line">_end                       C060EBF0 
+</pre></td><td class="code"><pre><code class=""><span class="line">$sudo cp stunnel_s.pem /etc/stunnel/
+</span><span class="line">$sudo cp stunnel_c.pem /etc/stunnel/
+</span><span class="line">$sudo chmod 400 /etc/stunnel/*.pem
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="linux">1.2 linux系统管理内存</h3>
-
-<p>linux系统可见的内存，<code>free</code>命令里的<code>total</code>或者<code>cat /proc/meminfo</code>里看到的<code>MemTotal</code>。内存管理太复杂了，完整拼接出来<code>total</code>或者<code>MemTotal</code>几乎不可能，但可以有几个重要的部分。</p>
-
-<h4 id="section-2">1.2.1 空闲内存</h4>
-
-<p>空闲内存：meminfo(cat /proc/meminfo)里的<code>MemFree</code> + <code>Buffers</code> + <code>Cached</code> + <code>SwapCached</code></p>
-
-<h4 id="section-3">1.2.2 内核内存占用</h4>
-
-<p>内核内存占用：meminfo(cat /proc/meminfo)里的<code>Slab</code> + <code>KernelStack</code> + <code>PageTables</code></p>
-
-<h4 id="section-4">1.2.3 应用内存占用</h4>
-
-<p>应用内存有两个视图，一个是虚拟内存视图，一个物理内存（RSS）视图。
-比如查看进程编号为1的Init进程内存占用</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$cat /pric/1/statm
-</span><span class="line">537 18 11 7 0 75 0
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>537是虚拟内存的page数，18是物理内存page数，每个page是4K Bytes。</p>
-
-<p>用下面的脚本可以把系统所有应用的虚拟内存和物理内存统计出来，应用间的内存比较分析是有意义的或者同一个应用不同版本间的比较是有意义的。</p>
+<p>创建<code>stunnel.conf</code>文件，内容如下，拷贝到<code>/etc/stunnel/</code>目录。对外端口是8445，加密的是<a href="https://github.com/cyfdecyf/cow">cow</a>的7777端口,根据情况自行修改。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -172,28 +154,90 @@
 <span class="line-number">15</span>
 <span class="line-number">16</span>
 <span class="line-number">17</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#/bin/bash
-</span><span class="line">RSS=0
-</span><span class="line">VM=0
-</span><span class="line">for PROC in `ls /proc/|grep "^[0-9]"`
-</span><span class="line">do
-</span><span class="line">  if [ -f /proc/$PROC/statm ]; then
-</span><span class="line">      TEP1=`cat /proc/$PROC/statm | awk '{print ($1)}'`
-</span><span class="line">      TEP2=`cat /proc/$PROC/statm | awk '{print ($2)}'`
-</span><span class="line">      echo $PROC $TEP1 $TEP2
-</span><span class="line">      RSS=`expr $RSS + $TEP2`
-</span><span class="line">      VM=`expr $VM + $TEP1`
-</span><span class="line">  fi
-</span><span class="line">done
-</span><span class="line">RSS=`expr $RSS \* 4`
-</span><span class="line">VM=`expr $VM \* 4`
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">;fips=no
+</span><span class="line">client = no
+</span><span class="line">sslVersion=all
 </span><span class="line">
-</span><span class="line">echo "APP total" $RSS"KB", $VM"KB",
+</span><span class="line">chroot = /var/lib/stunnel4/
+</span><span class="line">setuid = root
+</span><span class="line">setgid = root
+</span><span class="line">
+</span><span class="line">pid = /stunnel4.open.pid
+</span><span class="line">;output = /stunnel.open.log
+</span><span class="line">cert = /etc/stunnel/stunnel_s.pem
+</span><span class="line">key = /etc/stunnel/stunnel_s.pem
+</span><span class="line">
+</span><span class="line">[open]
+</span><span class="line">accept = 8445
+</span><span class="line">connect = 7777
+</span><span class="line">
+</span><span class="line">verify=2
+</span><span class="line">CAfile = /etc/stunnel/stunnel_c.pem
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section-5">2. 参考资料</h2>
+<p>服务器端重启</p>
 
-<p>http://blog.yufeng.info/archives/2456</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$sudo service  stunnel4  restart
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="stunnelconf-1">第三步 客户端stunnel.conf</h2>
+
+<p>我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统自行验证。</p>
+
+<p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，自行修改。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">fips=no
+</span><span class="line">client = yes
+</span><span class="line">sslVersion = all
+</span><span class="line">socket = l:TCP_NODELAY=1
+</span><span class="line">socket = r:TCP_NODELAY=1
+</span><span class="line">socket = l:SO_LINGER=1:1
+</span><span class="line">socket = r:SO_LINGER=1:1
+</span><span class="line">
+</span><span class="line">[fastssl]
+</span><span class="line">accept = 127.0.0.1:8084
+</span><span class="line">connect = stunnel_ip:8445
+</span><span class="line">
+</span><span class="line">verify = 2
+</span><span class="line">CAfile = stunnel_s.pem
+</span><span class="line">
+</span><span class="line">cert = stunnel_c.pem
+</span><span class="line">key = stunnel_c.pem
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="stunnel">stunnel安全说明</h2>
+
+<p>发现stunnel当服务器配置<code>verify = 2</code>时，如果客户端配置<code>verify = 0</code>，客户端并不检查服务器端的证书，就算<code>CAfile</code>配置错误的服务器证书还是可以正常连接。而服务器检查客户端的证书。</p>
+
+<p>所以，stunnel的防盗连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 2</code>，服务器端检查客户端证书不在列表则断开连接。</p>
+
+<h2 id="section-1">参考博客</h2>
+
+<ol>
+  <li><a href="http://www.hawu.me/operation/886">squid + stunnel » 跨越长城，科学上网！</a></li>
+  <li><a href="http://briteming.blogspot.com/2013/03/stunnel.html">Using stunnel With Bilateral Authentication</a></li>
+</ol>
+
 </div>
 
 
@@ -216,12 +260,12 @@
   
 
 
-<time datetime="2016-07-11T21:07:20+00:00" pubdate data-updated="true">Jul 11<span>th</span>, 2016</time>
+<time datetime="2016-10-13T20:09:49+00:00" pubdate data-updated="true">Oct 13<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/stunnel/'>stunnel</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -233,7 +277,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:Linux内存占用分布分析 http://xixitalk.github.io/blog/2016/07/11/linux-mem-used/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:stunnel双向证书验证 http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -279,8 +323,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/11/linux-mem-used/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/11/linux-mem-used/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/';
         var disqus_script = 'embed.js';
       
     (function () {
