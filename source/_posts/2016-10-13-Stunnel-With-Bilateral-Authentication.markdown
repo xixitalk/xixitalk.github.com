@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "stunnel双向证书验证"
+title: "stunnel双向证书认证"
 date: 2016-10-13 20:09:49
 comments: true
 mathjax: false
 categories: tech stunnel
 ---
 
-stunnel 双向证书验证：防止不授权的客户端连接stunnel服务器，防止连接假的服务器。
+stunnel 双向证书认证：**防止没授权的客户端连接stunnel服务器，防止连接假的服务器**。
 
 <!--more-->
 
@@ -64,7 +64,7 @@ $sudo service  stunnel4  restart
 
 我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统自行验证。
 
-将`stunnel_c.pem`和`stunnel_s.pem`（存放在客户端的stunnel_s.pem最好删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到`stunnel`安装目录，修改`stunnel.conf`文件，配置如下。`stunnel_ip`是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理，其他端口自行修改。
+将`stunnel_c.pem`和`stunnel_s.pem`（存放在客户端的stunnel_s.pem最好删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到`stunnel`安装目录，修改`stunnel.conf`文件，配置如下。`stunnel_ip`是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理。如果要换其他端口自行修改。
 
 ```
 fips=no
@@ -102,9 +102,9 @@ protocolHost = stunnel_ip:8445
 
 所以，stunnel服务端的**防盗**连安全机制是：在服务器`CAfile`里配置客户端的证书，并设置`verify = 2`，服务器端检查客户端证书不在`CAfile`列表则断开连接。
 
-同样，为了避免客户端连接到**假的服务端**，则需要配置`verify = 2`，并把服务端的**公钥证书**放在`CAfile`里。
+同样，为了避免客户端连接到**假的服务端**，则需要配置`verify = 2`，并把服务端的**公钥证书**放在客户端侧的`CAfile`里。
 
-综上所述，当服务端和客户端都配置`verify = 2`，才是**双向证书验证**。
+综上所述，当服务端和客户端都配置`verify = 2`，才是**双向证书认证**。
 
 ##  pem证书安全说明
 
