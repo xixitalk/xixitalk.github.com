@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-14T00:52:43+00:00</updated>
+  <updated>2016-10-14T01:29:25+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,13 +18,13 @@
     <link href="http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/"/>
     <updated>2016-10-13T20:09:49+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication</id>
-    <content type="html"><![CDATA[<p>stunnel 双向证书验证，防止有人偷偷连接stunnel服务器。</p>
+    <content type="html"><![CDATA[<p>stunnel 双向证书验证：防止不授权的客户端连接stunnel服务器，防止连接假的服务器。</p>
 
 <!--more-->
 
 <h2 id="section">第一步 生成证书</h2>
 
-<p>生成两个证书，一个服务端的<code>stunnel_s.pem</code>，一个客户端的<code>stunnel_c.pem</code>，有效期设置长一点1000天。</p>
+<p>生成两个证书，一个服务端的<code>stunnel_s.pem</code>，一个客户端的<code>stunnel_c.pem</code>，有效期设置长一点10000天。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -44,7 +44,7 @@
 </span><span class="line">$sudo chmod 400 /etc/stunnel/*.pem
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>创建<code>stunnel.conf</code>文件，内容如下，拷贝到<code>/etc/stunnel/</code>目录。对外端口是8445，加密的是<a href="https://github.com/cyfdecyf/cow">cow</a>的7777端口,根据情况自行修改。</p>
+<p>创建<code>stunnel.conf</code>文件，内容如下，拷贝到<code>/etc/stunnel/</code>目录。对外端口是8445，加密的是<a href="https://github.com/cyfdecyf/cow">cow HTTP proxy</a>的7777端口,根据情况自行修改。如果要调试打开<code>output</code>选项。cow是个HTTP代理，智能分流值得推荐。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -96,7 +96,7 @@
 
 <p>我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统自行验证。</p>
 
-<p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理，其他端口自行修改。</p>
+<p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（存放在客户端的stunnel_s.pem最好删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理，其他端口自行修改。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -158,7 +158,7 @@
 
 <p>综上所述，当服务端和客户端都配置<code>verify = 2</code>，才是<strong>双向证书验证</strong>。</p>
 
-<h2 id="pem">pem证书说明</h2>
+<h2 id="pem">pem证书安全说明</h2>
 
 <p>pem证书是文本文件，里面<code>BEGIN PRIVATE KEY</code>和<code>END PRIVATE KEY</code>是私钥部分，<code>BEGIN CERTIFICATE</code>和<code>END CERTIFICATE</code>是公钥部分。<code>cert</code>和<code>key</code>配置完整的pem，而<code>CAfile</code>里只包含对方的公钥部分即可，即服务端<code>CAfile</code>是客户端的公钥，客户端<code>CAfile</code>是服务端的公钥。遵循这样原则，客户端的私钥只放客户端，服务端的私钥只放服务端，而公钥是可以多处存放的。</p>
 
