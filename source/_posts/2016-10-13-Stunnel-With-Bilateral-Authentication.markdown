@@ -64,7 +64,7 @@ $sudo service  stunnel4  restart
 
 我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统自行验证。
 
-将`stunnel_c.pem`和`stunnel_s.pem`（删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到`stunnel`安装目录，修改`stunnel.conf`文件，配置如下。`stunnel_ip`是服务器端stunnel的IP，自行修改。
+将`stunnel_c.pem`和`stunnel_s.pem`（删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到`stunnel`安装目录，修改`stunnel.conf`文件，配置如下。`stunnel_ip`是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理，其他端口自行修改。
 
 ```
 fips=no
@@ -86,14 +86,46 @@ cert = stunnel_c.pem
 key = stunnel_c.pem
 ```
 
+如果客户端连接`stunnel`服务器端需要HTTP代理（公司网络），`fastssl`部分这样配置
+
+```
+[fastssl]
+accept = 127.0.0.1:8084
+connect = proxy.company.com:80
+protocol = connect
+protocolHost = stunnel_ip:8445
+```
+
 ## stunnel安全说明
 
-发现stunnel当服务器配置`verify = 2`时，如果客户端配置`verify = 0`，客户端并不检查服务器端的证书，就算`CAfile`配置错误的服务器证书还是可以正常连接。而服务器检查客户端的证书。
+发现stunnel当服务器配置`verify = 2`时，服务器端会检查客户端证书是否在`CAfile`中。但是客户端配置`verify = 0`，客户端并不检查服务器端的证书，就算`CAfile`配置错误的服务器证书还是可以正常连接。
 
-所以，stunnel的防盗连安全机制是：在服务器`CAfile`里配置客户端的证书，并设置`verify = 2`，服务器端检查客户端证书不在列表则断开连接。
+所以，stunnel服务端的**防盗**连安全机制是：在服务器`CAfile`里配置客户端的证书，并设置`verify = 2`，服务器端检查客户端证书不在`CAfile`列表则断开连接。
+
+同样，为了避免客户端连接到**假的服务端**，则需要配置`verify = 2`，并把服务端的**公钥证书**放在`CAfile`里。
+
+综上所述，当服务端和客户端都配置`verify = 2`，才是**双向证书验证**。
+
+##  pem证书说明
+
+pem证书是文本文件，里面`BEGIN PRIVATE KEY`和`END PRIVATE KEY`是私钥部分，`BEGIN CERTIFICATE`和`END CERTIFICATE`是公钥部分。`cert`和`key`配置完整的pem，而`CAfile`里只包含对方的公钥部分即可，即服务端`CAfile`是客户端的公钥，客户端`CAfile`是服务端的公钥。遵循这样原则，客户端的私钥只放客户端，服务端的私钥只放服务端，而公钥是可以多处存放的。
+
+```
+-----BEGIN PRIVATE KEY-----
+MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCo9WC13gg9WCRX
+...
+kPpWg2PAANRi5Bmr9ScvBISSYQ==
+-----END PRIVATE KEY-----
+-----BEGIN CERTIFICATE-----
+MIID6TCCAtGgAwIBAgIJANBMqvP0YuV4MA0GCSqGSIb3DQEBBQUAMIGKMQswCQYD
+...
+o5tKoL9GcMhyjDoD9GCMfP6fY5DwPqhhqFTsPd47DzEdQ8amxPMn5kR/w/xk
+-----END CERTIFICATE-----
+```
 
 ##  参考博客
 
 1.  [squid + stunnel >> 跨越长城，科学上网！](http://www.hawu.me/operation/886)
 1.  [Using stunnel With Bilateral Authentication](http://briteming.blogspot.com/2013/03/stunnel.html)
+
 
