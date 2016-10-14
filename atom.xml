@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-14T01:29:25+00:00</updated>
+  <updated>2016-10-14T09:18:37+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[stunnel双向证书验证]]></title>
+    <title type="html"><![CDATA[stunnel双向证书认证]]></title>
     <link href="http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/"/>
     <updated>2016-10-13T20:09:49+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication</id>
-    <content type="html"><![CDATA[<p>stunnel 双向证书验证：防止不授权的客户端连接stunnel服务器，防止连接假的服务器。</p>
+    <content type="html"><![CDATA[<p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止连接假的服务器</strong>。</p>
 
 <!--more-->
 
@@ -96,7 +96,7 @@
 
 <p>我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统自行验证。</p>
 
-<p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（存放在客户端的stunnel_s.pem最好删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理，其他端口自行修改。</p>
+<p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（存放在客户端的stunnel_s.pem最好删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理。如果要换其他端口自行修改。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -154,9 +154,9 @@
 
 <p>所以，stunnel服务端的<strong>防盗</strong>连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 2</code>，服务器端检查客户端证书不在<code>CAfile</code>列表则断开连接。</p>
 
-<p>同样，为了避免客户端连接到<strong>假的服务端</strong>，则需要配置<code>verify = 2</code>，并把服务端的<strong>公钥证书</strong>放在<code>CAfile</code>里。</p>
+<p>同样，为了避免客户端连接到<strong>假的服务端</strong>，则需要配置<code>verify = 2</code>，并把服务端的<strong>公钥证书</strong>放在客户端侧的<code>CAfile</code>里。</p>
 
-<p>综上所述，当服务端和客户端都配置<code>verify = 2</code>，才是<strong>双向证书验证</strong>。</p>
+<p>综上所述，当服务端和客户端都配置<code>verify = 2</code>，才是<strong>双向证书认证</strong>。</p>
 
 <h2 id="pem">pem证书安全说明</h2>
 
