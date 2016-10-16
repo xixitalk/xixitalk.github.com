@@ -4,7 +4,7 @@
   <title><![CDATA[Category: stunnel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/stunnel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-14T09:18:37+00:00</updated>
+  <updated>2016-10-16T11:44:02+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -22,9 +22,17 @@
 
 <!--more-->
 
+<h2 id="stunnel">stunnel安全说明</h2>
+
+<p>stunnel服务端的<strong>防盗</strong>连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 2</code>，服务器端检查客户端证书，证书不在<code>CAfile</code>列表的客户端则会被断开连接。</p>
+
+<p>同样，为了避免客户端连接到<strong>假的服务端</strong>，则需要配置<code>verify = 2</code>，并把服务端的<strong>公钥证书</strong>放在客户端侧的<code>CAfile</code>里。</p>
+
+<p>综上所述，当服务端和客户端都配置<code>verify = 2</code>，才是<strong>双向证书认证</strong>。</p>
+
 <h2 id="section">第一步 生成证书</h2>
 
-<p>生成两个证书，一个服务端的<code>stunnel_s.pem</code>，一个客户端的<code>stunnel_c.pem</code>，有效期设置长一点10000天。</p>
+<p>生成两个证书，一个服务端的<code>stunnel_s.pem</code>，一个客户端的<code>stunnel_c.pem</code>，有效期设置长一点，10000天，时间可以自行调整。</p>
 
 <p><code>
 $openssl req -new -x509 -days 10000 -nodes -out stunnel_c.pem -keyout stunnel_c.pem
@@ -33,7 +41,7 @@ $openssl req -new -x509 -days 10000 -nodes -out stunnel_s.pem -keyout stunnel_s.
 
 <h2 id="stunnelconf">第二步 服务器端stunnel.conf</h2>
 
-<p>将证书拷贝到/etc/stunnel目录，设置权限400.</p>
+<p>将证书拷贝到/etc/stunnel目录，设置权限400（文件拥有者只读，其他人不可查看）.</p>
 
 <p><code>
 $sudo cp stunnel_s.pem /etc/stunnel/
@@ -41,7 +49,7 @@ $sudo cp stunnel_c.pem /etc/stunnel/
 $sudo chmod 400 /etc/stunnel/*.pem
 </code></p>
 
-<p>创建<code>stunnel.conf</code>文件，内容如下，拷贝到<code>/etc/stunnel/</code>目录。对外端口是8445，加密的是<a href="https://github.com/cyfdecyf/cow">cow HTTP proxy</a>的7777端口,根据情况自行修改。如果要调试打开<code>output</code>选项。cow是个HTTP代理，智能分流值得推荐。</p>
+<p>创建<code>stunnel.conf</code>文件，内容如下，拷贝到<code>/etc/stunnel/</code>目录。对外端口是8445，加密的是<a href="https://github.com/cyfdecyf/cow">cow HTTP proxy</a>的7777端口连接,根据情况自行修改。如果要调试打开<code>output</code>选项。cow是个HTTP代理，智能分流值得推荐。</p>
 
 <p>```
 ;fips=no
@@ -65,7 +73,7 @@ connect = 7777</p>
 CAfile = /etc/stunnel/stunnel_c.pem
 ```</p>
 
-<p>服务器端重启</p>
+<p>重启stunnel服务器</p>
 
 <p><code>
 $sudo service  stunnel4  restart
@@ -73,7 +81,7 @@ $sudo service  stunnel4  restart
 
 <h2 id="stunnelconf-1">第三步 客户端stunnel.conf</h2>
 
-<p>我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统自行验证。</p>
+<p>我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统配置类似，自行配置验证。</p>
 
 <p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（存放在客户端的stunnel_s.pem最好删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理。如果要换其他端口自行修改。</p>
 
@@ -107,17 +115,7 @@ protocol = connect
 protocolHost = stunnel_ip:8445
 </code></p>
 
-<h2 id="stunnel">stunnel安全说明</h2>
-
-<p>发现stunnel当服务器配置<code>verify = 2</code>时，服务器端会检查客户端证书是否在<code>CAfile</code>中。但是客户端配置<code>verify = 0</code>，客户端并不检查服务器端的证书，就算<code>CAfile</code>配置错误的服务器证书还是可以正常连接。</p>
-
-<p>所以，stunnel服务端的<strong>防盗</strong>连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 2</code>，服务器端检查客户端证书不在<code>CAfile</code>列表则断开连接。</p>
-
-<p>同样，为了避免客户端连接到<strong>假的服务端</strong>，则需要配置<code>verify = 2</code>，并把服务端的<strong>公钥证书</strong>放在客户端侧的<code>CAfile</code>里。</p>
-
-<p>综上所述，当服务端和客户端都配置<code>verify = 2</code>，才是<strong>双向证书认证</strong>。</p>
-
-<h2 id="pem">pem证书安全说明</h2>
+<h2 id="pem">pem证书安全存放说明</h2>
 
 <p>pem证书是文本文件，里面<code>BEGIN PRIVATE KEY</code>和<code>END PRIVATE KEY</code>是私钥部分，<code>BEGIN CERTIFICATE</code>和<code>END CERTIFICATE</code>是公钥部分。<code>cert</code>和<code>key</code>配置完整的pem，而<code>CAfile</code>里只包含对方的公钥部分即可，即服务端<code>CAfile</code>是客户端的公钥，客户端<code>CAfile</code>是服务端的公钥。遵循这样原则，客户端的私钥只放客户端，服务端的私钥只放服务端，而公钥是可以多处存放的。</p>
 
