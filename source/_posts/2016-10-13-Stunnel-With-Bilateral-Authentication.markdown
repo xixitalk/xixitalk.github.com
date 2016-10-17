@@ -7,11 +7,32 @@ mathjax: false
 categories: tech stunnel
 ---
 
-stunnel 双向证书认证：**防止没授权的客户端连接stunnel服务器，防止连接假的服务器**。
+stunnel 双向证书认证：**防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器**。
+
+stunnel官方的[说明](https://www.stunnel.org/auth.html)是：（客户端）检查服务器端证书是为了防止**中间人攻击**；（服务器端）检查客户端证书是为了严格控制客户端的访问。
+
+1.  Server authentication prevents [Man-In-The-Middle](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) (MITM) attacks on the encryption protocol.
+1.  Client authentication allows for restricting access for individual clients (access control).
 
 <!--more-->
 
 ## stunnel安全说明
+
+stunnel有三种证书检查配置，用`verify`选项控制。
+
+Stunnel has [3 methods](https://www.stunnel.org/howto.html) for checking certificates, which are controlled by the verify option:
+
+1.  **Do not Verify Certificates**  不检查证书，**默认值**  
+If no verify argument is given, then stunnel will ignore any certificates offered and will allow all connections.
+1.  **verify = 1**  如果证书存在则检查证书  
+Verify the certificate, if present.  
+1.  **verify = 2**  每个SSL连接要求检查证书  
+Require and verify certificates  
+Stunnel will require and verify certificates for every SSL connection. If no certificate or an invalid certificate is presented, then it will drop the connection.
+1.  **verify = 3**  依据本地安装的证书检查证书  
+Require and verify certificates against locally installed certificates.
+
+说实话`verify=2`和`verify=3`有什么区别，我查了很多资料，没有发现**明确且信服**的说法。有地方说`verify=2`证书是全球CA签发的证书（一般是买的），而`verify=3`是自签名证书(openssl生成的），但是自签名的证书`verify=2`也用的好好的。如果你清楚区别请不吝留言告诉我。
 
 stunnel服务端的**防盗**连安全机制是：在服务器`CAfile`里配置客户端的证书，并设置`verify = 2`，服务器端检查客户端证书，证书不在`CAfile`列表的客户端则会被断开连接。
 
@@ -121,9 +142,20 @@ o5tKoL9GcMhyjDoD9GCMfP6fY5DwPqhhqFTsPd47DzEdQ8amxPMn5kR/w/xk
 -----END CERTIFICATE-----
 ```
 
+多个公钥证书保存在一个`CAfile`里，这样排列存放。[官方说明Where do I put all these certificates?](https://www.stunnel.org/howto.html)。
+
+```
+-----BEGIN CERTIFICATE-----
+certificate #1 data here
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+certificate #2 data here
+-----END CERTIFICATE-----
+```
+
 ##  参考博客
 
 1.  [squid + stunnel >> 跨越长城，科学上网！](http://www.hawu.me/operation/886)
 1.  [Using stunnel With Bilateral Authentication](http://briteming.blogspot.com/2013/03/stunnel.html)
-
+1.  [Stunnel的设置和使用](https://sunmaiblog.wordpress.com/2010/09/21/stunnel%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8/)
 
