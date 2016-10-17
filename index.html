@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="stunnel 双向证书认证：防止没授权的客户端连接stunnel服务器，防止连接假的服务器。 ">
+  <meta name="description" content="stunnel 双向证书认证：防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器。 stunnel官方的说明是：（客户端）检查服务器端证书是为了防止中间人攻击；（服务器端）检查客户端证书是为了严格控制客户端的访问。 Server authentication prevents &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,7 +110,14 @@
   </header>
 
 
-  <div class="entry-content"><p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止连接假的服务器</strong>。</p>
+  <div class="entry-content"><p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器</strong>。</p>
+
+<p>stunnel官方的<a href="https://www.stunnel.org/auth.html">说明</a>是：（客户端）检查服务器端证书是为了防止<strong>中间人攻击</strong>；（服务器端）检查客户端证书是为了严格控制客户端的访问。</p>
+
+<ol>
+  <li>Server authentication prevents <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-In-The-Middle</a> (MITM) attacks on the encryption protocol.</li>
+  <li>Client authentication allows for restricting access for individual clients (access control).</li>
+</ol>
 
 </div>
   

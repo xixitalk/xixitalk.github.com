@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-16T11:44:02+00:00</updated>
+  <updated>2016-10-17T12:23:05+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,11 +18,36 @@
     <link href="http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/"/>
     <updated>2016-10-13T20:09:49+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication</id>
-    <content type="html"><![CDATA[<p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止连接假的服务器</strong>。</p>
+    <content type="html"><![CDATA[<p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器</strong>。</p>
+
+<p>stunnel官方的<a href="https://www.stunnel.org/auth.html">说明</a>是：（客户端）检查服务器端证书是为了防止<strong>中间人攻击</strong>；（服务器端）检查客户端证书是为了严格控制客户端的访问。</p>
+
+<ol>
+  <li>Server authentication prevents <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-In-The-Middle</a> (MITM) attacks on the encryption protocol.</li>
+  <li>Client authentication allows for restricting access for individual clients (access control).</li>
+</ol>
 
 <!--more-->
 
 <h2 id="stunnel">stunnel安全说明</h2>
+
+<p>stunnel有三种证书检查配置，用<code>verify</code>选项控制。</p>
+
+<p>Stunnel has <a href="https://www.stunnel.org/howto.html">3 methods</a> for checking certificates, which are controlled by the verify option:</p>
+
+<ol>
+  <li><strong>Do not Verify Certificates</strong>  不检查证书，<strong>默认值</strong><br />
+If no verify argument is given, then stunnel will ignore any certificates offered and will allow all connections.</li>
+  <li><strong>verify = 1</strong>  如果证书存在则检查证书<br />
+Verify the certificate, if present.  </li>
+  <li><strong>verify = 2</strong>  每个SSL连接要求检查证书<br />
+Require and verify certificates<br />
+Stunnel will require and verify certificates for every SSL connection. If no certificate or an invalid certificate is presented, then it will drop the connection.</li>
+  <li><strong>verify = 3</strong>  依据本地安装的证书检查证书<br />
+Require and verify certificates against locally installed certificates.</li>
+</ol>
+
+<p>说实话<code>verify=2</code>和<code>verify=3</code>有什么区别，我查了很多资料，没有发现<strong>明确且信服</strong>的说法。有地方说<code>verify=2</code>证书是全球CA签发的证书（一般是买的），而<code>verify=3</code>是自签名证书(openssl生成的），但是自签名的证书<code>verify=2</code>也用的好好的。如果你清楚区别请不吝留言告诉我。</p>
 
 <p>stunnel服务端的<strong>防盗</strong>连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 2</code>，服务器端检查客户端证书，证书不在<code>CAfile</code>列表的客户端则会被断开连接。</p>
 
@@ -132,11 +157,23 @@ o5tKoL9GcMhyjDoD9GCMfP6fY5DwPqhhqFTsPd47DzEdQ8amxPMn5kR/w/xk
 -----END CERTIFICATE-----
 </code></p>
 
+<p>多个公钥证书保存在一个<code>CAfile</code>里，这样排列存放。<a href="https://www.stunnel.org/howto.html">官方说明Where do I put all these certificates?</a>。</p>
+
+<p><code>
+-----BEGIN CERTIFICATE-----
+certificate #1 data here
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+certificate #2 data here
+-----END CERTIFICATE-----
+</code></p>
+
 <h2 id="section-1">参考博客</h2>
 
 <ol>
   <li><a href="http://www.hawu.me/operation/886">squid + stunnel » 跨越长城，科学上网！</a></li>
   <li><a href="http://briteming.blogspot.com/2013/03/stunnel.html">Using stunnel With Bilateral Authentication</a></li>
+  <li><a href="https://sunmaiblog.wordpress.com/2010/09/21/stunnel%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8/">Stunnel的设置和使用</a></li>
 </ol>
 
 ]]></content>
