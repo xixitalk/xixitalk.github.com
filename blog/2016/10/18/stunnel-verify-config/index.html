@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>我的AStyle配置选项 - xixitalk's snippet</title>
+  <title>stunnel verify选项配置 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="我的AStyle代码格式工具的选项：AStyle.exe -A1 -C -S -K -Y -f -s4 -p -U -o -n main.c 在notepad++里添加：运行(R)--运行(R) 选择AStyle.exe，选项输入-A1 -C -S -K -Y -f -s4 -p -U -o -n &hellip;">
+  <meta name="description" content="verify配置认证方式，取值0 1 2 3 4。 0 - request and ignore peer cert
+1 - only validate peer cert if present
+2 - always require a valid peer cert
+3 - verify &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,9 +21,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
@@ -82,7 +87,7 @@
   
   <header>
     
-      <h1 class="entry-title">我的AStyle配置选项</h1>
+      <h1 class="entry-title">stunnel verify选项配置</h1>
     
     
       <p class="meta">
@@ -98,7 +103,7 @@
   
 
 
-<time datetime="2016-07-11T18:35:57+00:00" pubdate data-updated="true">Jul 11<span>th</span>, 2016</time>
+<time datetime="2016-10-18T09:12:59+00:00" pubdate data-updated="true">Oct 18<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,14 +112,19 @@
   </header>
 
 
-<div class="entry-content"><p>我的AStyle代码格式工具的选项：AStyle.exe -A1 -C -S -K -Y -f -s4 -p -U -o -n main.c</p>
+<div class="entry-content"><p>verify配置认证方式，取值0 1 2 3 4。</p>
 
-<p>在<code>notepad++</code>里添加：<code>运行(R)--运行(R)</code> 选择AStyle.exe，选项输入<code>-A1 -C -S -K -Y -f -s4 -p -U -o -n "$(FULL_CURRENT_PATH)"</code>，然后点击<code>保存</code>，这样就保存在运行菜单里了。每次使用从<code>运行(R)</code>点击即可。</p>
+<p>0 - request and ignore peer cert<br />
+1 - only validate peer cert if present<br />
+2 - always require a valid peer cert<br />
+3 - verify peer with locally installed cert<br />
+4 - ignore CA chain and only verify peer cert  </p>
 
 <!--more-->
 
-<p>简略选项：<code>-A1 -C -S -K -Y -f -s4 -p -U -o -n</code>
-对应长选项如下：</p>
+<h2 id="stunnel5-verify">stunnel5 verify配置</h2>
+
+<p>代码版本<code>stunnel 5.36</code>  文件<code>option.c</code>  函数<code>parse_service_option()</code></p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -127,18 +137,77 @@
 <span class="line-number">9</span>
 <span class="line-number">10</span>
 <span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">--style=bsd
-</span><span class="line">--indent-classes
-</span><span class="line">--indent-switches
-</span><span class="line">--indent-cases
-</span><span class="line">--indent-col1-comments
-</span><span class="line">--break-blocks
-</span><span class="line">--indent=spaces=4
-</span><span class="line">--pad-oper
-</span><span class="line">--unpad-paren
-</span><span class="line">--keep-one-line-statements
-</span><span class="line">--suffix=none
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">case CMD_EXEC:
+</span><span class="line">    if(strcasecmp(opt, "verify"))
+</span><span class="line">        break;
+</span><span class="line">    {
+</span><span class="line">        char *tmp_str;
+</span><span class="line">        int tmp_int=(int)strtol(arg, &amp;tmp_str, 10);
+</span><span class="line">        if(tmp_str==arg || *tmp_str || tmp_int&lt;0 || tmp_int&gt;4)
+</span><span class="line">            return "Bad verify level";
+</span><span class="line">        section-&gt;option.request_cert=1;
+</span><span class="line">        section-&gt;option.require_cert=(tmp_int&gt;=2);
+</span><span class="line">        section-&gt;option.verify_chain=(tmp_int&gt;=1 &amp;&amp; tmp_int&lt;=3);
+</span><span class="line">        section-&gt;option.verify_peer=(tmp_int&gt;=3);
+</span><span class="line">    }
+</span><span class="line">    return NULL; /* OK */
 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>verify</code>选项合法值为：0  1 2 3 4</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>取值</th>
+      <th>request_cert</th>
+      <th>require_cert</th>
+      <th>verify_chain</th>
+      <th>verify_peer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>√</td>
+      <td>×</td>
+      <td>×</td>
+      <td>×</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>√</td>
+      <td>×</td>
+      <td>√</td>
+      <td>×</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>√</td>
+      <td>√</td>
+      <td>√</td>
+      <td>×</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>√</td>
+      <td>√</td>
+      <td>√</td>
+      <td>√</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>√</td>
+      <td>√</td>
+      <td>×</td>
+      <td>√</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>根据上表可得出，证书验证，<code>verify = 3</code>最全面。</p>
 
 </div>
 
@@ -162,12 +231,12 @@
   
 
 
-<time datetime="2016-07-11T18:35:57+00:00" pubdate data-updated="true">Jul 11<span>th</span>, 2016</time>
+<time datetime="2016-10-18T09:12:59+00:00" pubdate data-updated="true">Oct 18<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/tech/'>tech</a>
+    <a class='category' href='/blog/categories/stunnel/'>stunnel</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -179,7 +248,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:我的AStyle配置选项 http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:stunnel verify选项配置 http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -225,8 +294,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/11/my-AStyle-config/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config/';
         var disqus_script = 'embed.js';
       
     (function () {

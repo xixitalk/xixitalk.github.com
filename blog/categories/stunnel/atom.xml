@@ -4,7 +4,7 @@
   <title><![CDATA[Category: stunnel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/stunnel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-18T00:55:45+00:00</updated>
+  <updated>2016-10-18T01:46:37+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,98 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[stunnel verify选项配置]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config/"/>
+    <updated>2016-10-18T09:12:59+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config</id>
+    <content type="html"><![CDATA[<p>verify配置认证方式，取值0 1 2 3 4。</p>
+
+<p>0 - request and ignore peer cert<br />
+1 - only validate peer cert if present<br />
+2 - always require a valid peer cert<br />
+3 - verify peer with locally installed cert<br />
+4 - ignore CA chain and only verify peer cert  </p>
+
+<!--more-->
+
+<h2 id="stunnel5-verify">stunnel5 verify配置</h2>
+
+<p>代码版本<code>stunnel 5.36</code>  文件<code>option.c</code>  函数<code>parse_service_option()</code></p>
+
+<p><code>
+    case CMD_EXEC:
+        if(strcasecmp(opt, "verify"))
+            break;
+        {
+            char *tmp_str;
+            int tmp_int=(int)strtol(arg, &amp;tmp_str, 10);
+            if(tmp_str==arg || *tmp_str || tmp_int&lt;0 || tmp_int&gt;4)
+                return "Bad verify level";
+            section-&gt;option.request_cert=1;
+            section-&gt;option.require_cert=(tmp_int&gt;=2);
+            section-&gt;option.verify_chain=(tmp_int&gt;=1 &amp;&amp; tmp_int&lt;=3);
+            section-&gt;option.verify_peer=(tmp_int&gt;=3);
+        }
+        return NULL; /* OK */
+</code></p>
+
+<p><code>verify</code>选项合法值为：0  1 2 3 4</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>取值</th>
+      <th>request_cert</th>
+      <th>require_cert</th>
+      <th>verify_chain</th>
+      <th>verify_peer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>√</td>
+      <td>×</td>
+      <td>×</td>
+      <td>×</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>√</td>
+      <td>×</td>
+      <td>√</td>
+      <td>×</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>√</td>
+      <td>√</td>
+      <td>√</td>
+      <td>×</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>√</td>
+      <td>√</td>
+      <td>√</td>
+      <td>√</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>√</td>
+      <td>√</td>
+      <td>×</td>
+      <td>√</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>根据上表可得出，证书验证，<code>verify = 3</code>最全面。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[stunnel双向证书认证]]></title>
