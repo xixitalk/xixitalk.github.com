@@ -4,7 +4,7 @@
   <title><![CDATA[Category: stunnel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/stunnel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-18T08:37:40+00:00</updated>
+  <updated>2016-10-18T08:57:15+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -100,7 +100,19 @@
   </tbody>
 </table>
 
-<p>根据上表可得出，证书验证，<code>verify = 3</code>最全面。</p>
+<p>conf配置文件里，<code>requireCert</code>可以修改require_cert，<code>verifyChain</code>可以修改<code>verify_chain</code>，<code>verifyPeer</code>可以修改<code>verify_peer</code>。</p>
+
+<p>根据上表可得出，stunnel5里<code>verify = 3</code>最全面。</p>
+
+<p>我自己服务器端是<code>verify = 3</code>，客户端用的是<code>verify = 4</code>。</p>
+
+<p><code>
+verify = 4
+verifyChain = no
+verifyPeer = yes
+</code></p>
+
+<p>如果是stunnel4，配置<code>verify = 3</code>即可，点对点连接推荐3。</p>
 
 ]]></content>
   </entry>
