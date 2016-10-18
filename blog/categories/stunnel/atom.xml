@@ -4,7 +4,7 @@
   <title><![CDATA[Category: stunnel | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/stunnel/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-17T12:23:05+00:00</updated>
+  <updated>2016-10-18T00:55:45+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -47,13 +47,13 @@ Stunnel will require and verify certificates for every SSL connection. If no cer
 Require and verify certificates against locally installed certificates.</li>
 </ol>
 
-<p>说实话<code>verify=2</code>和<code>verify=3</code>有什么区别，我查了很多资料，没有发现<strong>明确且信服</strong>的说法。有地方说<code>verify=2</code>证书是全球CA签发的证书（一般是买的），而<code>verify=3</code>是自签名证书(openssl生成的），但是自签名的证书<code>verify=2</code>也用的好好的。如果你清楚区别请不吝留言告诉我。</p>
+<p>在stunnel v4上，<code>verify=2</code>和<code>verify=3</code>有什么区别，我查了很多资料，没有发现<strong>明确且信服</strong>的说法。有地方说<code>verify=2</code>证书是全球CA签发的证书（一般是买的），而<code>verify=3</code>是自签名证书(openssl生成的），但是自签名的证书<code>verify=2</code>也用的好好的。从stunnel-4.53原代码上看<code>verify=3</code>比<code>verify=2</code>多了一条打印语句。本文建议设置为<code>verify=3</code>。stunnel v5版本上<code>verify</code>取值增加了4，这里配置3也兼容stunnel v5。</p>
 
-<p>stunnel服务端的<strong>防盗</strong>连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 2</code>，服务器端检查客户端证书，证书不在<code>CAfile</code>列表的客户端则会被断开连接。</p>
+<p>stunnel服务端的<strong>防盗</strong>连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 3</code>，服务器端检查客户端证书，证书不在<code>CAfile</code>列表的客户端则会被断开连接。</p>
 
-<p>同样，为了避免客户端连接到<strong>假的服务端</strong>，则需要配置<code>verify = 2</code>，并把服务端的<strong>公钥证书</strong>放在客户端侧的<code>CAfile</code>里。</p>
+<p>同样，为了避免客户端连接到<strong>假的服务端</strong>，则需要配置<code>verify = 3</code>，并把服务端的<strong>公钥证书</strong>放在客户端侧的<code>CAfile</code>里。</p>
 
-<p>综上所述，当服务端和客户端都配置<code>verify = 2</code>，才是<strong>双向证书认证</strong>。</p>
+<p>综上所述，当服务端和客户端都配置<code>verify = 3</code>，才是<strong>双向证书认证</strong>。</p>
 
 <h2 id="section">第一步 生成证书</h2>
 
@@ -94,7 +94,7 @@ key = /etc/stunnel/stunnel_s.pem</p>
 accept = 8445
 connect = 7777</p>
 
-<p>verify=2
+<p>verify = 3
 CAfile = /etc/stunnel/stunnel_c.pem
 ```</p>
 
@@ -123,7 +123,7 @@ socket = r:SO_LINGER=1:1</p>
 accept = 127.0.0.1:8084
 connect = stunnel_ip:8445</p>
 
-<p>verify = 2
+<p>verify = 3
 CAfile = stunnel_s.pem</p>
 
 <p>cert = stunnel_c.pem
