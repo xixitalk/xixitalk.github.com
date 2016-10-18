@@ -49,5 +49,17 @@ verify配置认证方式，取值0 1 2 3 4。
 | 3 | √ | √ | √ | √ |
 | 4 | √ | √ | × | √ |
 
-根据上表可得出，证书验证，`verify = 3`最全面。
+conf配置文件里，`requireCert`可以修改require_cert，`verifyChain`可以修改`verify_chain`，`verifyPeer`可以修改`verify_peer`。
+
+根据上表可得出，stunnel5里`verify = 3`最全面。
+
+我自己服务器端是`verify = 3`，客户端用的是`verify = 4`。
+
+```
+verify = 4
+verifyChain = no
+verifyPeer = yes
+```
+
+如果是stunnel4，配置`verify = 3`即可，点对点连接推荐3。
 
