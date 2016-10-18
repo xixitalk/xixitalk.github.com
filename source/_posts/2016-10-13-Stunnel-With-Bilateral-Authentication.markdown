@@ -32,13 +32,13 @@ Stunnel will require and verify certificates for every SSL connection. If no cer
 1.  **verify = 3**  依据本地安装的证书检查证书  
 Require and verify certificates against locally installed certificates.
 
-说实话`verify=2`和`verify=3`有什么区别，我查了很多资料，没有发现**明确且信服**的说法。有地方说`verify=2`证书是全球CA签发的证书（一般是买的），而`verify=3`是自签名证书(openssl生成的），但是自签名的证书`verify=2`也用的好好的。如果你清楚区别请不吝留言告诉我。
+在stunnel v4上，`verify=2`和`verify=3`有什么区别，我查了很多资料，没有发现**明确且信服**的说法。有地方说`verify=2`证书是全球CA签发的证书（一般是买的），而`verify=3`是自签名证书(openssl生成的），但是自签名的证书`verify=2`也用的好好的。从stunnel-4.53原代码上看`verify=3`比`verify=2`多了一条打印语句。本文建议设置为`verify=3`。stunnel v5版本上`verify`取值增加了4，这里配置3也兼容stunnel v5。
 
-stunnel服务端的**防盗**连安全机制是：在服务器`CAfile`里配置客户端的证书，并设置`verify = 2`，服务器端检查客户端证书，证书不在`CAfile`列表的客户端则会被断开连接。
+stunnel服务端的**防盗**连安全机制是：在服务器`CAfile`里配置客户端的证书，并设置`verify = 3`，服务器端检查客户端证书，证书不在`CAfile`列表的客户端则会被断开连接。
 
-同样，为了避免客户端连接到**假的服务端**，则需要配置`verify = 2`，并把服务端的**公钥证书**放在客户端侧的`CAfile`里。
+同样，为了避免客户端连接到**假的服务端**，则需要配置`verify = 3`，并把服务端的**公钥证书**放在客户端侧的`CAfile`里。
 
-综上所述，当服务端和客户端都配置`verify = 2`，才是**双向证书认证**。
+综上所述，当服务端和客户端都配置`verify = 3`，才是**双向证书认证**。
 
 ## 第一步 生成证书
 
@@ -79,7 +79,7 @@ key = /etc/stunnel/stunnel_s.pem
 accept = 8445
 connect = 7777
 
-verify=2
+verify = 3
 CAfile = /etc/stunnel/stunnel_c.pem
 ```
 
@@ -108,7 +108,7 @@ socket = r:SO_LINGER=1:1
 accept = 127.0.0.1:8084
 connect = stunnel_ip:8445
 
-verify = 2
+verify = 3
 CAfile = stunnel_s.pem
 
 cert = stunnel_c.pem
