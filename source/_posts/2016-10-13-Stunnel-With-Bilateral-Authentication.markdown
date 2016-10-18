@@ -18,9 +18,7 @@ stunnel官方的[说明](https://www.stunnel.org/auth.html)是：（客户端）
 
 ## stunnel安全说明
 
-stunnel有三种证书检查配置，用`verify`选项控制。
-
-Stunnel has [3 methods](https://www.stunnel.org/howto.html) for checking certificates, which are controlled by the verify option:
+stunnel有四种证书检查配置，用`verify`选项控制。
 
 1.  **Do not Verify Certificates**  不检查证书，**默认值**  
 If no verify argument is given, then stunnel will ignore any certificates offered and will allow all connections.
@@ -31,14 +29,14 @@ Require and verify certificates
 Stunnel will require and verify certificates for every SSL connection. If no certificate or an invalid certificate is presented, then it will drop the connection.
 1.  **verify = 3**  依据本地安装的证书检查证书  
 Require and verify certificates against locally installed certificates.
+1.  **verify = 4**  忽略CA chain，只验证peer certificate  
+ignore CA chain and only verify peer certificate
 
-在stunnel v4上，`verify=2`和`verify=3`有什么区别，我查了很多资料，没有发现**明确且信服**的说法。有地方说`verify=2`证书是全球CA签发的证书（一般是买的），而`verify=3`是自签名证书(openssl生成的），但是自签名的证书`verify=2`也用的好好的。从stunnel-4.53原代码上看`verify=3`比`verify=2`多了一条打印语句。本文建议设置为`verify=3`。stunnel v5版本上`verify`取值增加了4，这里配置3也兼容stunnel v5。
+当`verify`配置2 3 4的时候，都会开启双向证书认证，自行选择。这里选择`verify = 3`。
 
 stunnel服务端的**防盗**连安全机制是：在服务器`CAfile`里配置客户端的证书，并设置`verify = 3`，服务器端检查客户端证书，证书不在`CAfile`列表的客户端则会被断开连接。
 
 同样，为了避免客户端连接到**假的服务端**，则需要配置`verify = 3`，并把服务端的**公钥证书**放在客户端侧的`CAfile`里。
-
-综上所述，当服务端和客户端都配置`verify = 3`，才是**双向证书认证**。
 
 ## 第一步 生成证书
 
