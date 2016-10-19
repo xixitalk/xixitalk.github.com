@@ -25,18 +25,14 @@ cd stunnel-5.36
 ./configure --help
 ```
 
-配置选项中`--with-threads`可以配置成`ucontext`、`pthread`或者`fork`，默认是`pthread`。如果是`pthread`模式，创建一个线程处理每个连接；如果是`fork`模式，`fork`一个进程处理每个连接。用`ps aux | grep stunnel`查看，如果很多个`stunnel`进程，则是`fork`模式；如果只有一个`stunnel`进程，那就是`ucontext`或者`pthread`模式。`ucontext`实现了用户空间一个进程中上下文切换，用这种机制可以实现协程（Coroutine），从资源利用上来说`ucontext`比`pthread`和`fork`更好一点。
+配置选项中`--with-threads`可以配置成`ucontext`、`pthread`或者`fork`，默认是`pthread`。如果是`pthread`模式，创建一个线程处理每个连接；如果是`fork`模式，创建一个进程处理每个连接。用`ps aux | grep stunnel`查看，如果很多个`stunnel`进程，则是`fork`模式；如果只有一个`stunnel`进程，那就是`ucontext`或者`pthread`模式。`ucontext`实现了用户空间一个进程中上下文切换，用这种机制可以实现协程（Coroutine），从资源利用上来说`ucontext`比`pthread`和`fork`更好一点。`fork`方式稳定性和安全性应该最好，一是代码最简单，二是进程独立空间。`pthread`是默认配置，稳定性也有保障。
 
-`stunnel`依赖`libwrap`和`libssl`，如果没有安装用下面命令安装（根据发行版本调整），其他依赖根据错误log安装。
+用`configure`生成`Makefile`，下面配置选项含义：禁用`ipv6`，禁用[fips][fips_www]，禁用TCP Wrappers，每个网络连接创建一个线程处理。选项根据自己需要增删。
 
-```
-sudo apt-get install libwrap0-dev  libssl-dev
-```
-
-用`configure`生成`Makefile`，下面配置选项含义：禁用`ipv6`，禁用[fips][fips_www]，每个网络连接用`ucontext`获得一个协程处理。选项根据自己需要增删。
+备注：TCP Wrappers作用是用`/etc/hosts.allow` 和 `/etc/hosts.deny`进行IP地址过滤，属于安全增强。
 
 ```
-./configure --disable-ipv6 --disable-fips --with-threads=ucontext
+./configure --disable-ipv6 --disable-fips --disable-libwrap --with-threads=pthread
 ```
 
 生成`Makefile`之后，`make`进行编译。
