@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-18T08:57:15+00:00</updated>
+  <updated>2016-10-19T02:31:56+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[编译stunnel]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/10/19/compile-stunnel-from-source/"/>
+    <updated>2016-10-19T09:21:51+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/10/19/compile-stunnel-from-source</id>
+    <content type="html"><![CDATA[<p>现在最新的stunnel是v5.36，而很多平台都还是<code>stunnel4</code></p>
+
+<!--more-->
+
+<p><a href="https://www.stunnel.org/downloads/stunnel-5.36.tar.gz">下载</a>stunnel-5.36.tar.gz，解压。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">wget https://www.stunnel.org/downloads/stunnel-5.36.tar.gz
+</span><span class="line">tar -zxvf stunnel-5.36.tar.gz
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用<code>./configure --help</code>查看编译配置选项。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd stunnel-5.36
+</span><span class="line">./configure --help
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>配置选项中<code>--with-threads</code>可以配置成<code>ucontext</code>、<code>pthread</code>或者<code>fork</code>，默认是<code>pthread</code>。如果是<code>pthread</code>模式，创建一个线程处理每个连接；如果是<code>fork</code>模式，<code>fork</code>一个进程处理每个连接。用<code>ps aux | grep stunnel</code>查看，如果很多个<code>stunnel</code>进程，则是<code>fork</code>模式；如果只有一个<code>stunnel</code>进程，那就是<code>ucontext</code>或者<code>pthread</code>模式。<code>ucontext</code>和<code>pthread</code>类似，也是一种用户线程，叫协程，从资源利用上来说<code>ucontext</code>比<code>pthread</code>和<code>fork</code>更好一点。</p>
+
+<p><code>stunnel</code>依赖<code>libwrap</code>和<code>libssl</code>，如果没有安装用下面命令安装（根据发行版本调整），其他依赖根据错误log安装。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install libwrap0-dev  libssl-dev
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用<code>configure</code>生成<code>Makefile</code>，下面配置选项含义：禁用<code>ipv6</code>，禁用<a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards" title="fips">fips</a>，每个网络连接用<code>ucontext</code>获得一个协程处理。选项根据自己需要增删。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">./configure --disable-ipv6 --disable-fips --with-threads=ucontext
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>生成<code>Makefile</code>之后，<code>make</code>进行编译。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">make
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>make</code>编译完成编译好的stunnel位于<code>src/stunnel</code>，根据发行版本配置启动。我偷懒，直接覆盖了原来安装的<code>/usr/bin/stunnel4</code>命令，其他的脚本还用<code>stunnel4</code>的，目前没有发现问题。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo service  stunnel4  stop
+</span><span class="line">sudo cp /usr/bin/stunnel4 /usr/bin/stunnel4.backup
+</span><span class="line">sudo cp src/stunnel /usr/bin/stunnel4
+</span><span class="line">sudo service  stunnel4  start
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[stunnel verify选项配置]]></title>
@@ -1869,26 +1929,6 @@ changed (this has happened to me).</p>
 </span><span class="line"> return __kmalloc(size, flags);
 </span><span class="line">}
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux栈和内存管理]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management/"/>
-    <updated>2016-07-18T09:11:52+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/18/linux-stack-and-memory-management</id>
-    <content type="html"><![CDATA[<p>先记录，待细看</p>
-
-<!--more-->
-
-<p><a href="http://blog.csdn.net/daniel_ice/article/details/8146003">http://blog.csdn.net/daniel_ice/article/details/8146003</a></p>
-
-<p><a href="http://gityuan.com/2015/10/30/kernel-memory/">http://gityuan.com/2015/10/30/kernel-memory/</a></p>
-
-<p><a href="http://www.2ndmoon.net/weblog/?p=509">http://www.2ndmoon.net/weblog/?p=509</a></p>
-
-<p><a href="http://www.cnblogs.com/tolimit/p/4610974.html">http://www.cnblogs.com/tolimit/p/4610974.html</a></p>
 
 ]]></content>
   </entry>

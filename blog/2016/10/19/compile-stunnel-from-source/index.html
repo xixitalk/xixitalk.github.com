@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>C库线程安全函数 - xixitalk's snippet</title>
+  <title>编译stunnel - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="C库线程安全函数和不安全函数 http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0492c/Chdiedfe.html 线程安全函数 Functions Description calloc(),free(),malloc &hellip;">
+  <meta name="description" content="现在最新的stunnel是v5.36，而很多平台都还是stunnel4 下载stunnel-5.36.tar.gz，解压。 1
+2
+wget https://www.stunnel.org/downloads/stunnel-5.36.tar.gz
+tar -zxvf stunnel-5.36. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/10/19/compile-stunnel-from-source">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   
@@ -82,7 +85,7 @@
   
   <header>
     
-      <h1 class="entry-title">C库线程安全函数</h1>
+      <h1 class="entry-title">编译stunnel</h1>
     
     
       <p class="meta">
@@ -98,7 +101,7 @@
   
 
 
-<time datetime="2016-07-31T08:28:21+00:00" pubdate data-updated="true">Jul 31<span>st</span>, 2016</time>
+<time datetime="2016-10-19T09:21:51+00:00" pubdate data-updated="true">Oct 19<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,78 +110,57 @@
   </header>
 
 
-<div class="entry-content"><p>C库线程安全函数和不安全函数</p>
+<div class="entry-content"><p>现在最新的stunnel是v5.36，而很多平台都还是<code>stunnel4</code></p>
 
 <!--more-->
 
-<p><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0492c/Chdiedfe.html">http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0492c/Chdiedfe.html</a></p>
+<p><a href="https://www.stunnel.org/downloads/stunnel-5.36.tar.gz">下载</a>stunnel-5.36.tar.gz，解压。</p>
 
-<p>线程安全函数</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">wget https://www.stunnel.org/downloads/stunnel-5.36.tar.gz
+</span><span class="line">tar -zxvf stunnel-5.36.tar.gz
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Functions</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>calloc(),free(),malloc(),realloc()</td>
-      <td>The heap functions are thread-safe if the <em>mutex</em>* functions are implemented.A single heap is shared between all threads, and mutexes are used to avoid data corruption when there is concurrent access. Each heap implementation is responsible for doing its own locking. If you supply your own allocator, it must also do its own locking. This enables it to do fine-grained locking if required, rather than protecting the entire heap with a single mutex (coarse-grained locking).</td>
-    </tr>
-    <tr>
-      <td>alloca()</td>
-      <td>alloca() is thread-safe because it allocates memory on the stack.</td>
-    </tr>
-    <tr>
-      <td>abort(),raise(),signal(),fenv.h</td>
-      <td>The ARM signal handling functions and floating-point exception traps are thread-safe.The settings for signal handlers and floating-point traps are global across the entire process and are protected by locks. Data corruption does not occur if multiple threads call signal() or an fenv.h function at the same time. However, be aware that the effects of the call act on all threads and not only on the calling thread.</td>
-    </tr>
-    <tr>
-      <td>clearerr(), fclose(),feof(),ferror(), fflush(),fgetc(),fgetpos(), fgets(),fopen(),fputc(), fputs(),fread(),freopen(), fseek(),fsetpos(),ftell(), fwrite(),getc(),getchar(), gets(),perror(),putc(), putchar(),puts(),rewind(), setbuf(),setvbuf(),tmpfile(), tmpnam(),ungetc()</td>
-      <td>The stdio library is thread-safe if the <em>mutex</em>* functions are implemented.Each individual stream is protected by a lock, so two threads can each open their own stdio stream and use it, without interfering with one another.If two threads both want to read or write the same stream, locking at the fgetc() and fputc() level prevents data corruption, but it is possible that the individual characters output by each thread might be interleaved in a confusing way. <strong>Note</strong> tmpnam() also contains a static buffer but this is only used if the argument is NULL. To ensure that your use of tmpnam() is thread-safe, supply your own buffer space.</td>
-    </tr>
-    <tr>
-      <td>fprintf(), printf(),vfprintf(), vprintf(), fscanf(),scanf()</td>
-      <td>When using these functions:the standard C printf() and scanf() functions use stdio so they are thread-safe. the standard C printf() function is susceptible to changes in the locale settings if called in a multithreaded program.</td>
-    </tr>
-    <tr>
-      <td>clock()</td>
-      <td>clock() contains static data that is written once at program startup and then only ever read. Therefore, clock() is thread-safe provided no extra threads are already running at the time that the library is initialized.</td>
-    </tr>
-    <tr>
-      <td>errno</td>
-      <td>errno is thread-safe.Each thread has its own errno stored in a __user_perthread_libspace block. This means that each thread can call errno-setting functions independently and then check errno afterwards without interference from other threads.</td>
-    </tr>
-    <tr>
-      <td>atexit()</td>
-      <td>The list of exit functions maintained by atexit() is process-global and protected by a lock.In the worst case, if more than one thread calls atexit(), the order that exit functions are called cannot be guaranteed.</td>
-    </tr>
-    <tr>
-      <td>abs(), acos(), asin(),atan(),atan2(), atof(),atol(), atoi(),bsearch(),ceil(), cos(),cosh(),difftime(), div(),exp(),fabs(), floor(),fmod(),frexp(), labs(),ldexp(),ldiv(), log(),log10(),memchr(), memcmp(),memcpy(),memmove(), memset(),mktime(),modf(), pow(),qsort(),sin(), sinh(),sqrt(),strcat(), strchr(),strcmp(),strcpy(), strcspn(),strlcat(),strlcpy(), strlen(),strncat(),strncmp(), strncpy(),strpbrk(),strrchr(), strspn(),strstr(),strxfrm(), tan(), tanh()</td>
-      <td>These functions are inherently thread-safe.</td>
-    </tr>
-    <tr>
-      <td>longjmp(), setjmp()</td>
-      <td>Although setjmp() and longjmp() keep data in <em>_user_libspace, they call the __alloca</em>* functions, that are thread-safe.</td>
-    </tr>
-    <tr>
-      <td>remove(), rename(), time()</td>
-      <td>These functions use interrupts that communicate with the ARM debugging environments. Typically, you have to reimplement these for a real-world application.</td>
-    </tr>
-    <tr>
-      <td>snprintf(), sprintf(),vsnprintf(),vsprintf(), sscanf(),isalnum(),isalpha(), iscntrl(),isdigit(),isgraph(), islower(),isprint(),ispunct(), isspace(),isupper(),isxdigit(), tolower(),toupper(),strcoll(), strtod(),strtol(),strtoul(), strftime()</td>
-      <td>When using these functions, the string-based functions read the locale settings. Typically, they are thread-safe. However, if you change locale in mid-session, you must ensure that these functions are not affected.The string-based functions, such as sprintf() and sscanf(), do not depend on the stdio library.</td>
-    </tr>
-    <tr>
-      <td>stdin, stdout, stderr</td>
-      <td>These functions are thread-safe.</td>
-    </tr>
-  </tbody>
-</table>
+<p>用<code>./configure --help</code>查看编译配置选项。</p>
 
-<p>线程不安全函数</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd stunnel-5.36
+</span><span class="line">./configure --help
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>配置选项中<code>--with-threads</code>可以配置成<code>ucontext</code>、<code>pthread</code>或者<code>fork</code>，默认是<code>pthread</code>。如果是<code>pthread</code>模式，创建一个线程处理每个连接；如果是<code>fork</code>模式，<code>fork</code>一个进程处理每个连接。用<code>ps aux | grep stunnel</code>查看，如果很多个<code>stunnel</code>进程，则是<code>fork</code>模式；如果只有一个<code>stunnel</code>进程，那就是<code>ucontext</code>或者<code>pthread</code>模式。<code>ucontext</code>和<code>pthread</code>类似，也是一种用户线程，叫协程，从资源利用上来说<code>ucontext</code>比<code>pthread</code>和<code>fork</code>更好一点。</p>
+
+<p><code>stunnel</code>依赖<code>libwrap</code>和<code>libssl</code>，如果没有安装用下面命令安装（根据发行版本调整），其他依赖根据错误log安装。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install libwrap0-dev  libssl-dev
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>用<code>configure</code>生成<code>Makefile</code>，下面配置选项含义：禁用<code>ipv6</code>，禁用<a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards" title="fips">fips</a>，每个网络连接用<code>ucontext</code>获得一个协程处理。选项根据自己需要增删。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">./configure --disable-ipv6 --disable-fips --with-threads=ucontext
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>生成<code>Makefile</code>之后，<code>make</code>进行编译。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">make
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>make</code>编译完成编译好的stunnel位于<code>src/stunnel</code>，根据发行版本配置启动。我偷懒，直接覆盖了原来安装的<code>/usr/bin/stunnel4</code>命令，其他的脚本还用<code>stunnel4</code>的，目前没有发现问题。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo service  stunnel4  stop
+</span><span class="line">sudo cp /usr/bin/stunnel4 /usr/bin/stunnel4.backup
+</span><span class="line">sudo cp src/stunnel /usr/bin/stunnel4
+</span><span class="line">sudo service  stunnel4  start
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
 
@@ -202,12 +184,12 @@
   
 
 
-<time datetime="2016-07-31T08:28:21+00:00" pubdate data-updated="true">Jul 31<span>st</span>, 2016</time>
+<time datetime="2016-10-19T09:21:51+00:00" pubdate data-updated="true">Oct 19<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/libc/'>libc</a>
+    <a class='category' href='/blog/categories/stunnel/'>stunnel</a>
   
 </span>
 
@@ -219,7 +201,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:C库线程安全函数 http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:编译stunnel http://xixitalk.github.io/blog/2016/10/19/compile-stunnel-from-source/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -265,8 +247,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2016/07/31/Thread-safe-C-library-functions/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/10/19/compile-stunnel-from-source/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/10/19/compile-stunnel-from-source/';
         var disqus_script = 'embed.js';
       
     (function () {
