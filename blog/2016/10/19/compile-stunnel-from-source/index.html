@@ -130,18 +130,14 @@ tar -zxvf stunnel-5.36. &hellip;">
 </span><span class="line">./configure --help
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>配置选项中<code>--with-threads</code>可以配置成<code>ucontext</code>、<code>pthread</code>或者<code>fork</code>，默认是<code>pthread</code>。如果是<code>pthread</code>模式，创建一个线程处理每个连接；如果是<code>fork</code>模式，<code>fork</code>一个进程处理每个连接。用<code>ps aux | grep stunnel</code>查看，如果很多个<code>stunnel</code>进程，则是<code>fork</code>模式；如果只有一个<code>stunnel</code>进程，那就是<code>ucontext</code>或者<code>pthread</code>模式。<code>ucontext</code>实现了用户空间一个进程中上下文切换，用这种机制可以实现协程（Coroutine），从资源利用上来说<code>ucontext</code>比<code>pthread</code>和<code>fork</code>更好一点。</p>
+<p>配置选项中<code>--with-threads</code>可以配置成<code>ucontext</code>、<code>pthread</code>或者<code>fork</code>，默认是<code>pthread</code>。如果是<code>pthread</code>模式，创建一个线程处理每个连接；如果是<code>fork</code>模式，创建一个进程处理每个连接。用<code>ps aux | grep stunnel</code>查看，如果很多个<code>stunnel</code>进程，则是<code>fork</code>模式；如果只有一个<code>stunnel</code>进程，那就是<code>ucontext</code>或者<code>pthread</code>模式。<code>ucontext</code>实现了用户空间一个进程中上下文切换，用这种机制可以实现协程（Coroutine），从资源利用上来说<code>ucontext</code>比<code>pthread</code>和<code>fork</code>更好一点。<code>fork</code>方式稳定性和安全性应该最好，一是代码最简单，二是进程独立空间。<code>pthread</code>是默认配置，稳定性也有保障。</p>
 
-<p><code>stunnel</code>依赖<code>libwrap</code>和<code>libssl</code>，如果没有安装用下面命令安装（根据发行版本调整），其他依赖根据错误log安装。</p>
+<p>用<code>configure</code>生成<code>Makefile</code>，下面配置选项含义：禁用<code>ipv6</code>，禁用<a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards" title="fips">fips</a>，禁用TCP Wrappers，每个网络连接创建一个线程处理。选项根据自己需要增删。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo apt-get install libwrap0-dev  libssl-dev
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>用<code>configure</code>生成<code>Makefile</code>，下面配置选项含义：禁用<code>ipv6</code>，禁用<a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards" title="fips">fips</a>，每个网络连接用<code>ucontext</code>获得一个协程处理。选项根据自己需要增删。</p>
+<p>备注：TCP Wrappers作用是用<code>/etc/hosts.allow</code> 和 <code>/etc/hosts.deny</code>进行IP地址过滤，属于安全增强。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">./configure --disable-ipv6 --disable-fips --with-threads=ucontext
+</pre></td><td class="code"><pre><code class=""><span class="line">./configure --disable-ipv6 --disable-fips --disable-libwrap --with-threads=pthread
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>生成<code>Makefile</code>之后，<code>make</code>进行编译。</p>
