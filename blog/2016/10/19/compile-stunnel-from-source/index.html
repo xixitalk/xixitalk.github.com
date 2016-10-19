@@ -130,7 +130,7 @@ tar -zxvf stunnel-5.36. &hellip;">
 </span><span class="line">./configure --help
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>配置选项中<code>--with-threads</code>可以配置成<code>ucontext</code>、<code>pthread</code>或者<code>fork</code>，默认是<code>pthread</code>。如果是<code>pthread</code>模式，创建一个线程处理每个连接；如果是<code>fork</code>模式，<code>fork</code>一个进程处理每个连接。用<code>ps aux | grep stunnel</code>查看，如果很多个<code>stunnel</code>进程，则是<code>fork</code>模式；如果只有一个<code>stunnel</code>进程，那就是<code>ucontext</code>或者<code>pthread</code>模式。<code>ucontext</code>和<code>pthread</code>类似，也是一种用户线程，叫协程，从资源利用上来说<code>ucontext</code>比<code>pthread</code>和<code>fork</code>更好一点。</p>
+<p>配置选项中<code>--with-threads</code>可以配置成<code>ucontext</code>、<code>pthread</code>或者<code>fork</code>，默认是<code>pthread</code>。如果是<code>pthread</code>模式，创建一个线程处理每个连接；如果是<code>fork</code>模式，<code>fork</code>一个进程处理每个连接。用<code>ps aux | grep stunnel</code>查看，如果很多个<code>stunnel</code>进程，则是<code>fork</code>模式；如果只有一个<code>stunnel</code>进程，那就是<code>ucontext</code>或者<code>pthread</code>模式。<code>ucontext</code>实现了用户空间一个进程中上下文切换，用这种机制可以实现协程（Coroutine），从资源利用上来说<code>ucontext</code>比<code>pthread</code>和<code>fork</code>更好一点。</p>
 
 <p><code>stunnel</code>依赖<code>libwrap</code>和<code>libssl</code>，如果没有安装用下面命令安装（根据发行版本调整），其他依赖根据错误log安装。</p>
 
