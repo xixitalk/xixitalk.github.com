@@ -25,7 +25,7 @@ cd stunnel-5.36
 ./configure --help
 ```
 
-配置选项中`--with-threads`可以配置成`ucontext`、`pthread`或者`fork`，默认是`pthread`。如果是`pthread`模式，创建一个线程处理每个连接；如果是`fork`模式，`fork`一个进程处理每个连接。用`ps aux | grep stunnel`查看，如果很多个`stunnel`进程，则是`fork`模式；如果只有一个`stunnel`进程，那就是`ucontext`或者`pthread`模式。`ucontext`和`pthread`类似，也是一种用户线程，叫协程，从资源利用上来说`ucontext`比`pthread`和`fork`更好一点。
+配置选项中`--with-threads`可以配置成`ucontext`、`pthread`或者`fork`，默认是`pthread`。如果是`pthread`模式，创建一个线程处理每个连接；如果是`fork`模式，`fork`一个进程处理每个连接。用`ps aux | grep stunnel`查看，如果很多个`stunnel`进程，则是`fork`模式；如果只有一个`stunnel`进程，那就是`ucontext`或者`pthread`模式。`ucontext`实现了用户空间一个进程中上下文切换，用这种机制可以实现协程（Coroutine），从资源利用上来说`ucontext`比`pthread`和`fork`更好一点。
 
 `stunnel`依赖`libwrap`和`libssl`，如果没有安装用下面命令安装（根据发行版本调整），其他依赖根据错误log安装。
 
