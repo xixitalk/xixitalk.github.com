@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>西部数据硬盘Load_Cycle_Count增长多快的问题 - xixitalk's snippet</title>
+  <meta name="author" content="xixitalk">
+
+  
+  <meta name="description" content="我有一块西部数据的硬盘，同时有一块笔记本淘汰下来的东芝的硬盘，关键数据用这两个硬盘进行备份。最近东芝的硬盘偶尔读取失败，所以寻思再买一块硬盘替代东芝的这块硬盘。于是在网上搜索到底是买西部数据还是希捷，还是东芝的硬盘。搜索发现了西部数据硬盘曾经有“Load_Cycle_Count”的bug， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2016/10/31/Western-Digital-problems">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xixitalk's snippet" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32324744-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xixitalk's snippet</a></h1>
+  
+    <h2>Post Longer Than 140 Characters Tweets</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xixitalk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/">Categories</a></li>
+  <li><a href="/wishlist/">My wishlist</a></li>
+  <li><a href="/about/">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">西部数据硬盘Load_Cycle_Count增长多快的问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-31T08:39:21+00:00" pubdate data-updated="true">Oct 31<span>st</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>我有一块西部数据的硬盘，同时有一块笔记本淘汰下来的东芝的硬盘，关键数据用这两个硬盘进行备份。最近东芝的硬盘偶尔读取失败，所以寻思再买一块硬盘替代东芝的这块硬盘。于是在网上搜索到底是买西部数据还是希捷，还是东芝的硬盘。搜索发现了西部数据硬盘曾经有“Load_Cycle_Count”的bug，一看我用着的这块西部数据硬盘恰恰中招，估计寿命快终结了。</p>
+
+<!--more-->
+
+<p>数据数据网站对这个问题的解释：<a href="http://support.wdc.com/knowledgebase/answer.aspx?ID=5357">The S.M.A.R.T Attribute 193 Load/Unload counter keeps increasing on a SATA 2 hard drive</a></p>
+
+<p>受影响的型号：</p>
+
+<ol>
+  <li>WD20EADS</li>
+  <li>WD20EARS</li>
+  <li>WD15EADS</li>
+  <li>WD15EARS</li>
+  <li>WD10EADS</li>
+  <li>WD10EARS</li>
+  <li>WD8000AARS</li>
+  <li>WD7500AADS</li>
+  <li>WD7500AARS</li>
+  <li>WD6400AADS</li>
+  <li>WD6400AARS</li>
+  <li>WD5000AADS</li>
+  <li>WD5000AARS</li>
+</ol>
+
+<p>我的硬盘型号是<code>Device Model:     WDC WD20EARS-00MVWB1</code>，2T的3.5寸硬盘。我买的是西部数据 Elements Desktop3.5寸外置硬盘2T （WDBAAU0020HBK），为树莓派买的，所以直接买的是西部数据外置硬盘，USB接口输出，里面是一块绿盘<code>WD20EARS-00MVWB1</code>，时间是2011.8.18号。</p>
+
+<p>SMART信息如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">SMART Attributes Data Structure revision number: 16
+</span><span class="line">Vendor Specific SMART Attributes with Thresholds:
+</span><span class="line">ID# ATTRIBUTE_NAME          FLAG     VALUE WORST THRESH TYPE      UPDATED  WHEN_FAILED RAW_VALUE
+</span><span class="line">  1 Raw_Read_Error_Rate     0x002f   200   200   051    Pre-fail  Always       -       0
+</span><span class="line">  3 Spin_Up_Time            0x0027   166   160   021    Pre-fail  Always       -       6691
+</span><span class="line">  4 Start_Stop_Count        0x0032   091   091   000    Old_age   Always       -       9326
+</span><span class="line">  5 Reallocated_Sector_Ct   0x0033   200   200   140    Pre-fail  Always       -       0
+</span><span class="line">  7 Seek_Error_Rate         0x002e   200   200   000    Old_age   Always       -       0
+</span><span class="line">  9 Power_On_Hours          0x0032   059   059   000    Old_age   Always       -       30290
+</span><span class="line"> 10 Spin_Retry_Count        0x0032   100   100   000    Old_age   Always       -       0
+</span><span class="line"> 11 Calibration_Retry_Count 0x0032   100   100   000    Old_age   Always       -       0
+</span><span class="line"> 12 Power_Cycle_Count       0x0032   100   100   000    Old_age   Always       -       789
+</span><span class="line">192 Power-Off_Retract_Count 0x0032   200   200   000    Old_age   Always       -       12
+</span><span class="line">193 Load_Cycle_Count        0x0032   001   001   000    Old_age   Always       -       904905
+</span><span class="line">194 Temperature_Celsius     0x0022   125   082   000    Old_age   Always       -       25
+</span><span class="line">196 Reallocated_Event_Count 0x0032   200   200   000    Old_age   Always       -       0
+</span><span class="line">197 Current_Pending_Sector  0x0032   200   200   000    Old_age   Always       -       0
+</span><span class="line">198 Offline_Uncorrectable   0x0030   200   200   000    Old_age   Offline      -       0
+</span><span class="line">199 UDMA_CRC_Error_Count    0x0032   200   200   000    Old_age   Always       -       0
+</span><span class="line">200 Multi_Zone_Error_Rate   0x0008   200   200   000    Old_age   Offline      -       0
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>通电时间（Power_On_Hours）<strong>30290</strong>小时，折合3年多，对于5年多24/7接在树莓派上，也算正常。关键是Load_Cycle_Count，已经<strong>904905</strong>，90多万了。有地方说Load_Cycle_Count寿命3.5寸是30万，2.5寸是60万，我这个已经是90多万了。</p>
+
+<p>西部数据Load_Cycle_Count增长多快的问题解决办法就是的就是官方提供的<code>wdidle3.exe</code>工具，关闭绿盘的定时休眠功能。windows平台自行搜索使用。</p>
+
+<p>西部数据官方没有提供linux下的工具，只提供windows下的工具，并且<code>wdidle3.exe</code>命令不能指定硬盘，一运行全部硬盘全部影响，建议不相关的硬盘拔掉（这是啥傻逼命令）。</p>
+
+<p>有一个非官方的<a href="http://idle3-tools.sourceforge.net/">linux wdidle3工具</a>，开源的，可以linux平台编译，可以指定硬盘。但是发现运行的时候提示<code>HDIO_DRIVE_CMD(identify) failed: Invalid argument</code>设置失败，这个应该是<strong>西部数据SATA转USB接口的问题</strong>，如果是直接SATA接口应该没有问题，我懒得折腾了。</p>
+
+<p>我现在成<strong>西部数据黑了</strong>，原因有二：一个是因为<code>Load_Cycle_Count</code>的问题，这么严重的问题难道都不召回吗？第二我买的Elements Desktop，官方的SATA转USB接口，使用linux最常用的硬盘工具<code>hdparm</code>竟然提示错误，不可理解。上面<code>wdidle3</code>报的一样的错误。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$sudo hdparm -i /dev/sdb
+</span><span class="line">
+</span><span class="line">/dev/sdb:
+</span><span class="line"> HDIO_GET_IDENTITY failed: Invalid argument
+</span><span class="line">$sudo hdparm -C /dev/sdb
+</span><span class="line">
+</span><span class="line">/dev/sdb:
+</span><span class="line"> drive state is:  unknown
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>我买了一块希捷的<code>ST4000DM000</code>，4T容量，依据<a href="https://www.backblaze.com/blog/hard-drive-reliability-stats-q1-2016/">backblaze的数据</a>，样本足够大，报废率低。加上绿联的SATA转USB线，目前接树莓派上使用正常，<code>hdparm</code>设置也正常。就不知道希捷这块<code>ST4000DM000中国专供版</code>是否和国外的品质一致了。</p>
+
+<p>我启动<code>hd-idle</code>后，西部数据这块硬盘Load_Cycle_Count一天竟然只增加了3，之前每天平均应该是495（904905/5/365），这可能是因为我把平常读写硬盘的程序停掉了的缘故。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ cat /var/log/hd-idle.log
+</span><span class="line">date: 2016-10-30, time: 06:11:48, disk: sdb, running: 601, stopped: 33241
+</span><span class="line">date: 2016-10-30, time: 11:24:50, disk: sdb, running: 661, stopped: 18121
+</span><span class="line">date: 2016-10-30, time: 11:24:51, disk: sdc, running: 604, stopped: 52084
+</span><span class="line">date: 2016-10-30, time: 19:54:54, disk: sdc, running: 602, stopped: 30001
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>同时在这里吐槽一下SSK的2.5寸硬盘盒，竟然<code>smartctl</code>读取东芝硬盘SMART信息都读不到。希捷3.5寸硬盘SATA转USB我买了<strong>绿联</strong>的转接线。</p>
+
+<p>2T西部数据硬盘的数据已经备份，静待他的报废，有地方说Load_Cycle_Count超过1百万会出问题，拭目以待。</p>
+
+<p>参考博客：</p>
+
+<p><a href="https://blog.vandenbrand.org/2012/04/05/western-digital-green-caviar-wd10eads-and-hdparm-problems/">Western Digital Green Caviar WD10EADS and hdparm problems</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-31T08:39:21+00:00" pubdate data-updated="true">Oct 31<span>st</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/life/'>life</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:西部数据硬盘Load_Cycle_Count增长多快的问题 http://xixitalk.github.io/blog/2016/10/31/Western-Digital-problems/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (15)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (5)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (16)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - xixitalk -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gitblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2016/10/31/Western-Digital-problems/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2016/10/31/Western-Digital-problems/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
