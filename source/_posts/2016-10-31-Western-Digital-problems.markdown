@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "西部数据硬盘Load_Cycle_Count增长多快的问题"
+title: "西部数据硬盘Load_Cycle_Count增长过快的问题"
 date: 2016-10-31 08:39:21
 comments: true
 mathjax: false
@@ -31,7 +31,7 @@ categories: life
 
 我的硬盘型号是`Device Model:     WDC WD20EARS-00MVWB1`，2T的3.5寸硬盘。我买的是西部数据 Elements Desktop3.5寸外置硬盘2T （WDBAAU0020HBK），为树莓派买的，所以直接买的是西部数据外置硬盘，USB接口输出，里面是一块绿盘`WD20EARS-00MVWB1`，时间是2011.8.18号。
 
-SMART信息如下
+今天（2016.10.31）SMART信息如下
 
 ```
 SMART Attributes Data Structure revision number: 16
@@ -77,9 +77,9 @@ $sudo hdparm -C /dev/sdb
  drive state is:  unknown
 ```
 
-我买了一块希捷的`ST4000DM000`，4T容量，依据[backblaze的数据](https://www.backblaze.com/blog/hard-drive-reliability-stats-q1-2016/)，样本足够大，报废率低。加上绿联的SATA转USB线，目前接树莓派上使用正常，`hdparm`设置也正常。就不知道希捷这块`ST4000DM000中国专供版`是否和国外的品质一致了。
+我现在买了一块希捷的`ST4000DM000`，4T容量，依据[backblaze的数据](https://www.backblaze.com/blog/hard-drive-reliability-stats-q1-2016/)，样本足够大，出错率低。加上**绿联**的SATA转USB线，外接12V2A供电，目前接树莓派上使用正常，`hdparm`设置也正常，推荐使用。就不知道希捷这块`ST4000DM000中国专供版`是否和国外的品质一致了。
 
-我启动`hd-idle`后，西部数据这块硬盘Load_Cycle_Count一天竟然只增加了3，之前每天平均应该是495（904905/5/365），这可能是因为我把平常读写硬盘的程序停掉了的缘故。
+我启动`hd-idle`服务后，西部数据这块硬盘Load_Cycle_Count一天竟然只增加了3，通电时间增加了2小时，之前Load_Cycle_Count每天平均应该是495（904905/5/365），这可能和我把平常读写硬盘的程序停掉了有关系，硬盘休眠时间增加了。
 
 ```
 $ cat /var/log/hd-idle.log
