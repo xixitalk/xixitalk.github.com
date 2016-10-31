@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-31T01:53:12+00:00</updated>
+  <updated>2016-10-31T02:18:30+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[西部数据硬盘Load_Cycle_Count增长多快的问题]]></title>
+    <title type="html"><![CDATA[西部数据硬盘Load_Cycle_Count增长过快的问题]]></title>
     <link href="http://xixitalk.github.io/blog/2016/10/31/Western-Digital-problems/"/>
     <updated>2016-10-31T08:39:21+00:00</updated>
     <id>http://xixitalk.github.io/blog/2016/10/31/Western-Digital-problems</id>
@@ -44,7 +44,7 @@
 
 <p>我的硬盘型号是<code>Device Model:     WDC WD20EARS-00MVWB1</code>，2T的3.5寸硬盘。我买的是西部数据 Elements Desktop3.5寸外置硬盘2T （WDBAAU0020HBK），为树莓派买的，所以直接买的是西部数据外置硬盘，USB接口输出，里面是一块绿盘<code>WD20EARS-00MVWB1</code>，时间是2011.8.18号。</p>
 
-<p>SMART信息如下</p>
+<p>今天（2016.10.31）SMART信息如下</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -116,9 +116,9 @@
 </span><span class="line"> drive state is:  unknown
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>我买了一块希捷的<code>ST4000DM000</code>，4T容量，依据<a href="https://www.backblaze.com/blog/hard-drive-reliability-stats-q1-2016/">backblaze的数据</a>，样本足够大，报废率低。加上绿联的SATA转USB线，目前接树莓派上使用正常，<code>hdparm</code>设置也正常。就不知道希捷这块<code>ST4000DM000中国专供版</code>是否和国外的品质一致了。</p>
+<p>我现在买了一块希捷的<code>ST4000DM000</code>，4T容量，依据<a href="https://www.backblaze.com/blog/hard-drive-reliability-stats-q1-2016/">backblaze的数据</a>，样本足够大，出错率低。加上<strong>绿联</strong>的SATA转USB线，外接12V2A供电，目前接树莓派上使用正常，<code>hdparm</code>设置也正常，推荐使用。就不知道希捷这块<code>ST4000DM000中国专供版</code>是否和国外的品质一致了。</p>
 
-<p>我启动<code>hd-idle</code>后，西部数据这块硬盘Load_Cycle_Count一天竟然只增加了3，之前每天平均应该是495（904905/5/365），这可能是因为我把平常读写硬盘的程序停掉了的缘故。</p>
+<p>我启动<code>hd-idle</code>服务后，西部数据这块硬盘Load_Cycle_Count一天竟然只增加了3，通电时间增加了2小时，之前Load_Cycle_Count每天平均应该是495（904905/5/365），这可能和我把平常读写硬盘的程序停掉了有关系，硬盘休眠时间增加了。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
