@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-31T06:23:40+00:00</updated>
+  <updated>2016-11-01T11:13:56+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[pkcs11-helper编译]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/11/01/pkcs11-helper-build/"/>
+    <updated>2016-11-01T18:37:08+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/11/01/pkcs11-helper-build</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/OpenSC/pkcs11-helper/releases">pkcs11-helper</a>也真是的，软件包里<code>INSTALL</code>里说用<code>./configure</code>生成<code>Makefile</code>，但是软件包还没有<code>configure</code>文件，需要<code>autoreconf</code>生成<code>configure</code>文件。妈蛋，<code>INSTALL</code>多写一句<code>autoreconf -ivf</code>会死吗？</p>
+
+<!--more-->
+
+<h1 id="section">准备</h1>
+
+<p>确保系统安装了<code>autoconf</code> <code>automake</code> <code>libtool</code></p>
+
+<h1 id="section-1">下载源代码解压</h1>
+
+<p><code>
+$wget https://github.com/OpenSC/pkcs11-helper/archive/pkcs11-helper-1.10.tar.gz
+$tar -zxvf pkcs11-helper-1.10.tar.gz
+$cd pkcs11-helper-pkcs11-helper-1.10
+</code></p>
+
+<h1 id="makefile">生成Makefile</h1>
+
+<p><code>
+$autoreconf -ivf
+$./configure
+</code></p>
+
+<h1 id="section-2">编译安装</h1>
+
+<p><code>
+$make
+$make install
+</code></p>
+
+<h1 id="section-3">参考</h1>
+
+<p><a href="https://github.com/OpenSC/pkcs11-helper/issues/2">https://github.com/OpenSC/pkcs11-helper/issues/2</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[stunnel verify选项配置]]></title>
@@ -569,90 +611,6 @@ ANY=0xFF //指定任何以前列出的通配符。
 
 <p>READ MORE<br />
 <a href="http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3">http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[TCP/IP之以太网帧]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip/"/>
-    <updated>2016-10-10T10:15:46+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/10/10/Ethernet-of-tcpip</id>
-    <content type="html"><![CDATA[<h3 id="ethernet-iiv2">Ethernet II(以太网V2帧)</h3>
-
-<!--more-->
-
-<table border="1">
-  <thead>
-    <tr>
-      <th>6字节</th>
-      <th>6字节</th>
-      <th>2字节</th>
-      <th>46-1500字节</th>
-      <th>4字节</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>目标MAC地址</td>
-      <td>源MAC地址</td>
-      <td>类型</td>
-      <td>数据</td>
-      <td>FCS</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>类型</strong>：  08 00 是IP包，08 06 是ARP包<br />
-<strong>数据</strong>：  最常见的是IP包<br />
-<strong>FCS</strong>：   Frame check sequence帧校验序列  </p>
-
-<p>更多常见类型：  </p>
-
-<table border="1">
-  <thead>
-    <tr>
-      <th>类型值</th>
-      <th>解释</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0x0800</td>
-      <td>网际协议（IP）</td>
-    </tr>
-    <tr>
-      <td>0x0806</td>
-      <td>地址解析协议（ARP ： Address Resolution Protocol）</td>
-    </tr>
-    <tr>
-      <td>0x0808</td>
-      <td>帧中继 ARP （Frame Relay ARP） [RFC1701]</td>
-    </tr>
-    <tr>
-      <td>0x814C</td>
-      <td>简单网络管理协议（SNMP：Simple Network Management Protocol）</td>
-    </tr>
-    <tr>
-      <td>0x86DD</td>
-      <td>网际协议v6 （IPv6，Internet Protocol version 6）</td>
-    </tr>
-    <tr>
-      <td>0x880B</td>
-      <td>点对点协议（PPP：Point-to-Point Protocol）</td>
-    </tr>
-    <tr>
-      <td>0x8847</td>
-      <td>多协议标签交换（单播）（MPLS：Multi-Protocol Label Switching unicast）</td>
-    </tr>
-    <tr>
-      <td>0x8848</td>
-      <td>多协议标签交换（组播）（MPLS, Multi-Protocol Label Switching multicast）</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>More Read  <a href="http://technow.blog.51cto.com/746816/320773">http://technow.blog.51cto.com/746816/320773</a></p>
 
 ]]></content>
   </entry>

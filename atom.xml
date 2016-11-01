@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-10-31T06:23:40+00:00</updated>
+  <updated>2016-11-01T11:13:56+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[pkcs11-helper编译]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/11/01/pkcs11-helper-build/"/>
+    <updated>2016-11-01T18:37:08+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/11/01/pkcs11-helper-build</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/OpenSC/pkcs11-helper/releases">pkcs11-helper</a>也真是的，软件包里<code>INSTALL</code>里说用<code>./configure</code>生成<code>Makefile</code>，但是软件包还没有<code>configure</code>文件，需要<code>autoreconf</code>生成<code>configure</code>文件。妈蛋，<code>INSTALL</code>多写一句<code>autoreconf -ivf</code>会死吗？</p>
+
+<!--more-->
+
+<h1 id="section">准备</h1>
+
+<p>确保系统安装了<code>autoconf</code> <code>automake</code> <code>libtool</code></p>
+
+<h1 id="section-1">下载源代码解压</h1>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$wget https://github.com/OpenSC/pkcs11-helper/archive/pkcs11-helper-1.10.tar.gz
+</span><span class="line">$tar -zxvf pkcs11-helper-1.10.tar.gz
+</span><span class="line">$cd pkcs11-helper-pkcs11-helper-1.10
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h1 id="makefile">生成Makefile</h1>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$autoreconf -ivf
+</span><span class="line">$./configure
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h1 id="section-2">编译安装</h1>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$make
+</span><span class="line">$make install
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h1 id="section-3">参考</h1>
+
+<p><a href="https://github.com/OpenSC/pkcs11-helper/issues/2">https://github.com/OpenSC/pkcs11-helper/issues/2</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[西部数据硬盘Load_Cycle_Count增长过快的问题]]></title>
@@ -1701,147 +1747,6 @@ changed (this has happened to me).</p>
 </table>
 
 <p>线程不安全函数</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux内核代码瘦身]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip/"/>
-    <updated>2016-07-20T21:07:23+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/07/20/linux-kernel-source-strip</id>
-    <content type="html"><![CDATA[<p>linux内核代码瘦身，原理：把不参与编译的代码删除，这样用Source Insight工具阅读代码的时候就轻简了很多。</p>
-
-<p>例子数据：原本一个嵌入式linux内核代码1万7千个C文件，精简之后只有1222个C文件，删除了1万6千个C文件。</p>
-
-<!--more-->
-
-<h4 id="section">第一步 清理临时文件</h4>
-
-<p>内核编译clean，把内核编译的临时文件都清除。</p>
-
-<h4 id="c">第二步 保存所有C文件路径</h4>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">cd linux-3.4.5
-</span><span class="line">find ./ -name "*.c" | tee allsrc.txt
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="section-1">第三步 编译内核</h4>
-
-<p>无需多讲，编译内核。</p>
-
-<h4 id="strippy">第四步 用strip.py清除不参与编译的代码</h4>
-
-<p>部分代码使用了include C代码，所以用<code>ignorefilelist</code>自定义文件过滤。<code>scripts</code>是工具目录，<code>./drivers/usb/gadget/</code>里inlucde C代码太多了，所以这两个目录直接目录过滤，添加到<code>ignorepathlist</code>自定义目录过滤里。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import sys
-</span><span class="line">import os
-</span><span class="line">
-</span><span class="line">ignorefilelist=['fsr-2level.c','fsr-3level.c','percpu-km.c','percpu-vm.c','nf_conntrack_h323_types.c']
-</span><span class="line">ignorepathlist=['./scripts/','./drivers/usb/gadget/']
-</span><span class="line">
-</span><span class="line">f = open('allsrc.txt','r')  
-</span><span class="line">
-</span><span class="line">for line in f.readlines():
-</span><span class="line">	cfilename=line.strip('\n')
-</span><span class="line">	objfilename=cfilename.replace(".c",".o")
-</span><span class="line">	asmfilename=cfilename.replace(".c",".s")
-</span><span class="line">	exefilename=cfilename.replace(".c","")
-</span><span class="line">
-</span><span class="line">	cfile=cfilename.split('/')[-1]
-</span><span class="line">	#print cfile
-</span><span class="line">	
-</span><span class="line">	flag=False
-</span><span class="line">	for item in ignorepathlist:
-</span><span class="line">		if cfilename.find(item)!=-1:
-</span><span class="line">			#print cfilename
-</span><span class="line">			flag=True
-</span><span class="line">			break
-</span><span class="line">	if flag:
-</span><span class="line">		continue
-</span><span class="line">	
-</span><span class="line">	if cfile in ignorefilelist:
-</span><span class="line">		#print cfile,cfilename
-</span><span class="line">		continue
-</span><span class="line">	
-</span><span class="line">	if  os.path.exists(objfilename):
-</span><span class="line">		continue
-</span><span class="line">	if os.path.exists(asmfilename):
-</span><span class="line">		#print asmfilename
-</span><span class="line">		continue
-</span><span class="line">	if os.path.exists(exefilename):
-</span><span class="line">		#print exefilename
-</span><span class="line">		continue
-</span><span class="line">	
-</span><span class="line">	if os.path.exists(cfilename):
-</span><span class="line">		print objfilename,"NOT USING and rm ",cfilename
-</span><span class="line">		os.remove(cfilename)
-</span><span class="line">		pass
-</span><span class="line">
-</span><span class="line">f.close()
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>保存代码为<code>strip.py</code>，保存在内核目录。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">cd linux-3.4.5
-</span><span class="line">python strip.py
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h3 id="section-2">第五步 重新编译内核</h3>
-
-<p>重新编译内核。</p>
-
-<p>如果编译成功，清理临时文件后保存代码用于阅读；<br />
-如果编译失败，恢复缺失的文件，修改strip.py，接着编译，直到内核重新编译通过，清理临时文件后保存代码用于阅读。</p>
 
 ]]></content>
   </entry>
