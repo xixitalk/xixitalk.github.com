@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-11-01T11:13:56+00:00</updated>
+  <updated>2016-11-12T07:53:39+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[华硕路由器外接硬盘格式化成什么格式最好]]></title>
+    <link href="http://xixitalk.github.io/blog/2016/11/12/How-to-Format-Usb-Drive-for-asus-router/"/>
+    <updated>2016-11-12T15:33:41+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2016/11/12/How-to-Format-Usb-Drive-for-asus-router</id>
+    <content type="html"><![CDATA[<p>关键词：华硕 AC66U AC68U 外接硬盘 文件系统 EXT4 EXT3 NTFS FAT32</p>
+
+<p>我有一台华硕AC66U，外接了一块2.5吋移动硬盘。不知道格式化成什么格式最好？硬盘本来是EXT4格式的，插上发现没有自动挂载，搜索发现，AC66U建议用<strong>EXT3</strong>格式，而AC68U建议用<strong>EXT4</strong>格式。果然格式成ext3后，插上AC66U后<strong>自动挂载</strong>了。其他华硕机器未验证。</p>
+
+<!--more-->
+
+<blockquote>
+  <p>For usb hdd Mipsel devices is EXT3 (RT-N16, RT-N66U, RT-AC66U and all other versions: /R /W)</p>
+</blockquote>
+
+<p>RT-N16, RT-N66U, RT-AC66U是<a href="https://en.wikipedia.org/wiki/MIPS_instruction_set">MIPS</a>架构的CPU，建议最好格式化成EXT3.</p>
+
+<blockquote>
+  <p>For usb hdd ARM devices is EXT4 (RT-AC56U, RT-AC68U, RT-AC87U, RT-AC88U, RT-AC3200, RT-AC5300 and all other versions: /P /R /W)</p>
+</blockquote>
+
+<p>RT-AC56U, RT-AC68U, RT-AC87U, RT-AC88U, RT-AC3200, RT-AC5300是<a href="https://en.wikipedia.org/wiki/ARM_architecture">ARM</a>架构的CPU，建议最好格式化成EXT4.</p>
+
+<p>华硕路由器系统是Linux，对windows的NTFS和FAT32支持并不好，所以建议外接硬盘使用EXT4或者EXT3，如果不支持也许应该升级个路由器了。</p>
+
+<h2 id="section">参考文章</h2>
+
+<p><a href="https://www.hqt.ro/how-to-format-usb-drive/">How to Format Usb Drive</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[pkcs11-helper编译]]></title>
@@ -519,98 +551,6 @@ ANY=0xFF //指定任何以前列出的通配符。
     <p><a href="http://ju.outofmemory.cn/entry/187521">域名DNS解析相关概念 — A记录，MX记录，CNAME记录，url转发，ns记录</a></p>
   </li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[TCP/IP之IP包头部]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip/"/>
-    <updated>2016-10-10T17:03:51+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/10/10/ipheader-of-tcpip</id>
-    <content type="html"><![CDATA[<p>TCP/IP之IP包头部</p>
-
-<!--more-->
-
-<p><img src="http://www.informit.com/content/images/chap3_0672323516/elementLinks/03table02.gif" alt="iphead" /></p>
-
-<h3 id="ip">IP包头</h3>
-
-<table border="1">
-  <tbody>
-    <tr>
-      <td>4位版本</td>
-      <td>4位首部长度</td>
-      <td>8位服务类型</td>
-      <td>16位总长度</td>
-    </tr>
-    <tr>
-      <td>16位标识</td>
-      <td>3位标志</td>
-      <td>13位片偏移</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8位生存时间（TTL）</td>
-      <td>8位协议</td>
-      <td>16位首部校验和</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>32位源IP地址</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>32位目的IP地址</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>可选字段</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>不定长度数据</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>4位版本：4表示IPv4<br />
-4位首部长度：一般是5，标识首部20bytes<br />
-<strong>注释： <code>08 00 45 00</code>是典型的IP包特征</strong>,08 00是以太网帧头中IP包类型标识<br />
-8位服务类型：<br />
-16位总长度：整个IP包长度（如果数据是UDP包，包含了UDP包的长度）<br />
-8位协议：<strong>0x11是UDP，0x06是TCP</strong><br />
-8位TTL：0x80（128）</p>
-
-<h3 id="udp">UDP包头</h3>
-
-<table border="1">
-  <tbody>
-    <tr>
-      <td>16位源端口</td>
-      <td>16位目的端口</td>
-    </tr>
-    <tr>
-      <td>16位长度</td>
-      <td>16位校验和</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>整个UDP包头8个字节。<br />
-16位长度：包括UDP头和数据包（比如上层DNS协议）</p>
-
-<p>READ MORE<br />
-<a href="http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3">http://www.informit.com/articles/article.aspx?p=28782&amp;seqNum=3</a></p>
 
 ]]></content>
   </entry>
