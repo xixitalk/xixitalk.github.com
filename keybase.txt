@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/xixitalk
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://xixitalk.github.io
+  * I am xixitalk (https://keybase.io/xixitalk) on keybase.
+  * I have a public key with fingerprint 81EA F423 F64F 7730 BF0E  182D 6DC8 72E5 A611 F93B
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01011e07a2552afc617f204b3316289b8424393f6eff45249d3791ad01fc2cb1753b0a",
+            "fingerprint": "81eaf423f64f7730bf0e182d6dc872e5a611f93b",
+            "host": "keybase.io",
+            "key_id": "6dc872e5a611f93b",
+            "kid": "01011e07a2552afc617f204b3316289b8424393f6eff45249d3791ad01fc2cb1753b0a",
+            "uid": "e8452fbef8d964b8aa4afbe612220b00",
+            "username": "xixitalk"
+        },
+        "service": {
+            "hostname": "xixitalk.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1486648376,
+    "expire_in": 157680000,
+    "prev": "e84303ba0dc0a39b236b43de19365d2f9d6ad5eb5c3ab923ee788d99357a61d8",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.62
+Comment: https://keybase.io/crypto
+
+yMIjAnicrVJbSFRBGN7dMss20CiKzIIjFQtaZ2bOdYMeottTNymD0nXmzJzdk3p2
+2z1rymYFgYX2UrBEN8GyyBCxG0V3JSqzVJDIUEoIw4pCjJCeao7VS/TYvAz/P9/3
+zff9/I9mTfFkefu3506/IX80vN0dZ5OeHWccLSWQKK0RgimhnE1erIKyhBMqt6gQ
+FEQgAsBEFUNZhtg0FKCaUJQIQkCBmk40CUpIR6bCTFOSoaRTpOoAUxGYBjQIUGVE
+RCwUCKZlh1k8Frdsh8tqgGFTgpwnmaqKRGKKDGiQKtTQVMhkrABg6ohwYiSacBnc
+HMEJttyK8h4vQpP2/oH/z76Tk3JM4yCTMFOjuiIRDWMJ81IBEEKRiKILTLC4jSsZ
+R1db1ZaDK8qF2gKBd6ssg7mDdZP8hVgetpxIkvxKFYtHnagRreDvEceJJYIu36mJ
+uYS9jIR+S4WIZVM+Tc6oYvGEFbWFIOBIw7FcbSBpiiJpSFUKBFYds+IsZLkIWVU0
+kR/3H1b1KxMSEcEiNUSMdAKRQiREGdCRIlNo6lTBVGZENhAmOkSMqRqPryNZ5eOm
+muCG22NHhaDEbeIwl0xYYRs7yTgTajsf7prq8WZ5pmX43C3zZM3I/rN7mR8yfxQ1
+XoxESsc7z7yuXz3av660A45OPOv2F83xla0ab84pNfz9d3IP1N0cWdLQXjx4Mm/M
+Wx68n1m0aEtPycbK9if9l3v7sgP00/F00wR+PjM98CpV8qDpzeiplYVKfSjQEPCN
+tub3DhTuv//pysRYhi/naQ2t+Jyfrq4dqULfW7rGmof7Eot7am89Xps+cbar/ej8
+29eTgXnb8l4siGc88PZtS4YjdVtvFYttrX0aQHjZsd1lTQ29a64tXeqPvRsytnQc
+Xv/10L2DG94PNtuXUrjl0stzC9G+wFChx/dt7uYV/p2pC4dPH2m3r7btLfacb5pa
+33i3+c7b9Jdsf9a04U1ls38CyrFCaA==
+=NCQ/
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/xixitalk
+
+==================================================================
