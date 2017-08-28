@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-08-28T03:24:10+00:00</updated>
+  <updated>2017-08-28T04:29:32+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -201,16 +201,7 @@ FlickRaw.proxy = "http://192.168.1.106:8118/"
 
 <p><code>b</code>是指big，图片大小约为1024x768，基本可以满足博客显示。如果要更小图片，可以用<code>m</code>,表示medium。再小的用<code>sq</code>,表示square thumbnail。</p>
 
-<p>Liquid error: 746: unexpected token at '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head>
-<title>Proxy error: 502 Server dropped connection.</title>
-</head><body>
-<h1>502 Server dropped connection</h1>
-<p>The following error occurred while trying to access <strong>http://api.flickr.com/services/rest/</strong>:<br><br>
-<strong>502 Server dropped connection</strong></p>
-<hr>Generated Mon, 28 Aug 2017 11:28:24 HKT by Polipo on <em>raspberrypi:8118</em>.
-</body></html>
-'</p>
+<p>Liquid error: FlickRaw::OAuthClient::FailedResponse</p>
 
 <h3 id="section-1">参考</h3>
 
