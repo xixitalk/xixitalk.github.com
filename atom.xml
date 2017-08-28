@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2016-11-12T08:14:34+00:00</updated>
+  <updated>2017-08-28T03:24:10+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[当小孩吞吃了一个红枣核]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/08/28/When-a-child-eat-a-chinese-date-stone/"/>
+    <updated>2017-08-28T10:51:54+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/08/28/When-a-child-eat-a-chinese-date-stone</id>
+    <content type="html"><![CDATA[<p><strong>不要给小孩吃红枣！不要给小孩吃红枣！不要给小孩吃红枣！</strong></p>
+
+<!--more-->
+
+<p>新疆红枣的枣核是那种两头尖尖的长枣核（大于2厘米），小孩吞吃很危险。</p>
+
+<p>上周一天晚上儿子吞吃了一颗枣核，枣是新疆红枣，枣核扁长（约2厘米），两头尖尖。因为担心肠穿孔风险，从明基医院辗转到儿童医院，第二天胃镜没有找到（离吃红枣22小时），最后第三天自己拉出来了（离吃枣48小时）。我在反思自己，除了最大的错误是给小孩吃红枣外，治疗的抉择事后仔细想想也很不合理，胃镜本不是必须，我认为<strong>南京市儿童医院</strong>上来就开<strong>病危住院单</strong>也是很不负责任的。事后治疗的措施建议发在网上给其他人参考。</p>
+
+<p>如果小孩吞吃了枣核，去医院挂<strong>消化科</strong>，其他科不管用，<strong>胃镜手术也在消化科</strong>。如果<strong>肠穿孔治疗在外科</strong>，因为需要腹腔手术。</p>
+
+<ol>
+  <li>如果有疼痛症状，怀疑卡在食管、扎在胃壁上，选择胃镜。胃镜手术要提前禁水禁食6个小时。胃镜手术后要吃流质半流质易消化食物4天。</li>
+  <li>如果没有症状，可以选择自行拉出。原因是小孩胃镜要全身麻醉，麻醉和胃镜对胃粘膜的损伤不得不考虑。
+具体措施：住院观察，多吃粗纤维食物，检查每次大便，看看枣核是否拉出，化验每次大便，看胃肠是否出血。如果有穿孔风险医院及时处理。</li>
+  <li>如果离吃的时间比较长（大于12小时），可以采取自行拉出。
+原因是如果做胃镜，枣核不一定在胃里，花钱小孩还受罪。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[华硕路由器外接硬盘格式化成什么文件系统最好]]></title>
@@ -1656,48 +1682,6 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
 
 <p><a href="http://blog.csdn.net/njuitjf/article/details/5821716">http://blog.csdn.net/njuitjf/article/details/5821716</a><br />
 <a href="http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file">http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[pthread和errno]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/08/01/pthread-errno/"/>
-    <updated>2016-08-01T19:10:02+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/08/01/pthread-errno</id>
-    <content type="html"><![CDATA[<p>pthread和errno：pthread函数在出错的时候不会设置errno，而是直接返回错误值。</p>
-
-<!--more-->
-
-<blockquote>
-  <p><strong>pthread_create() won’t ever set errno</strong>.  pthread function returns zero
-on success, and an error code on error.  So the value you are seeing
-in errno is either the result of an error in some previous other
-system call, or errno is just starting out at EINTR and never getting
-changed (this has happened to me).</p>
-</blockquote>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"> #define handle_error_en(en, msg) \
-</span><span class="line">               do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
-</span><span class="line">
-</span><span class="line">s = pthread_create(&amp;tinfo[tnum].thread_id, &amp;attr,
-</span><span class="line">                      &amp;thread_start, &amp;tinfo[tnum]);
-</span><span class="line">if (s != 0)
-</span><span class="line">    handle_error_en(s, "pthread_create");
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="section">参考资料</h4>
-
-<p><a href="http://man7.org/linux/man-pages/man3/pthread_create.3.html">http://man7.org/linux/man-pages/man3/pthread_create.3.html</a><br />
-<a href="https://sourceware.org/ml/libc-alpha/2000-10/msg00153.html">https://sourceware.org/ml/libc-alpha/2000-10/msg00153.html</a><br />
-<a href="http://www.oschina.net/question/234345_40365">http://www.oschina.net/question/234345_40365</a></p>
 
 ]]></content>
   </entry>

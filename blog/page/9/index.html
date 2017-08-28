@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="下表是某寿险保费列表： ">
+  <meta name="description" content="疑问：数字签名时的私钥加密 公钥解密怎么理解？ 前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的私钥加密 公钥解密是怎么回事呢？ ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/digest-signature/">数字签名时的私钥加密公钥解密</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T15:33:05+00:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/digest-signature/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>疑问：数字签名时的<code>私钥加密 公钥解密</code>怎么理解？</p>
+
+<p>前一段时间设计系统启动,为了保障安全使用数字签名进行版本验证，平常的不对称加解密（公钥加密，私钥解密）很容易理解，而数字签名时的<code>私钥加密 公钥解密</code>是怎么回事呢？</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/06/07/digest-signature/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -489,52 +534,6 @@ TestDisk, Data Recovery</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/11/func-is-china-ip/">算法：判断是否是中国IP？</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-11T19:11:00+00:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/11/func-is-china-ip/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>世界上有五个<a href="http://en.wikipedia.org/wiki/Regional_Internet_registry">区域互联网注册管理机构</a>，负责亚洲和太平洋地区的是亚太网络信息中心(APNIC)。<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest">点击这里</a>可以获得亚太地址各个国家或地区申请到的IP地址区域。
-中国共申请到42亿中的330026496个IPv4地址（约3.3亿）,分布在3579块不同的区域。<br />
-IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑用空间换时间思路。所有2的32次方的IP，分布在256x256的区域内，每个区域表述addr1.addr2.*.*表述的IP（65536个IP）。
-判断一个IP首先由addr1和addr2直接找到addr1.addr2.*.*的区域块，在块内进行搜索判断，这样查询的次数将大大降低。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/03/11/func-is-china-ip/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -549,7 +548,7 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (15)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (5)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (18)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (5)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (18)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
 </section>
 
   
@@ -558,7 +557,7 @@ IPv4地址格式是addr1.addr2.addr3.addr4，为了减少查找次数，考虑�
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - xixitalk -
+  Copyright &copy; 2017 - xixitalk -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
