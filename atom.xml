@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-08-28T04:29:32+00:00</updated>
+  <updated>2017-09-02T22:28:47+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派3上编译haproxy]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/09/03/compile-haproxy-on-raspberry3/"/>
+    <updated>2017-09-03T06:01:08+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/09/03/compile-haproxy-on-raspberry3</id>
+    <content type="html"><![CDATA[<p>最近发现树莓派上haproxy有点问题，Google Play下载有些不正常。所以想更新编译haproxy。raspbian软件仓库的haproxy的版本比较低，所以直接下载haproxy源代码编译。更新过程记录下来。</p>
+
+<!--more-->
+
+<p>为了配置省事，建议先安装raspbian软件仓库里的haproxy，然后编译好的haproxy的直接覆盖，这样启动配置不用费心配置。</p>
+
+<p>1、下载源代码并解压</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">wget http://www.haproxy.org/download/1.7/src/haproxy-1.7.9.tar.gz
+</span><span class="line">tar xzvf haproxy-1.7.9.tar.gz
+</span><span class="line">cd haproxy-1.7.9/
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>2、编译</p>
+
+<p>haproxy不能直接make，需要带配置参数。先查看已经安装的haproxy的编译参数。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">haproxy -vv OPTIONS = USE_GETADDRINFO=1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>执行上面的命令会得到类似以下信息。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">Build options :
+</span><span class="line">  TARGET  = linux2628
+</span><span class="line">  CPU     = generic
+</span><span class="line">  CC      = gcc
+</span><span class="line">  CFLAGS  = -O2 -g -fno-strict-aliasing -Wdeclaration-after-statement
+</span><span class="line">  OPTIONS =
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>make编译</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">make  TARGET=linux2628   CPU=generic  CFLAGS="-O2 -g -fno-strict-aliasing -Wdeclaration-after-statement"
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>正常编译完，在haproxy-1.7.9目录下就会生成haproxy可执行文件。用<code>./haproxy -vv</code>查看编译好的haproxy版本号。</p>
+
+<p>3、替换系统里的haproxy</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$which haproxy
+</span><span class="line">/usr/sbin/haproxy
+</span><span class="line">$sudo service haproxy stop
+</span><span class="line">$sudo cp ./haproxy /usr/sbin/haproxy
+</span><span class="line">$sudo service haproxy start
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>4、haproxy负载平衡shadowsocks配置参考</p>
+
+<p><code>14826</code>是haproxy提供的端口，<code>12222</code>是haproxy的状态web端口，可以用浏览器访问http://IP:12222查看haproxy状态。<code>j1.vps.com</code>等是多个SS server端。SS local访问haproxy的<code>14826</code>端口，IP为haproxy的侦听IP，SS local其他配置和直接访问SS server是一样的。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">global
+</span><span class="line">ulimit-n 51200
+</span><span class="line">defaults
+</span><span class="line">log global
+</span><span class="line">mode tcp
+</span><span class="line">option dontlognull
+</span><span class="line">balance roundrobin
+</span><span class="line">option persist
+</span><span class="line">timeout connect 10000
+</span><span class="line">timeout client 150000
+</span><span class="line">timeout server 150000
+</span><span class="line">
+</span><span class="line">listen stats
+</span><span class="line">bind *:12222
+</span><span class="line">mode http
+</span><span class="line">stats enable
+</span><span class="line">stats uri /
+</span><span class="line">stats refresh 10s
+</span><span class="line">
+</span><span class="line">retries 1
+</span><span class="line">option redispatch
+</span><span class="line">frontend ss-in
+</span><span class="line">bind *:14826
+</span><span class="line">default_backend ss-out
+</span><span class="line">backend ss-out
+</span><span class="line">server j1 j1.vps.com:29777 maxconn 20480 weight 1
+</span><span class="line">server j2 j2.vps.com:29777 maxconn 20480 weight 100
+</span><span class="line">server us0 us0.vps.com:29777 maxconn 20480 weight 1 backup
+</span><span class="line">server us1 us1.vps.com:29777 maxconn 20480 weight 1 backup
+</span><span class="line">server us2 us2.vps.com:29777 maxconn 20480 weight 1 backup
+</span><span class="line">server us3 us3.vps.com:29777 maxconn 20480 weight 1 backup
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[当小孩吞吃了一个红枣核]]></title>
@@ -1651,37 +1789,6 @@ sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
 <p><a href="http://blog.csdn.net/olidrop/article/details/7295908">http://blog.csdn.net/olidrop/article/details/7295908</a></p>
 
 <p><a href="https://www.gnu.org/software/libsigsegv/">https://www.gnu.org/software/libsigsegv/</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[fwrite()多了个了0x0D字符]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D/"/>
-    <updated>2016-08-02T08:18:55+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/08/02/fwrite-0x0D</id>
-    <content type="html"><![CDATA[<p>fwrite()写文件竟然多了个了0x0D字符，buffer里检查了也确实没有0x0D，一搜索竟然是如果fopen不是二进制打开，fwrite()遇到0x0A额外写一个0x0D。0D 0A是windows平台的换行符，很明显这是只有在windows平台才有的奇特现象。</p>
-
-<!--more-->
-
-<p>解决办法是fopen的flag加个<code>b</code>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">fopen("sample.bin", "w+");
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>修改成：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">fopen("sample.bin", "wb+");
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>另外想起来几年前我遇到过，也解决过，但是忘记了。这次随手记录下来。</p>
-
-<h4 id="section">参考文章</h4>
-
-<p><a href="http://blog.csdn.net/njuitjf/article/details/5821716">http://blog.csdn.net/njuitjf/article/details/5821716</a><br />
-<a href="http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file">http://stackoverflow.com/questions/5537066/strange-0x0d-being-added-to-my-binary-file</a></p>
 
 ]]></content>
   </entry>

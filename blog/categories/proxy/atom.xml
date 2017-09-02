@@ -4,7 +4,7 @@
   <title><![CDATA[Category: proxy | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/proxy/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-08-28T04:29:32+00:00</updated>
+  <updated>2017-09-02T22:28:47+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,103 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派3上编译haproxy]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/09/03/compile-haproxy-on-raspberry3/"/>
+    <updated>2017-09-03T06:01:08+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/09/03/compile-haproxy-on-raspberry3</id>
+    <content type="html"><![CDATA[<p>最近发现树莓派上haproxy有点问题，Google Play下载有些不正常。所以想更新编译haproxy。raspbian软件仓库的haproxy的版本比较低，所以直接下载haproxy源代码编译。更新过程记录下来。</p>
+
+<!--more-->
+
+<p>为了配置省事，建议先安装raspbian软件仓库里的haproxy，然后编译好的haproxy的直接覆盖，这样启动配置不用费心配置。</p>
+
+<p>1、下载源代码并解压</p>
+
+<p><code>
+wget http://www.haproxy.org/download/1.7/src/haproxy-1.7.9.tar.gz
+tar xzvf haproxy-1.7.9.tar.gz
+cd haproxy-1.7.9/
+</code></p>
+
+<p>2、编译</p>
+
+<p>haproxy不能直接make，需要带配置参数。先查看已经安装的haproxy的编译参数。</p>
+
+<p><code>
+haproxy -vv OPTIONS = USE_GETADDRINFO=1
+</code></p>
+
+<p>执行上面的命令会得到类似以下信息。</p>
+
+<p><code>
+Build options :
+  TARGET  = linux2628
+  CPU     = generic
+  CC      = gcc
+  CFLAGS  = -O2 -g -fno-strict-aliasing -Wdeclaration-after-statement
+  OPTIONS =
+</code></p>
+
+<p>make编译</p>
+
+<p><code>
+make  TARGET=linux2628   CPU=generic  CFLAGS="-O2 -g -fno-strict-aliasing -Wdeclaration-after-statement"
+</code></p>
+
+<p>正常编译完，在haproxy-1.7.9目录下就会生成haproxy可执行文件。用<code>./haproxy -vv</code>查看编译好的haproxy版本号。</p>
+
+<p>3、替换系统里的haproxy</p>
+
+<p><code>
+$which haproxy
+/usr/sbin/haproxy
+$sudo service haproxy stop
+$sudo cp ./haproxy /usr/sbin/haproxy
+$sudo service haproxy start
+</code></p>
+
+<p>4、haproxy负载平衡shadowsocks配置参考</p>
+
+<p><code>14826</code>是haproxy提供的端口，<code>12222</code>是haproxy的状态web端口，可以用浏览器访问http://IP:12222查看haproxy状态。<code>j1.vps.com</code>等是多个SS server端。SS local访问haproxy的<code>14826</code>端口，IP为haproxy的侦听IP，SS local其他配置和直接访问SS server是一样的。</p>
+
+<p>```
+global
+ulimit-n 51200
+defaults
+log global
+mode tcp
+option dontlognull
+balance roundrobin
+option persist
+timeout connect 10000
+timeout client 150000
+timeout server 150000</p>
+
+<p>listen stats
+bind *:12222
+mode http
+stats enable
+stats uri /
+stats refresh 10s</p>
+
+<p>retries 1
+option redispatch
+frontend ss-in
+bind *:14826
+default_backend ss-out
+backend ss-out
+server j1 j1.vps.com:29777 maxconn 20480 weight 1
+server j2 j2.vps.com:29777 maxconn 20480 weight 100
+server us0 us0.vps.com:29777 maxconn 20480 weight 1 backup
+server us1 us1.vps.com:29777 maxconn 20480 weight 1 backup
+server us2 us2.vps.com:29777 maxconn 20480 weight 1 backup
+server us3 us3.vps.com:29777 maxconn 20480 weight 1 backup
+```</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[git ssh使用代理]]></title>
@@ -184,29 +281,6 @@ curl_setopt($ch, CURLOPT_PROXY, '192.168.1.106:8118');
 
 <p>总结：如果从应用里打开网页推荐orweb v2，如果长时间浏览推荐使用firefox。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[利用Raspberry Pi加shadowsocks搭建代理服务]]></title>
-    <link href="http://xixitalk.github.io/blog/2013/03/02/raspberry-pi-proxy/"/>
-    <updated>2013-03-02T12:31:00+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2013/03/02/raspberry-pi-proxy</id>
-    <content type="html"><![CDATA[<p>设想：路由器和Raspberry Pi的耗电都非常小，可以常开不关机。而且手机上使用SSH -D、shadowsocks和VPN都不方便，还增加电池消耗。android上的twidere和twitter官方客户端都支持HTTP代理，iOS也方便使用pac代理。HTTP代理虽然没有加密，但是因为都在国内没有通过GFW所以不会触发屏蔽。</p>
-
-<!--more-->
-
-<p>原理如图：<br />
-<img src="/static/images/2013/03/RaspberryPiProxy.png" alt="Raspberry Pi代理原理图" /></p>
-
-<p>说明：<br />
-1. Raspberry Pi运行在一个局域网里面，分配的IP如192.168.1.103(如果是DHCP可以在路由器设置里将MAC和IP绑定，防止IP分配变化)，Raspberry Pi运行shadowsocks或者ssh D产生一个socks代理，用polipo再转化成HTTP代理。这样产生了一个192.168.1.103:7070的socks代理和一个192.168.1.103:1080的HTTP代理。<br />
-2. 路由器同时包含两个IP，一个是对内的192.168.1.1，一个运营商分配的公网IP。在路由器配置端口转发，将7070和1080都转发到192.168.1.103上。这样从外面访问路由器（公网IP）的这两个端口，就相当于访问192.168.1.103（Raspberry Pi）的对应的两个端口。<br />
-3. 局域网内PC和手机可以直接用Raspberry Pi的IP和端口进行代理。<br />
-4. 因特网上的PC和手机（外出的情况）就用路由器的公网IP和端口进行代理，当然局域网内也可以这样访问，只不过绕了路。<br />
-5. 如果Raspberry Pi再运行一个HTTP server，路由器添加80端口转发，可以实现通过pac文件进行选择性代理。<br />
-6. 路由器的公网IP变化比较快，推荐绑定3322.org的二级域名，花生壳和kmdns都不好使，3322.org支持API更新，可以用shell<a href="http://xixitalk.github.io/blog/2013/05/29/update-ddns-with-api/">脚本更新</a>，从外面用域名加端口的方式访问，这样就可以防止公网IP变了无法使用的情况。<br />
-7. 安全问题：这里的HTTP代理没有用户名密码验证，注意保密。以上端口除了系统占用的一小部分外，几乎可以修改为任意不常用的端口。  </p>
 ]]></content>
   </entry>
   

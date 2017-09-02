@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-08-28T04:29:32+00:00</updated>
+  <updated>2017-09-02T22:28:47+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,103 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派3上编译haproxy]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/09/03/compile-haproxy-on-raspberry3/"/>
+    <updated>2017-09-03T06:01:08+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/09/03/compile-haproxy-on-raspberry3</id>
+    <content type="html"><![CDATA[<p>最近发现树莓派上haproxy有点问题，Google Play下载有些不正常。所以想更新编译haproxy。raspbian软件仓库的haproxy的版本比较低，所以直接下载haproxy源代码编译。更新过程记录下来。</p>
+
+<!--more-->
+
+<p>为了配置省事，建议先安装raspbian软件仓库里的haproxy，然后编译好的haproxy的直接覆盖，这样启动配置不用费心配置。</p>
+
+<p>1、下载源代码并解压</p>
+
+<p><code>
+wget http://www.haproxy.org/download/1.7/src/haproxy-1.7.9.tar.gz
+tar xzvf haproxy-1.7.9.tar.gz
+cd haproxy-1.7.9/
+</code></p>
+
+<p>2、编译</p>
+
+<p>haproxy不能直接make，需要带配置参数。先查看已经安装的haproxy的编译参数。</p>
+
+<p><code>
+haproxy -vv OPTIONS = USE_GETADDRINFO=1
+</code></p>
+
+<p>执行上面的命令会得到类似以下信息。</p>
+
+<p><code>
+Build options :
+  TARGET  = linux2628
+  CPU     = generic
+  CC      = gcc
+  CFLAGS  = -O2 -g -fno-strict-aliasing -Wdeclaration-after-statement
+  OPTIONS =
+</code></p>
+
+<p>make编译</p>
+
+<p><code>
+make  TARGET=linux2628   CPU=generic  CFLAGS="-O2 -g -fno-strict-aliasing -Wdeclaration-after-statement"
+</code></p>
+
+<p>正常编译完，在haproxy-1.7.9目录下就会生成haproxy可执行文件。用<code>./haproxy -vv</code>查看编译好的haproxy版本号。</p>
+
+<p>3、替换系统里的haproxy</p>
+
+<p><code>
+$which haproxy
+/usr/sbin/haproxy
+$sudo service haproxy stop
+$sudo cp ./haproxy /usr/sbin/haproxy
+$sudo service haproxy start
+</code></p>
+
+<p>4、haproxy负载平衡shadowsocks配置参考</p>
+
+<p><code>14826</code>是haproxy提供的端口，<code>12222</code>是haproxy的状态web端口，可以用浏览器访问http://IP:12222查看haproxy状态。<code>j1.vps.com</code>等是多个SS server端。SS local访问haproxy的<code>14826</code>端口，IP为haproxy的侦听IP，SS local其他配置和直接访问SS server是一样的。</p>
+
+<p>```
+global
+ulimit-n 51200
+defaults
+log global
+mode tcp
+option dontlognull
+balance roundrobin
+option persist
+timeout connect 10000
+timeout client 150000
+timeout server 150000</p>
+
+<p>listen stats
+bind *:12222
+mode http
+stats enable
+stats uri /
+stats refresh 10s</p>
+
+<p>retries 1
+option redispatch
+frontend ss-in
+bind *:14826
+default_backend ss-out
+backend ss-out
+server j1 j1.vps.com:29777 maxconn 20480 weight 1
+server j2 j2.vps.com:29777 maxconn 20480 weight 100
+server us0 us0.vps.com:29777 maxconn 20480 weight 1 backup
+server us1 us1.vps.com:29777 maxconn 20480 weight 1 backup
+server us2 us2.vps.com:29777 maxconn 20480 weight 1 backup
+server us3 us3.vps.com:29777 maxconn 20480 weight 1 backup
+```</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[华硕路由器外接硬盘格式化成什么文件系统最好]]></title>
@@ -350,206 +447,6 @@ certificate #2 data here
   <li><a href="http://www.hawu.me/operation/886">squid + stunnel » 跨越长城，科学上网！</a></li>
   <li><a href="http://briteming.blogspot.com/2013/03/stunnel.html">Using stunnel With Bilateral Authentication</a></li>
   <li><a href="https://sunmaiblog.wordpress.com/2010/09/21/stunnel%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8/">Stunnel的设置和使用</a></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[DNS协议学习笔记之DNS查询]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/10/10/dns-protocol/"/>
-    <updated>2016-10-10T19:00:54+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/10/10/dns-protocol</id>
-    <content type="html"><![CDATA[<p>DNS学习概要：  </p>
-
-<ol>
-  <li>DNS几个概念：A记录、AAAA记录、MX记录、CNAME记录、TEXT记录、URL转发、NS记录</li>
-  <li>DNS查询报文</li>
-  <li>DNS响应报文</li>
-  <li>Google DNS over HTTPS</li>
-</ol>
-
-<!--more-->
-
-<h2 id="dns">1.  DNS几个概念</h2>
-
-<p>DNS几个概念，参看这两篇文章：</p>
-
-<p><a href="https://www.ezloo.com/2011/04/a_mx_cname_txt_aaaa_ns.html">常用域名记录解释：A记录、MX记录、CNAME记录、TXT记录、AAAA记录、NS记录</a></p>
-
-<p><a href="http://ju.outofmemory.cn/entry/187521">域名DNS解析相关概念 — A记录，MX记录，CNAME记录，url转发，ns记录</a></p>
-
-<h2 id="dns-1">2. DNS查询报文</h2>
-
-<h3 id="section">2.1 整体结构</h3>
-
-<p><code>
-    +---------------------+
-    |        Header       |
-    +---------------------+
-    |       Question      | the question for the name server
-    +---------------------+
-    |        Answer       | RRs answering the question
-    +---------------------+
-    |      Authority      | RRs pointing toward an authority
-    +---------------------+
-    |      Additional     | RRs holding additional information
-    +---------------------+
-</code></p>
-
-<p><img src="http://s6.51cto.com/wyfs02/M02/4D/A8/wKiom1RW2KaCvqHrAABEwMOH0AE633.jpg" alt="DNSrequest" /></p>
-
-<h3 id="section-1">2.2 报文头</h3>
-
-<p><img src="http://xixitalkgithubio.qiniudn.com/dnsheader.jpg" alt="DNSrequest2" /></p>
-
-<table border="1">
-  <tbody>
-    <tr>
-      <td>16位标识</td>
-      <td>16位标志</td>
-    </tr>
-    <tr>
-      <td>16位问题数</td>
-      <td>16资源记录数</td>
-    </tr>
-    <tr>
-      <td>16位授权资源记录数</td>
-      <td>16位额外资源记录数</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>整个DNS包头12个字节。  </p>
-
-<p><strong>16位标志详解</strong></p>
-
-<table border="1">
-  <tbody>
-    <tr>
-      <td>1位QR</td>
-      <td>4位Opcode</td>
-      <td>1位AA</td>
-      <td>1位TC</td>
-      <td>1位RD</td>
-      <td>1位RA</td>
-      <td>3位清0</td>
-      <td>4位RCode</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>QR：0表示查询报文，1表示响应报文<br />
-Opcode：通常值为0(标准查询)，其他值为1(反向查询)和2(服务器状态请求)。<br />
-AA：表示授权回答(authoritative answer).<br />
-TC：表示可截断的(truncated)<br />
-RD：表示期望递归<br />
-RA：表示可用递归，随后3bit必须为0<br />
-RCode：返回码，通常为0(没有差错)和3(出错，该域名不存在)  </p>
-
-<h3 id="question">2.3 查询问题(Question)结构</h3>
-
-<p>```</p>
-
-<pre><code>                                1  1  1  1  1  1
-  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
-+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-|                                               |
-/                     QNAME                     /
-/                                               /
-+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-|                     QTYPE                     |
-+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-|                     QCLASS                    |
-+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+ ```
-</code></pre>
-
-<p>QNAME结构：<strong>域名字符串按照<code>.</code>分割，按照字符长度+字符依次排列，00结尾</strong>。</p>
-
-<p>比如www.google.com.hk，在抓包里QNAME的视图如下：</p>
-
-<p><strong>03</strong> 77 77 77 <strong>06</strong> 67 6f 6f 67 6c 65 <strong>03</strong> 63 6f 6d <strong>02</strong> 68 6b 00</p>
-
-<p>解读：03个字符（www），06个字符（google），03个字符（com），02个字符（hk），结尾是00</p>
-
-<p>QType：长度16位，表示查询类型<br />
-QClass:长度为16位，表示分类</p>
-
-<h2 id="dns-2">2.4  一个典型的DNS查询包</h2>
-
-<p>下面是<code>wireshark</code>抓取的一个DNS查询包：</p>
-
-<p><code>
-(前面是以太网包头+IP包头+UDP包头)6d 54 01 00 00 01
-00 00 00 00 00 00 03 77    77 77 06 67 6f 6f 67 6c 
-65 03 63 6f 6d 02 68 6b    00 00 01 00 01
-</code></p>
-
-<p><code>6d 54</code>是标识，每次查询变化，DNS回应本次查询会用相同的标识<br />
-<code>01 00</code>是标志，表示RD期望递归为1<br />
-<code>00 01</code>是问题数，一个问题查询；其他三个查询记录数都是0<br />
-接下来是QName，结构如上文说明<br />
-倒数第二个<code>00 01</code>是QType，值是1<br />
-最后一个<code>00 01</code>是QClass，值是是1  </p>
-
-<p><code>
-enum QueryType //查询的资源记录类型。 
-{ 
-A=0x01, //指定计算机 IP 地址。 
-NS=0x02, //指定用于命名区域的 DNS 名称服务器。 
-MD=0x03, //指定邮件接收站（此类型已经过时了，使用MX代替） 
-MF=0x04, //指定邮件中转站（此类型已经过时了，使用MX代替） 
-CNAME=0x05, //指定用于别名的规范名称。 
-SOA=0x06, //指定用于 DNS 区域的“起始授权机构”。 
-MB=0x07, //指定邮箱域名。 
-MG=0x08, //指定邮件组成员。 
-MR=0x09, //指定邮件重命名域名。 
-NULL=0x0A, //指定空的资源记录 
-WKS=0x0B, //描述已知服务。 
-PTR=0x0C, //如果查询是 IP 地址，则指定计算机名；否则指定指向其它信息的指针。 
-HINFO=0x0D, //指定计算机 CPU 以及操作系统类型。 
-MINFO=0x0E, //指定邮箱或邮件列表信息。 
-MX=0x0F, //指定邮件交换器。 
-TXT=0x10, //指定文本信息。 
-UINFO=0x64, //指定用户信息。 
-UID=0x65, //指定用户标识符。 
-GID=0x66, //指定组名的组标识符。 
-ANY=0xFF //指定所有数据类型。 
-};
-</code></p>
-
-<p><code>
-enum QueryClass //指定信息的协议组。 
-{ 
-IN=0x01, //指定 Internet 类别。 
-CSNET=0x02, //指定 CSNET 类别。（已过时） 
-CHAOS=0x03, //指定 Chaos 类别。 
-HESIOD=0x04,//指定 MIT Athena Hesiod 类别。 
-ANY=0xFF //指定任何以前列出的通配符。 
-};
-</code></p>
-
-<h3 id="section-2">学习资料</h3>
-
-<ol>
-  <li>
-    <p><a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.zytrax.com/books/dns/ch15/">Chapter 15 DNS Messages</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.iprotocolsec.com/2012/01/13/%E4%BD%BF%E7%94%A8wireshark%E5%AD%A6%E4%B9%A0dns%E5%8D%8F%E8%AE%AE%E5%8F%8Adns%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/">使用Wireshark学习DNS协议及DNS欺骗原理</a></p>
-  </li>
-  <li>
-    <p><a href="http://www.cnblogs.com/topdog/archive/2011/11/15/2250185.html">DIY一个DNS查询器：了解DNS协议</a></p>
-  </li>
-  <li>
-    <p><a href="https://www.ezloo.com/2011/04/a_mx_cname_txt_aaaa_ns.html">常用域名记录解释：A记录、MX记录、CNAME记录、TXT记录、AAAA记录、NS记录</a></p>
-  </li>
-  <li>
-    <p><a href="http://ju.outofmemory.cn/entry/187521">域名DNS解析相关概念 — A记录，MX记录，CNAME记录，url转发，ns记录</a></p>
-  </li>
 </ol>
 
 ]]></content>

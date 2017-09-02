@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="我的AStyle代码格式工具的选项：AStyle.exe -A1 -C -S -K -Y -f -s4 -p -U -o -n main.c 在notepad++里添加：运行(R)--运行(R) 选择AStyle.exe，选项输入-A1 -C -S -K -Y -f -s4 -p -U -o -n &hellip;">
+  <meta name="description" content="1. 内存占用 linux内存占用分两部分：一部分是不可见的，内核代码段数据段的本身的占用空间，对于PC 上几个G的内存来说可能很小可以忽略不计，但是只有几十M内存的嵌入式环境来说就不能忽略了。另一部分就是linux系统可见的内存，free命令里的total或者cat /proc/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/07/11/linux-mem-used/">Linux内存占用分布分析</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-07-11T21:07:20+00:00" pubdate data-updated="true">Jul 11<span>th</span>, 2016</time>
+        
+         | <a href="/blog/2016/07/11/linux-mem-used/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="section">1. 内存占用</h2>
+
+<p>linux内存占用分两部分：一部分是不可见的，内核代码段数据段的本身的占用空间，对于PC 上几个G的内存来说可能很小可以忽略不计，但是只有几十M内存的嵌入式环境来说就不能忽略了。另一部分就是linux系统可见的内存，<code>free</code>命令里的<code>total</code>或者<code>cat /proc/meminfo</code>里看到的<code>MemTotal</code>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/07/11/linux-mem-used/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -492,61 +537,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/12/curl-continue/">curl下载断点传续</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-12T17:22:17+00:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/12/curl-continue/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3 id="curl">curl下载断点传续</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl -C offset -O http://google.com/p4.mp4 
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>offset手动输入已经下载的字节数</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl -C - -O http://google.com/p4.mp4 
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><code>-C -</code>可以自动识别offet续传</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/12/curl-continue/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -561,7 +551,7 @@
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (5)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (18)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (6)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (19)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
 </section>
 
   
