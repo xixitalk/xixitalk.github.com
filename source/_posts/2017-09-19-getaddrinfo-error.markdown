@@ -137,7 +137,7 @@ uname({sysname="Linux", nodename="root", ...}) = 0
 socket(PF_INET, SOCK_DGRAM|SOCK_NONBLOCK, IPPROTO_IP) = 3
 connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("10.41.213.131")}, 16) = 0
 poll([{fd=3, events=POLLOUT}], 1, 0)    = 1 ([{fd=3, revents=POLLOUT}])
-sendmmsg(3, {{{msg_name(0)=NULL, msg_iov(1)=[{"\261\235\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\1\0\1", 31}], msg_controllen=0, msg_flags=0}, 31}, {{msg_name(0)=NULL, msg_iov(1)=[{"\321\3\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\34\0\1", 31}], msg_controllen=0, msg_flags=0}, 31}}, 2, MSG_NOSIGNAL) = 2
+sendmmsg(3, {msg_name(0)=NULL, msg_iov(1)=[{"\261\235\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\1\0\1", 31}], msg_controllen=0, msg_flags=0}, 31}, {msg_name(0)=NULL, msg_iov(1)=[{"\321\3\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\34\0\1", 31}], msg_controllen=0, msg_flags=0}, 31}, 2, MSG_NOSIGNAL) = 2
 poll([{fd=3, events=POLLIN}], 1, 5000)  = 1 ([{fd=3, revents=POLLIN}])
 ioctl(3, FIONREAD, [47])                = 0
 recvfrom(3, "\261\235\201\200\0\1\0\1\0\0\0\0\5baidu\3com\0\0\1\0\1\300"..., 2048, 0, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("10.41.213.131")}, [16]) = 47
