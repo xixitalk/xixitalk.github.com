@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-09-02T22:28:47+00:00</updated>
+  <updated>2017-09-19T06:58:00+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,182 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[getaddrinfo 返回Name or service not known错误]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/09/19/getaddrinfo-error/"/>
+    <updated>2017-09-19T14:23:57+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/09/19/getaddrinfo-error</id>
+    <content type="html"><![CDATA[<p>关键词：glibc  getaddrinfo</p>
+
+<p>同事反馈说程序调用<code>getaddrinfo</code>函数出错（arm linux平台），glibc是2.20，我想glibc不会这么弱，这么标准的函数都有问题。</p>
+
+<!--more-->
+
+<p>从网上找了一个getaddrinfo的<a href="http://beej.us/guide/bgnet/examples/showip.c">实例代码</a>，用arm交叉编译链编译后，执行，确实getaddrinfo出错，提示信息<code>Name or service not known</code>。</p>
+
+<p><code>
+arm-linux-gcc showip.c -o getaddrinfo
+./getaddrinfo baidu.com
+getaddrinfo: Name or service not known
+</code></p>
+
+<p>从strace分析getaddrinfo执行流程，和PC linux上对比，发现resolv.conf流程后，缺少socket流程。</p>
+
+<p>下面是出问题的strace流程。</p>
+
+<p><code>
+$./strace ./getaddrinfo baidu.com
+execve("./getaddrinfo", ["./getaddrinfo", "baidu.com"], [/* 12 vars */]) = 0
+brk(0)                                  = 0x11000
+uname({sysname="Linux", nodename="root", ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6fa8000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/v6l/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/v6l", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/v6l/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/v6l", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib", {st_mode=S_IFDIR|0775, st_size=0, ...}) = 0
+open("/usr/lib/tls/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls/v6l/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+open("/usr/lib/tls/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls/v6l", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+open("/usr/lib/tls/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls/vfp", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+open("/usr/lib/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/v6l/vfp", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+open("/usr/lib/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/v6l", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/vfp", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib", {st_mode=S_IFDIR|0775, st_size=0, ...}) = 0
+open("/lib/tls/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls/v6l/vfp", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+open("/lib/tls/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls/v6l", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+open("/lib/tls/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls/vfp", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+open("/lib/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls", 0xbed8c4c0)          = -1 ENOENT (No such file or directory)
+open("/lib/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/lib/v6l/vfp", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+open("/lib/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/lib/v6l", 0xbed8c4c0)          = -1 ENOENT (No such file or directory)
+open("/lib/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/lib/vfp", 0xbed8c4c0)          = -1 ENOENT (No such file or directory)
+open("/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\\f\1\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0775, st_size=1218140, ...}) = 0
+mmap2(NULL, 1254784, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb6e50000
+mprotect(0xb6f75000, 32768, PROT_NONE)  = 0
+mmap2(0xb6f7d000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x125000) = 0xb6f7d000
+mmap2(0xb6f80000, 9600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb6f80000
+close(3)                                = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6fa7000
+set_tls(0xb6fa74c0, 0xb6fa7ba8, 0xb6faa050, 0xb6fa74c0, 0xb6faa050) = 0
+mprotect(0xb6f7d000, 8192, PROT_READ)   = 0
+mprotect(0xb6fa9000, 4096, PROT_READ)   = 0
+socket(PF_LOCAL, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+connect(3, {sa_family=AF_LOCAL, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+close(3)                                = 0
+socket(PF_LOCAL, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+connect(3, {sa_family=AF_LOCAL, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+close(3)                                = 0
+brk(0)                                  = 0x11000
+brk(0x32000)                            = 0x32000
+open("/etc/nsswitch.conf", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/etc/host.conf", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+getpid()                                = 93
+open("/etc/resolv.conf", O_RDONLY|O_CLOEXEC) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=104, ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6fa6000
+read(3, "nameserver 10.30.1.9\nsearch baidu."..., 4096) = 104
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+munmap(0xb6fa6000, 4096)                = 0
+open("/usr/local/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+write(2, "getaddrinfo: Name or service not"..., 39getaddrinfo: Name or service not known
+) = 39
+exit_group(2)                           = ?
++++ exited with 2 +++
+</code></p>
+
+<p>PC linux正常的getaddrinfo strace流程，resolv.conf有<code>sendmmsg</code>和<code>recvfrom</code>流程，正是这个流程获取到了IP。</p>
+
+<p>```
+open(“/etc/resolv.conf”, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=224, …}) = 0
+read(3, “# Dynamic resolv.conf(5) file fo”…, 4096) = 224
+read(3, “”, 4096)                       = 0
+close(3)                                = 0
+uname({sysname=”Linux”, nodename=”root”, …}) = 0
+socket(PF_INET, SOCK_DGRAM|SOCK_NONBLOCK, IPPROTO_IP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(“10.41.213.131”)}, 16) = 0
+poll([{fd=3, events=POLLOUT}], 1, 0)    = 1 ([{fd=3, revents=POLLOUT}])
+sendmmsg(3, {{{msg_name(0)=NULL, msg_iov(1)=[{“\261\235\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\1\0\1”, 31}], msg_controllen=0, msg_flags=0}, 31}, {{msg_name(0)=NULL, msg_iov(1)=[{“\321\3\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\34\0\1”, 31}], msg_controllen=0, msg_flags=0}, 31}}, 2, MSG_NOSIGNAL) = 2
+poll([{fd=3, events=POLLIN}], 1, 5000)  = 1 ([{fd=3, revents=POLLIN}])
+ioctl(3, FIONREAD, [47])                = 0
+recvfrom(3, “\261\235\201\200\0\1\0\1\0\0\0\0\5baidu\3com\0\0\1\0\1\300”…, 2048, 0, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(“10.41.213.131”)}, [16]) = 47
+poll([{fd=3, events=POLLIN}], 1, 4998)  = 1 ([{fd=3, revents=POLLIN}])
+ioctl(3, FIONREAD, [81])                = 0
+recvfrom(3, “\321\3\201\200\0\1\0\0\0\1\0\0\5baidu\3com\0\0\34\0\1\300”…, 65536, 0, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(“10.41.213.131”)}, [16]) = 81
+close(3)                                = 0
+fstat(1, {st_mode=S_IFREG|0664, st_size=7635, …}) = 0
+write(1, “IP addresses for baidu.com:\n”…, 52IP addresses for baidu.com:</p>
+
+<p>IPv4: 10.30.1.61
+) = 52
+exit_group(0)                           = ?
++++ exited with 0 +++
+```</p>
+
+<p>对比两个strace的打印，发现出问题的平台提示<code>libresolv.so.2</code>和<code>libnss_dns.so.2</code>找不到，这两个库看起来和域名解析有关，从编译链里找到这两个库<code>libnss_dns-2.20.so</code>和<code>libresolv-2.20.so</code>，放到开发板<code>/lib</code>目录，并创建好软连接。再次运行<code> ./getaddrinfo baidu.com</code>发现正常了。看来就是<code>getaddrinfo</code>依赖<code>libnss_dns</code>和<code>libresolv</code>两个动态库。坑爹的是<code>ldd getaddrinfo</code>并发现不了getaddrinfo程序依赖这两个动态库。</p>
+
+<p><code>/lib</code>新增库如下</p>
+
+<p><code>
+libnss_dns-2.20.so
+libnss_dns.so.2 -&gt; libnss_dns-2.20.so
+libresolv-2.20.so
+libresolv.so.2 -&gt; libresolv-2.20.so
+</code></p>
+
+<p>[root@~ ]# ./getaddrinfo baidu.com
+IP addresses for baidu.com
+IPv4: 10.30.1.19</p>
+
+<h3 id="section">参考资料</h3>
+
+<p><a href="http://beej-zhtw.netdpi.net/05-system-call-or-bust/5-1-getaddrinfo-start">http://beej-zhtw.netdpi.net/05-system-call-or-bust/5-1-getaddrinfo-start</a></p>
+
+<p><a href="http://beej.us/guide/bgnet/examples/showip.c">http://beej.us/guide/bgnet/examples/showip.c</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派3上编译haproxy]]></title>
@@ -284,170 +460,6 @@ verifyPeer = yes
 </code></p>
 
 <p>如果是stunnel4，配置<code>verify = 3</code>即可，点对点连接推荐3。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[stunnel双向证书认证]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/"/>
-    <updated>2016-10-13T20:09:49+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/10/13/Stunnel-With-Bilateral-Authentication</id>
-    <content type="html"><![CDATA[<p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器</strong>。</p>
-
-<p>stunnel官方的<a href="https://www.stunnel.org/auth.html">说明</a>是：（客户端）检查服务器端证书是为了防止<strong>中间人攻击</strong>；（服务器端）检查客户端证书是为了严格控制客户端的访问。</p>
-
-<ol>
-  <li>Server authentication prevents <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-In-The-Middle</a> (MITM) attacks on the encryption protocol.</li>
-  <li>Client authentication allows for restricting access for individual clients (access control).</li>
-</ol>
-
-<!--more-->
-
-<h2 id="stunnel">stunnel安全说明</h2>
-
-<p>stunnel有四种证书检查配置，用<code>verify</code>选项控制。</p>
-
-<ol>
-  <li><strong>Do not Verify Certificates</strong>  不检查证书，<strong>默认值</strong><br />
-If no verify argument is given, then stunnel will ignore any certificates offered and will allow all connections.</li>
-  <li><strong>verify = 1</strong>  如果证书存在则检查证书<br />
-Verify the certificate, if present.  </li>
-  <li><strong>verify = 2</strong>  每个SSL连接要求检查证书<br />
-Require and verify certificates<br />
-Stunnel will require and verify certificates for every SSL connection. If no certificate or an invalid certificate is presented, then it will drop the connection.</li>
-  <li><strong>verify = 3</strong>  依据本地安装的证书检查证书<br />
-Require and verify certificates against locally installed certificates.</li>
-  <li><strong>verify = 4</strong>  忽略CA chain，只验证peer certificate<br />
-ignore CA chain and only verify peer certificate</li>
-</ol>
-
-<p>当<code>verify</code>配置2 3 4的时候，都会开启双向证书认证，自行选择。这里选择<code>verify = 3</code>。</p>
-
-<p>stunnel服务端的<strong>防盗</strong>连安全机制是：在服务器<code>CAfile</code>里配置客户端的证书，并设置<code>verify = 3</code>，服务器端检查客户端证书，证书不在<code>CAfile</code>列表的客户端则会被断开连接。</p>
-
-<p>同样，为了避免客户端连接到<strong>假的服务端</strong>，则需要配置<code>verify = 3</code>，并把服务端的<strong>公钥证书</strong>放在客户端侧的<code>CAfile</code>里。</p>
-
-<h2 id="section">第一步 生成证书</h2>
-
-<p>生成两个证书，一个服务端的<code>stunnel_s.pem</code>，一个客户端的<code>stunnel_c.pem</code>，有效期设置长一点，10000天，时间可以自行调整。</p>
-
-<p><code>
-$openssl req -new -x509 -days 10000 -nodes -out stunnel_c.pem -keyout stunnel_c.pem
-$openssl req -new -x509 -days 10000 -nodes -out stunnel_s.pem -keyout stunnel_s.pem
-</code></p>
-
-<h2 id="stunnelconf">第二步 服务器端stunnel.conf</h2>
-
-<p>将证书拷贝到/etc/stunnel目录，设置权限400（文件拥有者只读，其他人不可查看）.</p>
-
-<p><code>
-$sudo cp stunnel_s.pem /etc/stunnel/
-$sudo cp stunnel_c.pem /etc/stunnel/
-$sudo chmod 400 /etc/stunnel/*.pem
-</code></p>
-
-<p>创建<code>stunnel.conf</code>文件，内容如下，拷贝到<code>/etc/stunnel/</code>目录。对外端口是8445，加密的是<a href="https://github.com/cyfdecyf/cow">cow HTTP proxy</a>的7777端口连接,根据情况自行修改。如果要调试打开<code>output</code>选项。cow是个HTTP代理，智能分流值得推荐。</p>
-
-<p>```
-;fips=no
-client = no
-sslVersion=all</p>
-
-<p>chroot = /var/lib/stunnel4/
-setuid = root
-setgid = root</p>
-
-<p>pid = /stunnel4.open.pid
-;output = /stunnel.open.log
-cert = /etc/stunnel/stunnel_s.pem
-key = /etc/stunnel/stunnel_s.pem</p>
-
-<p>[open]
-accept = 8445
-connect = 7777</p>
-
-<p>verify = 3
-CAfile = /etc/stunnel/stunnel_c.pem
-```</p>
-
-<p>重启stunnel服务器</p>
-
-<p><code>
-$sudo service  stunnel4  restart
-</code></p>
-
-<h2 id="stunnelconf-1">第三步 客户端stunnel.conf</h2>
-
-<p>我的客户端运行在windows系统，所以下面的配置是windows上stunnel验证的。其他系统配置类似，自行配置验证。</p>
-
-<p>将<code>stunnel_c.pem</code>和<code>stunnel_s.pem</code>（存放在客户端的stunnel_s.pem最好删除证书里BEGIN PRIVATE KEY私钥部分，只保留BEGIN CERTIFICATE公钥部分）拷贝到<code>stunnel</code>安装目录，修改<code>stunnel.conf</code>文件，配置如下。<code>stunnel_ip</code>是服务器端stunnel的IP，端口是8084，浏览器配置127.0.0.1:8084 HTTP代理。如果要换其他端口自行修改。</p>
-
-<p>```
-fips=no
-client = yes
-sslVersion = all
-socket = l:TCP_NODELAY=1
-socket = r:TCP_NODELAY=1
-socket = l:SO_LINGER=1:1
-socket = r:SO_LINGER=1:1</p>
-
-<p>[fastssl]
-accept = 127.0.0.1:8084
-connect = stunnel_ip:8445</p>
-
-<p>verify = 3
-CAfile = stunnel_s.pem</p>
-
-<p>cert = stunnel_c.pem
-key = stunnel_c.pem
-```</p>
-
-<p>如果客户端连接<code>stunnel</code>服务器端需要HTTP代理（公司网络），<code>fastssl</code>部分这样配置</p>
-
-<p><code>
-[fastssl]
-accept = 127.0.0.1:8084
-connect = proxy.company.com:80
-protocol = connect
-protocolHost = stunnel_ip:8445
-</code></p>
-
-<h2 id="pem">pem证书安全存放说明</h2>
-
-<p>pem证书是文本文件，里面<code>BEGIN PRIVATE KEY</code>和<code>END PRIVATE KEY</code>是私钥部分，<code>BEGIN CERTIFICATE</code>和<code>END CERTIFICATE</code>是公钥部分。<code>cert</code>和<code>key</code>配置完整的pem，而<code>CAfile</code>里只包含对方的公钥部分即可，即服务端<code>CAfile</code>是客户端的公钥，客户端<code>CAfile</code>是服务端的公钥。遵循这样原则，客户端的私钥只放客户端，服务端的私钥只放服务端，而公钥是可以多处存放的。</p>
-
-<p><code>
------BEGIN PRIVATE KEY-----
-MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCo9WC13gg9WCRX
-...
-kPpWg2PAANRi5Bmr9ScvBISSYQ==
------END PRIVATE KEY-----
------BEGIN CERTIFICATE-----
-MIID6TCCAtGgAwIBAgIJANBMqvP0YuV4MA0GCSqGSIb3DQEBBQUAMIGKMQswCQYD
-...
-o5tKoL9GcMhyjDoD9GCMfP6fY5DwPqhhqFTsPd47DzEdQ8amxPMn5kR/w/xk
------END CERTIFICATE-----
-</code></p>
-
-<p>多个公钥证书保存在一个<code>CAfile</code>里，这样排列存放。<a href="https://www.stunnel.org/howto.html">官方说明Where do I put all these certificates?</a>。</p>
-
-<p><code>
------BEGIN CERTIFICATE-----
-certificate #1 data here
------END CERTIFICATE-----
------BEGIN CERTIFICATE-----
-certificate #2 data here
------END CERTIFICATE-----
-</code></p>
-
-<h2 id="section-1">参考博客</h2>
-
-<ol>
-  <li><a href="http://www.hawu.me/operation/886">squid + stunnel » 跨越长城，科学上网！</a></li>
-  <li><a href="http://briteming.blogspot.com/2013/03/stunnel.html">Using stunnel With Bilateral Authentication</a></li>
-  <li><a href="https://sunmaiblog.wordpress.com/2010/09/21/stunnel%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8/">Stunnel的设置和使用</a></li>
-</ol>
 
 ]]></content>
   </entry>

@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>getaddrinfo 返回Name or service not known错误 - xixitalk's snippet</title>
+  <meta name="author" content="xixitalk">
+
+  
+  <meta name="description" content="关键词：glibc getaddrinfo 同事反馈说程序调用getaddrinfo函数出错（arm linux平台），glibc是2.20，我想glibc不会这么弱，这么标准的函数都有问题。 从网上找了一个getaddrinfo的实例代码，用arm交叉编译链编译后，执行， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2017/09/19/getaddrinfo-error">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xixitalk's snippet" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32324744-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xixitalk's snippet</a></h1>
+  
+    <h2>Post Longer Than 140 Characters Tweets</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xixitalk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/">Categories</a></li>
+  <li><a href="/wishlist/">My wishlist</a></li>
+  <li><a href="/about/">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">getaddrinfo 返回Name or service not known错误</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-09-19T14:23:57+00:00" pubdate data-updated="true">Sep 19<span>th</span>, 2017</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>关键词：glibc  getaddrinfo</p>
+
+<p>同事反馈说程序调用<code>getaddrinfo</code>函数出错（arm linux平台），glibc是2.20，我想glibc不会这么弱，这么标准的函数都有问题。</p>
+
+<!--more-->
+
+<p>从网上找了一个getaddrinfo的<a href="http://beej.us/guide/bgnet/examples/showip.c">实例代码</a>，用arm交叉编译链编译后，执行，确实getaddrinfo出错，提示信息<code>Name or service not known</code>。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">arm-linux-gcc showip.c -o getaddrinfo
+</span><span class="line">./getaddrinfo baidu.com
+</span><span class="line">getaddrinfo: Name or service not known
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>从strace分析getaddrinfo执行流程，和PC linux上对比，发现resolv.conf流程后，缺少socket流程。</p>
+
+<p>下面是出问题的strace流程。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$./strace ./getaddrinfo baidu.com
+</span><span class="line">execve("./getaddrinfo", ["./getaddrinfo", "baidu.com"], [/* 12 vars */]) = 0
+</span><span class="line">brk(0)                                  = 0x11000
+</span><span class="line">uname({sysname="Linux", nodename="root", ...}) = 0
+</span><span class="line">mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6fa8000
+</span><span class="line">access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/tls/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib/tls/v6l/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/tls/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib/tls/v6l", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/tls/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib/tls/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib/tls", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib/v6l/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib/v6l", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/local/lib", {st_mode=S_IFDIR|0775, st_size=0, ...}) = 0
+</span><span class="line">open("/usr/lib/tls/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib/tls/v6l/vfp", 0xbed8c4c0) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/tls/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib/tls/v6l", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/tls/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib/tls/vfp", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib/tls", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib/v6l/vfp", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib/v6l", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib/vfp", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/usr/lib", {st_mode=S_IFDIR|0775, st_size=0, ...}) = 0
+</span><span class="line">open("/lib/tls/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/lib/tls/v6l/vfp", 0xbed8c4c0)  = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/tls/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/lib/tls/v6l", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/tls/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/lib/tls/vfp", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/lib/tls", 0xbed8c4c0)          = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/v6l/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/lib/v6l/vfp", 0xbed8c4c0)      = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/v6l/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/lib/v6l", 0xbed8c4c0)          = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/vfp/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">stat64("/lib/vfp", 0xbed8c4c0)          = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+</span><span class="line">read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\\f\1\0004\0\0\0"..., 512) = 512
+</span><span class="line">fstat64(3, {st_mode=S_IFREG|0775, st_size=1218140, ...}) = 0
+</span><span class="line">mmap2(NULL, 1254784, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb6e50000
+</span><span class="line">mprotect(0xb6f75000, 32768, PROT_NONE)  = 0
+</span><span class="line">mmap2(0xb6f7d000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x125000) = 0xb6f7d000
+</span><span class="line">mmap2(0xb6f80000, 9600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb6f80000
+</span><span class="line">close(3)                                = 0
+</span><span class="line">mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6fa7000
+</span><span class="line">set_tls(0xb6fa74c0, 0xb6fa7ba8, 0xb6faa050, 0xb6fa74c0, 0xb6faa050) = 0
+</span><span class="line">mprotect(0xb6f7d000, 8192, PROT_READ)   = 0
+</span><span class="line">mprotect(0xb6fa9000, 4096, PROT_READ)   = 0
+</span><span class="line">socket(PF_LOCAL, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+</span><span class="line">connect(3, {sa_family=AF_LOCAL, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+</span><span class="line">close(3)                                = 0
+</span><span class="line">socket(PF_LOCAL, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+</span><span class="line">connect(3, {sa_family=AF_LOCAL, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+</span><span class="line">close(3)                                = 0
+</span><span class="line">brk(0)                                  = 0x11000
+</span><span class="line">brk(0x32000)                            = 0x32000
+</span><span class="line">open("/etc/nsswitch.conf", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/etc/host.conf", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">getpid()                                = 93
+</span><span class="line">open("/etc/resolv.conf", O_RDONLY|O_CLOEXEC) = 3
+</span><span class="line">fstat64(3, {st_mode=S_IFREG|0644, st_size=104, ...}) = 0
+</span><span class="line">mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6fa6000
+</span><span class="line">read(3, "nameserver 10.30.1.9\nsearch baidu."..., 4096) = 104
+</span><span class="line">read(3, "", 4096)                       = 0
+</span><span class="line">close(3)                                = 0
+</span><span class="line">munmap(0xb6fa6000, 4096)                = 0
+</span><span class="line">open("/usr/local/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/local/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">open("/usr/lib/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+</span><span class="line">write(2, "getaddrinfo: Name or service not"..., 39getaddrinfo: Name or service not known
+</span><span class="line">) = 39
+</span><span class="line">exit_group(2)                           = ?
+</span><span class="line">+++ exited with 2 +++
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>PC linux正常的getaddrinfo strace流程，resolv.conf有<code>sendmmsg</code>和<code>recvfrom</code>流程，正是这个流程获取到了IP。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">open("/etc/resolv.conf", O_RDONLY|O_CLOEXEC) = 3
+</span><span class="line">fstat(3, {st_mode=S_IFREG|0644, st_size=224, ...}) = 0
+</span><span class="line">read(3, "# Dynamic resolv.conf(5) file fo"..., 4096) = 224
+</span><span class="line">read(3, "", 4096)                       = 0
+</span><span class="line">close(3)                                = 0
+</span><span class="line">uname({sysname="Linux", nodename="root", ...}) = 0
+</span><span class="line">socket(PF_INET, SOCK_DGRAM|SOCK_NONBLOCK, IPPROTO_IP) = 3
+</span><span class="line">connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("10.41.213.131")}, 16) = 0
+</span><span class="line">poll([{fd=3, events=POLLOUT}], 1, 0)    = 1 ([{fd=3, revents=POLLOUT}])
+</span><span class="line">sendmmsg(3, {{{msg_name(0)=NULL, msg_iov(1)=[{"\261\235\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\1\0\1", 31}], msg_controllen=0, msg_flags=0}, 31}, {{msg_name(0)=NULL, msg_iov(1)=[{"\321\3\1\0\0\1\0\0\0\0\0\0\5baidu\3com\0\0\34\0\1", 31}], msg_controllen=0, msg_flags=0}, 31}}, 2, MSG_NOSIGNAL) = 2
+</span><span class="line">poll([{fd=3, events=POLLIN}], 1, 5000)  = 1 ([{fd=3, revents=POLLIN}])
+</span><span class="line">ioctl(3, FIONREAD, [47])                = 0
+</span><span class="line">recvfrom(3, "\261\235\201\200\0\1\0\1\0\0\0\0\5baidu\3com\0\0\1\0\1\300"..., 2048, 0, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("10.41.213.131")}, [16]) = 47
+</span><span class="line">poll([{fd=3, events=POLLIN}], 1, 4998)  = 1 ([{fd=3, revents=POLLIN}])
+</span><span class="line">ioctl(3, FIONREAD, [81])                = 0
+</span><span class="line">recvfrom(3, "\321\3\201\200\0\1\0\0\0\1\0\0\5baidu\3com\0\0\34\0\1\300"..., 65536, 0, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("10.41.213.131")}, [16]) = 81
+</span><span class="line">close(3)                                = 0
+</span><span class="line">fstat(1, {st_mode=S_IFREG|0664, st_size=7635, ...}) = 0
+</span><span class="line">write(1, "IP addresses for baidu.com:\n"..., 52IP addresses for baidu.com:
+</span><span class="line">
+</span><span class="line">  IPv4: 10.30.1.61
+</span><span class="line">) = 52
+</span><span class="line">exit_group(0)                           = ?
+</span><span class="line">+++ exited with 0 +++
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>对比两个strace的打印，发现出问题的平台提示<code>libresolv.so.2</code>和<code>libnss_dns.so.2</code>找不到，这两个库看起来和域名解析有关，从编译链里找到这两个库<code>libnss_dns-2.20.so</code>和<code>libresolv-2.20.so</code>，放到开发板<code>/lib</code>目录，并创建好软连接。再次运行<code> ./getaddrinfo baidu.com</code>发现正常了。看来就是<code>getaddrinfo</code>依赖<code>libnss_dns</code>和<code>libresolv</code>两个动态库。坑爹的是<code>ldd getaddrinfo</code>并发现不了getaddrinfo程序依赖这两个动态库。</p>
+
+<p><code>/lib</code>新增库如下</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">libnss_dns-2.20.so
+</span><span class="line">libnss_dns.so.2 -&gt; libnss_dns-2.20.so
+</span><span class="line">libresolv-2.20.so
+</span><span class="line">libresolv.so.2 -&gt; libresolv-2.20.so
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>[root@~ ]# ./getaddrinfo baidu.com
+IP addresses for baidu.com
+IPv4: 10.30.1.19</p>
+
+<h3 id="section">参考资料</h3>
+
+<p><a href="http://beej-zhtw.netdpi.net/05-system-call-or-bust/5-1-getaddrinfo-start">http://beej-zhtw.netdpi.net/05-system-call-or-bust/5-1-getaddrinfo-start</a></p>
+
+<p><a href="http://beej.us/guide/bgnet/examples/showip.c">http://beej.us/guide/bgnet/examples/showip.c</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-09-19T14:23:57+00:00" pubdate data-updated="true">Sep 19<span>th</span>, 2017</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:getaddrinfo 返回Name or service not known错误 http://xixitalk.github.io/blog/2017/09/19/getaddrinfo-error/" target="_blank"><img src="/images/tweet.png" /></a>
+  
+
+</div>
+
+    
+
+
+
+</footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (6)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (20)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - xixitalk -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gitblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2017/09/19/getaddrinfo-error/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2017/09/19/getaddrinfo-error/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
