@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-11-13T08:13:09+00:00</updated>
+  <updated>2017-11-13T09:19:17+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用frp代替stunnel进行服务共享和安全连接]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel/"/>
+    <updated>2017-11-13T16:14:36+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel</id>
+    <content type="html"><![CDATA[<p>需求：家里内网的服务，办公室内网可以访问。</p>
+
+<h4 id="section">环境说明</h4>
+
+<p>办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上，端口号可以自行选择其他的，和下面保持一致即可。</p>
+
+<!--more-->
+
+<h4 id="section-1">原理</h4>
+
+<p>路由器端口映射可以将家里内网的服务开放到外网，stunnel可以加密指定端口连接，这依赖于家里路由器要有公网IP。<br />
+而frp更自由一些，运行一个frp服务端，开放的服务和访问端各运行一个frp客户端，两个客户端之间可以安全通信，通过frp的stcp机制可以同时解决内网穿透和安全连接。公网IP主机可以是路由器，也可以是因特网上的VPS主机。</p>
+
+<h2 id="section-2">服务配置</h2>
+
+<p>下面以开放家里内网MEOW代理服务为例。MEOW运行在树莓派3上（192.168.1.104），端口是7788.</p>
+
+<h3 id="frp">frp服务端配置</h3>
+
+<p>frp服务运行在树莓派3，或者公网VPS上。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[common]
+</span><span class="line">bind_port = 14828
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="frp1meowfrp">frp客户端1：MEOW的frp客户端配置</h3>
+
+<p>MEOW是运行家里内网树莓派3上的HTTP代理服务。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[common]
+</span><span class="line">server_addr = 192.168.1.104
+</span><span class="line">server_port = 14828
+</span><span class="line">
+</span><span class="line">[meow_http]
+</span><span class="line">type = stcp
+</span><span class="line">sk = pass_token_123
+</span><span class="line">local_ip = 192.168.1.104
+</span><span class="line">local_port = 7788
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>pass_token_123</code>是安全密码，自行定义。因为公网IP在路由器，14828端口开启了端口映射，所以对于14828端口frp的server_addr可以是192.168.1.104、192.168.1.1或公网IP 180.109.114.114。如果是公网VPS，这里地址改成公网IP。</p>
+
+<h3 id="frp2">frp客户端2：访问客户端</h3>
+
+<p>客户端2运行在外部内网，比如办公室内网。http_proxy是办公室上网代理，如果不需要则去掉。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># frpc.ini
+</span><span class="line">[common]
+</span><span class="line">server_addr = 180.109.114.114
+</span><span class="line">server_port = 14828
+</span><span class="line">http_proxy = http://proxy.example.com.cn:80
+</span><span class="line">
+</span><span class="line">[meow_http_vistor]
+</span><span class="line">type = stcp
+</span><span class="line">role = vistor
+</span><span class="line">server_name = meow_http
+</span><span class="line">sk = pass_token_123
+</span><span class="line">bind_addr = 127.0.0.1
+</span><span class="line">bind_port = 8088
+</span><span class="line">use_encryption = true
+</span><span class="line">use_compression = true
+</span><span class="line">
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>因为MEOW是HTTP代理服务，所以浏览器设置http://127.0.0.1:8088就可以使用家里的MEOW服务了。如果是FTP、SSH、HTTP服务，换成对应的端口即可。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[内网穿透：从家里连接办公室电脑]]></title>
@@ -1989,126 +2090,6 @@ September 28, 2016 12:54 BST</p>
 2. 开发版本用<code>iptables</code>设置禁止<code>ppp0</code>网口的23端口访问，不用admin：admin这样简单的账号密码，<code>telnetd</code>可以不用默认23端口，换成4589这样端口号</p>
 
 <p>PS：因特网真是太危险了</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[netlink遇到ENOBUFS错误]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS/"/>
-    <updated>2016-08-18T08:49:42+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/08/18/netlink-ENOBUFS</id>
-    <content type="html"><![CDATA[<p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
-
-<!--more-->
-
-<p>经过内核代码分析，<code>af_netlink.c</code>里<code>netlink_broadcast_deliver</code>函数返回-1才会触发<code>ENOBUFS</code>流程。加<code>printk</code>和<code>panic</code>复现问题(因为嵌入式开发环境抓panic死机现场分析和串口log都太方便了)。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">static int netlink_broadcast_deliver(struct sock *sk, struct sk_buff *skb)
-</span><span class="line">{
-</span><span class="line">	struct netlink_sock *nlk = nlk_sk(sk);
-</span><span class="line">
-</span><span class="line">	if (atomic_read(&amp;sk-&gt;sk_rmem_alloc) &lt;= sk-&gt;sk_rcvbuf &amp;&amp;
-</span><span class="line">	    !test_bit(0, &amp;nlk-&gt;state)) {
-</span><span class="line">		skb_set_owner_r(skb, sk);
-</span><span class="line">		__netlink_sendskb(sk, skb);
-</span><span class="line">		return atomic_read(&amp;sk-&gt;sk_rmem_alloc) &gt; (sk-&gt;sk_rcvbuf &gt;&gt; 1);
-</span><span class="line">	}
-</span><span class="line">	printk("[testcode]netlink sk_rmem_alloc:%x sk_rcvbuf:%x \n",atomic_read(&amp;sk-&gt;sk_rmem_alloc),sk-&gt;sk_rcvbuf);
-</span><span class="line">	panic("[testcode]netlink broadcast panic\n");
-</span><span class="line">	return -1;
-</span><span class="line">}
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>抓取的串口log如下显示<code>sk_rcvbuf</code>确实小于<code>sk_rmem_alloc</code>了，没有空间了。</p>
-
-<blockquote>
-  <p>[   18.618473] [testcode]netlink sk_rmem_alloc:b00 sk_rcvbuf:8b8  [<br />
-18.623727] Kernel panic - not syncing: [testcode]netlink broadcast panic</p>
-</blockquote>
-
-<p>对比发现死机现场里的<code>kobject_uevent_env</code>函数里的<code>uevent_sock</code>变量里<code>sk_sndbuf</code>和<code>sk_rcvbuf</code>都是163840（160K）。而<code>netlink_broadcast_deliver</code>里sock是8b8（2232）。很明显netlink接收socket里的sock比内核驱动的sock接收buf差距太大了。</p>
-
-<p>内核sock.c里<code>sock_init_data</code>函数里进行sock初始化，<code>sk_rcvbuf</code>和<code>sk_sndbuf</code>初始化成<code>sysctl_rmem_default</code>。<code>sysctl_rmem_default</code>是个全局变量，导出的panic现场看值就是163840。</p>
-
-<blockquote>
-  <p>sk-&gt;sk_rcvbuf		=	sysctl_rmem_default;
-sk-&gt;sk_sndbuf		=	sysctl_wmem_default;</p>
-</blockquote>
-
-<p>看应用netlink的接收，果然用<code>setsockopt</code>修改了<code>RCVBUF</code>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">const int buffersize = 1024;  
-</span><span class="line">int ret;  
-</span><span class="line">
-</span><span class="line">struct sockaddr_nl snl;  
-</span><span class="line">bzero(&amp;snl, sizeof(struct sockaddr_nl));  
-</span><span class="line">snl.nl_family = AF_NETLINK;  
-</span><span class="line">snl.nl_pid = getpid();  
-</span><span class="line">snl.nl_groups = 1;  
-</span><span class="line">
-</span><span class="line">int s = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);  
-</span><span class="line">if (s == -1)   
-</span><span class="line">{  
-</span><span class="line">    perror("socket");  
-</span><span class="line">    return -1;  
-</span><span class="line">}  
-</span><span class="line">setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));  
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>C库的<code>setsockopt</code>函数会通过系统调用进入到内核<code>sock.c</code>文件里的<code>sock_setsockopt</code>函数。<code>SOCK_MIN_RCVBUF</code>就是2232。很明显应用<code>setsockopt</code>的<code>buffersize</code>是1024，乘以2还小于<code>SOCK_MIN_RCVBUF</code>，所以<code>sk_rcvbuf</code>就变成<code>SOCK_MIN_RCVBUF</code>。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">case SO_RCVBUF:
-</span><span class="line">    if (val &gt; sysctl_rmem_max)
-</span><span class="line">		val = sysctl_rmem_max;
-</span><span class="line">	if ((val * 2) &lt; SOCK_MIN_RCVBUF)
-</span><span class="line">		sk-&gt;sk_rcvbuf = SOCK_MIN_RCVBUF;
-</span><span class="line">	else
-</span><span class="line">		sk-&gt;sk_rcvbuf = val * 2;
-</span><span class="line">	break;
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>解决办法：删除应用代码里的<code>setsockopt</code>语句,这样<code>sk_rcvbuf</code>默认就是160K，或者用<code>setsockopt</code>设置合适的大小。</p>
-
-<p>通过Google发现，网络上好多netlink实例都用了<code>setsockopt</code>设置了1024的buffer大小。应用这个代码应该是从网上抄来的。</p>
 
 ]]></content>
   </entry>

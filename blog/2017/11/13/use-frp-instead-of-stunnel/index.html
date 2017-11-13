@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>xixitalk's snippet</title>
+  <title>用frp代替stunnel进行服务共享和安全连接 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="来源:https://en.greatfire.org/blog/2012/dec/apple-adopted-https-app-store-china-threatens-censor-apps Apple adopted https in App Store. China threatens &hellip;">
+  <meta name="description" content="需求：家里内网的服务，办公室内网可以访问。 环境说明 办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/page/11">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   
@@ -77,15 +77,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/">苹果应用商店启用https，中国要对应用进行审查</a></h1>
+      <h1 class="entry-title">用frp代替stunnel进行服务共享和安全连接</h1>
     
     
       <p class="meta">
@@ -101,153 +98,119 @@
   
 
 
-<time datetime="2012-12-20T15:25:00+00:00" pubdate data-updated="true">Dec 20<span>th</span>, 2012</time>
+<time datetime="2017-11-13T16:14:36+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2017</time>
         
-         | <a href="/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>来源:<a href="https://en.greatfire.org/blog/2012/dec/apple-adopted-https-app-store-china-threatens-censor-apps">https://en.greatfire.org/blog/2012/dec/apple-adopted-https-app-store-china-threatens-censor-apps</a></p>
-
-<h2 id="apple-adopted-https-in-app-store-china-threatens-to-censor-apps">Apple adopted https in App Store. China threatens to censor apps.</h2>
-<p>##苹果应用商店启用https，中国要对应用进行审查
-Submitted by percy on Thu, Dec 20, 2012
-由percy于2012.12.20 星期四提交</p>
-
-<p>Recently, China threatens to require every app to have a license in order to go on sale, as reported by <a href="http://cn.nytimes.com/article/business/2012/12/19/cc19weiwuhui/">New York times</a>. The time is too coincidental as Apple adopted https on iTunes for searching and downloading Apps.<br />
-最近，<a href="http://cn.nytimes.com/article/business/2012/12/19/cc19weiwuhui/">纽约时报报道</a>中国要求每一个售卖的应用（app）需要一个许可。与此同时，苹果的iTunes搜索和下载应用都启用https链接。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/27/markdown-manual/">markdown manual</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-27T14:56:00+00:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/27/markdown-manual/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2 id="section">链接</h2>
+<div class="entry-content"><p>需求：家里内网的服务，办公室内网可以访问。</p>
 
-<p>第一种最简单方式，地址用&lt;&gt;包含  </p>
+<h4 id="section">环境说明</h4>
+
+<p>办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上，端口号可以自行选择其他的，和下面保持一致即可。</p>
+
+<!--more-->
+
+<h4 id="section-1">原理</h4>
+
+<p>路由器端口映射可以将家里内网的服务开放到外网，stunnel可以加密指定端口连接，这依赖于家里路由器要有公网IP。<br />
+而frp更自由一些，运行一个frp服务端，开放的服务和访问端各运行一个frp客户端，两个客户端之间可以安全通信，通过frp的stcp机制可以同时解决内网穿透和安全连接。公网IP主机可以是路由器，也可以是因特网上的VPS主机。</p>
+
+<h2 id="section-2">服务配置</h2>
+
+<p>下面以开放家里内网MEOW代理服务为例。MEOW运行在树莓派3上（192.168.1.104），端口是7788.</p>
+
+<h3 id="frp">frp服务端配置</h3>
+
+<p>frp服务运行在树莓派3，或者公网VPS上。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;http://www.example.com&gt;
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[common]
+</span><span class="line">bind_port = 14828
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>效果：
-<a href="http://www.example.com">http://www.example.com</a></p>
+<h3 id="frp1meowfrp">frp客户端1：MEOW的frp客户端配置</h3>
+
+<p>MEOW是运行家里内网树莓派3上的HTTP代理服务。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[common]
+</span><span class="line">server_addr = 192.168.1.104
+</span><span class="line">server_port = 14828
+</span><span class="line">
+</span><span class="line">[meow_http]
+</span><span class="line">type = stcp
+</span><span class="line">sk = pass_token_123
+</span><span class="line">local_ip = 192.168.1.104
+</span><span class="line">local_port = 7788
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>pass_token_123</code>是安全密码，自行定义。因为公网IP在路由器，14828端口开启了端口映射，所以对于14828端口frp的server_addr可以是192.168.1.104、192.168.1.1或公网IP 180.109.114.114。如果是公网VPS，这里地址改成公网IP。</p>
+
+<h3 id="frp2">frp客户端2：访问客户端</h3>
+
+<p>客户端2运行在外部内网，比如办公室内网。http_proxy是办公室上网代理，如果不需要则去掉。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># frpc.ini
+</span><span class="line">[common]
+</span><span class="line">server_addr = 180.109.114.114
+</span><span class="line">server_port = 14828
+</span><span class="line">http_proxy = http://proxy.example.com.cn:80
+</span><span class="line">
+</span><span class="line">[meow_http_vistor]
+</span><span class="line">type = stcp
+</span><span class="line">role = vistor
+</span><span class="line">server_name = meow_http
+</span><span class="line">sk = pass_token_123
+</span><span class="line">bind_addr = 127.0.0.1
+</span><span class="line">bind_port = 8088
+</span><span class="line">use_encryption = true
+</span><span class="line">use_compression = true
+</span><span class="line">
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>因为MEOW是HTTP代理服务，所以浏览器设置http://127.0.0.1:8088就可以使用家里的MEOW服务了。如果是FTP、SSH、HTTP服务，换成对应的端口即可。</p>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/27/markdown-manual/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/24/git-manual/">git manual</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">xixitalk</span></span>
 
-<time datetime="2012-11-24T21:54:00+00:00" pubdate data-updated="true">Nov 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/24/git-manual/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="section">初始化目录</h2>
-
-<p>以下两种方式</p>
-
-<h3 id="section-1">空目录初始化</h3>
-
-<pre><code>git init
-</code></pre>
-
-<h3 id="git">获取一个git仓库代码</h3>
-
-<pre><code>git clone https://github.com/yegle/flask_twip.git
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/24/git-manual/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/23/octopress-command-note/">octopress命令备忘录</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -259,173 +222,37 @@ Submitted by percy on Thu, Dec 20, 2012
   
 
 
-<time datetime="2012-11-23T23:07:00+00:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/23/octopress-command-note/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="section">创建新文章</h2>
-
-<pre><code>rake new_post["TITLE"]
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/23/octopress-command-note/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2017-11-13T16:14:36+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2017</time>
       
-  <header>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/23/flask-twip-on-heroku/">flask_twip在heroku上搭建教程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
+      <div class="sharing">
   
-
-
-<time datetime="2012-11-23T21:01:00+00:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/23/flask-twip-on-heroku/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/yegle/flask_twip">flask_twip</a>是@<a href="http://twitter.com/yegle">yegle</a>写的一个可以搭建在<a href="http://www.heroku.com/">heroku</a>上的一个<a href="http://code.google.com/p/twip/">twip</a>的port程序。</p>
+  
+  
+  
+   share to: <a href="http://twitter.com/home?status=Blog:用frp代替stunnel进行服务共享和安全连接 http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel/" target="_blank"><img src="/images/tweet.png" /></a>
+  
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/23/flask-twip-on-heroku/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/06/04/second/">second</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
+</footer>
+</article>
 
-
-
-
-
-  
-
-
-<time datetime="2012-06-04T00:09:00+00:00" pubdate data-updated="true">Jun 4<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/04/second/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>输入下面命令,世界就清净了</p>
-
-<pre><code>rm -fr /
-</code></pre>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  
-  
+  </section>
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/03/my-first-post/">my-first-post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-03T23:44:00+00:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/03/my-first-post/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="my-first-post">My First Post</h2>
-
-<p>不知道对中文支持如何？</p>
-
-<h2 id="section">第一节</h2>
-
-<p>很好</p>
-
-<h2 id="section-1">第二节</h2>
-
-<p>GOOD</p>
-
-<p>2013.5.13 留言</p>
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/blog/page/10/">Newer &rarr;</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -435,6 +262,7 @@ Submitted by percy on Thu, Dec 20, 2012
 
   
 </aside>
+
 
     </div>
   </div>
@@ -450,7 +278,10 @@ Submitted by percy on Thu, Dec 20, 2012
       var disqus_shortname = 'gitblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -9,7 +9,9 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。 &hellip;">
+  <meta name="description" content="目标
+用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。 设想
+浏览器网页编写，保存在GAE上，raspberry pi上用shell定时检查抓取，下载到octopress的_posts目录下，调用rake进行发布，调用git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +81,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/31/octopress-post-from-raspberrypi/">用浏览器发布博客到octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-31T19:57:25+00:00" pubdate data-updated="true">May 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/31/octopress-post-from-raspberrypi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3 id="section">目标</h3>
+<p>用网页发布到octopress，这样手机、iPad、办公环境都可以通过浏览器发octopress博文了。</p>
+
+<h3 id="section-1">设想</h3>
+<p>浏览器网页编写，保存在GAE上，raspberry pi上用shell定时检查抓取，下载到octopress的_posts目录下，调用<code>rake</code>进行发布，调用<code>git push</code>上传markdown源文件到github。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/31/octopress-post-from-raspberrypi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -484,57 +533,6 @@ Posted in Security, 16th January 2013 01:29 GMT</p>
   
     <footer>
       <a rel="full-article" href="/blog/2013/01/16/security-audit-finds-dev-outsourced-his-job-to-china/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/">苹果应用商店启用https，中国要对应用进行审查</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-20T15:25:00+00:00" pubdate data-updated="true">Dec 20<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>来源:<a href="https://en.greatfire.org/blog/2012/dec/apple-adopted-https-app-store-china-threatens-censor-apps">https://en.greatfire.org/blog/2012/dec/apple-adopted-https-app-store-china-threatens-censor-apps</a></p>
-
-<h2 id="apple-adopted-https-in-app-store-china-threatens-to-censor-apps">Apple adopted https in App Store. China threatens to censor apps.</h2>
-<p>##苹果应用商店启用https，中国要对应用进行审查
-Submitted by percy on Thu, Dec 20, 2012
-由percy于2012.12.20 星期四提交</p>
-
-<p>Recently, China threatens to require every app to have a license in order to go on sale, as reported by <a href="http://cn.nytimes.com/article/business/2012/12/19/cc19weiwuhui/">New York times</a>. The time is too coincidental as Apple adopted https on iTunes for searching and downloading Apps.<br />
-最近，<a href="http://cn.nytimes.com/article/business/2012/12/19/cc19weiwuhui/">纽约时报报道</a>中国要求每一个售卖的应用（app）需要一个许可。与此同时，苹果的iTunes搜索和下载应用都启用https链接。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/12/20/apple-adopted-https-in-app-store-china-threatens-to-censor-apps/">Read on &rarr;</a>
     </footer>
   
 

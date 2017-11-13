@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="遇到一个问题，在一个内核模块里使用current-&gt;comm保存当前任务名，编译报错:dereferencing pointer to incomplete type。 ">
+  <meta name="description" content="一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：No buffer space available ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/18/netlink-ENOBUFS/">netlink遇到ENOBUFS错误</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
+        
+         | <a href="/blog/2016/08/18/netlink-ENOBUFS/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/08/18/netlink-ENOBUFS/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -463,49 +506,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2016/07/18/pthread-autoclean-when-exiting/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/07/18/kmalloc-vs-vmalloc/">linux内核kmalloc和vmalloc的区别</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-07-18T08:41:56+00:00" pubdate data-updated="true">Jul 18<span>th</span>, 2016</time>
-        
-         | <a href="/blog/2016/07/18/kmalloc-vs-vmalloc/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>kmalloc 和 vmalloc的区别</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/07/18/kmalloc-vs-vmalloc/">Read on &rarr;</a>
     </footer>
   
 

@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="octopress里怎么样用表格？octopress默认的表格border是0，看起来不整齐。这样修改可以显示border。 ">
+  <meta name="description" content="stunnel 双向证书认证：防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器。 stunnel官方的说明是：（客户端）检查服务器端证书是为了防止中间人攻击；（服务器端）检查客户端证书是为了严格控制客户端的访问。 Server authentication prevents &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/">stunnel双向证书认证</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-13T20:09:49+00:00" pubdate data-updated="true">Oct 13<span>th</span>, 2016</time>
+        
+         | <a href="/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器</strong>。</p>
+
+<p>stunnel官方的<a href="https://www.stunnel.org/auth.html">说明</a>是：（客户端）检查服务器端证书是为了防止<strong>中间人攻击</strong>；（服务器端）检查客户端证书是为了严格控制客户端的访问。</p>
+
+<ol>
+  <li>Server authentication prevents <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-In-The-Middle</a> (MITM) attacks on the encryption protocol.</li>
+  <li>Client authentication allows for restricting access for individual clients (access control).</li>
+</ol>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -470,49 +520,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2016/08/30/virus-dvrHelper/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/18/netlink-ENOBUFS/">netlink遇到ENOBUFS错误</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-08-18T08:49:42+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2016</time>
-        
-         | <a href="/blog/2016/08/18/netlink-ENOBUFS/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一个场景：USB插拔的时候内核会通过netlink广播到user层，多个应用接收这个消息。但是出现了errno 105错误，105错误是：<code>No buffer space available</code></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/08/18/netlink-ENOBUFS/">Read on &rarr;</a>
     </footer>
   
 

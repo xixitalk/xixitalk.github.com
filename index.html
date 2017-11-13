@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="环境说明: 办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的，可以借路由器的公网IP进行内网穿透。 环境 家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168 &hellip;">
+  <meta name="description" content="需求：家里内网的服务，办公室内网可以访问。 环境说明 办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/11/13/use-frp-instead-of-stunnel/">用frp代替stunnel进行服务共享和安全连接</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-11-13T16:14:36+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2017</time>
+        
+         | <a href="/blog/2017/11/13/use-frp-instead-of-stunnel/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>需求：家里内网的服务，办公室内网可以访问。</p>
+
+<h4 id="section">环境说明</h4>
+
+<p>办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上，端口号可以自行选择其他的，和下面保持一致即可。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2017/11/13/use-frp-instead-of-stunnel/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -480,56 +527,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2016/10/18/stunnel-verify-config/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/">stunnel双向证书认证</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-10-13T20:09:49+00:00" pubdate data-updated="true">Oct 13<span>th</span>, 2016</time>
-        
-         | <a href="/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>stunnel 双向证书认证：<strong>防止没授权的客户端连接stunnel服务器，防止客户端连接假的服务器</strong>。</p>
-
-<p>stunnel官方的<a href="https://www.stunnel.org/auth.html">说明</a>是：（客户端）检查服务器端证书是为了防止<strong>中间人攻击</strong>；（服务器端）检查客户端证书是为了严格控制客户端的访问。</p>
-
-<ol>
-  <li>Server authentication prevents <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-In-The-Middle</a> (MITM) attacks on the encryption protocol.</li>
-  <li>Client authentication allows for restricting access for individual clients (access control).</li>
-</ol>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2016/10/13/Stunnel-With-Bilateral-Authentication/">Read on &rarr;</a>
     </footer>
   
 
