@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-11-13T01:43:16+00:00</updated>
+  <updated>2017-11-13T02:24:23+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -38,7 +38,7 @@ bind_port = 14828</p>
 
 <p>```</p>
 
-<p>配置如上，保存为config.ini，运行执行<code>./frps -c config.ini -L log.txt  &gt; /dev/null &amp;</code></p>
+<p>配置如上，保存为config.ini，运行执行<code>nohup ./frps -c ./conf.ini -L ./log.txt &amp;</code></p>
 
 <h4 id="frp-client">运行frp client</h4>
 
@@ -54,7 +54,9 @@ http_proxy = http://proxy.example.com.cn:80</p>
 type = tcp
 local_ip = 127.0.0.1
 local_port = 3389
-remote_port = 14827</p>
+remote_port = 14827
+use_encryption = true
+use_compression = true</p>
 
 <p>```</p>
 

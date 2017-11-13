@@ -4,7 +4,7 @@
   <title><![CDATA[xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-11-13T01:43:16+00:00</updated>
+  <updated>2017-11-13T02:24:23+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -40,7 +40,7 @@
 </span><span class="line">
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>配置如上，保存为config.ini，运行执行<code>./frps -c config.ini -L log.txt  &gt; /dev/null &amp;</code></p>
+<p>配置如上，保存为config.ini，运行执行<code>nohup ./frps -c ./conf.ini -L ./log.txt &amp;</code></p>
 
 <h4 id="frp-client">运行frp client</h4>
 
@@ -57,6 +57,8 @@
 <span class="line-number">9</span>
 <span class="line-number">10</span>
 <span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">[common]
 </span><span class="line">server_addr = 180.109.114.114
 </span><span class="line">server_port = 14828
@@ -67,6 +69,8 @@
 </span><span class="line">local_ip = 127.0.0.1
 </span><span class="line">local_port = 3389
 </span><span class="line">remote_port = 14827
+</span><span class="line">use_encryption = true
+</span><span class="line">use_compression = true
 </span><span class="line">
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
