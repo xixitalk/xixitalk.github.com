@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-09-19T07:37:19+00:00</updated>
+  <updated>2017-11-13T01:43:16+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[内网穿透：从家里连接办公室电脑]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp/"/>
+    <updated>2017-11-13T09:11:13+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp</id>
+    <content type="html"><![CDATA[<p>环境说明: 我没有公网IP的VPS，但是家里路由器是有公网IP的，可以借路由器的公网IP进行内网穿透。</p>
+
+<h4 id="section">环境</h4>
+
+<p>家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1  公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上。</p>
+
+<p>内网穿透使用<a href="https://github.com/fatedier/frp/blob/master/README_zh.md">frp</a>软件。frp编译好的二进制下载地址<a href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a>，树莓派使用<code>frp_0.13.0_linux_arm.tar.gz</code>。</p>
+
+<!--more-->
+
+<h4 id="frp-server">运行frp server</h4>
+
+<p>树莓派运行frp server，配置如下：</p>
+
+<p>```
+[common]
+bind_port = 14828</p>
+
+<p>```</p>
+
+<p>配置如上，保存为config.ini，运行执行<code>./frps -c config.ini -L log.txt  &gt; /dev/null &amp;</code></p>
+
+<h4 id="frp-client">运行frp client</h4>
+
+<p>办公室运行frp client，配置如下：</p>
+
+<p>```
+[common]
+server_addr = 180.109.114.114
+server_port = 14828
+http_proxy = http://proxy.example.com.cn:80</p>
+
+<p>[rdp]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3389
+remote_port = 14827</p>
+
+<p>```</p>
+
+<p>配置说明：180.109.114.114为路由器公网IP，14828是frp服务的侦听端口；http_proxy是办公室访问因特网要通过HTTP代理，如果不需要直接去掉；3389是windows远程桌面的端口，其他服务换对应端口。</p>
+
+<p>配置如上，保存为frpc.ini，运行<code>frpc.exe -c frpc.ini</code>。</p>
+
+<h4 id="section-1">测试连接</h4>
+
+<p>在家里Windows电脑上打开远程桌面登录框，IP输入：192.168.1.104:14827，或者192.168.1.1:14827登录。</p>
+
+<p>或者在外边因特网环境，IP输入：180.109.114.114:14827登录。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[getaddrinfo 返回Name or service not known错误]]></title>
@@ -356,110 +414,6 @@ $make install
 <h1 id="section-3">参考</h1>
 
 <p><a href="https://github.com/OpenSC/pkcs11-helper/issues/2">https://github.com/OpenSC/pkcs11-helper/issues/2</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[stunnel verify选项配置]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config/"/>
-    <updated>2016-10-18T09:12:59+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/10/18/stunnel-verify-config</id>
-    <content type="html"><![CDATA[<p>verify配置认证方式，取值0 1 2 3 4。</p>
-
-<p>0 - request and ignore peer cert<br />
-1 - only validate peer cert if present<br />
-2 - always require a valid peer cert<br />
-3 - verify peer with locally installed cert<br />
-4 - ignore CA chain and only verify peer cert  </p>
-
-<!--more-->
-
-<h2 id="stunnel5-verify">stunnel5 verify配置</h2>
-
-<p>代码版本<code>stunnel 5.36</code>  文件<code>option.c</code>  函数<code>parse_service_option()</code></p>
-
-<p><code>
-    case CMD_EXEC:
-        if(strcasecmp(opt, "verify"))
-            break;
-        {
-            char *tmp_str;
-            int tmp_int=(int)strtol(arg, &amp;tmp_str, 10);
-            if(tmp_str==arg || *tmp_str || tmp_int&lt;0 || tmp_int&gt;4)
-                return "Bad verify level";
-            section-&gt;option.request_cert=1;
-            section-&gt;option.require_cert=(tmp_int&gt;=2);
-            section-&gt;option.verify_chain=(tmp_int&gt;=1 &amp;&amp; tmp_int&lt;=3);
-            section-&gt;option.verify_peer=(tmp_int&gt;=3);
-        }
-        return NULL; /* OK */
-</code></p>
-
-<p><code>verify</code>选项合法值为：0  1 2 3 4</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>取值</th>
-      <th>request_cert</th>
-      <th>require_cert</th>
-      <th>verify_chain</th>
-      <th>verify_peer</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>√</td>
-      <td>×</td>
-      <td>×</td>
-      <td>×</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>√</td>
-      <td>×</td>
-      <td>√</td>
-      <td>×</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>×</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-      <td>√</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>√</td>
-      <td>√</td>
-      <td>×</td>
-      <td>√</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>conf配置文件里，<code>requireCert</code>可以修改require_cert，<code>verifyChain</code>可以修改<code>verify_chain</code>，<code>verifyPeer</code>可以修改<code>verify_peer</code>。</p>
-
-<p>根据上表可得出，stunnel5里<code>verify = 3</code>最全面。</p>
-
-<p>我自己服务器端是<code>verify = 3</code>，客户端用的是<code>verify = 4</code>。</p>
-
-<p><code>
-verify = 4
-verifyChain = no
-verifyPeer = yes
-</code></p>
-
-<p>如果是stunnel4，配置<code>verify = 3</code>即可，点对点连接推荐3。</p>
 
 ]]></content>
   </entry>

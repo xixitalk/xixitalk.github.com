@@ -9,9 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="用API更新3322.org免费二级域名的DDNS:
-1、注册3322.org的免费二级域名：http://www.pubyun.com/
-2、把下面的shell脚步保存为updateDDNS.sh。mydomain替换为你自己的二级域名，username: &hellip;">
+  <meta name="description" content="场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +79,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/30/iptables-port-8222-to-ssh-22/">用iptables将8222端口转向22（SSH）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-30T21:53:00+00:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/30/iptables-port-8222-to-ssh-22/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/30/iptables-port-8222-to-ssh-22/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -500,58 +541,6 @@ Submitted by percy on Thu, Dec 20, 2012
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/27/markdown-manual/">markdown manual</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-27T14:56:00+00:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/27/markdown-manual/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="section">链接</h2>
-
-<p>第一种最简单方式，地址用&lt;&gt;包含  </p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">&lt;http://www.example.com&gt;
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>效果：
-<a href="http://www.example.com">http://www.example.com</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/11/27/markdown-manual/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -566,7 +555,7 @@ Submitted by percy on Thu, Dec 20, 2012
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (6)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (20)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (6)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (21)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
 </section>
 
   

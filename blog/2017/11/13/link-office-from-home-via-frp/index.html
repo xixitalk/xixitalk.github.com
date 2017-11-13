@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>用iptables将8222端口转向22（SSH） - xixitalk's snippet</title>
+  <title>内网穿透：从家里连接办公室电脑 - xixitalk's snippet</title>
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。 &hellip;">
+  <meta name="description" content="环境说明: 我没有公网IP的VPS，但是家里路由器是有公网IP的，可以借路由器的公网IP进行内网穿透。 环境 家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。路由器上配置端口映射， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22">
+  <link rel="canonical" href="http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">用iptables将8222端口转向22（SSH）</h1>
+      <h1 class="entry-title">内网穿透：从家里连接办公室电脑</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2013-05-30T21:53:00+00:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
+<time datetime="2017-11-13T09:11:13+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2017</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,14 +107,67 @@
   </header>
 
 
-<div class="entry-content"><p>场景：家里树莓派的SSH端口是22，因为我的树莓派本身没有连接键盘，所以不敢轻易修改SSH的端口。从办公室里连接树莓派的SSH，需要家里的路由器进行端口转发。比如将路由器的22端口转发到树莓派的22端口。实际上路由器的22转发不成功，想来应该路由器本身占用了22端口，或者屏蔽了22端口的访问。所以这样操作：路由器转发8222端口到树莓派的8222端口，树莓派的8222端口再转发到本机的22端口，实现外部SSH的访问。</p>
+<div class="entry-content"><p>环境说明: 我没有公网IP的VPS，但是家里路由器是有公网IP的，可以借路由器的公网IP进行内网穿透。</p>
+
+<h4 id="section">环境</h4>
+
+<p>家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1  公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上。</p>
+
+<p>内网穿透使用<a href="https://github.com/fatedier/frp/blob/master/README_zh.md">frp</a>软件。frp编译好的二进制下载地址<a href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a>，树莓派使用<code>frp_0.13.0_linux_arm.tar.gz</code>。</p>
 
 <!--more-->
 
-<p>用下面的命令进行iptables端口转发，192.168.1.106是树莓派的局域网IP  </p>
+<h4 id="frp-server">运行frp server</h4>
 
-<pre><code>sudo iptables -t nat -A PREROUTING -d 192.168.1.106 -p tcp --dport 8222 -j DNAT --to-destination 192.168.1.106:22 
-</code></pre>
+<p>树莓派运行frp server，配置如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[common]
+</span><span class="line">bind_port = 14828
+</span><span class="line">
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>配置如上，保存为config.ini，运行执行<code>./frps -c config.ini -L log.txt  &gt; /dev/null &amp;</code></p>
+
+<h4 id="frp-client">运行frp client</h4>
+
+<p>办公室运行frp client，配置如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[common]
+</span><span class="line">server_addr = 180.109.114.114
+</span><span class="line">server_port = 14828
+</span><span class="line">http_proxy = http://proxy.example.com.cn:80
+</span><span class="line">
+</span><span class="line">[rdp]
+</span><span class="line">type = tcp
+</span><span class="line">local_ip = 127.0.0.1
+</span><span class="line">local_port = 3389
+</span><span class="line">remote_port = 14827
+</span><span class="line">
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>配置说明：180.109.114.114为路由器公网IP，14828是frp服务的侦听端口；http_proxy是办公室访问因特网要通过HTTP代理，如果不需要直接去掉；3389是windows远程桌面的端口，其他服务换对应端口。</p>
+
+<p>配置如上，保存为frpc.ini，运行<code>frpc.exe -c frpc.ini</code>。</p>
+
+<h4 id="section-1">测试连接</h4>
+
+<p>在家里Windows电脑上打开远程桌面登录框，IP输入：192.168.1.104:14827，或者192.168.1.1:14827登录。</p>
+
+<p>或者在外边因特网环境，IP输入：180.109.114.114:14827登录。</p>
 
 </div>
 
@@ -138,12 +191,12 @@
   
 
 
-<time datetime="2013-05-30T21:53:00+00:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
+<time datetime="2017-11-13T09:11:13+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2017</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/iptables/'>iptables</a>, <a class='category' href='/blog/categories/raspberrypi/'>raspberrypi</a>
+    <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -155,7 +208,7 @@
   
   
   
-   share to: <a href="http://twitter.com/home?status=Blog:用iptables将8222端口转向22（SSH） http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22/" target="_blank"><img src="/images/tweet.png" /></a>
+   share to: <a href="http://twitter.com/home?status=Blog:内网穿透：从家里连接办公室电脑 http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp/" target="_blank"><img src="/images/tweet.png" /></a>
   
 
 </div>
@@ -201,8 +254,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22/';
-        var disqus_url = 'http://xixitalk.github.io/blog/2013/05/30/iptables-port-8222-to-ssh-22/';
+        var disqus_identifier = 'http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp/';
+        var disqus_url = 'http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp/';
         var disqus_script = 'embed.js';
       
     (function () {
