@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-11-13T02:24:23+00:00</updated>
+  <updated>2017-11-13T08:13:09+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -18,11 +18,11 @@
     <link href="http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp/"/>
     <updated>2017-11-13T09:11:13+00:00</updated>
     <id>http://xixitalk.github.io/blog/2017/11/13/link-office-from-home-via-frp</id>
-    <content type="html"><![CDATA[<p>环境说明: 我没有公网IP的VPS，但是家里路由器是有公网IP的，可以借路由器的公网IP进行内网穿透。</p>
+    <content type="html"><![CDATA[<p>环境说明: 办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的，可以借路由器的公网IP进行内网穿透。</p>
 
 <h4 id="section">环境</h4>
 
-<p>家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1  公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上。</p>
+<p>家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1  公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上，端口号可以自行选择其他的，和下面保持一致即可。</p>
 
 <p>内网穿透使用<a href="https://github.com/fatedier/frp/blob/master/README_zh.md">frp</a>软件。frp编译好的二进制下载地址<a href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a>，树莓派使用<code>frp_0.13.0_linux_arm.tar.gz</code>。</p>
 
