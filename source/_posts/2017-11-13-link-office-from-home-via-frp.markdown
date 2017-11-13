@@ -27,7 +27,7 @@ bind_port = 14828
 
 ```
 
-配置如上，保存为config.ini，运行执行`./frps -c config.ini -L log.txt  > /dev/null &`
+配置如上，保存为config.ini，运行执行`nohup ./frps -c ./conf.ini -L ./log.txt &`
 
 #### 运行frp client
 
@@ -44,6 +44,8 @@ type = tcp
 local_ip = 127.0.0.1
 local_port = 3389
 remote_port = 14827
+use_encryption = true
+use_compression = true
 
 ```
 
@@ -56,4 +58,5 @@ remote_port = 14827
 在家里Windows电脑上打开远程桌面登录框，IP输入：192.168.1.104:14827，或者192.168.1.1:14827登录。
 
 或者在外边因特网环境，IP输入：180.109.114.114:14827登录。
+
 
