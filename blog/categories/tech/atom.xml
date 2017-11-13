@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | xixitalk's snippet]]></title>
   <link href="http://xixitalk.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://xixitalk.github.io/"/>
-  <updated>2017-11-13T09:19:17+00:00</updated>
+  <updated>2017-11-13T11:59:21+00:00</updated>
   <id>http://xixitalk.github.io/</id>
   <author>
     <name><![CDATA[xixitalk]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用frp代替stunnel进行服务共享和安全连接]]></title>
+    <link href="http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel/"/>
+    <updated>2017-11-13T16:14:36+00:00</updated>
+    <id>http://xixitalk.github.io/blog/2017/11/13/use-frp-instead-of-stunnel</id>
+    <content type="html"><![CDATA[<p>需求：家里内网的服务，办公室内网可以访问。</p>
+
+<h4 id="section">环境说明</h4>
+
+<p>办公室电脑是 10.40.xx.xx这样的内网IP。家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。路由器上配置端口映射，把端口14828映射到树莓派3的192.168.1.104上。端口号14828可以自行选择其他的，和下面保持一致即可。</p>
+
+<!--more-->
+
+<h4 id="section-1">原理</h4>
+
+<p>公网主机运行一个frp服务端，开放的服务和访问端各运行一个frp客户端，两个客户端之间进行通信，通过frp的stcp机制可以同时解决内网穿透和安全连接。公网IP主机可以是家里路由器，也可以是因特网上的VPS主机。<br />
+我的环境是frp服务端运行在路由器下面的树莓派上，路由器上配置了端口转发，frp服务端等同于运行在有公网IP的路由器上。</p>
+
+<h2 id="section-2">服务配置</h2>
+
+<p>下面以开放家里内网MEOW代理服务为例。MEOW运行在树莓派3上（192.168.1.104），端口是7788。</p>
+
+<h3 id="frp">frp服务端配置</h3>
+
+<p>frp服务运行在公网VPS上。因为我路由器有公网IP，并配置了端口转发，我的环境是运行在家里树莓派3上。</p>
+
+<p><code>
+[common]
+bind_port = 14828
+</code></p>
+
+<h3 id="frp1meowfrp">frp客户端1：MEOW的frp客户端配置</h3>
+
+<p>MEOW是运行家里内网树莓派3上的HTTP代理服务。</p>
+
+<p>```
+# frpc1.ini
+[common]
+server_addr = 192.168.1.104
+server_port = 14828</p>
+
+<p>[meow_http]
+type = stcp
+sk = pass_token_123
+local_ip = 192.168.1.104
+local_port = 7788
+use_encryption = true
+use_compression = true
+```</p>
+
+<p><code>pass_token_123</code>是安全密码，自行定义，和下面客户端2配置要一致。公网IP在路由器，并且14828端口开启了端口映射，所以对于192.168.1.1或公网IP 180.109.114.114的14828端口访问都会转到192.168.1.104，所以这里配置<code>server_addr</code>是192.168.1.104。如果是公网VPS，这里<code>server_addr</code>地址改成公网IP。</p>
+
+<h3 id="frp2">frp客户端2：服务访问端</h3>
+
+<p>客户端2运行在外部内网，比如办公室内网，是服务访问端。http_proxy是办公室上网代理，如果不需要则去掉。</p>
+
+<p>```
+# frpc2.ini
+[common]
+server_addr = 180.109.114.114
+server_port = 14828
+http_proxy = http://proxy.example.com.cn:80</p>
+
+<p>[meow_http_vistor]
+type = stcp
+role = vistor
+server_name = meow_http
+sk = pass_token_123
+bind_addr = 127.0.0.1
+bind_port = 8088
+use_encryption = true
+use_compression = true
+```</p>
+
+<p>MEOW是HTTP代理服务，浏览器设置http://127.0.0.1:8088就可以使用家里的MEOW服务了。如果是FTP、SSH、HTTP服务，换成对应的端口即可。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[内网穿透：从家里连接办公室电脑]]></title>
@@ -374,48 +453,6 @@ server us3 us3.vps.com:29777 maxconn 20480 weight 1 backup
 <h2 id="section">参考文章</h2>
 
 <p><a href="https://www.hqt.ro/how-to-format-usb-drive/">How to Format Usb Drive</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[pkcs11-helper编译]]></title>
-    <link href="http://xixitalk.github.io/blog/2016/11/01/pkcs11-helper-build/"/>
-    <updated>2016-11-01T18:37:08+00:00</updated>
-    <id>http://xixitalk.github.io/blog/2016/11/01/pkcs11-helper-build</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/OpenSC/pkcs11-helper/releases">pkcs11-helper</a>也真是的，软件包里<code>INSTALL</code>里说用<code>./configure</code>生成<code>Makefile</code>，但是软件包还没有<code>configure</code>文件，需要<code>autoreconf</code>生成<code>configure</code>文件。妈蛋，<code>INSTALL</code>多写一句<code>autoreconf -ivf</code>会死吗？</p>
-
-<!--more-->
-
-<h1 id="section">准备</h1>
-
-<p>确保系统安装了<code>autoconf</code> <code>automake</code> <code>libtool</code></p>
-
-<h1 id="section-1">下载源代码解压</h1>
-
-<p><code>
-$wget https://github.com/OpenSC/pkcs11-helper/archive/pkcs11-helper-1.10.tar.gz
-$tar -zxvf pkcs11-helper-1.10.tar.gz
-$cd pkcs11-helper-pkcs11-helper-1.10
-</code></p>
-
-<h1 id="makefile">生成Makefile</h1>
-
-<p><code>
-$autoreconf -ivf
-$./configure
-</code></p>
-
-<h1 id="section-2">编译安装</h1>
-
-<p><code>
-$make
-$make install
-</code></p>
-
-<h1 id="section-3">参考</h1>
-
-<p><a href="https://github.com/OpenSC/pkcs11-helper/issues/2">https://github.com/OpenSC/pkcs11-helper/issues/2</a></p>
 
 ]]></content>
   </entry>

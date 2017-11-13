@@ -9,7 +9,7 @@
   <meta name="author" content="xixitalk">
 
   
-  <meta name="description" content="需求：家里内网的服务，办公室内网可以访问。 环境说明 办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168. &hellip;">
+  <meta name="description" content="需求：家里内网的服务，办公室内网可以访问。 环境说明 办公室电脑是 10.40.xx.xx这样的内网IP。家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,22 +111,22 @@
 
 <h4 id="section">环境说明</h4>
 
-<p>办公室电脑是 10.40.xx.xx这样的内网IP，并且办公环境要通过HTTP代理才能访问外网。我没有公网IP的VPS，但是家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。路由器上配置端口映射，把14827和14828都映射到树莓派3的192.168.1.104上，端口号可以自行选择其他的，和下面保持一致即可。</p>
+<p>办公室电脑是 10.40.xx.xx这样的内网IP。家里路由器是有公网IP的。家里一台树莓派3（IP 192.168.1.104）接在路由器下，路由器IP是192.168.1.1 公网IP假定是180.109.114.114。路由器上配置端口映射，把端口14828映射到树莓派3的192.168.1.104上。端口号14828可以自行选择其他的，和下面保持一致即可。</p>
 
 <!--more-->
 
 <h4 id="section-1">原理</h4>
 
-<p>路由器端口映射可以将家里内网的服务开放到外网，stunnel可以加密指定端口连接，这依赖于家里路由器要有公网IP。<br />
-而frp更自由一些，运行一个frp服务端，开放的服务和访问端各运行一个frp客户端，两个客户端之间可以安全通信，通过frp的stcp机制可以同时解决内网穿透和安全连接。公网IP主机可以是路由器，也可以是因特网上的VPS主机。</p>
+<p>公网主机运行一个frp服务端，开放的服务和访问端各运行一个frp客户端，两个客户端之间进行通信，通过frp的stcp机制可以同时解决内网穿透和安全连接。公网IP主机可以是家里路由器，也可以是因特网上的VPS主机。<br />
+我的环境是frp服务端运行在路由器下面的树莓派上，路由器上配置了端口转发，frp服务端等同于运行在有公网IP的路由器上。</p>
 
 <h2 id="section-2">服务配置</h2>
 
-<p>下面以开放家里内网MEOW代理服务为例。MEOW运行在树莓派3上（192.168.1.104），端口是7788.</p>
+<p>下面以开放家里内网MEOW代理服务为例。MEOW运行在树莓派3上（192.168.1.104），端口是7788。</p>
 
 <h3 id="frp">frp服务端配置</h3>
 
-<p>frp服务运行在树莓派3，或者公网VPS上。</p>
+<p>frp服务运行在公网VPS上。因为我路由器有公网IP，并配置了端口转发，我的环境是运行在家里树莓派3上。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -147,7 +147,11 @@
 <span class="line-number">7</span>
 <span class="line-number">8</span>
 <span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">[common]
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># frpc1.ini
+</span><span class="line">[common]
 </span><span class="line">server_addr = 192.168.1.104
 </span><span class="line">server_port = 14828
 </span><span class="line">
@@ -156,13 +160,15 @@
 </span><span class="line">sk = pass_token_123
 </span><span class="line">local_ip = 192.168.1.104
 </span><span class="line">local_port = 7788
+</span><span class="line">use_encryption = true
+</span><span class="line">use_compression = true
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><code>pass_token_123</code>是安全密码，自行定义。因为公网IP在路由器，14828端口开启了端口映射，所以对于14828端口frp的server_addr可以是192.168.1.104、192.168.1.1或公网IP 180.109.114.114。如果是公网VPS，这里地址改成公网IP。</p>
+<p><code>pass_token_123</code>是安全密码，自行定义，和下面客户端2配置要一致。公网IP在路由器，并且14828端口开启了端口映射，所以对于192.168.1.1或公网IP 180.109.114.114的14828端口访问都会转到192.168.1.104，所以这里配置<code>server_addr</code>是192.168.1.104。如果是公网VPS，这里<code>server_addr</code>地址改成公网IP。</p>
 
-<h3 id="frp2">frp客户端2：访问客户端</h3>
+<h3 id="frp2">frp客户端2：服务访问端</h3>
 
-<p>客户端2运行在外部内网，比如办公室内网。http_proxy是办公室上网代理，如果不需要则去掉。</p>
+<p>客户端2运行在外部内网，比如办公室内网，是服务访问端。http_proxy是办公室上网代理，如果不需要则去掉。</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -179,8 +185,7 @@
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
-<span class="line-number">16</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"># frpc.ini
+</pre></td><td class="code"><pre><code class=""><span class="line"># frpc2.ini
 </span><span class="line">[common]
 </span><span class="line">server_addr = 180.109.114.114
 </span><span class="line">server_port = 14828
@@ -195,10 +200,9 @@
 </span><span class="line">bind_port = 8088
 </span><span class="line">use_encryption = true
 </span><span class="line">use_compression = true
-</span><span class="line">
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>因为MEOW是HTTP代理服务，所以浏览器设置http://127.0.0.1:8088就可以使用家里的MEOW服务了。如果是FTP、SSH、HTTP服务，换成对应的端口即可。</p>
+<p>MEOW是HTTP代理服务，浏览器设置http://127.0.0.1:8088就可以使用家里的MEOW服务了。如果是FTP、SSH、HTTP服务，换成对应的端口即可。</p>
 
 </div>
 
@@ -224,6 +228,12 @@
 
 <time datetime="2017-11-13T16:14:36+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2017</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
 
 
     </p>
@@ -257,7 +267,7 @@
   
     <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (6)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (21)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (2)</a></li><li><a href='/blog/categories/apple'>apple (1)</a></li><li><a href='/blog/categories/art'>art (2)</a></li><li><a href='/blog/categories/base64'>base64 (1)</a></li><li><a href='/blog/categories/book'>book (1)</a></li><li><a href='/blog/categories/bugfix'>bugfix (3)</a></li><li><a href='/blog/categories/bullshit'>bullshit (1)</a></li><li><a href='/blog/categories/censor'>censor (1)</a></li><li><a href='/blog/categories/cowproxy'>cowproxy (1)</a></li><li><a href='/blog/categories/cryptography'>cryptography (1)</a></li><li><a href='/blog/categories/ddns'>DDNS (1)</a></li><li><a href='/blog/categories/dnsmasq'>dnsmasq (1)</a></li><li><a href='/blog/categories/english'>english (1)</a></li><li><a href='/blog/categories/flashfire'>flashfire (1)</a></li><li><a href='/blog/categories/flask-twip'>flask_twip (2)</a></li><li><a href='/blog/categories/flickr'>flickr (1)</a></li><li><a href='/blog/categories/foursquare'>foursquare (1)</a></li><li><a href='/blog/categories/funny'>funny (1)</a></li><li><a href='/blog/categories/git'>git (4)</a></li><li><a href='/blog/categories/github'>github (1)</a></li><li><a href='/blog/categories/golang'>golang (2)</a></li><li><a href='/blog/categories/heroku'>heroku (1)</a></li><li><a href='/blog/categories/hpv'>HPV (1)</a></li><li><a href='/blog/categories/iptables'>iptables (1)</a></li><li><a href='/blog/categories/kernel'>kernel (4)</a></li><li><a href='/blog/categories/libc'>libc (2)</a></li><li><a href='/blog/categories/life'>life (16)</a></li><li><a href='/blog/categories/linux'>linux (16)</a></li><li><a href='/blog/categories/markdown'>markdown (1)</a></li><li><a href='/blog/categories/math'>math (1)</a></li><li><a href='/blog/categories/mathjax'>mathjax (1)</a></li><li><a href='/blog/categories/movie'>movie (1)</a></li><li><a href='/blog/categories/network'>network (5)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/owncloud'>owncloud (1)</a></li><li><a href='/blog/categories/proxy'>proxy (6)</a></li><li><a href='/blog/categories/pthread'>pthread (2)</a></li><li><a href='/blog/categories/python'>python (1)</a></li><li><a href='/blog/categories/raspberrypi'>raspberrypi (8)</a></li><li><a href='/blog/categories/raspbian'>raspbian (1)</a></li><li><a href='/blog/categories/shadowsocks'>shadowsocks (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/society'>society (5)</a></li><li><a href='/blog/categories/software'>software (1)</a></li><li><a href='/blog/categories/ssh'>ssh (2)</a></li><li><a href='/blog/categories/stunnel'>stunnel (4)</a></li><li><a href='/blog/categories/tech'>tech (22)</a></li><li><a href='/blog/categories/test'>test (2)</a></li><li><a href='/blog/categories/transgene'>transgene (1)</a></li><li><a href='/blog/categories/twip'>twip (1)</a></li><li><a href='/blog/categories/twitter'>twitter (4)</a></li><li><a href='/blog/categories/vpn'>vpn (1)</a></li><li><a href='/blog/categories/wpad'>WPAD (1)</a></li></ul>
 </section>
 
   
